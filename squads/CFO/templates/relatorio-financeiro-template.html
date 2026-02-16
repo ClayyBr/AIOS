@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITULO}} — {{DATA}}</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --success: #2e7d32;
+            --success-bg: #e8f5e9;
+            --warning: #f57f17;
+            --warning-bg: #fff8e1;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #eeeeee;
+            --gray-300: #e0e0e0;
+            --gray-600: #757575;
+            --gray-800: #424242;
+            --gray-900: #212121;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            color: var(--gray-900);
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        /* === HEADER === */
+        .report-header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .report-header h1 {
+            font-size: 1.8em;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .report-header .subtitle {
+            font-size: 1.1em;
+            color: var(--gray-600);
+        }
+
+        .report-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 12px;
+            font-size: 0.9em;
+            color: var(--gray-600);
+        }
+
+        .report-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* === SECTIONS === */
+        h2 {
+            font-size: 1.3em;
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+            margin: 30px 0 16px 0;
+        }
+
+        h3 {
+            font-size: 1.1em;
+            color: var(--gray-800);
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--gray-800);
+        }
+
+        /* === TABLES === */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 24px 0;
+            font-size: 0.92em;
+        }
+
+        thead th {
+            background-color: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            text-align: left;
+            padding: 10px 14px;
+            white-space: nowrap;
+        }
+
+        tbody td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--gray-50);
+        }
+
+        tbody tr:hover {
+            background-color: var(--gray-100);
+        }
+
+        /* Alinhamento numérico */
+        td.num,
+        th.num {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Linha de total / destaque */
+        tr.total td,
+        tr.highlight td {
+            font-weight: 700;
+            border-top: 2px solid var(--gray-300);
+            background-color: var(--gray-100);
+        }
+
+        tr.subtotal td {
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* === STATUS BADGES === */
+        .status-ok {
+            color: var(--success);
+            background: var(--success-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .status-warn {
+            color: var(--warning);
+            background: var(--warning-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .status-danger {
+            color: var(--danger);
+            background: var(--danger-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        /* === KPI CARDS === */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 16px 0 24px 0;
+        }
+
+        .kpi-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .kpi-card .label {
+            font-size: 0.85em;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-card .value {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 4px 0;
+        }
+
+        .kpi-card .value.ok {
+            color: var(--success);
+        }
+
+        .kpi-card .value.warn {
+            color: var(--warning);
+        }
+
+        .kpi-card .value.danger {
+            color: var(--danger);
+        }
+
+        .kpi-card .benchmark {
+            font-size: 0.8em;
+            color: var(--gray-600);
+        }
+
+        /* === ALERTS === */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin: 12px 0;
+            border-left: 4px solid;
+        }
+
+        .alert-success {
+            background: var(--success-bg);
+            border-color: var(--success);
+        }
+
+        .alert-warning {
+            background: var(--warning-bg);
+            border-color: var(--warning);
+        }
+
+        .alert-danger {
+            background: var(--danger-bg);
+            border-color: var(--danger);
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* === FORMULA / CODE === */
+        .formula {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 8px 0 16px 0;
+            overflow-x: auto;
+        }
+
+        /* === LISTS === */
+        ul,
+        ol {
+            margin: 8px 0 16px 24px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* === FOOTER === */
+        .report-footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 2px solid var(--gray-200);
+            text-align: center;
+            font-size: 0.8em;
+            color: var(--gray-600);
+        }
+
+        .report-footer .confidential {
+            font-weight: 600;
+            color: var(--danger);
+            margin-bottom: 4px;
+        }
+
+        /* === LEGEND === */
+        .legend {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+            font-size: 0.85em;
+            color: var(--gray-600);
+        }
+
+        /* === PRINT STYLES === */
+        @media print {
+            body {
+                padding: 10px;
+                font-size: 11pt;
+            }
+
+            .report-header h1 {
+                font-size: 1.4em;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            thead th {
+                background-color: var(--primary) !important;
+                color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            tbody tr:nth-child(even) {
+                background-color: var(--gray-50) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .kpi-card {
+                break-inside: avoid;
+            }
+
+            .status-ok,
+            .status-warn,
+            .status-danger {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .alert {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="report-header">
+        <h1>{{TITULO}}</h1>
+        <div class="subtitle">{{SUBTITULO}}</div>
+        <div class="report-meta">
+            <span>📅 {{DATA}}</span>
+            <span>📊 Gerado por: {{AGENTE}}</span>
+            <span>🏢 Squad CFO</span>
+        </div>
+    </div>
+
+    <!-- === CONTEÚDO DO RELATÓRIO === -->
+
+    {{CONTEUDO}}
+
+    <!--
+        GUIA DE USO DOS COMPONENTES HTML:
+
+        === TABELAS ===
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th class="num">Valor (R$)</th>
+                    <th class="num">% RL</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Receita Líquida</td>
+                    <td class="num">R$ 28.548</td>
+                    <td class="num">100%</td>
+                    <td><span class="status-ok">✅ OK</span></td>
+                </tr>
+                <tr class="total">
+                    <td>RESULTADO LÍQUIDO</td>
+                    <td class="num">R$ 5.854</td>
+                    <td class="num">18,8%</td>
+                    <td><span class="status-ok">✅ OK</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        === KPI CARDS ===
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="label">CMV</div>
+                <div class="value ok">32,0%</div>
+                <div class="benchmark">Meta: ≤ 35%</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Prime Cost</div>
+                <div class="value warn">61,2%</div>
+                <div class="benchmark">Meta: ≤ 60%</div>
+            </div>
+        </div>
+
+        === ALERTAS ===
+        <div class="alert alert-success">
+            <strong>✅ CMV dentro da meta</strong>
+            CMV de 32% está abaixo do teto de 35%.
+        </div>
+        <div class="alert alert-warning">
+            <strong>⚠️ Prime Cost ligeiramente acima</strong>
+            Prime Cost de 61,2% está 1,2pp acima da meta.
+        </div>
+
+        === FÓRMULAS ===
+        <div class="formula">
+            CMV = EI + Compras - Devoluções - EF
+            CMV = R$ 3.200 + R$ 8.500 - R$ 0 - R$ 1.716 = R$ 9.984
+        </div>
+
+        === LEGENDA ===
+        <div class="legend">
+            <span><span class="status-ok">✅ OK</span> Dentro da meta</span>
+            <span><span class="status-warn">⚠️ Atenção</span> Desvio 5-10%</span>
+            <span><span class="status-danger">🚨 Crítico</span> Desvio > 10%</span>
+        </div>
+    -->
+
+    <!-- === FIM DO CONTEÚDO === -->
+
+    <div class="report-footer">
+        <div class="confidential">CONFIDENCIAL — USO INTERNO</div>
+        Squad CFO • {{RODAPE}} • Gerado em {{DATA}}
+    </div>
+
+</body>
+
+</html>

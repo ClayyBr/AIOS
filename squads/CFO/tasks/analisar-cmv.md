@@ -96,4 +96,5 @@ Auditoria completa de CMV com identificação de causas de desvio e ações corr
 
 ## Output
 
-Relatório de CMV com: valor real, comparação com meta, decomposição de variância, causas prováveis, ações corretivas priorizadas por impacto
+Relatório de CMV com: valor real, comparação com meta, decomposição de variância, causas prováveis, ações corretivas priorizadas por impacto.
+Formato: **dois arquivos** — `cmv-mes-ano.md` + `cmv-mes-ano.html` (usar template `relatorio-financeiro-template.html`)

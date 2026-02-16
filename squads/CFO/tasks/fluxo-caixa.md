@@ -83,4 +83,5 @@ Projeta o fluxo de caixa para identificar dias/semanas com risco de saldo negati
 
 ## Output
 
-Tabela de fluxo de caixa projetado (saldo por semana) + Ciclo Financeiro + Alertas + Recomendações
+Tabela de fluxo de caixa projetado (saldo por semana) + Ciclo Financeiro + Alertas + Recomendações.
+Formato: **dois arquivos** — `fluxo-caixa-mes-ano.md` + `fluxo-caixa-mes-ano.html` (usar template `relatorio-financeiro-template.html`)

@@ -69,4 +69,5 @@ Simula 3 cenários financeiros para antecipar riscos e oportunidades. Referênci
 
 ## Output
 
-Tabela comparativa dos 3 cenários (lado a lado) + ponto de quebra + plano de contingência
+Tabela comparativa dos 3 cenários (lado a lado) + ponto de quebra + plano de contingência.
+Formato: **dois arquivos** — `projecao-mes-ano.md` + `projecao-mes-ano.html` (usar template `relatorio-financeiro-template.html`)
