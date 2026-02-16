@@ -1,0 +1,8 @@
+Entendido. Para garantir que a arquitetura do site para "Academia CrossFit de Elite - Treinamento Funcional de Alta Intensidade" seja perfeitamente alinhada aos seus objetivos e à experiência de usuário desejada, preciso esclarecer alguns pontos estratégicos. Isso nos permitirá travar o escopo e construir a solução ideal:
+
+1.  **Principal Objetivo do Site:** O site deve focar primariamente em (a) *captação de novos leads* (formulário de contato/inscrição para aula experimental), (b) *gerenciamento de membros existentes* (agendamento de aulas, acompanhamento de progresso via login) ou (c) *divulgação institucional* com foco em marca e contato básico?
+2.  **Conteúdo Dinâmico e Administração:** Será necessário um *painel administrativo* para a equipe da academia gerenciar horários de aulas, instrutores, notícias/blog, depoimentos ou promoções de forma autônoma?
+3.  **Fluxo de Conversão e Pagamento:** Existe a intenção de implementar um fluxo de *agendamento e/ou pagamento online* de aulas avulsas e/ou planos de membresia diretamente pelo site, ou o objetivo é que o usuário entre em contato por outros canais para fechar a matrícula?
+4.  **Estilo Visual "Elite":** Para traduzir a ideia de "Elite", há alguma *preferência de estilo* específica (ex: minimalista e sóbrio com tons escuros, robusto e com texturas industriais, ou vibrante e dinâmico com foco em fotos de alta intensidade)?
+
+Assim que tivermos essas definições, poderei arquitetar a especificação técnica completa, o contrato de API e as diretrizes para os times de Front-end e Back-end.

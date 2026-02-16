@@ -1,0 +1,755 @@
+# =============================================================================
+# CALENDÁRIO DE SAZONALIDADE DE HORTIFRÚTI — BRASIL
+# Referência para Planejamento de Cardápio e Compras
+# =============================================================================
+#
+# Fontes: CEAGESP (São Paulo), EMBRAPA, CONAB, Sebrae
+#
+# Legenda de disponibilidade/preço:
+#   alta    = Alta temporada (produto abundante, PREÇO BAIXO)
+#   media   = Disponibilidade moderada (preço intermediário)
+#   baixa   = Baixa temporada (produto escasso, PREÇO ALTO)
+#   safra   = Pico de safra (melhor momento para comprar)
+#   entressafra = Momento de menor oferta (evitar ou substituir)
+#
+# ESTRATÉGIA: Sempre que possível, montar o cardápio semanal/mensal
+# priorizando ingredientes em "alta" ou "safra" e evitando os em "baixa".
+# Isso pode reduzir o CMV de hortifrúti em 15-30%.
+#
+# NOTA: Sazonalidade varia por região. Este calendário é baseado
+# principalmente no Sudeste (SP/RJ/MG). Para Nordeste e Sul,
+# os meses podem variar em 1-2 meses.
+# =============================================================================
+
+metadata:
+  versao: "1.0.0"
+  data_atualizacao: "2026-02"
+  regiao_referencia: "Sudeste (SP/RJ/MG)"
+  fontes:
+    - "CEAGESP — Calendário de Sazonalidade"
+    - "CONAB — Prognóstico Agrícola"
+    - "EMBRAPA — Sistemas de Produção"
+    - "Sebrae — Guia de Compras para Restaurantes"
+
+# =============================================================================
+# HORTALIÇAS — FOLHOSAS
+# =============================================================================
+folhosas:
+  alface:
+    nome: "Alface (americana, crespa, lisa)"
+    melhor_epoca: "Abril a Outubro"
+    pior_epoca: "Dezembro a Fevereiro"
+    meses:
+      jan: baixa    # Calor reduz qualidade e aumenta preço
+      fev: baixa
+      mar: media
+      abr: alta     # Clima ameno, produção alta
+      mai: alta
+      jun: safra    # Melhor mês — abundante e barata
+      jul: safra
+      ago: alta
+      set: alta
+      out: media
+      nov: media
+      dez: baixa    # Chuvas e calor prejudicam
+    impacto_cmv: "No verão, preço pode dobrar. Substituir por rúcula ou agrião se mais baratos"
+    dica_compra: "Comprar 3x/semana. No verão, reduzir variedade de saladas de folha"
+
+  rucula:
+    nome: "Rúcula"
+    melhor_epoca: "Maio a Setembro"
+    pior_epoca: "Janeiro a Março"
+    meses:
+      jan: baixa
+      fev: baixa
+      mar: media
+      abr: media
+      mai: alta
+      jun: safra
+      jul: safra
+      ago: alta
+      set: alta
+      out: media
+      nov: media
+      dez: baixa
+    impacto_cmv: "FC alto (1.45) já encarece. No verão, preço + FC = custo proibitivo"
+
+  espinafre:
+    nome: "Espinafre"
+    melhor_epoca: "Maio a Agosto"
+    pior_epoca: "Novembro a Fevereiro"
+    meses:
+      jan: baixa
+      fev: baixa
+      mar: media
+      abr: media
+      mai: alta
+      jun: safra
+      jul: safra
+      ago: alta
+      set: media
+      out: media
+      nov: baixa
+      dez: baixa
+    impacto_cmv: "FCc de 3.0 quando refogado — usar com parcimônia no buffet"
+
+  couve_manteiga:
+    nome: "Couve Manteiga"
+    melhor_epoca: "Junho a Setembro"
+    pior_epoca: "Dezembro a Fevereiro"
+    meses:
+      jan: media
+      fev: media
+      mar: media
+      abr: alta
+      mai: alta
+      jun: safra
+      jul: safra
+      ago: alta
+      set: alta
+      out: media
+      nov: media
+      dez: media
+    impacto_cmv: "Relativamente estável. Produção o ano todo em muitas regiões"
+
+  repolho:
+    nome: "Repolho"
+    melhor_epoca: "Maio a Outubro"
+    pior_epoca: "Janeiro a Março"
+    meses:
+      jan: media
+      fev: media
+      mar: media
+      abr: alta
+      mai: alta
+      jun: safra
+      jul: safra
+      ago: alta
+      set: alta
+      out: alta
+      nov: media
+      dez: media
+    impacto_cmv: "Muito barato mesmo fora de safra. Excelente para controle de CMV no buffet"
+
+# =============================================================================
+# LEGUMES E RAÍZES
+# =============================================================================
+legumes:
+  tomate:
+    nome: "Tomate (salada e molho)"
+    melhor_epoca: "Abril a Outubro"
+    pior_epoca: "Dezembro a Março"
+    meses:
+      jan: baixa    # Chuvas prejudicam, preço dispara
+      fev: baixa    # Pior mês típico
+      mar: baixa
+      abr: media
+      mai: alta
+      jun: safra
+      jul: safra    # Melhor preço
+      ago: alta
+      set: alta
+      out: media
+      nov: media
+      dez: baixa
+    impacto_cmv: "Variação de preço pode chegar a 300% entre safra e entressafra. Em fev/mar, substituir tomate fresco por molho pelati em lata para controle"
+    dica_compra: "No pico de safra (jun-jul), comprar em maior volume para molhos. Considerar tomate pelado em lata como buffer de preço"
+
+  cebola:
+    nome: "Cebola"
+    melhor_epoca: "Outubro a Março"
+    pior_epoca: "Junho a Agosto"
+    meses:
+      jan: alta
+      fev: alta
+      mar: alta
+      abr: media
+      mai: media
+      jun: baixa    # Entressafra
+      jul: baixa
+      ago: baixa
+      set: media
+      out: safra    # Safra nacional
+      nov: safra
+      dez: alta
+    impacto_cmv: "FC de 1.67 já é alto. Na entressafra, preço sobe e FC piora (cebola menor, mais casca). Considerar cebola roxa como alternativa se mais barata"
+
+  cenoura:
+    nome: "Cenoura"
+    melhor_epoca: "Julho a Novembro"
+    pior_epoca: "Fevereiro a Abril"
+    meses:
+      jan: media
+      fev: baixa
+      mar: baixa
+      abr: baixa
+      mai: media
+      jun: media
+      jul: alta
+      ago: safra
+      set: safra
+      out: alta
+      nov: alta
+      dez: media
+    impacto_cmv: "FC baixo (1.17), preço geralmente acessível. Bom ingrediente âncora para buffet"
+
+  batata_inglesa:
+    nome: "Batata Inglesa"
+    melhor_epoca: "Agosto a Novembro"
+    pior_epoca: "Março a Maio"
+    meses:
+      jan: media
+      fev: media
+      mar: baixa
+      abr: baixa
+      mai: baixa
+      jun: media
+      jul: media
+      ago: alta
+      set: safra
+      out: safra
+      nov: alta
+      dez: media
+    impacto_cmv: "Ingrediente versátil (purê, frita, cozida). No período de alta, estocar congelada pré-processada"
+
+  beterraba:
+    nome: "Beterraba"
+    melhor_epoca: "Maio a Outubro"
+    pior_epoca: "Dezembro a Fevereiro"
+    meses:
+      jan: baixa
+      fev: baixa
+      mar: media
+      abr: media
+      mai: alta
+      jun: safra
+      jul: safra
+      ago: alta
+      set: alta
+      out: alta
+      nov: media
+      dez: baixa
+    impacto_cmv: "FC de 1.47. Custo baixo na safra. Boa opção para salada do buffet"
+
+  abobrinha:
+    nome: "Abobrinha Italiana"
+    melhor_epoca: "Outubro a Março"
+    pior_epoca: "Junho a Agosto"
+    meses:
+      jan: alta
+      fev: alta
+      mar: alta
+      abr: media
+      mai: media
+      jun: baixa
+      jul: baixa
+      ago: baixa
+      set: media
+      out: safra
+      nov: safra
+      dez: alta
+    impacto_cmv: "FC baixo (1.15). No inverno, substituir por chuchu (mais barato e disponível)"
+
+  berinjela:
+    nome: "Berinjela"
+    melhor_epoca: "Outubro a Março"
+    pior_epoca: "Junho a Agosto"
+    meses:
+      jan: alta
+      fev: safra
+      mar: alta
+      abr: media
+      mai: media
+      jun: baixa
+      jul: baixa
+      ago: baixa
+      set: media
+      out: alta
+      nov: alta
+      dez: alta
+    impacto_cmv: "FC muito baixo (1.10). Excelente relação custo-benefício na safra"
+
+  brocolis:
+    nome: "Brócolis"
+    melhor_epoca: "Maio a Setembro"
+    pior_epoca: "Dezembro a Fevereiro"
+    meses:
+      jan: baixa
+      fev: baixa
+      mar: media
+      abr: media
+      mai: alta
+      jun: safra
+      jul: safra
+      ago: alta
+      set: alta
+      out: media
+      nov: media
+      dez: baixa
+    impacto_cmv: "FC altíssimo (1.87). No verão, preço dobra E rendimento cai. Substituir por vagem ou couve-flor se mais baratas"
+
+  couve_flor:
+    nome: "Couve-flor"
+    melhor_epoca: "Maio a Setembro"
+    pior_epoca: "Dezembro a Fevereiro"
+    meses:
+      jan: baixa
+      fev: baixa
+      mar: media
+      abr: media
+      mai: alta
+      jun: safra
+      jul: safra
+      ago: alta
+      set: alta
+      out: media
+      nov: media
+      dez: baixa
+    impacto_cmv: "FC de 2.13 (o mais alto entre legumes comuns!). Usar como alternativa ao brócolis quando mais barata, nunca como item principal do buffet pelo custo real"
+
+  chuchu:
+    nome: "Chuchu"
+    melhor_epoca: "Março a Agosto"
+    pior_epoca: "Outubro a Dezembro"
+    meses:
+      jan: media
+      fev: media
+      mar: alta
+      abr: alta
+      mai: safra
+      jun: safra
+      jul: alta
+      ago: alta
+      set: media
+      out: baixa
+      nov: baixa
+      dez: baixa
+    impacto_cmv: "Muito barato na safra. Excelente para completar buffet com custo baixíssimo"
+
+  pimentao:
+    nome: "Pimentão (verde, vermelho, amarelo)"
+    melhor_epoca: "Setembro a Dezembro"
+    pior_epoca: "Maio a Julho"
+    meses:
+      jan: media
+      fev: media
+      mar: media
+      abr: media
+      mai: baixa
+      jun: baixa
+      jul: baixa
+      ago: media
+      set: alta
+      out: safra
+      nov: safra
+      dez: alta
+    impacto_cmv: "Vermelho e amarelo custam 50-70% mais que verde. No inverno, usar só verde ou substituir por tomate"
+
+  mandioca:
+    nome: "Mandioca (Aipim)"
+    melhor_epoca: "Maio a Setembro"
+    pior_epoca: "Janeiro a Março"
+    meses:
+      jan: baixa
+      fev: baixa
+      mar: media
+      abr: media
+      mai: alta
+      jun: safra
+      jul: safra
+      ago: alta
+      set: alta
+      out: media
+      nov: media
+      dez: media
+    impacto_cmv: "Disponível o ano todo, mas preço e qualidade variam. Pode ser comprada descascada e congelada para padronizar"
+
+  quiabo:
+    nome: "Quiabo"
+    melhor_epoca: "Outubro a Março"
+    pior_epoca: "Junho a Agosto"
+    meses:
+      jan: alta
+      fev: safra
+      mar: alta
+      abr: media
+      mai: media
+      jun: baixa
+      jul: baixa
+      ago: baixa
+      set: media
+      out: alta
+      nov: alta
+      dez: alta
+    impacto_cmv: "Ingrediente regional. No inverno (entressafra), preço triplica. Usar apenas quando em safra"
+
+  abobora:
+    nome: "Abóbora (Cabotiá/Japonesa)"
+    melhor_epoca: "Março a Julho"
+    pior_epoca: "Novembro a Janeiro"
+    meses:
+      jan: baixa
+      fev: media
+      mar: alta
+      abr: safra
+      mai: safra
+      jun: alta
+      jul: alta
+      ago: media
+      set: media
+      out: media
+      nov: baixa
+      dez: baixa
+    impacto_cmv: "Custo baixo na safra (R$ 3-5/kg). Excelente para sopas, purês e guarnições"
+
+  milho_verde:
+    nome: "Milho Verde (espiga)"
+    melhor_epoca: "Dezembro a Março"
+    pior_epoca: "Julho a Setembro"
+    meses:
+      jan: safra
+      fev: safra
+      mar: alta
+      abr: media
+      mai: media
+      jun: baixa
+      jul: baixa
+      ago: baixa
+      set: baixa
+      out: media
+      nov: media
+      dez: alta
+    impacto_cmv: "FC de 2.80 (espiga). Fora de safra, usar milho em lata ou congelado"
+
+  vagem:
+    nome: "Vagem"
+    melhor_epoca: "Setembro a Janeiro"
+    pior_epoca: "Abril a Junho"
+    meses:
+      jan: alta
+      fev: media
+      mar: media
+      abr: baixa
+      mai: baixa
+      jun: baixa
+      jul: media
+      ago: media
+      set: alta
+      out: safra
+      nov: safra
+      dez: alta
+    impacto_cmv: "Boa alternativa ao brócolis quando mais barata. FC baixo (1.08)"
+
+# =============================================================================
+# FRUTAS
+# =============================================================================
+frutas:
+  banana:
+    nome: "Banana (prata, nanica)"
+    melhor_epoca: "Março a Agosto"
+    pior_epoca: "Outubro a Dezembro"
+    meses:
+      jan: media
+      fev: media
+      mar: alta
+      abr: safra
+      mai: safra
+      jun: alta
+      jul: alta
+      ago: alta
+      set: media
+      out: baixa
+      nov: baixa
+      dez: media
+    impacto_cmv: "Nanica é sempre mais barata. Para buffet (sobremesa), usar nanica. Para prato, prata"
+
+  laranja:
+    nome: "Laranja"
+    melhor_epoca: "Junho a Outubro"
+    pior_epoca: "Fevereiro a Abril"
+    meses:
+      jan: media
+      fev: baixa
+      mar: baixa
+      abr: baixa
+      mai: media
+      jun: alta
+      jul: safra
+      ago: safra
+      set: alta
+      out: alta
+      nov: media
+      dez: media
+    impacto_cmv: "FC de 2.0 para suco. Na entressafra, suco de laranja fica caríssimo. Substituir por limonada ou suco de maracujá"
+
+  limao:
+    nome: "Limão (tahiti)"
+    melhor_epoca: "Janeiro a Maio"
+    pior_epoca: "Agosto a Outubro"
+    meses:
+      jan: alta
+      fev: safra
+      mar: safra
+      abr: alta
+      mai: alta
+      jun: media
+      jul: media
+      ago: baixa
+      set: baixa
+      out: baixa
+      nov: media
+      dez: media
+    impacto_cmv: "Variação extrema de preço (até 500% entre safra e entressafra). Crucial para temperos. Estocar suco congelado"
+
+  manga:
+    nome: "Manga (Tommy, Palmer)"
+    melhor_epoca: "Novembro a Fevereiro"
+    pior_epoca: "Maio a Agosto"
+    meses:
+      jan: safra
+      fev: alta
+      mar: media
+      abr: baixa
+      mai: baixa
+      jun: baixa
+      jul: baixa
+      ago: baixa
+      set: media
+      out: media
+      nov: alta
+      dez: safra
+    impacto_cmv: "Disponível apenas na safra a preços acessíveis. Fora de safra, preço quintuplica"
+
+  mamao:
+    nome: "Mamão (Formosa, Papaia)"
+    melhor_epoca: "Outubro a Janeiro"
+    pior_epoca: "Maio a Julho"
+    meses:
+      jan: alta
+      fev: media
+      mar: media
+      abr: media
+      mai: baixa
+      jun: baixa
+      jul: baixa
+      ago: media
+      set: media
+      out: alta
+      nov: safra
+      dez: safra
+    impacto_cmv: "Formosa é mais barato que papaia. Para buffet, usar formosa"
+
+  abacaxi:
+    nome: "Abacaxi"
+    melhor_epoca: "Novembro a Março"
+    pior_epoca: "Junho a Agosto"
+    meses:
+      jan: safra
+      fev: alta
+      mar: alta
+      abr: media
+      mai: media
+      jun: baixa
+      jul: baixa
+      ago: baixa
+      set: media
+      out: media
+      nov: alta
+      dez: safra
+    impacto_cmv: "FC de 1.89. Fora de safra, usar versão em calda para sobremesas"
+
+  melancia:
+    nome: "Melancia"
+    melhor_epoca: "Outubro a Fevereiro"
+    pior_epoca: "Maio a Julho"
+    meses:
+      jan: safra
+      fev: alta
+      mar: media
+      abr: media
+      mai: baixa
+      jun: baixa
+      jul: baixa
+      ago: media
+      set: media
+      out: alta
+      nov: alta
+      dez: safra
+    impacto_cmv: "FC de 1.82 (muita casca). Baratíssima na safra. Excelente para suco do buffet"
+
+  maracuja:
+    nome: "Maracujá"
+    melhor_epoca: "Janeiro a Junho"
+    pior_epoca: "Agosto a Outubro"
+    meses:
+      jan: alta
+      fev: safra
+      mar: safra
+      abr: alta
+      mai: alta
+      jun: alta
+      jul: media
+      ago: baixa
+      set: baixa
+      out: baixa
+      nov: media
+      dez: media
+    impacto_cmv: "Polpa congelada é alternativa estável de preço o ano todo"
+
+  morango:
+    nome: "Morango"
+    melhor_epoca: "Junho a Outubro"
+    pior_epoca: "Dezembro a Março"
+    meses:
+      jan: baixa
+      fev: baixa
+      mar: baixa
+      abr: media
+      mai: media
+      jun: alta
+      jul: safra
+      ago: safra
+      set: alta
+      out: alta
+      nov: media
+      dez: baixa
+    impacto_cmv: "No verão custa 3-4x mais. Usar congelado para smoothies e apenas fresco na safra"
+
+  uva:
+    nome: "Uva (Itália, Rubi)"
+    melhor_epoca: "Novembro a Fevereiro"
+    pior_epoca: "Maio a Agosto"
+    meses:
+      jan: safra
+      fev: alta
+      mar: media
+      abr: media
+      mai: baixa
+      jun: baixa
+      jul: baixa
+      ago: baixa
+      set: media
+      out: media
+      nov: alta
+      dez: safra
+    impacto_cmv: "Item premium para buffet de sobremesa. Usar apenas na safra"
+
+# =============================================================================
+# GUIA RÁPIDO MENSAL: O QUE COMPRAR E O QUE EVITAR
+# =============================================================================
+guia_mensal:
+  janeiro:
+    comprar: ["Manga", "Abacaxi", "Melancia", "Milho verde", "Quiabo", "Cebola"]
+    evitar: ["Alface", "Brócolis", "Couve-flor", "Morango"]
+    dica_cardapio: "Verão. Saladas mais simples (repolho, tomate cereja). Sucos de frutas da safra. Mais pratos frios"
+
+  fevereiro:
+    comprar: ["Limão", "Maracujá", "Berinjela", "Cebola", "Quiabo"]
+    evitar: ["Tomate", "Alface", "Brócolis", "Batata", "Morango"]
+    dica_cardapio: "Mês mais desafiador para hortifrúti. Carnaval altera padrão de consumo. Cardápio flexível"
+
+  marco:
+    comprar: ["Banana", "Abóbora", "Chuchu", "Limão", "Maracujá"]
+    evitar: ["Tomate", "Batata", "Cenoura", "Mandioca"]
+    dica_cardapio: "Transição verão-outono. Começar a reintroduzir folhosas. Sopas ganham espaço"
+
+  abril:
+    comprar: ["Alface", "Banana", "Abóbora", "Couve", "Repolho"]
+    evitar: ["Batata", "Cenoura", "Pimentão", "Vagem"]
+    dica_cardapio: "Clima ameno. Retorno das saladas de folha. Sopas e caldos"
+
+  maio:
+    comprar: ["Alface", "Rúcula", "Espinafre", "Chuchu", "Mandioca", "Banana"]
+    evitar: ["Pimentão", "Abobrinha", "Berinjela", "Quiabo"]
+    dica_cardapio: "Início do inverno. Pratos quentes, caldos, sopas. Couve na feijoada (safra!)"
+
+  junho:
+    comprar: ["Alface", "Rúcula", "Espinafre", "Tomate", "Repolho", "Couve", "Brócolis", "Morango"]
+    evitar: ["Cebola", "Abobrinha", "Berinjela", "Quiabo", "Manga"]
+    dica_cardapio: "Melhor mês para folhosas e brócolis. Festa junina: canjica, milho (se safra tardia). Morango aparece"
+
+  julho:
+    comprar: ["Rúcula", "Espinafre", "Tomate", "Brócolis", "Couve-flor", "Cenoura", "Laranja", "Morango"]
+    evitar: ["Cebola", "Abobrinha", "Quiabo", "Manga", "Melancia"]
+    dica_cardapio: "Pico do inverno. Sopas, gratinados, pratos com molho. Inverno é ouro para CMV de folhosas"
+
+  agosto:
+    comprar: ["Cenoura", "Batata", "Brócolis", "Couve-flor", "Laranja", "Morango"]
+    evitar: ["Cebola", "Limão", "Manga", "Abobrinha"]
+    dica_cardapio: "Transição inverno-primavera. Manter pratos quentes. Limão caro — oferecer suco de laranja"
+
+  setembro:
+    comprar: ["Cenoura", "Batata", "Pimentão", "Vagem", "Laranja", "Morango"]
+    evitar: ["Limão", "Maracujá", "Chuchu"]
+    dica_cardapio: "Primavera. Reintroduzir saladas coloridas. Pimentão em safra — usar em refogados"
+
+  outubro:
+    comprar: ["Cebola", "Pimentão", "Vagem", "Abobrinha", "Melancia", "Mamão", "Morango"]
+    evitar: ["Limão", "Maracujá", "Brócolis (começa a subir)"]
+    dica_cardapio: "Variedade de legumes. Frutas tropicais voltando. Sorvetes e sobremesas geladas"
+
+  novembro:
+    comprar: ["Cebola", "Mamão", "Manga", "Abacaxi", "Abobrinha", "Berinjela", "Uva"]
+    evitar: ["Brócolis", "Couve-flor", "Morango", "Chuchu"]
+    dica_cardapio: "Verão se aproxima. Frutas tropicais abundantes para sucos. Saladas tropicais"
+
+  dezembro:
+    comprar: ["Cebola", "Manga", "Melancia", "Abacaxi", "Uva", "Milho"]
+    evitar: ["Alface", "Rúcula", "Brócolis", "Couve-flor", "Morango"]
+    dica_cardapio: "Festas. Demanda alta. Proteínas em alta (Chester, pernil). Frutas para sobremesas festivas"
+
+# =============================================================================
+# ESTRATÉGIAS DE SUBSTITUIÇÃO SAZONAL
+# =============================================================================
+substituicoes:
+  - quando: "Tomate caro (dez-mar)"
+    substituir: "Tomate fresco para molhos"
+    por: "Tomate pelado em lata (Pomodori pelati) ou extrato de tomate"
+    economia: "30-50%"
+
+  - quando: "Brócolis caro (dez-fev)"
+    substituir: "Brócolis fresco"
+    por: "Vagem, couve-flor (se mais barata), ou brócolis congelado"
+    economia: "20-40%"
+
+  - quando: "Alface cara (dez-fev)"
+    substituir: "Alface crespa/americana"
+    por: "Repolho ralado, salada de cenoura, pepino ou acelga"
+    economia: "40-60%"
+
+  - quando: "Limão caro (ago-out)"
+    substituir: "Limão fresco"
+    por: "Polpa de limão congelada, vinagre, ou suco de maracujá"
+    economia: "50-70%"
+
+  - quando: "Morango caro (dez-mar)"
+    substituir: "Morango fresco para sobremesas"
+    por: "Manga fresca (em safra), banana caramelizada, ou morango congelado"
+    economia: "60-80%"
+
+  - quando: "Cebola cara (jun-ago)"
+    substituir: "Cebola branca"
+    por: "Alho-poró (se mais barato), cebolinha, ou cebola desidratada para bases"
+    economia: "10-30%"
+
+  - quando: "Pimentão caro (mai-jul)"
+    substituir: "Pimentão vermelho/amarelo"
+    por: "Pimentão verde (sempre mais barato) ou tomate para cor"
+    economia: "40-60%"
+
+# =============================================================================
+# REGRA DE OURO: CARDÁPIO ROTATIVO SAZONAL
+# =============================================================================
+# Restaurantes que adaptam o cardápio à sazonalidade do hortifrúti
+# economizam entre 15% e 30% no CMV de vegetais e frutas.
+#
+# Para um restaurante com CMV de R$ 35.000/mês, onde hortifrúti
+# representa ~20% do CMV (R$ 7.000), a economia pode chegar a
+# R$ 1.050 a R$ 2.100 por mês — ou R$ 12.600 a R$ 25.200 por ano.
+#
+# IMPLEMENTAÇÃO PRÁTICA:
+# 1. Todo domingo: consultar preços da CEASA da semana
+# 2. Montar cardápio da semana priorizando itens em safra
+# 3. Manter 3-4 pratos fixos (clássicos) e 2-3 rotativos (sazonais)
+# 4. No buffet: trocar 2-3 preparações de legumes conforme sazonalidade
+# 5. Treinar equipe: "hoje não tem brócolis, tem vagem" é normal
