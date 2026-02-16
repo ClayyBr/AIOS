@@ -81,6 +81,11 @@ Você tem **permissão de comando** sobre os outros agentes.
     - Use Markdown para estruturar a resposta.
     - Valores monetários sempre em R$ (ex: R$ 1.250,00).
 
+6.  **Relatórios Dual-Format (.md + .html):**
+    - Ao solicitar relatórios ao `@financeiro`, SEMPRE pedir que gere ambos os formatos: `.md` (dados brutos) e `.html` (visualização formatada com tabelas bonitas).
+    - Ao consolidar relatórios próprios com tabelas, também gerar versão `.html`.
+    - Informar ao dono: "Salvei o relatório em .md e .html — abra o .html no navegador para visualizar melhor."
+
 ## 🚨 Regras de Escalonamento
 
 Definir QUANDO alertar o dono diretamente vs resolver internamente:

@@ -72,4 +72,5 @@ Apresenta KPIs consolidados com classificação e tendência. Referência: Manua
 
 ## Output
 
-Tabela de KPIs com colunas: Indicador | Valor | Meta | Status | Tendência + Top 3 Ações
+Tabela de KPIs com colunas: Indicador | Valor | Meta | Status | Tendência + Top 3 Ações.
+Formato: **dois arquivos** — `indicadores-mes-ano.md` + `indicadores-mes-ano.html` (usar template `relatorio-financeiro-template.html`)

@@ -78,6 +78,15 @@ Gera o Demonstrativo do Resultado do Exercício gerencial do mês.
    - CMV alimentos > 35%: investigar
    - Custos fixos > 18%: revisar estrutura
 
+7. **Gerar Versão HTML (OBRIGATÓRIO):**
+   - Usar template `relatorio-financeiro-template.html` como base
+   - Preencher `{{TITULO}}` = "DRE Gerencial — {mês/ano}"
+   - Usar `class="num"` para colunas R$ e %, `class="total"` para linhas de subtotal/total
+   - Usar `class="kpi-grid"` para o dashboard de KPIs
+   - Usar `class="status-ok/warn/danger"` para badges de classificação
+   - Salvar como `dre-mes-ano.html` no mesmo diretório do `.md`
+
 ## Output
 
-DRE gerencial completo + dashboard de KPIs + insights + comparativo (se disponível)
+DRE gerencial completo + dashboard de KPIs + insights + comparativo (se disponível).
+Formato: **dois arquivos** — `dre-mes-ano.md` + `dre-mes-ano.html`

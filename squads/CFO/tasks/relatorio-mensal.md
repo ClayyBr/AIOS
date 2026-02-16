@@ -78,4 +78,5 @@ Gera relatório executivo mensal para apresentação aos sócios do restaurante.
 
 ## Output
 
-Relatório formatado usando `relatorio-socios-template.md`, pronto para ser compartilhado via WhatsApp, e-mail ou impressão
+Relatório formatado usando `relatorio-socios-template.md`, pronto para ser compartilhado via WhatsApp, e-mail ou impressão.
+Formato: **dois arquivos** — `relatorio-mes-ano.md` + `relatorio-mes-ano.html` (usar template `relatorio-financeiro-template.html`)

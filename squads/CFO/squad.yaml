@@ -52,6 +52,7 @@ components:
     - buffet-custo-montado-template.md
     - cardapio-semanal-buffet-template.md
     - orcamento-mensal-template.md
+    - relatorio-financeiro-template.html
   checklists:
     - fechamento-mensal.md
     - pre-abertura.md
