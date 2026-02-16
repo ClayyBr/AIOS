@@ -1,0 +1,73 @@
+name: cfo-restaurante
+version: 2.0.0
+description: |
+  Squad CFO — Gestão Financeira, Logística e Estratégica.
+  Agente Master (Gerente Geral): Orquestração e Estratégia.
+  Agente 1 (Arquiteto Lucro): Fichas Técnicas, Precificação, Cardápio.
+  Agente 2 (Financeiro): DRE, CMV, Relatórios, Projeções, Impostos.
+  Agente 3 (Estoque): Entradas, Saídas, Inventário.
+  Regime: Simples Nacional.
+author: Cleison
+license: MIT
+slashPrefix: cfo
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  agents:
+    - gerente-geral.md
+    - arquiteto-lucro.md
+    - financeiro.md
+    - controlador-estoque.md
+  tasks:
+    - gerir-operacao.md
+    - criar-ficha-tecnica.md
+    - precificar-prato.md
+    - analisar-cmv.md
+    - gerar-dre.md
+    - planejar-cardapio.md
+    - avaliar-fornecedor.md
+    - relatorio-mensal.md
+    - registrar-entrada.md
+    - registrar-saida.md
+    - fazer-inventario.md
+    - alerta-estoque.md
+    - curva-abc.md
+    - estimar-consumo.md
+    - fluxo-caixa.md
+    - projecao-cenarios.md
+    - break-even.md
+    - simular-impostos.md
+    - indicadores-financeiros.md
+    - orcamento-mensal.md
+  templates:
+    - ficha-tecnica-template.md
+    - ficha-cozinha-template.html
+    - dre-mensal-template.md
+    - relatorio-socios-template.md
+    - inventario-template.md
+    - ficha-tecnica-buffet-template.md
+    - buffet-custo-montado-template.md
+    - cardapio-semanal-buffet-template.md
+    - orcamento-mensal-template.md
+  checklists:
+    - fechamento-mensal.md
+    - pre-abertura.md
+    - recebimento-mercadoria.md
+
+config:
+  extends: extend
+
+dependencies:
+  squads: []
+
+tags:
+  - finance
+  - restaurant
+  - cmv
+  - pricing
+  - food-cost
+  - simples-nacional
+  - brazil

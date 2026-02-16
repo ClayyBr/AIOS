@@ -1,0 +1,31 @@
+name: lp-creator
+version: 2.0.0
+description: Squad especializado na criação de Landing Pages (projetos Next.js completos) via sistema multi-agente.
+author: User <user@example.com>
+license: MIT
+slashPrefix: lp
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  agents:
+    - Agente Master.md
+    - Blueprint Agente Front-end.md
+    - Blueprint Agente IA Back-end.md
+  tasks:
+    - create-landing-page.md
+  tools:
+    - tools/orchestrator.js
+    - tools/diagnose-gemini.js
+    - tools/list-models.js
+
+dependencies:
+  squads: []
+
+tags:
+  - web-design
+  - frontend
+  - landing-page
+  - nextjs

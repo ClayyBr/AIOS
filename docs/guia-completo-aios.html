@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synkra AIOS: Guia Completo</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #475569;
+            --accent: #0f172a;
+            --bg: #ffffff;
+            --text: #1e293b;
+            --card-bg: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        @media print {
+            @page { margin: 2cm; }
+            body { font-size: 12pt; }
+            .no-print { display: none; }
+            a { text-decoration: none; color: black; }
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--bg);
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            font-weight: 400;
+        }
+
+        h2 {
+            border-left: 5px solid var(--primary);
+            padding-left: 1rem;
+            margin-top: 3rem;
+            color: var(--accent);
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin-top: 2rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 0.2em 0.4em;
+            border-radius: 0.3em;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            color: #db2777;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+        }
+        
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--card-bg);
+            font-weight: 600;
+        }
+
+        .alert {
+            background: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .tip {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .mermaid {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Synkra AIOS: Guia Definitivo</h1>
+        <p class="subtitle">Framework Universal de Agentes IA para Desenvolvimento e Gestão</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;">Versão 1.0 • Fevereiro 2026</p>
+    </header>
+
+    <section>
+        <h2>📌 O Que é o Synkra AIOS?</h2>
+        <p>Imagine que você pudesse contratar uma <strong>equipe inteira de profissionais especializados</strong> — desenvolvedores, arquitetos, gerentes de projeto, analistas — mas todos eles são <strong>agentes de IA</strong> que trabalham dentro do seu computador, seguindo regras claras e colaborando entre si.</p>
+        
+        <div class="card" style="background: #eef2ff; border-color: #c7d2fe;">
+            <p style="font-size: 1.1em; text-align: center; margin: 0;">Isso é o Synkra AIOS.</p>
+        </div>
+
+        <h3>Analogia Simples</h3>
+        <table>
+            <tr>
+                <th>Sem AIOS ❌</th>
+                <th>Com AIOS ✅</th>
+            </tr>
+            <tr>
+                <td>Você pede a uma IA genérica: "faça um app"</td>
+                <td>Você ativa o <code>@analyst</code> → <code>@architect</code> → <code>@dev</code> → <code>@qa</code></td>
+            </tr>
+            <tr>
+                <td>A IA "esquece" o contexto entre conversas</td>
+                <td>Cada agente recebe o documento completo do anterior</td>
+            </tr>
+            <tr>
+                <td>Resultado inconsistente e sem padrão</td>
+                <td>Processo padronizado, repetível e profissional</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>🧩 Como Funciona: O Ecossistema</h2>
+        
+        <div class="mermaid">
+            graph LR
+            User((Você)) --> Analyst
+            Analyst[Analyst<br>Pesquisa & Briefing] --> PM[PM<br>Requisitos PRD]
+            PM --> Architect[Architect<br>Design Técnico]
+            Architect --> SM[Scrum Master<br>Stories & Tasks]
+            SM --> Dev[Developer<br>Implementação]
+            Dev --> QA[QA<br>Testes & Validação]
+            QA --> DevOps[DevOps<br>Deploy & Push]
+            
+            style User fill:#f9fafb,stroke:#333,stroke-width:2px
+            style Analyst fill:#dbeafe,stroke:#2563eb
+            style PM fill:#dbeafe,stroke:#2563eb
+            style Architect fill:#dbeafe,stroke:#2563eb
+            style SM fill:#dcfce7,stroke:#16a34a
+            style Dev fill:#dcfce7,stroke:#16a34a
+            style QA fill:#fee2e2,stroke:#dc2626
+            style DevOps fill:#f3e8ff,stroke:#9333ea
+        </div>
+
+        <h3>1. Agentes Especializados</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <strong>@analyst (Alex)</strong>
+                <p>Pesquisa mercado, analisa concorrentes e cria briefings detalhados.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <strong>@pm (Morgan)</strong>
+                <p>Gerencia o produto, cria o PRD e prioriza funcionalidades.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏗️</div>
+                <strong>@architect (Aria)</strong>
+                <p>Projeta a arquitetura técnica e decide tecnologias.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💻</div>
+                <strong>@dev (Dex)</strong>
+                <p>O desenvolvedor que escreve o código e implementa features.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <strong>@qa (Quinn)</strong>
+                <p>Testa tudo, roda validações e garante qualidade.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <strong>@devops (Gage)</strong>
+                <p>O único com autoridade para fazer deploy e push.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>📜 Story-Driven Development</h2>
+        <p>No AIOS, <strong>nenhum código é escrito sem uma story</strong>. É a regra de ouro para manter o contexto.</p>
+        
+        <div class="tip">
+            <strong>Fluxo de Trabalho:</strong><br>
+            <code>@po cria story</code> → <code>@dev implementa</code> → <code>@qa testa</code> → <code>@devops deploy</code>
+        </div>
+    </section>
+
+    <section>
+        <h2>🛠️ Ferramentas Incluídas</h2>
+        
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <h3>📑 18 Templates Prontos</h3>
+                <ul>
+                    <li>PRD & Project Brief</li>
+                    <li>Arquitetura (Full-stack, Front-end)</li>
+                    <li>Stories & Tasks</li>
+                    <li>Pesquisa de Mercado</li>
+                    <li>Database Schema</li>
+                </ul>
+            </div>
+            <div style="flex: 1; min-width: 300px;">
+                <h3>⚡ 8 Skills Avançadas</h3>
+                <ul>
+                    <li><strong>Squad Creator:</strong> Crie novos agentes</li>
+                    <li><strong>Mind Clone:</strong> Clone especialistas humanos</li>
+                    <li><strong>MCP Builder:</strong> Crie servidores MCP</li>
+                    <li><strong>Course Generation:</strong> Crie cursos completos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>⚖️ A Constituição (Regras Inegociáveis)</h2>
+        <p>Garante que os agentes nunca saiam do controle.</p>
+        
+        <div class="card">
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem;">🛑 <strong>CLI First:</strong> Tudo deve funcionar via terminal primeiro.</li>
+                <li style="margin-bottom: 0.5rem;">🛑 <strong>Agent Authority:</strong> Cada agente tem poderes exclusivos (ex: só DevOps faz push).</li>
+                <li style="margin-bottom: 0.5rem;">🛑 <strong>No Invention:</strong> Agentes não inventam requisitos, seguem o PRD.</li>
+                <li>🛑 <strong>Quality First:</strong> Código sem testes ou com lint errors é bloqueado.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>🍽️ Exemplo Real: Squad CFO (Restaurante)</h2>
+        <p>Gestão financeira completa com 3 agentes especializados.</p>
+
+        <div class="mermaid">
+            graph TD
+            GG[👔 Gerente Geral<br>Master] --> CFO[💰 Arquiteto do Lucro<br>Financeiro]
+            GG --> Ops[📦 Controlador de Estoque<br>Operacional]
+            
+            subgraph Tarefas
+            CFO --> T1[Precificação]
+            CFO --> T2[CMV & DRE]
+            Ops --> T3[Inventário]
+            Ops --> T4[Entradas/Saídas]
+            end
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <strong>Principais Comandos</strong>
+                <ul>
+                    <li><code>*novo-prato</code>: Lança produto com ficha técnica</li>
+                    <li><code>*dashboard</code>: Visão 360º do negócio</li>
+                    <li><code>*precificar</code>: Calcula preço ideal de venda</li>
+                </ul>
+            </div>
+            <div class="card">
+                <strong>Base de Conhecimento</strong>
+                <ul>
+                    <li>Sazonalidade de Hortifruti</li>
+                    <li>Fatores de Correção</li>
+                    <li>Modelos de DRE</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>🚀 Como Começar Agora</h2>
+        
+        <h3>1. Instalação</h3>
+        <pre><code>npx aios-core init meu-projeto</code></pre>
+
+        <h3>2. Verificação</h3>
+        <pre><code>npx aios-core doctor</code></pre>
+
+        <h3>3. Primeiro Comando</h3>
+        <p>No seu terminal ou IDE:</p>
+        <pre><code>@analyst *help</code></pre>
+
+        <div class="alert">
+            <strong>Dica Pro:</strong> Comece pedindo ao <code>@analyst</code> para pesquisar sobre sua ideia, depois peça ao <code>@pm</code> para criar o PRD.
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--secondary);">
+        <p>Synkra AIOS • CLI First | Observability Second | UI Third</p>
+        <p>Documento gerado automaticamente pelo Antigravity</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+# Par Stock — Níveis Mínimos de Estoque
+# Baseado nos insumos das fichas técnicas existentes
+# Cobertura: 4 dias + 1 dia de segurança
+# v2.1 — Suporte a operação mista (buffet + executivo + delivery)
+
+config:
+  dias_cobertura_padrao: 4
+  margem_seguranca_dias: 1
+  frequencia_revisao: mensal
+  operacoes_ativas:
+    - executivo    # Pratos executivos (porcionados)
+    - buffet       # Buffet por quilo
+    # - delivery   # Delivery (ativar quando iniciar)
+  notas: |
+    - Par Stock = Consumo diário estimado × (dias_cobertura + margem_seguranca)
+    - Valores devem ser ajustados após 30 dias de operação com dados reais
+    - Itens marcados como 'estimado: true' precisam de calibração
+    - consumo_por_operacao: breakdown do consumo diário por tipo de operação
+    - Par Stock Total = soma dos consumos × (dias_cobertura + margem_seguranca)
+
+itens:
+  # ═══ PROTEÍNAS ═══
+  - nome: Peito de Frango (Filé)
+    unidade: kg
+    par_stock_minimo: 5.0
+    par_stock_ideal: 8.0
+    categoria: proteina
+    fornecedor_principal: null
+    estimado: true
+    consumo_por_operacao:
+      executivo: 0.56   # ~180g PB × 40 clientes × 8% mix ÷ 10 pratos = ~3 pratos frango/dia
+      buffet: 0.80      # ~800g/dia para GN 1/3 de frango grelhado no buffet (estimativa)
+      delivery: 0.00    # Ainda não ativo
+    notas: "Usado em Strogonoff, Parmegiana e Grelhado (exec) + preparações de frango (buffet)"
+
+  - nome: Sobrecoxa de Frango
+    unidade: kg
+    par_stock_minimo: 3.0
+    par_stock_ideal: 5.0
+    categoria: proteina
+    fornecedor_principal: null
+    estimado: true
+
+  # ═══ HORTIFRÚTI ═══
+  - nome: Cebola
+    unidade: kg
+    par_stock_minimo: 2.0
+    par_stock_ideal: 4.0
+    categoria: hortifruti
+    fornecedor_principal: null
+    estimado: true
+
+  - nome: Tomate (Molho/Fresco)
+    unidade: kg
+    par_stock_minimo: 2.0
+    par_stock_ideal: 3.0
+    categoria: hortifruti
+    fornecedor_principal: null
+    estimado: true
+
+  - nome: Batata Inglesa
+    unidade: kg
+    par_stock_minimo: 5.0
+    par_stock_ideal: 8.0
+    categoria: hortifruti
+    fornecedor_principal: null
+    estimado: true
+    notas: "Usado em Parmegiana e Grelhado com fritas"
+
+  - nome: Alho
+    unidade: kg
+    par_stock_minimo: 0.5
+    par_stock_ideal: 1.0
+    categoria: hortifruti
+    fornecedor_principal: null
+    estimado: true
+
+  # ═══ LATICÍNIOS ═══
+  - nome: Queijo Mussarela
+    unidade: kg
+    par_stock_minimo: 2.0
+    par_stock_ideal: 3.0
+    categoria: laticinio
+    fornecedor_principal: null
+    estimado: true
+    notas: "Usado na Parmegiana"
+
+  - nome: Creme de Leite
+    unidade: un
+    par_stock_minimo: 5
+    par_stock_ideal: 10
+    categoria: laticinio
+    fornecedor_principal: null
+    estimado: true
+    notas: "Usado no Strogonoff"
+
+  # ═══ SECOS / DESPENSA ═══
+  - nome: Arroz Branco
+    unidade: kg
+    par_stock_minimo: 5.0
+    par_stock_ideal: 10.0
+    categoria: seco
+    fornecedor_principal: null
+    estimado: true
+
+  - nome: Óleo de Soja
+    unidade: L
+    par_stock_minimo: 5.0
+    par_stock_ideal: 10.0
+    categoria: seco
+    fornecedor_principal: null
+    estimado: true
+
+  - nome: Farinha de Trigo
+    unidade: kg
+    par_stock_minimo: 2.0
+    par_stock_ideal: 4.0
+    categoria: seco
+    fornecedor_principal: null
+    estimado: true
+
+  - nome: Farinha de Rosca
+    unidade: kg
+    par_stock_minimo: 1.0
+    par_stock_ideal: 2.0
+    categoria: seco
+    fornecedor_principal: null
+    estimado: true
+
+  - nome: Molho de Tomate (Industrializado)
+    unidade: un
+    par_stock_minimo: 5
+    par_stock_ideal: 10
+    categoria: seco
+    fornecedor_principal: null
+    estimado: true
+
+  - nome: Sal
+    unidade: kg
+    par_stock_minimo: 2.0
+    par_stock_ideal: 5.0
+    categoria: seco
+    fornecedor_principal: null
+    estimado: true

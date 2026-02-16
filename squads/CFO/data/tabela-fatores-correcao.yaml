@@ -1,0 +1,756 @@
+# =============================================================================
+# TABELA DE FATORES DE CORREÇÃO (FC) E COCÇÃO (FCc)
+# Base de Dados para Restaurantes Brasileiros
+# =============================================================================
+#
+# Fontes: EMBRAPA, IBGE (Tabela TACO), Sebrae, literatura técnica gastronômica
+#
+# FC (Fator de Correção): PB ÷ PL (Peso Bruto ÷ Peso Líquido)
+#   - FC = 1.00 significa zero perda
+#   - FC = 1.50 significa 33% de perda (compra 1.5kg para obter 1kg limpo)
+#   - Quanto MAIOR o FC, MAIOR a perda
+#
+# FCc (Fator de Cocção): Peso Cru ÷ Peso Cozido
+#   - FCc < 1.00 significa que o alimento GANHA peso (ex: arroz absorve água)
+#   - FCc > 1.00 significa que o alimento PERDE peso (ex: carne encolhe)
+#
+# Custo Real por Kg Utilizável = Custo Compra/kg × FC
+#
+# ATENÇÃO: Estes valores são MÉDIAS. O FC real varia por:
+#   - Qualidade do fornecedor
+#   - Safra e sazonalidade
+#   - Habilidade do manipulador
+#   - Equipamento utilizado
+# SEMPRE faça seus próprios testes de rendimento!
+# =============================================================================
+
+metadata:
+  versao: "1.0.0"
+  data_atualizacao: "2026-02"
+  fontes:
+    - "Tabela TACO - UNICAMP"
+    - "EMBRAPA - Tabelas de Composição"
+    - "Sebrae - Guias de Gestão Gastronômica"
+    - "Ornellas, L.H. - Técnica Dietética"
+    - "Philippi, S.T. - Tabela de Composição de Alimentos"
+  notas:
+    - "FC médio. Testar com seu fornecedor específico"
+    - "FCc varia por método de cocção (forno, grelha, fritura, vapor)"
+    - "Preços são referência Brasil fev/2026, variam por região"
+
+# =============================================================================
+# CARNES BOVINAS
+# =============================================================================
+carnes_bovinas:
+  - nome: "Filé Mignon"
+    fc: 1.25
+    fcc_grelha: 1.30
+    fcc_forno: 1.25
+    perda_percentual: "20%"
+    preco_ref_kg: 89.90
+    custo_kg_utilizavel: 112.38
+    notas: "Perda de gordura e cordão. FC pode chegar a 1.40 se baixa qualidade"
+
+  - nome: "Contrafilé"
+    fc: 1.15
+    fcc_grelha: 1.28
+    fcc_forno: 1.22
+    perda_percentual: "13%"
+    preco_ref_kg: 59.90
+    custo_kg_utilizavel: 68.89
+    notas: "Retirada de capa de gordura e nervos"
+
+  - nome: "Alcatra"
+    fc: 1.18
+    fcc_grelha: 1.25
+    fcc_forno: 1.20
+    perda_percentual: "15%"
+    preco_ref_kg: 52.90
+    custo_kg_utilizavel: 62.42
+    notas: "Variação grande por peça. Miolo de alcatra tem FC menor"
+
+  - nome: "Picanha"
+    fc: 1.12
+    fcc_grelha: 1.35
+    fcc_forno: 1.28
+    perda_percentual: "11%"
+    preco_ref_kg: 79.90
+    custo_kg_utilizavel: 89.49
+    notas: "FC baixo pois usa com capa de gordura. Perda alta na cocção"
+
+  - nome: "Coxão Mole (Chã de Dentro)"
+    fc: 1.15
+    fcc_panela: 1.20
+    fcc_forno: 1.18
+    perda_percentual: "13%"
+    preco_ref_kg: 39.90
+    custo_kg_utilizavel: 45.89
+    notas: "Ideal para carne de panela, desfiados e executivos"
+
+  - nome: "Patinho"
+    fc: 1.10
+    fcc_panela: 1.15
+    fcc_grelha: 1.22
+    perda_percentual: "9%"
+    preco_ref_kg: 37.90
+    custo_kg_utilizavel: 41.69
+    notas: "Pouca gordura, FC baixo. Bom para carne moída e escabeche"
+
+  - nome: "Acém (Paleta)"
+    fc: 1.22
+    fcc_panela: 1.18
+    fcc_forno: 1.15
+    perda_percentual: "18%"
+    preco_ref_kg: 32.90
+    custo_kg_utilizavel: 40.14
+    notas: "Nervos e gordura. Ótimo custo-benefício para cozidos longos"
+
+  - nome: "Costela Bovina"
+    fc: 1.50
+    fcc_forno: 1.40
+    fcc_panela: 1.35
+    perda_percentual: "33%"
+    preco_ref_kg: 29.90
+    custo_kg_utilizavel: 44.85
+    notas: "FC alto por conta dos ossos. Desossar antes de pesar PL"
+
+  - nome: "Carne Moída (1ª)"
+    fc: 1.00
+    fcc_refogada: 1.25
+    perda_percentual: "0%"
+    preco_ref_kg: 34.90
+    custo_kg_utilizavel: 34.90
+    notas: "Já comprada limpa. Perda apenas na cocção (gordura liberada)"
+
+  - nome: "Músculo"
+    fc: 1.20
+    fcc_panela: 1.15
+    perda_percentual: "17%"
+    preco_ref_kg: 32.90
+    custo_kg_utilizavel: 39.48
+    notas: "Nervos e gordura. Excelente para sopas e desfiados"
+
+# =============================================================================
+# AVES
+# =============================================================================
+aves:
+  - nome: "Frango Inteiro"
+    fc: 1.55
+    fcc_forno: 1.25
+    fcc_grelha: 1.30
+    perda_percentual: "35%"
+    preco_ref_kg: 12.90
+    custo_kg_utilizavel: 20.00
+    notas: "Ossos, pele, vísceras. Ossos rendem caldo/fundo"
+
+  - nome: "Peito de Frango (com osso/pele)"
+    fc: 1.35
+    fcc_grelha: 1.25
+    fcc_forno: 1.20
+    perda_percentual: "26%"
+    preco_ref_kg: 16.90
+    custo_kg_utilizavel: 22.82
+    notas: "Retirada de osso e pele. Pele pode ser aproveitada"
+
+  - nome: "Peito de Frango (filé sem osso)"
+    fc: 1.05
+    fcc_grelha: 1.22
+    fcc_forno: 1.18
+    perda_percentual: "5%"
+    preco_ref_kg: 22.90
+    custo_kg_utilizavel: 24.05
+    notas: "FC baixo, quase sem perda. Ideal para executivos"
+
+  - nome: "Sobrecoxa (com osso)"
+    fc: 1.25
+    fcc_forno: 1.20
+    fcc_grelha: 1.25
+    perda_percentual: "20%"
+    preco_ref_kg: 14.90
+    custo_kg_utilizavel: 18.63
+    notas: "Osso e excesso de gordura/pele"
+
+  - nome: "Sobrecoxa (sem osso)"
+    fc: 1.10
+    fcc_grelha: 1.22
+    fcc_forno: 1.18
+    perda_percentual: "9%"
+    preco_ref_kg: 18.90
+    custo_kg_utilizavel: 20.79
+    notas: "Melhor custo-benefício para frango grelhado em buffet"
+
+  - nome: "Coxa de Frango"
+    fc: 1.30
+    fcc_forno: 1.20
+    perda_percentual: "23%"
+    preco_ref_kg: 11.90
+    custo_kg_utilizavel: 15.47
+    notas: "Osso, cartilagem. Bom para cozidos e caldos"
+
+# =============================================================================
+# SUÍNOS
+# =============================================================================
+suinos:
+  - nome: "Lombo Suíno"
+    fc: 1.15
+    fcc_forno: 1.22
+    fcc_grelha: 1.28
+    perda_percentual: "13%"
+    preco_ref_kg: 29.90
+    custo_kg_utilizavel: 34.39
+    notas: "Retirada de gordura externa e membrana"
+
+  - nome: "Costelinha Suína"
+    fc: 1.40
+    fcc_forno: 1.30
+    perda_percentual: "29%"
+    preco_ref_kg: 24.90
+    custo_kg_utilizavel: 34.86
+    notas: "Ossos e cartilagem. FC varia muito por corte"
+
+  - nome: "Pernil Suíno"
+    fc: 1.30
+    fcc_forno: 1.25
+    perda_percentual: "23%"
+    preco_ref_kg: 19.90
+    custo_kg_utilizavel: 25.87
+    notas: "Osso, couro e gordura. Excelente para produção em lote"
+
+  - nome: "Bisteca Suína"
+    fc: 1.20
+    fcc_grelha: 1.25
+    perda_percentual: "17%"
+    preco_ref_kg: 26.90
+    custo_kg_utilizavel: 32.28
+    notas: "Osso incluso no corte"
+
+# =============================================================================
+# PEIXES E FRUTOS DO MAR
+# =============================================================================
+peixes:
+  - nome: "Tilápia (filé)"
+    fc: 1.05
+    fcc_grelha: 1.15
+    fcc_frito: 1.10
+    perda_percentual: "5%"
+    preco_ref_kg: 39.90
+    custo_kg_utilizavel: 41.90
+    notas: "Filé já vem limpo. Atenção ao glaciamento (peso do gelo)"
+
+  - nome: "Tilápia (inteira)"
+    fc: 2.50
+    fcc_forno: 1.20
+    perda_percentual: "60%"
+    preco_ref_kg: 18.90
+    custo_kg_utilizavel: 47.25
+    notas: "FC altíssimo: cabeça, espinha, pele, vísceras"
+
+  - nome: "Salmão (filé com pele)"
+    fc: 1.10
+    fcc_grelha: 1.18
+    fcc_forno: 1.15
+    perda_percentual: "9%"
+    preco_ref_kg: 79.90
+    custo_kg_utilizavel: 87.89
+    notas: "Pele serve para preparo crocante. Atenção ao glaciamento"
+
+  - nome: "Merluza (filé congelado)"
+    fc: 1.30
+    fcc_frito: 1.12
+    perda_percentual: "23%"
+    preco_ref_kg: 32.90
+    custo_kg_utilizavel: 42.77
+    notas: "FC alto por glaciamento. Pesar APÓS descongelamento"
+
+  - nome: "Camarão Médio (com casca)"
+    fc: 1.65
+    fcc_refogado: 1.15
+    perda_percentual: "39%"
+    preco_ref_kg: 65.90
+    custo_kg_utilizavel: 108.74
+    notas: "Casca, cabeça, intestino. Casca rende bisque/caldo"
+
+  - nome: "Camarão Limpo (sem casca)"
+    fc: 1.10
+    fcc_refogado: 1.12
+    perda_percentual: "9%"
+    preco_ref_kg: 89.90
+    custo_kg_utilizavel: 98.89
+    notas: "Pouca perda. Verificar glaciamento"
+
+# =============================================================================
+# HORTALIÇAS — FOLHOSAS
+# =============================================================================
+folhosas:
+  - nome: "Alface Americana"
+    fc: 1.20
+    fcc: 1.00
+    perda_percentual: "17%"
+    preco_ref_kg: 8.90
+    custo_kg_utilizavel: 10.68
+    notas: "Folhas externas danificadas e talo"
+
+  - nome: "Alface Crespa"
+    fc: 1.33
+    fcc: 1.00
+    perda_percentual: "25%"
+    preco_ref_kg: 6.50
+    custo_kg_utilizavel: 8.65
+    notas: "Mais perda que americana por folhas finas"
+
+  - nome: "Rúcula"
+    fc: 1.45
+    fcc: 1.00
+    perda_percentual: "31%"
+    preco_ref_kg: 18.90
+    custo_kg_utilizavel: 27.41
+    notas: "Talos grossos e folhas murchas. FC alto"
+
+  - nome: "Espinafre"
+    fc: 1.55
+    fcc_refogado: 3.00
+    perda_percentual: "35%"
+    preco_ref_kg: 14.90
+    custo_kg_utilizavel: 23.10
+    notas: "ALTO FCc quando refogado — murcha drasticamente"
+
+  - nome: "Couve Manteiga"
+    fc: 1.47
+    fcc_refogada: 1.50
+    perda_percentual: "32%"
+    preco_ref_kg: 9.90
+    custo_kg_utilizavel: 14.55
+    notas: "Talos grossos removidos. Talos podem ser aproveitados em sopas"
+
+  - nome: "Repolho"
+    fc: 1.34
+    fcc_refogado: 1.40
+    perda_percentual: "25%"
+    preco_ref_kg: 4.90
+    custo_kg_utilizavel: 6.57
+    notas: "Folhas externas e miolo duro. Custo muito baixo"
+
+  - nome: "Agrião"
+    fc: 1.52
+    fcc: 1.00
+    perda_percentual: "34%"
+    preco_ref_kg: 16.90
+    custo_kg_utilizavel: 25.69
+    notas: "Talos longos removidos, folhas murchas"
+
+# =============================================================================
+# HORTALIÇAS — LEGUMES E RAÍZES
+# =============================================================================
+legumes:
+  - nome: "Tomate (salada)"
+    fc: 1.25
+    fcc: 1.00
+    perda_percentual: "20%"
+    preco_ref_kg: 8.90
+    custo_kg_utilizavel: 11.13
+    notas: "Talo, sementes (se removidas), partes verdes"
+
+  - nome: "Tomate (para molho)"
+    fc: 1.20
+    fcc_cozido: 1.50
+    perda_percentual: "17%"
+    preco_ref_kg: 6.90
+    custo_kg_utilizavel: 8.28
+    notas: "Menos perda quando usado inteiro para molho"
+
+  - nome: "Cebola"
+    fc: 1.67
+    fcc_refogada: 1.60
+    perda_percentual: "40%"
+    preco_ref_kg: 7.90
+    custo_kg_utilizavel: 13.19
+    notas: "Casca, raiz e camada externa. FC alto!"
+
+  - nome: "Alho"
+    fc: 1.95
+    fcc_refogado: 1.40
+    perda_percentual: "49%"
+    preco_ref_kg: 45.00
+    custo_kg_utilizavel: 87.75
+    notas: "Casca e miolo duro. FC altíssimo. Usar alho já descascado pode compensar"
+
+  - nome: "Cenoura"
+    fc: 1.17
+    fcc_vapor: 1.03
+    fcc_refogada: 1.08
+    perda_percentual: "15%"
+    preco_ref_kg: 5.90
+    custo_kg_utilizavel: 6.90
+    notas: "Ponta, talo e casca. FC baixo"
+
+  - nome: "Batata Inglesa"
+    fc: 1.20
+    fcc_cozida: 0.95
+    fcc_frita: 1.50
+    perda_percentual: "17%"
+    preco_ref_kg: 6.90
+    custo_kg_utilizavel: 8.28
+    notas: "Casca e olhos. Ganha levemente de peso quando cozida"
+
+  - nome: "Batata Doce"
+    fc: 1.15
+    fcc_cozida: 0.97
+    fcc_forno: 1.10
+    perda_percentual: "13%"
+    preco_ref_kg: 7.90
+    custo_kg_utilizavel: 9.09
+    notas: "Casca fina, pouca perda"
+
+  - nome: "Mandioca (Aipim)"
+    fc: 1.32
+    fcc_cozida: 0.90
+    fcc_frita: 1.40
+    perda_percentual: "24%"
+    preco_ref_kg: 6.90
+    custo_kg_utilizavel: 9.11
+    notas: "Casca grossa e fibra central. Absorve água quando cozida"
+
+  - nome: "Abobrinha"
+    fc: 1.15
+    fcc_grelha: 1.20
+    fcc_refogada: 1.15
+    perda_percentual: "13%"
+    preco_ref_kg: 7.90
+    custo_kg_utilizavel: 9.09
+    notas: "Pontas. FC baixo quando usada com casca"
+
+  - nome: "Berinjela"
+    fc: 1.10
+    fcc_grelha: 1.30
+    fcc_forno: 1.25
+    perda_percentual: "9%"
+    preco_ref_kg: 8.90
+    custo_kg_utilizavel: 9.79
+    notas: "Pouca perda, usa quase inteira"
+
+  - nome: "Beterraba"
+    fc: 1.47
+    fcc_cozida: 1.05
+    perda_percentual: "32%"
+    preco_ref_kg: 6.90
+    custo_kg_utilizavel: 10.14
+    notas: "Folhas, raiz e casca. Folhas são comestíveis (refogado)"
+
+  - nome: "Chuchu"
+    fc: 1.30
+    fcc_cozido: 1.05
+    perda_percentual: "23%"
+    preco_ref_kg: 4.90
+    custo_kg_utilizavel: 6.37
+    notas: "Casca e miolo fibroso"
+
+  - nome: "Brócolis"
+    fc: 1.87
+    fcc_vapor: 1.05
+    fcc_refogado: 1.10
+    perda_percentual: "47%"
+    preco_ref_kg: 14.90
+    custo_kg_utilizavel: 27.86
+    notas: "FC muito alto! Talo grosso. Talos podem ser aproveitados"
+
+  - nome: "Couve-flor"
+    fc: 2.13
+    fcc_vapor: 1.05
+    fcc_gratinada: 1.08
+    perda_percentual: "53%"
+    preco_ref_kg: 12.90
+    custo_kg_utilizavel: 27.48
+    notas: "FC altíssimo: folhas, talo e base. Mais da metade é descarte"
+
+  - nome: "Pimentão Verde"
+    fc: 1.26
+    fcc_refogado: 1.15
+    perda_percentual: "21%"
+    preco_ref_kg: 9.90
+    custo_kg_utilizavel: 12.47
+    notas: "Sementes, nervuras e talo"
+
+  - nome: "Pimentão Vermelho"
+    fc: 1.20
+    fcc_refogado: 1.12
+    perda_percentual: "17%"
+    preco_ref_kg: 16.90
+    custo_kg_utilizavel: 20.28
+    notas: "Menos perda que verde, paredes mais grossas"
+
+  - nome: "Abóbora Cabotiá (Japonesa)"
+    fc: 1.30
+    fcc_cozida: 1.05
+    fcc_forno: 1.10
+    perda_percentual: "23%"
+    preco_ref_kg: 5.90
+    custo_kg_utilizavel: 7.67
+    notas: "Casca grossa, sementes e fibras internas"
+
+  - nome: "Quiabo"
+    fc: 1.22
+    fcc_refogado: 1.15
+    perda_percentual: "18%"
+    preco_ref_kg: 12.90
+    custo_kg_utilizavel: 15.74
+    notas: "Pontas e cabinho de cada unidade"
+
+  - nome: "Milho Verde (espiga)"
+    fc: 2.80
+    fcc_cozido: 0.95
+    perda_percentual: "64%"
+    preco_ref_kg: 5.90
+    custo_kg_utilizavel: 16.52
+    notas: "Palha, cabelo e sabugo. FC altíssimo. Considerar milho em lata"
+
+  - nome: "Pepino"
+    fc: 1.15
+    fcc: 1.00
+    perda_percentual: "13%"
+    preco_ref_kg: 6.90
+    custo_kg_utilizavel: 7.94
+    notas: "Pontas e casca (se removida). Com casca FC = 1.03"
+
+# =============================================================================
+# GRÃOS, CEREAIS E LEGUMINOSAS
+# =============================================================================
+graos:
+  - nome: "Arroz Branco (agulhinha)"
+    fc: 1.00
+    fcc_cozido: 0.40
+    rendimento: "1kg cru = 2.5kg cozido"
+    perda_percentual: "0%"
+    preco_ref_kg: 6.50
+    custo_kg_cozido: 2.60
+    notas: "Zero perda na limpeza. Rende 2,5x quando cozido"
+
+  - nome: "Arroz Integral"
+    fc: 1.00
+    fcc_cozido: 0.45
+    rendimento: "1kg cru = 2.2kg cozido"
+    perda_percentual: "0%"
+    preco_ref_kg: 9.90
+    custo_kg_cozido: 4.50
+    notas: "Rende ligeiramente menos que branco"
+
+  - nome: "Feijão Carioca"
+    fc: 1.05
+    fcc_cozido: 0.50
+    rendimento: "1kg cru = 2.0kg cozido (com caldo)"
+    perda_percentual: "5%"
+    preco_ref_kg: 8.90
+    custo_kg_cozido: 4.68
+    notas: "Catação de pedras e grãos ruins"
+
+  - nome: "Feijão Preto"
+    fc: 1.05
+    fcc_cozido: 0.48
+    rendimento: "1kg cru = 2.1kg cozido"
+    perda_percentual: "5%"
+    preco_ref_kg: 9.90
+    custo_kg_cozido: 4.95
+    notas: "Base para feijoada. Catação necessária"
+
+  - nome: "Lentilha"
+    fc: 1.02
+    fcc_cozida: 0.45
+    rendimento: "1kg cru = 2.2kg cozido"
+    perda_percentual: "2%"
+    preco_ref_kg: 14.90
+    custo_kg_cozido: 6.91
+    notas: "Quase sem perda, grão limpo"
+
+  - nome: "Macarrão Seco (espaguete)"
+    fc: 1.00
+    fcc_cozido: 0.40
+    rendimento: "1kg cru = 2.5kg cozido"
+    perda_percentual: "0%"
+    preco_ref_kg: 7.90
+    custo_kg_cozido: 3.16
+    notas: "Excelente rendimento. Custo muito baixo por porção"
+
+  - nome: "Farinha de Mandioca"
+    fc: 1.00
+    fcc: 1.00
+    perda_percentual: "0%"
+    preco_ref_kg: 8.90
+    custo_kg_utilizavel: 8.90
+    notas: "Sem perda. Base para farofa"
+
+  - nome: "Farinha de Trigo"
+    fc: 1.00
+    fcc: 1.00
+    perda_percentual: "0%"
+    preco_ref_kg: 5.90
+    custo_kg_utilizavel: 5.90
+    notas: "Sem perda. Uso em empanados, molhos e massas"
+
+# =============================================================================
+# OVOS E LATICÍNIOS
+# =============================================================================
+ovos_laticinios:
+  - nome: "Ovo de Galinha (unidade ~60g)"
+    fc: 1.30
+    fcc_cozido: 1.00
+    perda_percentual: "23%"
+    preco_ref_unidade: 0.75
+    notas: "Casca = 12%, clara perdida ao separar = variável"
+
+  - nome: "Queijo Mussarela"
+    fc: 1.00
+    fcc_derretido: 0.90
+    perda_percentual: "0%"
+    preco_ref_kg: 39.90
+    custo_kg_utilizavel: 39.90
+    notas: "Sem perda de manipulação. Derrete e reduz levemente"
+
+  - nome: "Queijo Parmesão"
+    fc: 1.15
+    fcc_gratinado: 0.85
+    perda_percentual: "13%"
+    preco_ref_kg: 89.90
+    custo_kg_utilizavel: 103.39
+    notas: "Casca dura. Casca rende sabor em caldos/molhos"
+
+  - nome: "Creme de Leite"
+    fc: 1.00
+    fcc: 1.00
+    perda_percentual: "0%"
+    preco_ref_litro: 14.00
+    custo_litro_utilizavel: 14.00
+    notas: "Sem perda. Resíduo mínimo na embalagem"
+
+  - nome: "Leite Integral"
+    fc: 1.00
+    fcc_fervido: 0.95
+    perda_percentual: "0%"
+    preco_ref_litro: 6.50
+    custo_litro_utilizavel: 6.50
+    notas: "Sem perda, evaporação mínima"
+
+  - nome: "Manteiga"
+    fc: 1.00
+    fcc: 1.00
+    perda_percentual: "0%"
+    preco_ref_kg: 55.00
+    custo_kg_utilizavel: 55.00
+    notas: "Sem perda de manipulação"
+
+# =============================================================================
+# FRUTAS
+# =============================================================================
+frutas:
+  - nome: "Banana Prata"
+    fc: 1.47
+    fcc_frita: 1.15
+    perda_percentual: "32%"
+    preco_ref_kg: 6.90
+    custo_kg_utilizavel: 10.14
+    notas: "Casca. Para sobremesas e buffet"
+
+  - nome: "Laranja (suco)"
+    fc: 2.00
+    perda_percentual: "50%"
+    preco_ref_kg: 4.90
+    custo_litro_suco: 19.60
+    notas: "Casca, sementes e bagaço. 1kg = ~500ml de suco"
+
+  - nome: "Limão (suco)"
+    fc: 2.50
+    perda_percentual: "60%"
+    preco_ref_kg: 7.90
+    custo_litro_suco: 39.50
+    notas: "FC muito alto. 1kg = ~400ml de suco"
+
+  - nome: "Abacaxi"
+    fc: 1.89
+    fcc: 1.00
+    perda_percentual: "47%"
+    preco_ref_kg: 5.90
+    custo_kg_utilizavel: 11.15
+    notas: "Coroa, casca e miolo fibroso"
+
+  - nome: "Mamão Formosa"
+    fc: 1.47
+    fcc: 1.00
+    perda_percentual: "32%"
+    preco_ref_kg: 4.90
+    custo_kg_utilizavel: 7.20
+    notas: "Casca, sementes e fibras"
+
+  - nome: "Melancia"
+    fc: 1.82
+    fcc: 1.00
+    perda_percentual: "45%"
+    preco_ref_kg: 2.90
+    custo_kg_utilizavel: 5.28
+    notas: "Casca grossa e sementes. Rendimento baixo"
+
+  - nome: "Manga"
+    fc: 1.52
+    fcc: 1.00
+    perda_percentual: "34%"
+    preco_ref_kg: 6.90
+    custo_kg_utilizavel: 10.49
+    notas: "Casca e caroço grande"
+
+  - nome: "Maçã"
+    fc: 1.15
+    fcc: 1.00
+    perda_percentual: "13%"
+    preco_ref_kg: 9.90
+    custo_kg_utilizavel: 11.39
+    notas: "Semente e talo. FC baixo se usada com casca"
+
+# =============================================================================
+# TEMPEROS E CONDIMENTOS
+# =============================================================================
+temperos:
+  - nome: "Salsinha"
+    fc: 1.62
+    fcc: 1.00
+    perda_percentual: "38%"
+    preco_ref_kg: 12.90
+    custo_kg_utilizavel: 20.90
+    notas: "Talos grossos, folhas murchas. Talos servem para caldos"
+
+  - nome: "Cebolinha"
+    fc: 1.35
+    fcc: 1.00
+    perda_percentual: "26%"
+    preco_ref_kg: 14.90
+    custo_kg_utilizavel: 20.12
+    notas: "Pontas secas e raízes"
+
+  - nome: "Coentro"
+    fc: 1.50
+    fcc: 1.00
+    perda_percentual: "33%"
+    preco_ref_kg: 15.90
+    custo_kg_utilizavel: 23.85
+    notas: "Raiz, talos grossos e folhas amareladas"
+
+  - nome: "Gengibre"
+    fc: 1.30
+    fcc: 1.00
+    perda_percentual: "23%"
+    preco_ref_kg: 25.90
+    custo_kg_utilizavel: 33.67
+    notas: "Casca e pontas secas"
+
+# =============================================================================
+# REFERÊNCIA RÁPIDA: TOP 10 MAIORES FC (MAIORES PERDAS)
+# =============================================================================
+# CUIDADO: Estes insumos têm as maiores perdas no processamento.
+# Se não considerar o FC, seu CMV estará gravemente subestimado.
+#
+# 1. Milho Verde (espiga)   FC 2.80  - 64% perda
+# 2. Limão (suco)           FC 2.50  - 60% perda
+# 3. Tilápia Inteira        FC 2.50  - 60% perda
+# 4. Couve-flor             FC 2.13  - 53% perda
+# 5. Laranja (suco)         FC 2.00  - 50% perda
+# 6. Alho                   FC 1.95  - 49% perda
+# 7. Abacaxi                FC 1.89  - 47% perda
+# 8. Brócolis               FC 1.87  - 47% perda
+# 9. Melancia               FC 1.82  - 45% perda
+# 10. Cebola                FC 1.67  - 40% perda
