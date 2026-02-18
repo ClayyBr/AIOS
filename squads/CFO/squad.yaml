@@ -6,6 +6,7 @@ description: |
   Agente 1 (Arquiteto Lucro): Fichas Técnicas, Precificação, Cardápio.
   Agente 2 (Financeiro): DRE, CMV, Relatórios, Projeções, Impostos.
   Agente 3 (Estoque): Entradas, Saídas, Inventário.
+  Agente 4 (Vendas): Revenue Management, Marketing, Campanhas.
   Regime: Simples Nacional.
 author: Cleison
 license: MIT
@@ -21,6 +22,7 @@ components:
     - arquiteto-lucro.md
     - financeiro.md
     - controlador-estoque.md
+    - vendas.md
   tasks:
     - gerir-operacao.md
     - criar-ficha-tecnica.md
@@ -42,6 +44,8 @@ components:
     - simular-impostos.md
     - indicadores-financeiros.md
     - orcamento-mensal.md
+    - criar-campanha.md
+    - analisar-viabilidade-promocao.md
   templates:
     - ficha-tecnica-template.md
     - ficha-cozinha-template.html
