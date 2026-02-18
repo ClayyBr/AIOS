@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Synkra AIOS-Core — Guia Técnico Completo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        /* Adicionado para rolagem suave ao clicar no link */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #0a0e1a;
+            --surface: #111827;
+            --surface2: #1a2236;
+            --border: #2a3450;
+            --accent: #6366f1;
+            --accent2: #818cf8;
+            --accent3: #a5b4fc;
+            --green: #34d399;
+            --yellow: #fbbf24;
+            --red: #f87171;
+            --cyan: #22d3ee;
+            --text: #e2e8f0;
+            --text2: #94a3b8;
+            --text3: #64748b
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 11pt
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #1a1a2e;
+                font-size: 9.5pt;
+                line-height: 1.5
+            }
+
+            :root {
+                --bg: #fff;
+                --surface: #f8f9fa;
+                --surface2: #f0f1f5;
+                --border: #dee2e6;
+                --text: #1a1a2e;
+                --text2: #495057;
+                --text3: #6c757d;
+                --accent: #4f46e5;
+                --accent2: #6366f1
+            }
+
+            .page-break {
+                page-break-before: always
+            }
+
+            .no-print {
+                display: none
+            }
+        }
+
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1e1b4b 50%, #312e81 100%);
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden
+        }
+
+        @media print {
+            .cover {
+                min-height: auto;
+                padding: 80px 40px;
+                background: #fff !important;
+                border-bottom: 4px solid var(--accent)
+            }
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent);
+            top: -200px;
+            right: -200px
+        }
+
+        .cover h1 {
+            font-size: 3.2em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #a5b4fc, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -1px
+        }
+
+        @media print {
+            .cover h1 {
+                -webkit-text-fill-color: #4f46e5;
+                font-size: 2.6em
+            }
+        }
+
+        .cover .subtitle {
+            font-size: 1.3em;
+            color: var(--text2);
+            font-weight: 300;
+            margin-bottom: 30px
+        }
+
+        .cover .meta {
+            font-size: 0.85em;
+            color: var(--text3);
+            margin-top: 20px
+        }
+
+        .cover .badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin: 4px;
+            border: 1px solid var(--accent)
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px
+        }
+
+        h2 {
+            font-size: 1.8em;
+            font-weight: 800;
+            margin: 40px 0 16px;
+            color: var(--accent3);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+            letter-spacing: -0.5px;
+            /* Scroll margin para compensar visualmente quando o link é clicado */
+            scroll-margin-top: 20px;
+        }
+
+        @media print {
+            h2 {
+                color: var(--accent);
+                font-size: 1.5em;
+                margin: 30px 0 12px
+            }
+        }
+
+        h3 {
+            font-size: 1.25em;
+            font-weight: 700;
+            margin: 28px 0 10px;
+            color: var(--accent2)
+        }
+
+        h4 {
+            font-size: 1.05em;
+            font-weight: 600;
+            margin: 18px 0 8px;
+            color: var(--cyan)
+        }
+
+        @media print {
+            h4 {
+                color: #0891b2
+            }
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--text2)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 24px;
+            font-size: 0.92em
+        }
+
+        th {
+            background: var(--surface2);
+            color: var(--accent3);
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 600;
+            border: 1px solid var(--border)
+        }
+
+        @media print {
+            th {
+                background: #e8e9f3;
+                color: var(--accent)
+            }
+        }
+
+        td {
+            padding: 9px 14px;
+            border: 1px solid var(--border);
+            color: var(--text2)
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(99, 102, 241, 0.03)
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--surface2);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.88em;
+            color: var(--cyan)
+        }
+
+        @media print {
+            code {
+                color: #0891b2;
+                background: #f0f1f5
+            }
+        }
+
+        pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 14px 0 20px;
+            overflow-x: auto;
+            font-size: 0.88em;
+            line-height: 1.6
+        }
+
+        pre code {
+            background: none;
+            padding: 0
+        }
+
+        .callout {
+            border-left: 4px solid var(--accent);
+            background: var(--surface2);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0
+        }
+
+        .callout.warn {
+            border-left-color: var(--yellow)
+        }
+
+        .callout.success {
+            border-left-color: var(--green)
+        }
+
+        .callout.danger {
+            border-left-color: var(--red)
+        }
+
+        .callout strong {
+            color: var(--accent3)
+        }
+
+        .grid2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0
+        }
+
+        @media(max-width:700px) {
+            .grid2 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media print {
+            .grid2 {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px
+        }
+
+        .card h4 {
+            margin-top: 0;
+            color: var(--accent2)
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.78em;
+            font-weight: 600;
+            margin: 2px
+        }
+
+        .tag-core {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--accent2)
+        }
+
+        .tag-must {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--yellow)
+        }
+
+        .tag-nn {
+            background: rgba(248, 113, 113, 0.15);
+            color: var(--red)
+        }
+
+        ul,
+        ol {
+            margin: 8px 0 16px 24px;
+            color: var(--text2)
+        }
+
+        li {
+            margin-bottom: 5px
+        }
+
+        .toc {
+            columns: 2;
+            column-gap: 30px;
+            margin: 20px 0
+        }
+
+        .toc a {
+            color: var(--accent2);
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            font-size: 0.95em;
+            cursor: pointer;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+            color: var(--accent);
+        }
+
+        .flow-diagram {
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--surface);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            line-height: 2
+        }
+
+        .separator {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 40px 0
+        }
+
+        /* Estilo do Botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--accent2);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        @media print {
+            .back-to-top {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CAPA -->
+    <div class="cover">
+        <div style="font-size:1.1em;letter-spacing:6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">
+            SYNKRA AI</div>
+        <h1>AIOS-CORE</h1>
+        <div class="subtitle">Framework Universal de Agentes IA<br>Guia Técnico Completo & Denso</div>
+        <div style="margin:20px 0">
+            <span class="badge">Open Source — MIT</span>
+            <span class="badge">Node.js ≥18</span>
+            <span class="badge">v2.1.0</span>
+        </div>
+        <div class="meta">Documento gerado em Fevereiro 2026 · SynkraAI/aios-core<br>Framework de Desenvolvimento
+            Auto-Modificável Alimentado por IA</div>
+    </div>
+
+    <div class="container">
+
+        <!-- SUMÁRIO -->
+        <!-- ID adicionado para o botão voltar -->
+        <h2 id="summary-top">Sumário</h2>
+        <div class="toc">
+            <a href="#sec-1">1. Visão Geral e Propósito</a>
+            <a href="#sec-2">2. Premissa Arquitetural: CLI First</a>
+            <a href="#sec-3">3. Inovações-Chave</a>
+            <a href="#sec-4">4. Constitution & Governança</a>
+            <a href="#sec-5">5. Arquitetura de Sistema</a>
+            <a href="#sec-6">6. Sistema de Agentes (11+)</a>
+            <a href="#sec-7">7. Story-Driven Development</a>
+            <a href="#sec-8">8. Templates (18 Templates)</a>
+            <a href="#sec-9">9. Skills Avançadas (8 Skills)</a>
+            <a href="#sec-10">10. ADE — Autonomous Dev Engine</a>
+            <a href="#sec-11">11. Quality Gates — 3 Camadas</a>
+            <a href="#sec-12">12. Squads — Expansion Packs</a>
+            <a href="#sec-13">13. MCP & Infraestrutura</a>
+            <a href="#sec-14">14. IDE Sync & Integrações</a>
+            <a href="#sec-15">15. Utilitários (60+ helpers)</a>
+            <a href="#sec-16">16. Instalação & CLI</a>
+            <a href="#sec-17">17. Comparativo: Manual vs AIOS</a>
+            <a href="#sec-18">18. Roadmap & Futuro</a>
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- 1. VISÃO GERAL -->
+        <h2 id="sec-1">1. Visão Geral e Propósito</h2>
+        <p>O <strong>Synkra AIOS</strong> (AI-Orchestrated System) é um framework de desenvolvimento auto-modificável
+            alimentado por IA. Fundado em Desenvolvimento Ágil Dirigido por Agentes, oferece capacidades revolucionárias
+            para desenvolvimento dirigido por IA e transformação de qualquer domínio com expertise especializada.</p>
+        <p>O AIOS organiza agentes de IA para trabalharem <strong>como uma equipe real</strong>: cada agente possui
+            papel, responsabilidades e regras definidas. Em vez de interagir com uma IA genérica, o AIOS garante:</p>
+        <ul>
+            <li>Cada agente <strong>sabe exatamente o que fazer</strong> (persona, capabilities, dependencies)</li>
+            <li>Agentes <strong>se comunicam entre si</strong> passando documentos e contexto</li>
+            <li>Existe um <strong>processo claro</strong> do início ao fim (Planning → Development → QA → Deploy)</li>
+            <li>A <strong>qualidade é verificada automaticamente</strong> por gates multi-camada</li>
+        </ul>
+        <div class="callout success">
+            <strong>Natural Language First:</strong> Todo o framework é escrito em linguagem natural (Markdown/YAML).
+            Não há código de programação no core — apenas instruções em linguagem natural que agentes de IA interpretam
+            e executam.
+        </div>
+
+        <p>O AIOS é <strong>domain-agnostic</strong>: funciona para desenvolvimento de software, entretenimento, escrita
+            criativa, estratégia de negócios, educação, gestão financeira de restaurantes, e qualquer domínio que possa
+            ser representado por agentes especializados.</p>
+
+        <div class="page-break"></div>
+
+        <!-- 2. CLI FIRST -->
+        <h2 id="sec-2">2. Premissa Arquitetural: CLI First</h2>
+        <p>O Synkra AIOS segue uma hierarquia <strong>inegociável</strong> de prioridades que deve guiar TODAS as
+            decisões:</p>
+
+        <table>
+            <tr>
+                <th>Camada</th>
+                <th>Prioridade</th>
+                <th>Foco</th>
+                <th>Exemplos</th>
+            </tr>
+            <tr>
+                <td><strong>CLI</strong></td>
+                <td>Máxima</td>
+                <td>Onde a inteligência vive. Toda execução, decisões e automação.</td>
+                <td>Agentes (<code>@dev</code>, <code>@qa</code>), workflows, comandos</td>
+            </tr>
+            <tr>
+                <td><strong>Observability</strong></td>
+                <td>Secundária</td>
+                <td>Observar e monitorar o que acontece no CLI em tempo real.</td>
+                <td>Dashboard SSE, logs, métricas, timeline</td>
+            </tr>
+            <tr>
+                <td><strong>UI</strong></td>
+                <td>Terciária</td>
+                <td>Gestão pontual e visualizações quando necessário.</td>
+                <td>Kanban, settings, story management</td>
+            </tr>
+        </table>
+
+        <h4>Princípios Derivados</h4>
+        <ol>
+            <li>A CLI é a <strong>fonte da verdade</strong> — dashboards apenas observam, nunca controlam</li>
+            <li>Funcionalidades novas devem funcionar <strong>100% via CLI</strong> antes de ter qualquer UI</li>
+            <li>A UI <strong>nunca deve ser requisito</strong> para operação do sistema</li>
+            <li>Observabilidade serve para <strong>entender</strong> o que o CLI está fazendo, não para controlá-lo</li>
+            <li>Ao decidir onde implementar algo, sempre prefira <strong>CLI > Observability > UI</strong></li>
+        </ol>
+
+        <!-- 3. INOVAÇÕES -->
+        <h2 id="sec-3">3. As Duas Inovações-Chave</h2>
+
+        <div class="grid2">
+            <div class="card">
+                <h4>🧠 1. Planejamento Agêntico</h4>
+                <p>Agentes dedicados (<code>@analyst</code>, <code>@pm</code>, <code>@architect</code>) colaboram com
+                    você para criar documentos de PRD e Arquitetura detalhados e consistentes. Através de engenharia
+                    avançada de prompts e refinamento com human-in-the-loop, estes agentes produzem especificações
+                    abrangentes que vão muito além da geração genérica.</p>
+            </div>
+            <div class="card">
+                <h4>⚙️ 2. Desenvolvimento Contextualizado</h4>
+                <p>O agente <code>@sm</code> (Scrum Master) transforma planos detalhados em stories hiper-detalhadas que
+                    contêm tudo que o <code>@dev</code> precisa: contexto completo, detalhes de implementação e
+                    orientação arquitetural incorporada diretamente nos arquivos de stories.</p>
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Problema resolvido:</strong> Esta abordagem de duas fases elimina tanto a <strong>inconsistência de
+                planejamento</strong> quanto a <strong>perda de contexto</strong> — os dois maiores problemas no
+            desenvolvimento assistido por IA. O agente dev abre uma story com compreensão completa do que construir,
+            como construir e por quê.
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 4. CONSTITUTION -->
+        <h2 id="sec-4">4. Constitution & Governança</h2>
+        <p>O AIOS possui uma <strong>Constituição formal</strong> (v1.0.0) com princípios inegociáveis e gates
+            automáticos que bloqueiam violações:</p>
+
+        <table>
+            <tr>
+                <th>Artigo</th>
+                <th>Princípio</th>
+                <th>Severidade</th>
+                <th>Descrição</th>
+            </tr>
+            <tr>
+                <td>I</td>
+                <td><strong>CLI First</strong></td>
+                <td><span class="tag tag-nn">NON-NEGOTIABLE</span></td>
+                <td>Toda funcionalidade nova funciona 100% via CLI antes de UI. Dashboards observam, nunca controlam.
+                </td>
+            </tr>
+            <tr>
+                <td>II</td>
+                <td><strong>Agent Authority</strong></td>
+                <td><span class="tag tag-nn">NON-NEGOTIABLE</span></td>
+                <td>Cada agente tem autoridades exclusivas. Apenas <code>@devops</code> pode <code>git push</code>,
+                    criar PRs e releases.</td>
+            </tr>
+            <tr>
+                <td>III</td>
+                <td><strong>Story-Driven</strong></td>
+                <td><span class="tag tag-must">MUST</span></td>
+                <td>Nenhum código é escrito sem story associada. Stories têm acceptance criteria claros.</td>
+            </tr>
+            <tr>
+                <td>IV</td>
+                <td><strong>No Invention</strong></td>
+                <td><span class="tag tag-must">MUST</span></td>
+                <td>Specs não inventam — derivam de requisitos funcionais, não-funcionais, constraints ou research.</td>
+            </tr>
+            <tr>
+                <td>V</td>
+                <td><strong>Quality First</strong></td>
+                <td><span class="tag tag-must">MUST</span></td>
+                <td>Lint, typecheck, tests e build devem passar. CodeRabbit sem issues CRITICAL.</td>
+            </tr>
+            <tr>
+                <td>VI</td>
+                <td><strong>Absolute Imports</strong></td>
+                <td><span class="tag tag-core">SHOULD</span></td>
+                <td>Sempre usar imports absolutos com alias <code>@/</code>. Relativos criam acoplamento.</td>
+            </tr>
+        </table>
+
+        <h4>Gate Severity Levels</h4>
+        <table>
+            <tr>
+                <th>Severidade</th>
+                <th>Comportamento</th>
+                <th>Uso</th>
+            </tr>
+            <tr>
+                <td><strong>BLOCK</strong></td>
+                <td>Impede execução, requer correção</td>
+                <td>NON-NEGOTIABLE, MUST críticos</td>
+            </tr>
+            <tr>
+                <td><strong>WARN</strong></td>
+                <td>Permite continuar com alerta</td>
+                <td>MUST não-críticos</td>
+            </tr>
+            <tr>
+                <td><strong>INFO</strong></td>
+                <td>Apenas reporta</td>
+                <td>SHOULD</td>
+            </tr>
+        </table>
+
+        <h4>Autoridades Exclusivas por Agente</h4>
+        <table>
+            <tr>
+                <th>Autoridade</th>
+                <th>Agente Exclusivo</th>
+            </tr>
+            <tr>
+                <td>git push / PR creation / Release & Tags</td>
+                <td><code>@devops</code></td>
+            </tr>
+            <tr>
+                <td>Story creation</td>
+                <td><code>@sm</code>, <code>@po</code></td>
+            </tr>
+            <tr>
+                <td>Architecture decisions</td>
+                <td><code>@architect</code></td>
+            </tr>
+            <tr>
+                <td>Quality verdicts</td>
+                <td><code>@qa</code></td>
+            </tr>
+        </table>
+
+        <div class="page-break"></div>
+
+        <!-- 5. ARQUITETURA -->
+        <h2 id="sec-5">5. Arquitetura de Sistema</h2>
+
+        <h3>5.1 Estrutura do Projeto</h3>
+        <pre><code>aios-core/
+├── .aios-core/                    ← Coração do framework
+│   ├── core/                      ← 18 módulos: orchestration, memory, quality, etc.
+│   ├── development/               ← Agentes, tasks, templates, checklists
+│   │   ├── agents/                ← Definições master dos agentes
+│   │   ├── tasks/                 ← Procedimentos step-by-step
+│   │   └── scripts/               ← Scripts de desenvolvimento
+│   ├── constitution.md            ← Regras sagradas inegociáveis
+│   ├── core-config.yaml           ← Configuração central (344 linhas)
+│   ├── framework-config.yaml      ← Configuração do framework
+│   ├── project-config.yaml        ← Configuração por projeto
+│   ├── elicitation/               ← Motor de extração de requisitos
+│   ├── hooks/                     ← Hooks de ciclo de vida
+│   ├── infrastructure/            ← Scripts de infra
+│   ├── quality/                   ← Quality gates e checklists
+│   ├── schemas/                   ← JSON Schemas de validação
+│   ├── workflow-intelligence/     ← Motor inteligente de workflows
+│   └── utils/                     ← 60+ utilitários
+├── apps/dashboard/                ← Dashboard Next.js (Observability)
+├── bin/                           ← CLI executables (aios-init.js, aios.js)
+├── squads/                        ← Expansion Packs (1652 arquivos)
+│   ├── CFO/                       ← Gestão financeira restaurante
+│   ├── lp-creator/                ← Criação de landing pages
+│   ├── squad-creator/             ← Meta-squad que cria squads
+│   ├── mmos-squad/                ← Squad complexo (1395 arquivos)
+│   └── video-downloader/          ← Download de vídeos
+├── packages/                      ← Shared packages (63 arquivos)
+├── docs/                          ← Documentação (533 arquivos)
+├── tests/                         ← Testes automatizados (265 arquivos)
+├── .claude/                       ← Integração Claude Code (24 agentes)
+├── .antigravity/                  ← Integração Antigravity/Gemini
+├── .cursor/                       ← Integração Cursor AI
+└── .github/                       ← CI/CD, Actions, templates</code></pre>
+
+        <h3>5.2 Os 18 Módulos Core</h3>
+        <table>
+            <tr>
+                <th>Módulo</th>
+                <th>Função</th>
+            </tr>
+            <tr>
+                <td><code>orchestration/</code></td>
+                <td>Coordena agentes e workflows; roteamento inteligente de tarefas</td>
+            </tr>
+            <tr>
+                <td><code>memory/</code></td>
+                <td>Memória persistente entre sessões; aprendizado contínuo</td>
+            </tr>
+            <tr>
+                <td><code>execution/</code></td>
+                <td>Motor de execução de tarefas com 13 steps e autocrítica</td>
+            </tr>
+            <tr>
+                <td><code>quality-gates/</code></td>
+                <td>Portões automáticos de qualidade (3 camadas)</td>
+            </tr>
+            <tr>
+                <td><code>permissions/</code></td>
+                <td>Controle de autoridade dos agentes — quem pode fazer o quê</td>
+            </tr>
+            <tr>
+                <td><code>events/</code></td>
+                <td>Sistema de eventos entre componentes (pub/sub)</td>
+            </tr>
+            <tr>
+                <td><code>session/</code></td>
+                <td>Gerenciamento de sessões de trabalho</td>
+            </tr>
+            <tr>
+                <td><code>registry/</code></td>
+                <td>Registro de agentes, capabilities e squads</td>
+            </tr>
+            <tr>
+                <td><code>config/</code></td>
+                <td>Sistema hierárquico de configuração (core → project → local)</td>
+            </tr>
+            <tr>
+                <td><code>manifest/</code></td>
+                <td>Manifestos de componentes com metadados</td>
+            </tr>
+            <tr>
+                <td><code>health-check/</code></td>
+                <td>Diagnóstico do sistema (<code>aios-core doctor</code>)</td>
+            </tr>
+            <tr>
+                <td><code>migration/</code></td>
+                <td>Migração entre versões com rollback</td>
+            </tr>
+            <tr>
+                <td><code>elicitation/</code></td>
+                <td>Extração interativa de requisitos (10 ações de brainstorming)</td>
+            </tr>
+            <tr>
+                <td><code>ideation/</code></td>
+                <td>Geração de ideias e sessões criativas</td>
+            </tr>
+            <tr>
+                <td><code>mcp/</code></td>
+                <td>Model Context Protocol — conexão com serviços externos</td>
+            </tr>
+            <tr>
+                <td><code>ui/</code></td>
+                <td>Componentes visuais do dashboard</td>
+            </tr>
+            <tr>
+                <td><code>utils/</code></td>
+                <td>60+ utilitários: análise, migração, validação, etc.</td>
+            </tr>
+            <tr>
+                <td><code>workflow-intelligence/</code></td>
+                <td>Motor inteligente que adapta workflows ao contexto</td>
+            </tr>
+        </table>
+
+        <h3>5.3 Fluxo de Dados — Diagrama</h3>
+        <div class="flow-diagram">
+            <strong>Planning (Web UI)</strong><br>
+            @analyst → @pm → @architect → @ux-expert<br>
+            ↓ PRD + Arquitetura ↓<br>
+            <strong>━━━ Transição para IDE ━━━</strong><br>
+            ↓ Documentos shardados ↓<br>
+            @po → @sm → @dev → @qa → @devops<br>
+            ↑_______ciclo contínuo________↑
+        </div>
+
+        <h3>5.4 Template Processing System</h3>
+        <p>O AIOS emprega um sofisticado sistema de processamento de templates orquestrado por três componentes:</p>
+        <ul>
+            <li><strong><code>template-format.md</code></strong> — Define a linguagem de markup:
+                <code>{{placeholders}}</code> para substituição de variáveis, <code>[[LLM: instructions]]</code> para
+                diretivas AI-only, blocos condicionais</li>
+            <li><strong><code>create-doc.md</code></strong> — Engine de orquestração que gerencia geração de documentos,
+                interação com usuário, validação</li>
+            <li><strong><code>advanced-elicitation.md</code></strong> — Camada de refinamento interativo com 10 ações de
+                brainstorming estruturado</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <!-- 6. AGENTES -->
+        <h2 id="sec-6">6. Sistema de Agentes (11+ Agentes)</h2>
+
+        <h3>6.1 Agentes de Planejamento (Web UI)</h3>
+        <table>
+            <tr>
+                <th>Agente</th>
+                <th>Persona</th>
+                <th>Capabilities</th>
+            </tr>
+            <tr>
+                <td><code>@analyst</code></td>
+                <td>Alex</td>
+                <td>Pesquisa mercado, análise de concorrentes, market research, criação de briefings,
+                    <code>*research-deps</code>, <code>*extract-patterns</code></td>
+            </tr>
+            <tr>
+                <td><code>@pm</code></td>
+                <td>Morgan</td>
+                <td>Product Manager — cria PRD, prioriza features, <code>*gather-requirements</code>,
+                    <code>*write-spec</code></td>
+            </tr>
+            <tr>
+                <td><code>@architect</code></td>
+                <td>Aria</td>
+                <td>Arquitetura de sistema, decisões técnicas, diagramas, <code>*assess-complexity</code>,
+                    <code>*create-plan</code>, <code>*create-context</code>, <code>*map-codebase</code></td>
+            </tr>
+            <tr>
+                <td><code>@ux-design-expert</code></td>
+                <td>Uma</td>
+                <td>Design UX/UI, wireframes, usabilidade, design systems</td>
+            </tr>
+        </table>
+
+        <h3>6.2 Agentes de Desenvolvimento (IDE)</h3>
+        <table>
+            <tr>
+                <th>Agente</th>
+                <th>Persona</th>
+                <th>Capabilities</th>
+            </tr>
+            <tr>
+                <td><code>@po</code></td>
+                <td>Pax</td>
+                <td>Product Owner — gerenciamento de backlog, criação de stories e epics, shard documents</td>
+            </tr>
+            <tr>
+                <td><code>@sm</code></td>
+                <td>River</td>
+                <td>Scrum Master — organiza sprints, transforma planos em stories hiper-detalhadas com contexto completo
+                </td>
+            </tr>
+            <tr>
+                <td><code>@dev</code></td>
+                <td>Dex</td>
+                <td>Desenvolvedor — implementa código, <code>*execute-subtask</code>, <code>*track-attempt</code>,
+                    <code>*rollback</code>, <code>*capture-insights</code>, <code>*apply-qa-fix</code></td>
+            </tr>
+            <tr>
+                <td><code>@qa</code></td>
+                <td>Quinn</td>
+                <td>QA — <code>*critique-spec</code>, <code>*review-build</code>, <code>*request-fix</code>,
+                    <code>*verify-fix</code>, review 10 fases</td>
+            </tr>
+            <tr>
+                <td><code>@devops</code></td>
+                <td>Gage</td>
+                <td><strong>EXCLUSIVO</strong>: git push, PRs, releases, tags. <code>*create-worktree</code>,
+                    <code>*merge-worktree</code>, <code>*migrate-agent</code></td>
+            </tr>
+        </table>
+
+        <h3>6.3 Agentes Meta</h3>
+        <table>
+            <tr>
+                <th>Agente</th>
+                <th>Função</th>
+            </tr>
+            <tr>
+                <td><code>@aios-master</code></td>
+                <td>Orquestra todo o sistema, gerencia o framework, capacidades de meta-desenvolvimento</td>
+            </tr>
+            <tr>
+                <td><code>@aios-orchestrator</code></td>
+                <td>Orquestrador de workflow, coordenação de equipe, guia o fluxo planning→dev</td>
+            </tr>
+            <tr>
+                <td><code>@data-engineer</code> (Dara)</td>
+                <td>Database design, schemas, migrações, otimização de consultas</td>
+            </tr>
+        </table>
+
+        <h3>6.4 Princípios de Design de Agentes</h3>
+        <ul>
+            <li><strong>Dev Agents devem ser Lean</strong> — Mínimo de dependências, foco em código. Cada linha conta.
+            </li>
+            <li><strong>Web/Planning Agents podem ser maiores</strong> — Tasks e templates mais complexos são
+                aceitáveis.</li>
+            <li><strong>Agentes definem roles</strong>, Tasks são procedures, Templates são outputs.</li>
+            <li><strong>Dependencies explícitas</strong> — Cada agente declara exatamente o que precisa.</li>
+            <li><strong>Startup Instructions</strong> — Agentes carregam documentação do projeto automaticamente ao
+                ativar.</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <!-- 7. STORY-DRIVEN -->
+        <h2 id="sec-7">7. Story-Driven Development</h2>
+        <p>No AIOS, <strong>nenhum código é escrito sem uma story</strong>. Este é um princípio MUST da Constitution.
+        </p>
+
+        <h4>Anatomia de uma Story</h4>
+        <ul>
+            <li><strong>O que</strong> precisa ser feito (acceptance criteria detalhados)</li>
+            <li><strong>Por que</strong> precisa ser feito (contexto de negócio, valor para o usuário)</li>
+            <li><strong>Como</strong> implementar (orientação técnica, referências arquiteturais)</li>
+            <li><strong>Checklist</strong> para acompanhar progresso (<code>[ ]</code> → <code>[x]</code>)</li>
+            <li><strong>File List</strong> com todos os arquivos modificados</li>
+        </ul>
+
+        <h4>Workflow Completo</h4>
+        <pre><code>@po cria story com acceptance criteria
+    → @sm enriquece com contexto técnico hiper-detalhado
+        → @dev implementa marcando checkboxes
+            → @qa testa e valida (review 10 fases)
+                → @devops faz push seguro
+                    → Ciclo reinicia com próxima story</code></pre>
+
+        <div class="callout">
+            <strong>Key Insight:</strong> Stories são o mecanismo de <strong>transferência de contexto</strong> entre
+            agentes. Quando o <code>@sm</code> cria uma story, ele embute toda a orientação arquitetural, decisões do
+            <code>@architect</code>, e requisitos do <code>@pm</code>. O <code>@dev</code> recebe um arquivo
+            auto-suficiente.
+        </div>
+
+        <!-- 8. TEMPLATES -->
+        <h2 id="sec-8">8. Templates (18 Templates Profissionais)</h2>
+
+        <table>
+            <tr>
+                <th>Categoria</th>
+                <th>Template</th>
+                <th>Uso</th>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>Produto</strong></td>
+                <td>PRD</td>
+                <td>Documento de Requisitos do Produto completo</td>
+            </tr>
+            <tr>
+                <td>Project Brief</td>
+                <td>Brief inicial do projeto</td>
+            </tr>
+            <tr>
+                <td>Brownfield PRD</td>
+                <td>PRD para projetos existentes</td>
+            </tr>
+            <tr>
+                <td rowspan="4"><strong>Arquitetura</strong></td>
+                <td>Architecture</td>
+                <td>Arquitetura completa de sistema</td>
+            </tr>
+            <tr>
+                <td>Full-Stack Architecture</td>
+                <td>Arquitetura full-stack detalhada</td>
+            </tr>
+            <tr>
+                <td>Front-end Architecture</td>
+                <td>Arquitetura específica para front-end</td>
+            </tr>
+            <tr>
+                <td>Brownfield Architecture</td>
+                <td>Arquitetura para projetos existentes</td>
+            </tr>
+            <tr>
+                <td rowspan="4"><strong>Desenvolvimento</strong></td>
+                <td>Story</td>
+                <td>Stories de desenvolvimento hiper-detalhadas</td>
+            </tr>
+            <tr>
+                <td>Task</td>
+                <td>Template de tarefa step-by-step</td>
+            </tr>
+            <tr>
+                <td>Workflow</td>
+                <td>Definição de workflow completo</td>
+            </tr>
+            <tr>
+                <td>QA Gate</td>
+                <td>Gates de qualidade</td>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>Pesquisa</strong></td>
+                <td>Brainstorming Output</td>
+                <td>Output estruturado de sessões de brainstorming</td>
+            </tr>
+            <tr>
+                <td>Market Research</td>
+                <td>Pesquisa de mercado completa</td>
+            </tr>
+            <tr>
+                <td>Competitor Analysis</td>
+                <td>Análise de concorrentes</td>
+            </tr>
+            <tr>
+                <td rowspan="2"><strong>Dados</strong></td>
+                <td>Database Schema (Full)</td>
+                <td>Schema completo com todas as tabelas</td>
+            </tr>
+            <tr>
+                <td>Database Schema (Lite)</td>
+                <td>Schema simplificado para MVP</td>
+            </tr>
+            <tr>
+                <td><strong>Agentes</strong></td>
+                <td>Agent Template</td>
+                <td>Template para criar novos agentes</td>
+            </tr>
+            <tr>
+                <td><strong>Front-end</strong></td>
+                <td>Front-end Spec</td>
+                <td>Especificação detalhada de front-end</td>
+            </tr>
+        </table>
+
+        <p>Templates são <strong>self-contained</strong>: contêm tanto o output desejado quanto as instruções LLM
+            embutidas para processar o documento. Formato YAML com seções estruturadas, variáveis
+            (<code>{{placeholder}}</code>), diretivas AI (<code>[[LLM: instructions]]</code>), seções condicionais e
+            repetíveis.</p>
+
+        <div class="page-break"></div>
+
+        <!-- 9. SKILLS -->
+        <h2 id="sec-9">9. Skills Avançadas (8 Skills)</h2>
+
+        <table>
+            <tr>
+                <th>Skill</th>
+                <th>O que faz</th>
+                <th>Potencial</th>
+            </tr>
+            <tr>
+                <td><strong>Squad Creator</strong></td>
+                <td>Cria novas equipes de agentes para qualquer domínio</td>
+                <td>Criar squad de marketing, jurídico, médico, educacional, etc.</td>
+            </tr>
+            <tr>
+                <td><strong>Mind Clone</strong></td>
+                <td>Clona conhecimento de um especialista humano para um agente</td>
+                <td>Capturar expertise de um chef, advogado, médico em formato de agente</td>
+            </tr>
+            <tr>
+                <td><strong>Enhance Workflow</strong></td>
+                <td>Melhora workflows existentes automaticamente</td>
+                <td>Otimizar processos identificando gargalos e redundâncias</td>
+            </tr>
+            <tr>
+                <td><strong>MCP Builder</strong></td>
+                <td>Constrói servidores Model Context Protocol</td>
+                <td>Conectar agentes a APIs, bancos de dados, serviços externos</td>
+            </tr>
+            <tr>
+                <td><strong>Skill Creator</strong></td>
+                <td>Cria novas skills — meta-capacidade</td>
+                <td>Auto-expansão infinita do framework</td>
+            </tr>
+            <tr>
+                <td><strong>Architect First</strong></td>
+                <td>Workflow que garante arquitetura antes do código</td>
+                <td>Prevenir dívida técnica desde o início</td>
+            </tr>
+            <tr>
+                <td><strong>Course Generation</strong></td>
+                <td>Gera cursos educacionais completos</td>
+                <td>Criar cursos estruturados com módulos, exercícios e avaliações</td>
+            </tr>
+            <tr>
+                <td><strong>Ralph</strong></td>
+                <td>Assistente personalizado</td>
+                <td>Template de assistente custom para casos específicos</td>
+            </tr>
+        </table>
+
+        <!-- 10. ADE -->
+        <h2 id="sec-10">10. ADE — Autonomous Development Engine</h2>
+        <p>O motor de desenvolvimento autônomo transforma requisitos em código funcional através de <strong>7
+                Epics</strong>:</p>
+
+        <table>
+            <tr>
+                <th>Epic</th>
+                <th>Nome</th>
+                <th>Descrição Técnica</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><strong>Worktree Manager</strong></td>
+                <td>Isolamento de branches via Git worktrees. Cada feature em ambiente isolado com auto-create on story
+                    start e auto-cleanup.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><strong>Migration V2→V3</strong></td>
+                <td>Migração para formato autoClaude V3. Inventory assets, analyze paths, migrate agents em batch.</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><strong>Spec Pipeline</strong></td>
+                <td>Transforma requisitos em specs executáveis. Gather requirements → assess complexity → research deps
+                    → write spec → critique spec.</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><strong>Execution Engine</strong></td>
+                <td>Executa specs com <strong>13 steps + self-critique</strong>. Create plan → create context → execute
+                    subtasks sequencialmente.</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><strong>Recovery System</strong></td>
+                <td>Recuperação automática de falhas. Track attempts, rollback, retry com ajustes baseados no erro.</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><strong>QA Evolution</strong></td>
+                <td>Review estruturado em <strong>10 fases</strong>. Review build → request fix → verify fix →
+                    approve/reject.</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><strong>Memory Layer</strong></td>
+                <td>Memória persistente de padrões e insights. Capture insights, list gotchas, apply learned patterns.
+                </td>
+            </tr>
+        </table>
+
+        <div class="flow-diagram">
+            User Request → Spec Pipeline → Execution Engine → QA Review → Working Code<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓
+            (falha)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recovery
+            System<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Memory
+            Layer
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 11. QUALITY GATES -->
+        <h2 id="sec-11">11. Quality Gates — 3 Camadas de Validação</h2>
+
+        <div class="grid2">
+            <div class="card">
+                <h4>⚡ Camada 1: Pre-commit (Local)</h4>
+                <p>Performance: &lt;5s com cache habilitado</p>
+                <ul>
+                    <li>ESLint — qualidade de código</li>
+                    <li>TypeScript — verificação de tipos</li>
+                    <li>Validação de filenames</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>📋 Camada 2: Pre-push (Local)</h4>
+                <p>Validação de stories e consistência</p>
+                <ul>
+                    <li>Checkboxes de stories completas</li>
+                    <li>Consistência de status</li>
+                    <li>Seções obrigatórias presentes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+            <h4>☁️ Camada 3: CI/CD (Cloud — Obrigatório para merge)</h4>
+            <ul>
+                <li>Todos os testes automatizados</li>
+                <li>Cobertura de testes mínimo 80%</li>
+                <li>CodeRabbit automated review (self-healing: auto-fix para CRITICAL e HIGH)</li>
+                <li>GitHub Actions workflows completos</li>
+                <li>Build de produção com sucesso</li>
+            </ul>
+        </div>
+
+        <h4>Comandos de Validação</h4>
+        <pre><code>npm run lint              # ESLint
+npm run typecheck         # TypeScript
+npm test                  # Jest
+npm run test:coverage     # Cobertura
+node .aios-core/utils/aios-validator.js pre-commit   # Gate 1
+node .aios-core/utils/aios-validator.js pre-push     # Gate 2
+node .aios-core/utils/aios-validator.js stories      # Validar stories</code></pre>
+
+        <!-- 12. SQUADS -->
+        <h2 id="sec-12">12. Squads — Expansion Packs</h2>
+        <p>Squads permitem estender o AIOS para <strong>qualquer domínio</strong>, além do desenvolvimento de software.
+        </p>
+
+        <h3>12.1 Squads Disponíveis</h3>
+        <table>
+            <tr>
+                <th>Squad</th>
+                <th>Descrição</th>
+                <th>Agentes</th>
+                <th>Arquivos</th>
+            </tr>
+            <tr>
+                <td><strong>CFO Restaurante</strong></td>
+                <td>Gestão financeira, estoque, precificação, DRE</td>
+                <td>3 (Gerente, Arquiteto do Lucro, Controlador Estoque)</td>
+                <td>66</td>
+            </tr>
+            <tr>
+                <td><strong>LP Creator</strong></td>
+                <td>Criação de landing pages profissionais</td>
+                <td>3</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td><strong>Squad Creator</strong></td>
+                <td>Meta-squad: cria outros squads</td>
+                <td>3 agentes, 16 tarefas</td>
+                <td>76</td>
+            </tr>
+            <tr>
+                <td><strong>MMOS Squad</strong></td>
+                <td>Squad complexo de grande porte</td>
+                <td>Múltiplos</td>
+                <td>1395</td>
+            </tr>
+            <tr>
+                <td><strong>Video Downloader</strong></td>
+                <td>Download e processamento de vídeos</td>
+                <td>Utilitário</td>
+                <td>10</td>
+            </tr>
+        </table>
+
+        <h3>12.2 Estrutura de um Squad</h3>
+        <pre><code>squads/seu-squad/
+├── config.yaml           # Configuração do squad
+├── agents/               # Agentes especializados do domínio
+├── tasks/                # Fluxos de trabalho de tarefas
+├── templates/            # Templates de documentos
+├── checklists/           # Checklists de validação
+├── data/                 # Base de conhecimento embutida
+├── README.md             # Documentação
+└── user-guide.md         # Guia do usuário</code></pre>
+
+        <h3>12.3 CFO Restaurante — Case Study</h3>
+        <p>O Squad CFO demonstra o poder do AIOS em domínios não-técnicos. Inclui <strong>13 tarefas</strong> e
+            <strong>9 arquivos de conhecimento</strong> embutido:</p>
+
+        <div class="grid2">
+            <div class="card">
+                <h4>13 Tarefas</h4>
+                <ul>
+                    <li><code>*dashboard</code> — Resumo 360° do negócio</li>
+                    <li><code>*novo-prato</code> — Lançar prato (custo, preço, ficha)</li>
+                    <li><code>*ficha-tecnica</code> — Ficha com ingredientes e custos</li>
+                    <li><code>*precificar</code> — Preço de venda ideal</li>
+                    <li><code>*cmv</code> — Análise CMV</li>
+                    <li><code>*dre</code> — DRE mensal</li>
+                    <li><code>*entrada</code> / <code>*saida</code> — Movimentação estoque</li>
+                    <li><code>*inventario</code> — Inventário completo</li>
+                    <li><code>*curva-abc</code> — Análise Curva ABC</li>
+                    <li><code>*avaliar-fornecedor</code> — Comparar fornecedores</li>
+                    <li><code>*analise-estrategica</code> — Saúde financeira</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>9 Knowledge Files</h4>
+                <ul>
+                    <li>Gestão de CMV (Brasil)</li>
+                    <li>Engenharia de Custos (US)</li>
+                    <li>Fórmula de Precificação</li>
+                    <li>Guia de Ficha Técnica</li>
+                    <li>Guia de Gestão de Estoque</li>
+                    <li>Guia de Pré-Abertura</li>
+                    <li>Modelo de DRE</li>
+                    <li>Sazonalidade de Hortifruti</li>
+                    <li>Tabela de Fatores de Correção</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 13. MCP -->
+        <h2 id="sec-13">13. MCP & Infraestrutura</h2>
+        <p>O AIOS integra nativamente com o <strong>Model Context Protocol (MCP)</strong> via Docker:</p>
+
+        <table>
+            <tr>
+                <th>Servidor MCP</th>
+                <th>Função</th>
+                <th>API Key</th>
+            </tr>
+            <tr>
+                <td><code>context7</code></td>
+                <td>Documentação atualizada de bibliotecas para LLMs</td>
+                <td>Não</td>
+            </tr>
+            <tr>
+                <td><code>desktop-commander</code></td>
+                <td>File management, terminal commands, system operations</td>
+                <td>Não</td>
+            </tr>
+            <tr>
+                <td><code>playwright</code></td>
+                <td>Browser automation para testes e web interaction</td>
+                <td>Não</td>
+            </tr>
+            <tr>
+                <td><code>exa</code></td>
+                <td>AI-powered web search e content extraction</td>
+                <td>Sim (EXA_API_KEY)</td>
+            </tr>
+        </table>
+
+        <h4>Presets</h4>
+        <ul>
+            <li><strong>Minimal</strong> (default): context7 + desktop-commander + playwright — sem API keys, ~10-15k
+                tokens</li>
+            <li><strong>Full</strong>: Todos + exa — requer EXA_API_KEY, ~20-25k tokens</li>
+        </ul>
+
+        <h4>Gateway Docker</h4>
+        <pre><code>docker compose -f .docker/mcp/gateway-service.yml up -d  # Start
+curl http://localhost:8080/health                          # Health check
+docker mcp server ls                                       # List servers</code></pre>
+
+        <!-- 14. IDE SYNC -->
+        <h2 id="sec-14">14. IDE Sync & Integrações</h2>
+        <p>O AIOS sincroniza agentes automaticamente para múltiplos IDEs:</p>
+
+        <table>
+            <tr>
+                <th>IDE</th>
+                <th>Formato</th>
+                <th>Path</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Claude Code</td>
+                <td>full-markdown-yaml</td>
+                <td><code>.claude/commands/AIOS/agents</code></td>
+                <td>✅ Ativo</td>
+            </tr>
+            <tr>
+                <td>Cursor</td>
+                <td>condensed-rules</td>
+                <td><code>.cursor/rules/agents</code></td>
+                <td>✅ Ativo</td>
+            </tr>
+            <tr>
+                <td>Antigravity</td>
+                <td>cursor-style</td>
+                <td><code>.antigravity/rules/agents</code></td>
+                <td>✅ Ativo</td>
+            </tr>
+            <tr>
+                <td>Windsurf</td>
+                <td>xml-tagged-markdown</td>
+                <td><code>.windsurf/rules/agents</code></td>
+                <td>❌ Desativado</td>
+            </tr>
+        </table>
+
+        <p>Validação com <code>strictMode: true</code> e <code>failOnDrift: true</code> garante que os agentes nos IDEs
+            nunca fiquem desatualizados em relação ao source master em <code>.aios-core/development/agents</code>.</p>
+
+        <!-- 15. UTILITÁRIOS -->
+        <h2 id="sec-15">15. Utilitários (60+ Helpers)</h2>
+
+        <div class="grid2">
+            <div class="card">
+                <h4>Helpers (27)</h4>
+                <p style="font-size:0.85em"><code>batch-creator</code>, <code>capability-analyzer</code>,
+                    <code>change-propagation-predictor</code>, <code>code-quality-improver</code>,
+                    <code>compatibility-checker</code>, <code>component-metadata</code>, <code>conflict-manager</code>,
+                    <code>coverage-analyzer</code>, <code>dependency-analyzer</code>, <code>diff-generator</code>,
+                    <code>framework-analyzer</code>, <code>git-wrapper</code>, <code>manifest-preview</code>,
+                    <code>migration-path-generator</code>, <code>migration-tester</code>,
+                    <code>modification-history</code>, <code>modification-risk-assessment</code>,
+                    <code>modification-validator</code>, <code>performance-analyzer</code>,
+                    <code>redundancy-analyzer</code>, <code>refactoring-suggester</code>, <code>sandbox-tester</code>,
+                    <code>template-validator</code>, <code>test-quality-assessment</code>,
+                    <code>validate-filenames</code>, <code>version-tracker</code>, <code>visual-impact-generator</code>
+                </p>
+            </div>
+            <div class="card">
+                <h4>Executors (17) + Framework (11)</h4>
+                <p style="font-size:0.85em"><strong>Executors:</strong> <code>approval-workflow</code>,
+                    <code>branch-manager</code>, <code>commit-message-generator</code>,
+                    <code>component-generator</code>, <code>conflict-resolver</code>, <code>deprecation-manager</code>,
+                    <code>dependency-impact-analyzer</code>, <code>documentation-synchronizer</code>,
+                    <code>migration-generator</code>, <code>migration-rollback</code>,
+                    <code>performance-optimizer</code>, <code>rollback-handler</code>,
+                    <code>safe-removal-handler</code>, <code>test-generator</code>, <code>test-updater</code></p>
+                <p style="font-size:0.85em"><strong>Framework:</strong> <code>elicitation-engine</code>,
+                    <code>improvement-engine</code>, <code>improvement-validator</code>, <code>metrics-tracker</code>,
+                    <code>pattern-learner</code>, <code>template-engine</code>, <code>test-template-system</code>,
+                    <code>transaction-manager</code>, <code>usage-analytics</code>, <code>usage-tracker</code></p>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 16. INSTALAÇÃO -->
+        <h2 id="sec-16">16. Instalação & CLI</h2>
+
+        <pre><code># Criar novo projeto com assistente interativo
+npx aios-core init meu-projeto
+npx aios-core init meu-projeto --template enterprise
+
+# Instalar em projeto existente
+cd seu-projeto && npx aios-core install
+
+# Comandos do sistema
+npx aios-core --version       # Versão
+npx aios-core info            # Info do sistema
+npx aios-core doctor          # Diagnóstico
+npx aios-core doctor --fix    # Auto-fix
+npx aios-core update          # Atualizar
+npx aios-core uninstall       # Remover
+
+# Opções avançadas
+npx aios-core install --quiet --force    # CI/CD silencioso
+npx aios-core install --dry-run          # Simular sem modificar</code></pre>
+
+        <h4>Templates de Projeto</h4>
+        <table>
+            <tr>
+                <th>Template</th>
+                <th>Uso</th>
+            </tr>
+            <tr>
+                <td><code>default</code></td>
+                <td>Projeto padrão com todos os agentes core</td>
+            </tr>
+            <tr>
+                <td><code>minimal</code></td>
+                <td>Setup mínimo para projetos simples</td>
+            </tr>
+            <tr>
+                <td><code>enterprise</code></td>
+                <td>Configuração completa para equipes grandes</td>
+            </tr>
+        </table>
+
+        <!-- 17. COMPARATIVO -->
+        <h2 id="sec-17">17. Comparativo: Manual vs AIOS</h2>
+        <table>
+            <tr>
+                <th>Aspecto</th>
+                <th>Manual / IA Genérica</th>
+                <th>Com AIOS</th>
+            </tr>
+            <tr>
+                <td>Contexto</td>
+                <td>Cada conversa começa do zero</td>
+                <td>Stories e docs passam contexto completo entre agentes</td>
+            </tr>
+            <tr>
+                <td>Consistência</td>
+                <td>Respostas variam a cada interação</td>
+                <td>Constitution + Templates garantem padrão</td>
+            </tr>
+            <tr>
+                <td>Qualidade</td>
+                <td>Sem verificação automática</td>
+                <td>Quality Gates 3 camadas bloqueiam erros</td>
+            </tr>
+            <tr>
+                <td>Colaboração</td>
+                <td>Um agente isolado</td>
+                <td>11+ agentes delegam entre si com autoridades</td>
+            </tr>
+            <tr>
+                <td>Estrutura</td>
+                <td>Começa do zero toda vez</td>
+                <td>18 templates, 8 skills, 60+ utils prontos</td>
+            </tr>
+            <tr>
+                <td>Governança</td>
+                <td>Sem limites definidos</td>
+                <td>Constitution com gates automáticos</td>
+            </tr>
+            <tr>
+                <td>Memória</td>
+                <td>Sem aprendizado</td>
+                <td>Memory Layer persiste padrões e insights</td>
+            </tr>
+            <tr>
+                <td>Recovery</td>
+                <td>Falha = recomeçar</td>
+                <td>Recovery System com rollback automático</td>
+            </tr>
+            <tr>
+                <td>Domínio</td>
+                <td>Apenas chat genérico</td>
+                <td>Squads para qualquer domínio: finanças, educação, etc.</td>
+            </tr>
+        </table>
+
+        <!-- 18. ROADMAP -->
+        <h2 id="sec-18">18. Roadmap & Futuro</h2>
+
+        <h4>Q1 2026 — v2.1 (Atual)</h4>
+        <ul>
+            <li>✅ Hybrid installer (npx + interactive wizard)</li>
+            <li>✅ 4-module architecture (Core, Squads, MCP, Premium)</li>
+            <li>✅ Service Discovery, Quality Gates, Template Engine</li>
+            <li>✅ CodeRabbit integration, Community infrastructure</li>
+        </ul>
+
+        <h4>Q2 2026 — v2.2 (Planejado)</h4>
+        <ul>
+            <li>Memory Layer para persistência de contexto entre sessões</li>
+            <li>Enhanced agent collaboration capabilities</li>
+            <li>Performance optimizations para large codebases</li>
+            <li>Squads marketplace (community-contributed)</li>
+        </ul>
+
+        <h4>Futuro (Exploração)</h4>
+        <ul>
+            <li>Multi-language support para definições de agentes</li>
+            <li>Cloud deployment para equipes distribuídas</li>
+            <li>Visual workflow builder para não-técnicos</li>
+            <li>Plugin marketplace para integrações terceiras</li>
+            <li>Enhanced analytics e telemetry (opt-in)</li>
+        </ul>
+
+        <div class="separator"></div>
+
+        <h2>Como Extrair o Máximo do AIOS</h2>
+
+        <div class="grid2">
+            <div class="card">
+                <h4>🎯 Para Desenvolvedores</h4>
+                <ul>
+                    <li>Use o fluxo completo: <code>@analyst</code> → <code>@pm</code> → <code>@architect</code> →
+                        <code>@sm</code> → <code>@dev</code> → <code>@qa</code></li>
+                    <li>Nunca pule a etapa de planning — a qualidade do código depende da qualidade do PRD</li>
+                    <li>Use <code>@qa *review-build</code> antes de todo push</li>
+                    <li>Mantenha <code>technical-preferences.md</code> atualizado</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>🏢 Para Negócios</h4>
+                <ul>
+                    <li>Crie squads para seu domínio com <code>Squad Creator</code></li>
+                    <li>Use <code>Mind Clone</code> para capturar expertise de especialistas</li>
+                    <li>Explore o CFO Restaurante como modelo para outros domínios financeiros</li>
+                    <li>Use <code>Course Generation</code> para treinamento de equipes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout" style="margin-top:24px">
+            <strong>Conclusão:</strong> O Synkra AIOS não é apenas um framework de agentes IA — é um <strong>sistema
+                operacional completo</strong> para orquestração de inteligência artificial em qualquer domínio. Com sua
+            Constitution formal, 11+ agentes especializados, 18 templates, 8 skills, 60+ utilitários, sistema de Quality
+            Gates multi-camada, e a capacidade de se expandir infinitamente através de Squads, o AIOS representa a
+            próxima geração de ferramentas para quem deseja criar e gerenciar agentes IA de forma profissional,
+            consistente e escalável.
+        </div>
+
+        <div style="text-align:center;margin:40px 0;color:var(--text3);font-size:0.85em">
+            <p><strong>Synkra AIOS-Core v2.1.0</strong> — Licença MIT — Open Source</p>
+            <p>CLI First | Observability Second | UI Third</p>
+            <p>github.com/SynkraAI/aios-core</p>
+            <p style="margin-top:12px">Documento gerado em 16/02/2026</p>
+        </div>
+
+    </div>
+
+    <a href="#summary-top" class="back-to-top" id="backToTop">
+        ↑ 
+    </a>
+
+    <script>
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+
+</html>

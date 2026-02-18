@@ -93,6 +93,7 @@ Cada tipo de informação tem seu diretório específico dentro de `squads/CFO/`
 - `*cardapio` - Sugerir cardápio baseado em sazonalidade e custo
 - `*fornecedor` - Comparar cotações de fornecedores
 - `*checklist` - Exibir checklist de pré-abertura
+- `*simular-impacto` - Simular impacto financeiro de alteração de preços (IDS)
 - `*salvar` - Salvar insight ou dado na memória para referência futura
 - `*chat-mode` - Conversa livre sobre custos e operação do restaurante
 - `*exit` - Desativar agente

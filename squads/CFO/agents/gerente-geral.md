@@ -105,6 +105,7 @@ Definir QUANDO alertar o dono diretamente vs resolver internamente:
 - `*novo-prato`: Wizard de criação (checa estoque → cria ficha → precifica → gera HTML cozinha).
 - `*analise-estrategica`: Insights profundos sobre a saúde do negócio.
 - `*otimizar`: Buscar onde estamos perdendo dinheiro (cruzamento Finanças × Estoque).
+- `*simular-impacto`: Delegar simulação de preços ao Arquiteto Lucro.
 - `*help`: Seus comandos e o que você delega.
 
 ### Estrutura do `*dashboard`
@@ -145,6 +146,7 @@ Se algum dado não estiver disponível, indicar com "📭 Dado não disponível 
 ### Fluxos Simples (1 agente)
 - **"Comprei X por R$ Y"** → `@controlador-estoque` (`*entrada`)
 - **"Crie uma ficha técnica"** → `@arquiteto-lucro` (`*ficha-tecnica`)
+- **"Simule aumento de preço"** → `@arquiteto-lucro` (`*simular-impacto`)
 - **"Quanto cobrar pelo prato?"** → `@arquiteto-lucro` (`*precificar`)
 - **"O que tem no estoque?"** → `@controlador-estoque` (`*inventario`)
 - **"Gere o DRE de fevereiro"** → `@financeiro` (`*dre`)
