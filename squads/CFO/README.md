@@ -9,6 +9,7 @@ O Squad CFO é uma equipe de **3 agentes** hierarquizados:
 1.  **👔 Gerente Geral (Master):** Seu ponto de contato único. Recebe ordens, orquestra os especialistas e propõe estratégias.
 2.  **💰 Financeiro (CFO):** Calcula custos, preços e DRE.
 3.  **📦 Estoque (Ops):** Cuida das compras, validades e inventário.
+4.  **🎯 Vendas (Estrategista):** Cria campanhas, raspadinhas e cuida do Revenue Management.
 
 **Recomendação:** Fale sempre com o `@gerente-geral`. Ele saberá quem acionar.
 
@@ -25,6 +26,7 @@ O Squad CFO é uma equipe de **3 agentes** hierarquizados:
 
 **💰 Financeiro:** `*ficha-tecnica`, `*precificar`, `*cmv`, `*dre`
 **📦 Estoque:** `*entrada`, `*saida`, `*inventario`, `*alerta`
+**🎯 Vendas:** `*vendas-criar-raspadinha`, `*analisar-oportunidades`, `*sugerir-acao`
 
 ## Base de Conhecimento Compartilhada
 
@@ -53,7 +55,8 @@ squads/CFO/
 ├── agents/
 │   ├── gerente-geral.md         # [NOVO] Master Agent
 │   ├── arquiteto-lucro.md       # Especialista Financeiro
-│   └── controlador-estoque.md   # Especialista Estoque
+│   ├── controlador-estoque.md   # Especialista Estoque
+│   └── vendas.md                # [NOVO] Especialista Vendas
 ├── tasks/                       # 13 tasks (1 mestra + 12 operacionais)
 ├── templates/                   # 5 templates (incl. HTML cozinha)
 ├── checklists/                  # 3 checklists
