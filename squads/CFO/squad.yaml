@@ -44,8 +44,8 @@ components:
     - simular-impostos.md
     - indicadores-financeiros.md
     - orcamento-mensal.md
-    - criar-campanha.md
-    - analisar-viabilidade-promocao.md
+    - vendas-criar-campanha.md
+    - vendas-analisar-viabilidade.md
   templates:
     - ficha-tecnica-template.md
     - ficha-cozinha-template.html

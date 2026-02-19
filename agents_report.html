@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIOS Agents Report</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --border-color: rgba(148, 163, 184, 0.1);
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --danger: #f87171;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 25%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-top: 2rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-glow);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .agent-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .role-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            height: 1px;
+            background: var(--border-color);
+            flex-grow: 1;
+        }
+
+        .commands-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .command-tag {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .command-tag:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+        }
+
+        .tasks-container {
+            max-height: 150px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .tasks-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .tasks-container::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .tasks-container::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .task-bullet {
+            color: var(--accent-color);
+            margin-top: 0.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AIOS Agents Spectrum</h1>
+            <p class="subtitle">Complete catalog of the 24 autonomous agents powering the Synkra AIOS ecosystem, detailing their roles, commands, and operational tasks.</p>
+        </header>
+
+        <div class="grid">
+            <!-- Global Agents -->
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-analyst</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS Analyst autônomo. Market research, competitive analysis, brainstorming facilitation, ROI calculations, and deep research.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">brainstorming</span>
+                    <span class="command-tag">deep-research</span>
+                    <span class="command-tag">market-research</span>
+                    <span class="command-tag">roi</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Facilitate brainstorming sessions</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Conduct market and competitor analysis</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Create project briefs</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Generate ROI and shock reports</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-architect</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS Architect autônomo. Impact analysis, architecture design, PRD validation, and deep technical research.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">analyze-impact</span>
+                    <span class="command-tag">check-prd</span>
+                    <span class="command-tag">create-fullstack-arch</span>
+                    <span class="command-tag">research</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Analyze project structure and change impact</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Design fullstack, backend, and frontend architectures</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Document project technical details</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Validate PRDs against technical feasibility</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-data-engineer</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS Data Engineer autônomo. Database design, migrations, RLS policies, query optimization, and schema audits.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">schema-design</span>
+                    <span class="command-tag">create-rls</span>
+                    <span class="command-tag">apply-migration</span>
+                    <span class="command-tag">dry-run</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Design database schemas and RLS policies</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Apply migrations with rollback plans</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Audit schema and RLS security</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Analyze performance and hotpaths</div>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-dev</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS Developer autônomo. Implementa stories using real task files with self-critique checkpoints, DoD checklist, and IDS protocol.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">develop-story</span>
+                    <span class="command-tag">apply-qa-fixes</span>
+                    <span class="command-tag">create-service</span>
+                    <span class="command-tag">improve-code</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Implement features from stories</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Apply QA fixes and improvements</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Create services and optimize performance</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Sync documentation and capture insights</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-devops</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS DevOps autônomo. Git operations, CI/CD, PR automation, pre-push quality gates, and version management.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">commit</span>
+                    <span class="command-tag">pre-push</span>
+                    <span class="command-tag">pr-automation</span>
+                    <span class="command-tag">ci-cd</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Manage Git workflow (commit, push, diagnosis)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Automate PR creation and management</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Configure CI/CD pipelines</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Enforce quality gates before push</div>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-pm</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS Project Manager autônomo. Creates PRDs, defines strategic direction, roadmap, epics and business decisions.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">create-prd</span>
+                    <span class="command-tag">create-epic</span>
+                    <span class="command-tag">check-prd</span>
+                    <span class="command-tag">correct-course</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Create Product Requirements Documents (PRDs)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Define epics and stories</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Manage brownfield enhancements</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Conduct strategic research</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-po</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS Product Owner autônomo. Validates stories, manages backlog, ensures epic context coherence.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">validate-story</span>
+                    <span class="command-tag">backlog-review</span>
+                    <span class="command-tag">epic-context</span>
+                    <span class="command-tag">create-story</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Validate stories ready for development</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Manage and groom the backlog</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Maintain epic context coherence</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Sync and pull stories</div>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-qa</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS QA/Tester autônomo. Reviews stories, executes quality gates, security scans, and test architecture.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">review-story</span>
+                    <span class="command-tag">gate</span>
+                    <span class="command-tag">run-tests</span>
+                    <span class="command-tag">security-scan</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Review stories and code</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Execute Quality Gates</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Design and run tests</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Perform security and web scans</div>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-sm</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS Scrum Master autônomo. Creates and expands stories using task files and templates. Ensures process adherence.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">create-story</span>
+                    <span class="command-tag">expand-story</span>
+                    <span class="command-tag">correct-course</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Create and draft new stories</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Expand stories from epics to implementation details</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Facilitate course correction</div>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@aios-ux</div>
+                    <span class="role-badge">Global</span>
+                </div>
+                <p class="description">AIOS UX Design Expert autônomo. Frontend architecture, UI/UX design, wireframes, design system, accessibility.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">user-research</span>
+                    <span class="command-tag">wireframe</span>
+                    <span class="command-tag">component-build</span>
+                    <span class="command-tag">tokenize</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Conduct research and create wireframes</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Setup and audit Design Systems</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Build components and extract tokens</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Validate accessibility and document</div>
+                </div>
+            </div>
+
+            <!-- Squad Chiefs -->
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@copy-chief</div>
+                    <span class="role-badge">Squad Chief</span>
+                </div>
+                <p class="description">Orchestrates legendary copywriters. Tier-based system: Diagnosis → Execution (Sales, Email, Ads) → Audit (Hopkins) → Triggers.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">diagnose</span>
+                    <span class="command-tag">sales-page</span>
+                    <span class="command-tag">email-sequence</span>
+                    <span class="command-tag">launch-plan</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Diagnose awareness and sophistication levels</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Create sales pages, emails, ads, and VSLs</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Orchestrate Jeff Walker PLF launches</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Audit copy quality (Hopkins & Sugarman)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@cyber-chief</div>
+                    <span class="role-badge">Squad Chief</span>
+                </div>
+                <p class="description">Orchestrates cybersecurity squad. Problem triage, routing to specialists, and operational coordination.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">triage</span>
+                    <span class="command-tag">pentest</span>
+                    <span class="command-tag">appsec-audit</span>
+                    <span class="command-tag">threat-hunt</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Coordinate Red Team (Pentest, Social Engineering)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Manage AppSec (Code Audit, Secure Coding)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Lead Blue Team (Threat Hunt, Incident Response)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Oversee Security Programs and Compliance</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@data-chief</div>
+                    <span class="role-badge">Squad Chief</span>
+                </div>
+                <p class="description">Orchestrates Data Intelligence specialists. Foundation (CLV, Growth) → Operations (Health Score) → Communication (Attribution).</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">diagnose</span>
+                    <span class="command-tag">clv</span>
+                    <span class="command-tag">north-star</span>
+                    <span class="command-tag">churn-risk</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Foundation: Calculate CLV, defining North Star</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Operations: Predict churn, health scores</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Communication: Attribution, Dashboards</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Customer 360 and Growth experiments</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@db-sage</div>
+                    <span class="role-badge">Specialist</span>
+                </div>
+                <p class="description">Database specialist. Design, migrations, RLS policies, query optimization, and KISS validation.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">kiss</span>
+                    <span class="command-tag">schema-design</span>
+                    <span class="command-tag">migrate</span>
+                    <span class="command-tag">optimize-queries</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Validate schema changes via KISS Gate</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Design schemas and RLS policies</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Execute migrations and maintenance</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Performance tuning and query optimization</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@design-chief</div>
+                    <span class="role-badge">Squad Chief</span>
+                </div>
+                <p class="description">Orchestrates Design squad. Routing Strategy → Masters → Specialists. Branding, DesignOps, Pricing, Systems, etc.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">brand</span>
+                    <span class="command-tag">designops</span>
+                    <span class="command-tag">pricing</span>
+                    <span class="command-tag">design-system</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Definine Brand Strategy and Positioning</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Scale DesignOps and Governance</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Execute specialized design tasks (Logo, Edit)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Establish Design Systems</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@design-system</div>
+                    <span class="role-badge">Specialist</span>
+                </div>
+                <p class="description">Brad Frost persona. Atomic Design, pattern consolidation, token extraction, component building, and accessibility.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">audit</span>
+                    <span class="command-tag">consolidate</span>
+                    <span class="command-tag">tokenize</span>
+                    <span class="command-tag">build</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Audit codebases for pattern redundancy</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Consolidate and extract Design Tokens</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Build components (Atomic Design)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Automate accessibility audits (WCAG)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@legal-chief</div>
+                    <span class="role-badge">Squad Chief</span>
+                </div>
+                <p class="description">Orchestrates Legal squad. Tier system: Diagnosis → Global Frameworks → BR Specialists (Tax, Labor, Corporate, LGPD).</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">diagnose</span>
+                    <span class="command-tag">contract-review</span>
+                    <span class="command-tag">investment</span>
+                    <span class="command-tag">compliance</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Diagnose legal risks and needs</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Review and draft contracts/investment docs</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Consult on BR Tax, Labor, and Corporate Law</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Ensure LGPD and Privacy compliance</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@oalanicolas</div>
+                    <span class="role-badge">Architect</span>
+                </div>
+                <p class="description">Mind Cloning Architect. Expert in "DNA Mental". Extracts Voice DNA (style) and Thinking DNA (frameworks).</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">Via @squad</span>
+                    <span class="command-tag">*clone-mind</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Extract Voice DNA (tone, hooks)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Extract Thinking DNA (mental models)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Create agent definitions</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@pedro-valerio</div>
+                    <span class="role-badge">Validator</span>
+                </div>
+                <p class="description">Process Absolutist. Validates workflows for zero wrong paths. Audits veto conditions and unidirectional flow.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">Via @squad</span>
+                    <span class="command-tag">*validate-squad</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Audit workflows for veto conditions</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Ensure unidirectional process flow</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Validate agent quality filters</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@sop-extractor</div>
+                    <span class="role-badge">Specialist</span>
+                </div>
+                <p class="description">SOP Specialist. Extracts Standard Operating Procedures from raw content, interviews, and documentation.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">Via @squad</span>
+                    <span class="command-tag">extract-sop</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Extract process steps from media</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Identify trigger and veto conditions</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Format procedures into standardized SOPs</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@squad</div>
+                    <span class="role-badge">Orchestrator</span>
+                </div>
+                <p class="description">Master Orchestrator. Creates teams of AI agents. Uses subagents for DNA extraction, SOPs, and content.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">*create-squad</span>
+                    <span class="command-tag">*clone-mind</span>
+                    <span class="command-tag">*validate-squad</span>
+                    <span class="command-tag">*status</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Create complete agent squads</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Clone elite minds into agents</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Validate squad quality and structure</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@story-chief</div>
+                    <span class="role-badge">Squad Chief</span>
+                </div>
+                <p class="description">Orchestrates Storytellers. Diagnosis (Hero's Journey) → Execution (Frameworks) → Quality Check.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">diagnose-structure</span>
+                    <span class="command-tag">heros-journey</span>
+                    <span class="command-tag">ted-talk</span>
+                    <span class="command-tag">pitch</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Diagnose narrative structure (Campbell/Coyne)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Apply storytelling frameworks (StoryBrand, ABT)</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Craft speeches, pitches, and scripts</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Validate stories against quality checklists</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@tools-orchestrator</div>
+                    <span class="role-badge">Squad Chief</span>
+                </div>
+                <p class="description">Orchestrates Tool/Framework creation. Reviews, Creates, and Extracts tools across domains (sales, product, etc).</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">review</span>
+                    <span class="command-tag">create</span>
+                    <span class="command-tag">extract</span>
+                    <span class="command-tag">validate</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Review and expand existing frameworks</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Create new tools from requirements</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Extract frameworks from source material</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Manage tool knowledge base</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="agent-header">
+                    <div class="agent-name">@traffic-masters-chief</div>
+                    <span class="role-badge">Squad Chief</span>
+                </div>
+                <p class="description">Orchestrates Paid Traffic squad. Strategy → Platform Masters (Meta, Google, YT) → Scaling.</p>
+                <div class="section-title">Key Commands</div>
+                <div class="commands-list">
+                    <span class="command-tag">diagnose</span>
+                    <span class="command-tag">meta</span>
+                    <span class="command-tag">google</span>
+                    <span class="command-tag">scale</span>
+                </div>
+                <div class="section-title">Tasks</div>
+                <div class="tasks-container">
+                    <div class="task-item"><span class="task-bullet">›</span> Audit accounts and define strategy</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Manage platform-specific campaigns</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Scale operations and optimize creatives</div>
+                    <div class="task-item"><span class="task-bullet">›</span> Implement Brazil/Global strategies</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
