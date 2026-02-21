@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIOS CFO Squad | Introdução ao IDS</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            /* Color Palette */
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --bg-card-hover: rgba(30, 41, 59, 1);
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.3);
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+
+            /* Typography */
+            --font-headings: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Ambient Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 40%);
+            filter: blur(60px);
+            animation: pulse-bg 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse-bg {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-headings);
+            line-height: 1.2;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            background: var(--primary-glow);
+            padding: 0.75rem;
+            border-radius: 12px;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .badge.pulse {
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .badge i {
+            color: var(--primary);
+        }
+
+        /* Grid & Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Diagrams & Charts Area */
+        .visual-box {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .mermaid {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        canvas {
+            max-height: 400px;
+        }
+
+        /* Specific Agent Styles */
+        .agent-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .tag-gerente {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .tag-engenheiro {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .tag-controller {
+            background: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+        }
+
+        /* Stats Highlighting */
+        .stat-val {
+            font-family: var(--font-headings);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .stat-val.danger {
+            color: var(--danger);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ambient-bg"></div>
+
+    <div class="container">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="visible">
+            <div class="badge pulse"><i class="ph ph-cpu"></i> Synkra AIOS Core v2.0</div>
+            <h1 class="hero-title">O Cérebro Financeiro<br>do Restaurante.</h1>
+            <p class="hero-subtitle">Conheça o <strong>IDS (Incremental Decision Engine)</strong>: Uma arquitetura de IA
+                capaz de mapear cada centavo da sua operação, conectar o estoque às finanças e capacitar seus Agentes a
+                tomarem decisões baseadas em dados em tempo real.</p>
+        </section>
+
+        <!-- O QUE É O IDS -->
+        <section id="o-que-e">
+            <h2 class="section-title"><i class="ph ph-brain"></i> O que é o IDS?</h2>
+
+            <div class="grid-2">
+                <div>
+                    <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-muted);">
+                        Originalmente projetado para avaliar impactos profundos em grandes bases de código, nós
+                        adaptamos o motor do AIOS para se tornar um <strong>Registro Financeiro Vivo</strong>.
+                    </p>
+                    <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-muted);">
+                        O IDS lê e analisa o <code>financial-registry.yaml</code> — onde moram seus Ingredientes,
+                        Fornecedores e Receitas — criando uma teia neural de dependências e regras de neǵocio.
+                    </p>
+
+                    <div class="grid-2" style="gap: 1rem; margin-top: 3rem;">
+                        <div class="card" style="padding: 1.5rem;">
+                            <i class="ph ph-graph card-icon"></i>
+                            <h4 class="card-title" style="font-size: 1.1rem;">Grafo de Dependência</h4>
+                            <p style="font-size: 0.85rem;">Mapeia de qual fornecedor vem o tomate, e para quais 5 pratos
+                                ele vai.</p>
+                        </div>
+                        <div class="card" style="padding: 1.5rem;">
+                            <i class="ph ph-tree-structure card-icon"></i>
+                            <h4 class="card-title" style="font-size: 1.1rem;">Cascata de Custos</h4>
+                            <p style="font-size: 0.85rem;">Se o preço muda na raiz (insumo), o IDS propaga o cálculo até
+                                a ponta (receita).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-box">
+                    <div class="mermaid">
+                        graph TD
+                        classDef insumo fill:#eef2ff,stroke:#6366f1,stroke-width:2px,color:#312e81;
+                        classDef receita fill:#fdf4ff,stroke:#d946ef,stroke-width:2px,color:#701a75;
+                        classDef alert fill:#fef2f2,stroke:#ef4444,stroke-width:2px,color:#7f1d1d;
+
+                        F["Fornecedor: Hortifruti"] --> T("Tomate Italiano")
+                        T:::insumo
+                        T -->|"+15% Preço"| M("Molho Pomodoro")
+                        M:::receita
+                        M -->|"Base"| P("Parmegiana")
+                        M -->|"Base"| N("Nhoque")
+
+                        P:::receita
+                        N:::receita
+
+                        P -.->|"Custo Sobe 7%"| A["Alerta: Margem Caiu!"]
+                        A:::alert
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMO OS AGENTES USAM -->
+        <section id="dinamica-squad">
+            <h2 class="section-title"><i class="ph ph-users-three"></i> Maximizando o Squad CFO</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 3rem; color: var(--text-muted); max-width: 800px;">
+                O IDS não trabalha sozinho; ele é a "calculadora quântica" dos seus agentes. Veja como eles utilizam
+                essa ferramenta para blindar sua lucratividade.
+            </p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <i class="ph ph-tie card-icon"></i>
+                    <h3 class="card-title">Orquestração Estratégica</h3>
+                    <p>Ao ser perguntado: <em>"O que acontece se a carne subir 10%?"</em>, ele não chuta. Ele cruza os
+                        dados do Estoque com o cálculo do IDS delegado ao especialista para entregar uma resposta
+                        gerencial completa.</p>
+                    <span class="agent-tag tag-gerente">@gerente-geral</span>
+                </div>
+
+                <div class="card">
+                    <i class="ph ph-calculator card-icon"></i>
+                    <h3 class="card-title">Motor de Execução Técnica</h3>
+                    <p>O dono invisível do comando <code>*simular-impacto</code>. Ele roda o algoritmo forense na
+                        montanha de dados do <code>financial-registry.yaml</code>, analisando os <i>Yields</i> e Fatores
+                        de Correção para gerar relatórios exatos.</p>
+                    <span class="agent-tag tag-engenheiro">@arquiteto-lucro</span>
+                </div>
+
+                <div class="card">
+                    <i class="ph ph-chart-bar card-icon"></i>
+                    <h3 class="card-title">Análise de Metas e Sobrevivência</h3>
+                    <p>Pega a queda de margem do relatório do IDS (ex: Parmegiana) e verifica o que acontece com o Ponto
+                        de Equilíbrio (Break-even) da loja e qual o novo % projetado de CMV no fim do mês.</p>
+                    <span class="agent-tag tag-controller">@financeiro</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASOS DE USO VISUAIS -->
+        <section id="casos-de-uso">
+            <h2 class="section-title"><i class="ph ph-chart-line-up"></i> O Poder do Simulador (Casos Práticos)</h2>
+
+            <div class="grid-2">
+                <!-- CHART COMPONENT -->
+                <div class="visual-box" style="flex-direction: column; align-items: flex-start; padding: 2.5rem;">
+                    <h3 style="color: #333; margin-bottom: 0.5rem; font-size: 1.25rem;">Impacto Margem: Parmegiana</h3>
+                    <p style="color: #666; font-size: 0.85rem; margin-bottom: 2rem;">Cenário: Aumento de 15% Insumos
+                        Hortifruti</p>
+                    <div style="width: 100%; position: relative;">
+                        <canvas id="marginChart"></canvas>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; justify-content: center; gap: 2rem;">
+                    <div class="card">
+                        <h4 class="card-title" style="color: var(--accent);"><i class="ph ph-handshake"></i> Negociação
+                            com Fornecedores</h4>
+                        <p>Não aceite tabelas goela abaixo. Quando o fornecedor mandar a nova tabela, rode a simulação.
+                            Descubra o impacto real em R$ por mês e use o relatório gerado pelo IDS como argumento para
+                            exigir bonificações.</p>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="card-title" style="color: var(--primary);"><i class="ph ph-compass-tool"></i>
+                            Engenharia de Cardápio (Stress Test)</h4>
+                        <p>Simule a "entressafra". Aumente hipoteticamente todos os insumos de alto risco em 10%. Os
+                            pratos que mantiverem as maiores margens (mesmo sob stress) são seus <strong>Portos
+                                Seguros</strong> — oriente a brigada a focar a venda neles.</p>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="card-title" style="color: var(--danger);"><i class="ph ph-trash"></i> Auditoria de
+                            Desperdício (Yield)</h4>
+                        <p>A equipe limpa a carne de forma bruta? Mude o rendimento (yield) no Registro Financeiro de
+                            90% para 70%. O IDS vai devolver em segundos que aquele prato passou a dar prejuízo real.
+                            Imprima, mostre na cozinha de forma didática.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Intersection Observer for Scroll Animations
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            if (section.id !== 'hero') observer.observe(section);
+        });
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true, theme: 'base',
+            themeVariables: {
+                fontFamily: 'Inter',
+                primaryColor: '#e0e7ff',
+                primaryBorderColor: '#6366f1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#fdf4ff',
+                tertiaryColor: '#fff'
+            }
+        });
+
+        // Initialize Chart.js
+        const ctx = document.getElementById('marginChart').getContext('2d');
+
+        // Tailwind colors for chart
+        const cPrimary = '#3b82f6';
+        const cDanger = '#ef4444';
+        const cMuted = '#cbd5e1';
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Venda (R$)', 'Custo Antigo', 'Custo +15%', 'Margem Antiga', 'Nova Margem'],
+                datasets: [{
+                    label: 'Valores Financeiros',
+                    data: [65.00, 24.14, 26.85, 40.86, 38.15],
+                    backgroundColor: [
+                        cMuted,
+                        '#818cf8',
+                        cDanger,
+                        '#34d399',
+                        '#f87171'
+                    ],
+                    borderWidth: 0,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        padding: 12,
+                        titleFont: { family: 'Inter', size: 14 },
+                        bodyFont: { family: 'Inter', size: 14 },
+                        callbacks: {
+                            label: function (context) {
+                                return ' R$ ' + context.parsed.y.toFixed(2);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9' },
+                        ticks: {
+                            font: { family: 'Inter', size: 12 },
+                            color: '#64748b'
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            font: { family: 'Inter', size: 12, weight: '500' },
+                            color: '#475569'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

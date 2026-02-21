@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitetura Squad CFO</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f6f8; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        .agent-card { border: 1px solid #ddd; border-left-width: 5px; padding: 15px; margin-bottom: 15px; border-radius: 4px; background: #fff; }
+        .role-gg { border-left-color: #f1c40f; }
+        .role-al { border-left-color: #27ae60; }
+        .role-fin { border-left-color: #2980b9; }
+        .role-est { border-left-color: #e67e22; }
+        .role-vend { border-left-color: #8e44ad; }
+        h3 { margin-top: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏛️ Arquitetura do Squad CFO</h1>
+        
+        <div class="mermaid">
+            graph TD
+            User((👤 Dono / Usuário))
+            
+            subgraph "Master Layer (Estratégia)"
+                GG[👔 Gerente Geral]
+            end
+            
+            subgraph "Specialist Layer (Execução)"
+                AL[💰 Arquiteto de Lucro]
+                FIN[📊 Financeiro]
+                EST[📦 Estoque]
+                VEND[🎯 Vendas]
+            end
+
+            User -->|Comandos Gerais| GG
+            User -.->|Acesso Direto| AL
+            User -.->|Acesso Direto| FIN
+            User -.->|Acesso Direto| EST
+            User -.->|Acesso Direto| VEND
+
+            GG -->|Solicita Fichas| AL
+            GG -->|Solicita DRE| FIN
+            GG -->|Solicita Compras| EST
+            GG -->|Solicita Campanhas| VEND
+
+            %% Dependências Cruzadas
+            VEND -.->|Validade| EST
+            VEND -.->|Margem| AL
+            AL -.->|Custo Base| EST
+            FIN -.->|CMV| AL
+            FIN -.->|Valor Estoque| EST
+
+            style GG fill:#2c3e50,stroke:#f1c40f,stroke-width:4px,color:white
+            style AL fill:#27ae60,stroke:#2ecc71,color:white
+            style FIN fill:#2980b9,stroke:#3498db,color:white
+            style EST fill:#e67e22,stroke:#d35400,color:white
+            style VEND fill:#8e44ad,stroke:#9b59b6,color:white
+        </div>
+
+        <h2>📋 Detalhamento das Responsabilidades</h2>
+
+        <div class="agent-card role-gg">
+            <h3>👔 Gerente Geral (Master)</h3>
+            <p><strong>Missão:</strong> Orquestração e Estratégia.</p>
+            <p>Centraliza a comunicação, cruza dados dos especialistas e gera insights de negócio. Não realiza tarefas operacionais.</p>
+        </div>
+
+        <div class="agent-card role-al">
+            <h3>💰 Arquiteto de Lucro</h3>
+            <p><strong>Missão:</strong> Engenharia de Menu e Precificação.</p>
+            <p>Responsável técnico pelas Fichas Técnicas e definição de preços de venda baseados em meta de lucro.</p>
+        </div>
+
+        <div class="agent-card role-fin">
+            <h3>📊 Financeiro</h3>
+            <p><strong>Missão:</strong> Controladoria e DRE.</p>
+            <p>Cuida do macro: Fluxo de Caixa, DRE Mensal, Impostos e Saúde Financeira da empresa.</p>
+        </div>
+
+        <div class="agent-card role-est">
+            <h3>📦 Estoque</h3>
+            <p><strong>Missão:</strong> Logística e Abastecimento.</p>
+            <p>Garante que o insumo certo esteja disponível na hora certa. Controla validade e inventário.</p>
+        </div>
+
+        <div class="agent-card role-vend">
+            <h3>🎯 Vendas</h3>
+            <p><strong>Missão:</strong> Revenue Management e Growth.</p>
+            <p>Cria promoções estratégicas (ex: Raspadinha) para aumentar ticket médio ou escoar estoque parado.</p>
+        </div>
+    </div>
+</body>
+</html>

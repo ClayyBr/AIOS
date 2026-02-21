@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Vendas - CFO Squad</title>
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --success: #27ae60;
+            --danger: #c0392b;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--dark);
+            margin: 10px 0;
+        }
+
+        .card .delta {
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .text-success {
+            color: var(--success);
+        }
+
+        .text-danger {
+            color: var(--danger);
+        }
+
+        .section-title {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-size: 0.8em;
+        }
+
+        .bg-raspadinha {
+            background-color: #3498db;
+        }
+
+        .bg-pvps {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🚀 Performance de Vendas</h1>
+        <p>Período: <strong>{{PERIODO}}</strong></p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Receita de Campanhas</h3>
+            <div class="value">R$ {{RECEITA}}</div>
+            <div class="delta text-success">💰 Cash In</div>
+        </div>
+        <div class="card">
+            <h3>ROI Global</h3>
+            <div class="value">{{ROI}}%</div>
+            <div class="delta text-success">📈 Eficiência</div>
+        </div>
+        <div class="card">
+            <h3>Estoque Salvo (PVPS)</h3>
+            <div class="value">R$ {{PVPS}}</div>
+            <div class="delta text-success">🛡️ Perda Evitada</div>
+        </div>
+        <div class="card">
+            <h3>Custo (Investimento)</h3>
+            <div class="value">R$ {{CUSTO}}</div>
+            <div class="delta text-danger">📉 Brindes/Desc.</div>
+        </div>
+    </div>
+
+    <h2 class="section-title">🏆 Top Campanhas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Campanha</th>
+                <th>Tipo</th>
+                <th>Custo</th>
+                <th>Receita</th>
+                <th>ROI</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- {{ROWS_CAMPANHAS}} -->
+        </tbody>
+    </table>
+
+</body>
+
+</html>

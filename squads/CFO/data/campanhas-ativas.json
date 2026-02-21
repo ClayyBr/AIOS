@@ -1,0 +1,32 @@
+[
+    {
+        "id": "RASP-TERCA-V1",
+        "nome": "Raspadinha Terça Premiada",
+        "tipo": "raspadinha",
+        "data_inicio": "2026-02-10",
+        "custo_total": 45.00,
+        "receita_gerada": 350.00,
+        "valor_estoque_salvo": 0.00,
+        "status": "concluida"
+    },
+    {
+        "id": "PVPS-MIGNON-URGENTE",
+        "nome": "Festival do Mignon (Vencimento)",
+        "tipo": "pvps",
+        "data_inicio": "2026-02-18",
+        "custo_total": 400.00,
+        "receita_gerada": 420.00,
+        "valor_estoque_salvo": 400.00,
+        "status": "ativa"
+    },
+    {
+        "id": "REVPASH-HAPPY-HOUR",
+        "nome": "Happy Hour em Dobro",
+        "tipo": "revpash",
+        "data_inicio": "2026-02-15",
+        "custo_total": 120.00,
+        "receita_gerada": 890.00,
+        "valor_estoque_salvo": 0.00,
+        "status": "concluida"
+    }
+]

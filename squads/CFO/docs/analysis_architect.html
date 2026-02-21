@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise do Arquiteto - Squad CFO</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #f9f9f9;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 0;
+        }
+
+        .status-ok {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .status-warn {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .metric-box {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .metric {
+            flex: 1;
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric h3 {
+            margin: 0;
+            font-size: 2em;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>🏗️ Relatório de Análise Técnica</h1>
+        <p><strong>Agente:</strong> @architect (Aria) | <strong>Squad:</strong> CFO</p>
+
+        <div class="metric-box">
+            <div class="metric">
+                <h3>9/10</h3>
+                <p>Nota de Arquitetura</p>
+            </div>
+            <div class="metric">
+                <h3>Sólido</h3>
+                <p>Estrutura Hierárquica</p>
+            </div>
+            <div class="metric">
+                <h3>3</h3>
+                <p>Pontos de Atenção</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>1. Análise de Coerência</h2>
+        <p>A estrutura <code>Master -> Specialists</code> está correta e escalável.</p>
+        <table>
+            <tr>
+                <th>Fluxo</th>
+                <th>Status</th>
+                <th>Análise</th>
+            </tr>
+            <tr>
+                <td>Vendas → Estoque</td>
+                <td class="status-ok">✅ Seguro</td>
+                <td>Gatilho de validade (PVPS) está claro e objetivo.</td>
+            </tr>
+            <tr>
+                <td>Vendas → Financeiro</td>
+                <td class="status-warn">⚠️ Alerta</td>
+                <td>Risco de inconsistência no DRE se o custo de marketing não for reportado.</td>
+            </tr>
+            <tr>
+                <td>Vendas → Arquiteto</td>
+                <td class="status-warn">⚠️ Alerta</td>
+                <td>Conflito potencial de preço. Vendas não pode reduzir margem sem aprovação.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>2. Gaps Identificados</h2>
+        <ul>
+            <li><strong>Protocolos de Comunicação:</strong> Falta um evento formal de "Notificação de Campanha" para o
+                Financeiro.</li>
+            <li><strong>Poluição de Tasks:</strong> A pasta <code>tasks/</code> está ficando cheia. Sugere-se prefixos
+                (ex: <code>fin-dre.md</code>).</li>
+            <li><strong>Propriedade do Menu:</strong> Definir que o Arquiteto é dono da estrutura e o Vendas da
+                promoção.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>3. Veredito e Ação</h2>
+        <p>A hierarquia é robusta. A recomendação imediata é formalizar o fluxo de aprovação de preços promocionais.</p>
+    </div>
+
+</body>
+
+</html>

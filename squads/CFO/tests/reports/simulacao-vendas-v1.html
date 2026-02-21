@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Simulação - Agente Vendas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+
+        /* Dashboard Gird */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+        }
+
+        .card.success {
+            background: #27ae60;
+        }
+
+        .card.risk {
+            background: #e67e22;
+        }
+
+        .card.block {
+            background: #c0392b;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .card p {
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
+
+        /* Scenarios */
+        .scenario {
+            border-left: 5px solid #ddd;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+
+        .scenario.pass {
+            border-left-color: #27ae60;
+        }
+
+        .scenario.warn {
+            border-left-color: #f1c40f;
+        }
+
+        .scenario.block {
+            border-left-color: #c0392b;
+        }
+
+        .scenario h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            font-size: 0.8em;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .bg-green {
+            background: #27ae60;
+        }
+
+        .bg-red {
+            background: #c0392b;
+        }
+
+        .bg-orange {
+            background: #e67e22;
+        }
+
+        .output-box {
+            background: #2d3436;
+            color: #81ecec;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎯 Relatório de Validação: Agente Vendas</h1>
+        <p class="meta">Versão 1.0.0 • Story 3.2 • Executor: @qa</p>
+
+        <div class="dashboard">
+            <div class="card success">
+                <h2>100%</h2>
+                <p>Taxa de Sucesso</p>
+            </div>
+            <div class="card risk">
+                <h2>1</h2>
+                <p>Override Aut. (PVPS)</p>
+            </div>
+            <div class="card block">
+                <h2>1</h2>
+                <p>Bloqueio de Prejuízo</p>
+            </div>
+        </div>
+
+        <h2>Cenários Testados</h2>
+
+        <!-- Cenário 1 -->
+        <div class="scenario pass">
+            <h3>1. A Raspadinha (Migração) <span class="badge bg-green">APROVADO</span></h3>
+            <p><strong>Teste:</strong> Validar se a matemática de migração iFood -> WhatsApp gera lucro real.</p>
+            <p><strong>Resultado:</strong> Lucro aumenta R$ 12,70 por pedido ao economizar taxa de 27%.</p>
+            <div class="output-box">
+                📢 NOTIFICAÇÃO FINANCEIRA: Campanha RASPADINHA-V1 iniciada. Custo previsto: R$ 3,50/unidade.
+            </div>
+        </div>
+
+        <!-- Cenário 2 -->
+        <div class="scenario pass">
+            <h3>2. RevPASH (Terça-feira) <span class="badge bg-green">APROVADO</span></h3>
+            <p><strong>Teste:</strong> Sugerir ação para baixo movimento sem destruir margem.</p>
+            <p><strong>Resultado:</strong> "Terça em Dobro" foca em volume para pagar custo fixo.</p>
+        </div>
+
+        <!-- Cenário 3 -->
+        <div class="scenario warn">
+            <h3>3. PVPS (Perda Total) <span class="badge bg-orange">APROVADO COM ALERTA</span></h3>
+            <p><strong>Teste:</strong> Verificar se o agente ignora a regra de margem para evitar perda total de estoque
+                vencendo.</p>
+            <p><strong>Resultado:</strong> Override acionado corretamente.</p>
+            <div class="output-box">
+                🚨 ALERTA PVPS: Margem de segurança IGNORADA devido a risco de perda total (R$ 400,00).
+            </div>
+        </div>
+
+        <!-- Cenário 4 -->
+        <div class="scenario block">
+            <h3>4. Bloqueio de Prejuízo <span class="badge bg-red">BLOQUEADO COM SUCESSO</span></h3>
+            <p><strong>Teste:</strong> Tentar forçar uma promoção de 50% sem motivo de vencimento.</p>
+            <p><strong>Resultado:</strong> O Gatekeeper (Arquiteto) impediu a ação.</p>
+            <div class="output-box">
+                ⛔ PROMOÇÃO RECUSADA: A sugestão gera prejuízo de R$ 5,00/un e o item não está vencendo.
+            </div>
+        </div>
+
+        <h2>Conclusão</h2>
+        <p>Os protocolos da Story 3.2 estão funcionais. O agente demonstra inteligência estratégica para aumentar lucro
+            (Cenário 1) e responsabilidade fiscal para evitar prejuízo (Cenário 4).</p>
+    </div>
+</body>
+
+</html>

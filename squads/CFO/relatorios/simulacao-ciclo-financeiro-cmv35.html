@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação Ciclo Financeiro — CMV 35% — 16/02/2026</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --success: #2e7d32;
+            --success-bg: #e8f5e9;
+            --warning: #f57f17;
+            --warning-bg: #fff8e1;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #eeeeee;
+            --gray-300: #e0e0e0;
+            --gray-600: #757575;
+            --gray-800: #424242;
+            --gray-900: #212121;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            color: var(--gray-900);
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        .report-header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .report-header h1 {
+            font-size: 1.8em;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .report-header .subtitle {
+            font-size: 1.1em;
+            color: var(--gray-600);
+        }
+
+        .report-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 12px;
+            font-size: 0.9em;
+            color: var(--gray-600);
+        }
+
+        .report-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        h2 {
+            font-size: 1.3em;
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+            margin: 30px 0 16px 0;
+        }
+
+        h3 {
+            font-size: 1.1em;
+            color: var(--gray-800);
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--gray-800);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 24px 0;
+            font-size: 0.92em;
+        }
+
+        thead th {
+            background-color: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            text-align: left;
+            padding: 10px 14px;
+            white-space: nowrap;
+        }
+
+        tbody td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--gray-50);
+        }
+
+        tbody tr:hover {
+            background-color: var(--gray-100);
+        }
+
+        td.num, th.num {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        tr.total td, tr.highlight td {
+            font-weight: 700;
+            border-top: 2px solid var(--gray-300);
+            background-color: var(--gray-100);
+        }
+
+        tr.subtotal td {
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .status-ok {
+            color: var(--success);
+            background: var(--success-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .status-warn {
+            color: var(--warning);
+            background: var(--warning-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .status-danger {
+            color: var(--danger);
+            background: var(--danger-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 16px 0 24px 0;
+        }
+
+        .kpi-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .kpi-card .label {
+            font-size: 0.85em;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-card .value {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 4px 0;
+        }
+
+        .kpi-card .value.ok { color: var(--success); }
+        .kpi-card .value.warn { color: var(--warning); }
+        .kpi-card .value.danger { color: var(--danger); }
+
+        .kpi-card .benchmark {
+            font-size: 0.8em;
+            color: var(--gray-600);
+        }
+
+        .alert {
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin: 12px 0;
+            border-left: 4px solid;
+        }
+
+        .alert-success { background: var(--success-bg); border-color: var(--success); }
+        .alert-warning { background: var(--warning-bg); border-color: var(--warning); }
+        .alert-danger { background: var(--danger-bg); border-color: var(--danger); }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .formula {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 8px 0 16px 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        ul, ol {
+            margin: 8px 0 16px 24px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+            font-size: 0.85em;
+            color: var(--gray-600);
+        }
+
+        .report-footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 2px solid var(--gray-200);
+            text-align: center;
+            font-size: 0.8em;
+            color: var(--gray-600);
+        }
+
+        .report-footer .confidential {
+            font-weight: 600;
+            color: var(--danger);
+            margin-bottom: 4px;
+        }
+
+        @media print {
+            body { padding: 10px; font-size: 11pt; }
+            .report-header h1 { font-size: 1.4em; }
+            table { page-break-inside: avoid; }
+            thead th { background-color: var(--primary) !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            tbody tr:nth-child(even) { background-color: var(--gray-50) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .kpi-card { break-inside: avoid; }
+            .status-ok, .status-warn, .status-danger { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .alert { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="report-header">
+        <h1>📊 Simulação do Ciclo Financeiro — Cenário CMV 35%</h1>
+        <div class="subtitle">Análise comparativa com baseline 32% | Pré-abertura</div>
+        <div class="report-meta">
+            <span>📅 16/02/2026</span>
+            <span>📊 Gerado por: @financeiro + @gerente-geral</span>
+            <span>🏢 Squad CFO</span>
+        </div>
+    </div>
+
+    <!-- ALERTA -->
+    <div class="alert alert-danger">
+        <strong>⚠️ ALERTA DO GERENTE GERAL</strong>
+        Este relatório simula o cenário de CMV a 35% — o LIMITE MÁXIMO aceitável para alimentos. Acima de 35%, o @financeiro emite alerta imediato. Este cenário mostra o impacto financeiro quando operamos "na borda" da zona de perigo.
+    </div>
+
+    <!-- KPI CARDS -->
+    <h2>KPIs Principais — CMV 35% (Cenário Realista)</h2>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="label">CMV</div>
+            <div class="value warn">35,0%</div>
+            <div class="benchmark">Meta: ≤ 35% | ⚠️ Limite</div>
+        </div>
+        <div class="kpi-card">
+            <div class="label">Prime Cost</div>
+            <div class="value warn">58,9%</div>
+            <div class="benchmark">Meta: < 60% | ⚠️ Próximo</div>
+        </div>
+        <div class="kpi-card">
+            <div class="label">Lucro Líquido</div>
+            <div class="value ok">R$ 4.918</div>
+            <div class="benchmark">Margem: 15,8%</div>
+        </div>
+        <div class="kpi-card">
+            <div class="label">Perda vs CMV 32%</div>
+            <div class="value danger">-R$ 936</div>
+            <div class="benchmark">-16% do lucro/mês</div>
+        </div>
+    </div>
+
+    <!-- PREMISSAS -->
+    <h2>1. Premissas da Simulação</h2>
+
+    <h3>Dados Financeiros Base</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Premissa</th>
+                <th class="num">Pessimista</th>
+                <th class="num">Realista</th>
+                <th class="num">Otimista</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Clientes/dia</td><td class="num">25</td><td class="num">40</td><td class="num">60</td></tr>
+            <tr><td>Faturamento Mensal</td><td class="num">R$ 19.500</td><td class="num">R$ 31.200</td><td class="num">R$ 46.800</td></tr>
+            <tr><td>Custos Fixos Totais</td><td class="num">R$ 12.510</td><td class="num">R$ 12.510</td><td class="num">R$ 12.510</td></tr>
+            <tr class="highlight"><td><strong>CMV (35%)</strong></td><td class="num"><strong>R$ 6.825</strong></td><td class="num"><strong>R$ 10.920</strong></td><td class="num"><strong>R$ 16.380</strong></td></tr>
+            <tr><td>Ticket Médio</td><td class="num">R$ 30,00</td><td class="num">R$ 30,00</td><td class="num">R$ 30,00</td></tr>
+            <tr><td>Dias operação/mês</td><td class="num">26</td><td class="num">26</td><td class="num">26</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Comparativo CMV: 32% vs 35%</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Cenário</th>
+                <th class="num">CMV a 32%</th>
+                <th class="num">CMV a 35%</th>
+                <th class="num">Diferença</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>🔴 Pessimista</td><td class="num">R$ 6.240</td><td class="num">R$ 6.825</td><td class="num"><span class="status-danger">+R$ 585</span></td></tr>
+            <tr><td>🟡 Realista</td><td class="num">R$ 9.984</td><td class="num">R$ 10.920</td><td class="num"><span class="status-danger">+R$ 936</span></td></tr>
+            <tr><td>🟢 Otimista</td><td class="num">R$ 14.976</td><td class="num">R$ 16.380</td><td class="num"><span class="status-danger">+R$ 1.404</span></td></tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-warning">
+        <strong>💡 Insight</strong>
+        A cada 1pp de aumento no CMV, o restaurante perde ~R$ 312/mês (cenário realista). A diferença de 3pp (32→35%) custa <strong>R$ 936/mês = R$ 11.232/ano</strong>.
+    </div>
+
+    <!-- CICLO FINANCEIRO -->
+    <h2>2. Ciclo Financeiro — Sem Antecipação</h2>
+
+    <div class="formula">Ciclo Financeiro = PME + PMR - PMP
+                 = 7 + 18 - 15
+                 = 10 dias</div>
+
+    <p>O restaurante precisa financiar <strong>10 dias de operação</strong> com capital próprio.</p>
+
+    <h3>Capital de Giro Necessário (CMV 35%)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Cenário</th>
+                <th class="num">Custo Diário</th>
+                <th class="num">Ciclo</th>
+                <th class="num">Capital de Giro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>🔴 Pessimista</td><td class="num">R$ 773/dia</td><td class="num">10 dias</td><td class="num"><strong>R$ 7.730</strong></td></tr>
+            <tr><td>🟡 Realista</td><td class="num">R$ 1.011/dia</td><td class="num">10 dias</td><td class="num"><strong>R$ 10.110</strong></td></tr>
+            <tr><td>🟢 Otimista</td><td class="num">R$ 1.284/dia</td><td class="num">10 dias</td><td class="num"><strong>R$ 12.840</strong></td></tr>
+        </tbody>
+    </table>
+
+    <h3>Comparativo Capital de Giro: 32% vs 35%</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Cenário</th>
+                <th class="num">CG com CMV 32%</th>
+                <th class="num">CG com CMV 35%</th>
+                <th class="num">Capital Extra</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>🔴 Pessimista</td><td class="num">R$ 7.500</td><td class="num">R$ 7.730</td><td class="num"><span class="status-warn">+R$ 230</span></td></tr>
+            <tr><td>🟡 Realista</td><td class="num">R$ 9.750</td><td class="num">R$ 10.110</td><td class="num"><span class="status-warn">+R$ 360</span></td></tr>
+            <tr><td>🟢 Otimista</td><td class="num">R$ 12.300</td><td class="num">R$ 12.840</td><td class="num"><span class="status-warn">+R$ 540</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- DRE COMPARATIVO -->
+    <h2>3. DRE Comparativo — CMV 32% vs 35% (Cenário Realista)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Linha</th>
+                <th>Descrição</th>
+                <th class="num">CMV 32%</th>
+                <th class="num">CMV 35%</th>
+                <th class="num">Diferença</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Receita Bruta</td><td class="num">R$ 31.200</td><td class="num">R$ 31.200</td><td class="num">—</td></tr>
+            <tr><td>2.1</td><td>Impostos (Simples 6%)</td><td class="num">(R$ 1.872)</td><td class="num">(R$ 1.872)</td><td class="num">—</td></tr>
+            <tr><td>2.2</td><td>Taxas Cartão (MDR 2,5%)</td><td class="num">(R$ 780)</td><td class="num">(R$ 780)</td><td class="num">—</td></tr>
+            <tr class="subtotal"><td></td><td><strong>Receita Líquida</strong></td><td class="num"><strong>R$ 28.548</strong></td><td class="num"><strong>R$ 28.548</strong></td><td class="num"><strong>—</strong></td></tr>
+            <tr class="highlight"><td>3</td><td><strong>CMV</strong></td><td class="num"><strong>(R$ 9.984)</strong></td><td class="num"><strong>(R$ 10.920)</strong></td><td class="num"><span class="status-danger">-R$ 936</span></td></tr>
+            <tr class="subtotal"><td></td><td><strong>Lucro Bruto</strong></td><td class="num"><strong>R$ 18.564</strong></td><td class="num"><strong>R$ 17.628</strong></td><td class="num"><span class="status-danger">-R$ 936</span></td></tr>
+            <tr><td>4</td><td>Mão de Obra</td><td class="num">(R$ 7.460)</td><td class="num">(R$ 7.460)</td><td class="num">—</td></tr>
+            <tr><td>5</td><td>Custos Fixos</td><td class="num">(R$ 4.150)</td><td class="num">(R$ 4.150)</td><td class="num">—</td></tr>
+            <tr><td>6</td><td>Despesas Adm</td><td class="num">(R$ 1.100)</td><td class="num">(R$ 1.100)</td><td class="num">—</td></tr>
+            <tr class="total">
+                <td></td>
+                <td><strong>RESULTADO LÍQUIDO</strong></td>
+                <td class="num"><strong>R$ 5.854</strong></td>
+                <td class="num"><strong>R$ 4.918</strong></td>
+                <td class="num"><span class="status-danger">🚨 -R$ 936</span></td>
+            </tr>
+            <tr class="total">
+                <td></td>
+                <td><strong>Margem Líquida</strong></td>
+                <td class="num"><strong>18,8%</strong></td>
+                <td class="num"><strong>15,8%</strong></td>
+                <td class="num"><span class="status-danger">-3,0 pp</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-danger">
+        <strong>🚨 Impacto Brutal</strong>
+        Os mesmos 3pp de CMV a mais reduzem a margem líquida em 3pp e o lucro mensal em <strong>R$ 936 (-16% do lucro!)</strong>. Em 12 meses = <strong>R$ 11.232 perdidos</strong>.
+    </div>
+
+    <!-- KPIs POR CENARIO -->
+    <h2>4. Dashboard de KPIs por Cenário — CMV 35%</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Indicador</th>
+                <th class="num">🔴 Pessimista</th>
+                <th class="num">🟡 Realista</th>
+                <th class="num">🟢 Otimista</th>
+                <th class="num">Meta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CMV %</td>
+                <td class="num"><span class="status-warn">35,0%</span></td>
+                <td class="num"><span class="status-warn">35,0%</span></td>
+                <td class="num"><span class="status-warn">35,0%</span></td>
+                <td class="num">28-35%</td>
+            </tr>
+            <tr>
+                <td>MO %</td>
+                <td class="num"><span class="status-danger">38,3%</span></td>
+                <td class="num"><span class="status-ok">23,9%</span></td>
+                <td class="num"><span class="status-ok">15,9%</span></td>
+                <td class="num">25-35%</td>
+            </tr>
+            <tr class="highlight">
+                <td><strong>Prime Cost %</strong></td>
+                <td class="num"><span class="status-danger">73,3% 🚨</span></td>
+                <td class="num"><span class="status-warn">58,9%</span></td>
+                <td class="num"><span class="status-ok">50,9%</span></td>
+                <td class="num">55-65%</td>
+            </tr>
+            <tr>
+                <td>Custos Fixos %</td>
+                <td class="num"><span class="status-danger">21,3%</span></td>
+                <td class="num"><span class="status-ok">13,3%</span></td>
+                <td class="num"><span class="status-ok">8,9%</span></td>
+                <td class="num">12-18%</td>
+            </tr>
+            <tr class="total">
+                <td><strong>Lucro Líq. %</strong></td>
+                <td class="num"><span class="status-danger">-7,5% 🚨</span></td>
+                <td class="num"><span class="status-ok">15,8%</span></td>
+                <td class="num"><span class="status-ok">29,5%</span></td>
+                <td class="num">8-15%</td>
+            </tr>
+            <tr class="total">
+                <td><strong>Resultado (R$)</strong></td>
+                <td class="num"><span class="status-danger">(R$ 1.843)</span></td>
+                <td class="num"><span class="status-ok">R$ 4.918</span></td>
+                <td class="num"><span class="status-ok">R$ 13.432</span></td>
+                <td class="num">—</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- BREAK-EVEN -->
+    <h2>5. Ponto de Equilíbrio Comparativo</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Indicador</th>
+                <th class="num">CMV 32%</th>
+                <th class="num">CMV 35%</th>
+                <th class="num">Diferença</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Margem/Prato</td><td class="num">R$ 17,85</td><td class="num">R$ 16,95</td><td class="num"><span class="status-warn">-R$ 0,90</span></td></tr>
+            <tr><td>Margem %</td><td class="num">59,5%</td><td class="num">56,5%</td><td class="num"><span class="status-warn">-3,0 pp</span></td></tr>
+            <tr class="highlight"><td><strong>Break-even (pratos/mês)</strong></td><td class="num"><strong>701</strong></td><td class="num"><strong>738</strong></td><td class="num"><span class="status-danger">+37 pratos</span></td></tr>
+            <tr class="highlight"><td><strong>Break-even (pratos/dia)</strong></td><td class="num"><strong>27</strong></td><td class="num"><strong>29</strong></td><td class="num"><span class="status-danger">+2/dia</span></td></tr>
+            <tr class="total"><td><strong>Faturamento mín./mês</strong></td><td class="num"><strong>R$ 21.030</strong></td><td class="num"><strong>R$ 22.140</strong></td><td class="num"><span class="status-danger">+R$ 1.110</span></td></tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-warning">
+        <strong>⚠️ Impacto no Break-even</strong>
+        Com CMV 35%, você precisa vender <strong>2 pratos a mais por dia</strong> (29 vs 27) só para empatar. Em um ano, são 624 pratos extras sem lucro.
+    </div>
+
+    <!-- ANTECIPAÇÃO -->
+    <h2>6. Cenário COM Antecipação — CMV 35%</h2>
+
+    <div class="formula">PMR (com antecipação) = (55%×1) + (20%×1) + (18%×0) + (2%×0) + (5%×15)
+                      = 1,5 dias ≈ 2 dias
+
+Novo Ciclo Financeiro = 7 + 2 - 15 = -6 dias ✅ (CICLO NEGATIVO)</div>
+
+    <h3>DRE Completo — Cenário Realista, CMV 35%, COM Antecipação</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th class="num">SEM Antecipação</th>
+                <th class="num">COM Antecipação</th>
+                <th class="num">Diferença</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Receita Bruta</td><td class="num">R$ 31.200</td><td class="num">R$ 31.200</td><td class="num">—</td></tr>
+            <tr><td>Impostos (Simples 6%)</td><td class="num">(R$ 1.872)</td><td class="num">(R$ 1.872)</td><td class="num">—</td></tr>
+            <tr><td>Taxas Cartão (MDR 2,5%)</td><td class="num">(R$ 780)</td><td class="num">(R$ 780)</td><td class="num">—</td></tr>
+            <tr class="highlight"><td><strong>Taxa Antecipação (3% s/ crédito)</strong></td><td class="num"><strong>R$ 0</strong></td><td class="num"><strong>(R$ 515)</strong></td><td class="num"><span class="status-danger">-R$ 515</span></td></tr>
+            <tr class="subtotal"><td>Receita Líquida</td><td class="num">R$ 28.548</td><td class="num">R$ 28.033</td><td class="num">-R$ 515</td></tr>
+            <tr><td><strong>CMV (35%)</strong></td><td class="num">(R$ 10.920)</td><td class="num">(R$ 10.920)</td><td class="num">—</td></tr>
+            <tr class="subtotal"><td>Lucro Bruto</td><td class="num">R$ 17.628</td><td class="num">R$ 17.113</td><td class="num">-R$ 515</td></tr>
+            <tr><td>Mão de Obra</td><td class="num">(R$ 7.460)</td><td class="num">(R$ 7.460)</td><td class="num">—</td></tr>
+            <tr><td>Custos Fixos</td><td class="num">(R$ 4.150)</td><td class="num">(R$ 4.150)</td><td class="num">—</td></tr>
+            <tr><td>Despesas Adm</td><td class="num">(R$ 1.100)</td><td class="num">(R$ 1.100)</td><td class="num">—</td></tr>
+            <tr class="total">
+                <td><strong>RESULTADO LÍQUIDO</strong></td>
+                <td class="num"><strong>R$ 4.918</strong></td>
+                <td class="num"><strong>R$ 4.403</strong></td>
+                <td class="num"><span class="status-danger">-R$ 515</span></td>
+            </tr>
+            <tr class="total">
+                <td><strong>Margem Líquida</strong></td>
+                <td class="num">15,8%</td>
+                <td class="num">14,1%</td>
+                <td class="num"><span class="status-warn">-1,7 pp</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- SENSIBILIDADE -->
+    <h2>7. Análise de Sensibilidade — Lucro por Faixa de CMV</h2>
+
+    <p>Cenário Realista — 40 clientes/dia:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="num">CMV %</th>
+                <th class="num">CMV (R$)</th>
+                <th class="num">Lucro Líquido</th>
+                <th class="num">Margem</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td class="num">28%</td><td class="num">R$ 8.736</td><td class="num">R$ 6.102</td><td class="num">19,6%</td><td><span class="status-ok">✅ Excelente</span></td></tr>
+            <tr><td class="num">30%</td><td class="num">R$ 9.360</td><td class="num">R$ 5.478</td><td class="num">17,6%</td><td><span class="status-ok">✅ Bom</span></td></tr>
+            <tr class="highlight"><td class="num"><strong>32%</strong></td><td class="num"><strong>R$ 9.984</strong></td><td class="num"><strong>R$ 5.854</strong></td><td class="num"><strong>18,8%</strong></td><td><span class="status-ok">✅ Meta atual</span></td></tr>
+            <tr><td class="num">33%</td><td class="num">R$ 10.296</td><td class="num">R$ 4.542</td><td class="num">14,6%</td><td><span class="status-ok">✅ Aceitável</span></td></tr>
+            <tr class="highlight"><td class="num"><strong>35%</strong></td><td class="num"><strong>R$ 10.920</strong></td><td class="num"><strong>R$ 4.918</strong></td><td class="num"><strong>15,8%</strong></td><td><span class="status-warn">⚠️ Limite</span></td></tr>
+            <tr><td class="num">37%</td><td class="num">R$ 11.544</td><td class="num">R$ 3.294</td><td class="num">10,6%</td><td><span class="status-danger">🚨 Risco</span></td></tr>
+            <tr><td class="num">40%</td><td class="num">R$ 12.480</td><td class="num">R$ 2.358</td><td class="num">7,6%</td><td><span class="status-danger">🚨 Crítico</span></td></tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-warning">
+        <strong>💡 Insight</strong>
+        Cada 1pp de CMV = ~R$ 312/mês de lucro perdido. A diferença entre CMV 28% (excelente) e 40% (crítico) é de R$ 3.744/mês = <strong>R$ 44.928/ano</strong>.
+    </div>
+
+    <!-- RESUMO EXECUTIVO -->
+    <h2>8. Resumo Executivo — Todas as Combinações</h2>
+
+    <h3>Cenário Realista (40 clientes/dia)</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Indicador</th>
+                <th class="num">CMV 32%<br>Sem Antecip.</th>
+                <th class="num">CMV 35%<br>Sem Antecip.</th>
+                <th class="num">CMV 35%<br>Com Antecip.</th>
+                <th class="num">CMV 35%<br>PIX+PMP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Ciclo Financeiro</td><td class="num">10 dias</td><td class="num">10 dias</td><td class="num"><span class="status-ok">-6 dias ✅</span></td><td class="num"><span class="status-ok">-1 dia ✅</span></td></tr>
+            <tr><td>Capital de Giro</td><td class="num">R$ 9.750</td><td class="num">R$ 10.110</td><td class="num"><span class="status-ok">~R$ 0</span></td><td class="num"><span class="status-ok">~R$ 0</span></td></tr>
+            <tr><td>Custo mensal extra</td><td class="num">R$ 0</td><td class="num">R$ 0</td><td class="num">R$ 515</td><td class="num">~R$ 140</td></tr>
+            <tr><td>CMV/mês</td><td class="num">R$ 9.984</td><td class="num">R$ 10.920</td><td class="num">R$ 10.920</td><td class="num">R$ 10.920</td></tr>
+            <tr class="total">
+                <td><strong>Lucro mensal</strong></td>
+                <td class="num"><strong>R$ 5.854</strong></td>
+                <td class="num"><strong>R$ 4.918</strong></td>
+                <td class="num"><strong>R$ 4.403</strong></td>
+                <td class="num"><strong>R$ 4.778</strong></td>
+            </tr>
+            <tr class="total">
+                <td><strong>Margem líquida</strong></td>
+                <td class="num"><strong>18,8%</strong></td>
+                <td class="num"><strong>15,8%</strong></td>
+                <td class="num"><strong>14,1%</strong></td>
+                <td class="num"><strong>15,3%</strong></td>
+            </tr>
+            <tr>
+                <td>Risco de caixa</td>
+                <td class="num"><span class="status-warn">⚠️ Médio</span></td>
+                <td class="num"><span class="status-danger">⚠️ Alto</span></td>
+                <td class="num"><span class="status-ok">✅ Baixo</span></td>
+                <td class="num"><span class="status-ok">✅ Baixo</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- RECOMENDAÇÕES -->
+    <h2>🏆 Top 5 Recomendações do Gerente Geral</h2>
+
+    <div class="alert alert-danger">
+        <strong>🥇 PRIORIDADE MÁXIMA: Controle o CMV!</strong>
+        A diferença entre 32% e 35% é de R$ 936/mês (R$ 11.232/ano). Invista em: fichas técnicas padronizadas, balança na cozinha, negociação com 3+ fornecedores, controle de perdas.
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>🥈 Reserve R$ 15.000 de capital de giro</strong>
+        Com CMV 35%, o saldo mínimo cai para R$ 6.870 (Semana 3). A reserva é OBRIGATÓRIA para absorver o impacto.
+    </div>
+
+    <div class="alert alert-success">
+        <strong>🥉 Incentive PIX</strong>
+        Desconto de 3-5% no PIX reduz o ciclo financeiro de 10 para 5 dias e economiza R$ 5.055 em capital de giro.
+    </div>
+
+    <div class="alert alert-success">
+        <strong>4️⃣ Negocie PMP 21+ dias</strong>
+        Combinar PIX + PMP longo zera o ciclo financeiro SEM custo de antecipação.
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>5️⃣ NÃO antecipe se tiver reserva</strong>
+        A antecipação consome R$ 515/mês. Se tiver reserva de R$ 15.000, economize. Se não tiver, antecipe nos 3 primeiros meses.
+    </div>
+
+    <!-- ALERTAS DE ESCALONAMENTO -->
+    <h2>🚨 Alertas de Escalonamento</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Condição</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>CMV subir acima de 35%</td><td><span class="status-danger">ALERTA IMEDIATO — Ciclo de auditoria com @financeiro</span></td></tr>
+            <tr><td>Caixa cair abaixo de R$ 5.000</td><td><span class="status-danger">EMERGÊNCIA — Considerar antecipação pontual</span></td></tr>
+            <tr><td>CMV em 35% por 2+ meses</td><td><span class="status-warn">Revisão de cardápio com @arquiteto-lucro</span></td></tr>
+            <tr><td>Lucro cair abaixo de R$ 3.000/mês</td><td><span class="status-danger">Reunião estratégica — cortar custos ou aumentar preços</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- LEGENDA -->
+    <div class="legend">
+        <span><span class="status-ok">✅ OK</span> Dentro da meta</span>
+        <span><span class="status-warn">⚠️ Atenção</span> Limite / Desvio 5-10%</span>
+        <span><span class="status-danger">🚨 Crítico</span> Desvio > 10%</span>
+    </div>
+
+    <div class="report-footer">
+        <div class="confidential">CONFIDENCIAL — USO INTERNO</div>
+        Squad CFO • Simulação Ciclo Financeiro CMV 35% • @financeiro + @gerente-geral • 16/02/2026
+    </div>
+
+</body>
+
+</html>

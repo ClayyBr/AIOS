@@ -1,0 +1,102 @@
+metadata:
+  version: "1.0.0"
+  lastUpdated: "2026-02-16T12:00:00Z"
+  entityCount: 15
+  currency: "BRL"
+
+entities:
+  ingredients:
+    tomato-italian:
+      price: 6.50
+      unit: "kg"
+      yield: 0.90
+      supplier: "hortifruti-beta"
+      lastUpdated: "2026-02-16"
+      keywords: ["tomato", "sauce", "fresh"]
+    
+    onion:
+      price: 4.20
+      unit: "kg"
+      yield: 0.85
+      supplier: "hortifruti-beta"
+      lastUpdated: "2026-02-16"
+      keywords: ["vegetable", "seasoning"]
+
+    chicken-fillet:
+      price: 22.90
+      unit: "kg"
+      yield: 1.0
+      supplier: "avicola-alpha"
+      lastUpdated: "2026-02-16"
+      keywords: ["protein", "chicken", "meat"]
+
+    olive-oil:
+      price: 45.00
+      unit: "l"
+      yield: 1.0
+      supplier: "emporio-gamma"
+      lastUpdated: "2026-02-16"
+      keywords: ["oil", "fat", "cooking"]
+
+    mozarella:
+      price: 38.90
+      unit: "kg"
+      yield: 1.0
+      supplier: "lacticinios-delta"
+      lastUpdated: "2026-02-16"
+      keywords: ["cheese", "dairy", "topping"]
+
+  suppliers:
+    hortifruti-beta:
+      name: "Hortifruti Beta Ltda"
+      contact: "zap: 1199999999"
+      deliveryDays: ["mon", "wed", "fri"]
+    avicola-alpha:
+      name: "Avicola Alpha"
+      contact: "zap: 1188888888"
+    emporio-gamma:
+      name: "Emporio Gamma"
+      contact: "email: sales@gamma.com"
+    lacticinios-delta:
+      name: "Lacticinios Delta"
+      contact: "zap: 1177777777"
+
+  recipes:
+    sauce-pomodoro:
+      yield: 2.5
+      unit: "kg"
+      laborCost: 15.00
+      dependencies:
+        - "ingredient:tomato-italian:3.0"
+        - "ingredient:olive-oil:0.1"
+        - "ingredient:onion:0.2"
+      keywords: ["base", "sauce", "tomato"]
+      category: "prep"
+
+    chicken-parmigiana:
+      yield: 1.0
+      unit: "portion"
+      laborCost: 12.00
+      dependencies:
+        - "ingredient:chicken-fillet:0.250"
+        - "recipe:sauce-pomodoro:0.150"
+        - "ingredient:mozarella:0.080"
+        - "ingredient:olive-oil:0.020"
+      keywords: ["main", "chicken", "classic"]
+      category: "dish"
+
+  cost-centers:
+    kitchen:
+      manager: "Chef Luigi"
+    delivery:
+      manager: "Motoboy Fast"
+
+categories:
+  - id: ingredients
+    description: "Raw materials and inputs"
+  - id: suppliers
+    description: "External vendors"
+  - id: recipes
+    description: "Technical sheets (Fichas Técnicas)"
+  - id: cost-centers
+    description: "Operational divisions"

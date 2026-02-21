@@ -50,12 +50,12 @@ secrets/
 credentials/
 
 # Private local commands (not for repository)
-.claude/commands/mmosMapper/
-.claude/commands/hybridOps/
+# .claude/commands/mmosMapper/ - REMOVIDO PARA BACKUP GLOBAL
+# .claude/commands/hybridOps/ - REMOVIDO PARA BACKUP GLOBAL
 
 # Private local squads (not for repository)
-squads/
-keys/
+# squads/ - REMOVIDO PARA BACKUP GLOBAL
+# keys/ - REMOVIDO PARA BACKUP GLOBAL
 *.secret
 *.credentials
 
@@ -106,16 +106,16 @@ sample-project/*
 
 # Expansion Projects (separate from core AIOS-FULLSTACK)
 # These folders are from other projects and should NOT be in this repository
-.aios/                        # AIOS expansion project files
-.aios/project-status.yaml     # Project status cache (Story 6.1.2.4 - auto-generated)
+# .aios/                        - REMOVIDO PARA BACKUP GLOBAL
+# .aios/project-status.yaml     - REMOVIDO PARA BACKUP GLOBAL
 .cursor/                      # Cursor IDE project files
-aios-memory-layer-mvp/        # Separate memory layer project
-memory/                       # Memory squad
-performance/                  # Performance squad
-scripts/                      # Project-specific scripts (not part of core)
-security/                     # Security squad
-telemetry/                    # Telemetry squad
-tests/                        # Test files for expansion projects
+# aios-memory-layer-mvp/        - REMOVIDO PARA BACKUP GLOBAL
+# memory/                       - REMOVIDO PARA BACKUP GLOBAL
+# performance/                  - REMOVIDO PARA BACKUP GLOBAL
+# scripts/                      - REMOVIDO PARA BACKUP GLOBAL
+# security/                     - REMOVIDO PARA BACKUP GLOBAL
+# telemetry/                    - REMOVIDO PARA BACKUP GLOBAL
+# tests/                        - REMOVIDO PARA BACKUP GLOBAL
 
 # AIOS Development Artifacts (generated during workflow execution)
 # These files are created by agents during development and should NOT be in version control
@@ -241,30 +241,28 @@ test-sample-*.md
 # These are SynkraAI-specific methodologies and business documents
 
 # Proprietary Process Mapping Frameworks (Pedro Valério methodology)
-docs/standards/
+# docs/standards/ - REMOVIDO PARA BACKUP GLOBAL
 
 # Internal Business Decisions and Strategy
-docs/one-pagers/
+# docs/one-pagers/ - REMOVIDO PARA BACKUP GLOBAL
 
 # Internal PRDs (product requirements - internal development plans)
-docs/prd/
+# docs/prd/ - REMOVIDO PARA BACKUP GLOBAL
 
 # Internal Decisions (business strategy, architecture decisions)
-docs/decisions/
+# docs/decisions/ - REMOVIDO PARA BACKUP GLOBAL
 
 # Internal Development Stories (sprint backlogs, story tracking)
-# Users don't need development history - only documentation
-docs/stories/
+# docs/stories/ - REMOVIDO PARA BACKUP GLOBAL
 
 # Internal QA Reports and Assessments
-docs/qa/
+# docs/qa/ - REMOVIDO PARA BACKUP GLOBAL
 
 # Internal Epics (roadmap, partner strategies, business plans)
-# Contains sensitive info: partner names, financials, timelines
-docs/epics/
+# docs/epics/ - REMOVIDO PARA BACKUP GLOBAL
 
 # Squad Design Files (test artifacts)
-squads/.designs/
+# squads/.designs/ - REMOVIDO PARA BACKUP GLOBAL
 
 # ============================================
 # MCP Configuration (contains API keys)
