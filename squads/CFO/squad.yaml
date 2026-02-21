@@ -7,6 +7,7 @@ description: |
   Agente 2 (Financeiro): DRE, CMV, Relatórios, Projeções, Impostos.
   Agente 3 (Estoque): Entradas, Saídas, Inventário.
   Agente 4 (Vendas): Revenue Management, Marketing, Campanhas.
+  Agente 5 (IDS): Simulador Forense, Cascatas de Custo, Grafos Financeiros.
   Regime: Simples Nacional.
 author: Cleison
 license: MIT
@@ -23,6 +24,7 @@ components:
     - financeiro.md
     - controlador-estoque.md
     - vendas.md
+    - ids.md
   tasks:
     - gerir-operacao.md
     - criar-ficha-tecnica.md

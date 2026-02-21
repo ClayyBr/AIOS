@@ -4,14 +4,18 @@
 
 ## O Que Este Squad Faz
 
-O Squad CFO é uma equipe de **3 agentes** hierarquizados:
+O Squad CFO é uma equipe de **5 agentes** hierarquizados:
 
 1.  **👔 Gerente Geral (Master):** Seu ponto de contato único. Recebe ordens, orquestra os especialistas e propõe estratégias.
-2.  **💰 Financeiro (CFO):** Calcula custos, preços e DRE.
-3.  **📦 Estoque (Ops):** Cuida das compras, validades e inventário.
-4.  **🎯 Vendas (Estrategista):** Cria campanhas, raspadinhas e cuida do Revenue Management.
+2.  **💰 Arquiteto do Lucro (CFO):** Calcula fichas técnicas e precificações unitárias.
+3.  **📊 Financeiro (Fiscal):** DRE, CMV Global, Fluxo de Caixa, e relatórios mensais.
+4.  **📦 Estoque (Ops):** Cuida das compras, validades e inventário.
+5.  **🧠 IDS (Motor de Decisão):** Simulador de impacto de custos, cascatas e entressafra do mercado.
+6.  **🎯 Vendas (Estrategista):** Cria campanhas, raspadinhas e cuida do Revenue Management.
 
 **Recomendação:** Fale sempre com o `@gerente-geral`. Ele saberá quem acionar.
+ Se você precisa precificar um prato novo: o Master usará o `@arquiteto-lucro`.
+ Se você precisa calcular o impacto nas vendas se o alface dobrar o preço amanhã: o Master usará o `@ids`.
 
 ## Comandos Principais (Gerente Geral)
 
@@ -24,7 +28,9 @@ O Squad CFO é uma equipe de **3 agentes** hierarquizados:
 
 ### Comandos dos Especialistas (Uso direto opcional)
 
-**💰 Financeiro:** `*ficha-tecnica`, `*precificar`, `*cmv`, `*dre`
+**💰 Arquiteto do Lucro:** `*ficha-tecnica`, `*precificar`
+**📊 Financeiro:** `*cmv`, `*dre`, `*relatorio-mensal`
+**🧠 IDS:** `*simular-impacto`, `*extracao-teia`
 **📦 Estoque:** `*entrada`, `*saida`, `*inventario`, `*alerta`
 **🎯 Vendas:** `*vendas-criar-raspadinha`, `*analisar-oportunidades`, `*sugerir-acao`
 
@@ -53,10 +59,12 @@ O Squad CFO é uma equipe de **3 agentes** hierarquizados:
 squads/CFO/
 ├── squad.yaml                   # Manifesto
 ├── agents/
-│   ├── gerente-geral.md         # [NOVO] Master Agent
-│   ├── arquiteto-lucro.md       # Especialista Financeiro
+│   ├── gerente-geral.md         
+│   ├── arquiteto-lucro.md       # Especialista Receitas/Preços
+│   ├── financeiro.md            # Controlador DRE/CMV
 │   ├── controlador-estoque.md   # Especialista Estoque
-│   └── vendas.md                # [NOVO] Especialista Vendas
+│   ├── ids.md                   # [NOVO] Motor Forense (IDS)
+│   └── vendas.md                
 ├── tasks/                       # 13 tasks (1 mestra + 12 operacionais)
 ├── templates/                   # 5 templates (incl. HTML cozinha)
 ├── checklists/                  # 3 checklists
