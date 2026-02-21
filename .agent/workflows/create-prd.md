@@ -31,6 +31,7 @@ description: Criar um PRD (Product Requirements Document) seguindo o template AI
    O documento deve ser salvo em `docs/` com nome descritivo
 
 ## Templates Disponíveis
+
 - PRD padrão: `.claude/templates/prd-tmpl.yaml`
 - PRD brownfield: `.claude/templates/brownfield-prd-tmpl.yaml`
 - Project brief: `.claude/templates/project-brief-tmpl.yaml`

@@ -102,12 +102,12 @@ CLI First  >  Observability Second  >  UI Third
 
 A metodologia **Task-First** do Pedro Valerio inverte o paradigma tradicional:
 
-| Paradigma Tradicional | Task-First (AIOS) |
-|-----------------------|-------------------|
-| Agentes sao o centro | **Tasks** sao o centro |
-| "Qual agente uso?" | "Qual task preciso executar?" |
+| Paradigma Tradicional       | Task-First (AIOS)                            |
+| --------------------------- | -------------------------------------------- |
+| Agentes sao o centro        | **Tasks** sao o centro                       |
+| "Qual agente uso?"          | "Qual task preciso executar?"                |
 | Agentes decidem o que fazer | Tasks definem O QUE, executores definem QUEM |
-| Acoplado ao executor | Executor e **intercambiavel** |
+| Acoplado ao executor        | Executor e **intercambiavel**                |
 
 ### Principio Central
 
@@ -220,14 +220,14 @@ flowchart TB
 
 ### Comparativo Rapido
 
-| | Agent | Worker | Clone | Human |
-|---|---|---|---|---|
-| **Custo** | $$$$ | $ | $$$$ | $$$ |
-| **Velocidade** | 3-10s | < 1s | 5-15s | min-horas |
-| **Deterministico** | Nao | Sim | Parcial | Nao |
-| **Criatividade** | Sim | Nao | Sim (guiada) | Sim |
-| **Responsabilidade Legal** | Nao | Nao | Nao | Sim |
-| **Melhor para** | Tasks criativas | Transformacoes | Validacao metodologica | Decisoes criticas |
+|                            | Agent           | Worker         | Clone                  | Human             |
+| -------------------------- | --------------- | -------------- | ---------------------- | ----------------- |
+| **Custo**                  | $$$$            | $              | $$$$                   | $$$               |
+| **Velocidade**             | 3-10s           | < 1s           | 5-15s                  | min-horas         |
+| **Deterministico**         | Nao             | Sim            | Parcial                | Nao               |
+| **Criatividade**           | Sim             | Nao            | Sim (guiada)           | Sim               |
+| **Responsabilidade Legal** | Nao             | Nao            | Nao                    | Sim               |
+| **Melhor para**            | Tasks criativas | Transformacoes | Validacao metodologica | Decisoes criticas |
 
 ---
 
@@ -507,23 +507,23 @@ flowchart TD
 
 ### Mapeamento Executor por Fase
 
-| Fase | Task | Executor Padrao | Alternativa Possivel |
-|------|------|-----------------|---------------------|
-| Pesquisa | Analisar mercado | Agent (@analyst) | Human (pesquisador) |
-| Planejamento | Criar PRD | Agent (@pm) | Human (PM real) |
-| Arquitetura | Design do sistema | Agent (@architect) | Human (CTO) |
-| Stories | Criar stories | Agent (@sm) | Human (SM real) |
-| Validacao | Validar story | Agent (@po) | Human (PO real) |
-| Implementacao | Codificar feature | Agent (@dev) | Human (dev real) |
-| QA | Quality gate | Agent (@qa) | Human (QA real) |
-| Deploy | Push + PR | Agent (@devops) | Human (DevOps real) |
-| Linting | Verificar estilo | **Worker** (ESLint) | — |
-| Type check | Verificar tipos | **Worker** (TypeScript) | — |
-| Build | Compilar projeto | **Worker** (npm build) | — |
-| Design review | Validar Atomic Design | **Clone** (Brad Frost) | Human (designer senior) |
-| Copy review | Validar copywriting | **Clone** (Hormozi) | Human (copywriter) |
-| Aprovacao legal | Compliance check | **Human** (obrigatorio) | — |
-| Aprovacao financeira | Budget > $10k | **Human** (obrigatorio) | — |
+| Fase                 | Task                  | Executor Padrao         | Alternativa Possivel    |
+| -------------------- | --------------------- | ----------------------- | ----------------------- |
+| Pesquisa             | Analisar mercado      | Agent (@analyst)        | Human (pesquisador)     |
+| Planejamento         | Criar PRD             | Agent (@pm)             | Human (PM real)         |
+| Arquitetura          | Design do sistema     | Agent (@architect)      | Human (CTO)             |
+| Stories              | Criar stories         | Agent (@sm)             | Human (SM real)         |
+| Validacao            | Validar story         | Agent (@po)             | Human (PO real)         |
+| Implementacao        | Codificar feature     | Agent (@dev)            | Human (dev real)        |
+| QA                   | Quality gate          | Agent (@qa)             | Human (QA real)         |
+| Deploy               | Push + PR             | Agent (@devops)         | Human (DevOps real)     |
+| Linting              | Verificar estilo      | **Worker** (ESLint)     | —                       |
+| Type check           | Verificar tipos       | **Worker** (TypeScript) | —                       |
+| Build                | Compilar projeto      | **Worker** (npm build)  | —                       |
+| Design review        | Validar Atomic Design | **Clone** (Brad Frost)  | Human (designer senior) |
+| Copy review          | Validar copywriting   | **Clone** (Hormozi)     | Human (copywriter)      |
+| Aprovacao legal      | Compliance check      | **Human** (obrigatorio) | —                       |
+| Aprovacao financeira | Budget > $10k         | **Human** (obrigatorio) | —                       |
 
 ---
 
@@ -563,14 +563,14 @@ flowchart LR
 
 O AIOS opera sob uma **Constitution formal** com principios inegociaveis:
 
-| Artigo | Principio | Severidade | Significado |
-|--------|-----------|------------|-------------|
-| I | CLI First | NON-NEGOTIABLE | Tudo funciona via CLI antes de qualquer UI |
-| II | Agent Authority | NON-NEGOTIABLE | Cada agente tem autoridades exclusivas |
-| III | Story-Driven | MUST | Todo desenvolvimento comeca com uma story |
-| IV | No Invention | MUST | Specs derivam de requisitos, nunca inventam |
-| V | Quality First | MUST | Quality gates bloqueiam codigo ruim |
-| VI | Absolute Imports | SHOULD | Imports absolutos sempre |
+| Artigo | Principio        | Severidade     | Significado                                 |
+| ------ | ---------------- | -------------- | ------------------------------------------- |
+| I      | CLI First        | NON-NEGOTIABLE | Tudo funciona via CLI antes de qualquer UI  |
+| II     | Agent Authority  | NON-NEGOTIABLE | Cada agente tem autoridades exclusivas      |
+| III    | Story-Driven     | MUST           | Todo desenvolvimento comeca com uma story   |
+| IV     | No Invention     | MUST           | Specs derivam de requisitos, nunca inventam |
+| V      | Quality First    | MUST           | Quality gates bloqueiam codigo ruim         |
+| VI     | Absolute Imports | SHOULD         | Imports absolutos sempre                    |
 
 ---
 
@@ -587,16 +587,16 @@ Os flowcharts usam **Mermaid** e podem ser renderizados em:
 
 ## Documentos Relacionados
 
-| Documento | Conteudo |
-|-----------|----------|
+| Documento                                                                              | Conteudo                                            |
+| -------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | [EXECUTOR-DECISION-TREE.md](../../.aios-core/docs/standards/EXECUTOR-DECISION-TREE.md) | Decision tree detalhado com exemplos e cost-benefit |
-| [SYNAPSE-FLOWCHARTS.md](SYNAPSE/SYNAPSE-FLOWCHARTS.md) | 12 flowcharts do motor de contexto SYNAPSE |
-| [Constitution](../../.aios-core/constitution.md) | Principios inegociaveis do framework |
-| [User Guide](../../.aios-core/user-guide.md) | Guia completo de uso do AIOS |
-| [Squads Guide](../guides/squads-guide.md) | Como criar e gerenciar squads |
+| [SYNAPSE-FLOWCHARTS.md](SYNAPSE/SYNAPSE-FLOWCHARTS.md)                                 | 12 flowcharts do motor de contexto SYNAPSE          |
+| [Constitution](../../.aios-core/constitution.md)                                       | Principios inegociaveis do framework                |
+| [User Guide](../../.aios-core/user-guide.md)                                           | Guia completo de uso do AIOS                        |
+| [Squads Guide](../guides/squads-guide.md)                                              | Como criar e gerenciar squads                       |
 
 ---
 
-*Synkra AIOS Visual Overview v1.0.0*
-*Task-First | 4 Executores | Workspace Dinamico*
-*— Aria, arquitetando o futuro*
+_Synkra AIOS Visual Overview v1.0.0_
+_Task-First | 4 Executores | Workspace Dinamico_
+_— Aria, arquitetando o futuro_

@@ -35,7 +35,7 @@ describe('ContextManager structured handoff package', () => {
           checks: [{ type: 'file_exists', path: 'docs/spec.md', passed: true }],
         },
       },
-      { handoffTarget: { phase: 2, agent: 'dev' } },
+      { handoffTarget: { phase: 2, agent: 'dev' } }
     );
 
     const state = await manager.loadState();
@@ -62,7 +62,7 @@ describe('ContextManager structured handoff package', () => {
         task: 'dev-develop-story.md',
         result: { decisions: [] },
       },
-      { handoffTarget: { phase: 3, agent: 'qa' } },
+      { handoffTarget: { phase: 3, agent: 'qa' } }
     );
 
     const handoffPath = path.join(
@@ -70,7 +70,7 @@ describe('ContextManager structured handoff package', () => {
       '.aios',
       'workflow-state',
       'handoffs',
-      'test-workflow-phase-2.handoff.json',
+      'test-workflow-phase-2.handoff.json'
     );
     const exists = await fs.pathExists(handoffPath);
     const content = await fs.readJson(handoffPath);
@@ -87,7 +87,7 @@ describe('ContextManager structured handoff package', () => {
         agent: 'architect',
         result: { decisions: [{ id: 'D1' }] },
       },
-      { handoffTarget: { phase: 2, agent: 'dev' } },
+      { handoffTarget: { phase: 2, agent: 'dev' } }
     );
 
     const phase2Context = await manager.getContextForPhase(2);
@@ -116,7 +116,7 @@ describe('ContextManager structured handoff package', () => {
           ],
         },
       },
-      { handoffTarget: { phase: 2, agent: 'qa' } },
+      { handoffTarget: { phase: 2, agent: 'qa' } }
     );
 
     const state = await manager.loadState();
@@ -135,7 +135,7 @@ describe('ContextManager structured handoff package', () => {
       '.aios',
       'workflow-state',
       'confidence',
-      'test-workflow.delivery-confidence.json',
+      'test-workflow.delivery-confidence.json'
     );
     const persisted = await fs.readJson(confidencePath);
     expect(persisted.score).toBe(confidence.score);
@@ -149,7 +149,7 @@ describe('ContextManager structured handoff package', () => {
         result: { status: 'success' },
         validation: { checks: [{ type: 'regression', passed: true }] },
       },
-      { handoffTarget: { phase: 2, agent: 'po' } },
+      { handoffTarget: { phase: 2, agent: 'po' } }
     );
 
     const summary = manager.getSummary();

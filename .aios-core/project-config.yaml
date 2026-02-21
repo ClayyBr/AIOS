@@ -13,35 +13,35 @@
 # --- Project Metadata (Section 1 - project portion) ---
 project:
   type: EXISTING_AIOS
-  installed_at: "2025-01-14T00:00:00Z"
-  version: "2.1.0"
+  installed_at: '2025-01-14T00:00:00Z'
+  version: '2.1.0'
 
 # --- Documentation Paths (Section 2) ---
 documentation_paths:
-  qa_dir: "docs/qa"
-  prd_file: "docs/prd.md"
-  prd_version: "v4"
+  qa_dir: 'docs/qa'
+  prd_file: 'docs/prd.md'
+  prd_version: 'v4'
   prd_sharded: true
-  prd_sharded_location: "docs/prd"
-  architecture_file: "docs/architecture.md"
-  architecture_version: "v4"
+  prd_sharded_location: 'docs/prd'
+  architecture_file: 'docs/architecture.md'
+  architecture_version: 'v4'
   architecture_sharded: true
-  architecture_sharded_location: "docs/architecture"
-  stories_dir: "docs/stories"
-  dev_debug_log: ".ai/debug-log.md"
-  slash_prefix: "AIOS"
+  architecture_sharded_location: 'docs/architecture'
+  stories_dir: 'docs/stories'
+  dev_debug_log: '.ai/debug-log.md'
+  slash_prefix: 'AIOS'
   custom_technical_documents: null
   dev_load_always_files:
-    - "docs/framework/coding-standards.md"
-    - "docs/framework/tech-stack.md"
-    - "docs/framework/source-tree.md"
+    - 'docs/framework/coding-standards.md'
+    - 'docs/framework/tech-stack.md'
+    - 'docs/framework/source-tree.md'
   dev_load_always_files_fallback:
-    - "docs/pt/framework/coding-standards.md"
-    - "docs/pt/framework/tech-stack.md"
-    - "docs/pt/framework/source-tree.md"
-    - "docs/es/framework/coding-standards.md"
-    - "docs/es/framework/tech-stack.md"
-    - "docs/es/framework/source-tree.md"
+    - 'docs/pt/framework/coding-standards.md'
+    - 'docs/pt/framework/tech-stack.md'
+    - 'docs/pt/framework/source-tree.md'
+    - 'docs/es/framework/coding-standards.md'
+    - 'docs/es/framework/tech-stack.md'
+    - 'docs/es/framework/source-tree.md'
 
 # --- GitHub Integration (Section 8) ---
 github_integration:
@@ -51,25 +51,25 @@ github_integration:
     pr_creation: true
     issue_management: true
   pr:
-    title_format: "conventional"
+    title_format: 'conventional'
     include_story_id: true
     conventional_commits:
       enabled: true
       branch_type_map:
-        "feature/": "feat"
-        "feat/": "feat"
-        "fix/": "fix"
-        "bugfix/": "fix"
-        "hotfix/": "fix"
-        "docs/": "docs"
-        "chore/": "chore"
-        "refactor/": "refactor"
-        "test/": "test"
-        "perf/": "perf"
-        "ci/": "ci"
-        "style/": "style"
-        "build/": "build"
-      default_type: "feat"
+        'feature/': 'feat'
+        'feat/': 'feat'
+        'fix/': 'fix'
+        'bugfix/': 'fix'
+        'hotfix/': 'fix'
+        'docs/': 'docs'
+        'chore/': 'chore'
+        'refactor/': 'refactor'
+        'test/': 'test'
+        'perf/': 'perf'
+        'ci/': 'ci'
+        'style/': 'style'
+        'build/': 'build'
+      default_type: 'feat'
     auto_assign_reviewers: false
     draft_by_default: false
   semantic_release:
@@ -80,22 +80,22 @@ coderabbit_integration:
   enabled: true
   self_healing:
     enabled: true
-    type: "full"
+    type: 'full'
     max_iterations: 3
     timeout_minutes: 30
   severity_handling:
-    CRITICAL: "auto_fix"
-    HIGH: "auto_fix"
-    MEDIUM: "document_as_debt"
-    LOW: "ignore"
+    CRITICAL: 'auto_fix'
+    HIGH: 'auto_fix'
+    MEDIUM: 'document_as_debt'
+    LOW: 'ignore'
   graceful_degradation:
     skip_if_not_installed: true
-    fallback_message: "CodeRabbit CLI not found. Skipping automated review. Install via: pip install coderabbit-cli"
-  report_location: "docs/qa/coderabbit-reports/"
+    fallback_message: 'CodeRabbit CLI not found. Skipping automated review. Install via: pip install coderabbit-cli'
+  report_location: 'docs/qa/coderabbit-reports/'
 
 # --- Squads System (Section 10) ---
 squads:
-  template_location: "templates/squad"
+  template_location: 'templates/squad'
   auto_load: false
 
 # --- Logging & Status (Section 7) ---
@@ -103,9 +103,9 @@ logging:
   decision_logging:
     enabled: true
     async: true
-    location: ".ai/"
-    index_file: "decision-logs-index.md"
-    format: "adr"
+    location: '.ai/'
+    index_file: 'decision-logs-index.md'
+    format: 'adr'
     performance:
       max_overhead: 50
   project_status:
@@ -119,14 +119,14 @@ logging:
       recent_work: true
       current_epic: true
       current_story: true
-    status_file: ".aios/project-status.yaml"
+    status_file: '.aios/project-status.yaml'
     max_modified_files: 5
     max_recent_commits: 2
   agent_identity:
     greeting:
       context_detection: true
-      session_detection: "hybrid"
-      workflow_detection: "hardcoded"
+      session_detection: 'hybrid'
+      workflow_detection: 'hardcoded'
       performance:
         git_check_cache: true
         git_check_ttl: 300
@@ -134,30 +134,30 @@ logging:
 # --- Story Backlog ---
 story_backlog:
   enabled: true
-  location: "docs/stories/backlog"
-  prioritization: "value_risk"
+  location: 'docs/stories/backlog'
+  prioritization: 'value_risk'
 
 # --- pvMindContext ---
 pv_mind_context:
   enabled: true
-  location: "outputs/minds/pedro_valerio"
+  location: 'outputs/minds/pedro_valerio'
   features:
     persona_voice: true
-    technical_depth: "advanced"
-    communication_style: "structured"
+    technical_depth: 'advanced'
+    communication_style: 'structured'
 
 # --- Auto-Claude Configuration (Section 13) ---
 auto_claude:
   enabled: true
-  version: "3.0"
-  migrated_at: "2026-01-29T02:25:00Z"
+  version: '3.0'
+  migrated_at: '2026-01-29T02:25:00Z'
   worktree:
     enabled: true
-    auto_create: "on_story_start"
-    auto_cleanup: "manual"
+    auto_create: 'on_story_start'
+    auto_cleanup: 'manual'
     max_worktrees: 10
     stale_days: 30
-    branch_prefix: "auto-claude/"
+    branch_prefix: 'auto-claude/'
   spec_pipeline:
     enabled: false
   execution:

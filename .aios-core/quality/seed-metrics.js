@@ -88,9 +88,7 @@ function generateLayer2Run(timestamp) {
     'code-style',
     'maintainability',
   ];
-  const topCategories = categories
-    .sort(() => Math.random() - 0.5)
-    .slice(0, randomInt(1, 3));
+  const topCategories = categories.sort(() => Math.random() - 0.5).slice(0, randomInt(1, 3));
 
   return {
     timestamp: timestamp.toISOString(),
@@ -100,15 +98,17 @@ function generateLayer2Run(timestamp) {
     findingsCount: crTotal + quinnFindings,
     metadata: {
       triggeredBy: 'pr',
-      coderabbit: crActive ? {
-        findingsCount: crTotal,
-        severityBreakdown: {
-          critical: crCritical,
-          high: crHigh,
-          medium: crMedium,
-          low: crLow,
-        },
-      } : null,
+      coderabbit: crActive
+        ? {
+            findingsCount: crTotal,
+            severityBreakdown: {
+              critical: crCritical,
+              high: crHigh,
+              medium: crMedium,
+              low: crLow,
+            },
+          }
+        : null,
       quinn: {
         findingsCount: quinnFindings,
         topCategories,
@@ -173,9 +173,8 @@ function generateSeedData(options = {}) {
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
     // Reduce runs on weekends
-    const dayRuns = isWeekend && weekendReduction
-      ? Math.floor(runsPerDay * 0.3)
-      : runsPerDay + randomInt(-2, 2);
+    const dayRuns =
+      isWeekend && weekendReduction ? Math.floor(runsPerDay * 0.3) : runsPerDay + randomInt(-2, 2);
 
     for (let r = 0; r < Math.max(1, dayRuns); r++) {
       // Spread runs throughout the workday (9 AM - 6 PM)
@@ -234,7 +233,10 @@ function generateSeedData(options = {}) {
   const layer2Runs = history.filter((r) => r.layer === 2);
   if (layer2Runs.length > 0) {
     let totalCrFindings = 0;
-    let crCritical = 0, crHigh = 0, crMedium = 0, crLow = 0;
+    let crCritical = 0,
+      crHigh = 0,
+      crMedium = 0,
+      crLow = 0;
     let quinnFindings = 0;
     const allCategories = [];
 
@@ -288,9 +290,7 @@ function generateSeedData(options = {}) {
     const dateStr = trendDate.toISOString().split('T')[0];
 
     // Daily pass rate
-    const dayRuns = history.filter((r) =>
-      r.timestamp.startsWith(dateStr),
-    );
+    const dayRuns = history.filter((r) => r.timestamp.startsWith(dateStr));
     if (dayRuns.length > 0) {
       const passedToday = dayRuns.filter((r) => r.passed).length;
       metrics.trends.passRates.push({

@@ -3,7 +3,10 @@
  * Story MIS-3: Session Digest (PreCompact Hook)
  */
 
-const { onPreCompact, getHookConfig } = require('../../../../.aios-core/hooks/unified/runners/precompact-runner');
+const {
+  onPreCompact,
+  getHookConfig,
+} = require('../../../../.aios-core/hooks/unified/runners/precompact-runner');
 const proDetector = require('../../../../bin/utils/pro-detector');
 
 // Mock pro-detector
@@ -50,7 +53,7 @@ describe('PreCompact Hook Runner', () => {
       await onPreCompact(context);
 
       expect(console.log).toHaveBeenCalledWith(
-        '[PreCompact] aios-pro not available, skipping session digest',
+        '[PreCompact] aios-pro not available, skipping session digest'
       );
     });
 
@@ -66,13 +69,11 @@ describe('PreCompact Hook Runner', () => {
       await onPreCompact(context);
 
       // Wait for setImmediate to execute
-      await new Promise(resolve => setImmediate(resolve));
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Should attempt to load the digest extractor
-      expect(proDetector.loadProModule).toHaveBeenCalledWith(
-        'memory/session-digest/extractor.js',
-      );
+      expect(proDetector.loadProModule).toHaveBeenCalledWith('memory/session-digest/extractor.js');
     });
 
     it('should handle missing extractor function gracefully', async () => {
@@ -87,8 +88,8 @@ describe('PreCompact Hook Runner', () => {
       await onPreCompact(context);
 
       // Wait for setImmediate to execute
-      await new Promise(resolve => setImmediate(resolve));
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Should not throw, but log error asynchronously
       expect(proDetector.loadProModule).toHaveBeenCalled();
@@ -111,8 +112,8 @@ describe('PreCompact Hook Runner', () => {
       await onPreCompact(context);
 
       // Give setImmediate time to execute
-      await new Promise(resolve => setImmediate(resolve));
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       expect(mockExtractSessionDigest).toHaveBeenCalledWith(context);
     });
@@ -134,8 +135,8 @@ describe('PreCompact Hook Runner', () => {
       await expect(onPreCompact(context)).resolves.toBeUndefined();
 
       // Give setImmediate time to execute
-      await new Promise(resolve => setImmediate(resolve));
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       expect(mockExtractSessionDigest).toHaveBeenCalled();
     });
@@ -155,7 +156,7 @@ describe('PreCompact Hook Runner', () => {
 
       expect(console.error).toHaveBeenCalledWith(
         '[PreCompact] Hook runner error:',
-        'Detection failed',
+        'Detection failed'
       );
     });
   });

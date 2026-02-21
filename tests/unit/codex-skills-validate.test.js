@@ -5,7 +5,9 @@ const os = require('os');
 const path = require('path');
 
 const { syncSkills } = require('../../.aios-core/infrastructure/scripts/codex-skills-sync/index');
-const { validateCodexSkills } = require('../../.aios-core/infrastructure/scripts/codex-skills-sync/validate');
+const {
+  validateCodexSkills,
+} = require('../../.aios-core/infrastructure/scripts/codex-skills-sync/validate');
 
 describe('Codex Skills Validator', () => {
   let tmpRoot;
@@ -17,7 +19,7 @@ describe('Codex Skills Validator', () => {
     tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-codex-validate-'));
     sourceDir = path.join(process.cwd(), '.aios-core', 'development', 'agents');
     skillsDir = path.join(tmpRoot, '.codex', 'skills');
-    expectedAgentCount = fs.readdirSync(sourceDir).filter(name => name.endsWith('.md')).length;
+    expectedAgentCount = fs.readdirSync(sourceDir).filter((name) => name.endsWith('.md')).length;
   });
 
   afterEach(() => {
@@ -51,14 +53,18 @@ describe('Codex Skills Validator', () => {
     });
 
     expect(result.ok).toBe(false);
-    expect(result.errors.some(error => error.includes('Missing skill file'))).toBe(true);
+    expect(result.errors.some((error) => error.includes('Missing skill file'))).toBe(true);
   });
 
   it('fails when greeting command is removed from a skill', () => {
     syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
     const target = path.join(skillsDir, 'aios-dev', 'SKILL.md');
     const original = fs.readFileSync(target, 'utf8');
-    fs.writeFileSync(target, original.replace('generate-greeting.js dev', 'generate-greeting.js'), 'utf8');
+    fs.writeFileSync(
+      target,
+      original.replace('generate-greeting.js dev', 'generate-greeting.js'),
+      'utf8'
+    );
 
     const result = validateCodexSkills({
       projectRoot: tmpRoot,
@@ -68,7 +74,9 @@ describe('Codex Skills Validator', () => {
     });
 
     expect(result.ok).toBe(false);
-    expect(result.errors.some(error => error.includes('missing canonical greeting command'))).toBe(true);
+    expect(
+      result.errors.some((error) => error.includes('missing canonical greeting command'))
+    ).toBe(true);
   });
 
   it('fails in strict mode when orphaned aios-* skill dir exists', () => {

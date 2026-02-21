@@ -57,7 +57,8 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
 
   describe('extractPurpose()', () => {
     it('extracts from ## Purpose section', () => {
-      const content = '# Title\n\n## Purpose\n\nThis is the purpose line.\n\nMore details.\n\n## Other';
+      const content =
+        '# Title\n\n## Purpose\n\nThis is the purpose line.\n\nMore details.\n\n## Other';
       const purpose = extractPurpose(content, '/test.md');
       expect(purpose).toBe('This is the purpose line.');
     });
@@ -200,10 +201,7 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
 
       const result = scanCategory({
         category: 'fixtures',
-        basePath: path.relative(
-          path.resolve(__dirname, '../../..'),
-          FIXTURES,
-        ),
+        basePath: path.relative(path.resolve(__dirname, '../../..'), FIXTURES),
         glob: '**/*.yaml',
         type: 'data',
       });
@@ -214,7 +212,7 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
 
       // Verify that duplicates are logged (if any were found)
       const dupWarnings = warnSpy.mock.calls.filter(
-        (call) => typeof call[0] === 'string' && call[0].includes('Duplicate entity ID'),
+        (call) => typeof call[0] === 'string' && call[0].includes('Duplicate entity ID')
       );
       // All returned IDs are unique — any duplicates found would have been warned about
       expect(dupWarnings.length + ids.length).toBeGreaterThanOrEqual(ids.length);

@@ -164,7 +164,7 @@ describe('SquadGenerator', () => {
       const error = new SquadGeneratorError(
         GeneratorErrorCodes.INVALID_NAME,
         'Test message',
-        'Test suggestion',
+        'Test suggestion'
       );
 
       expect(error.name).toBe('SquadGeneratorError');
@@ -256,18 +256,16 @@ describe('SquadGenerator', () => {
 
       // Try to create again
       await expect(generator.generate({ name: 'existing-squad' })).rejects.toThrow(
-        SquadGeneratorError,
+        SquadGeneratorError
       );
     });
 
     it('should fail with invalid squad name', async () => {
       await expect(generator.generate({ name: 'InvalidName' })).rejects.toThrow(
-        SquadGeneratorError,
+        SquadGeneratorError
       );
 
-      await expect(generator.generate({ name: '123-squad' })).rejects.toThrow(
-        SquadGeneratorError,
-      );
+      await expect(generator.generate({ name: '123-squad' })).rejects.toThrow(SquadGeneratorError);
     });
 
     it('should fail without squad name', async () => {
@@ -279,7 +277,7 @@ describe('SquadGenerator', () => {
         generator.generate({
           name: 'template-test',
           template: 'invalid-template',
-        }),
+        })
       ).rejects.toThrow(SquadGeneratorError);
     });
 
@@ -288,7 +286,7 @@ describe('SquadGenerator', () => {
         generator.generate({
           name: 'config-test',
           configMode: 'invalid-mode',
-        }),
+        })
       ).rejects.toThrow(SquadGeneratorError);
     });
 
@@ -409,7 +407,7 @@ describe('SquadGenerator', () => {
 
       const codingStandards = await fs.readFile(
         path.join(result.path, 'config', 'coding-standards.md'),
-        'utf-8',
+        'utf-8'
       );
       expect(codingStandards).toContain('extends');
     });

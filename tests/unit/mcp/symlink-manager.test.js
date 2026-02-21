@@ -128,7 +128,7 @@ describe('Symlink Manager', () => {
 
     it('should return NOT_LINKED when link path does not exist', () => {
       fs.existsSync
-        .mockReturnValueOnce(true)  // tools dir exists
+        .mockReturnValueOnce(true) // tools dir exists
         .mockReturnValueOnce(false); // link path does not exist
 
       const result = checkLinkStatus(mockProjectRoot);
@@ -233,7 +233,7 @@ describe('Symlink Manager', () => {
         // Verify mklink /J was called (the key behavior for Windows)
         expect(execSync).toHaveBeenCalledWith(
           expect.stringContaining('mklink /J'),
-          expect.any(Object),
+          expect.any(Object)
         );
       });
     });
@@ -260,7 +260,7 @@ describe('Symlink Manager', () => {
 
       it('should succeed when link does not exist', () => {
         fs.existsSync
-          .mockReturnValueOnce(true)  // tools dir
+          .mockReturnValueOnce(true) // tools dir
           .mockReturnValueOnce(false); // link path
 
         const result = removeLink(mockProjectRoot);
@@ -296,10 +296,7 @@ describe('Symlink Manager', () => {
         const result = removeLink(mockProjectRoot);
 
         expect(result.success).toBe(true);
-        expect(execSync).toHaveBeenCalledWith(
-          expect.stringContaining('rmdir'),
-          expect.any(Object),
-        );
+        expect(execSync).toHaveBeenCalledWith(expect.stringContaining('rmdir'), expect.any(Object));
       });
     });
   });

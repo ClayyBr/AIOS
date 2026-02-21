@@ -346,7 +346,7 @@ async function stepLicenseGateWithEmail() {
     return loginWithRetry(client, trimmedEmail);
   }
 
-  checkSpinner.succeed('Pro access confirmed! Let\'s create your account.');
+  checkSpinner.succeed("Pro access confirmed! Let's create your account.");
   // Flow 4: New account → Create account flow
   return createAccountFlow(client, trimmedEmail);
 }
@@ -386,7 +386,11 @@ async function loginWithRetry(client, email) {
 
       // Wait for email verification if needed
       if (!loginResult.emailVerified) {
-        const verifyResult = await waitForEmailVerification(client, loginResult.sessionToken, email);
+        const verifyResult = await waitForEmailVerification(
+          client,
+          loginResult.sessionToken,
+          email
+        );
         if (!verifyResult.success) {
           return verifyResult;
         }
@@ -397,7 +401,9 @@ async function loginWithRetry(client, email) {
     } catch (loginError) {
       if (loginError.code === 'EMAIL_NOT_VERIFIED') {
         // Email not verified — poll by retrying login until verified
-        spinner.info('Email not verified yet. Please check your inbox and click the verification link.');
+        spinner.info(
+          'Email not verified yet. Please check your inbox and click the verification link.'
+        );
         console.log(colors.dim('  (Checking every 5 seconds... timeout in 10 minutes)'));
 
         const startTime = Date.now();
@@ -407,7 +413,11 @@ async function loginWithRetry(client, email) {
             const retryLogin = await client.login(email, password);
             showSuccess('Email verified!');
             if (!retryLogin.emailVerified) {
-              const verifyResult = await waitForEmailVerification(client, retryLogin.sessionToken, email);
+              const verifyResult = await waitForEmailVerification(
+                client,
+                retryLogin.sessionToken,
+                email
+              );
               if (!verifyResult.success) return verifyResult;
             }
             return activateProByAuth(client, retryLogin.sessionToken);
@@ -425,7 +435,9 @@ async function loginWithRetry(client, email) {
       } else if (loginError.code === 'INVALID_CREDENTIALS') {
         const remaining = MAX_RETRIES - attempt;
         if (remaining > 0) {
-          spinner.fail(`Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`);
+          spinner.fail(
+            `Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`
+          );
           showInfo('Forgot your password? Visit https://pro.synkra.ai/reset-password');
         } else {
           spinner.fail('Maximum login attempts reached.');
@@ -1094,19 +1106,13 @@ async function stepVerify(scaffoldResult) {
 
     // Categorize files
     result.squads = files.filter((f) => f.startsWith('squads/'));
-    result.configs = files.filter(
-      (f) => f.endsWith('.yaml') || f.endsWith('.json'),
-    );
+    result.configs = files.filter((f) => f.endsWith('.yaml') || f.endsWith('.json'));
 
     showInfo(`Files installed: ${files.length}`);
 
     if (result.squads.length > 0) {
       // Extract unique squad names
-      const squadNames = [...new Set(
-        result.squads
-          .map((f) => f.split('/')[1])
-          .filter(Boolean),
-      )];
+      const squadNames = [...new Set(result.squads.map((f) => f.split('/')[1]).filter(Boolean))];
       showSuccess(`Squads: ${squadNames.join(', ')}`);
     }
 

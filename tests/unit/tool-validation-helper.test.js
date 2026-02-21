@@ -60,7 +60,10 @@ describe('ToolValidationHelper', () => {
 
     test('should replace existing validator', () => {
       const helper = new ToolValidationHelper([
-        { validates: 'replaceable', function: '(function() { return { valid: true, errors: [] }; })();' },
+        {
+          validates: 'replaceable',
+          function: '(function() { return { valid: true, errors: [] }; })();',
+        },
       ]);
 
       helper.replaceValidator({
@@ -430,9 +433,7 @@ describe('ToolValidationHelper', () => {
       const helper = new ToolValidationHelper([
         {
           validates: 'create_user',
-          checks: [
-            { required_fields: ['name', 'email'] },
-          ],
+          checks: [{ required_fields: ['name', 'email'] }],
           function: 'function() {}',
         },
       ]);
@@ -446,14 +447,15 @@ describe('ToolValidationHelper', () => {
       const helper = new ToolValidationHelper([
         {
           validates: 'create_user',
-          checks: [
-            { required_fields: ['name', 'email'] },
-          ],
+          checks: [{ required_fields: ['name', 'email'] }],
           function: 'function() {}',
         },
       ]);
 
-      const result = helper.validateDeclarative('create_user', { name: 'John', email: 'john@example.com' });
+      const result = helper.validateDeclarative('create_user', {
+        name: 'John',
+        email: 'john@example.com',
+      });
       expect(result.valid).toBe(true);
       expect(result.errors).toEqual([]);
     });

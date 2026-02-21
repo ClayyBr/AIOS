@@ -4,7 +4,9 @@
  */
 
 const inquirer = require('inquirer');
-const { offerTroubleshooting } = require('../../../../packages/installer/src/wizard/validation/troubleshooting-system');
+const {
+  offerTroubleshooting,
+} = require('../../../../packages/installer/src/wizard/validation/troubleshooting-system');
 
 // Mock inquirer
 jest.mock('inquirer');
@@ -26,10 +28,16 @@ describe('Troubleshooting System', () => {
     it('should return troubleshooting for known error codes', async () => {
       // Given
       const errors = [
-        { component: 'files', code: 'ENV_FILE_MISSING', severity: 'critical', message: '.env file not found' },
+        {
+          component: 'files',
+          code: 'ENV_FILE_MISSING',
+          severity: 'critical',
+          message: '.env file not found',
+        },
       ];
 
-      inquirer.prompt = jest.fn()
+      inquirer.prompt = jest
+        .fn()
         .mockResolvedValueOnce({ viewLogs: false })
         .mockResolvedValueOnce({ openDocs: false });
 
@@ -37,15 +45,18 @@ describe('Troubleshooting System', () => {
       await offerTroubleshooting(errors);
 
       // Then
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('.env file not found'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('.env file not found'));
     });
 
     it('should handle unknown error codes gracefully', async () => {
       // Given
       const errors = [
-        { component: 'unknown', code: 'UNKNOWN_ERROR_CODE', severity: 'medium', message: 'Unknown error' },
+        {
+          component: 'unknown',
+          code: 'UNKNOWN_ERROR_CODE',
+          severity: 'medium',
+          message: 'Unknown error',
+        },
       ];
 
       inquirer.prompt = jest.fn().mockResolvedValue({ action: 'skip' });
@@ -61,7 +72,12 @@ describe('Troubleshooting System', () => {
     it('should format troubleshooting output correctly', async () => {
       // Given
       const errors = [
-        { component: 'mcps', code: 'MCP_HEALTH_TIMEOUT', severity: 'medium', message: 'Health check timeout' },
+        {
+          component: 'mcps',
+          code: 'MCP_HEALTH_TIMEOUT',
+          severity: 'medium',
+          message: 'Health check timeout',
+        },
       ];
 
       inquirer.prompt = jest.fn().mockResolvedValue({ action: 'skip' });
@@ -70,16 +86,12 @@ describe('Troubleshooting System', () => {
       await offerTroubleshooting(errors);
 
       // Then
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('Solutions:'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Solutions:'));
     });
 
     it('should provide solutions for ENV_FILE_MISSING', async () => {
       // Given
-      const errors = [
-        { component: 'files', code: 'ENV_FILE_MISSING', severity: 'critical' },
-      ];
+      const errors = [{ component: 'files', code: 'ENV_FILE_MISSING', severity: 'critical' }];
 
       inquirer.prompt = jest.fn().mockResolvedValue({ action: 'skip' });
 
@@ -87,18 +99,15 @@ describe('Troubleshooting System', () => {
       await offerTroubleshooting(errors);
 
       // Then
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('.env'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('.env'));
     });
 
     it('should provide solutions for MCP_HEALTH_CHECK_FAILED', async () => {
       // Given
-      const errors = [
-        { component: 'mcps', code: 'MCP_HEALTH_CHECK_FAILED', severity: 'medium' },
-      ];
+      const errors = [{ component: 'mcps', code: 'MCP_HEALTH_CHECK_FAILED', severity: 'medium' }];
 
-      inquirer.prompt = jest.fn()
+      inquirer.prompt = jest
+        .fn()
         .mockResolvedValueOnce({ viewLogs: false })
         .mockResolvedValueOnce({ openDocs: false });
 
@@ -106,16 +115,12 @@ describe('Troubleshooting System', () => {
       await offerTroubleshooting(errors);
 
       // Then
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('API key'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('API key'));
     });
 
     it('should provide solutions for CORE_CONFIG_MISSING', async () => {
       // Given
-      const errors = [
-        { component: 'configs', code: 'CORE_CONFIG_MISSING', severity: 'high' },
-      ];
+      const errors = [{ component: 'configs', code: 'CORE_CONFIG_MISSING', severity: 'high' }];
 
       inquirer.prompt = jest.fn().mockResolvedValue({ action: 'skip' });
 
@@ -123,9 +128,7 @@ describe('Troubleshooting System', () => {
       await offerTroubleshooting(errors);
 
       // Then
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('core-config'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('core-config'));
     });
 
     it('should provide solutions for GITIGNORE_CRITICAL_MISSING', async () => {
@@ -134,7 +137,8 @@ describe('Troubleshooting System', () => {
         { component: 'configs', code: 'GITIGNORE_CRITICAL_MISSING', severity: 'high' },
       ];
 
-      inquirer.prompt = jest.fn()
+      inquirer.prompt = jest
+        .fn()
         .mockResolvedValueOnce({ viewLogs: false })
         .mockResolvedValueOnce({ openDocs: false });
 
@@ -142,9 +146,7 @@ describe('Troubleshooting System', () => {
       await offerTroubleshooting(errors);
 
       // Then
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('.gitignore'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('.gitignore'));
     });
 
     it('should provide solutions for dependency errors', async () => {
@@ -153,7 +155,8 @@ describe('Troubleshooting System', () => {
         { component: 'dependencies', code: 'VULNERABILITIES_FOUND', severity: 'medium' },
       ];
 
-      inquirer.prompt = jest.fn()
+      inquirer.prompt = jest
+        .fn()
         .mockResolvedValueOnce({ viewLogs: false })
         .mockResolvedValueOnce({ openDocs: false });
 
@@ -161,21 +164,40 @@ describe('Troubleshooting System', () => {
       await offerTroubleshooting(errors);
 
       // Then
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('npm audit'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('npm audit'));
     });
 
     it('should prioritize errors by severity (critical > high > medium > low)', async () => {
       // Given
       const errors = [
-        { component: 'test', code: 'ENV_FILE_MISSING', severity: 'critical', message: 'Critical priority' },
-        { component: 'test', code: 'CORE_CONFIG_MISSING', severity: 'high', message: 'High priority' },
-        { component: 'test', code: 'MCP_HEALTH_CHECK_FAILED', severity: 'medium', message: 'Medium priority' },
-        { component: 'test', code: 'GITIGNORE_RECOMMENDED_MISSING', severity: 'low', message: 'Low priority' },
+        {
+          component: 'test',
+          code: 'ENV_FILE_MISSING',
+          severity: 'critical',
+          message: 'Critical priority',
+        },
+        {
+          component: 'test',
+          code: 'CORE_CONFIG_MISSING',
+          severity: 'high',
+          message: 'High priority',
+        },
+        {
+          component: 'test',
+          code: 'MCP_HEALTH_CHECK_FAILED',
+          severity: 'medium',
+          message: 'Medium priority',
+        },
+        {
+          component: 'test',
+          code: 'GITIGNORE_RECOMMENDED_MISSING',
+          severity: 'low',
+          message: 'Low priority',
+        },
       ];
 
-      inquirer.prompt = jest.fn()
+      inquirer.prompt = jest
+        .fn()
         .mockResolvedValueOnce({ viewLogs: false })
         .mockResolvedValueOnce({ openDocs: false });
 
@@ -185,18 +207,15 @@ describe('Troubleshooting System', () => {
       // Then
       // Verify inquirer was called (troubleshooting executed)
       expect(inquirer.prompt).toHaveBeenCalled();
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('Troubleshooting Guide'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Troubleshooting Guide'));
     });
 
     it('should include documentation links', async () => {
       // Given
-      const errors = [
-        { component: 'mcps', code: 'MCP_HEALTH_CHECK_FAILED', severity: 'medium' },
-      ];
+      const errors = [{ component: 'mcps', code: 'MCP_HEALTH_CHECK_FAILED', severity: 'medium' }];
 
-      inquirer.prompt = jest.fn()
+      inquirer.prompt = jest
+        .fn()
         .mockResolvedValueOnce({ viewLogs: false })
         .mockResolvedValueOnce({ openDocs: true });
 
@@ -204,18 +223,15 @@ describe('Troubleshooting System', () => {
       await offerTroubleshooting(errors);
 
       // Then
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('docs.SynkraAI.com'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('docs.SynkraAI.com'));
     });
 
     it('should include support contact information', async () => {
       // Given
-      const errors = [
-        { component: 'test', code: 'ENV_FILE_MISSING', severity: 'critical' },
-      ];
+      const errors = [{ component: 'test', code: 'ENV_FILE_MISSING', severity: 'critical' }];
 
-      inquirer.prompt = jest.fn()
+      inquirer.prompt = jest
+        .fn()
         .mockResolvedValueOnce({ viewLogs: true })
         .mockResolvedValueOnce({ openDocs: false });
 
@@ -224,9 +240,7 @@ describe('Troubleshooting System', () => {
 
       // Then
       // Check for installation logs which is shown when viewLogs=true
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('Installation Logs'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Installation Logs'));
     });
 
     it('should handle empty errors array', async () => {
@@ -243,9 +257,7 @@ describe('Troubleshooting System', () => {
 
     it('should handle interactive prompts (mock inquirer)', async () => {
       // Given
-      const errors = [
-        { component: 'files', code: 'ENV_FILE_MISSING', severity: 'critical' },
-      ];
+      const errors = [{ component: 'files', code: 'ENV_FILE_MISSING', severity: 'critical' }];
 
       inquirer.prompt = jest.fn().mockResolvedValue({
         action: 'view_details',

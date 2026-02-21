@@ -82,7 +82,12 @@ describe('ObservabilityPanel', () => {
     it('should set agent with reason for detailed mode', () => {
       const panel = createPanel({ mode: PanelMode.DETAILED });
 
-      panel.setCurrentAgent('@dev', 'Dex', 'implementing jwt-handler.ts', 'Story tipo "código geral"');
+      panel.setCurrentAgent(
+        '@dev',
+        'Dex',
+        'implementing jwt-handler.ts',
+        'Story tipo "código geral"'
+      );
 
       expect(panel.state.current_agent.reason).toBe('Story tipo "código geral"');
     });

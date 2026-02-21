@@ -7,7 +7,9 @@
  * @story 3.5 - Human Review Orchestration
  */
 
-const { HumanReviewOrchestrator } = require('../../../.aios-core/core/quality-gates/human-review-orchestrator');
+const {
+  HumanReviewOrchestrator,
+} = require('../../../.aios-core/core/quality-gates/human-review-orchestrator');
 
 describe('HumanReviewOrchestrator', () => {
   let orchestrator;
@@ -92,7 +94,9 @@ describe('HumanReviewOrchestrator', () => {
     });
 
     it('should return CRITICAL for critical coderabbit issues', () => {
-      expect(orchestrator.determineSeverity({ check: 'coderabbit', issues: { critical: 1 } })).toBe('CRITICAL');
+      expect(orchestrator.determineSeverity({ check: 'coderabbit', issues: { critical: 1 } })).toBe(
+        'CRITICAL'
+      );
     });
 
     it('should return MEDIUM for other issues', () => {
@@ -158,7 +162,10 @@ describe('HumanReviewOrchestrator', () => {
   describe('orchestrateReview (HUMAN-01)', () => {
     it('should block when Layer 1 fails', async () => {
       const prContext = { changedFiles: ['file.js'] };
-      const layer1Result = { pass: false, results: [{ check: 'lint', pass: false, message: 'Error' }] };
+      const layer1Result = {
+        pass: false,
+        results: [{ check: 'lint', pass: false, message: 'Error' }],
+      };
       const layer2Result = { pass: true };
 
       const result = await orchestrator.orchestrateReview(prContext, layer1Result, layer2Result);
@@ -171,7 +178,10 @@ describe('HumanReviewOrchestrator', () => {
     it('should block when Layer 2 fails', async () => {
       const prContext = { changedFiles: ['file.js'] };
       const layer1Result = { pass: true };
-      const layer2Result = { pass: false, results: [{ check: 'coderabbit', pass: false, message: 'Issues' }] };
+      const layer2Result = {
+        pass: false,
+        results: [{ check: 'coderabbit', pass: false, message: 'Issues' }],
+      };
 
       const result = await orchestrator.orchestrateReview(prContext, layer1Result, layer2Result);
 
@@ -216,9 +226,7 @@ describe('HumanReviewOrchestrator', () => {
     it('should generate summary for Layer 2 with CodeRabbit', () => {
       const layer2Result = {
         pass: true,
-        results: [
-          { check: 'coderabbit', pass: true, issues: { critical: 0, high: 2, medium: 5 } },
-        ],
+        results: [{ check: 'coderabbit', pass: true, issues: { critical: 0, high: 2, medium: 5 } }],
       };
       const summary = orchestrator.generateAutomatedSummary({}, layer2Result);
 
@@ -267,8 +275,12 @@ describe('HumanReviewOrchestrator', () => {
     });
 
     it('should reject path traversal attempts with ../', () => {
-      expect(() => orchestrator.validateRequestId('../../../etc/passwd')).toThrow('Invalid request ID');
-      expect(() => orchestrator.validateRequestId('..\\..\\windows\\system32')).toThrow('Invalid request ID');
+      expect(() => orchestrator.validateRequestId('../../../etc/passwd')).toThrow(
+        'Invalid request ID'
+      );
+      expect(() => orchestrator.validateRequestId('..\\..\\windows\\system32')).toThrow(
+        'Invalid request ID'
+      );
     });
 
     it('should reject IDs with slashes', () => {
@@ -290,21 +302,26 @@ describe('HumanReviewOrchestrator', () => {
 
     it('should reject non-string IDs', () => {
       expect(() => orchestrator.validateRequestId(123)).toThrow('Request ID is required');
-      expect(() => orchestrator.validateRequestId({ id: 'test' })).toThrow('Request ID is required');
+      expect(() => orchestrator.validateRequestId({ id: 'test' })).toThrow(
+        'Request ID is required'
+      );
     });
   });
 
   describe('saveReviewRequest (Security)', () => {
     it('should reject requests with malicious IDs', async () => {
       const maliciousRequest = { id: '../../../etc/passwd', status: 'pending' };
-      await expect(orchestrator.saveReviewRequest(maliciousRequest)).rejects.toThrow('Invalid request ID');
+      await expect(orchestrator.saveReviewRequest(maliciousRequest)).rejects.toThrow(
+        'Invalid request ID'
+      );
     });
   });
 
   describe('completeReview (Security)', () => {
     it('should reject malicious request IDs', async () => {
-      await expect(orchestrator.completeReview('../../../etc/passwd', { approved: true }))
-        .rejects.toThrow('Invalid request ID');
+      await expect(
+        orchestrator.completeReview('../../../etc/passwd', { approved: true })
+      ).rejects.toThrow('Invalid request ID');
     });
   });
 });

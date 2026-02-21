@@ -29,9 +29,9 @@ function getAiosCoreSourcePath() {
  */
 const FOLDERS_TO_COPY = [
   // v4.0.4 Modular Structure (Story 2.15)
-  'core',           // Framework utilities, config, registry, migration
-  'development',    // Agents, tasks, workflows, scripts, personas
-  'product',        // Templates, checklists, cli, api
+  'core', // Framework utilities, config, registry, migration
+  'development', // Agents, tasks, workflows, scripts, personas
+  'product', // Templates, checklists, cli, api
   'infrastructure', // Hooks, telemetry, integrations, tools
 
   // v2.0 Legacy Flat Structure (for backwards compatibility)
@@ -48,12 +48,12 @@ const FOLDERS_TO_COPY = [
   'workflows',
 
   // Additional directories
-  'cli',                    // CLI commands
-  'manifests',              // Manifest definitions
-  'schemas',                // JSON schemas for validation (*validate-squad, *migrate-squad)
-  'workflow-intelligence',  // Workflow intelligence engine (*next, *patterns)
-  'monitor',                // Claude Code hooks for monitoring
-  'presets',                // Configuration presets
+  'cli', // CLI commands
+  'manifests', // Manifest definitions
+  'schemas', // JSON schemas for validation (*validate-squad, *migrate-squad)
+  'workflow-intelligence', // Workflow intelligence engine (*next, *patterns)
+  'monitor', // Claude Code hooks for monitoring
+  'presets', // Configuration presets
 ];
 
 /**
@@ -63,9 +63,9 @@ const FOLDERS_TO_COPY = [
 const ROOT_FILES_TO_COPY = [
   'index.js',
   'index.esm.js',
-  'core-config.yaml',   // Core framework configuration
-  'package.json',       // Module package definition
-  'constitution.md',    // AIOS fundamental principles
+  'core-config.yaml', // Core framework configuration
+  'package.json', // Module package definition
+  'constitution.md', // AIOS fundamental principles
   'user-guide.md',
   'working-in-the-brownfield.md',
 ];
@@ -123,12 +123,7 @@ async function generateFileHashes(targetAiosCore, installedFiles) {
  * @returns {Promise<Object>} version.json content
  */
 async function generateVersionJson(options) {
-  const {
-    targetAiosCore,
-    version,
-    installedFiles,
-    mode = 'project-development',
-  } = options;
+  const { targetAiosCore, version, installedFiles, mode = 'project-development' } = options;
 
   const fileHashes = await generateFileHashes(targetAiosCore, installedFiles);
 
@@ -186,7 +181,7 @@ async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = t
 async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress = null) {
   const copiedFiles = [];
 
-  if (!await fs.pathExists(sourceDir)) {
+  if (!(await fs.pathExists(sourceDir))) {
     return copiedFiles;
   }
 
@@ -199,8 +194,10 @@ async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress =
     const destPath = path.join(destDir, item.name);
 
     // Skip backup files and hidden files (except .gitignore and .session*)
-    if (item.name.includes('.backup') ||
-        (item.name.startsWith('.') && !item.name.startsWith('.session') && item.name !== '.gitignore')) {
+    if (
+      item.name.includes('.backup') ||
+      (item.name.startsWith('.') && !item.name.startsWith('.session') && item.name !== '.gitignore')
+    ) {
       continue;
     }
 
@@ -234,10 +231,7 @@ async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress =
  * console.log(result.installedFiles); // List of installed files
  */
 async function installAiosCore(options = {}) {
-  const {
-    targetDir = process.cwd(),
-    onProgress = null,
-  } = options;
+  const { targetDir = process.cwd(), onProgress = null } = options;
 
   const result = {
     success: false,
@@ -253,7 +247,7 @@ async function installAiosCore(options = {}) {
     const targetAiosCore = path.join(targetDir, '.aios-core');
 
     // Check if source exists
-    if (!await fs.pathExists(sourceDir)) {
+    if (!(await fs.pathExists(sourceDir))) {
       throw new Error('.aios-core source directory not found in package');
     }
 
@@ -271,12 +265,12 @@ async function installAiosCore(options = {}) {
         const copiedFiles = await copyDirectoryWithRootReplacement(
           folderSource,
           folderDest,
-          onProgress,
+          onProgress
         );
 
         if (copiedFiles.length > 0) {
           result.installedFolders.push(folder);
-          result.installedFiles.push(...copiedFiles.map(f => path.join(folder, f)));
+          result.installedFiles.push(...copiedFiles.map((f) => path.join(folder, f)));
         }
       }
     }
@@ -308,7 +302,7 @@ async function installAiosCore(options = {}) {
     await fs.writeFile(
       path.join(targetAiosCore, 'install-manifest.yaml'),
       require('js-yaml').dump(manifest),
-      'utf8',
+      'utf8'
     );
 
     // Story 7.2: Create version.json with file hashes for update tracking
@@ -346,7 +340,6 @@ async function installAiosCore(options = {}) {
 
     result.success = true;
     spinner.succeed(`AIOS core installed (${result.installedFiles.length} files)`);
-
   } catch (error) {
     spinner.fail('AIOS core installation failed');
     result.errors.push(error.message);
@@ -405,11 +398,13 @@ async function createBasicPackageJson(options = {}) {
  * @returns {string} Sanitized name
  */
 function sanitizePackageName(name) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9-_]/g, '-')
-    .replace(/--+/g, '-')
-    .replace(/^-|-$/g, '') || 'my-project';
+  return (
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9-_]/g, '-')
+      .replace(/--+/g, '-')
+      .replace(/^-|-$/g, '') || 'my-project'
+  );
 }
 
 module.exports = {

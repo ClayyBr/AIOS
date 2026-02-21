@@ -18,7 +18,11 @@ const {
   getAiosDir,
 } = require('../../pro/license/license-cache');
 const { FeatureGate, featureGate } = require('../../pro/license/feature-gate');
-const { generateMachineId, deriveCacheKey, generateSalt } = require('../../pro/license/license-crypto');
+const {
+  generateMachineId,
+  deriveCacheKey,
+  generateSalt,
+} = require('../../pro/license/license-crypto');
 
 describe('Performance Tests (AC-13)', () => {
   let testDir;
@@ -301,7 +305,7 @@ describe('Performance Tests (AC-13)', () => {
               ...response,
               activatedAt: new Date().toISOString(),
             },
-            activationDir,
+            activationDir
           );
 
           // Step 4: Reload feature gate
@@ -443,7 +447,7 @@ describe('Performance Tests (AC-13)', () => {
               const cache = readLicenseCache(testDir);
               resolve(cache);
             });
-          }),
+          })
         );
       }
 

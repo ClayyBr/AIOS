@@ -60,7 +60,7 @@ describe('PreCompact Hook Integration', () => {
         conversation: {
           messages: [
             { role: 'user', content: 'Actually, tests should expect null' },
-            { role: 'assistant', content: 'You\'re right, I\'ll update the tests' },
+            { role: 'assistant', content: "You're right, I'll update the tests" },
             { role: 'user', content: 'How do I run the tests?' },
             { role: 'assistant', content: 'Run npm test' },
           ],
@@ -77,12 +77,12 @@ describe('PreCompact Hook Integration', () => {
       await onPreCompact(context);
 
       // Wait for async digest to complete
-      await new Promise(resolve => setImmediate(resolve));
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify digest file was created
       const files = await fs.readdir(TEST_DIGESTS_DIR);
-      const digestFile = files.find(f => f.startsWith('integration-test-session'));
+      const digestFile = files.find((f) => f.startsWith('integration-test-session'));
 
       expect(digestFile).toBeDefined();
 
@@ -131,13 +131,11 @@ describe('PreCompact Hook Integration', () => {
       await expect(onPreCompact(context)).resolves.toBeUndefined();
 
       // Should log graceful message
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('aios-pro not available'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('aios-pro not available'));
 
       // No digest file should be created
       const files = await fs.readdir(TEST_DIGESTS_DIR);
-      const digestFile = files.find(f => f.startsWith('test-no-pro-session'));
+      const digestFile = files.find((f) => f.startsWith('test-no-pro-session'));
 
       expect(digestFile).toBeUndefined();
     });
@@ -174,8 +172,8 @@ describe('PreCompact Hook Integration', () => {
 
       // Wait for async digest
       const startAsyncTime = Date.now();
-      await new Promise(resolve => setImmediate(resolve));
-      await new Promise(resolve => setTimeout(resolve, 100)); // Wait for digest to complete
+      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 100)); // Wait for digest to complete
 
       const asyncDuration = Date.now() - startAsyncTime;
 
@@ -185,7 +183,7 @@ describe('PreCompact Hook Integration', () => {
 
       // Cleanup
       const files = await fs.readdir(TEST_DIGESTS_DIR);
-      const digestFile = files.find(f => f.startsWith('performance-test-session'));
+      const digestFile = files.find((f) => f.startsWith('performance-test-session'));
       if (digestFile) {
         await fs.unlink(path.join(TEST_DIGESTS_DIR, digestFile));
       }
@@ -221,10 +219,10 @@ describe('PreCompact Hook Integration', () => {
       expect(returnTime).toBeLessThan(50);
 
       // Wait for digest to be created, then cleanup
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 200));
       try {
         const files = await fs.readdir(TEST_DIGESTS_DIR);
-        const digestFile = files.find(f => f.startsWith('async-test-session'));
+        const digestFile = files.find((f) => f.startsWith('async-test-session'));
         if (digestFile) {
           await fs.unlink(path.join(TEST_DIGESTS_DIR, digestFile));
         }
@@ -247,9 +245,7 @@ describe('PreCompact Hook Integration', () => {
         sessionId: 'schema-test-session',
         projectDir: TEST_PROJECT_DIR,
         conversation: {
-          messages: [
-            { role: 'user', content: 'Test correction message' },
-          ],
+          messages: [{ role: 'user', content: 'Test correction message' }],
         },
         metadata: {
           sessionStart: Date.now(),
@@ -259,12 +255,12 @@ describe('PreCompact Hook Integration', () => {
       await onPreCompact(context);
 
       // Wait for digest
-      await new Promise(resolve => setImmediate(resolve));
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Read digest
       const files = await fs.readdir(TEST_DIGESTS_DIR);
-      const digestFile = files.find(f => f.startsWith('schema-test-session'));
+      const digestFile = files.find((f) => f.startsWith('schema-test-session'));
 
       expect(digestFile).toBeDefined();
 

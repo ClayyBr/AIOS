@@ -73,7 +73,7 @@ describe('SquadDesigner', () => {
       const error = new SquadDesignerError(
         DesignerErrorCodes.NO_DOCUMENTATION,
         'Test message',
-        'Test suggestion',
+        'Test suggestion'
       );
 
       expect(error.name).toBe('SquadDesignerError');
@@ -152,7 +152,7 @@ describe('SquadDesigner', () => {
       await expect(
         designer.collectDocumentation({
           docs: ['/nonexistent/file.md'],
-        }),
+        })
       ).rejects.toThrow(SquadDesignerError);
     });
   });
@@ -223,7 +223,8 @@ describe('SquadDesigner', () => {
 
     it('should use provided domain hint', () => {
       const docs = {
-        mergedContent: 'This system manages Products and Inventory with create and update operations.',
+        mergedContent:
+          'This system manages Products and Inventory with create and update operations.',
         sources: ['test'],
         domainHint: 'inventory-management',
       };
@@ -584,7 +585,7 @@ describe('SquadDesigner', () => {
       expect(blueprint.metadata.created_at).toBeDefined();
       // Should be valid ISO date
       expect(new Date(blueprint.metadata.created_at).toISOString()).toBe(
-        blueprint.metadata.created_at,
+        blueprint.metadata.created_at
       );
     });
   });
@@ -713,7 +714,7 @@ The Order Management System handles customer orders from creation to fulfillment
 - Administrators manage the system
 - Customers place orders
 - Support staff handle inquiries
-`,
+`
       );
 
       // Collect documentation

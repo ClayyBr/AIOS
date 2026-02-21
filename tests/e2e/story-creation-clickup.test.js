@@ -15,7 +15,10 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { verifyEpicExists } = require('../../common/utils/clickup-helpers');
-const { createStoryInClickUp, updateStoryFrontmatter } = require('../../common/utils/story-manager');
+const {
+  createStoryInClickUp,
+  updateStoryFrontmatter,
+} = require('../../common/utils/story-manager');
 
 // Create a single shared mock instance
 const mockClickUpTool = {
@@ -49,75 +52,77 @@ describeIntegration('End-to-End Story Creation with ClickUp Integration', () => 
     }
   });
 
-  describeIntegration('Complete Flow: Epic Verification → Story Creation → ClickUp Subtask → Frontmatter Update', () => {
-    test('should successfully create story with ClickUp integration', async () => {
-      // Step 1: Mock Epic verification
-      mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
-        tasks: [
-          {
-            id: 'epic-task-5',
-            name: 'Epic 5: Tools System',
-            status: 'In Progress',
-            tags: ['epic', 'epic-5'],
-            list: {
-              id: 'backlog-list-123',
-              name: 'Backlog',
+  describeIntegration(
+    'Complete Flow: Epic Verification → Story Creation → ClickUp Subtask → Frontmatter Update',
+    () => {
+      test('should successfully create story with ClickUp integration', async () => {
+        // Step 1: Mock Epic verification
+        mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
+          tasks: [
+            {
+              id: 'epic-task-5',
+              name: 'Epic 5: Tools System',
+              status: 'In Progress',
+              tags: ['epic', 'epic-5'],
+              list: {
+                id: 'backlog-list-123',
+                name: 'Backlog',
+              },
             },
-          },
-        ],
-      });
+          ],
+        });
 
-      // Step 2: Verify Epic exists
-      const epicResult = await verifyEpicExists(5);
-      expect(epicResult.found).toBe(true);
-      expect(epicResult.epicTaskId).toBe('epic-task-5');
+        // Step 2: Verify Epic exists
+        const epicResult = await verifyEpicExists(5);
+        expect(epicResult.found).toBe(true);
+        expect(epicResult.epicTaskId).toBe('epic-task-5');
 
-      // Step 3: Mock ClickUp story task creation
-      mockClickUpTool.createTask.mockResolvedValue({
-        id: 'story-task-5-99',
-        name: 'Story 5.99: E2E Test Story',
-        url: 'https://app.clickup.com/t/story-task-5-99',
-        status: 'Draft',
-        parent: 'epic-task-5',
-        tags: ['story', 'epic-5', 'story-5.99'],
-        custom_fields: [
-          { id: 'epic_number', value: 5 },
-          { id: 'story_number', value: '5.99' },
-          { id: 'story_file_path', value: 'docs/stories/5.99.story.md' },
-          { id: 'story-status', value: 'Draft' },
-        ],
-      });
+        // Step 3: Mock ClickUp story task creation
+        mockClickUpTool.createTask.mockResolvedValue({
+          id: 'story-task-5-99',
+          name: 'Story 5.99: E2E Test Story',
+          url: 'https://app.clickup.com/t/story-task-5-99',
+          status: 'Draft',
+          parent: 'epic-task-5',
+          tags: ['story', 'epic-5', 'story-5.99'],
+          custom_fields: [
+            { id: 'epic_number', value: 5 },
+            { id: 'story_number', value: '5.99' },
+            { id: 'story_file_path', value: 'docs/stories/5.99.story.md' },
+            { id: 'story-status', value: 'Draft' },
+          ],
+        });
 
-      // Step 4: Create story in ClickUp (as subtask)
-      const storyResult = await createStoryInClickUp({
-        epicNum: 5,
-        storyNum: 99,
-        title: 'E2E Test Story',
-        epicTaskId: epicResult.epicTaskId,
-        listName: 'Backlog',
-        storyContent: '# Story 5.99: E2E Test Story\n\nTest content...',
-      });
+        // Step 4: Create story in ClickUp (as subtask)
+        const storyResult = await createStoryInClickUp({
+          epicNum: 5,
+          storyNum: 99,
+          title: 'E2E Test Story',
+          epicTaskId: epicResult.epicTaskId,
+          listName: 'Backlog',
+          storyContent: '# Story 5.99: E2E Test Story\n\nTest content...',
+        });
 
-      expect(storyResult.taskId).toBe('story-task-5-99');
-      expect(storyResult.url).toBe('https://app.clickup.com/t/story-task-5-99');
+        expect(storyResult.taskId).toBe('story-task-5-99');
+        expect(storyResult.url).toBe('https://app.clickup.com/t/story-task-5-99');
 
-      // Verify createTask was called with correct parameters
-      expect(mockClickUpTool.createTask).toHaveBeenCalledWith({
-        listName: 'Backlog',
-        name: 'Story 5.99: E2E Test Story',
-        parent: 'epic-task-5',
-        markdown_description: expect.stringContaining('Test content'),
-        tags: ['story', 'epic-5', 'story-5.99'],
-        custom_fields: [
-          { id: 'epic_number', value: 5 },
-          { id: 'story_number', value: '5.99' },
-          { id: 'story_file_path', value: expect.stringContaining('5.99') },
-          { id: 'story-status', value: 'Draft' },
-        ],
-      });
+        // Verify createTask was called with correct parameters
+        expect(mockClickUpTool.createTask).toHaveBeenCalledWith({
+          listName: 'Backlog',
+          name: 'Story 5.99: E2E Test Story',
+          parent: 'epic-task-5',
+          markdown_description: expect.stringContaining('Test content'),
+          tags: ['story', 'epic-5', 'story-5.99'],
+          custom_fields: [
+            { id: 'epic_number', value: 5 },
+            { id: 'story_number', value: '5.99' },
+            { id: 'story_file_path', value: expect.stringContaining('5.99') },
+            { id: 'story-status', value: 'Draft' },
+          ],
+        });
 
-      // Step 5: Create minimal story file for frontmatter update
-      const initialStoryContent = `---
+        // Step 5: Create minimal story file for frontmatter update
+        const initialStoryContent = `---
 title: "Story 5.99: E2E Test Story"
 epic: 5
 story: 99
@@ -127,72 +132,71 @@ story: 99
 
 Test content...
 `;
-      await fs.writeFile(testStoryPath, initialStoryContent, 'utf-8');
+        await fs.writeFile(testStoryPath, initialStoryContent, 'utf-8');
 
-      // Step 6: Update story file frontmatter with ClickUp metadata
-      const frontmatter = await updateStoryFrontmatter(testStoryPath, {
-        clickup: {
-          task_id: storyResult.taskId,
-          epic_task_id: epicResult.epicTaskId,
-          list: 'Backlog',
-          url: storyResult.url,
-          last_sync: new Date().toISOString(),
-        },
-      });
-
-      expect(frontmatter.clickup.task_id).toBe('story-task-5-99');
-      expect(frontmatter.clickup.epic_task_id).toBe('epic-task-5');
-      expect(frontmatter.clickup.url).toBe('https://app.clickup.com/t/story-task-5-99');
-    });
-
-    test('should handle Epic verification failure gracefully', async () => {
-      // Mock Epic not found
-      mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
-        tasks: [],
-      });
-
-      await expect(verifyEpicExists(99)).rejects.toThrow(
-        /Epic 99 not found in ClickUp Backlog list/,
-      );
-
-      // Story creation should not proceed
-      expect(mockClickUpTool.createTask).not.toHaveBeenCalled();
-    });
-
-    test('should rollback on ClickUp task creation failure', async () => {
-      // Step 1: Epic verification succeeds
-      mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
-        tasks: [
-          {
-            id: 'epic-task-7',
-            name: 'Epic 7: Test',
-            status: 'Planning',
-            tags: ['epic', 'epic-7'],
+        // Step 6: Update story file frontmatter with ClickUp metadata
+        const frontmatter = await updateStoryFrontmatter(testStoryPath, {
+          clickup: {
+            task_id: storyResult.taskId,
+            epic_task_id: epicResult.epicTaskId,
+            list: 'Backlog',
+            url: storyResult.url,
+            last_sync: new Date().toISOString(),
           },
-        ],
+        });
+
+        expect(frontmatter.clickup.task_id).toBe('story-task-5-99');
+        expect(frontmatter.clickup.epic_task_id).toBe('epic-task-5');
+        expect(frontmatter.clickup.url).toBe('https://app.clickup.com/t/story-task-5-99');
       });
 
-      const epicResult = await verifyEpicExists(7);
-      expect(epicResult.found).toBe(true);
+      test('should handle Epic verification failure gracefully', async () => {
+        // Mock Epic not found
+        mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
+          tasks: [],
+        });
 
-      // Step 2: ClickUp task creation fails
-      mockClickUpTool.createTask.mockRejectedValue(
-        new Error('ClickUp API: Rate limit exceeded'),
-      );
+        await expect(verifyEpicExists(99)).rejects.toThrow(
+          /Epic 99 not found in ClickUp Backlog list/
+        );
 
-      // Step 3: Story creation should fail
-      await expect(
-        createStoryInClickUp({
-          epicNum: 7,
-          storyNum: 1,
-          title: 'Test Story',
-          epicTaskId: epicResult.epicTaskId,
-          listName: 'Backlog',
-          storyContent: 'Content',
-        }),
-      ).rejects.toThrow('ClickUp API: Rate limit exceeded');
-    });
-  });
+        // Story creation should not proceed
+        expect(mockClickUpTool.createTask).not.toHaveBeenCalled();
+      });
+
+      test('should rollback on ClickUp task creation failure', async () => {
+        // Step 1: Epic verification succeeds
+        mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
+          tasks: [
+            {
+              id: 'epic-task-7',
+              name: 'Epic 7: Test',
+              status: 'Planning',
+              tags: ['epic', 'epic-7'],
+            },
+          ],
+        });
+
+        const epicResult = await verifyEpicExists(7);
+        expect(epicResult.found).toBe(true);
+
+        // Step 2: ClickUp task creation fails
+        mockClickUpTool.createTask.mockRejectedValue(new Error('ClickUp API: Rate limit exceeded'));
+
+        // Step 3: Story creation should fail
+        await expect(
+          createStoryInClickUp({
+            epicNum: 7,
+            storyNum: 1,
+            title: 'Test Story',
+            epicTaskId: epicResult.epicTaskId,
+            listName: 'Backlog',
+            storyContent: 'Content',
+          })
+        ).rejects.toThrow('ClickUp API: Rate limit exceeded');
+      });
+    }
+  );
 
   describeIntegration('Verify Parent-Child Relationship in ClickUp', () => {
     test('should create story as subtask with correct parent reference', async () => {
@@ -220,14 +224,12 @@ Test content...
       expect(mockClickUpTool.createTask).toHaveBeenCalledWith(
         expect.objectContaining({
           parent: epicTaskId,
-        }),
+        })
       );
     });
 
     test('should fail if parent Epic task_id is invalid', async () => {
-      mockClickUpTool.createTask.mockRejectedValue(
-        new Error('Parent task not found'),
-      );
+      mockClickUpTool.createTask.mockRejectedValue(new Error('Parent task not found'));
 
       await expect(
         createStoryInClickUp({
@@ -237,7 +239,7 @@ Test content...
           epicTaskId: 'invalid-epic-id',
           listName: 'Backlog',
           storyContent: 'Content',
-        }),
+        })
       ).rejects.toThrow('Parent task not found');
     });
 
@@ -289,13 +291,13 @@ Test content...
         epicTaskId: 'epic-2',
         listName: 'Backlog',
         storyContent: 'Content',
-        subStoryNum: 3,  // For nested story numbering
+        subStoryNum: 3, // For nested story numbering
       });
 
       expect(mockClickUpTool.createTask).toHaveBeenCalledWith(
         expect.objectContaining({
           tags: ['story', 'epic-2', 'story-2.3.5'],
-        }),
+        })
       );
     });
 
@@ -322,7 +324,7 @@ Test content...
       await createStoryInClickUp({
         epicNum: 4,
         storyNum: 2,
-        subStoryNum: 3,  // Creates 4.3.2
+        subStoryNum: 3, // Creates 4.3.2
         title: 'Nested',
         epicTaskId: 'epic-4',
         listName: 'Backlog',
@@ -332,7 +334,7 @@ Test content...
       expect(mockClickUpTool.createTask).toHaveBeenCalledWith(
         expect.objectContaining({
           tags: expect.arrayContaining(['story-4.3.2']),
-        }),
+        })
       );
     });
   });
@@ -365,18 +367,19 @@ Test content...
           custom_fields: expect.arrayContaining([
             expect.objectContaining({ id: 'epic_number', value: 9 }),
             expect.objectContaining({ id: 'story_number', value: '9.1' }),
-            expect.objectContaining({ id: 'story_file_path', value: expect.stringContaining('9.1') }),
+            expect.objectContaining({
+              id: 'story_file_path',
+              value: expect.stringContaining('9.1'),
+            }),
           ]),
-        }),
+        })
       );
     });
 
     test('should set initial story-status to Draft', async () => {
       mockClickUpTool.createTask.mockResolvedValue({
         id: 'status-test',
-        custom_fields: [
-          { id: 'story-status', value: 'Draft' },
-        ],
+        custom_fields: [{ id: 'story-status', value: 'Draft' }],
       });
 
       await createStoryInClickUp({
@@ -389,13 +392,13 @@ Test content...
       });
 
       const createCall = mockClickUpTool.createTask.mock.calls[0][0];
-      const statusField = createCall.custom_fields.find(f => f.id === 'story-status');
+      const statusField = createCall.custom_fields.find((f) => f.id === 'story-status');
       expect(statusField.value).toBe('Draft');
     });
 
     test('should handle custom field validation errors', async () => {
       mockClickUpTool.createTask.mockRejectedValue(
-        new Error('Custom field "story-status" does not exist'),
+        new Error('Custom field "story-status" does not exist')
       );
 
       await expect(
@@ -406,20 +409,20 @@ Test content...
           epicTaskId: 'epic-12',
           listName: 'Backlog',
           storyContent: 'Content',
-        }),
+        })
       ).rejects.toThrow('Custom field "story-status" does not exist');
     });
 
     test('should validate epic_number is numeric', async () => {
       await expect(
         createStoryInClickUp({
-          epicNum: 'invalid',  // Should be number
+          epicNum: 'invalid', // Should be number
           storyNum: 1,
           title: 'Invalid Epic',
           epicTaskId: 'epic-x',
           listName: 'Backlog',
           storyContent: 'Content',
-        }),
+        })
       ).rejects.toThrow(/epic_number must be a number/);
     });
 
@@ -427,12 +430,12 @@ Test content...
       await expect(
         createStoryInClickUp({
           epicNum: 5,
-          storyNum: 'abc',  // Should be number
+          storyNum: 'abc', // Should be number
           title: 'Invalid Story',
           epicTaskId: 'epic-5',
           listName: 'Backlog',
           storyContent: 'Content',
-        }),
+        })
       ).rejects.toThrow(/story_number must be numeric/);
     });
   });
@@ -442,9 +445,7 @@ Test content...
  * Helper function to generate story tags
  */
 function generateStoryTags(epicNum, storyNum, subStoryNum = null) {
-  const storyId = subStoryNum
-    ? `${epicNum}.${subStoryNum}.${storyNum}`
-    : `${epicNum}.${storyNum}`;
+  const storyId = subStoryNum ? `${epicNum}.${subStoryNum}.${storyNum}` : `${epicNum}.${storyNum}`;
 
   return ['story', `epic-${epicNum}`, `story-${storyId}`];
 }

@@ -13,7 +13,9 @@ Or manually copy to `~/.gemini/extensions/aios/`
 ## Features
 
 ### Quick Agent Launcher
+
 Use slash commands for fast activation flow (Codex `$`-like UX):
+
 - `/aios-menu` - show all quick launch commands
 - `/aios-dev`
 - `/aios-architect`
@@ -25,6 +27,7 @@ Use slash commands for fast activation flow (Codex `$`-like UX):
 Each launcher returns a ready-to-send activation prompt plus greeting preview.
 
 ### Commands
+
 - `/aios-status` - Show system status
 - `/aios-agents` - List available agents
 - `/aios-validate` - Validate installation
@@ -32,7 +35,9 @@ Each launcher returns a ready-to-send activation prompt plus greeting preview.
 - `/aios-agent <id>` - Generic launcher by agent id
 
 ### Hooks
+
 Automatic integration with AIOS memory and security:
+
 - Session context loading
 - Gotchas and patterns injection
 - Security validation (blocks secrets)

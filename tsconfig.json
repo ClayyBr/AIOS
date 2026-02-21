@@ -14,10 +14,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "typeRoots": [
-      "./types",
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["./types", "./node_modules/@types"],
     "baseUrl": ".",
     "paths": {
       "@synkra/aios-core": ["./.aios-core/core"],

@@ -132,7 +132,7 @@ describe('license-api', () => {
       const client = new LicenseApiClient({ baseUrl: serverUrl });
 
       await expect(client.activate('PRO-INVALID', 'machine', '1.0')).rejects.toThrow(
-        LicenseActivationError,
+        LicenseActivationError
       );
 
       try {
@@ -165,7 +165,7 @@ describe('license-api', () => {
           JSON.stringify({
             code: 'SEAT_LIMIT_EXCEEDED',
             details: { used: 5, max: 5 },
-          }),
+          })
         );
       });
 
@@ -281,7 +281,7 @@ describe('license-api', () => {
       const client = new LicenseApiClient({ baseUrl: serverUrl });
 
       await expect(client.validate('PRO-INVALID', 'machine')).rejects.toThrow(
-        LicenseActivationError,
+        LicenseActivationError
       );
     });
   });
@@ -298,7 +298,7 @@ describe('license-api', () => {
             success: true,
             seatFreed: true,
             message: 'License deactivated',
-          }),
+          })
         );
       });
 
@@ -318,7 +318,7 @@ describe('license-api', () => {
       const client = new LicenseApiClient({ baseUrl: serverUrl });
 
       await expect(client.deactivate('PRO-TEST', 'machine')).rejects.toThrow(
-        LicenseActivationError,
+        LicenseActivationError
       );
     });
   });
@@ -474,7 +474,7 @@ describe('license-api', () => {
           JSON.stringify({
             message: 'Custom error message',
             code: 'CUSTOM_ERROR',
-          }),
+          })
         );
       });
 

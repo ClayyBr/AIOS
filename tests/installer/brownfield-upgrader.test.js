@@ -239,7 +239,7 @@ describe('brownfield-upgrader', () => {
 
       const result = await applyUpgrade(report, sourceDir, targetDir, { includeModified: true });
 
-      expect(result.filesInstalled.some(f => f.path === 'updated.md')).toBe(true);
+      expect(result.filesInstalled.some((f) => f.path === 'updated.md')).toBe(true);
     });
 
     it('should skip user-modified files', async () => {

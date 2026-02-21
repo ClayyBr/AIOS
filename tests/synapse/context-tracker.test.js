@@ -143,10 +143,12 @@ describe('estimateContextPercent', () => {
 
   test('should support both custom options', () => {
     // 100 - (5 * 1000 / 50000 * 100) = 100 - 10 = 90
-    expect(estimateContextPercent(5, {
-      avgTokensPerPrompt: 1000,
-      maxContext: 50000,
-    })).toBeCloseTo(90, 5);
+    expect(
+      estimateContextPercent(5, {
+        avgTokensPerPrompt: 1000,
+        maxContext: 50000,
+      })
+    ).toBeCloseTo(90, 5);
   });
 
   test('should return 100% for negative promptCount (graceful)', () => {
@@ -411,7 +413,7 @@ describe('AC8: zero external dependencies', () => {
     const path = require('path');
     const source = fs.readFileSync(
       path.join(__dirname, '../../.aios-core/core/synapse/context/context-tracker.js'),
-      'utf8',
+      'utf8'
     );
     // Should not have any require() calls (only module.exports)
     const requireMatches = source.match(/\brequire\s*\(/g);

@@ -19,25 +19,37 @@ const mockFeatureGate = {
   require: jest.fn(),
 };
 
-jest.mock('../../pro/license/feature-gate', () => ({
-  featureGate: mockFeatureGate,
-}), { virtual: true });
+jest.mock(
+  '../../pro/license/feature-gate',
+  () => ({
+    featureGate: mockFeatureGate,
+  }),
+  { virtual: true }
+);
 
 const mockGetMemories = jest.fn(() => Promise.resolve([]));
 const mockClearCache = jest.fn();
 
-jest.mock('../../pro/memory/synapse-memory-provider', () => ({
-  SynapseMemoryProvider: jest.fn().mockImplementation(() => ({
-    getMemories: mockGetMemories,
-    clearCache: mockClearCache,
-  })),
-}), { virtual: true });
+jest.mock(
+  '../../pro/memory/synapse-memory-provider',
+  () => ({
+    SynapseMemoryProvider: jest.fn().mockImplementation(() => ({
+      getMemories: mockGetMemories,
+      clearCache: mockClearCache,
+    })),
+  }),
+  { virtual: true }
+);
 
 // ---------------------------------------------------------------------------
 // Import (after mocks)
 // ---------------------------------------------------------------------------
 
-const { MemoryBridge, BRACKET_LAYER_MAP, BRIDGE_TIMEOUT_MS } = require('../../.aios-core/core/synapse/memory/memory-bridge');
+const {
+  MemoryBridge,
+  BRACKET_LAYER_MAP,
+  BRIDGE_TIMEOUT_MS,
+} = require('../../.aios-core/core/synapse/memory/memory-bridge');
 
 // =============================================================================
 // MemoryBridge
@@ -200,8 +212,9 @@ describe('MemoryBridge', () => {
     test('returns [] on provider timeout', async () => {
       // Create a bridge with very short timeout
       const fastBridge = new MemoryBridge({ timeout: 1 });
-      mockGetMemories.mockImplementation(() =>
-        new Promise((resolve) => setTimeout(() => resolve([{ content: 'late', tokens: 5 }]), 100)),
+      mockGetMemories.mockImplementation(
+        () =>
+          new Promise((resolve) => setTimeout(() => resolve([{ content: 'late', tokens: 5 }]), 100))
       );
 
       const hints = await fastBridge.getMemoryHints('dev', 'MODERATE', 100);
@@ -260,9 +273,7 @@ describe('MemoryBridge', () => {
     });
 
     test('estimates tokens from content when tokens property missing', async () => {
-      mockGetMemories.mockResolvedValue([
-        { content: 'hello world', source: 'p', relevance: 0.9 },
-      ]);
+      mockGetMemories.mockResolvedValue([{ content: 'hello world', source: 'p', relevance: 0.9 }]);
 
       const hints = await bridge.getMemoryHints('dev', 'MODERATE', 100);
       if (hints.length > 0) {

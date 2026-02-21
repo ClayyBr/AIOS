@@ -50,7 +50,7 @@ name: financeiro
 role: Controller Financeiro — Contabilidade Gerencial e Estratégia
 version: 1.0.0
 icon: 📊
-whenToUse: "Use para DRE, relatórios para sócios, auditoria de CMV mensal, fluxo de caixa, projeções financeiras, impostos do Simples Nacional, indicadores de performance e orçamento"
+whenToUse: 'Use para DRE, relatórios para sócios, auditoria de CMV mensal, fluxo de caixa, projeções financeiras, impostos do Simples Nacional, indicadores de performance e orçamento'
 dependencies:
   tasks:
     - analisar-cmv.md
@@ -81,25 +81,25 @@ dependencies:
 ```markdown
 # SYSTEM ROLE: CONTROLLER FINANCEIRO
 
-Você é o **Controller Financeiro** do restaurante, um CFO virtual com expertise 
-em contabilidade gerencial de performance para o food service brasileiro. Sua 
-base técnica é o Manual de Contabilidade de Performance para Restaurantes no 
-Simples Nacional. Você transforma dados operacionais caóticos em inteligência 
+Você é o **Controller Financeiro** do restaurante, um CFO virtual com expertise
+em contabilidade gerencial de performance para o food service brasileiro. Sua
+base técnica é o Manual de Contabilidade de Performance para Restaurantes no
+Simples Nacional. Você transforma dados operacionais caóticos em inteligência
 financeira acionável.
 
-**Foco:** Contabilidade gerencial, relatórios para stakeholders, análise macro 
+**Foco:** Contabilidade gerencial, relatórios para stakeholders, análise macro
 de custos, projeções financeiras e otimização tributária.
 
-**Resolução de comandos:** Match flexível — "dre"→`*dre`, "cmv"→`*cmv`, 
-"relatório"→`*relatorio`, "fluxo"→`*fluxo-caixa`, "projeção"→`*projecao`, 
-"ponto de equilíbrio"→`*break-even`, "imposto"→`*impostos`, 
+**Resolução de comandos:** Match flexível — "dre"→`*dre`, "cmv"→`*cmv`,
+"relatório"→`*relatorio`, "fluxo"→`*fluxo-caixa`, "projeção"→`*projecao`,
+"ponto de equilíbrio"→`*break-even`, "imposto"→`*impostos`,
 "indicadores"→`*indicadores`, "orçamento"→`*orcamento`.
 
 ## 🎭 Persona
 
 - **Nome:** Controller Financeiro
 - **Estilo:** Analítico e estratégico. Fala com dados, não com achismos.
-  Nível intermediário-avançado, mas traduz para linguagem acessível nos 
+  Nível intermediário-avançado, mas traduz para linguagem acessível nos
   relatórios para sócios.
 - **Customizações:**
   - CONTROLLER: Contabilidade de Performance (não apenas fiscal)
@@ -111,13 +111,13 @@ de custos, projeções financeiras e otimização tributária.
 ## 🧠 Princípios Fundamentais
 
 1. **IDIOMA OBRIGATÓRIO:** Português do Brasil (pt-BR)
-2. **MANUAL PRIMEIRO:** Consultar o Manual_Contabilidade_Restaurante.md 
+2. **MANUAL PRIMEIRO:** Consultar o Manual_Contabilidade_Restaurante.md
    antes de qualquer cálculo ou análise. Ele é a fonte de verdade.
-3. **COMPETÊNCIA > CAIXA:** Contabilizar por regime de competência 
+3. **COMPETÊNCIA > CAIXA:** Contabilizar por regime de competência
    (entrada da mercadoria), não pelo pagamento do boleto.
-4. **SEGREGAR SEMPRE:** CMV de alimentos ≠ CMV de bebidas. 
+4. **SEGREGAR SEMPRE:** CMV de alimentos ≠ CMV de bebidas.
    Buffet ≠ Executivo ≠ Delivery. Nunca misturar.
-5. **EXPLICAR O PORQUÊ:** Não apenas dar o número — contextualizar 
+5. **EXPLICAR O PORQUÊ:** Não apenas dar o número — contextualizar
    com benchmarks e tendências.
 6. **ALERTAR RISCOS:** ⚠️ quando fora da faixa, 🚨 quando crítico.
 7. **FASE PRÉ-ABERTURA:** Focar em simulações e estimativas.
@@ -126,6 +126,7 @@ de custos, projeções financeiras e otimização tributária.
 ## ⚙️ Regras Operacionais
 
 ### Consulta de Dados
+
 - SEMPRE consultar `Manual_Contabilidade_Restaurante.md` para fórmulas
 - Usar `modelo-dre-restaurante.md` como estrutura base para DREs
 - Ler `fichas/` para calcular CMV teórico (leitura cruzada)
@@ -134,12 +135,12 @@ de custos, projeções financeiras e otimização tributária.
 
 ### Regras de Salvamento (CRÍTICO)
 
-| Tipo | Diretório | Formato |
-|------|-----------|---------|
-| DREs gerenciais | `squads/CFO/relatorios/` | `dre-mes-ano.md` |
+| Tipo                   | Diretório                | Formato                |
+| ---------------------- | ------------------------ | ---------------------- |
+| DREs gerenciais        | `squads/CFO/relatorios/` | `dre-mes-ano.md`       |
 | Relatórios para sócios | `squads/CFO/relatorios/` | `relatorio-mes-ano.md` |
-| Projeções e cenários | `squads/CFO/relatorios/` | `projecao-mes-ano.md` |
-| Insights financeiros | `squads/CFO/insights/` | `insight-descricao.md` |
+| Projeções e cenários   | `squads/CFO/relatorios/` | `projecao-mes-ano.md`  |
+| Insights financeiros   | `squads/CFO/insights/`   | `insight-descricao.md` |
 
 - **NUNCA alterar** fichas técnicas — são do `@arquiteto-lucro`
 - **NUNCA alterar** dados de estoque — são do `@controlador-estoque`
@@ -212,7 +213,7 @@ flowchart LR
         FIN_R["relatorios/"]
         FIN_I["insights/"]
     end
-    
+
     AL_F -->|"custo por prato\n(CMV teórico)"| FIN_R
     CE_I -->|"EI + EF\n(CMV real)"| FIN_R
     CE_E -->|"compras do período"| FIN_R
@@ -221,37 +222,37 @@ flowchart LR
 
 ### 3.2 Tabela de Acesso
 
-| Agente | Lê de | Escreve em |
-|--------|-------|------------|
-| 📊 Financeiro | `fichas/`, `estoque/`, `relatorios/`, `data/`, `insights/` | `relatorios/`, `insights/` |
-| 💰 Arq. Lucro | `fichas/`, `data/`, `fornecedores/`, `estoque/` | `fichas/`, `fichas-cozinha/`, `insights/`, `fornecedores/` |
-| 📦 Estoque | `estoque/`, `fichas/`, `data/` | `estoque/` |
-| 👔 Gerente Geral | **TUDO** (read-only) | Nenhum diretório diretamente |
+| Agente           | Lê de                                                      | Escreve em                                                 |
+| ---------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| 📊 Financeiro    | `fichas/`, `estoque/`, `relatorios/`, `data/`, `insights/` | `relatorios/`, `insights/`                                 |
+| 💰 Arq. Lucro    | `fichas/`, `data/`, `fornecedores/`, `estoque/`            | `fichas/`, `fichas-cozinha/`, `insights/`, `fornecedores/` |
+| 📦 Estoque       | `estoque/`, `fichas/`, `data/`                             | `estoque/`                                                 |
+| 👔 Gerente Geral | **TUDO** (read-only)                                       | Nenhum diretório diretamente                               |
 
 ### 3.3 Roteamento do Gerente Geral (atualizado)
 
 Novos roteamentos para o `@financeiro`:
 
-| Intenção do dono | Agente | Comando |
-|-----------------|:------:|---------|
-| "quanto lucrei?", "como está o DRE?" | 📊 | `*dre` |
-| "o CMV está alto", "audite os custos" | 📊 | `*cmv` |
-| "relatório para os sócios" | 📊 | `*relatorio` |
-| "vai dar pra pagar as contas?" | 📊 | `*fluxo-caixa` |
-| "e se o faturamento cair 20%?" | 📊 | `*projecao` |
-| "quantos clientes preciso por dia?" | 📊 | `*break-even` |
-| "quanto pago de imposto?" | 📊 | `*impostos` |
-| "ficha técnica", "quanto cobrar" | 💰 | `*ficha-tecnica`, `*precificar` |
-| "comprei frango", "o que tem no estoque?" | 📦 | `*entrada`, `*inventario` |
+| Intenção do dono                          | Agente | Comando                         |
+| ----------------------------------------- | :----: | ------------------------------- |
+| "quanto lucrei?", "como está o DRE?"      |   📊   | `*dre`                          |
+| "o CMV está alto", "audite os custos"     |   📊   | `*cmv`                          |
+| "relatório para os sócios"                |   📊   | `*relatorio`                    |
+| "vai dar pra pagar as contas?"            |   📊   | `*fluxo-caixa`                  |
+| "e se o faturamento cair 20%?"            |   📊   | `*projecao`                     |
+| "quantos clientes preciso por dia?"       |   📊   | `*break-even`                   |
+| "quanto pago de imposto?"                 |   📊   | `*impostos`                     |
+| "ficha técnica", "quanto cobrar"          |   💰   | `*ficha-tecnica`, `*precificar` |
+| "comprei frango", "o que tem no estoque?" |   📦   | `*entrada`, `*inventario`       |
 
 Fluxos complexos atualizados (3 agentes):
 
-| Intenção | Fluxo |
-|----------|-------|
-| "Como estamos indo?" | 📊 DRE/CMV + 📦 alertas estoque → 👔 síntese cruzada |
-| "Lance um novo prato" | 📦 viabilidade + 💰 ficha/preço + 📊 impacto no CMV → 👔 consolidação |
-| "Onde cortar custos?" | 💰 CMV por prato + 📦 itens com alto CMP + 📊 análise macro → 👔 plano de ação |
-| "Preciso comprar o quê?" | 📦 par stock - atual + 📊 impacto no fluxo de caixa → 👔 lista priorizada |
+| Intenção                 | Fluxo                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------ |
+| "Como estamos indo?"     | 📊 DRE/CMV + 📦 alertas estoque → 👔 síntese cruzada                           |
+| "Lance um novo prato"    | 📦 viabilidade + 💰 ficha/preço + 📊 impacto no CMV → 👔 consolidação          |
+| "Onde cortar custos?"    | 💰 CMV por prato + 📦 itens com alto CMP + 📊 análise macro → 👔 plano de ação |
+| "Preciso comprar o quê?" | 📦 par stock - atual + 📊 impacto no fluxo de caixa → 👔 lista priorizada      |
 
 ---
 
@@ -286,6 +287,7 @@ inputs:
 ```
 
 **Steps:**
+
 1. Mapear entradas previstas (vendas cartão crédito D+30, débito D+1, PIX D+0)
 2. Mapear saídas fixas (aluguel, salários, DAS, energia, água, gás)
 3. Mapear saídas variáveis (fornecedores, reposição estoque)
@@ -315,6 +317,7 @@ inputs:
 ```
 
 **Steps:**
+
 1. Definir cenário base com dados reais ou estimados
 2. Cenário pessimista: faturamento -20%, CMV +5%, cliente -30%
 3. Cenário realista: projeção com tendência atual
@@ -352,6 +355,7 @@ inputs:
 ```
 
 **Steps:**
+
 1. Calcular Margem de Contribuição Unitária: `MCU = Ticket Médio × (1 - CMV% - CVarPct%)`
 2. Ponto de equilíbrio em R$: `PE = Custos Fixos ÷ (1 - CMV% - CVarPct%)`
 3. Ponto de equilíbrio em clientes/dia: `PE_clientes = PE_mensal ÷ dias_operação ÷ ticket_médio`
@@ -384,6 +388,7 @@ inputs:
 ```
 
 **Steps:**
+
 1. Identificar faixa atual do Simples Nacional (Anexo I — tabela do Manual)
 2. Calcular alíquota efetiva: `AE = (RBT12 × AlíqNom - PD) / RBT12`
 3. Se houver bebidas frias (NCMs 2201-2203): segregar receita monofásica
@@ -413,6 +418,7 @@ inputs:
 ```
 
 **Steps:**
+
 1. Consolidar KPIs primários:
    - CMV Alimentos (%), CMV Bebidas (%), CMV Total (%)
    - Custo de MO (%) — incluindo provisões 13º/férias
@@ -454,6 +460,7 @@ inputs:
 ```
 
 **Steps:**
+
 1. Definir metas de receita por centro de custo (buffet, executivo, delivery)
 2. Definir metas de custo por categoria (usando % padrão do DRE):
    - CMV: 28-33% da RL
@@ -471,28 +478,28 @@ inputs:
 
 ### 5.1 Arquivos a Criar
 
-| Arquivo | Tipo | Linhas Est. |
-|---------|:----:|:-----------:|
-| `agents/financeiro.md` | Agente | ~155 |
-| `tasks/fluxo-caixa.md` | Task | ~65 |
-| `tasks/projecao-cenarios.md` | Task | ~65 |
-| `tasks/break-even.md` | Task | ~55 |
-| `tasks/simular-impostos.md` | Task | ~70 |
-| `tasks/indicadores-financeiros.md` | Task | ~60 |
-| `tasks/orcamento-mensal.md` | Task | ~60 |
-| `templates/orcamento-mensal-template.md` | Template | ~80 |
+| Arquivo                                  |   Tipo   | Linhas Est. |
+| ---------------------------------------- | :------: | :---------: |
+| `agents/financeiro.md`                   |  Agente  |    ~155     |
+| `tasks/fluxo-caixa.md`                   |   Task   |     ~65     |
+| `tasks/projecao-cenarios.md`             |   Task   |     ~65     |
+| `tasks/break-even.md`                    |   Task   |     ~55     |
+| `tasks/simular-impostos.md`              |   Task   |     ~70     |
+| `tasks/indicadores-financeiros.md`       |   Task   |     ~60     |
+| `tasks/orcamento-mensal.md`              |   Task   |     ~60     |
+| `templates/orcamento-mensal-template.md` | Template |     ~80     |
 
 ### 5.2 Arquivos a Modificar
 
-| Arquivo | Mudança |
-|---------|---------|
+| Arquivo                     | Mudança                                                     |
+| --------------------------- | ----------------------------------------------------------- |
 | `agents/arquiteto-lucro.md` | Remover tasks/comandos migrados, atualizar role e whenToUse |
-| `agents/gerente-geral.md` | Adicionar `@financeiro`, atualizar roteamentos |
-| `tasks/analisar-cmv.md` | `agent: arquiteto-lucro` → `agent: financeiro` |
-| `tasks/gerar-dre.md` | `agent: arquiteto-lucro` → `agent: financeiro` |
-| `tasks/relatorio-mensal.md` | `agent: arquiteto-lucro` → `agent: financeiro` |
-| `tasks/gerir-operacao.md` | Adicionar roteamentos para `@financeiro` |
-| `squad.yaml` | Adicionar agente, tasks, template |
+| `agents/gerente-geral.md`   | Adicionar `@financeiro`, atualizar roteamentos              |
+| `tasks/analisar-cmv.md`     | `agent: arquiteto-lucro` → `agent: financeiro`              |
+| `tasks/gerar-dre.md`        | `agent: arquiteto-lucro` → `agent: financeiro`              |
+| `tasks/relatorio-mensal.md` | `agent: arquiteto-lucro` → `agent: financeiro`              |
+| `tasks/gerir-operacao.md`   | Adicionar roteamentos para `@financeiro`                    |
+| `squad.yaml`                | Adicionar agente, tasks, template                           |
 
 **Total: 8 novos + 7 modificados = 15 arquivos**
 
@@ -501,22 +508,25 @@ inputs:
 ## 6. Verificação
 
 ### Validação Estrutural
+
 - Cada arquivo `.md` de agente deve ter YAML frontmatter válido
 - Cada task deve referenciar `agent: financeiro`
 - `squad.yaml` deve listar todos os novos arquivos
 - Nenhuma task deve referenciar um agente inexistente
 
 ### Validação Funcional (via @qa)
+
 - Acionar cada comando do `@financeiro` e verificar se executa sem erro
 - Verificar se `@gerente-geral` roteia corretamente para o `@financeiro`
 - Verificar se `@arquiteto-lucro` NÃO responde mais a comandos migrados
 - Testar leitura cruzada: financeiro consegue ler fichas técnicas e dados de estoque
 
 ### Validação de Conteúdo (via @qa)
+
 - System prompt contém todas as referências ao Manual de Contabilidade
 - Fórmulas no Manual (CMV, alíquota efetiva, ciclo financeiro) são refletidas nas tasks
 - Benchmarks do Manual (CMV 28-35%, Prime Cost < 60%) são usados como referência
 
 ---
 
-*Arquitetura desenhada por Aria (@architect) — CFO Squad v3.0*
+_Arquitetura desenhada por Aria (@architect) — CFO Squad v3.0_

@@ -655,7 +655,7 @@ entities:
       type: task
       purpose: >-
         To identify the next logical story based on project progress and epic definitions, and then to prepare a
-        comprehensive, self-contained, and actionable story file using the `Story Template`. This task 
+        comprehensive, self-contained, and actionable story file using the `Story Template`. This task
       keywords:
         - create
         - next
@@ -1735,7 +1735,7 @@ entities:
       type: task
       purpose: >-
         This task maintains the integrity and completeness of the `docs/index.md` file by scanning all documentation
-        files and ensuring they are properly indexed with descriptions. It handles both root-level 
+        files and ensuring they are properly indexed with descriptions. It handles both root-level
       keywords:
         - index
         - docs
@@ -2059,7 +2059,7 @@ entities:
         - 'pipeline:'
       usedBy: []
       dependencies:
-        - 'path: ''{dependency file}'''
+        - "path: '{dependency file}'"
       adaptability:
         score: 0.8
         constraints: []
@@ -2396,7 +2396,7 @@ entities:
     qa-evidence-requirements:
       path: .aios-core/development/tasks/qa-evidence-requirements.md
       type: task
-      purpose: '''Screenshot, log, or reproduction steps of the bug'''
+      purpose: "'Screenshot, log, or reproduction steps of the bug'"
       keywords:
         - qa
         - evidence
@@ -3049,7 +3049,7 @@ entities:
       type: task
       purpose: >-
         To identify the next logical story based on project progress and epic definitions, and then to prepare a
-        comprehensive, self-contained, and actionable story file using the `Story Template`. This task 
+        comprehensive, self-contained, and actionable story file using the `Story Template`. This task
       keywords:
         - sm
         - create
@@ -4976,7 +4976,7 @@ entities:
     code-quality-improver:
       path: .aios-core/development/scripts/code-quality-improver.js
       type: script
-      purpose: '''Apply consistent code formatting'','
+      purpose: "'Apply consistent code formatting',"
       keywords:
         - code
         - quality
@@ -4993,7 +4993,7 @@ entities:
     commit-message-generator:
       path: .aios-core/development/scripts/commit-message-generator.js
       type: script
-      purpose: ''';'
+      purpose: "';"
       keywords:
         - commit
         - message
@@ -5011,7 +5011,7 @@ entities:
     conflict-resolver:
       path: .aios-core/development/scripts/conflict-resolver.js
       type: script
-      purpose: '''No conflicts detected'','
+      purpose: "'No conflicts detected',"
       keywords:
         - conflict
         - resolver
@@ -5083,7 +5083,7 @@ entities:
     decision-recorder:
       path: .aios-core/development/scripts/decision-recorder.js
       type: script
-      purpose: ''');'
+      purpose: "');"
       keywords:
         - decision
         - recorder
@@ -5399,7 +5399,7 @@ entities:
     refactoring-suggester:
       path: .aios-core/development/scripts/refactoring-suggester.js
       type: script
-      purpose: '''Extract long methods into smaller, focused methods'','
+      purpose: "'Extract long methods into smaller, focused methods',"
       keywords:
         - refactoring
         - suggester
@@ -5585,7 +5585,7 @@ entities:
     test-greeting-system:
       path: .aios-core/development/scripts/test-greeting-system.js
       type: script
-      purpose: '''Show all available commands with descriptions'' },'
+      purpose: "'Show all available commands with descriptions' },"
       keywords:
         - test
         - greeting
@@ -5619,7 +5619,7 @@ entities:
     unified-activation-pipeline:
       path: .aios-core/development/scripts/unified-activation-pipeline.js
       type: script
-      purpose: '''Agent identity — greeting is broken without this'','
+      purpose: "'Agent identity — greeting is broken without this',"
       keywords:
         - unified
         - activation
@@ -5835,7 +5835,7 @@ entities:
     squad-designer:
       path: .aios-core/development/scripts/squad/squad-designer.js
       type: script
-      purpose: '`Squad for ${analysis.domain.replace(/-/g, '' '')} management`,'
+      purpose: "`Squad for ${analysis.domain.replace(/-/g, ' ')} management`,"
       keywords:
         - squad
         - designer
@@ -5893,7 +5893,7 @@ entities:
         - squad
         - generator
         - '*${taskname.replace(/-/g,'
-        - '''-'')}'
+        - "'-')}"
       usedBy:
         - index
       dependencies: []
@@ -5942,7 +5942,7 @@ entities:
     squad-publisher:
       path: .aios-core/development/scripts/squad/squad-publisher.js
       type: script
-      purpose: '** ${manifest.description || ''No description provided''}'
+      purpose: "** ${manifest.description || 'No description provided'}"
       keywords:
         - squad
         - publisher
@@ -6228,7 +6228,7 @@ entities:
     task-elicitation:
       path: .aios-core/core/elicitation/task-elicitation.js
       type: module
-      purpose: '''Define the fundamental details of your task'','
+      purpose: "'Define the fundamental details of your task',"
       keywords:
         - task
         - elicitation
@@ -6244,7 +6244,7 @@ entities:
     workflow-elicitation:
       path: .aios-core/core/elicitation/workflow-elicitation.js
       type: module
-      purpose: '''Where should this workflow be created?'','
+      purpose: "'Where should this workflow be created?',"
       keywords:
         - workflow
         - elicitation
@@ -7015,7 +7015,7 @@ entities:
     master-orchestrator:
       path: .aios-core/core/orchestration/master-orchestrator.js
       type: module
-      purpose: '''Requirements → Specification generation'','
+      purpose: "'Requirements → Specification generation',"
       keywords:
         - master
         - orchestrator
@@ -7072,7 +7072,7 @@ entities:
     session-state:
       path: .aios-core/core/orchestration/session-state.js
       type: module
-      purpose: '''Resume from last saved state'','
+      purpose: "'Resume from last saved state',"
       keywords:
         - session
         - state
@@ -7092,7 +7092,7 @@ entities:
     skill-dispatcher:
       path: .aios-core/core/orchestration/skill-dispatcher.js
       type: module
-      purpose: '''No result returned from skill'','
+      purpose: "'No result returned from skill',"
       keywords:
         - skill
         - dispatcher
@@ -7179,7 +7179,7 @@ entities:
     terminal-spawner:
       path: .aios-core/core/orchestration/terminal-spawner.js
       type: module
-      purpose: '''Apple Silicon'' },'
+      purpose: "'Apple Silicon' },"
       keywords:
         - terminal
         - spawner
@@ -7257,7 +7257,7 @@ entities:
     permission-mode:
       path: .aios-core/core/permissions/permission-mode.js
       type: module
-      purpose: '''Read-only mode - safe exploration'','
+      purpose: "'Read-only mode - safe exploration',"
       keywords:
         - permission
         - mode
@@ -7308,7 +7308,7 @@ entities:
     focus-area-recommender:
       path: .aios-core/core/quality-gates/focus-area-recommender.js
       type: module
-      purpose: ''''','
+      purpose: "'',"
       keywords:
         - focus
         - area
@@ -7451,7 +7451,7 @@ entities:
     validate-registry:
       path: .aios-core/core/registry/validate-registry.js
       type: module
-      purpose: '''Registry file loads without errors'','
+      purpose: "'Registry file loads without errors',"
       keywords:
         - validate
         - registry
@@ -7757,7 +7757,7 @@ entities:
     build-config:
       path: .aios-core/core/health-check/checks/deployment/build-config.js
       type: module
-      purpose: '''Verifies build configuration'','
+      purpose: "'Verifies build configuration',"
       keywords:
         - build
         - config
@@ -7773,7 +7773,7 @@ entities:
     ci-config:
       path: .aios-core/core/health-check/checks/deployment/ci-config.js
       type: module
-      purpose: '''Verifies CI/CD configuration'','
+      purpose: "'Verifies CI/CD configuration',"
       keywords:
         - ci
         - config
@@ -7789,7 +7789,7 @@ entities:
     deployment-readiness:
       path: .aios-core/core/health-check/checks/deployment/deployment-readiness.js
       type: module
-      purpose: '''Verifies project is ready for deployment'','
+      purpose: "'Verifies project is ready for deployment',"
       keywords:
         - deployment
         - readiness
@@ -7805,7 +7805,7 @@ entities:
     docker-config:
       path: .aios-core/core/health-check/checks/deployment/docker-config.js
       type: module
-      purpose: '''Verifies Docker configuration'','
+      purpose: "'Verifies Docker configuration',"
       keywords:
         - docker
         - config
@@ -7821,7 +7821,7 @@ entities:
     env-file:
       path: .aios-core/core/health-check/checks/deployment/env-file.js
       type: module
-      purpose: '''Verifies .env configuration'','
+      purpose: "'Verifies .env configuration',"
       keywords:
         - env
         - file
@@ -7837,7 +7837,7 @@ entities:
     disk-space:
       path: .aios-core/core/health-check/checks/local/disk-space.js
       type: module
-      purpose: '''Verifies sufficient disk space is available'','
+      purpose: "'Verifies sufficient disk space is available',"
       keywords:
         - disk
         - space
@@ -7853,7 +7853,7 @@ entities:
     environment-vars:
       path: .aios-core/core/health-check/checks/local/environment-vars.js
       type: module
-      purpose: '''Verifies required environment variables are set'','
+      purpose: "'Verifies required environment variables are set',"
       keywords:
         - environment
         - vars
@@ -7869,7 +7869,7 @@ entities:
     git-install:
       path: .aios-core/core/health-check/checks/local/git-install.js
       type: module
-      purpose: '''Verifies Git is installed and configured'','
+      purpose: "'Verifies Git is installed and configured',"
       keywords:
         - git
         - install
@@ -7885,7 +7885,7 @@ entities:
     ide-detection:
       path: .aios-core/core/health-check/checks/local/ide-detection.js
       type: module
-      purpose: '''Detects IDE/editor configuration'','
+      purpose: "'Detects IDE/editor configuration',"
       keywords:
         - ide
         - detection
@@ -7901,7 +7901,7 @@ entities:
     memory:
       path: .aios-core/core/health-check/checks/local/memory.js
       type: module
-      purpose: '''Verifies sufficient memory is available'','
+      purpose: "'Verifies sufficient memory is available',"
       keywords:
         - memory
       usedBy: []
@@ -7916,7 +7916,7 @@ entities:
     network:
       path: .aios-core/core/health-check/checks/local/network.js
       type: module
-      purpose: '''Verifies network connectivity for development tools'','
+      purpose: "'Verifies network connectivity for development tools',"
       keywords:
         - network
       usedBy: []
@@ -7931,7 +7931,7 @@ entities:
     npm-install:
       path: .aios-core/core/health-check/checks/local/npm-install.js
       type: module
-      purpose: '''Verifies npm is installed and working'','
+      purpose: "'Verifies npm is installed and working',"
       keywords:
         - npm
         - install
@@ -7947,7 +7947,7 @@ entities:
     shell-environment:
       path: .aios-core/core/health-check/checks/local/shell-environment.js
       type: module
-      purpose: '''Verifies shell environment configuration'','
+      purpose: "'Verifies shell environment configuration',"
       keywords:
         - shell
         - environment
@@ -7963,7 +7963,7 @@ entities:
     agent-config:
       path: .aios-core/core/health-check/checks/project/agent-config.js
       type: module
-      purpose: '''Verifies agent configuration files are valid'','
+      purpose: "'Verifies agent configuration files are valid',"
       keywords:
         - agent
         - config
@@ -7979,7 +7979,7 @@ entities:
     aios-directory:
       path: .aios-core/core/health-check/checks/project/aios-directory.js
       type: module
-      purpose: '''Verifies .aios/ directory structure'','
+      purpose: "'Verifies .aios/ directory structure',"
       keywords:
         - aios
         - directory
@@ -7995,7 +7995,7 @@ entities:
     dependencies:
       path: .aios-core/core/health-check/checks/project/dependencies.js
       type: module
-      purpose: '''Verifies required dependencies are installed'','
+      purpose: "'Verifies required dependencies are installed',"
       keywords:
         - dependencies
       usedBy: []
@@ -8010,7 +8010,7 @@ entities:
     framework-config:
       path: .aios-core/core/health-check/checks/project/framework-config.js
       type: module
-      purpose: '''AIOS core framework'' },'
+      purpose: "'AIOS core framework' },"
       keywords:
         - framework
         - config
@@ -8026,7 +8026,7 @@ entities:
     node-version:
       path: .aios-core/core/health-check/checks/project/node-version.js
       type: module
-      purpose: '''Verifies Node.js version meets minimum requirements'','
+      purpose: "'Verifies Node.js version meets minimum requirements',"
       keywords:
         - node
         - version
@@ -8042,7 +8042,7 @@ entities:
     package-json:
       path: .aios-core/core/health-check/checks/project/package-json.js
       type: module
-      purpose: '''Verifies package.json exists and contains valid JSON'','
+      purpose: "'Verifies package.json exists and contains valid JSON',"
       keywords:
         - package
         - json
@@ -8058,7 +8058,7 @@ entities:
     task-definitions:
       path: .aios-core/core/health-check/checks/project/task-definitions.js
       type: module
-      purpose: '''Verifies task definition files are valid'','
+      purpose: "'Verifies task definition files are valid',"
       keywords:
         - task
         - definitions
@@ -8074,7 +8074,7 @@ entities:
     workflow-dependencies:
       path: .aios-core/core/health-check/checks/project/workflow-dependencies.js
       type: module
-      purpose: '''Verifies workflow dependencies are satisfied'','
+      purpose: "'Verifies workflow dependencies are satisfied',"
       keywords:
         - workflow
         - dependencies
@@ -8090,7 +8090,7 @@ entities:
     branch-protection:
       path: .aios-core/core/health-check/checks/repository/branch-protection.js
       type: module
-      purpose: '''Verifies branch protection best practices'','
+      purpose: "'Verifies branch protection best practices',"
       keywords:
         - branch
         - protection
@@ -8106,7 +8106,7 @@ entities:
     commit-history:
       path: .aios-core/core/health-check/checks/repository/commit-history.js
       type: module
-      purpose: '''Verifies commit history quality'','
+      purpose: "'Verifies commit history quality',"
       keywords:
         - commit
         - history
@@ -8122,7 +8122,7 @@ entities:
     conflicts:
       path: .aios-core/core/health-check/checks/repository/conflicts.js
       type: module
-      purpose: '''Checks for unresolved merge conflicts'','
+      purpose: "'Checks for unresolved merge conflicts',"
       keywords:
         - conflicts
       usedBy: []
@@ -8137,7 +8137,7 @@ entities:
     git-repo:
       path: .aios-core/core/health-check/checks/repository/git-repo.js
       type: module
-      purpose: '''Verifies project is a valid Git repository'','
+      purpose: "'Verifies project is a valid Git repository',"
       keywords:
         - git
         - repo
@@ -8153,7 +8153,7 @@ entities:
     git-status:
       path: .aios-core/core/health-check/checks/repository/git-status.js
       type: module
-      purpose: '''Checks for uncommitted changes and working directory status'','
+      purpose: "'Checks for uncommitted changes and working directory status',"
       keywords:
         - git
         - status
@@ -8169,7 +8169,7 @@ entities:
     gitignore:
       path: .aios-core/core/health-check/checks/repository/gitignore.js
       type: module
-      purpose: '''Verifies .gitignore has required patterns'','
+      purpose: "'Verifies .gitignore has required patterns',"
       keywords:
         - gitignore
       usedBy: []
@@ -8184,7 +8184,7 @@ entities:
     large-files:
       path: .aios-core/core/health-check/checks/repository/large-files.js
       type: module
-      purpose: '''Checks for large files in the repository'','
+      purpose: "'Checks for large files in the repository',"
       keywords:
         - large
         - files
@@ -8200,7 +8200,7 @@ entities:
     lockfile-integrity:
       path: .aios-core/core/health-check/checks/repository/lockfile-integrity.js
       type: module
-      purpose: '''Verifies package-lock.json integrity'','
+      purpose: "'Verifies package-lock.json integrity',"
       keywords:
         - lockfile
         - integrity
@@ -8216,7 +8216,7 @@ entities:
     api-endpoints:
       path: .aios-core/core/health-check/checks/services/api-endpoints.js
       type: module
-      purpose: '''Verifies external API endpoint connectivity'','
+      purpose: "'Verifies external API endpoint connectivity',"
       keywords:
         - api
         - endpoints
@@ -8232,7 +8232,7 @@ entities:
     claude-code:
       path: .aios-core/core/health-check/checks/services/claude-code.js
       type: module
-      purpose: '''Verifies Claude Code CLI configuration'','
+      purpose: "'Verifies Claude Code CLI configuration',"
       keywords:
         - claude
         - code
@@ -8248,7 +8248,7 @@ entities:
     gemini-cli:
       path: .aios-core/core/health-check/checks/services/gemini-cli.js
       type: module
-      purpose: '''Verifies Gemini CLI installation and configuration'','
+      purpose: "'Verifies Gemini CLI installation and configuration',"
       keywords:
         - gemini
         - cli
@@ -8264,7 +8264,7 @@ entities:
     github-cli:
       path: .aios-core/core/health-check/checks/services/github-cli.js
       type: module
-      purpose: '''Verifies GitHub CLI (gh) installation and authentication'','
+      purpose: "'Verifies GitHub CLI (gh) installation and authentication',"
       keywords:
         - github
         - cli
@@ -8280,7 +8280,7 @@ entities:
     mcp-integration:
       path: .aios-core/core/health-check/checks/services/mcp-integration.js
       type: module
-      purpose: '''Verifies MCP server configuration'','
+      purpose: "'Verifies MCP server configuration',"
       keywords:
         - mcp
         - integration
@@ -8455,7 +8455,7 @@ entities:
     registry-healer:
       path: .aios-core/core/ids/registry-healer.js
       type: module
-      purpose: '''Referenced file does not exist on disk'','
+      purpose: "'Referenced file does not exist on disk',"
       keywords:
         - registry
         - healer
@@ -8845,7 +8845,7 @@ entities:
     aios-master:
       path: .aios-core/development/agents/aios-master.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - aios
         - master
@@ -8861,7 +8861,7 @@ entities:
     analyst:
       path: .aios-core/development/agents/analyst.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - analyst
       usedBy: []
@@ -8875,7 +8875,7 @@ entities:
     architect:
       path: .aios-core/development/agents/architect.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - architect
       usedBy: []
@@ -8905,7 +8905,7 @@ entities:
     dev:
       path: .aios-core/development/agents/dev.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - dev
       usedBy: []
@@ -8920,7 +8920,7 @@ entities:
     devops:
       path: .aios-core/development/agents/devops.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - devops
       usedBy: []
@@ -8950,7 +8950,7 @@ entities:
     po:
       path: .aios-core/development/agents/po.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - po
       usedBy: []
@@ -8964,7 +8964,7 @@ entities:
     qa:
       path: .aios-core/development/agents/qa.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - qa
       usedBy: []
@@ -8978,7 +8978,7 @@ entities:
     sm:
       path: .aios-core/development/agents/sm.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - sm
       usedBy: []
@@ -8992,7 +8992,7 @@ entities:
     squad-creator:
       path: .aios-core/development/agents/squad-creator.md
       type: agent
-      purpose: '''Show all available commands with descriptions'''
+      purpose: "'Show all available commands with descriptions'"
       keywords:
         - squad
         - creator
@@ -9008,7 +9008,7 @@ entities:
     ux-design-expert:
       path: .aios-core/development/agents/ux-design-expert.md
       type: agent
-      purpose: '''Complete workflow from user research to component building'''
+      purpose: "'Complete workflow from user research to component building'"
       keywords:
         - ux
         - design
@@ -9217,7 +9217,7 @@ entities:
     _template:
       path: .aios-core/data/tech-presets/_template.md
       type: data
-      purpose: '''Brief description of when to use this preset'''
+      purpose: "'Brief description of when to use this preset'"
       keywords:
         - template
         - tech

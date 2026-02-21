@@ -12,20 +12,20 @@ Para discusiones, preguntas e interaccion con la comunidad, visita nuestro hub c
 
 **[Discusiones de la Comunidad AIOS](https://github.com/SynkraAI/aios-core/discussions)**
 
-| Necesidad | Donde Ir |
-|-----------|----------|
-| **Preguntas sobre Squads?** | Usa la [categoria "Squads"](https://github.com/SynkraAI/aios-core/discussions/categories/squads) |
-| **Ideas de funcionalidades?** | Inicia una [Discusion en "Ideas"](https://github.com/SynkraAI/aios-core/discussions/categories/ideas) |
-| **Encontraste un bug?** | [Abre un issue](https://github.com/SynkraAI/aios-squads/issues/new/choose) en **este repositorio** |
-| **Necesitas ayuda?** | Pregunta en ["Preguntas y Respuestas"](https://github.com/SynkraAI/aios-core/discussions/categories/q-a) |
-| **Construiste algo genial?** | Comparte en ["Mostrar y Contar"](https://github.com/SynkraAI/aios-core/discussions/categories/show-and-tell) |
+| Necesidad                     | Donde Ir                                                                                                     |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Preguntas sobre Squads?**   | Usa la [categoria "Squads"](https://github.com/SynkraAI/aios-core/discussions/categories/squads)             |
+| **Ideas de funcionalidades?** | Inicia una [Discusion en "Ideas"](https://github.com/SynkraAI/aios-core/discussions/categories/ideas)        |
+| **Encontraste un bug?**       | [Abre un issue](https://github.com/SynkraAI/aios-squads/issues/new/choose) en **este repositorio**           |
+| **Necesitas ayuda?**          | Pregunta en ["Preguntas y Respuestas"](https://github.com/SynkraAI/aios-core/discussions/categories/q-a)     |
+| **Construiste algo genial?**  | Comparte en ["Mostrar y Contar"](https://github.com/SynkraAI/aios-core/discussions/categories/show-and-tell) |
 
 ### Squads Disponibles
 
-| Squad | Descripcion | Estado |
-|-------|-------------|--------|
-| **ETL Squad** | Recoleccion de datos, transformacion y automatizacion de pipelines | Activo |
-| **Creator Squad** | Generacion de contenido, posts de blog, creacion de cursos | Activo |
+| Squad             | Descripcion                                                        | Estado |
+| ----------------- | ------------------------------------------------------------------ | ------ |
+| **ETL Squad**     | Recoleccion de datos, transformacion y automatizacion de pipelines | Activo |
+| **Creator Squad** | Generacion de contenido, posts de blog, creacion de cursos         | Activo |
 
 ### Proponer un Nuevo Squad
 
@@ -37,4 +37,4 @@ Tienes una idea para un nuevo AIOS Squad? Nos encantaria escucharla!
 
 ---
 
-**Eslogan:** *AIOS Squads: Equipos de agentes IA trabajando contigo*
+**Eslogan:** _AIOS Squads: Equipos de agentes IA trabajando contigo_

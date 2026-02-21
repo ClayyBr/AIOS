@@ -22,23 +22,18 @@ describeIntegration('Schema Detection & v1.0 Backward Compatibility', () => {
 
   // v1.0 simple tools (8 total)
   const v1SimpleTools = [
-    'github-cli',      // CLI tools
+    'github-cli', // CLI tools
     'railway-cli',
     'supabase-cli',
-    'ffmpeg',          // Local tools
-    '21st-dev-magic',  // MCP tools
+    'ffmpeg', // Local tools
+    '21st-dev-magic', // MCP tools
     'browser',
     'context7',
     'exa',
   ];
 
   // v2.0 complex tools (4 total)
-  const v2ComplexTools = [
-    'clickup',
-    'google-workspace',
-    'n8n',
-    'supabase',
-  ];
+  const v2ComplexTools = ['clickup', 'google-workspace', 'n8n', 'supabase'];
 
   beforeAll(() => {
     toolResolver.setSearchPaths([toolsPath]);
@@ -112,9 +107,7 @@ describeIntegration('Schema Detection & v1.0 Backward Compatibility', () => {
 
   describeIntegration('v1.0 Tools Functionality (No Breaking Changes)', () => {
     test('v1.0 tools resolve successfully', async () => {
-      const resolvePromises = v1SimpleTools.map(name =>
-        toolResolver.resolveTool(_name),
-      );
+      const resolvePromises = v1SimpleTools.map((name) => toolResolver.resolveTool(_name));
 
       const tools = await Promise.all(resolvePromises);
 
@@ -255,9 +248,7 @@ describeIntegration('Schema Detection & v1.0 Backward Compatibility', () => {
     });
 
     test('error handling unchanged for invalid tools', async () => {
-      await expect(
-        toolResolver.resolveTool('non-existent-tool'),
-      ).rejects.toThrow();
+      await expect(toolResolver.resolveTool('non-existent-tool')).rejects.toThrow();
 
       // Error should still be clear and helpful
       try {
@@ -289,15 +280,15 @@ describeIntegration('Schema Detection & v1.0 Backward Compatibility', () => {
       }
 
       // All should succeed
-      const failures = results.filter(r => !r.success);
+      const failures = results.filter((r) => !r.success);
       expect(failures).toHaveLength(0);
 
       // 8 should be v1.0
-      const v1Count = results.filter(r => r.schema_version === 1).length;
+      const v1Count = results.filter((r) => r.schema_version === 1).length;
       expect(v1Count).toBe(8);
 
       // 4 should be v2.0
-      const v2Count = results.filter(r => r.schema_version === 2).length;
+      const v2Count = results.filter((r) => r.schema_version === 2).length;
       expect(v2Count).toBe(4);
     });
   });

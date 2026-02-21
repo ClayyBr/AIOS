@@ -104,7 +104,7 @@ describe('os-detector', () => {
         expect(result.isWSL).toBe(true);
         expect(result.wslDistro).toBe('Ubuntu');
         expect(result.notes).toBeDefined();
-        expect(result.notes.some(n => n.includes('WSL'))).toBe(true);
+        expect(result.notes.some((n) => n.includes('WSL'))).toBe(true);
 
         // Cleanup
         Object.defineProperty(process, 'platform', originalPlatform);

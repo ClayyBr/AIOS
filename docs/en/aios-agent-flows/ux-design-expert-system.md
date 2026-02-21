@@ -23,4 +23,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 
 ---
 
-*AIOS Agent Flows - @ux-design-expert System v1.0*
+_AIOS Agent Flows - @ux-design-expert System v1.0_

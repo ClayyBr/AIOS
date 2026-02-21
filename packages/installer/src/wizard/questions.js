@@ -39,9 +39,7 @@ function getUserProfileQuestion() {
     message: colors.primary(t('userProfileQuestion')),
     choices: [
       {
-        name:
-          colors.highlight(`🟢 ${t('modoAssistido')}`) +
-          colors.dim(` (${t('recommended')})`),
+        name: colors.highlight(`🟢 ${t('modoAssistido')}`) + colors.dim(` (${t('recommended')})`),
         value: 'bob',
       },
       {
@@ -206,9 +204,7 @@ function getSquadQuestions() {
       message: colors.primary('Select Squads to install (optional):'),
       choices: [
         {
-          name:
-            colors.highlight('squad-creator') +
-            colors.dim(' - Tools to create custom squads'),
+          name: colors.highlight('squad-creator') + colors.dim(' - Tools to create custom squads'),
           value: 'squad-creator',
           checked: false,
         },

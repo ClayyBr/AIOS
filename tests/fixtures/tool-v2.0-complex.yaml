@@ -45,9 +45,9 @@ tool:
   api_complexity:
     api_quirks:
       - quirk: format_mismatch
-        description: "Create and Update use different formats"
-        impact: "Runtime errors if wrong format used"
-        mitigation: "Use validators"
+        description: 'Create and Update use different formats'
+        impact: 'Runtime errors if wrong format used'
+        mitigation: 'Use validators'
 
   mcp_specific:
     server_command: npx -y test-complex-server

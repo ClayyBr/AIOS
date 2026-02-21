@@ -82,7 +82,9 @@ beforeEach(() => {
   jest.clearAllMocks();
   os.homedir.mockReturnValue(FAKE_HOME);
   fs.existsSync.mockReturnValue(false);
-  fs.readFileSync.mockImplementation(() => { throw new Error('ENOENT'); });
+  fs.readFileSync.mockImplementation(() => {
+    throw new Error('ENOENT');
+  });
   fs.copyFileSync.mockImplementation(() => {});
   fs.writeFileSync.mockImplementation(() => {});
   fs.mkdirSync.mockImplementation(() => {});
@@ -327,7 +329,7 @@ describe('ensureUserConfigDir', () => {
     // Then
     expect(fs.mkdirSync).toHaveBeenCalledWith(
       expect.stringContaining('.aios'),
-      expect.objectContaining({ recursive: true }),
+      expect.objectContaining({ recursive: true })
     );
   });
 

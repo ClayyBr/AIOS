@@ -21,7 +21,7 @@ const ENGINE_PATH = path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'en
 const synapseExists = fs.existsSync(SYNAPSE_PATH);
 const engineExists = fs.existsSync(ENGINE_PATH);
 
-const describeIfReady = (synapseExists && engineExists) ? describe : describe.skip;
+const describeIfReady = synapseExists && engineExists ? describe : describe.skip;
 
 /**
  * Build a session object for a given prompt count.
@@ -51,7 +51,7 @@ describeIfReady('SYNAPSE E2E: Bracket Scenarios', () => {
   beforeAll(() => {
     const { SynapseEngine } = require(ENGINE_PATH);
     const { parseManifest } = require(
-      path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js'),
+      path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js')
     );
 
     const manifestPath = path.join(SYNAPSE_PATH, 'manifest');

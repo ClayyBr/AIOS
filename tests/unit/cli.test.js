@@ -120,7 +120,7 @@ describe('CLI Entry Point', () => {
     it('should have proper shebang for cross-platform compatibility', () => {
       const cliPath = path.join(__dirname, '../../bin/aios.js');
       const cliContent = fs.readFileSync(cliPath, 'utf8');
-      
+
       expect(cliContent.startsWith('#!/usr/bin/env node')).toBe(true);
     });
   });

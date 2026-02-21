@@ -146,7 +146,7 @@ function formatHuman(result) {
 
   for (const finding of result.findings) {
     lines.push(
-      `${finding.severity === 'error' ? '❌' : '⚠️'} ${finding.file}:${finding.line} ${finding.ruleId} -> "${finding.term}" (use "${finding.replacement}")`,
+      `${finding.severity === 'error' ? '❌' : '⚠️'} ${finding.file}:${finding.line} ${finding.ruleId} -> "${finding.term}" (use "${finding.replacement}")`
     );
   }
 
@@ -154,16 +154,14 @@ function formatHuman(result) {
   lines.push(
     result.ok
       ? `✅ Completed with ${result.warnings.length} warning(s)`
-      : `❌ Failed with ${result.errors.length} error(s) and ${result.warnings.length} warning(s)`,
+      : `❌ Failed with ${result.errors.length} error(s) and ${result.warnings.length} warning(s)`
   );
   return lines.join('\n');
 }
 
 function main() {
   const args = parseArgs();
-  const targets = args.files.length > 0
-    ? args.files
-    : (args.staged ? [] : DEFAULT_TARGETS);
+  const targets = args.files.length > 0 ? args.files : args.staged ? [] : DEFAULT_TARGETS;
   const result = runSemanticLint({ targets });
 
   if (args.json) {

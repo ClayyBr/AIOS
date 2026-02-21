@@ -20,7 +20,16 @@ const FAKE_HOME = '/fake/home';
 
 // Load real schema files before mocking fs
 const realFs = jest.requireActual('fs');
-const SCHEMAS_DIR = path.join(__dirname, '..', '..', '..', '.aios-core', 'core', 'config', 'schemas');
+const SCHEMAS_DIR = path.join(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  '.aios-core',
+  'core',
+  'config',
+  'schemas'
+);
 const REAL_SCHEMAS = {};
 for (const file of realFs.readdirSync(SCHEMAS_DIR)) {
   if (file.endsWith('.schema.json')) {
@@ -43,8 +52,14 @@ jest.mock('../../../.aios-core/core/config/config-cache', () => {
     ConfigCache: jest.fn(),
     globalConfigCache: {
       get: jest.fn((key) => cache.get(key) || null),
-      set: jest.fn((key, value) => { cache.set(key, value); timestamps.set(key, Date.now()); }),
-      clear: jest.fn(() => { cache.clear(); timestamps.clear(); }),
+      set: jest.fn((key, value) => {
+        cache.set(key, value);
+        timestamps.set(key, Date.now());
+      }),
+      clear: jest.fn(() => {
+        cache.clear();
+        timestamps.clear();
+      }),
       has: jest.fn((key) => cache.has(key)),
     },
   };
@@ -279,7 +294,7 @@ describe('loadLayeredConfig', () => {
     const userConfigPath = path.join(FAKE_HOME, '.aios', 'user-config.yaml');
     setupFileSystem({
       'framework-config.yaml': 'version: "1.0"',
-      [userConfigPath]: 'default_model: claude-sonnet',  // missing required user_profile
+      [userConfigPath]: 'default_model: claude-sonnet', // missing required user_profile
     });
 
     // When

@@ -47,7 +47,7 @@ describeIntegration('Supabase Tool Helpers', () => {
     });
 
     test('should have all required helper IDs', () => {
-      const helperIds = supabaseTool.executable_knowledge.helpers.map(h => h.id);
+      const helperIds = supabaseTool.executable_knowledge.helpers.map((h) => h.id);
       expect(helperIds).toContain('build-select-query');
       expect(helperIds).toContain('build-insert-query');
       expect(helperIds).toContain('build-update-query');
@@ -120,7 +120,9 @@ describeIntegration('Supabase Tool Helpers', () => {
         limit: 5,
       });
 
-      expect(result.query).toBe('SELECT id, title FROM posts WHERE published = true ORDER BY created_at DESC LIMIT 5');
+      expect(result.query).toBe(
+        'SELECT id, title FROM posts WHERE published = true ORDER BY created_at DESC LIMIT 5'
+      );
     });
 
     test('should skip RLS check when requested', async () => {
@@ -352,7 +354,9 @@ describeIntegration('Supabase Tool Helpers', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('Operation is required (SELECT, INSERT, UPDATE, DELETE, ALL)');
+      expect(result.errors).toContain(
+        'Operation is required (SELECT, INSERT, UPDATE, DELETE, ALL)'
+      );
     });
 
     test('should fail with invalid operation', async () => {
@@ -363,7 +367,9 @@ describeIntegration('Supabase Tool Helpers', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('Operation must be one of: SELECT, INSERT, UPDATE, DELETE, ALL');
+      expect(result.errors).toContain(
+        'Operation must be one of: SELECT, INSERT, UPDATE, DELETE, ALL'
+      );
     });
 
     test('should require USING for SELECT operation', async () => {
@@ -456,9 +462,7 @@ describeIntegration('Supabase Tool Helpers', () => {
       const result = await executor.execute('validate-table-permissions', {
         table: 'posts',
         hasRLS: true,
-        policies: [
-          { name: 'user_policy', using: 'auth.uid() = user_id' },
-        ],
+        policies: [{ name: 'user_policy', using: 'auth.uid() = user_id' }],
       });
 
       expect(result.rlsEnabled).toBe(true);
@@ -475,7 +479,9 @@ describeIntegration('Supabase Tool Helpers', () => {
       expect(result.rlsEnabled).toBe(false);
       expect(result.isSecure).toBe(false);
       expect(result.warnings).toContain('RLS is disabled - table data is publicly accessible');
-      expect(result.recommendations).toContain('Enable RLS with: ALTER TABLE posts ENABLE ROW LEVEL SECURITY');
+      expect(result.recommendations).toContain(
+        'Enable RLS with: ALTER TABLE posts ENABLE ROW LEVEL SECURITY'
+      );
     });
 
     test('should warn about RLS without policies', async () => {
@@ -487,16 +493,16 @@ describeIntegration('Supabase Tool Helpers', () => {
 
       expect(result.rlsEnabled).toBe(true);
       expect(result.isSecure).toBe(false);
-      expect(result.warnings).toContain('RLS is enabled but no policies exist - table is inaccessible');
+      expect(result.warnings).toContain(
+        'RLS is enabled but no policies exist - table is inaccessible'
+      );
     });
 
     test('should warn about overly permissive policy (true)', async () => {
       const result = await executor.execute('validate-table-permissions', {
         table: 'posts',
         hasRLS: true,
-        policies: [
-          { name: 'all_access', using: 'true' },
-        ],
+        policies: [{ name: 'all_access', using: 'true' }],
       });
 
       expect(result.warnings).toContain("Policy 'all_access' allows access to all rows");
@@ -506,9 +512,7 @@ describeIntegration('Supabase Tool Helpers', () => {
       const result = await executor.execute('validate-table-permissions', {
         table: 'posts',
         hasRLS: true,
-        policies: [
-          { name: 'all_access', using: '(true)' },
-        ],
+        policies: [{ name: 'all_access', using: '(true)' }],
       });
 
       expect(result.warnings).toContain("Policy 'all_access' allows access to all rows");
@@ -518,12 +522,12 @@ describeIntegration('Supabase Tool Helpers', () => {
       const result = await executor.execute('validate-table-permissions', {
         table: 'posts',
         hasRLS: true,
-        policies: [
-          { name: 'unrestricted', operation: 'ALL', using: 'true' },
-        ],
+        policies: [{ name: 'unrestricted', operation: 'ALL', using: 'true' }],
       });
 
-      expect(result.warnings).toContain("Policy 'unrestricted' allows all operations without restrictions");
+      expect(result.warnings).toContain(
+        "Policy 'unrestricted' allows all operations without restrictions"
+      );
     });
 
     test('should return error for missing table', async () => {
@@ -585,7 +589,9 @@ describeIntegration('Supabase Tool Helpers', () => {
       });
 
       expect(result.hint).toBe('Permission denied - check RLS policies and user authentication');
-      expect(result.rlsHint).toBe('Ensure user is authenticated and RLS policy allows this operation');
+      expect(result.rlsHint).toBe(
+        'Ensure user is authenticated and RLS policy allows this operation'
+      );
     });
 
     test('should detect permission denied in message', async () => {
@@ -596,7 +602,9 @@ describeIntegration('Supabase Tool Helpers', () => {
         },
       });
 
-      expect(result.rlsHint).toBe('Ensure user is authenticated and RLS policy allows this operation');
+      expect(result.rlsHint).toBe(
+        'Ensure user is authenticated and RLS policy allows this operation'
+      );
     });
 
     test('should include query context', async () => {
@@ -709,7 +717,9 @@ describeIntegration('Supabase Tool Helpers', () => {
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nSupabase Helper Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nSupabase Helper Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(100);
     });

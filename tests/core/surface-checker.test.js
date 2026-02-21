@@ -87,12 +87,12 @@ describe('SurfaceChecker', () => {
 
     describe('equality operators', () => {
       it('should evaluate string equality correctly', () => {
-        expect(
-          checker.evaluateCondition("risk_level == 'HIGH'", { risk_level: 'HIGH' }),
-        ).toBe(true);
-        expect(
-          checker.evaluateCondition("risk_level == 'HIGH'", { risk_level: 'LOW' }),
-        ).toBe(false);
+        expect(checker.evaluateCondition("risk_level == 'HIGH'", { risk_level: 'HIGH' })).toBe(
+          true
+        );
+        expect(checker.evaluateCondition("risk_level == 'HIGH'", { risk_level: 'LOW' })).toBe(
+          false
+        );
       });
 
       it('should evaluate number equality correctly', () => {
@@ -106,17 +106,17 @@ describe('SurfaceChecker', () => {
         expect(
           checker.evaluateCondition('action_type IN destructive_actions', {
             action_type: 'delete_files',
-          }),
+          })
         ).toBe(true);
         expect(
           checker.evaluateCondition('action_type IN destructive_actions', {
             action_type: 'force_push',
-          }),
+          })
         ).toBe(true);
         expect(
           checker.evaluateCondition('action_type IN destructive_actions', {
             action_type: 'read_file',
-          }),
+          })
         ).toBe(false);
       });
     });
@@ -126,12 +126,12 @@ describe('SurfaceChecker', () => {
         expect(
           checker.evaluateCondition('requested_scope > approved_scope', {
             scope_expanded: true,
-          }),
+          })
         ).toBe(true);
         expect(
           checker.evaluateCondition('requested_scope > approved_scope', {
             scope_expanded: false,
-          }),
+          })
         ).toBe(false);
       });
 
@@ -140,7 +140,7 @@ describe('SurfaceChecker', () => {
           checker.evaluateCondition('requested_scope > approved_scope', {
             requested_scope: 'full refactor of authentication system',
             approved_scope: 'fix login bug',
-          }),
+          })
         ).toBe(true);
       });
     });
@@ -151,19 +151,19 @@ describe('SurfaceChecker', () => {
           checker.evaluateCondition('requires_api_key OR requires_payment', {
             requires_api_key: true,
             requires_payment: false,
-          }),
+          })
         ).toBe(true);
         expect(
           checker.evaluateCondition('requires_api_key OR requires_payment', {
             requires_api_key: false,
             requires_payment: true,
-          }),
+          })
         ).toBe(true);
         expect(
           checker.evaluateCondition('requires_api_key OR requires_payment', {
             requires_api_key: false,
             requires_payment: false,
-          }),
+          })
         ).toBe(false);
       });
     });
@@ -171,10 +171,10 @@ describe('SurfaceChecker', () => {
     describe('boolean fields', () => {
       it('should evaluate boolean fields correctly', () => {
         expect(checker.evaluateCondition('requires_api_key', { requires_api_key: true })).toBe(
-          true,
+          true
         );
         expect(checker.evaluateCondition('requires_api_key', { requires_api_key: false })).toBe(
-          false,
+          false
         );
         expect(checker.evaluateCondition('requires_api_key', {})).toBe(false);
       });
@@ -200,7 +200,7 @@ describe('SurfaceChecker', () => {
         {
           errors_in_task: 3,
           error_summary: 'Connection failed',
-        },
+        }
       );
       expect(result).toBe('Error count: 3, Summary: Connection failed');
     });

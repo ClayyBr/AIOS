@@ -31,9 +31,11 @@ jest.mock('../../../.aios-core/core/orchestration/message-formatter', () => ({
     formatEducational: jest.fn().mockReturnValue('educational message'),
     setEducationalMode: jest.fn(),
     isEducationalMode: jest.fn().mockReturnValue(false),
-    formatToggleFeedback: jest.fn().mockImplementation((enabled) =>
-      enabled ? '🎓 Modo educativo ativado!' : '📋 Modo educativo desativado.',
-    ),
+    formatToggleFeedback: jest
+      .fn()
+      .mockImplementation((enabled) =>
+        enabled ? '🎓 Modo educativo ativado!' : '📋 Modo educativo desativado.'
+      ),
     formatPersistencePrompt: jest.fn().mockReturnValue('[1] Sessão / [2] Permanente'),
   })),
 }));
@@ -164,7 +166,9 @@ jest.mock('../../../.aios-core/core/orchestration/session-state', () => {
   const mockRecordPhaseChange = jest.fn().mockResolvedValue({});
   const mockGetSessionOverride = jest.fn().mockReturnValue(null);
   const mockSetSessionOverride = jest.fn();
-  const mockHandleResumeOption = jest.fn().mockResolvedValue({ action: 'continue', story: '12.1', phase: 'development' });
+  const mockHandleResumeOption = jest
+    .fn()
+    .mockResolvedValue({ action: 'continue', story: '12.1', phase: 'development' });
   return {
     SessionState: jest.fn().mockImplementation(() => ({
       exists: mockExists,
@@ -185,7 +189,12 @@ jest.mock('../../../.aios-core/core/orchestration/session-state', () => {
     loadSessionState: jest.fn(),
     ActionType: { PHASE_CHANGE: 'PHASE_CHANGE' },
     Phase: {},
-    ResumeOption: { CONTINUE: 'continue', REVIEW: 'review', RESTART: 'restart', DISCARD: 'discard' },
+    ResumeOption: {
+      CONTINUE: 'continue',
+      REVIEW: 'review',
+      RESTART: 'restart',
+      DISCARD: 'discard',
+    },
     SESSION_STATE_VERSION: '1.2',
     SESSION_STATE_FILENAME: '.session-state.yaml',
     CRASH_THRESHOLD_MINUTES: 30,
@@ -502,7 +511,7 @@ describe('BobOrchestrator', () => {
       // Given — read the source file
       const sourcePath = path.join(
         __dirname,
-        '../../../.aios-core/core/orchestration/bob-orchestrator.js',
+        '../../../.aios-core/core/orchestration/bob-orchestrator.js'
       );
       const source = await fs.readFile(sourcePath, 'utf8');
       const lines = source.split('\n');
@@ -774,7 +783,7 @@ describe('BobOrchestrator', () => {
       expect(orchestrator.sessionState.recordPhaseChange).toHaveBeenCalledWith(
         'development',
         '12.1',
-        '@dev',
+        '@dev'
       );
     });
 
@@ -932,7 +941,7 @@ describe('BobOrchestrator', () => {
         // Then
         expect(orchestrator.sessionState.setSessionOverride).toHaveBeenCalledWith(
           'educational_mode',
-          true,
+          true
         );
       });
 

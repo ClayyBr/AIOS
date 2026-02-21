@@ -15,21 +15,24 @@ const fs = require('fs');
 const os = require('os');
 
 // Collectors under test
-const { collectQualityMetrics, BRACKET_ACTIVE_LAYERS, MAX_STALENESS_MS } = require(
-  '../../../.aios-core/core/synapse/diagnostics/collectors/quality-collector',
-);
-const { collectConsistencyMetrics, MAX_TIMESTAMP_GAP_MS } = require(
-  '../../../.aios-core/core/synapse/diagnostics/collectors/consistency-collector',
-);
-const { collectOutputAnalysis, UAP_OUTPUT_EXPECTATIONS } = require(
-  '../../../.aios-core/core/synapse/diagnostics/collectors/output-analyzer',
-);
-const { collectRelevanceMatrix, IMPORTANCE } = require(
-  '../../../.aios-core/core/synapse/diagnostics/collectors/relevance-matrix',
-);
-const { getActiveLayers } = require(
-  '../../../.aios-core/core/synapse/context/context-tracker',
-);
+const {
+  collectQualityMetrics,
+  BRACKET_ACTIVE_LAYERS,
+  MAX_STALENESS_MS,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/quality-collector');
+const {
+  collectConsistencyMetrics,
+  MAX_TIMESTAMP_GAP_MS,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/consistency-collector');
+const {
+  collectOutputAnalysis,
+  UAP_OUTPUT_EXPECTATIONS,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/output-analyzer');
+const {
+  collectRelevanceMatrix,
+  IMPORTANCE,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/relevance-matrix');
+const { getActiveLayers } = require('../../../.aios-core/core/synapse/context/context-tracker');
 
 // Helpers
 function createTempProject() {
@@ -56,8 +59,12 @@ function cleanupDir(dir) {
 describe('Issue #1: Staleness should degrade, not zero out UAP score', () => {
   let project;
 
-  beforeEach(() => { project = createTempProject(); });
-  afterEach(() => { cleanupDir(project.dir); });
+  beforeEach(() => {
+    project = createTempProject();
+  });
+  afterEach(() => {
+    cleanupDir(project.dir);
+  });
 
   test('UAP metrics 6 minutes old (just past MAX_STALENESS) should NOT zero score', () => {
     const sixMinAgo = new Date(Date.now() - 6 * 60 * 1000).toISOString();
@@ -115,8 +122,12 @@ describe('Issue #1: Staleness should degrade, not zero out UAP score', () => {
 describe('Issue #2: Timestamp gap between UAP and Hook should allow > 30s', () => {
   let project;
 
-  beforeEach(() => { project = createTempProject(); });
-  afterEach(() => { cleanupDir(project.dir); });
+  beforeEach(() => {
+    project = createTempProject();
+  });
+  afterEach(() => {
+    cleanupDir(project.dir);
+  });
 
   test('MAX_TIMESTAMP_GAP_MS should be 10 minutes (covers independent pipeline lifecycle)', () => {
     // UAP: written once at activation
@@ -150,11 +161,11 @@ describe('Issue #2: Timestamp gap between UAP and Hook should allow > 30s', () =
     // Write active-agent bridge
     fs.writeFileSync(
       path.join(project.dir, '.synapse', 'sessions', '_active-agent.json'),
-      JSON.stringify({ id: 'po' }),
+      JSON.stringify({ id: 'po' })
     );
 
     const result = collectConsistencyMetrics(project.dir);
-    const timestampCheck = result.checks.find(c => c.name === 'timestamp');
+    const timestampCheck = result.checks.find((c) => c.name === 'timestamp');
 
     // BUG: Currently FAILS because 120s > 30s threshold
     // EXPECTED: Should PASS — 2 minutes is normal for independent pipelines
@@ -180,13 +191,14 @@ describe('Issue #3: hookBootMs should propagate from hook to engine metrics', ()
       // Spy on _persistHookMetrics
       let capturedConfig;
       const original = engine._persistHookMetrics.bind(engine);
-      engine._persistHookMetrics = function(summary, bracket, config) {
+      engine._persistHookMetrics = function (summary, bracket, config) {
         capturedConfig = config;
         original(summary, bracket, config);
       };
 
       // Run process with _hookBootTime (simulating hook entry)
-      return engine.process('test prompt', { prompt_count: 0 }, { _hookBootTime: mockBootTime })
+      return engine
+        .process('test prompt', { prompt_count: 0 }, { _hookBootTime: mockBootTime })
         .then(() => {
           expect(capturedConfig).toBeDefined();
           expect(capturedConfig._hookBootTime).toBe(mockBootTime);
@@ -210,8 +222,12 @@ describe('Issue #3: hookBootMs should propagate from hook to engine metrics', ()
 describe('Issue #4: Missing memories loader should say "Optional — Pro feature"', () => {
   let project;
 
-  beforeEach(() => { project = createTempProject(); });
-  afterEach(() => { cleanupDir(project.dir); });
+  beforeEach(() => {
+    project = createTempProject();
+  });
+  afterEach(() => {
+    cleanupDir(project.dir);
+  });
 
   test('output analyzer shows generic message for missing memories instead of Pro context', () => {
     writeMetrics(project.metricsDir, 'uap-metrics.json', {
@@ -222,7 +238,7 @@ describe('Issue #4: Missing memories loader should say "Optional — Pro feature
     });
 
     const result = collectOutputAnalysis(project.dir);
-    const memoriesEntry = result.uapAnalysis.find(a => a.name === 'memories');
+    const memoriesEntry = result.uapAnalysis.find((a) => a.name === 'memories');
 
     expect(memoriesEntry).toBeDefined();
     expect(memoriesEntry.status).toBe('missing');
@@ -239,8 +255,12 @@ describe('Issue #4: Missing memories loader should say "Optional — Pro feature
 describe('Issue #5: Skipped layers should NOT count as gaps', () => {
   let project;
 
-  beforeEach(() => { project = createTempProject(); });
-  afterEach(() => { cleanupDir(project.dir); });
+  beforeEach(() => {
+    project = createTempProject();
+  });
+  afterEach(() => {
+    cleanupDir(project.dir);
+  });
 
   test('layers skipped by bracket (no data) should not be gaps', () => {
     // Agent @po in FRESH bracket: only L0, L1, L2, L7 active
@@ -269,15 +289,15 @@ describe('Issue #5: Skipped layers should NOT count as gaps', () => {
 
     fs.writeFileSync(
       path.join(project.dir, '.synapse', 'sessions', '_active-agent.json'),
-      JSON.stringify({ id: 'po' }),
+      JSON.stringify({ id: 'po' })
     );
 
     const result = collectRelevanceMatrix(project.dir);
 
     // BUG: Currently counts skipped layers as gaps
     // For @po with no workflow/task, skipped L3-L6 is NORMAL
-    const skippedGaps = result.gaps.filter(g =>
-      ['workflow', 'task', 'keyword', 'star-command'].includes(g.component),
+    const skippedGaps = result.gaps.filter((g) =>
+      ['workflow', 'task', 'keyword', 'star-command'].includes(g.component)
     );
 
     // EXPECTED: skipped layers should NOT appear as gaps
@@ -293,10 +313,16 @@ describe('Issue #7: BRACKET_ACTIVE_LAYERS should match engine context-tracker', 
     // context-tracker LAYER_CONFIGS.FRESH = [0, 1, 2, 7]
     // = ['constitution', 'global', 'agent', 'star-command']
     const engineLayers = getActiveLayers('FRESH');
-    const engineLayerNames = engineLayers.layers.map(n => {
+    const engineLayerNames = engineLayers.layers.map((n) => {
       const map = {
-        0: 'constitution', 1: 'global', 2: 'agent', 3: 'workflow',
-        4: 'task', 5: 'squad', 6: 'keyword', 7: 'star-command',
+        0: 'constitution',
+        1: 'global',
+        2: 'agent',
+        3: 'workflow',
+        4: 'task',
+        5: 'squad',
+        6: 'keyword',
+        7: 'star-command',
       };
       return map[n];
     });
@@ -309,10 +335,16 @@ describe('Issue #7: BRACKET_ACTIVE_LAYERS should match engine context-tracker', 
 
   test('MODERATE bracket: quality-collector expects same layers as context-tracker', () => {
     const engineLayers = getActiveLayers('MODERATE');
-    const engineLayerNames = engineLayers.layers.map(n => {
+    const engineLayerNames = engineLayers.layers.map((n) => {
       const map = {
-        0: 'constitution', 1: 'global', 2: 'agent', 3: 'workflow',
-        4: 'task', 5: 'squad', 6: 'keyword', 7: 'star-command',
+        0: 'constitution',
+        1: 'global',
+        2: 'agent',
+        3: 'workflow',
+        4: 'task',
+        5: 'squad',
+        6: 'keyword',
+        7: 'star-command',
       };
       return map[n];
     });

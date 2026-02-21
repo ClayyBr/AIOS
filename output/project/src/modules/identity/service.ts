@@ -9,7 +9,8 @@ import { AppError } from '../../middlewares/errorHandler';
 const hashPassword = (password: string): TE.TaskEither<AppError, string> =>
   TE.tryCatch(
     () => bcrypt.hash(password, 10),
-    (reason) => new AppError('PasswordHashingError', `Failed to hash password: ${String(reason)}`, 500)
+    (reason) =>
+      new AppError('PasswordHashingError', `Failed to hash password: ${String(reason)}`, 500)
   );
 
 // Registra um novo usuário
@@ -50,7 +51,12 @@ export const loginUser = (email: string, passwordAttempt: string): TE.TaskEither
     TE.chain((user) =>
       TE.tryCatch(
         () => bcrypt.compare(passwordAttempt, user.password),
-        (reason) => new AppError('PasswordComparisonError', `Failed to compare passwords: ${String(reason)}`, 500)
+        (reason) =>
+          new AppError(
+            'PasswordComparisonError',
+            `Failed to compare passwords: ${String(reason)}`,
+            500
+          )
       )
     ),
     TE.chain((isMatch) =>

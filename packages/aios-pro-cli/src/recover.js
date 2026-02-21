@@ -97,4 +97,11 @@ async function recoverLicense() {
   console.log(`  You can also visit: ${RECOVERY_URL}\n`);
 }
 
-module.exports = { recoverLicense, maskEmail, promptEmail, openBrowser, RECOVERY_URL, RECOVERY_MESSAGE };
+module.exports = {
+  recoverLicense,
+  maskEmail,
+  promptEmail,
+  openBrowser,
+  RECOVERY_URL,
+  RECOVERY_MESSAGE,
+};

@@ -170,9 +170,8 @@ O instalador automaticamente:
 2. Comandos são instalados em `.claude\commands\AIOS\`
 3. Use `/nome-do-agente` para ativar agentes
 
-
-2. Execute o instalador
-4. Use `@nome-do-agente` para ativar agentes
+4. Execute o instalador
+5. Use `@nome-do-agente` para ativar agentes
 
 ---
 

@@ -17,14 +17,15 @@ O CFO Squad atualmente opera com 3 agentes: `gerente-geral` (orquestração), `a
 A divisão proposta separa o foco: `arquiteto-lucro` fica com custos operacionais (fichas, precificação, cardápio), enquanto o novo `financeiro` assume contabilidade gerencial (DRE, CMV auditoria, relatórios) e adiciona capacidades estratégicas (projeções, fluxo de caixa, orçamento).
 
 Documentos de referência:
+
 - [analise-divisao-agentes-cfo.md](file:///c:/Users/Cleison/Desktop/Google/aios-core/docs/analise-divisao-agentes-cfo.md)
 - [Manual_Contabilidade_Restaurante.md](file:///c:/Users/Cleison/Desktop/Google/aios-core/squads/CFO/data/Manual_Contabilidade_Restaurante.md) — Manual técnico de Contabilidade de Performance cobrindo CMV (real/teórico/variância), inteligência tributária (Simples Nacional, monofásica, ICMS-ST), CMO, DRE gerencial (USALI), fluxo de caixa, balanço patrimonial, KPIs avançados (Kasavana & Smith, RevPASH) e controle interno
 
 ### Change Log
 
-| Date | Version | Description | Author |
-|------|---------|-------------|--------|
-| 16/02/2026 | 1.0 | PRD criado | @pm (Morgan) |
+| Date       | Version | Description | Author       |
+| ---------- | ------- | ----------- | ------------ |
+| 16/02/2026 | 1.0     | PRD criado  | @pm (Morgan) |
 
 ---
 

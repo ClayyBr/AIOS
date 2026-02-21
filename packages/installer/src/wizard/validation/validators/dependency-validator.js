@@ -169,13 +169,7 @@ async function validatePackageJson(results) {
  * @private
  */
 async function checkCriticalDependencies(results) {
-  const criticalDeps = [
-    'inquirer',
-    'chalk',
-    'yaml',
-    'fs-extra',
-    '@clack/prompts',
-  ];
+  const criticalDeps = ['inquirer', 'chalk', 'yaml', 'fs-extra', '@clack/prompts'];
 
   const nodeModulesPath = path.join(process.cwd(), 'node_modules');
   const missingDeps = [];
@@ -234,7 +228,7 @@ async function runSecurityAudit(results, packageManager = 'npm') {
             severity: vulnerabilities.critical > 0 ? 'high' : 'medium',
             message: `${total} vulnerabilities found (${vulnerabilities.critical} critical, ${vulnerabilities.high} high, ${vulnerabilities.moderate} moderate, ${vulnerabilities.low} low)`,
             code: 'VULNERABILITIES_FOUND',
-            solution: 'Run \'npm audit fix\' to resolve',
+            solution: "Run 'npm audit fix' to resolve",
           });
         } else {
           results.checks.push({
@@ -300,7 +294,7 @@ async function runSecurityAudit(results, packageManager = 'npm') {
 async function countInstalledPackages(results, nodeModulesPath) {
   try {
     const packages = fs.readdirSync(nodeModulesPath);
-    const packageCount = packages.filter(pkg => {
+    const packageCount = packages.filter((pkg) => {
       // Filter out .bin, .cache, etc.
       if (pkg.startsWith('.')) return false;
 

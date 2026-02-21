@@ -9,7 +9,7 @@ describe('detectProjectType', () => {
   beforeEach(() => {
     // Clear all mocks before each test
     jest.clearAllMocks();
-    
+
     // Reset console.error mock to avoid test pollution
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
@@ -31,9 +31,9 @@ describe('detectProjectType', () => {
         return false; // No .aios-core, package.json, or .git
       });
       fs.readdirSync.mockReturnValue([]); // Empty directory
-      
+
       const result = detectProjectType('/test/empty');
-      
+
       expect(result).toBe('GREENFIELD');
       expect(fs.existsSync).toHaveBeenCalledWith(expect.stringContaining('.aios-core'));
       expect(fs.readdirSync).toHaveBeenCalledTimes(1);
@@ -47,9 +47,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue([]);
-      
+
       const result = detectProjectType();
-      
+
       expect(result).toBe('GREENFIELD');
       expect(fs.readdirSync).toHaveBeenCalledWith(path.resolve(mockCwd));
     });
@@ -67,9 +67,9 @@ describe('detectProjectType', () => {
         return false; // No .aios-core or .git
       });
       fs.readdirSync.mockReturnValue(['package.json', 'src', 'README.md']);
-      
+
       const result = detectProjectType('/test/brownfield');
-      
+
       expect(result).toBe('BROWNFIELD');
     });
 
@@ -83,9 +83,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue(['package.json', 'index.js']);
-      
+
       const result = detectProjectType('/test/node-project');
-      
+
       expect(result).toBe('BROWNFIELD');
     });
   });
@@ -102,9 +102,9 @@ describe('detectProjectType', () => {
         return false; // No .aios-core or package.json
       });
       fs.readdirSync.mockReturnValue(['.git', 'README.md', 'src']);
-      
+
       const result = detectProjectType('/test/brownfield-git');
-      
+
       expect(result).toBe('BROWNFIELD');
     });
 
@@ -118,9 +118,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue(['.git', 'package.json', 'src', 'README.md']);
-      
+
       const result = detectProjectType('/test/full-project');
-      
+
       expect(result).toBe('BROWNFIELD');
     });
   });
@@ -137,9 +137,9 @@ describe('detectProjectType', () => {
         return true; // Other files may exist too
       });
       fs.readdirSync.mockReturnValue(['.aios-core', 'package.json', '.git', 'src']);
-      
+
       const result = detectProjectType('/test/existing');
-      
+
       expect(result).toBe('EXISTING_AIOS');
     });
 
@@ -154,9 +154,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue(['.aios-core', 'package.json', '.git', 'src']);
-      
+
       const result = detectProjectType('/test/priority-test');
-      
+
       // EXISTING_AIOS has highest priority
       expect(result).toBe('EXISTING_AIOS');
     });
@@ -174,9 +174,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue(['README.md', 'index.html', 'styles.css']);
-      
+
       const result = detectProjectType('/test/unknown');
-      
+
       expect(result).toBe('UNKNOWN');
     });
 
@@ -187,9 +187,9 @@ describe('detectProjectType', () => {
         return false; // No recognized markers
       });
       fs.readdirSync.mockReturnValue(['.DS_Store', '.gitignore']); // Hidden files only
-      
+
       const result = detectProjectType('/test/hidden-only');
-      
+
       expect(result).toBe('UNKNOWN');
     });
   });
@@ -204,7 +204,7 @@ describe('detectProjectType', () => {
         if (checkPath === path.resolve('/test/nonexistent')) return false;
         return false;
       });
-      
+
       expect(() => detectProjectType('/test/nonexistent')).toThrow('Failed to detect project type');
       expect(() => detectProjectType('/test/nonexistent')).toThrow('Directory does not exist');
     });
@@ -213,7 +213,7 @@ describe('detectProjectType', () => {
       // Setup: Permission denied error
       const permissionError = new Error('EACCES: permission denied');
       permissionError.code = 'EACCES';
-      
+
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/denied')) return true;
         if (checkPath.endsWith('.aios-core')) {
@@ -221,10 +221,10 @@ describe('detectProjectType', () => {
         }
         return false;
       });
-      
+
       expect(() => detectProjectType('/test/denied')).toThrow('Failed to detect project type');
       expect(console.error).toHaveBeenCalledWith(
-        expect.stringContaining('[detect-project-type] Error detecting project type'),
+        expect.stringContaining('[detect-project-type] Error detecting project type')
       );
     });
 
@@ -232,7 +232,7 @@ describe('detectProjectType', () => {
       // Setup: readdirSync throws error
       const readError = new Error('EPERM: operation not permitted');
       readError.code = 'EPERM';
-      
+
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/read-error')) return true;
         return false;
@@ -240,7 +240,7 @@ describe('detectProjectType', () => {
       fs.readdirSync.mockImplementation(() => {
         throw readError;
       });
-      
+
       expect(() => detectProjectType('/test/read-error')).toThrow('Failed to detect project type');
       expect(console.error).toHaveBeenCalled();
     });
@@ -270,9 +270,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue(['.aios-core']); // Only .aios-core
-      
+
       const result = detectProjectType('/test/priority1');
-      
+
       expect(result).toBe('EXISTING_AIOS');
     });
 
@@ -283,9 +283,9 @@ describe('detectProjectType', () => {
         return false; // No markers
       });
       fs.readdirSync.mockReturnValue([]); // Empty
-      
+
       const result = detectProjectType('/test/priority2');
-      
+
       expect(result).toBe('GREENFIELD');
     });
 
@@ -299,9 +299,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue(['package.json', 'other-file.txt']);
-      
+
       const result = detectProjectType('/test/priority3');
-      
+
       expect(result).toBe('BROWNFIELD');
     });
   });
@@ -312,44 +312,44 @@ describe('detectProjectType', () => {
   describe('Cross-Platform Compatibility', () => {
     test('handles Windows-style paths correctly', () => {
       const windowsPath = 'C:\\Users\\Test\\project';
-      
+
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve(windowsPath)) return true;
         return false;
       });
       fs.readdirSync.mockReturnValue([]);
-      
+
       const result = detectProjectType(windowsPath);
-      
+
       expect(result).toBe('GREENFIELD');
       expect(fs.existsSync).toHaveBeenCalledWith(expect.any(String));
     });
 
     test('handles Unix-style paths correctly', () => {
       const unixPath = '/home/user/project';
-      
+
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve(unixPath)) return true;
         return false;
       });
       fs.readdirSync.mockReturnValue([]);
-      
+
       const result = detectProjectType(unixPath);
-      
+
       expect(result).toBe('GREENFIELD');
     });
 
     test('normalizes relative paths correctly', () => {
       const relativePath = './test/project';
-      
+
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve(relativePath)) return true;
         return false;
       });
       fs.readdirSync.mockReturnValue([]);
-      
+
       const result = detectProjectType(relativePath);
-      
+
       expect(result).toBe('GREENFIELD');
     });
   });
@@ -366,9 +366,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue([]);
-      
+
       detectProjectType('/test/secure');
-      
+
       // Verify all existsSync calls use proper path joining
       expect(fs.existsSync).toHaveBeenCalledWith(expect.stringContaining(path.sep));
     });
@@ -376,7 +376,7 @@ describe('detectProjectType', () => {
     test('normalizes path to prevent directory traversal attacks', () => {
       const maliciousPath = '/test/../../etc/passwd';
       const resolvedPath = path.resolve(maliciousPath);
-      
+
       fs.existsSync.mockImplementation((checkPath) => {
         // Directory exists
         if (checkPath === resolvedPath) return true;
@@ -385,9 +385,9 @@ describe('detectProjectType', () => {
         return false;
       });
       fs.readdirSync.mockReturnValue([]);
-      
+
       const result = detectProjectType(maliciousPath);
-      
+
       expect(result).toBe('GREENFIELD');
       expect(fs.existsSync).toHaveBeenCalled();
       // Verify the normalized path was used as base
@@ -398,4 +398,3 @@ describe('detectProjectType', () => {
     });
   });
 });
-

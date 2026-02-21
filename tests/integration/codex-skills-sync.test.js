@@ -15,8 +15,9 @@ describe('Codex Skills Sync', () => {
 
   beforeEach(() => {
     tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-codex-skills-'));
-    expectedAgentCount = fs.readdirSync(path.join(process.cwd(), '.aios-core', 'development', 'agents'))
-      .filter(name => name.endsWith('.md')).length;
+    expectedAgentCount = fs
+      .readdirSync(path.join(process.cwd(), '.aios-core', 'development', 'agents'))
+      .filter((name) => name.endsWith('.md')).length;
   });
 
   afterEach(() => {
@@ -82,7 +83,9 @@ describe('Codex Skills Sync', () => {
       id: 'dev',
       filename: 'dev.md',
       agent: { name: 'Dex', title: 'Developer', whenToUse: 'Build features safely.' },
-      commands: [{ name: 'help', description: 'Show commands', visibility: ['quick', 'key', 'full'] }],
+      commands: [
+        { name: 'help', description: 'Show commands', visibility: ['quick', 'key', 'full'] },
+      ],
     };
     const content = buildSkillContent(sample);
     expect(content.startsWith('---')).toBe(true);

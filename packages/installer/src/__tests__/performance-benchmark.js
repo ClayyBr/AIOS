@@ -209,7 +209,7 @@ async function benchmarkHashing(files) {
         } catch {
           // Skip files that can't be read
         }
-      }),
+      })
     );
   }
   timers.hashParallelBatch.stop();
@@ -338,8 +338,12 @@ async function runBenchmarks() {
   results.summary = {
     totalFiles: results.fileCount,
     hashingSpeedup: hashSeq > 0 ? `${(hashSeq / hashPar).toFixed(2)}x` : 'N/A',
-    realpathSavings: realpathDouble > 0 ? `${Math.round(((realpathDouble - realpathSingle) / realpathDouble) * 100)}%` : 'N/A',
-    statLoopSavings: statLoop > 0 ? `${Math.round(((statLoop - withTypes) / statLoop) * 100)}%` : 'N/A',
+    realpathSavings:
+      realpathDouble > 0
+        ? `${Math.round(((realpathDouble - realpathSingle) / realpathDouble) * 100)}%`
+        : 'N/A',
+    statLoopSavings:
+      statLoop > 0 ? `${Math.round(((statLoop - withTypes) / statLoop) * 100)}%` : 'N/A',
     estimatedTotalTime: results.phases.totalInstallSimulation?.avg || 0,
     target: '<30000ms for 1000 files',
     baseline: `${results.phases.totalInstallSimulation?.avg || 'TBD'}ms`,
@@ -364,11 +368,17 @@ async function runBenchmarks() {
   console.error('');
   console.error('Phase Results (avg ms):');
   console.error(`  Directory stat loop:     ${statLoop}ms`);
-  console.error(`  Directory withFileTypes: ${withTypes}ms (${results.summary.statLoopSavings} faster)`);
+  console.error(
+    `  Directory withFileTypes: ${withTypes}ms (${results.summary.statLoopSavings} faster)`
+  );
   console.error(`  Realpath single:         ${realpathSingle}ms`);
-  console.error(`  Realpath double:         ${realpathDouble}ms (${results.summary.realpathSavings} overhead)`);
+  console.error(
+    `  Realpath double:         ${realpathDouble}ms (${results.summary.realpathSavings} overhead)`
+  );
   console.error(`  Hash sequential:         ${hashSeq}ms`);
-  console.error(`  Hash parallel:           ${hashPar}ms (${results.summary.hashingSpeedup} faster)`);
+  console.error(
+    `  Hash parallel:           ${hashPar}ms (${results.summary.hashingSpeedup} faster)`
+  );
   console.error('');
   console.error(`Total Install Simulation:  ${results.summary.baseline}`);
   console.error(`Target:                    ${results.summary.target}`);

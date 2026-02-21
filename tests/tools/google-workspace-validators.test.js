@@ -49,7 +49,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
     });
 
     test('should have all required validator IDs', () => {
-      const validatorIds = googleWorkspaceTool.executable_knowledge.validators.map(v => v.id);
+      const validatorIds = googleWorkspaceTool.executable_knowledge.validators.map((v) => v.id);
       // Drive operations
       expect(validatorIds).toContain('validate-create-file');
       expect(validatorIds).toContain('validate-share-file');
@@ -101,7 +101,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('name is required for create_file');
     });
 
@@ -111,7 +111,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('Either content or fileUrl is required for create_file');
     });
 
@@ -123,7 +123,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('Invalid mimeType format');
     });
 
@@ -166,7 +166,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('fileId is required for share_file');
     });
 
@@ -177,7 +177,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('Either emailAddress or type (anyone/domain) is required');
     });
 
@@ -189,7 +189,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('role must be one of: reader, writer, commenter, owner');
     });
 
@@ -240,7 +240,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('summary is required for create_event');
     });
 
@@ -252,7 +252,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('startTime is required for create_event');
     });
 
@@ -264,7 +264,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('endTime is required for create_event');
     });
 
@@ -277,7 +277,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('startTime must be valid ISO 8601 format');
     });
 
@@ -290,7 +290,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('endTime must be valid ISO 8601 format');
     });
 
@@ -304,7 +304,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('attendees must be an array of email addresses');
     });
   });
@@ -325,7 +325,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('eventId is required for update_event');
     });
 
@@ -370,7 +370,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('to is required for send_email');
     });
 
@@ -381,7 +381,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('subject is required for send_email');
     });
 
@@ -392,7 +392,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('body is required for send_email');
     });
 
@@ -404,16 +404,12 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('to must be a valid email address');
     });
 
     test('should pass with valid email formats', async () => {
-      const validEmails = [
-        'user@example.com',
-        'user.name@example.co.uk',
-        'user+tag@example.com',
-      ];
+      const validEmails = ['user@example.com', 'user.name@example.co.uk', 'user+tag@example.com'];
 
       for (const email of validEmails) {
         const result = await validator.validate('send_email', {
@@ -449,7 +445,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       const result = await validator.validate('search_messages', {});
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('query is required for search_messages');
     });
 
@@ -460,7 +456,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('maxResults must be a positive number');
     });
 
@@ -471,7 +467,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('maxResults must be a positive number');
     });
   });
@@ -500,7 +496,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('title is required for create_spreadsheet');
     });
 
@@ -511,7 +507,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('sheets must be an array of sheet names');
     });
   });
@@ -521,7 +517,10 @@ describeIntegration('Google Workspace Tool Validators', () => {
       const result = await validator.validate('update_range', {
         spreadsheetId: 'spreadsheet123',
         range: 'Sheet1!A1:B2',
-        values: [['A1', 'B1'], ['A2', 'B2']],
+        values: [
+          ['A1', 'B1'],
+          ['A2', 'B2'],
+        ],
       });
 
       expect(result.valid).toBe(true);
@@ -534,7 +533,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('spreadsheetId is required for update_range');
     });
 
@@ -545,7 +544,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('range is required for update_range');
     });
 
@@ -556,7 +555,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('values is required for update_range');
     });
 
@@ -568,7 +567,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('values must be a 2D array');
     });
 
@@ -580,7 +579,7 @@ describeIntegration('Google Workspace Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      const messages = result.errors.map(e => e.message);
+      const messages = result.errors.map((e) => e.message);
       expect(messages).toContain('range must be in A1 notation (e.g., Sheet1!A1:B2)');
     });
 
@@ -622,7 +621,9 @@ describeIntegration('Google Workspace Tool Validators', () => {
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nGoogle Workspace Validator Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nGoogle Workspace Validator Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(50);
     });

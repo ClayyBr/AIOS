@@ -45,7 +45,7 @@ describeIntegration('Google Workspace Tool Helpers', () => {
     });
 
     test('should have all required helper IDs', () => {
-      const helperIds = googleWorkspaceTool.executable_knowledge.helpers.map(h => h.id);
+      const helperIds = googleWorkspaceTool.executable_knowledge.helpers.map((h) => h.id);
       expect(helperIds).toContain('format-oauth-scopes');
       expect(helperIds).toContain('parse-drive-file-id');
       expect(helperIds).toContain('format-calendar-datetime');
@@ -581,8 +581,14 @@ describeIntegration('Google Workspace Tool Helpers', () => {
 
     test('should handle various file extensions', async () => {
       const tests = [
-        { filename: 'doc.docx', expectedMime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' },
-        { filename: 'sheet.xlsx', expectedMime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
+        {
+          filename: 'doc.docx',
+          expectedMime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        },
+        {
+          filename: 'sheet.xlsx',
+          expectedMime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        },
         { filename: 'photo.jpg', expectedMime: 'image/jpeg' },
         { filename: 'video.mp4', expectedMime: 'video/mp4' },
         { filename: 'archive.zip', expectedMime: 'application/zip' },
@@ -668,7 +674,9 @@ describeIntegration('Google Workspace Tool Helpers', () => {
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nGoogle Workspace Helper Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nGoogle Workspace Helper Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(100);
     });
@@ -703,7 +711,8 @@ describeIntegration('Google Workspace Tool Helpers', () => {
       for (let i = 0; i < iterations; i++) {
         const start = Date.now();
         await executor.execute('parse-drive-file-id', {
-          input: 'https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/view',
+          input:
+            'https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/view',
         });
         const duration = Date.now() - start;
         durations.push(duration);

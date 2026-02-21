@@ -17,14 +17,18 @@ const {
   formatNotFoundError,
   wrapText,
 } = require('../../.aios-core/cli/commands/workers/formatters/info-formatter');
-const { findSuggestions, findRelatedWorkers } = require('../../.aios-core/cli/commands/workers/info');
+const {
+  findSuggestions,
+  findRelatedWorkers,
+} = require('../../.aios-core/cli/commands/workers/info');
 const { levenshteinDistance } = require('../../.aios-core/cli/commands/workers/search-keyword');
 
 // Mock worker for testing
 const mockWorker = {
   id: 'json-csv-transformer',
   name: 'JSON to CSV Transformer',
-  description: 'Converts JSON data to CSV format with configurable column mapping and delimiter options.',
+  description:
+    'Converts JSON data to CSV format with configurable column mapping and delimiter options.',
   category: 'data',
   subcategory: 'transformation',
   inputs: ['json (object|array) - JSON data to transform'],
@@ -177,10 +181,7 @@ describe('Not Found Error Formatter', () => {
   });
 
   test('formatNotFoundError includes suggestions', () => {
-    const suggestions = [
-      { id: 'json-validator' },
-      { id: 'json-transformer' },
-    ];
+    const suggestions = [{ id: 'json-validator' }, { id: 'json-transformer' }];
     const output = formatNotFoundError('json-validtor', suggestions);
     expect(output).toContain('Did you mean');
     expect(output).toContain('json-validator');
@@ -195,10 +196,11 @@ describe('Not Found Error Formatter', () => {
 
 describe('Text Wrapping', () => {
   test('wrapText wraps long text', () => {
-    const longText = 'This is a very long description that should be wrapped at a reasonable width for display in the terminal.';
+    const longText =
+      'This is a very long description that should be wrapped at a reasonable width for display in the terminal.';
     const wrapped = wrapText(longText, 40);
     expect(wrapped.length).toBeGreaterThan(1);
-    expect(wrapped.every(line => line.length <= 40)).toBe(true);
+    expect(wrapped.every((line) => line.length <= 40)).toBe(true);
   });
 
   test('wrapText handles short text', () => {

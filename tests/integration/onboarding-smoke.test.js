@@ -21,7 +21,7 @@ describe('Onboarding smoke flow (AIOS-DIFF-4.0.5)', () => {
     '.aios-core',
     'development',
     'scripts',
-    'generate-greeting.js',
+    'generate-greeting.js'
   );
   const FIRST_VALUE_TARGET_SECONDS = 10 * 60;
   const CI_MARGIN_SECONDS = 12 * 60;
@@ -67,7 +67,10 @@ describe('Onboarding smoke flow (AIOS-DIFF-4.0.5)', () => {
 
   it('validates onboarding docs keep an objective first-value path', async () => {
     const readme = await fs.readFile(path.join(repoRoot, 'README.md'), 'utf8');
-    const gettingStarted = await fs.readFile(path.join(repoRoot, 'docs', 'getting-started.md'), 'utf8');
+    const gettingStarted = await fs.readFile(
+      path.join(repoRoot, 'docs', 'getting-started.md'),
+      'utf8'
+    );
 
     expect(readme).toContain('Comece Aqui (10 Min)');
     expect(readme).toContain('npx aios-core init');
@@ -87,9 +90,10 @@ describe('Onboarding smoke flow (AIOS-DIFF-4.0.5)', () => {
     const greeting = runNode(greetingScript, ['dev'], repoRoot);
 
     const elapsedSeconds = (Date.now() - startedAt) / 1000;
-    expect(greeting).toContain('Agent dev loaded');
-    expect(greeting).toContain('Available Commands');
-    expect(greeting).toContain('*help');
+    // Updated expectations for Antigravity-compatible greeting format
+    expect(greeting).toMatch(/dev Agent/);
+    expect(greeting).toMatch(/ready/);
+    expect(greeting).toMatch(/\*help/);
 
     // Target for real user path is <=10 min.
     expect(elapsedSeconds).toBeLessThanOrEqual(FIRST_VALUE_TARGET_SECONDS);

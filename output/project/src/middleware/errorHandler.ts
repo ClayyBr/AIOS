@@ -3,7 +3,10 @@ import { AppError } from '../utils/fp';
 import { logger } from '../utils/logger';
 
 export const errorHandler = (err: unknown, req: Request, res: Response, next: NextFunction) => {
-  const error: AppError = err instanceof Error ? { type: 'UnknownError', message: err.message, details: err } : (err as AppError);
+  const error: AppError =
+    err instanceof Error
+      ? { type: 'UnknownError', message: err.message, details: err }
+      : (err as AppError);
 
   logger.error(`Error: ${error.type} - ${error.message}`, error.details);
 

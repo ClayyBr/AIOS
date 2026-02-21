@@ -22,11 +22,9 @@ function resolveHookRuntime(input) {
 
   try {
     const { loadSession } = require(
-      path.join(cwd, '.aios-core', 'core', 'synapse', 'session', 'session-manager.js'),
+      path.join(cwd, '.aios-core', 'core', 'synapse', 'session', 'session-manager.js')
     );
-    const { SynapseEngine } = require(
-      path.join(cwd, '.aios-core', 'core', 'synapse', 'engine.js'),
-    );
+    const { SynapseEngine } = require(path.join(cwd, '.aios-core', 'core', 'synapse', 'engine.js'));
 
     const sessionsDir = path.join(synapsePath, 'sessions');
     const session = loadSession(sessionId, sessionsDir) || { prompt_count: 0 };

@@ -11,9 +11,15 @@ const path = require('path');
 const os = require('os');
 
 const { createBackup, verifyBackup } = require('../../.aios-core/cli/commands/migrate/backup');
-const { detectV2Structure, analyzeMigrationPlan } = require('../../.aios-core/cli/commands/migrate/analyze');
+const {
+  detectV2Structure,
+  analyzeMigrationPlan,
+} = require('../../.aios-core/cli/commands/migrate/analyze');
 const { executeMigration } = require('../../.aios-core/cli/commands/migrate/execute');
-const { updateAllImports, verifyImports } = require('../../.aios-core/cli/commands/migrate/update-imports');
+const {
+  updateAllImports,
+  verifyImports,
+} = require('../../.aios-core/cli/commands/migrate/update-imports');
 const { validateStructure } = require('../../.aios-core/cli/commands/migrate/validate');
 const { executeRollback, canRollback } = require('../../.aios-core/cli/commands/migrate/rollback');
 
@@ -58,45 +64,45 @@ describe('Full Migration Integration', () => {
     // Create sample files
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'agents', 'dev.md'),
-      '# Dev Agent\nDeveloper persona',
+      '# Dev Agent\nDeveloper persona'
     );
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'agents', 'qa.md'),
-      '# QA Agent\nQuality assurance',
+      '# QA Agent\nQuality assurance'
     );
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'tasks', 'build.md'),
-      '# Build Task\nBuild workflow',
+      '# Build Task\nBuild workflow'
     );
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'registry', 'index.js'),
-      'const fs = require(\'fs\');\nconst utils = require(\'../utils\');\nmodule.exports = {};',
+      "const fs = require('fs');\nconst utils = require('../utils');\nmodule.exports = {};"
     );
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'utils', 'helpers.js'),
-      'module.exports = { helper: () => true };',
+      'module.exports = { helper: () => true };'
     );
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'cli', 'index.js'),
-      'const registry = require(\'../registry\');\nconst { Command } = require(\'commander\');\nmodule.exports = {};',
+      "const registry = require('../registry');\nconst { Command } = require('commander');\nmodule.exports = {};"
     );
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'cli', 'commands', 'run.js'),
-      'module.exports = { run: () => {} };',
+      'module.exports = { run: () => {} };'
     );
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'hooks', 'pre-commit.js'),
-      'module.exports = { hook: () => {} };',
+      'module.exports = { hook: () => {} };'
     );
     await fs.promises.writeFile(
       path.join(aiosCoreDir, 'index.js'),
-      'module.exports = require("./registry");',
+      'module.exports = require("./registry");'
     );
 
     // Create config file
     await fs.promises.writeFile(
       path.join(dir, 'aios.config.js'),
-      'module.exports = { name: "test-project" };',
+      'module.exports = { name: "test-project" };'
     );
 
     return aiosCoreDir;
@@ -152,8 +158,12 @@ describe('Full Migration Integration', () => {
       const result = await executeMigration(plan, { cleanupOriginals: false });
 
       expect(result.success).toBe(true);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'core', 'registry', 'index.js'))).toBe(true);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'core', 'utils', 'helpers.js'))).toBe(true);
+      expect(fs.existsSync(path.join(testDir, '.aios-core', 'core', 'registry', 'index.js'))).toBe(
+        true
+      );
+      expect(fs.existsSync(path.join(testDir, '.aios-core', 'core', 'utils', 'helpers.js'))).toBe(
+        true
+      );
     });
   });
 
@@ -165,8 +175,12 @@ describe('Full Migration Integration', () => {
       const result = await executeMigration(plan, { cleanupOriginals: false });
 
       expect(result.success).toBe(true);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'development', 'agents', 'dev.md'))).toBe(true);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'development', 'tasks', 'build.md'))).toBe(true);
+      expect(
+        fs.existsSync(path.join(testDir, '.aios-core', 'development', 'agents', 'dev.md'))
+      ).toBe(true);
+      expect(
+        fs.existsSync(path.join(testDir, '.aios-core', 'development', 'tasks', 'build.md'))
+      ).toBe(true);
     });
   });
 

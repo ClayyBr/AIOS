@@ -146,7 +146,7 @@ describe('GreetingPreferenceManager', () => {
       expect(result).toBe('auto');
       expect(consoleSpy).toHaveBeenCalledWith(
         expect.stringContaining('[GreetingPreference]'),
-        expect.any(String),
+        expect.any(String)
       );
 
       consoleSpy.mockRestore();

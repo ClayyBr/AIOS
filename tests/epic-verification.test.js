@@ -44,7 +44,7 @@ const _originalTests = () => {
 
     describe('Scenario 1: Epic Found Successfully', () => {
       test('should find Epic with correct tag and active status', async () => {
-      // Mock ClickUp API response: Epic 5 exists with "In Progress" status
+        // Mock ClickUp API response: Epic 5 exists with "In Progress" status
         mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
           tasks: [
             {
@@ -109,12 +109,8 @@ const _originalTests = () => {
 
         await verifyEpicExists(3);
 
-        expect(consoleLogSpy).toHaveBeenCalledWith(
-          expect.stringContaining('✅ Found Epic 3'),
-        );
-        expect(consoleLogSpy).toHaveBeenCalledWith(
-          expect.stringContaining('epic-task-99'),
-        );
+        expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('✅ Found Epic 3'));
+        expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('epic-task-99'));
 
         consoleLogSpy.mockRestore();
       });
@@ -122,13 +118,13 @@ const _originalTests = () => {
 
     describe('Scenario 2: Epic Not Found (HALT Expected)', () => {
       test('should throw error when Epic does not exist', async () => {
-      // Mock empty response: Epic 10 not found
+        // Mock empty response: Epic 10 not found
         mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
           tasks: [],
         });
 
         await expect(verifyEpicExists(10)).rejects.toThrow(
-          /Epic 10 not found in ClickUp Backlog list/,
+          /Epic 10 not found in ClickUp Backlog list/
         );
       });
 
@@ -160,11 +156,11 @@ const _originalTests = () => {
         try {
           await verifyEpicExists(20);
         } catch {
-        // Expected error
+          // Expected error
         }
 
         expect(consoleErrorSpy).toHaveBeenCalledWith(
-          expect.stringContaining('❌ Epic 20 not found'),
+          expect.stringContaining('❌ Epic 20 not found')
         );
 
         consoleErrorSpy.mockRestore();
@@ -184,9 +180,7 @@ const _originalTests = () => {
           ],
         });
 
-        await expect(verifyEpicExists(2)).rejects.toThrow(
-          /Epic 2 has invalid status: Done/,
-        );
+        await expect(verifyEpicExists(2)).rejects.toThrow(/Epic 2 has invalid status: Done/);
       });
 
       test('should reject Epic with "Archived" status', async () => {
@@ -201,9 +195,7 @@ const _originalTests = () => {
           ],
         });
 
-        await expect(verifyEpicExists(1)).rejects.toThrow(
-          /Epic 1 has invalid status: Archived/,
-        );
+        await expect(verifyEpicExists(1)).rejects.toThrow(/Epic 1 has invalid status: Archived/);
       });
 
       test('should provide error message explaining valid statuses', async () => {
@@ -235,13 +227,13 @@ const _originalTests = () => {
         try {
           await verifyEpicExists(6);
         } catch {
-        // Expected error
+          // Expected error
         }
 
         expect(mockClickUpTool.getWorkspaceTasks).toHaveBeenCalledWith(
           expect.objectContaining({
             statuses: ['Planning', 'In Progress'],
-          }),
+          })
         );
       });
     });
@@ -265,9 +257,7 @@ const _originalTests = () => {
           ],
         });
 
-        await expect(verifyEpicExists(4)).rejects.toThrow(
-          /Multiple Epics found with tag 'epic-4'/,
-        );
+        await expect(verifyEpicExists(4)).rejects.toThrow(/Multiple Epics found with tag 'epic-4'/);
       });
 
       test('should list all duplicate Epics in error message', async () => {
@@ -340,33 +330,27 @@ const _originalTests = () => {
     describe('Additional Edge Cases', () => {
       test('should handle ClickUp API errors gracefully', async () => {
         mockClickUpTool.getWorkspaceTasks.mockRejectedValue(
-          new Error('ClickUp API: Rate limit exceeded'),
+          new Error('ClickUp API: Rate limit exceeded')
         );
 
-        await expect(verifyEpicExists(5)).rejects.toThrow(
-          'ClickUp API: Rate limit exceeded',
-        );
+        await expect(verifyEpicExists(5)).rejects.toThrow('ClickUp API: Rate limit exceeded');
       });
 
       test('should handle network timeout errors', async () => {
-        mockClickUpTool.getWorkspaceTasks.mockRejectedValue(
-          new Error('Network timeout'),
-        );
+        mockClickUpTool.getWorkspaceTasks.mockRejectedValue(new Error('Network timeout'));
 
         await expect(verifyEpicExists(3)).rejects.toThrow('Network timeout');
       });
 
       test('should validate Epic number is positive integer', async () => {
-        await expect(verifyEpicExists(0)).rejects.toThrow(
-          /Epic number must be a positive integer/,
-        );
+        await expect(verifyEpicExists(0)).rejects.toThrow(/Epic number must be a positive integer/);
 
         await expect(verifyEpicExists(-5)).rejects.toThrow(
-          /Epic number must be a positive integer/,
+          /Epic number must be a positive integer/
         );
 
         await expect(verifyEpicExists(3.5)).rejects.toThrow(
-          /Epic number must be a positive integer/,
+          /Epic number must be a positive integer/
         );
       });
 
@@ -377,20 +361,18 @@ const _originalTests = () => {
               id: 'epic-no-tags',
               name: 'Epic 12: No Tags',
               status: 'In Progress',
-              tags: [],  // Missing tags
+              tags: [], // Missing tags
             },
           ],
         });
 
         // Should not find Epic if it doesn't have required tag
-        await expect(verifyEpicExists(12)).rejects.toThrow(
-          /Epic 12 not found/,
-        );
+        await expect(verifyEpicExists(12)).rejects.toThrow(/Epic 12 not found/);
       });
 
       test('should handle malformed ClickUp response', async () => {
         mockClickUpTool.getWorkspaceTasks.mockResolvedValue({
-        // Missing tasks array
+          // Missing tasks array
         });
 
         await expect(verifyEpicExists(5)).rejects.toThrow();
@@ -408,9 +390,7 @@ const _originalTests = () => {
                 id: 'list-123',
                 name: 'Backlog',
               },
-              custom_fields: [
-                { id: 'cf1', name: 'priority', value: 'High' },
-              ],
+              custom_fields: [{ id: 'cf1', name: 'priority', value: 'High' }],
             },
           ],
         });

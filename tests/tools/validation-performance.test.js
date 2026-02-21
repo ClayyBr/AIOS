@@ -284,7 +284,7 @@ describeIntegration('Validation System Performance', () => {
       ];
 
       let caught = 0;
-      const total = testCases.filter(tc => tc.shouldFail).length;
+      const total = testCases.filter((tc) => tc.shouldFail).length;
 
       for (const tc of testCases) {
         const result = await clickupValidator.validate('create_task', tc.args);
@@ -313,7 +313,7 @@ describeIntegration('Validation System Performance', () => {
       ];
 
       let caught = 0;
-      const total = testCases.filter(tc => tc.shouldFail).length;
+      const total = testCases.filter((tc) => tc.shouldFail).length;
 
       for (const tc of testCases) {
         const result = await googleValidator.validate('create_file', tc.args);
@@ -341,7 +341,7 @@ describeIntegration('Validation System Performance', () => {
       ];
 
       let caught = 0;
-      const total = testCases.filter(tc => tc.shouldFail).length;
+      const total = testCases.filter((tc) => tc.shouldFail).length;
 
       for (const tc of testCases) {
         const result = await n8nValidator.validate('execute_workflow', tc.args);
@@ -359,7 +359,10 @@ describeIntegration('Validation System Performance', () => {
       const testCases = [
         // Valid cases
         { args: { project_id: 'proj_123', query: 'SELECT * FROM users' }, shouldFail: false },
-        { args: { project_id: 'proj_123', query: 'INSERT INTO users VALUES (1)' }, shouldFail: false },
+        {
+          args: { project_id: 'proj_123', query: 'INSERT INTO users VALUES (1)' },
+          shouldFail: false,
+        },
 
         // Invalid cases
         { args: { query: 'SELECT * FROM users' }, shouldFail: true }, // Missing project_id
@@ -370,7 +373,7 @@ describeIntegration('Validation System Performance', () => {
       ];
 
       let caught = 0;
-      const total = testCases.filter(tc => tc.shouldFail).length;
+      const total = testCases.filter((tc) => tc.shouldFail).length;
 
       for (const tc of testCases) {
         const result = await supabaseValidator.validate('execute_sql', tc.args);
@@ -415,7 +418,7 @@ describeIntegration('Validation System Performance', () => {
           name: `Concurrent Task ${i}`,
           list_id: '123456789',
           assignees: [456 + i],
-        }),
+        })
       );
 
       const start = Date.now();
@@ -438,7 +441,7 @@ describeIntegration('Validation System Performance', () => {
       const duration = Date.now() - start;
 
       // All should succeed
-      results.forEach(result => {
+      results.forEach((result) => {
         expect(result.valid).toBe(true);
       });
 

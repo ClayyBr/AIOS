@@ -16,7 +16,10 @@ const {
   configureEnvironment,
 } = require('../../packages/installer/src/config/configure-environment');
 const { generateIDEConfigs } = require('../../packages/installer/src/wizard/ide-config-generator');
-const { installAiosCore, hasPackageJson } = require('../../packages/installer/src/installer/aios-core-installer');
+const {
+  installAiosCore,
+  hasPackageJson,
+} = require('../../packages/installer/src/installer/aios-core-installer');
 
 // Mock dependencies
 jest.mock('inquirer');
@@ -237,7 +240,7 @@ describe('Wizard Integration - Story 1.7', () => {
       expect(configureEnvironment).toHaveBeenCalledWith(
         expect.objectContaining({
           userProfile: 'bob',
-        }),
+        })
       );
     });
 
@@ -247,13 +250,11 @@ describe('Wizard Integration - Story 1.7', () => {
       fse.readFile.mockResolvedValue('user_profile: bob\nmarkdownExploder: true');
 
       // Only 2 prompts needed: language + remaining questions (no user profile prompt)
-      inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: ['vscode'],
-          selectedTechPreset: 'none',
-        });
+      inquirer.prompt.mockResolvedValueOnce({ language: 'en' }).mockResolvedValueOnce({
+        projectType: 'greenfield',
+        selectedIDEs: ['vscode'],
+        selectedTechPreset: 'none',
+      });
 
       const answers = await runWizard();
 
@@ -408,7 +409,7 @@ describe('Wizard Integration - Story 1.7', () => {
       await runWizard();
 
       expect(consoleLogSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Installing dependencies'),
+        expect.stringContaining('Installing dependencies')
       );
       expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('installed'));
     });

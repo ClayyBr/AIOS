@@ -76,12 +76,14 @@ describe('Wizard IDE Flow Integration', () => {
       expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules.md'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules.md'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.github', 'copilot-instructions.md'))).toBe(
-        true,
+        true
       );
 
       // Verify agent folders were created
       expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules'))).toBe(true);
-      expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules', 'AIOS', 'agents'))).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules', 'AIOS', 'agents'))).toBe(
+        true
+      );
       expect(await fs.pathExists(path.join(testDir, '.github', 'agents'))).toBe(true);
     });
 
@@ -211,10 +213,10 @@ describe('Wizard IDE Flow Integration', () => {
       expect(result.success).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'settings.json'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'hooks', 'before-agent.js'))).toBe(
-        true,
+        true
       );
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'hooks', 'session-start.js'))).toBe(
-        true,
+        true
       );
     });
   });
@@ -259,13 +261,13 @@ describe('Wizard IDE Flow Integration', () => {
 
       const copilotContent = await fs.readFile(
         path.join(testDir, '.github', 'copilot-instructions.md'),
-        'utf8',
+        'utf8'
       );
       expect(typeof copilotContent).toBe('string');
 
       const antigravityContent = await fs.readFile(
         path.join(testDir, '.antigravity', 'rules.md'),
-        'utf8',
+        'utf8'
       );
       expect(typeof antigravityContent).toBe('string');
     });

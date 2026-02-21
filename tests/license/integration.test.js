@@ -267,7 +267,7 @@ describe('License System Integration', () => {
         'pro.squads.premium',
         () => 'pro-result',
         () => 'fallback-result',
-        { silent: true },
+        { silent: true }
       );
 
       expect(result).toBe('fallback-result');
@@ -280,7 +280,7 @@ describe('License System Integration', () => {
       const result = withGracefulDegradation(
         'pro.squads.premium',
         () => 'pro-result',
-        () => 'fallback-result',
+        () => 'fallback-result'
       );
 
       expect(result).toBe('pro-result');
@@ -347,7 +347,7 @@ describe('License System Integration', () => {
     it('should support constructor-level gating', () => {
       // No license - should throw
       expect(() => featureGate.require('pro.squads.premium', 'Premium Squads')).toThrow(
-        ProFeatureError,
+        ProFeatureError
       );
 
       // With license - should not throw

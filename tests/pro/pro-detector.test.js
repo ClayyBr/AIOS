@@ -107,7 +107,7 @@ describe('pro-detector', () => {
         () => {
           throw new Error('Module initialization failed');
         },
-        { virtual: true },
+        { virtual: true }
       );
 
       expect(loadProModule('broken-module')).toBeNull();
@@ -137,7 +137,7 @@ describe('pro-detector', () => {
     it('should return version from pro/package.json', () => {
       fs.existsSync.mockReturnValue(true);
       fs.readFileSync.mockReturnValue(
-        JSON.stringify({ name: '@aios-fullstack/pro', version: '0.1.0' }),
+        JSON.stringify({ name: '@aios-fullstack/pro', version: '0.1.0' })
       );
 
       expect(getProVersion()).toBe('0.1.0');
@@ -183,7 +183,7 @@ describe('pro-detector', () => {
     it('should return full info when pro is available', () => {
       fs.existsSync.mockReturnValue(true);
       fs.readFileSync.mockReturnValue(
-        JSON.stringify({ name: '@aios-fullstack/pro', version: '0.1.0' }),
+        JSON.stringify({ name: '@aios-fullstack/pro', version: '0.1.0' })
       );
 
       const info = getProInfo();
@@ -217,9 +217,7 @@ describe('pro-detector', () => {
 
     it('should handle concurrent calls safely', () => {
       fs.existsSync.mockReturnValue(true);
-      fs.readFileSync.mockReturnValue(
-        JSON.stringify({ version: '1.0.0' }),
-      );
+      fs.readFileSync.mockReturnValue(JSON.stringify({ version: '1.0.0' }));
 
       // Multiple simultaneous calls should not interfere
       const results = Array.from({ length: 10 }, () => getProVersion());

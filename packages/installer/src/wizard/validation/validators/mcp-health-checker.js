@@ -26,11 +26,13 @@ async function validateMCPs(mcpContext = {}) {
   };
 
   if (!mcpContext.installedMCPs || Object.keys(mcpContext.installedMCPs).length === 0) {
-    results.checks = [{
-      component: 'MCPs',
-      status: 'skipped',
-      message: 'No MCPs installed',
-    }];
+    results.checks = [
+      {
+        component: 'MCPs',
+        status: 'skipped',
+        message: 'No MCPs installed',
+      },
+    ];
     return results;
   }
 
@@ -76,7 +78,7 @@ async function validateMCPs(mcpContext = {}) {
             error: error.message,
           };
         }
-      },
+      }
     );
 
     const healthCheckResults = await Promise.all(healthCheckPromises);
@@ -103,8 +105,8 @@ async function validateMCPs(mcpContext = {}) {
     }
 
     // Overall success if at least one MCP is healthy
-    const healthyCount = healthCheckResults.filter(r => r.status === 'success').length;
-    const failedCount = healthCheckResults.filter(r => r.status === 'failed').length;
+    const healthyCount = healthCheckResults.filter((r) => r.status === 'success').length;
+    const failedCount = healthCheckResults.filter((r) => r.status === 'failed').length;
 
     if (healthyCount === 0 && failedCount > 0) {
       results.success = false;

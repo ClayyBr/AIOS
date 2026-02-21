@@ -25,19 +25,19 @@ Esta pasta contém a documentação detalhada de todos os agentes do AIOS, inclu
 
 ## Agentes Documentados
 
-| Agente | Persona | Arquétipo | Documento |
-|--------|---------|-----------|-----------|
-| **@aios-master** | Orion | Orchestrator | [aios-master-system.md](./aios-master-system.md) |
-| **@analyst** | Atlas | Researcher | [analyst-system.md](./analyst-system.md) |
-| **@architect** | Aria | Visionary | [architect-system.md](./architect-system.md) |
-| **@data-engineer** | Dara | Data Sage | [data-engineer-system.md](./data-engineer-system.md) |
-| **@dev** | Dex | Builder | [dev-system.md](./dev-system.md) |
-| **@devops** | Gage | Guardian | [devops-system.md](./devops-system.md) |
-| **@pm** | Morgan | Strategist | [pm-system.md](./pm-system.md) |
-| **@qa** | Quinn | Guardian | [qa-system.md](./qa-system.md) |
-| **@sm** | River | Facilitator | [sm-system.md](./sm-system.md) |
-| **@squad-creator** | Nova | Creator | [squad-creator-system.md](./squad-creator-system.md) |
-| **@ux-design-expert** | Uma | Designer | [ux-design-expert-system.md](./ux-design-expert-system.md) |
+| Agente                | Persona | Arquétipo    | Documento                                                  |
+| --------------------- | ------- | ------------ | ---------------------------------------------------------- |
+| **@aios-master**      | Orion   | Orchestrator | [aios-master-system.md](./aios-master-system.md)           |
+| **@analyst**          | Atlas   | Researcher   | [analyst-system.md](./analyst-system.md)                   |
+| **@architect**        | Aria    | Visionary    | [architect-system.md](./architect-system.md)               |
+| **@data-engineer**    | Dara    | Data Sage    | [data-engineer-system.md](./data-engineer-system.md)       |
+| **@dev**              | Dex     | Builder      | [dev-system.md](./dev-system.md)                           |
+| **@devops**           | Gage    | Guardian     | [devops-system.md](./devops-system.md)                     |
+| **@pm**               | Morgan  | Strategist   | [pm-system.md](./pm-system.md)                             |
+| **@qa**               | Quinn   | Guardian     | [qa-system.md](./qa-system.md)                             |
+| **@sm**               | River   | Facilitator  | [sm-system.md](./sm-system.md)                             |
+| **@squad-creator**    | Nova    | Creator      | [squad-creator-system.md](./squad-creator-system.md)       |
+| **@ux-design-expert** | Uma     | Designer     | [ux-design-expert-system.md](./ux-design-expert-system.md) |
 
 ---
 
@@ -167,12 +167,12 @@ flowchart TB
 
 ## Relacionamento com Outras Documentações
 
-| Documentação | Localização | Propósito |
-|--------------|-------------|-----------|
-| Agent Reference Guide | [docs/agent-reference-guide.md](../agent-reference-guide.md) | Referência rápida |
-| Workflows Guide | [docs/guides/workflows-guide.md](../guides/workflows-guide.md) | Guia de workflows |
-| AIOS Workflows | [docs/aios-workflows/](../aios-workflows/) | Detalhamento de workflows |
-| Architecture | [docs/architecture/](../architecture/) | Arquitetura técnica |
+| Documentação          | Localização                                                    | Propósito                 |
+| --------------------- | -------------------------------------------------------------- | ------------------------- |
+| Agent Reference Guide | [docs/agent-reference-guide.md](../agent-reference-guide.md)   | Referência rápida         |
+| Workflows Guide       | [docs/guides/workflows-guide.md](../guides/workflows-guide.md) | Guia de workflows         |
+| AIOS Workflows        | [docs/aios-workflows/](../aios-workflows/)                     | Detalhamento de workflows |
+| Architecture          | [docs/architecture/](../architecture/)                         | Arquitetura técnica       |
 
 ---
 
@@ -187,4 +187,4 @@ Para adicionar ou atualizar documentação de agentes:
 
 ---
 
-*AIOS Agent Flows Documentation v1.0 - Documentação detalhada do sistema de agentes*
+_AIOS Agent Flows Documentation v1.0 - Documentação detalhada do sistema de agentes_

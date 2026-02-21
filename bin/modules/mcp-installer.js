@@ -88,7 +88,8 @@ const MCP_CONFIGS = {
       description: 'Web search test',
     },
     getConfig: (platform, apiKey) => {
-      const tools = '--tools=web_search_exa,research_paper_search,company_research,crawling,competitor_finder,linkedin_search,wikipedia_search_exa,github_search';
+      const tools =
+        '--tools=web_search_exa,research_paper_search,company_research,crawling,competitor_finder,linkedin_search,wikipedia_search_exa,github_search';
 
       if (platform === 'win32') {
         return {
@@ -170,7 +171,10 @@ async function installProjectMCPs(options = {}) {
   // Initialize logs
   await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Starting MCP installation...`);
   await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Platform: ${platform}`);
-  await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Selected MCPs: ${selectedMCPs.join(', ')}`);
+  await appendLog(
+    logPath,
+    `[${new Date().toISOString()}] [INFO] Selected MCPs: ${selectedMCPs.join(', ')}`
+  );
 
   // Backup existing .mcp.json if exists
   const mcpConfigPath = path.join(projectPath, '.mcp.json');
@@ -193,7 +197,10 @@ async function installProjectMCPs(options = {}) {
         return { mcpId, status: 'failed', message: errorMsg };
       }
 
-      await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Installing ${mcpConfig.name}...`);
+      await appendLog(
+        logPath,
+        `[${new Date().toISOString()}] [INFO] Installing ${mcpConfig.name}...`
+      );
       onProgress({ phase: 'installation', mcp: mcpId, message: `Installing ${mcpConfig.name}...` });
 
       try {
@@ -203,18 +210,25 @@ async function installProjectMCPs(options = {}) {
         }
 
         // Generate config
-        const config = typeof mcpConfig.getConfig === 'function'
-          ? mcpConfig.getConfig(platform, apiKeys[mcpConfig.apiKeyEnvVar])
-          : mcpConfig.getConfig;
+        const config =
+          typeof mcpConfig.getConfig === 'function'
+            ? mcpConfig.getConfig(platform, apiKeys[mcpConfig.apiKeyEnvVar])
+            : mcpConfig.getConfig;
 
         // Add to .mcp.json
         await addMCPToConfig(mcpId, config, mcpConfigPath);
 
-        await appendLog(logPath, `[${new Date().toISOString()}] [SUCCESS] ${mcpConfig.name} installed successfully`);
+        await appendLog(
+          logPath,
+          `[${new Date().toISOString()}] [SUCCESS] ${mcpConfig.name} installed successfully`
+        );
 
         return { mcpId, status: 'success', message: 'Installed successfully' };
       } catch (error) {
-        await appendLog(logPath, `[${new Date().toISOString()}] [ERROR] ${mcpConfig.name} installation failed: ${error.message}`);
+        await appendLog(
+          logPath,
+          `[${new Date().toISOString()}] [ERROR] ${mcpConfig.name} installation failed: ${error.message}`
+        );
         await appendLog(errorLogPath, `[${new Date().toISOString()}] [${mcpId}] ${error.stack}`);
 
         return { mcpId, status: 'failed', message: error.message };
@@ -238,26 +252,43 @@ async function installProjectMCPs(options = {}) {
         // but handle it defensively
         const errorMsg = result.reason?.message || 'Unknown error';
         results.errors.push(`Promise rejection: ${errorMsg}`);
-        await appendLog(errorLogPath, `[${new Date().toISOString()}] [CRITICAL] Unexpected promise rejection: ${result.reason?.stack || errorMsg}`);
+        await appendLog(
+          errorLogPath,
+          `[${new Date().toISOString()}] [CRITICAL] Unexpected promise rejection: ${result.reason?.stack || errorMsg}`
+        );
       }
     }
 
     // NOTE: Health checks deferred to Story 1.8 (Installation Validation)
     // MCP functionality will be validated when servers are first started
-    await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Health checks deferred to Story 1.8`);
+    await appendLog(
+      logPath,
+      `[${new Date().toISOString()}] [INFO] Health checks deferred to Story 1.8`
+    );
 
     // Determine overall success
-    const failedCount = Object.values(results.installedMCPs).filter(r => r.status === 'failed').length;
+    const failedCount = Object.values(results.installedMCPs).filter(
+      (r) => r.status === 'failed'
+    ).length;
     results.success = failedCount === 0;
 
     await appendLog(logPath, `[${new Date().toISOString()}] [INFO] MCP installation complete`);
-    await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Success: ${Object.values(results.installedMCPs).filter(r => r.status === 'success').length}`);
-    await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Warnings: ${Object.values(results.installedMCPs).filter(r => r.status === 'warning').length}`);
+    await appendLog(
+      logPath,
+      `[${new Date().toISOString()}] [INFO] Success: ${Object.values(results.installedMCPs).filter((r) => r.status === 'success').length}`
+    );
+    await appendLog(
+      logPath,
+      `[${new Date().toISOString()}] [INFO] Warnings: ${Object.values(results.installedMCPs).filter((r) => r.status === 'warning').length}`
+    );
     await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Failed: ${failedCount}`);
 
     return results;
   } catch (error) {
-    await appendLog(logPath, `[${new Date().toISOString()}] [ERROR] Installation failed: ${error.message}`);
+    await appendLog(
+      logPath,
+      `[${new Date().toISOString()}] [ERROR] Installation failed: ${error.message}`
+    );
     await appendLog(errorLogPath, `[${new Date().toISOString()}] ${error.stack}`);
 
     results.success = false;
@@ -276,7 +307,10 @@ async function installProjectMCPs(options = {}) {
  * This validation helps catch obvious package name typos during installation.
  */
 async function installNpmPackage(packageName, projectPath, logPath) {
-  await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Validating package: ${packageName}`);
+  await appendLog(
+    logPath,
+    `[${new Date().toISOString()}] [INFO] Validating package: ${packageName}`
+  );
 
   try {
     // Test if npx can find the package
@@ -286,13 +320,19 @@ async function installNpmPackage(packageName, projectPath, logPath) {
       timeout: 10000,
     });
 
-    await appendLog(logPath, `[${new Date().toISOString()}] [SUCCESS] Package ${packageName} validated`);
+    await appendLog(
+      logPath,
+      `[${new Date().toISOString()}] [SUCCESS] Package ${packageName} validated`
+    );
   } catch (error) {
     // Package validation failed - could be:
     // 1. Package doesn't support --version (non-critical)
     // 2. Package name is invalid (will fail when MCP starts)
     // 3. Network timeout (may succeed later)
-    await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Package ${packageName} validation skipped (${error.message}) - will be installed on first use`);
+    await appendLog(
+      logPath,
+      `[${new Date().toISOString()}] [INFO] Package ${packageName} validation skipped (${error.message}) - will be installed on first use`
+    );
     // Not throwing - npx will install/validate when MCP server actually starts
   }
 }
@@ -323,11 +363,7 @@ async function addMCPToConfig(mcpId, config, configPath) {
   mcpConfig.mcpServers[mcpId] = config;
 
   // Write updated config
-  await fse.writeFile(
-    configPath,
-    JSON.stringify(mcpConfig, null, 2) + '\n',
-    'utf8',
-  );
+  await fse.writeFile(configPath, JSON.stringify(mcpConfig, null, 2) + '\n', 'utf8');
 }
 
 /**
@@ -345,7 +381,7 @@ async function appendLog(logPath, message) {
 /**
  * Display installation status
  */
- 
+
 function displayInstallationStatus(results) {
   console.log('');
   console.log(chalk.cyan('📊 MCP Installation Status:'));
@@ -353,9 +389,12 @@ function displayInstallationStatus(results) {
 
   for (const [mcpId, result] of Object.entries(results.installedMCPs)) {
     const mcpConfig = MCP_CONFIGS[mcpId];
-    const icon = result.status === 'success' ? chalk.green('✓')
-      : result.status === 'warning' ? chalk.yellow('⚠️')
-        : chalk.red('❌');
+    const icon =
+      result.status === 'success'
+        ? chalk.green('✓')
+        : result.status === 'warning'
+          ? chalk.yellow('⚠️')
+          : chalk.red('❌');
 
     console.log(`  ${icon} ${mcpConfig.name}: ${result.message}`);
   }
@@ -364,7 +403,7 @@ function displayInstallationStatus(results) {
 
   if (results.errors.length > 0) {
     console.log(chalk.yellow('⚠️  Errors encountered:'));
-    results.errors.forEach(error => {
+    results.errors.forEach((error) => {
       console.log(chalk.yellow(`  - ${error}`));
     });
     console.log('');
@@ -374,7 +413,6 @@ function displayInstallationStatus(results) {
   console.log(chalk.gray('📋 Installation log: .aios/install-log.txt'));
   console.log('');
 }
- 
 
 module.exports = {
   installProjectMCPs,

@@ -212,7 +212,9 @@ project:
 
       const result = validateCoreConfigStructure(config);
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('Invalid project.type: INVALID_TYPE. Expected greenfield, brownfield, or existing_aios');
+      expect(result.errors).toContain(
+        'Invalid project.type: INVALID_TYPE. Expected greenfield, brownfield, or existing_aios'
+      );
     });
 
     it('should validate IDE section if present', () => {
@@ -239,7 +241,7 @@ project:
         './current/directory',
       ];
 
-      paths.forEach(p => {
+      paths.forEach((p) => {
         const result = validatePath(p);
         expect(result.valid).toBe(true);
         expect(result.error).toBeNull();
@@ -266,7 +268,7 @@ project:
         'path/with?question',
       ];
 
-      invalidPaths.forEach(p => {
+      invalidPaths.forEach((p) => {
         const result = validatePath(p);
         expect(result.valid).toBe(false);
         expect(result.error).toContain('invalid characters');
@@ -299,7 +301,7 @@ project:
     it('should handle non-string input', () => {
       const inputs = [null, undefined, 123, {}, []];
 
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         const result = sanitizeInput(input);
         expect(result).toBe('');
       });

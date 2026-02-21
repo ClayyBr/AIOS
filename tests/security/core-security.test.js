@@ -1,7 +1,7 @@
 /**
  * Core Security Tests (SEC-01 to SEC-05)
  * Story 3.0: Core Module Security Hardening
- * 
+ *
  * @module tests/security/core-security.test
  */
 
@@ -157,7 +157,7 @@ describe('Core Security Tests (Story 3.0)', () => {
     it('should save and retrieve session data correctly', async () => {
       await sessionManager.updateAnswers({ key: 'value' }, 1);
       const session = await sessionManager.loadSession(validSessionId);
-      
+
       expect(session.answers).toEqual({ key: 'value' });
       expect(session.currentStep).toBe(1);
     });

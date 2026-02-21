@@ -74,7 +74,6 @@ function buildInput(overrides = {}) {
 const describeIfHookExists = HOOK_EXISTS ? describe : describe.skip;
 
 describeIfHookExists('SYNAPSE E2E: Hook Integration', () => {
-
   // ========================================================================
   // 1. Hook produces valid JSON output with hookSpecificOutput key
   // ========================================================================
@@ -191,7 +190,7 @@ describeIfHookExists('SYNAPSE E2E: Hook Integration', () => {
     }
 
     const { SynapseEngine } = require(
-      path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js'),
+      path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js')
     );
     const engine = new SynapseEngine(synapsePath);
     const result = await engine.process('test prompt', { prompt_count: 0 });

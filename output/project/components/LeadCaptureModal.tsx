@@ -23,9 +23,9 @@ export default function LeadCaptureModal() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' })); // Clear error on change
+      setErrors((prev) => ({ ...prev, [name]: '' })); // Clear error on change
     }
   };
 
@@ -33,9 +33,11 @@ export default function LeadCaptureModal() {
     const newErrors: { [key: string]: string } = {};
     if (!formData.name.trim()) newErrors.name = 'Nome é obrigatório.';
     if (!formData.email.trim()) newErrors.email = 'Email é obrigatório.';
-    else if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(formData.email)) newErrors.email = 'Email inválido.';
+    else if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(formData.email))
+      newErrors.email = 'Email inválido.';
     if (!formData.phone.trim()) newErrors.phone = 'Telefone é obrigatório.';
-    else if (!/^\(?\d{2}\)?\s?\d{4,5}\-?\d{4}$/.test(formData.phone)) newErrors.phone = 'Telefone inválido (ex: (19) 99887-6655).';
+    else if (!/^\(?\d{2}\)?\s?\d{4,5}\-?\d{4}$/.test(formData.phone))
+      newErrors.phone = 'Telefone inválido (ex: (19) 99887-6655).';
     return newErrors;
   };
 
@@ -45,14 +47,14 @@ export default function LeadCaptureModal() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
-      setShakeKey(prev => prev + 1); // Trigger shake animation on form errors
+      setShakeKey((prev) => prev + 1); // Trigger shake animation on form errors
       return;
     }
 
     setIsSubmitting(true);
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       console.log('Lead captured:', formData);
       alert('Obrigado! Em breve entraremos em contato.');
       setFormData({ name: '', email: '', phone: '' }); // Clear form
@@ -66,33 +68,38 @@ export default function LeadCaptureModal() {
   };
 
   // Accessibility: Trap focus within the modal
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (!isOpen || !modalRef.current) return;
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!isOpen || !modalRef.current) return;
 
-    if (e.key === 'Escape') {
-      closeModal();
-    }
+      if (e.key === 'Escape') {
+        closeModal();
+      }
 
-    if (e.key === 'Tab') {
-      const focusableElements = modalRef.current.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      ) as NodeListOf<HTMLElement>;
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
+      if (e.key === 'Tab') {
+        const focusableElements = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        ) as NodeListOf<HTMLElement>;
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
 
-      if (e.shiftKey) { // Shift + Tab
-        if (document.activeElement === firstElement) {
-          lastElement?.focus();
-          e.preventDefault();
-        }
-      } else { // Tab
-        if (document.activeElement === lastElement) {
-          firstElement?.focus();
-          e.preventDefault();
+        if (e.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstElement) {
+            lastElement?.focus();
+            e.preventDefault();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastElement) {
+            firstElement?.focus();
+            e.preventDefault();
+          }
         }
       }
-    }
-  }, [isOpen, closeModal]);
+    },
+    [isOpen, closeModal]
+  );
 
   useEffect(() => {
     if (isOpen) {
@@ -111,7 +118,12 @@ export default function LeadCaptureModal() {
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+    <div
+      className="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lead-modal-title"
+    >
       <motion.div
         ref={modalRef}
         initial={{ opacity: 0, scale: 0.9 }}
@@ -121,7 +133,10 @@ export default function LeadCaptureModal() {
         className="modal-content"
         aria-live="assertive"
       >
-        <h3 id="lead-modal-title" className="text-3xl font-oswald font-bold text-white mb-6 text-center">
+        <h3
+          id="lead-modal-title"
+          className="text-3xl font-oswald font-bold text-white mb-6 text-center"
+        >
           Comece sua Jornada!
         </h3>
         <button
@@ -134,7 +149,9 @@ export default function LeadCaptureModal() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Nome completo</label>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+              Nome completo
+            </label>
             <motion.input
               key={`name-input-${shakeKey}`}
               type="text"
@@ -148,10 +165,16 @@ export default function LeadCaptureModal() {
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'name-error' : undefined}
             />
-            {errors.name && <p id="name-error" className="text-primary-500 text-sm mt-1 animate-shake-quick">{errors.name}</p>}
+            {errors.name && (
+              <p id="name-error" className="text-primary-500 text-sm mt-1 animate-shake-quick">
+                {errors.name}
+              </p>
+            )}
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+              Email
+            </label>
             <motion.input
               key={`email-input-${shakeKey}`}
               type="email"
@@ -164,10 +187,16 @@ export default function LeadCaptureModal() {
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? 'email-error' : undefined}
             />
-            {errors.email && <p id="email-error" className="text-primary-500 text-sm mt-1">{errors.email}</p>}
+            {errors.email && (
+              <p id="email-error" className="text-primary-500 text-sm mt-1">
+                {errors.email}
+              </p>
+            )}
           </div>
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">Telefone</label>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+              Telefone
+            </label>
             <motion.input
               key={`phone-input-${shakeKey}`}
               type="tel"
@@ -180,7 +209,11 @@ export default function LeadCaptureModal() {
               aria-invalid={!!errors.phone}
               aria-describedby={errors.phone ? 'phone-error' : undefined}
             />
-            {errors.phone && <p id="phone-error" className="text-primary-500 text-sm mt-1">{errors.phone}</p>}
+            {errors.phone && (
+              <p id="phone-error" className="text-primary-500 text-sm mt-1">
+                {errors.phone}
+              </p>
+            )}
           </div>
           <motion.button
             type="submit"

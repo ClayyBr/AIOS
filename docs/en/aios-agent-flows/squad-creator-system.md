@@ -23,4 +23,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 
 ---
 
-*AIOS Agent Flows - @squad-creator System v1.0*
+_AIOS Agent Flows - @squad-creator System v1.0_

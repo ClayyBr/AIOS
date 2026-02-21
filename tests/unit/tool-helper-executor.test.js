@@ -45,9 +45,7 @@ describe('ToolHelperExecutor', () => {
     });
 
     test('should throw error when adding duplicate helper', () => {
-      const executor = new ToolHelperExecutor([
-        { id: 'existing', function: 'function() {}' },
-      ]);
+      const executor = new ToolHelperExecutor([{ id: 'existing', function: 'function() {}' }]);
 
       expect(() => {
         executor.addHelper({ id: 'existing', function: 'function() {}' });
@@ -68,9 +66,7 @@ describe('ToolHelperExecutor', () => {
     });
 
     test('should remove helper', () => {
-      const executor = new ToolHelperExecutor([
-        { id: 'removable', function: 'function() {}' },
-      ]);
+      const executor = new ToolHelperExecutor([{ id: 'removable', function: 'function() {}' }]);
 
       const removed = executor.removeHelper('removable');
       expect(removed).toBe(true);
@@ -142,11 +138,7 @@ describe('ToolHelperExecutor', () => {
 
       const result = await executor.execute('complex-args', {
         user: { name: 'test' },
-        items: [
-          { value: 10 },
-          { value: 20 },
-          { value: 30 },
-        ],
+        items: [{ value: 10 }, { value: 20 }, { value: 30 }],
       });
 
       expect(result).toEqual({
@@ -218,9 +210,7 @@ describe('ToolHelperExecutor', () => {
         },
       ]);
 
-      await expect(executor.execute('slow-helper'))
-        .rejects
-        .toThrow(/exceeded 1s timeout/);
+      await expect(executor.execute('slow-helper')).rejects.toThrow(/exceeded 1s timeout/);
     }, 3000); // Test timeout higher than helper timeout
 
     test('should complete helper within timeout', async () => {
@@ -259,9 +249,7 @@ describe('ToolHelperExecutor', () => {
         },
       ]);
 
-      await expect(executor.execute('infinite-loop'))
-        .rejects
-        .toThrow(/exceeded 1s timeout/);
+      await expect(executor.execute('infinite-loop')).rejects.toThrow(/exceeded 1s timeout/);
     }, 3000);
   });
 
@@ -389,9 +377,7 @@ describe('ToolHelperExecutor', () => {
     test('should throw error for non-existent helper', async () => {
       const executor = new ToolHelperExecutor([]);
 
-      await expect(executor.execute('nonexistent'))
-        .rejects
-        .toThrow(/not found/);
+      await expect(executor.execute('nonexistent')).rejects.toThrow(/not found/);
     });
 
     test('should provide helpful error with available helpers', async () => {
@@ -400,9 +386,9 @@ describe('ToolHelperExecutor', () => {
         { id: 'helper2', function: 'function() {}' },
       ]);
 
-      await expect(executor.execute('wrong-helper'))
-        .rejects
-        .toThrow(/Available helpers: helper1, helper2/);
+      await expect(executor.execute('wrong-helper')).rejects.toThrow(
+        /Available helpers: helper1, helper2/
+      );
     });
 
     test('should handle syntax errors in helper function', async () => {
@@ -413,9 +399,7 @@ describe('ToolHelperExecutor', () => {
         },
       ]);
 
-      await expect(executor.execute('syntax-error'))
-        .rejects
-        .toThrow(/execution failed/);
+      await expect(executor.execute('syntax-error')).rejects.toThrow(/execution failed/);
     });
 
     test('should handle runtime errors in helper', async () => {
@@ -431,9 +415,7 @@ describe('ToolHelperExecutor', () => {
         },
       ]);
 
-      await expect(executor.execute('runtime-error'))
-        .rejects
-        .toThrow(/execution failed/);
+      await expect(executor.execute('runtime-error')).rejects.toThrow(/execution failed/);
     });
 
     test('should handle undefined variable access', async () => {
@@ -449,18 +431,14 @@ describe('ToolHelperExecutor', () => {
         },
       ]);
 
-      await expect(executor.execute('undefined-var'))
-        .rejects
-        .toThrow(/execution failed/);
+      await expect(executor.execute('undefined-var')).rejects.toThrow(/execution failed/);
     });
 
     test('should throw error for helper without function', async () => {
       const executor = new ToolHelperExecutor([]);
       executor.helpers.set('no-function', { id: 'no-function' });
 
-      await expect(executor.execute('no-function'))
-        .rejects
-        .toThrow(/has no function defined/);
+      await expect(executor.execute('no-function')).rejects.toThrow(/has no function defined/);
     });
   });
 
@@ -541,9 +519,7 @@ describe('ToolHelperExecutor', () => {
         },
       ]);
 
-      await expect(executor.execute('fail-dispose'))
-        .rejects
-        .toThrow();
+      await expect(executor.execute('fail-dispose')).rejects.toThrow();
       // Isolate should still be disposed even on error
     });
 
@@ -555,9 +531,7 @@ describe('ToolHelperExecutor', () => {
         },
       ]);
 
-      await expect(executor.execute('timeout-dispose'))
-        .rejects
-        .toThrow(/timeout/);
+      await expect(executor.execute('timeout-dispose')).rejects.toThrow(/timeout/);
       // Isolate should be disposed even on timeout
     }, 3000);
   });

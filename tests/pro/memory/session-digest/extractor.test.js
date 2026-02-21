@@ -28,7 +28,9 @@ try {
 const isProAvailable = !!extractorModule;
 const extractSessionDigest = isProAvailable ? extractorModule.extractSessionDigest : undefined;
 const _analyzeConversation = isProAvailable ? extractorModule._analyzeConversation : undefined;
-const _generateDigestDocument = isProAvailable ? extractorModule._generateDigestDocument : undefined;
+const _generateDigestDocument = isProAvailable
+  ? extractorModule._generateDigestDocument
+  : undefined;
 const _writeDigest = isProAvailable ? extractorModule._writeDigest : undefined;
 
 (isProAvailable ? describe : describe.skip)('Session Digest Extractor', () => {
@@ -112,7 +114,7 @@ const _writeDigest = isProAvailable ? extractorModule._writeDigest : undefined;
         conversation: {
           messages: [
             { role: 'user', content: 'Actually, the correct way is to use async/await' },
-            { role: 'user', content: 'No, that\'s wrong. Use promises instead' },
+            { role: 'user', content: "No, that's wrong. Use promises instead" },
           ],
         },
         metadata: {},
@@ -250,10 +252,9 @@ const _writeDigest = isProAvailable ? extractorModule._writeDigest : undefined;
 
       await _writeDigest(projectDir, sessionId, digest);
 
-      expect(fs.promises.mkdir).toHaveBeenCalledWith(
-        expect.stringContaining('.aios'),
-        { recursive: true },
-      );
+      expect(fs.promises.mkdir).toHaveBeenCalledWith(expect.stringContaining('.aios'), {
+        recursive: true,
+      });
     });
 
     it('should write YAML file with correct naming', async () => {
@@ -282,7 +283,7 @@ const _writeDigest = isProAvailable ? extractorModule._writeDigest : undefined;
       expect(fs.promises.writeFile).toHaveBeenCalledWith(
         expect.stringContaining('test-session-123'),
         expect.stringContaining('schema_version: "1.0"'),
-        'utf8',
+        'utf8'
       );
     });
 

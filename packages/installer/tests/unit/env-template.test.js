@@ -5,7 +5,10 @@
  * Tests for env-template.js
  */
 
-const { generateEnvContent, generateEnvExample } = require('../../src/config/templates/env-template');
+const {
+  generateEnvContent,
+  generateEnvExample,
+} = require('../../src/config/templates/env-template');
 
 describe('.env Template Generator', () => {
   describe('generateEnvContent', () => {
@@ -67,8 +70,8 @@ describe('.env Template Generator', () => {
       const content = generateEnvContent(apiKeys);
 
       // Check no spaces around =
-      const lines = content.split('\n').filter(line => !line.startsWith('#') && line.trim());
-      lines.forEach(line => {
+      const lines = content.split('\n').filter((line) => !line.startsWith('#') && line.trim());
+      lines.forEach((line) => {
         if (line.includes('=')) {
           expect(line).toMatch(/^[A-Z0-9_]+=.*/);
           // Check there are NO spaces before or after the = sign
@@ -95,11 +98,11 @@ describe('.env Template Generator', () => {
       const content = generateEnvExample();
 
       // All API key fields should be empty
-      const apiKeyLines = content.split('\n').filter(line =>
-        line.includes('_API_KEY=') || line.includes('_TOKEN='),
-      );
+      const apiKeyLines = content
+        .split('\n')
+        .filter((line) => line.includes('_API_KEY=') || line.includes('_TOKEN='));
 
-      apiKeyLines.forEach(line => {
+      apiKeyLines.forEach((line) => {
         const [, value] = line.split('=');
         expect(value.trim()).toBe('');
       });
@@ -124,14 +127,19 @@ describe('.env Template Generator', () => {
         /ghp_[a-zA-Z0-9]+/, // GitHub tokens
       ];
 
-      sensitivePatterns.forEach(pattern => {
+      sensitivePatterns.forEach((pattern) => {
         expect(content).not.toMatch(pattern);
       });
 
       // Check that no API key fields have actual values (only empty or commented)
-      const lines = content.split('\n').filter(line => !line.trim().startsWith('#'));
-      lines.forEach(line => {
-        if (line.includes('PASSWORD') || line.includes('SECRET') || line.includes('KEY') || line.includes('TOKEN')) {
+      const lines = content.split('\n').filter((line) => !line.trim().startsWith('#'));
+      lines.forEach((line) => {
+        if (
+          line.includes('PASSWORD') ||
+          line.includes('SECRET') ||
+          line.includes('KEY') ||
+          line.includes('TOKEN')
+        ) {
           const [key, value] = line.split('=');
           if (value !== undefined) {
             expect(value.trim()).toBe('');
@@ -145,13 +153,15 @@ describe('.env Template Generator', () => {
       const exampleContent = generateEnvExample();
 
       // Extract non-comment, non-empty lines
-      const envKeys = envContent.split('\n')
-        .filter(line => line.trim() && !line.startsWith('#'))
-        .map(line => line.split('=')[0]);
+      const envKeys = envContent
+        .split('\n')
+        .filter((line) => line.trim() && !line.startsWith('#'))
+        .map((line) => line.split('=')[0]);
 
-      const exampleKeys = exampleContent.split('\n')
-        .filter(line => line.trim() && !line.startsWith('#'))
-        .map(line => line.split('=')[0]);
+      const exampleKeys = exampleContent
+        .split('\n')
+        .filter((line) => line.trim() && !line.startsWith('#'))
+        .map((line) => line.split('=')[0]);
 
       // Both should have the same keys
       expect(exampleKeys.sort()).toEqual(envKeys.sort());

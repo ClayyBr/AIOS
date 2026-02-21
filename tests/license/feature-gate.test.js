@@ -105,7 +105,7 @@ describe('feature-gate', () => {
 
       writeLicenseCache(
         createTestCache(['pro.squads.*'], { activatedAt: activatedAt.toISOString() }),
-        testDir,
+        testDir
       );
 
       expect(featureGate.isAvailable('pro.squads.premium')).toBe(false);
@@ -117,7 +117,7 @@ describe('feature-gate', () => {
 
       writeLicenseCache(
         createTestCache(['pro.squads.*'], { activatedAt: activatedAt.toISOString() }),
-        testDir,
+        testDir
       );
 
       expect(featureGate.isAvailable('pro.squads.premium')).toBe(true);
@@ -278,7 +278,7 @@ describe('feature-gate', () => {
 
       writeLicenseCache(
         createTestCache(['pro.squads.*'], { activatedAt: activatedAt.toISOString() }),
-        testDir,
+        testDir
       );
 
       expect(featureGate.getLicenseState()).toBe('Grace');
@@ -290,7 +290,7 @@ describe('feature-gate', () => {
 
       writeLicenseCache(
         createTestCache(['pro.squads.*'], { activatedAt: activatedAt.toISOString() }),
-        testDir,
+        testDir
       );
 
       expect(featureGate.getLicenseState()).toBe('Expired');

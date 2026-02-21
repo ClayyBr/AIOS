@@ -13,7 +13,10 @@
 
 'use strict';
 
-const { MessageFormatter, createMessageFormatter } = require('../../../.aios-core/core/orchestration/message-formatter');
+const {
+  MessageFormatter,
+  createMessageFormatter,
+} = require('../../../.aios-core/core/orchestration/message-formatter');
 
 describe('MessageFormatter', () => {
   describe('constructor', () => {
@@ -113,11 +116,7 @@ describe('MessageFormatter', () => {
 
       it('should include steps when provided', () => {
         const result = formatter.formatActionResult('API Endpoint', {
-          steps: [
-            'Criar handler',
-            'Adicionar validação',
-            'Implementar testes',
-          ],
+          steps: ['Criar handler', 'Adicionar validação', 'Implementar testes'],
         });
         expect(result).toContain('🔧 O que vou fazer:');
         expect(result).toContain('1. Criar handler');
@@ -139,9 +138,7 @@ describe('MessageFormatter', () => {
 
       it('should include tradeoffs when provided', () => {
         const result = formatter.formatActionResult('Auth System', {
-          tradeoffs: [
-            { choice: 'JWT vs Session', selected: 'JWT', reason: 'Scalability' },
-          ],
+          tradeoffs: [{ choice: 'JWT vs Session', selected: 'JWT', reason: 'Scalability' }],
         });
         expect(result).toContain('Trade-offs:');
         expect(result).toContain('JWT vs Session: JWT');
@@ -196,7 +193,12 @@ describe('MessageFormatter', () => {
 
     it('should return explanation when educational mode is ON', () => {
       const formatter = new MessageFormatter({ educationalMode: true });
-      const result = formatter.formatAgentAssignment('@dev', 'Dex', 'Implement feature', 'Best for code implementation');
+      const result = formatter.formatAgentAssignment(
+        '@dev',
+        'Dex',
+        'Implement feature',
+        'Best for code implementation'
+      );
       expect(result).toContain('🤖 @dev (Dex) assumindo: Implement feature');
       expect(result).toContain('Por quê: Best for code implementation');
     });

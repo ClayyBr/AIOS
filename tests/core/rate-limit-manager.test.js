@@ -6,9 +6,7 @@
  * isRateLimitError, metrics, withRateLimit, getGlobalManager
  */
 
-const {
-  collectEvents,
-} = require('./execution-test-helpers');
+const { collectEvents } = require('./execution-test-helpers');
 
 const {
   RateLimitManager,
@@ -29,7 +27,12 @@ describe('RateLimitManager', () => {
     });
 
     test('accepts custom config', () => {
-      const rlm = new RateLimitManager({ maxRetries: 3, baseDelay: 500, maxDelay: 5000, requestsPerMinute: 10 });
+      const rlm = new RateLimitManager({
+        maxRetries: 3,
+        baseDelay: 500,
+        maxDelay: 5000,
+        requestsPerMinute: 10,
+      });
       expect(rlm.maxRetries).toBe(3);
       expect(rlm.baseDelay).toBe(500);
       expect(rlm.maxDelay).toBe(5000);
@@ -132,7 +135,9 @@ describe('RateLimitManager', () => {
     test('throws non-rate-limit errors immediately', async () => {
       const rlm = new RateLimitManager();
       await expect(
-        rlm.executeWithRetry(() => { throw new Error('connection failed'); }),
+        rlm.executeWithRetry(() => {
+          throw new Error('connection failed');
+        })
       ).rejects.toThrow('connection failed');
     });
 
@@ -162,7 +167,9 @@ describe('RateLimitManager', () => {
       const rlm = new RateLimitManager({ maxRetries: 2, baseDelay: 1 });
       rlm.sleep = () => Promise.resolve();
 
-      const fn = () => { throw new Error('Rate limit exceeded'); };
+      const fn = () => {
+        throw new Error('Rate limit exceeded');
+      };
 
       await expect(rlm.executeWithRetry(fn)).rejects.toThrow('Rate limit exceeded after 2 retries');
       expect(rlm.metrics.rateLimitHits).toBe(2);

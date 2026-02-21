@@ -24,20 +24,24 @@ Differentiate AIOS with its own product identity, with learning-curve reduction 
 ## Wave Plan
 
 ### Wave 0 (P0)
+
 - Learning curve reduction.
 - Single onboarding path and first-value <=10 min.
 
 ### Wave 1
+
 - Flow-state runtime guidance.
 - Compatibility contract and parity blocking.
 - Risk-based execution profiles.
 
 ### Wave 2
+
 - Structured handoffs.
 - Delivery confidence score.
 - Agent decision timeline observability.
 
 ### Wave 3
+
 - Vertical specialization clarity and public examples.
 - Brownfield premium track with rollback strategy.
 - Live ADR validations.

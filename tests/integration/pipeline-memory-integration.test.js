@@ -16,7 +16,9 @@
 const path = require('path');
 const fs = require('fs').promises;
 const yaml = require('js-yaml');
-const { UnifiedActivationPipeline } = require('../../.aios-core/development/scripts/unified-activation-pipeline');
+const {
+  UnifiedActivationPipeline,
+} = require('../../.aios-core/development/scripts/unified-activation-pipeline');
 
 // Mock pro-detector for testing different scenarios
 jest.mock('../../bin/utils/pro-detector');
@@ -28,10 +30,12 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
 
   // Store original env to restore after tests
   const originalPipelineTimeout = process.env.AIOS_PIPELINE_TIMEOUT;
+  const originalLoaderMultiplier = process.env.AIOS_LOADER_TIMEOUT_MULTIPLIER;
 
   beforeEach(() => {
     // Increase pipeline timeout so tests don't fail under heavy load (full suite)
     process.env.AIOS_PIPELINE_TIMEOUT = '5000';
+    process.env.AIOS_LOADER_TIMEOUT_MULTIPLIER = '10'; // ensure loaders don't timeout
     pipeline = new UnifiedActivationPipeline(testProjectRoot);
     jest.clearAllMocks();
   });
@@ -42,6 +46,12 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       process.env.AIOS_PIPELINE_TIMEOUT = originalPipelineTimeout;
     } else {
       delete process.env.AIOS_PIPELINE_TIMEOUT;
+    }
+
+    if (originalLoaderMultiplier !== undefined) {
+      process.env.AIOS_LOADER_TIMEOUT_MULTIPLIER = originalLoaderMultiplier;
+    } else {
+      delete process.env.AIOS_LOADER_TIMEOUT_MULTIPLIER;
     }
 
     // Cleanup test data
@@ -101,7 +111,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
 
       // Mock MemoryLoader that returns empty results (no digests)
       const MockMemoryLoader = class {
-        constructor() {}
+        constructor() { }
         async loadForAgent() {
           return { memories: [], metadata: { count: 0, tokensUsed: 0 } };
         }
@@ -169,10 +179,10 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
 
       // Mock MemoryLoader that returns test memories
       const MockMemoryLoader = class {
-        constructor() {}
+        constructor() { }
         async loadForAgent(agentId, options) {
           // Add small delay to simulate real async operation (for metrics.duration test)
-          await new Promise(resolve => setTimeout(resolve, 10));
+          await new Promise((resolve) => setTimeout(resolve, 10));
 
           return {
             memories: mockMemories,
@@ -242,7 +252,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
 
       // Mock MemoryLoader that respects budget
       const MockMemoryLoader = class {
-        constructor() {}
+        constructor() { }
         async loadForAgent(agentId, options) {
           const budget = options.budget || 2000;
           // Simulate budget enforcement
@@ -318,7 +328,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       proDetector.isProAvailable.mockReturnValue(true);
 
       const MockMemoryLoader = class {
-        constructor() {}
+        constructor() { }
         async loadForAgent(agentId, options) {
           // Simulate proper agent scoping
           const allMemories = [
@@ -328,9 +338,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
           ];
 
           // Filter to only agent's own + shared
-          const memories = allMemories.filter(m =>
-            m.agent === agentId || m.agent === 'shared',
-          );
+          const memories = allMemories.filter((m) => m.agent === agentId || m.agent === 'shared');
 
           return {
             memories,
@@ -353,7 +361,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     it('should only return dev + shared memories for dev agent', async () => {
       const result = await pipeline.activate('dev');
 
-      const agents = result.context.memories.map(m => m.agent);
+      const agents = result.context.memories.map((m) => m.agent);
       expect(agents).toContain('dev');
       expect(agents).toContain('shared');
       expect(agents).not.toContain('qa');
@@ -362,7 +370,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     it('should only return qa + shared memories for qa agent', async () => {
       const result = await pipeline.activate('qa');
 
-      const agents = result.context.memories.map(m => m.agent);
+      const agents = result.context.memories.map((m) => m.agent);
       expect(agents).toContain('qa');
       expect(agents).toContain('shared');
       expect(agents).not.toContain('dev');
@@ -372,8 +380,8 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       const devResult = await pipeline.activate('dev');
       const qaResult = await pipeline.activate('qa');
 
-      const devAgents = devResult.context.memories.map(m => m.agent);
-      const qaAgents = qaResult.context.memories.map(m => m.agent);
+      const devAgents = devResult.context.memories.map((m) => m.agent);
+      const qaAgents = qaResult.context.memories.map((m) => m.agent);
 
       // Dev should not see QA memories
       expect(devAgents).not.toContain('qa');
@@ -409,7 +417,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       proDetector.isProAvailable.mockReturnValue(true);
 
       const MockMemoryLoader = class {
-        constructor() {}
+        constructor() { }
         async loadForAgent() {
           throw new Error('Simulated memory load error');
         }
@@ -440,10 +448,10 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       // Track timer so we can clear it in case pipeline abandons the promise
       let slowTimer;
       const MockMemoryLoader = class {
-        constructor() {}
+        constructor() { }
         async loadForAgent() {
           // Simulate slow load that exceeds _profileLoader timeout (500ms)
-          await new Promise(resolve => {
+          await new Promise((resolve) => {
             slowTimer = setTimeout(resolve, 600);
           });
           return { memories: [], metadata: {} };

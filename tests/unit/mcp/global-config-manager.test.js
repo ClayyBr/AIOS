@@ -133,7 +133,7 @@ describe('Global Config Manager', () => {
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         expect.any(String),
         expect.stringContaining('"version"'),
-        'utf8',
+        'utf8'
       );
     });
 
@@ -147,7 +147,7 @@ describe('Global Config Manager', () => {
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         expect.any(String),
         expect.stringContaining('test'),
-        'utf8',
+        'utf8'
       );
     });
 

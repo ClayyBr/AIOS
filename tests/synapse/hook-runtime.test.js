@@ -40,7 +40,7 @@ describe('hook-runtime', () => {
 
       writeFile(
         path.join(cwd, '.aios-core/core/synapse/session/session-manager.js'),
-        "module.exports = { loadSession: () => ({ prompt_count: 7, id: 's-1' }) };",
+        "module.exports = { loadSession: () => ({ prompt_count: 7, id: 's-1' }) };"
       );
       writeFile(
         path.join(cwd, '.aios-core/core/synapse/engine.js'),
@@ -51,7 +51,7 @@ describe('hook-runtime', () => {
           '  }',
           '}',
           'module.exports = { SynapseEngine };',
-        ].join('\n'),
+        ].join('\n')
       );
 
       const result = resolveHookRuntime({ cwd, sessionId: 's-1' });

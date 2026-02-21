@@ -31,7 +31,10 @@ describe('Permission Mode Integration (Story ACT-4)', () => {
   let configPath;
 
   beforeEach(() => {
-    tempDir = path.join(os.tmpdir(), `permission-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    tempDir = path.join(
+      os.tmpdir(),
+      `permission-test-${Date.now()}-${Math.random().toString(36).slice(2)}`
+    );
     const aiosDir = path.join(tempDir, '.aios');
     fs.mkdirSync(aiosDir, { recursive: true });
     configPath = path.join(aiosDir, 'config.yaml');
@@ -114,7 +117,11 @@ describe('Permission Mode Integration (Story ACT-4)', () => {
     });
 
     test('explore mode blocks Edit tool', async () => {
-      const result = await guard.guard('Edit', { file_path: '/some/file.js', old_string: 'a', new_string: 'b' });
+      const result = await guard.guard('Edit', {
+        file_path: '/some/file.js',
+        old_string: 'a',
+        new_string: 'b',
+      });
       expect(result.proceed).toBe(false);
       expect(result.blocked).toBe(true);
     });

@@ -87,7 +87,9 @@ describe('BrownfieldHandler', () => {
     });
 
     test('should throw error if projectRoot is not a string', () => {
-      expect(() => new BrownfieldHandler(123)).toThrow('projectRoot is required and must be a string');
+      expect(() => new BrownfieldHandler(123)).toThrow(
+        'projectRoot is required and must be a string'
+      );
     });
 
     test('should initialize with correct defaults', () => {
@@ -103,7 +105,7 @@ describe('BrownfieldHandler', () => {
 
     test('should set correct workflow path', () => {
       expect(handler.workflowPath).toBe(
-        path.join(TEST_PROJECT_ROOT, '.aios-core/development/workflows/brownfield-discovery.yaml'),
+        path.join(TEST_PROJECT_ROOT, '.aios-core/development/workflows/brownfield-discovery.yaml')
       );
     });
   });
@@ -181,7 +183,7 @@ describe('BrownfieldHandler', () => {
         handler.workflowPath,
         expect.objectContaining({
           projectRoot: TEST_PROJECT_ROOT,
-        }),
+        })
       );
     });
 
@@ -195,7 +197,7 @@ describe('BrownfieldHandler', () => {
         handler.workflowPath,
         expect.objectContaining({
           techStack,
-        }),
+        })
       );
     });
 
@@ -227,7 +229,7 @@ describe('BrownfieldHandler', () => {
       const result = await handler.handlePhaseFailureAction(
         'system_documentation',
         PhaseFailureAction.RETRY,
-        {},
+        {}
       );
 
       expect(result.action).toBe('retry_phase');
@@ -238,7 +240,7 @@ describe('BrownfieldHandler', () => {
       const result = await handler.handlePhaseFailureAction(
         'database_documentation',
         PhaseFailureAction.SKIP,
-        {},
+        {}
       );
 
       expect(result.action).toBe('skip_phase');
@@ -249,7 +251,7 @@ describe('BrownfieldHandler', () => {
       const result = await handler.handlePhaseFailureAction(
         'frontend_documentation',
         PhaseFailureAction.ABORT,
-        {},
+        {}
       );
 
       expect(result.action).toBe('brownfield_aborted');
@@ -260,7 +262,7 @@ describe('BrownfieldHandler', () => {
       const result = await handler.handlePhaseFailureAction(
         'system_documentation',
         'invalid_action',
-        {},
+        {}
       );
 
       expect(result.action).toBe('invalid_action');
@@ -279,7 +281,9 @@ describe('BrownfieldHandler', () => {
     test('should reference system-architecture.md in outputs', async () => {
       const result = await handler.handleUserDecision(true, {});
 
-      expect(result.data.outputs.systemArchitecture).toBe('docs/architecture/system-architecture.md');
+      expect(result.data.outputs.systemArchitecture).toBe(
+        'docs/architecture/system-architecture.md'
+      );
     });
 
     test('should reference TECHNICAL-DEBT-REPORT.md in outputs', async () => {
@@ -332,7 +336,9 @@ describe('BrownfieldHandler', () => {
     });
 
     test('handle(RESOLVE_DEBTS) should route to debt resolution', async () => {
-      const result = await handler.handle({ postDiscoveryChoice: PostDiscoveryChoice.RESOLVE_DEBTS });
+      const result = await handler.handle({
+        postDiscoveryChoice: PostDiscoveryChoice.RESOLVE_DEBTS,
+      });
 
       expect(result.action).toBe('route_to_debt_resolution');
       expect(result.data.taskPath).toContain('brownfield-create-epic.md');
@@ -384,7 +390,7 @@ describe('BrownfieldHandler', () => {
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         path.join(TEST_PROJECT_ROOT, 'docs/test.md'),
         'new content',
-        'utf8',
+        'utf8'
       );
     });
 
@@ -393,10 +399,9 @@ describe('BrownfieldHandler', () => {
 
       handler.writeOutputIdempotent('docs/new/test.md', 'content');
 
-      expect(fs.mkdirSync).toHaveBeenCalledWith(
-        path.join(TEST_PROJECT_ROOT, 'docs/new'),
-        { recursive: true },
-      );
+      expect(fs.mkdirSync).toHaveBeenCalledWith(path.join(TEST_PROJECT_ROOT, 'docs/new'), {
+        recursive: true,
+      });
     });
 
     test('re-execution should update existing files, not duplicate', async () => {
@@ -537,6 +542,8 @@ describe('BrownfieldHandler integration with BobOrchestrator', () => {
     const result = await handler.handleUserDecision(true, {});
 
     expect(result).toHaveProperty('action');
-    expect(['brownfield_complete', 'brownfield_error', 'brownfield_failed']).toContain(result.action);
+    expect(['brownfield_complete', 'brownfield_error', 'brownfield_failed']).toContain(
+      result.action
+    );
   });
 });

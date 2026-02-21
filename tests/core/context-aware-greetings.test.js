@@ -56,7 +56,9 @@ jest.mock('../../.aios-core/core/orchestration/surface-checker', () => ({
   })),
 }));
 
-const { loadProjectStatus } = require('../../.aios-core/infrastructure/scripts/project-status-loader');
+const {
+  loadProjectStatus,
+} = require('../../.aios-core/infrastructure/scripts/project-status-loader');
 
 describe('Story ACT-7: Context-Aware Greeting Sections', () => {
   let builder;
@@ -155,11 +157,9 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
     });
 
     test('buildProjectStatus accepts sectionContext parameter', () => {
-      const result = builder.buildProjectStatus(
-        baseEnrichedContext.projectStatus,
-        'new',
-        { sessionType: 'new' },
-      );
+      const result = builder.buildProjectStatus(baseEnrichedContext.projectStatus, 'new', {
+        sessionType: 'new',
+      });
       expect(result).toContain('Project Status');
     });
 
@@ -174,7 +174,7 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
         { ...baseEnrichedContext, previousAgent: 'qa' },
         'existing',
         baseEnrichedContext.projectStatus,
-        { previousAgent: 'qa' },
+        { previousAgent: 'qa' }
       );
       // Should produce a context section for existing session with previous agent
       expect(result).toBeTruthy();
@@ -184,9 +184,13 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
       // All methods should still work with their original signatures
       expect(builder.buildPresentation(mockAgent, 'new', '')).toBeTruthy();
       expect(builder.buildRoleDescription(mockAgent)).toContain('Role:');
-      expect(builder.buildProjectStatus(baseEnrichedContext.projectStatus, 'new')).toContain('Project Status');
+      expect(builder.buildProjectStatus(baseEnrichedContext.projectStatus, 'new')).toContain(
+        'Project Status'
+      );
       expect(builder.buildFooter(mockAgent)).toBeTruthy();
-      expect(builder.buildContextSection(mockAgent, {}, 'existing', baseEnrichedContext.projectStatus)).toBeDefined();
+      expect(
+        builder.buildContextSection(mockAgent, {}, 'existing', baseEnrichedContext.projectStatus)
+      ).toBeDefined();
     });
   });
 
@@ -333,40 +337,32 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
   // ========================================================================
   describe('AC4: Natural language project status', () => {
     test('narrative format with branch and file count', () => {
-      const result = builder.buildProjectStatus(
-        baseEnrichedContext.projectStatus,
-        'new',
-        { sessionType: 'new' },
-      );
+      const result = builder.buildProjectStatus(baseEnrichedContext.projectStatus, 'new', {
+        sessionType: 'new',
+      });
       expect(result).toContain("You're on branch `feat/act-7`");
       expect(result).toContain('2 modified files');
     });
 
     test('narrative format with story reference', () => {
-      const result = builder.buildProjectStatus(
-        baseEnrichedContext.projectStatus,
-        'new',
-        { sessionType: 'new' },
-      );
+      const result = builder.buildProjectStatus(baseEnrichedContext.projectStatus, 'new', {
+        sessionType: 'new',
+      });
       expect(result).toContain('Story **ACT-7** is in progress');
     });
 
     test('narrative format with recent commit', () => {
-      const result = builder.buildProjectStatus(
-        baseEnrichedContext.projectStatus,
-        'new',
-        { sessionType: 'new' },
-      );
+      const result = builder.buildProjectStatus(baseEnrichedContext.projectStatus, 'new', {
+        sessionType: 'new',
+      });
       expect(result).toContain('Last commit:');
       expect(result).toContain('implement context-aware greetings');
     });
 
     test('workflow session still uses condensed format', () => {
-      const result = builder.buildProjectStatus(
-        baseEnrichedContext.projectStatus,
-        'workflow',
-        { sessionType: 'workflow' },
-      );
+      const result = builder.buildProjectStatus(baseEnrichedContext.projectStatus, 'workflow', {
+        sessionType: 'workflow',
+      });
       expect(result).toContain('🌿 feat/act-7');
       expect(result).toContain('📝 2 modified');
     });
@@ -412,7 +408,7 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
         context,
         'existing',
         baseEnrichedContext.projectStatus,
-        { previousAgent: context.previousAgent },
+        { previousAgent: context.previousAgent }
       );
       expect(result).toBeTruthy();
       expect(result).toContain('@Quinn');
@@ -429,7 +425,7 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
         context,
         'existing',
         baseEnrichedContext.projectStatus,
-        { previousAgent: 'qa' },
+        { previousAgent: 'qa' }
       );
       expect(result).toBeTruthy();
       expect(result).toContain('@qa');
@@ -446,7 +442,7 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
         context,
         'existing',
         null, // no projectStatus
-        { previousAgent: context.previousAgent },
+        { previousAgent: context.previousAgent }
       );
       expect(result).toBeTruthy();
       expect(result).toContain('@Pax');
@@ -458,7 +454,7 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
         baseEnrichedContext,
         'new',
         baseEnrichedContext.projectStatus,
-        {},
+        {}
       );
       expect(result).toBeNull();
     });
@@ -475,7 +471,7 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
         context,
         'existing',
         baseEnrichedContext.projectStatus,
-        { previousAgent: context.previousAgent },
+        { previousAgent: context.previousAgent }
       );
       expect(result).toContain('*review');
     });
@@ -568,7 +564,8 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
     });
 
     test('_safeBuildSection returns null on timeout', async () => {
-      const slowBuilder = () => new Promise((resolve) => setTimeout(() => resolve('too late'), 300));
+      const slowBuilder = () =>
+        new Promise((resolve) => setTimeout(() => resolve('too late'), 300));
       const result = await builder._safeBuildSection(slowBuilder);
       expect(result).toBeNull();
     }, 1000);
@@ -612,8 +609,8 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
     });
 
     test('section timeout produces null, not crash', async () => {
-      const result = await builder._safeBuildSection(() =>
-        new Promise((resolve) => setTimeout(() => resolve('too late'), 500)),
+      const result = await builder._safeBuildSection(
+        () => new Promise((resolve) => setTimeout(() => resolve('too late'), 500))
       );
       expect(result).toBeNull();
     }, 1000);
@@ -735,10 +732,7 @@ describe('Story ACT-7: Context-Aware Greeting Sections', () => {
     test('old format without visibility metadata still works', async () => {
       const oldAgent = {
         ...mockAgent,
-        commands: [
-          { name: 'help' },
-          { name: 'develop' },
-        ],
+        commands: [{ name: 'help' }, { name: 'develop' }],
       };
       const greeting = await builder.buildGreeting(oldAgent, baseEnrichedContext);
       expect(greeting).toContain('help');

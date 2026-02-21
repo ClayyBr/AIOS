@@ -1,7 +1,7 @@
 // Wizard test - uses describeIntegration due to file dependencies
 /**
  * Main Wizard Test Suite
- * 
+ *
  * Tests wizard flow, welcome/completion messages, and cancellation handling
  */
 
@@ -61,7 +61,7 @@ describeIntegration('wizard/index', () => {
           expect.objectContaining({
             name: 'projectType',
           }),
-        ]),
+        ])
       );
     });
 
@@ -96,9 +96,7 @@ describeIntegration('wizard/index', () => {
       inquirer.prompt = jest.fn().mockRejectedValue(error);
 
       await expect(runWizard()).rejects.toThrow();
-      expect(console.error).toHaveBeenCalledWith(
-        expect.stringContaining('couldn\'t be rendered'),
-      );
+      expect(console.error).toHaveBeenCalledWith(expect.stringContaining("couldn't be rendered"));
     });
   });
 
@@ -119,7 +117,7 @@ describeIntegration('wizard/index', () => {
       // Note: buildQuestionSequence returns 2 questions (project type + IDE selection)
       // So total time needs to be > 200ms for average > 100ms per question
       inquirer.prompt = jest.fn().mockImplementation(() => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setTimeout(() => resolve({ projectType: 'greenfield' }), 250);
         });
       });
@@ -127,15 +125,13 @@ describeIntegration('wizard/index', () => {
       await runWizard();
 
       // Should log warning about slow performance
-      expect(console.warn).toHaveBeenCalledWith(
-        expect.stringContaining('exceeds 100ms target'),
-      );
+      expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('exceeds 100ms target'));
     });
 
     test('does not warn if response time is acceptable', async () => {
       // Mock fast prompt (< 100ms)
       inquirer.prompt = jest.fn().mockImplementation(() => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setTimeout(() => resolve({ projectType: 'greenfield' }), 50);
         });
       });
@@ -188,7 +184,8 @@ describeIntegration('wizard/index', () => {
 
       // Future: Will have more keys
       // expect(answers).toHaveProperty('mcps');
-    });  });
+    });
+  });
 
   describeIntegration('Integration Contract (Story 1.1)', () => {
     test('exports runWizard function', () => {
@@ -200,7 +197,7 @@ describeIntegration('wizard/index', () => {
       const wizard = require('../../packages/installer/src/wizard/index');
       const result = wizard.runWizard();
       expect(result).toBeInstanceOf(Promise);
-      
+
       // Clean up promise
       result.catch(() => {});
     });
@@ -208,7 +205,7 @@ describeIntegration('wizard/index', () => {
     test('matches integration contract signature', async () => {
       // Contract: exports.runWizard = async function() { ... }
       const wizard = require('../../packages/installer/src/wizard/index');
-      
+
       inquirer.prompt = jest.fn().mockResolvedValue({ projectType: 'greenfield' });
 
       const result = await wizard.runWizard();
@@ -220,4 +217,3 @@ describeIntegration('wizard/index', () => {
     });
   });
 });
-

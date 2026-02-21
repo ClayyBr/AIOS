@@ -22,16 +22,9 @@ const { setLanguage, t } = require('./i18n');
 const yaml = require('js-yaml');
 const { showWelcome, showCompletion, showCancellation } = require('./feedback');
 const { generateIDEConfigs, showSuccessSummary } = require('./ide-config-generator');
-const {
-  configureEnvironment,
-} = require('../config/configure-environment');
-const {
-  installDependencies,
-} = require('../installer/dependency-installer');
-const {
-  installAiosCore,
-  hasPackageJson,
-} = require('../installer/aios-core-installer');
+const { configureEnvironment } = require('../config/configure-environment');
+const { installDependencies } = require('../installer/dependency-installer');
+const { installAiosCore, hasPackageJson } = require('../installer/aios-core-installer');
 const {
   validateInstallation,
   displayValidationReport,
@@ -167,9 +160,7 @@ async function getExistingLanguage(projectDir = process.cwd()) {
 
       if (settings && settings.language) {
         // Reverse map: Claude Code language name → wizard code
-        const reverseMap = Object.fromEntries(
-          Object.entries(LANGUAGE_MAP).map(([k, v]) => [v, k]),
-        );
+        const reverseMap = Object.fromEntries(Object.entries(LANGUAGE_MAP).map(([k, v]) => [v, k]));
         const langValue = String(settings.language).toLowerCase().trim();
         return reverseMap[langValue] || null;
       }
@@ -265,7 +256,7 @@ async function runWizard(options = {}) {
         language: options.language || existingLang || 'en',
         userProfile: options.userProfile || existingProfile || 'advanced', // Story 10.2
         projectType: options.projectType || 'brownfield', // Default to brownfield for safety
-        selectedIDEs: options.ide ? [options.ide] : [],   // Support single IDE flag if added later
+        selectedIDEs: options.ide ? [options.ide] : [], // Support single IDE flag if added later
         selectedTechPreset: 'none',
         ...options, // Merge any other options
       };
@@ -278,7 +269,9 @@ async function runWizard(options = {}) {
 
       if (existingLanguage) {
         // Idempotent: Use existing language, don't re-ask
-        console.log(`\n✓ ${t('languageSkipped') || 'Language already configured'}: ${existingLanguage}\n`);
+        console.log(
+          `\n✓ ${t('languageSkipped') || 'Language already configured'}: ${existingLanguage}\n`
+        );
         languageAnswer = { language: existingLanguage };
       } else {
         languageAnswer = await inquirer.prompt([getLanguageQuestion()]);
@@ -322,7 +315,7 @@ async function runWizard(options = {}) {
 
       if (avgTimePerQuestion > 100) {
         console.warn(
-          `Warning: Average question response time (${avgTimePerQuestion.toFixed(0)}ms) exceeds 100ms target`,
+          `Warning: Average question response time (${avgTimePerQuestion.toFixed(0)}ms) exceeds 100ms target`
         );
       }
     }
@@ -341,14 +334,14 @@ async function runWizard(options = {}) {
       if (aiosCoreResult.success) {
         console.log(`✅ AIOS core installed (${aiosCoreResult.installedFolders.length} folders)`);
         console.log(
-          `   - Agents: ${aiosCoreResult.installedFolders.includes('agents') ? '✓' : '⨉'}`,
+          `   - Agents: ${aiosCoreResult.installedFolders.includes('agents') ? '✓' : '⨉'}`
         );
         console.log(`   - Tasks: ${aiosCoreResult.installedFolders.includes('tasks') ? '✓' : '⨉'}`);
         console.log(
-          `   - Workflows: ${aiosCoreResult.installedFolders.includes('workflows') ? '✓' : '⨉'}`,
+          `   - Workflows: ${aiosCoreResult.installedFolders.includes('workflows') ? '✓' : '⨉'}`
         );
         console.log(
-          `   - Templates: ${aiosCoreResult.installedFolders.includes('templates') ? '✓' : '⨉'}`,
+          `   - Templates: ${aiosCoreResult.installedFolders.includes('templates') ? '✓' : '⨉'}`
         );
       }
       answers.aiosCoreInstalled = true;
@@ -410,7 +403,7 @@ async function runWizard(options = {}) {
                 process.cwd(),
                 '.aios-core',
                 'data',
-                'technical-preferences.md',
+                'technical-preferences.md'
               );
               const techPrefsSource = path.join(sourcePresetDir, '..', 'technical-preferences.md');
 
@@ -430,7 +423,7 @@ async function runWizard(options = {}) {
                     // Insert after the first heading
                     techPrefsContent = techPrefsContent.replace(
                       '# User-Defined Preferred Patterns and Preferences',
-                      '# User-Defined Preferred Patterns and Preferences' + activePresetSection,
+                      '# User-Defined Preferred Patterns and Preferences' + activePresetSection
                     );
                     await fse.writeFile(techPrefsFile, techPrefsContent, 'utf8');
                   }
@@ -440,7 +433,7 @@ async function runWizard(options = {}) {
 
             console.log(`   ✅ Tech Preset: ${answers.selectedTechPreset}`);
             console.log(
-              `   📁 Location: .aios-core/data/tech-presets/${answers.selectedTechPreset}.md`,
+              `   📁 Location: .aios-core/data/tech-presets/${answers.selectedTechPreset}.md`
             );
             answers.techPresetInstalled = true;
             answers.techPresetResult = { preset: answers.selectedTechPreset, success: true };
@@ -612,7 +605,7 @@ async function runWizard(options = {}) {
               answers.depsResult = retryResult;
             } else {
               console.log(
-                '\n⚠️  Installation still failed. You can run `npm install` manually later.',
+                '\n⚠️  Installation still failed. You can run `npm install` manually later.'
               );
               answers.depsInstalled = false;
               answers.depsResult = retryResult;
@@ -795,7 +788,7 @@ async function runWizard(options = {}) {
         },
         (status) => {
           console.log(`  [${status.step}] ${status.message}`);
-        },
+        }
       );
 
       // Display validation report

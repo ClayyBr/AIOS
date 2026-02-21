@@ -7,9 +7,7 @@
  * formatProgressBar, formatStatus, history, clear
  */
 
-const {
-  collectEvents,
-} = require('./execution-test-helpers');
+const { collectEvents } = require('./execution-test-helpers');
 
 const { ParallelMonitor, getMonitor } = require('../../.aios-core/core/execution/parallel-monitor');
 

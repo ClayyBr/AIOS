@@ -1,11 +1,7 @@
 'use strict';
 
 const path = require('path');
-const {
-  parseArgs,
-  lintContent,
-  runSemanticLint,
-} = require('../../scripts/semantic-lint');
+const { parseArgs, lintContent, runSemanticLint } = require('../../scripts/semantic-lint');
 
 describe('semantic-lint', () => {
   it('parses staged/json/file arguments', () => {
@@ -18,7 +14,7 @@ describe('semantic-lint', () => {
   it('detects deprecated terms with severities', () => {
     const findings = lintContent(
       'This expansion pack uses permission mode. Legacy workflow state term.',
-      'docs/sample.md',
+      'docs/sample.md'
     );
 
     expect(findings.some((item) => item.ruleId === 'deprecated-expansion-pack')).toBe(true);
@@ -32,7 +28,7 @@ describe('semantic-lint', () => {
       {
         collectFiles: () => [path.join('/tmp/project', 'docs', 'sample.md')],
         readFile: () => 'Use expansion pack here.',
-      },
+      }
     );
 
     expect(result.ok).toBe(false);
@@ -45,7 +41,7 @@ describe('semantic-lint', () => {
       {
         collectFiles: () => [path.join('/tmp/project', 'docs', 'sample.md')],
         readFile: () => 'Use workflow state wording for migration note.',
-      },
+      }
     );
 
     expect(result.ok).toBe(true);

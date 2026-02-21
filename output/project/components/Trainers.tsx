@@ -12,25 +12,25 @@ const trainers: Trainer[] = [
     name: 'Ana Cristina',
     specialty: 'Crosfit Coach Nível 2',
     image: '/trainer-ana.webp', // Replace with actual image
-    bio: 'Com mais de 10 anos de experiência, Ana é especialista em LPO e ginástica funcional, dedicada a superar seus limites.'
+    bio: 'Com mais de 10 anos de experiência, Ana é especialista em LPO e ginástica funcional, dedicada a superar seus limites.',
   },
   {
     name: 'Carlos Mendes',
     specialty: 'Especialista em Força e Condicionamento',
     image: '/trainer-carlos.webp', // Replace with actual image
-    bio: 'Ex-atleta profissional, Carlos traz uma abordagem única para o desenvolvimento de força e resiliência mental.'
+    bio: 'Ex-atleta profissional, Carlos traz uma abordagem única para o desenvolvimento de força e resiliência mental.',
   },
   {
     name: 'Beatriz Lima',
     specialty: 'Mobilidade e Prevenção de Lesões',
     image: '/trainer-beatriz.webp', // Replace with actual image
-    bio: 'Focada em garantir que cada movimento seja executado com perfeição, Beatriz é sua guia para uma prática segura e eficaz.'
+    bio: 'Focada em garantir que cada movimento seja executado com perfeição, Beatriz é sua guia para uma prática segura e eficaz.',
   },
   {
     name: 'Ricardo Souza',
     specialty: 'Coach de Endurance',
     image: '/trainer-ricardo.webp', // Replace with actual image
-    bio: 'Ricardo é apaixonado por ajudar atletas a construírem resistência e a conquistarem novas marcas em desafios de endurance.'
+    bio: 'Ricardo é apaixonado por ajudar atletas a construírem resistência e a conquistarem novas marcas em desafios de endurance.',
   },
 ];
 

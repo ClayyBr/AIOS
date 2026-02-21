@@ -1,7 +1,7 @@
 /**
  * Integration Test Suite for Story 3.6
  * Utility Script Integration - Part 3
- * 
+ *
  * Tests 12 utilities:
  * - Testing & QA (5): test-generator, test-quality-assessment, test-template-system, test-updater, visual-impact-generator
  * - Template Management (2): template-engine, template-validator
@@ -26,16 +26,16 @@ const utilities = [
   'test-template-system',
   'test-updater',
   'visual-impact-generator',
-  
+
   // Template Management (2)
   'template-engine',
   'template-validator',
-  
+
   // Analytics & Tracking (3)
   'usage-analytics',
   'usage-tracker',
   'version-tracker',
-  
+
   // Transaction & Validation (2)
   'transaction-manager',
   'validate-filenames',
@@ -45,7 +45,7 @@ const loadResults = {};
 let loadedCount = 0;
 let failedCount = 0;
 
-utilities.forEach(util => {
+utilities.forEach((util) => {
   try {
     const utilPath = path.join(__dirname, '../../aios-core/utils', `${util}.js`);
     require(utilPath);
@@ -97,10 +97,10 @@ try {
     encoding: 'utf8',
     stdio: 'pipe',
   });
-  
+
   // Check for util-* pattern matches in output
-  const hasUtilGaps = utilities.some(util => output.includes(`util-${util}`));
-  
+  const hasUtilGaps = utilities.some((util) => output.includes(`util-${util}`));
+
   if (hasUtilGaps) {
     console.log('❌ Gaps detected for Story 3.6 utilities');
     console.log(output);
@@ -125,11 +125,11 @@ const agents = [
 
 let agentCheckCount = 0;
 
-agents.forEach(agent => {
+agents.forEach((agent) => {
   try {
     const agentPath = path.join(__dirname, '../..', agent.path);
     const content = fs.readFileSync(agentPath, 'utf8');
-    
+
     // Check for YAML block
     if (content.includes('```yaml') || content.includes('dependencies:')) {
       console.log(`   ✅ ${agent.name} - structure OK`);
@@ -187,4 +187,3 @@ if (loadedCount === utilities.length && agentCheckCount === agents.length) {
 
 console.log('\n' + '='.repeat(60));
 console.log('\n✅ Test Suite Execution Complete\n');
-

@@ -253,7 +253,7 @@ describe('Gitignore Generator', () => {
     it('should return true if AIOS section exists', () => {
       fs.writeFileSync(
         path.join(tempDir, '.gitignore'),
-        '# AIOS Integration Section\n.aios-core/\n',
+        '# AIOS Integration Section\n.aios-core/\n'
       );
 
       expect(hasAiosIntegration(tempDir)).toBe(true);

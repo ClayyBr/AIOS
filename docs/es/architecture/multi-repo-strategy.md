@@ -30,13 +30,13 @@ AIOS v4 adopta una **estrategia multi-repositorio** para permitir el desarrollo 
 
 ### Objetivos de Diseño
 
-| Objetivo                      | Descripción                                           |
-| ----------------------------- | ----------------------------------------------------- |
-| **Modularidad**               | Los squads pueden desarrollarse y versionarse independientemente   |
-| **Comunidad**                 | Los squads de código abierto fomentan las contribuciones comunitarias  |
-| **Protección de IP**          | Los componentes propietarios permanecen en repositorios privados |
-| **Escalabilidad**             | Los equipos pueden trabajar en repositorios separados sin conflictos    |
-| **Flexibilidad de Licencias** | Los diferentes componentes pueden tener diferentes licencias      |
+| Objetivo                      | Descripción                                                           |
+| ----------------------------- | --------------------------------------------------------------------- |
+| **Modularidad**               | Los squads pueden desarrollarse y versionarse independientemente      |
+| **Comunidad**                 | Los squads de código abierto fomentan las contribuciones comunitarias |
+| **Protección de IP**          | Los componentes propietarios permanecen en repositorios privados      |
+| **Escalabilidad**             | Los equipos pueden trabajar en repositorios separados sin conflictos  |
+| **Flexibilidad de Licencias** | Los diferentes componentes pueden tener diferentes licencias          |
 
 ---
 
@@ -114,13 +114,13 @@ El repositorio central contiene el marco AIOS fundamental del que todos los proy
 
 ### Contenidos
 
-| Directorio                   | Descripción                                             |
-| ---------------------------- | ------------------------------------------------------- |
+| Directorio                   | Descripción                                                  |
+| ---------------------------- | ------------------------------------------------------------ |
 | `.aios-core/core/`           | Fundamentos del marco (config, registry, puertas de calidad) |
-| `.aios-core/development/`    | Definiciones de agentes, tareas, flujos de trabajo                     |
-| `.aios-core/product/`        | Plantillas, listas de verificación, datos de PM                          |
-| `.aios-core/infrastructure/` | Scripts, herramientas, integraciones                            |
-| `docs/`                      | Documentación del marco                                 |
+| `.aios-core/development/`    | Definiciones de agentes, tareas, flujos de trabajo           |
+| `.aios-core/product/`        | Plantillas, listas de verificación, datos de PM              |
+| `.aios-core/infrastructure/` | Scripts, herramientas, integraciones                         |
+| `docs/`                      | Documentación del marco                                      |
 
 ### Licencia
 
@@ -321,13 +321,13 @@ git submodule add https://github.com/SynkraAI/mcp-ecosystem.git mcp
 
 ### Alcance de Paquetes npm
 
-| Paquete               | Registro   | Licencia       | Repositorio    |
-| --------------------- | ---------- | -------------- | ------------- |
-| `@aios/core`          | npm public | MIT            | aios-core     |
-| `@aios/squad-etl`     | npm public | MIT            | aios-squads   |
-| `@aios/squad-creator` | npm public | MIT            | aios-squads   |
-| `@aios/squad-mmos`    | npm public | MIT            | aios-squads   |
-| `@aios/mcp-presets`   | npm public | Apache 2.0     | mcp-ecosystem |
+| Paquete               | Registro   | Licencia   | Repositorio   |
+| --------------------- | ---------- | ---------- | ------------- |
+| `@aios/core`          | npm public | MIT        | aios-core     |
+| `@aios/squad-etl`     | npm public | MIT        | aios-squads   |
+| `@aios/squad-creator` | npm public | MIT        | aios-squads   |
+| `@aios/squad-mmos`    | npm public | MIT        | aios-squads   |
+| `@aios/mcp-presets`   | npm public | Apache 2.0 | mcp-ecosystem |
 
 ### Flujo de Publicación
 
@@ -369,12 +369,12 @@ npm publish --access public
 
 ### Mantenimiento del Repositorio
 
-| Tarea              | Frecuencia   | Responsabilidad |
-| ------------------ | ----------- | -------------- |
-| Actualización de dependencias | Semanal      | DevOps         |
-| Auditorías de seguridad    | Mensual     | DevOps         |
-| Lanzamientos de versión   | Según sea necesario   | Mantenedores    |
-| Sincronización de documentación | Por lanzamiento | Colaboradores   |
+| Tarea                           | Frecuencia          | Responsabilidad |
+| ------------------------------- | ------------------- | --------------- |
+| Actualización de dependencias   | Semanal             | DevOps          |
+| Auditorías de seguridad         | Mensual             | DevOps          |
+| Lanzamientos de versión         | Según sea necesario | Mantenedores    |
+| Sincronización de documentación | Por lanzamiento     | Colaboradores   |
 
 ---
 

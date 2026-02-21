@@ -6,10 +6,7 @@ module.exports = {
   testEnvironment: 'node',
   roots: ['../../tests/packages/aios-install'],
   testMatch: ['**/*.test.js'],
-  collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*.test.js',
-  ],
+  collectCoverageFrom: ['src/**/*.js', '!src/**/*.test.js'],
   coverageDirectory: '../../coverage/packages/aios-install',
   coverageThreshold: {
     global: {
@@ -19,8 +16,6 @@ module.exports = {
       statements: 70,
     },
   },
-  modulePathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-  ],
+  modulePathIgnorePatterns: ['<rootDir>/node_modules/'],
   verbose: true,
 };

@@ -23,4 +23,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 
 ---
 
-*AIOS Agent Flows - @analyst System v1.0*
+_AIOS Agent Flows - @analyst System v1.0_

@@ -61,7 +61,10 @@ function parseArgs() {
       options.warm = true;
       options.cold = false;
     } else if (arg.startsWith('--agents=')) {
-      options.agents = arg.split('=')[1].split(',').map(s => s.trim());
+      options.agents = arg
+        .split('=')[1]
+        .split(',')
+        .map((s) => s.trim());
     } else if (arg.startsWith('--iterations=')) {
       options.iterations = parseInt(arg.split('=')[1], 10) || 10;
     }
@@ -91,7 +94,8 @@ function clearPipelineCache() {
 
 async function runBenchmark(options) {
   const pipelinePath = path.resolve(
-    PROJECT_ROOT, '.aios-core/development/scripts/unified-activation-pipeline',
+    PROJECT_ROOT,
+    '.aios-core/development/scripts/unified-activation-pipeline'
   );
   const { ALL_AGENT_IDS } = require(pipelinePath);
   let { UnifiedActivationPipeline } = require(pipelinePath);
@@ -153,14 +157,14 @@ async function runBenchmark(options) {
     'p50'.padStart(8),
     'p95'.padStart(8),
     'p99'.padStart(8),
-    'Quality'.padStart(20),
+    'Quality'.padStart(20)
   );
   console.log('-'.repeat(90));
 
   const allDurations = [];
 
   for (const agentId of agents) {
-    const sorted = results[agentId].durations.filter(d => d >= 0).sort((a, b) => a - b);
+    const sorted = results[agentId].durations.filter((d) => d >= 0).sort((a, b) => a - b);
     if (sorted.length === 0) continue;
 
     allDurations.push(...sorted);
@@ -176,7 +180,7 @@ async function runBenchmark(options) {
       String(p50).padStart(8),
       String(p95).padStart(8),
       String(p99).padStart(8),
-      qualityStr.padStart(20),
+      qualityStr.padStart(20)
     );
   }
 
@@ -188,7 +192,7 @@ async function runBenchmark(options) {
       'AGGREGATE'.padEnd(20),
       String(percentile(sortedAll, 50)).padStart(8),
       String(percentile(sortedAll, 95)).padStart(8),
-      String(percentile(sortedAll, 99)).padStart(8),
+      String(percentile(sortedAll, 99)).padStart(8)
     );
   }
 
@@ -201,7 +205,7 @@ async function runBenchmark(options) {
     'p50'.padStart(8),
     'p95'.padStart(8),
     'p99'.padStart(8),
-    'max'.padStart(8),
+    'max'.padStart(8)
   );
   console.log('-'.repeat(90));
 
@@ -222,7 +226,7 @@ async function runBenchmark(options) {
       String(percentile(sorted, 50)).padStart(8),
       String(percentile(sorted, 95)).padStart(8),
       String(percentile(sorted, 99)).padStart(8),
-      String(sorted[sorted.length - 1]).padStart(8),
+      String(sorted[sorted.length - 1]).padStart(8)
     );
   }
 
@@ -239,7 +243,7 @@ async function runBenchmark(options) {
   console.log('='.repeat(90));
 }
 
-runBenchmark(parseArgs()).catch(err => {
+runBenchmark(parseArgs()).catch((err) => {
   console.error('Benchmark failed:', err);
   process.exit(1);
 });

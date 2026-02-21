@@ -42,7 +42,7 @@ describe('WorkflowStateManager runtime-first recommendations', () => {
     const manager = new WorkflowStateManager();
     const next = manager.getNextActionRecommendation(
       { story_status: 'in_progress', qa_status: 'rejected', ci_status: 'green' },
-      { story: 'docs/stories/example.story.md' },
+      { story: 'docs/stories/example.story.md' }
     );
 
     expect(next.state).toBe('qa_rejected');
@@ -72,7 +72,7 @@ describe('WorkflowStateManager runtime-first recommendations', () => {
         ci_status: 'green',
         has_uncommitted_changes: false,
       },
-      { story: 'story.md' },
+      { story: 'story.md' }
     );
 
     expect(next.state).toBe('ready_for_validation');
@@ -89,7 +89,7 @@ describe('WorkflowStateManager runtime-first recommendations', () => {
         ci_status: 'green',
         has_uncommitted_changes: false,
       },
-      { story: 'docs/stories/completed.md' },
+      { story: 'docs/stories/completed.md' }
     );
 
     expect(next.state).toBe('completed');

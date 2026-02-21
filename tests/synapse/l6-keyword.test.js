@@ -56,10 +56,10 @@ describe('L6KeywordProcessor', () => {
 
   describe('process()', () => {
     test('should match keyword and load domain rules', () => {
-      fs.writeFileSync(path.join(tempDir, 'security'), [
-        'SEC_RULE_1=Validate all user inputs',
-        'SEC_RULE_2=Use parameterized queries',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'security'),
+        ['SEC_RULE_1=Validate all user inputs', 'SEC_RULE_2=Use parameterized queries'].join('\n')
+      );
 
       const context = {
         prompt: 'check the security of this code',
@@ -114,7 +114,7 @@ describe('L6KeywordProcessor', () => {
       expect(result).not.toBeNull();
       expect(result.rules).toHaveLength(2);
       expect(result.metadata.matchedDomains).toEqual(
-        expect.arrayContaining(['TESTING', 'PERFORMANCE']),
+        expect.arrayContaining(['TESTING', 'PERFORMANCE'])
       );
     });
 

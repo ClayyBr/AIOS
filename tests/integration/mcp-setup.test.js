@@ -104,7 +104,13 @@ describe('MCP Setup Integration', () => {
   });
 
   describe('OS Detection', () => {
-    const { detectOS, isWindows, isMacOS, isLinux, getOSInfo } = require('../../.aios-core/core/mcp/os-detector');
+    const {
+      detectOS,
+      isWindows,
+      isMacOS,
+      isLinux,
+      getOSInfo,
+    } = require('../../.aios-core/core/mcp/os-detector');
 
     it('should detect current OS correctly', () => {
       const osType = detectOS();
@@ -133,7 +139,11 @@ describe('MCP Setup Integration', () => {
   });
 
   describe('Server Templates', () => {
-    const { getAvailableTemplates, getServerTemplate, SERVER_TEMPLATES } = require('../../.aios-core/core/mcp/global-config-manager');
+    const {
+      getAvailableTemplates,
+      getServerTemplate,
+      SERVER_TEMPLATES,
+    } = require('../../.aios-core/core/mcp/global-config-manager');
 
     it('should have standard server templates', () => {
       const templates = getAvailableTemplates();
@@ -269,7 +279,7 @@ describe('MCP Setup Integration', () => {
 
     it('should have all subcommands registered', () => {
       const mcpCommand = createMcpCommand();
-      const subcommandNames = mcpCommand.commands.map(cmd => cmd.name());
+      const subcommandNames = mcpCommand.commands.map((cmd) => cmd.name());
 
       expect(subcommandNames).toContain('setup');
       expect(subcommandNames).toContain('link');
@@ -284,7 +294,7 @@ describe('MCP CLI Command Registration', () => {
     const { createProgram } = require('../../.aios-core/cli/index');
     const program = createProgram();
 
-    const commandNames = program.commands.map(cmd => cmd.name());
+    const commandNames = program.commands.map((cmd) => cmd.name());
     expect(commandNames).toContain('mcp');
   });
 

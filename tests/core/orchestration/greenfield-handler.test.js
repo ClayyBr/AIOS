@@ -99,7 +99,9 @@ describe('GreenfieldHandler', () => {
     });
 
     test('should throw error if projectRoot is not a string', () => {
-      expect(() => new GreenfieldHandler(123)).toThrow('projectRoot is required and must be a string');
+      expect(() => new GreenfieldHandler(123)).toThrow(
+        'projectRoot is required and must be a string'
+      );
     });
 
     test('should initialize with correct defaults', () => {
@@ -170,8 +172,8 @@ describe('GreenfieldHandler', () => {
       expect(handler.isGreenfield(customPath)).toBe(true);
       // Verify existsSync was called with the custom path (platform-agnostic)
       expect(fs.existsSync).toHaveBeenCalled();
-      const calls = fs.existsSync.mock.calls.map(c => c[0]);
-      const hasCustomPath = calls.some(c => c.includes('custom') && c.includes('path'));
+      const calls = fs.existsSync.mock.calls.map((c) => c[0]);
+      const hasCustomPath = calls.some((c) => c.includes('custom') && c.includes('path'));
       expect(hasCustomPath).toBe(true);
     });
 
@@ -266,8 +268,12 @@ describe('GreenfieldHandler', () => {
 
       await handler._executePhase0({});
 
-      expect(events.some((e) => e.type === 'start' && e.phase === GreenfieldPhase.BOOTSTRAP)).toBe(true);
-      expect(events.some((e) => e.type === 'complete' && e.phase === GreenfieldPhase.BOOTSTRAP)).toBe(true);
+      expect(events.some((e) => e.type === 'start' && e.phase === GreenfieldPhase.BOOTSTRAP)).toBe(
+        true
+      );
+      expect(
+        events.some((e) => e.type === 'complete' && e.phase === GreenfieldPhase.BOOTSTRAP)
+      ).toBe(true);
     });
   });
 
@@ -345,11 +351,7 @@ describe('GreenfieldHandler', () => {
     });
 
     test('should pass text input as userGoal', async () => {
-      const result = await handler.handleSurfaceDecision(
-        'Quero um app de e-commerce',
-        1,
-        {},
-      );
+      const result = await handler.handleSurfaceDecision('Quero um app de e-commerce', 1, {});
 
       // Should proceed to Phase 1 with userGoal in context
       expect(result.action).toBe('greenfield_surface');
@@ -371,7 +373,7 @@ describe('GreenfieldHandler', () => {
       const result = await handler.handlePhaseFailureAction(
         GreenfieldPhase.BOOTSTRAP,
         PhaseFailureAction.RETRY,
-        {},
+        {}
       );
 
       // Should re-execute Phase 0
@@ -383,7 +385,7 @@ describe('GreenfieldHandler', () => {
       const result = await handler.handlePhaseFailureAction(
         GreenfieldPhase.BOOTSTRAP,
         PhaseFailureAction.SKIP,
-        {},
+        {}
       );
 
       // Should skip to Phase 1
@@ -395,7 +397,7 @@ describe('GreenfieldHandler', () => {
       const result = await handler.handlePhaseFailureAction(
         GreenfieldPhase.BOOTSTRAP,
         PhaseFailureAction.ABORT,
-        {},
+        {}
       );
 
       expect(result.action).toBe('greenfield_aborted');
@@ -406,7 +408,7 @@ describe('GreenfieldHandler', () => {
       const result = await handler.handlePhaseFailureAction(
         GreenfieldPhase.BOOTSTRAP,
         'invalid',
-        {},
+        {}
       );
 
       expect(result.action).toBe('invalid_action');
@@ -485,7 +487,7 @@ describe('GreenfieldHandler', () => {
       expect(mockSessionState.recordPhaseChange).toHaveBeenCalledWith(
         'greenfield_phase_0_bootstrap',
         'greenfield-fullstack',
-        '@pm',
+        '@pm'
       );
     });
 

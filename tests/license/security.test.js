@@ -23,7 +23,11 @@ const {
   maskKey,
   validateKeyFormat,
 } = require('../../pro/license/license-crypto');
-const { ProFeatureError, LicenseActivationError, LicenseValidationError } = require('../../pro/license/errors');
+const {
+  ProFeatureError,
+  LicenseActivationError,
+  LicenseValidationError,
+} = require('../../pro/license/errors');
 
 describe('Security Tests (AC-9, AC-10)', () => {
   let testDir;
@@ -349,7 +353,9 @@ describe('Security Tests (AC-9, AC-10)', () => {
       const error = LicenseActivationError.networkError(originalError);
 
       // Should provide generic message, not expose internal network details
-      expect(error.message).toBe('Unable to reach license server. Please check your internet connection.');
+      expect(error.message).toBe(
+        'Unable to reach license server. Please check your internet connection.'
+      );
     });
 
     it('should not expose seat details beyond usage numbers', () => {

@@ -7,22 +7,26 @@ const features = [
   {
     icon: Dumbbell,
     title: 'Expert Coaching',
-    description: 'Learn from certified L2/L3 coaches dedicated to your progress and safety. Personalized guidance for every level.',
+    description:
+      'Learn from certified L2/L3 coaches dedicated to your progress and safety. Personalized guidance for every level.',
   },
   {
     icon: ShieldCheck,
     title: 'Proven Methodology',
-    description: 'Our CrossFit programs are designed for maximum effectiveness, combining strength, endurance, and agility.',
+    description:
+      'Our CrossFit programs are designed for maximum effectiveness, combining strength, endurance, and agility.',
   },
   {
     icon: Users,
     title: 'Supportive Community',
-    description: 'Train alongside motivated individuals in an inclusive environment that fosters camaraderie and mutual growth.',
+    description:
+      'Train alongside motivated individuals in an inclusive environment that fosters camaraderie and mutual growth.',
   },
   {
     icon: Trophy,
     title: 'Achieve Your Goals',
-    description: 'Whether it’s weight loss, muscle gain, or competitive fitness, we provide the path to reach your full potential.',
+    description:
+      'Whether it’s weight loss, muscle gain, or competitive fitness, we provide the path to reach your full potential.',
   },
 ];
 
@@ -53,9 +57,7 @@ export default function Features() {
               <h3 className="text-2xl font-bold text-primary-800 mb-4 font-oswald uppercase">
                 {feature.title}
               </h3>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                {feature.description}
-              </p>
+              <p className="text-gray-700 text-lg leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>

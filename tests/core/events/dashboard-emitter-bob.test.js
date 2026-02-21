@@ -15,7 +15,10 @@ const fs = require('fs-extra');
 const path = require('path');
 const os = require('os');
 
-const { DashboardEmitter, getDashboardEmitter } = require('../../../.aios-core/core/events/dashboard-emitter');
+const {
+  DashboardEmitter,
+  getDashboardEmitter,
+} = require('../../../.aios-core/core/events/dashboard-emitter');
 const { DashboardEventType } = require('../../../.aios-core/core/events/types');
 
 describe('DashboardEmitter Bob-specific methods', () => {

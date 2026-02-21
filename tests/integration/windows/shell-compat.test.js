@@ -10,7 +10,10 @@ const describeOnWindows = isWindows ? describe : describe.skip;
 
 describeOnWindows('PowerShell vs CMD Compatibility', () => {
   it('should document PowerShell execution policy handling', async () => {
-    const storyPath = path.join(__dirname, '../../../docs/stories/v2.1/sprint-1/story-1.10a-windows-testing.md');
+    const storyPath = path.join(
+      __dirname,
+      '../../../docs/stories/v2.1/sprint-1/story-1.10a-windows-testing.md'
+    );
     const storyContent = await fs.readFile(storyPath, 'utf-8');
 
     // Verify PowerShell execution policy is documented

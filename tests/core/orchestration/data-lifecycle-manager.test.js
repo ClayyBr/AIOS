@@ -336,7 +336,9 @@ describe('DataLifecycleManager', () => {
 
       // Then
       expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining('🧹 Cleanup: 2 locks removidos, 1 sessions arquivadas, 0 snapshots removidos'),
+        expect.stringContaining(
+          '🧹 Cleanup: 2 locks removidos, 1 sessions arquivadas, 0 snapshots removidos'
+        )
       );
 
       consoleSpy.mockRestore();
@@ -362,7 +364,9 @@ describe('DataLifecycleManager', () => {
         errors: [],
       });
 
-      jest.spyOn(DataLifecycleManager.prototype, 'runStartupCleanup').mockImplementation(mockCleanup);
+      jest
+        .spyOn(DataLifecycleManager.prototype, 'runStartupCleanup')
+        .mockImplementation(mockCleanup);
 
       // When
       const result = await runStartupCleanup(TEST_PROJECT_ROOT);

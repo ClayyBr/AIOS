@@ -60,4 +60,5 @@
 **I receive delegation from:**
 
 ---
-*AIOS Agent - Synced from .aios-core/development/agents/devops.md*
+
+_AIOS Agent - Synced from .aios-core/development/agents/devops.md_

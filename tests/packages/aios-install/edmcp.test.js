@@ -40,7 +40,8 @@ describe('edmcp', () => {
   describe('checkDocker', () => {
     it('should return installed and running when Docker is available', async () => {
       // Given
-      execa.mockResolvedValueOnce({ stdout: 'Docker version 24.0.6, build ed223bc' })
+      execa
+        .mockResolvedValueOnce({ stdout: 'Docker version 24.0.6, build ed223bc' })
         .mockResolvedValueOnce({ exitCode: 0, stdout: 'Server: Docker Desktop' });
 
       // When
@@ -54,7 +55,8 @@ describe('edmcp', () => {
 
     it('should return installed but not running when daemon is stopped', async () => {
       // Given
-      execa.mockResolvedValueOnce({ stdout: 'Docker version 24.0.6' })
+      execa
+        .mockResolvedValueOnce({ stdout: 'Docker version 24.0.6' })
         .mockResolvedValueOnce({ exitCode: 1, stdout: '' });
 
       // When
@@ -82,7 +84,8 @@ describe('edmcp', () => {
   describe('ensureDocker', () => {
     it('should resolve when Docker is available and running', async () => {
       // Given
-      execa.mockResolvedValueOnce({ stdout: 'Docker version 24.0.6' })
+      execa
+        .mockResolvedValueOnce({ stdout: 'Docker version 24.0.6' })
         .mockResolvedValueOnce({ exitCode: 0 });
 
       // When/Then
@@ -99,7 +102,8 @@ describe('edmcp', () => {
 
     it('should throw when Docker daemon is not running', async () => {
       // Given
-      execa.mockResolvedValueOnce({ stdout: 'Docker version 24.0.6' })
+      execa
+        .mockResolvedValueOnce({ stdout: 'Docker version 24.0.6' })
         .mockResolvedValueOnce({ exitCode: 1 });
 
       // When/Then

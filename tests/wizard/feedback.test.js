@@ -1,6 +1,6 @@
 /**
  * Feedback Helpers Test Suite
- * 
+ *
  * Tests visual feedback components (spinners, progress bars, status messages)
  */
 
@@ -48,7 +48,7 @@ describe('feedback', () => {
     test('creates spinner with text', () => {
       const ora = require('ora');
       ora.mockReturnValue({ start: jest.fn(), stop: jest.fn() });
-      
+
       createSpinner('Loading...');
 
       expect(ora).toHaveBeenCalledWith(
@@ -56,21 +56,21 @@ describe('feedback', () => {
           text: 'Loading...',
           color: 'cyan',
           spinner: 'dots',
-        }),
+        })
       );
     });
 
     test('accepts custom options', () => {
       const ora = require('ora');
       ora.mockReturnValue({ start: jest.fn(), stop: jest.fn() });
-      
+
       createSpinner('Loading...', { color: 'red' });
 
       expect(ora).toHaveBeenCalledWith(
         expect.objectContaining({
           text: 'Loading...',
           color: 'red',
-        }),
+        })
       );
     });
   });
@@ -164,9 +164,7 @@ describe('feedback', () => {
     test('showCancellation displays cancellation message', () => {
       showCancellation();
       expect(console.log).toHaveBeenCalled();
-      expect(console.log.mock.calls.some(call => 
-        call[0].includes('cancelled'),
-      )).toBe(true);
+      expect(console.log.mock.calls.some((call) => call[0].includes('cancelled'))).toBe(true);
     });
   });
 
@@ -195,4 +193,3 @@ describe('feedback', () => {
     });
   });
 });
-

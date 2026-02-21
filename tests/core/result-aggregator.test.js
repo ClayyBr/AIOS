@@ -8,11 +8,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const {
-  createTempDir,
-  cleanupTempDir,
-  collectEvents,
-} = require('./execution-test-helpers');
+const { createTempDir, cleanupTempDir, collectEvents } = require('./execution-test-helpers');
 
 const { ResultAggregator } = require('../../.aios-core/core/execution/result-aggregator');
 
@@ -114,7 +110,7 @@ describe('ResultAggregator', () => {
       };
 
       const result = await ra.aggregate(waveResults);
-      const longWarning = result.warnings.find(w => w.type === 'long_duration');
+      const longWarning = result.warnings.find((w) => w.type === 'long_duration');
       expect(longWarning).toBeDefined();
     });
 
@@ -126,7 +122,7 @@ describe('ResultAggregator', () => {
       };
 
       const result = await ra.aggregate(waveResults);
-      const noFilesWarning = result.warnings.find(w => w.type === 'no_files_modified');
+      const noFilesWarning = result.warnings.find((w) => w.type === 'no_files_modified');
       expect(noFilesWarning).toBeDefined();
     });
 
@@ -161,7 +157,10 @@ describe('ResultAggregator', () => {
       const ra = new ResultAggregator({ rootPath: tmpDir });
       const waves = [
         { waveIndex: 1, results: [{ taskId: 't1', success: true, filesModified: [] }] },
-        { waveIndex: 2, results: [{ taskId: 't2', success: false, error: 'fail', filesModified: [] }] },
+        {
+          waveIndex: 2,
+          results: [{ taskId: 't2', success: false, error: 'fail', filesModified: [] }],
+        },
       ];
 
       const result = await ra.aggregateAll(waves);
@@ -296,7 +295,15 @@ describe('ResultAggregator', () => {
         tasks: [{ taskId: 't1', agentId: '@dev', success: true, duration: 1000 }],
         conflicts: [],
         warnings: [],
-        metrics: { totalTasks: 1, successful: 1, failed: 0, successRate: 100, totalDuration: 1000, conflictCount: 0, filesModified: 1 },
+        metrics: {
+          totalTasks: 1,
+          successful: 1,
+          failed: 0,
+          successRate: 100,
+          totalDuration: 1000,
+          conflictCount: 0,
+          filesModified: 1,
+        },
       };
 
       const reportPath = await ra.generateReport(agg);
@@ -315,7 +322,14 @@ describe('ResultAggregator', () => {
         tasks: [{ taskId: 't1', agentId: '@dev', success: true, duration: 1000 }],
         conflicts: [],
         warnings: [],
-        metrics: { totalTasks: 1, successful: 1, failed: 0, successRate: 100, totalDuration: 1000, conflictCount: 0 },
+        metrics: {
+          totalTasks: 1,
+          successful: 1,
+          failed: 0,
+          successRate: 100,
+          totalDuration: 1000,
+          conflictCount: 0,
+        },
       };
       const md = ra.formatMarkdown(agg);
       expect(md).toContain('Wave Results Report');
@@ -327,7 +341,15 @@ describe('ResultAggregator', () => {
       const agg = {
         completedAt: new Date().toISOString(),
         tasks: [],
-        conflicts: [{ file: 'app.js', type: 'concurrent', severity: 'high', tasks: ['t1', 't2'], resolution: 'merge' }],
+        conflicts: [
+          {
+            file: 'app.js',
+            type: 'concurrent',
+            severity: 'high',
+            tasks: ['t1', 't2'],
+            resolution: 'merge',
+          },
+        ],
         warnings: [],
         metrics: { totalTasks: 0, successful: 0, failed: 0, successRate: 100, totalDuration: 0 },
       };

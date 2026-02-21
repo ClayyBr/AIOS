@@ -14,11 +14,30 @@ const path = require('path');
  * List of file extensions that should be treated as binary (not normalized)
  */
 const BINARY_EXTENSIONS = [
-  '.png', '.jpg', '.jpeg', '.gif', '.ico', '.webp', '.svg',
-  '.pdf', '.zip', '.tar', '.gz', '.7z',
-  '.woff', '.woff2', '.ttf', '.eot',
-  '.mp3', '.mp4', '.wav', '.avi',
-  '.exe', '.dll', '.so', '.dylib',
+  '.png',
+  '.jpg',
+  '.jpeg',
+  '.gif',
+  '.ico',
+  '.webp',
+  '.svg',
+  '.pdf',
+  '.zip',
+  '.tar',
+  '.gz',
+  '.7z',
+  '.woff',
+  '.woff2',
+  '.ttf',
+  '.eot',
+  '.mp3',
+  '.mp4',
+  '.wav',
+  '.avi',
+  '.exe',
+  '.dll',
+  '.so',
+  '.dylib',
 ];
 
 /**
@@ -46,7 +65,7 @@ function normalizeLineEndings(content) {
  * @returns {string} - Content without BOM
  */
 function removeBOM(content) {
-  if (content.charCodeAt(0) === 0xFEFF) {
+  if (content.charCodeAt(0) === 0xfeff) {
     return content.slice(1);
   }
   return content;
@@ -131,10 +150,7 @@ async function hashFileAsync(filePath) {
  */
 async function hashFilesMatchAsync(filePath1, filePath2) {
   try {
-    const [hash1, hash2] = await Promise.all([
-      hashFileAsync(filePath1),
-      hashFileAsync(filePath2),
-    ]);
+    const [hash1, hash2] = await Promise.all([hashFileAsync(filePath1), hashFileAsync(filePath2)]);
     return hashesMatch(hash1, hash2);
   } catch {
     return false;
@@ -164,7 +180,7 @@ async function hashFilesParallel(filePaths, batchSize = 50, onProgress = null) {
         } catch (error) {
           return { filePath, hash: null, error: error.message };
         }
-      }),
+      })
     );
 
     for (const result of batchResults) {

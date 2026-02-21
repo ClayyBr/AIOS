@@ -16,21 +16,24 @@ const trainers = [
     name: 'Coach Alex R.',
     role: 'Head Coach - L3 Certified',
     image: '/images/trainer-alex.jpg',
-    description: 'Specializes in Olympic Weightlifting and Gymnastics. Passionate about helping athletes reach their full potential.',
+    description:
+      'Specializes in Olympic Weightlifting and Gymnastics. Passionate about helping athletes reach their full potential.',
   },
   {
     id: 2,
     name: 'Coach Sarah K.',
     role: 'Coach - L2 Certified',
     image: '/images/trainer-sarah.jpg',
-    description: 'Focuses on endurance and mobility. Believes in functional fitness for all ages and abilities.',
+    description:
+      'Focuses on endurance and mobility. Believes in functional fitness for all ages and abilities.',
   },
   {
     id: 3,
     name: 'Coach Mike J.',
     role: 'Coach - L2 Certified',
     image: '/images/trainer-mike.jpg',
-    description: 'Expert in powerlifting and strength conditioning. Motivates members to push their limits safely.',
+    description:
+      'Expert in powerlifting and strength conditioning. Motivates members to push their limits safely.',
   },
 ];
 
@@ -38,19 +41,22 @@ const testimonials = [
   {
     id: 1,
     name: 'Emily R.',
-    quote: 'Joining CrossFit Academy changed my life! I’ve never been stronger or healthier. The coaches are incredible!',
+    quote:
+      'Joining CrossFit Academy changed my life! I’ve never been stronger or healthier. The coaches are incredible!',
     image: '/images/testimonial-emily.jpg',
   },
   {
     id: 2,
     name: 'David S.',
-    quote: 'The community here is amazing. Everyone is supportive, and the workouts are challenging but rewarding.',
+    quote:
+      'The community here is amazing. Everyone is supportive, and the workouts are challenging but rewarding.',
     image: '/images/testimonial-david.jpg',
   },
   {
     id: 3,
     name: 'Maria T.',
-    quote: 'I finally found a place that pushes me every day. Lost 20 pounds and gained so much confidence!',
+    quote:
+      'I finally found a place that pushes me every day. Lost 20 pounds and gained so much confidence!',
     image: '/images/testimonial-maria.jpg',
   },
 ];
@@ -69,7 +75,12 @@ const pricingPlans = [
     name: 'Pro',
     price: 149,
     frequency: 'month',
-    features: ['All Starter features', 'Personalized programming', 'Nutrition guidance', 'Open gym access'],
+    features: [
+      'All Starter features',
+      'Personalized programming',
+      'Nutrition guidance',
+      'Open gym access',
+    ],
     cta: 'Join Now',
     highlight: true,
   },
@@ -78,7 +89,12 @@ const pricingPlans = [
     name: 'Elite',
     price: 199,
     frequency: 'month',
-    features: ['All Pro features', '1-on-1 coaching sessions', 'Exclusive workshops', 'Priority booking'],
+    features: [
+      'All Pro features',
+      '1-on-1 coaching sessions',
+      'Exclusive workshops',
+      'Priority booking',
+    ],
     cta: 'Join Now',
   },
 ];
@@ -179,7 +195,6 @@ export default function Home() {
 
       <main className="flex-grow">
         <Hero onCtaClick={openModal} />
-
         {/* About Us Section */}
         <section id="about" className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
@@ -200,10 +215,16 @@ export default function Home() {
                 transition={{ duration: 0.7 }}
               >
                 <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                  CrossFit Academy is more than just a gym; it's a community dedicated to transforming lives through fitness. Our expertly designed programs combine weightlifting, gymnastics, and metabolic conditioning to deliver unparalleled results.
+                  CrossFit Academy is more than just a gym; it's a community dedicated to
+                  transforming lives through fitness. Our expertly designed programs combine
+                  weightlifting, gymnastics, and metabolic conditioning to deliver unparalleled
+                  results.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                  We believe in functional fitness that prepares you for life's challenges. Our certified coaches provide personalized attention, ensuring proper form and maximizing your potential in every workout. Join us and discover a stronger, healthier you.
+                  We believe in functional fitness that prepares you for life's challenges. Our
+                  certified coaches provide personalized attention, ensuring proper form and
+                  maximizing your potential in every workout. Join us and discover a stronger,
+                  healthier you.
                 </p>
                 <ul className="list-disc list-inside text-lg text-gray-700 space-y-2">
                   <li>State-of-the-art equipment</li>
@@ -232,9 +253,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-
         <Features /> {/* Why Choose Us / Benefits Section */}
-
         {/* Our Trainers Section */}
         <section id="trainers" className="py-16 md:py-24 bg-gray-100">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
@@ -270,19 +289,14 @@ export default function Home() {
                     <h3 className="text-2xl font-bold text-primary-800 mb-2 font-oswald uppercase">
                       {trainer.name}
                     </h3>
-                    <p className="text-primary-600 text-lg mb-4 font-semibold">
-                      {trainer.role}
-                    </p>
-                    <p className="text-gray-600 text-base leading-relaxed">
-                      {trainer.description}
-                    </p>
+                    <p className="text-primary-600 text-lg mb-4 font-semibold">{trainer.role}</p>
+                    <p className="text-gray-600 text-base leading-relaxed">{trainer.description}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
-
         {/* Pricing Section */}
         <section id="pricing" className="py-16 md:py-24 bg-primary-900 text-white">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
@@ -356,7 +370,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
         {/* Member's Success Story / Testimonials Section */}
         <section id="testimonials" className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
@@ -391,15 +404,12 @@ export default function Home() {
                   <p className="text-xl italic text-gray-800 mb-4 leading-relaxed">
                     &quot;{testimonial.quote}&quot;
                   </p>
-                  <p className="font-bold text-primary-700 text-lg">
-                    - {testimonial.name}
-                  </p>
+                  <p className="font-bold text-primary-700 text-lg">- {testimonial.name}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
-
         {/* Call to Action Section (Reciprocity Hint) */}
         <section className="bg-primary-800 text-white py-16 md:py-20">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl text-center">
@@ -419,7 +429,8 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl md:text-2xl mb-8 leading-relaxed"
             >
-              Join our community today and experience the difference of expert coaching and a supportive environment.
+              Join our community today and experience the difference of expert coaching and a
+              supportive environment.
             </motion.p>
             <motion.button
               whileHover={{ scale: 1.05, backgroundColor: 'var(--color-accent-600)' }}
@@ -432,7 +443,6 @@ export default function Home() {
             </motion.button>
           </div>
         </section>
-
         {/* Contact Section */}
         <section id="contact" className="py-16 md:py-24 bg-gray-50">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
@@ -473,10 +483,15 @@ export default function Home() {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 className="bg-white p-8 rounded-lg shadow-xl"
               >
-                <h3 className="text-3xl font-bold text-primary-800 mb-6 font-oswald uppercase">Send Us a Message</h3>
+                <h3 className="text-3xl font-bold text-primary-800 mb-6 font-oswald uppercase">
+                  Send Us a Message
+                </h3>
                 <form className="space-y-6">
                   <div>
-                    <label htmlFor="contact-name" className="block text-gray-700 text-lg font-medium mb-2">
+                    <label
+                      htmlFor="contact-name"
+                      className="block text-gray-700 text-lg font-medium mb-2"
+                    >
                       Name
                     </label>
                     <input
@@ -489,7 +504,10 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-email" className="block text-gray-700 text-lg font-medium mb-2">
+                    <label
+                      htmlFor="contact-email"
+                      className="block text-gray-700 text-lg font-medium mb-2"
+                    >
                       Email
                     </label>
                     <input
@@ -502,7 +520,10 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-message" className="block text-gray-700 text-lg font-medium mb-2">
+                    <label
+                      htmlFor="contact-message"
+                      className="block text-gray-700 text-lg font-medium mb-2"
+                    >
                       Message
                     </label>
                     <textarea
@@ -561,15 +582,22 @@ export default function Home() {
               >
                 <X size={24} />
               </button>
-              <h2 id="join-modal-title" className="text-3xl font-bold text-primary-800 mb-6 text-center font-oswald uppercase">
+              <h2
+                id="join-modal-title"
+                className="text-3xl font-bold text-primary-800 mb-6 text-center font-oswald uppercase"
+              >
                 Join Our Academy
               </h2>
               <p className="text-gray-600 text-center mb-8">
-                Fill out the form below and a representative will contact you shortly to discuss your fitness goals.
+                Fill out the form below and a representative will contact you shortly to discuss
+                your fitness goals.
               </p>
               <form ref={formRef} onSubmit={handleFormSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="modal-name" className="block text-gray-700 text-lg font-medium mb-2">
+                  <label
+                    htmlFor="modal-name"
+                    className="block text-gray-700 text-lg font-medium mb-2"
+                  >
                     Your Name
                   </label>
                   <input
@@ -582,7 +610,10 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="modal-email" className="block text-gray-700 text-lg font-medium mb-2">
+                  <label
+                    htmlFor="modal-email"
+                    className="block text-gray-700 text-lg font-medium mb-2"
+                  >
                     Your Email
                   </label>
                   <input
@@ -595,7 +626,10 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="modal-phone" className="block text-gray-700 text-lg font-medium mb-2">
+                  <label
+                    htmlFor="modal-phone"
+                    className="block text-gray-700 text-lg font-medium mb-2"
+                  >
                     Phone Number (Optional)
                   </label>
                   <input

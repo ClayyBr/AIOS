@@ -17,10 +17,10 @@ Configurar sincronização automática de squads entre o repositório MMOS (`oal
 
 ### Repositórios envolvidos
 
-| Repo | Visibilidade | Branch | Papel |
-|------|-------------|--------|-------|
-| `oalanicolas/mmos` | Privado | `main` | Fonte — onde squads são desenvolvidos |
-| `SynkraAI/aios-pro` | Privado | `main` | Destino — publicado no npm como `@aios-fullstack/pro` |
+| Repo                | Visibilidade | Branch | Papel                                                 |
+| ------------------- | ------------ | ------ | ----------------------------------------------------- |
+| `oalanicolas/mmos`  | Privado      | `main` | Fonte — onde squads são desenvolvidos                 |
+| `SynkraAI/aios-pro` | Privado      | `main` | Destino — publicado no npm como `@aios-fullstack/pro` |
 
 ### Estrutura atual do aios-pro
 
@@ -37,11 +37,11 @@ aios-pro/
 
 ### Regras de publicação (3 camadas)
 
-| Camada | Mecanismo | Controla |
-|--------|-----------|----------|
-| `package.json` `files[]` | Allowlist explícita | Só o que está listado vai pro npm |
-| `.npmignore` | Blacklist | Backup de exclusão (private-squads/, mmos-squad) |
-| `pro-scaffolder.js` `SCAFFOLD_EXCLUDES` | Array no código | `mmos-squad` nunca é copiado durante install |
+| Camada                                  | Mecanismo           | Controla                                         |
+| --------------------------------------- | ------------------- | ------------------------------------------------ |
+| `package.json` `files[]`                | Allowlist explícita | Só o que está listado vai pro npm                |
+| `.npmignore`                            | Blacklist           | Backup de exclusão (private-squads/, mmos-squad) |
+| `pro-scaffolder.js` `SCAFFOLD_EXCLUDES` | Array no código     | `mmos-squad` nunca é copiado durante install     |
 
 ### Regra de negócio
 
@@ -197,8 +197,8 @@ jobs:
 
 ### Secret necessário
 
-| Secret | Repo | Valor |
-|--------|------|-------|
+| Secret                | Repo               | Valor                                         |
+| --------------------- | ------------------ | --------------------------------------------- |
 | `AIOS_PRO_SYNC_TOKEN` | `oalanicolas/mmos` | PAT com `repo` scope para `SynkraAI/aios-pro` |
 
 ### Manifesto inicial sugerido: `sync-manifest.yaml`

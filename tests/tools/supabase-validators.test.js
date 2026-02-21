@@ -50,7 +50,7 @@ describeIntegration('Supabase Tool Validators', () => {
     });
 
     test('should have all required validator IDs', () => {
-      const validatorIds = supabaseTool.executable_knowledge.validators.map(v => v.id);
+      const validatorIds = supabaseTool.executable_knowledge.validators.map((v) => v.id);
       expect(validatorIds).toContain('validate-execute-sql');
       expect(validatorIds).toContain('validate-apply-migration');
       expect(validatorIds).toContain('validate-create-branch');
@@ -95,7 +95,9 @@ describeIntegration('Supabase Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('DROP operations not allowed via execute_sql - use apply_migration');
+      expect(result.errors).toContain(
+        'DROP operations not allowed via execute_sql - use apply_migration'
+      );
     });
 
     test('should reject DROP DATABASE operations', async () => {
@@ -105,7 +107,9 @@ describeIntegration('Supabase Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('DROP operations not allowed via execute_sql - use apply_migration');
+      expect(result.errors).toContain(
+        'DROP operations not allowed via execute_sql - use apply_migration'
+      );
     });
 
     test('should reject CREATE TABLE (DDL)', async () => {
@@ -115,7 +119,9 @@ describeIntegration('Supabase Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('DDL operations not allowed in execute_sql - use apply_migration instead');
+      expect(result.errors).toContain(
+        'DDL operations not allowed in execute_sql - use apply_migration instead'
+      );
     });
 
     test('should reject ALTER TABLE (DDL)', async () => {
@@ -125,19 +131,21 @@ describeIntegration('Supabase Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('DDL operations not allowed in execute_sql - use apply_migration instead');
+      expect(result.errors).toContain(
+        'DDL operations not allowed in execute_sql - use apply_migration instead'
+      );
     });
 
     test('should accept DML operations (INSERT, UPDATE, DELETE)', async () => {
       const insertResult = await validator.validate('execute_sql', {
         project_id: 'proj_abc123',
-        query: 'INSERT INTO posts (title) VALUES (\'test\')',
+        query: "INSERT INTO posts (title) VALUES ('test')",
       });
       expect(insertResult.valid).toBe(true);
 
       const updateResult = await validator.validate('execute_sql', {
         project_id: 'proj_abc123',
-        query: 'UPDATE posts SET title = \'updated\' WHERE id = 1',
+        query: "UPDATE posts SET title = 'updated' WHERE id = 1",
       });
       expect(updateResult.valid).toBe(true);
 
@@ -199,7 +207,9 @@ describeIntegration('Supabase Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('migration name must be snake_case (lowercase letters, numbers, underscores only)');
+      expect(result.errors).toContain(
+        'migration name must be snake_case (lowercase letters, numbers, underscores only)'
+      );
     });
 
     test('should reject invalid migration name (with spaces)', async () => {
@@ -210,7 +220,9 @@ describeIntegration('Supabase Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('migration name must be snake_case (lowercase letters, numbers, underscores only)');
+      expect(result.errors).toContain(
+        'migration name must be snake_case (lowercase letters, numbers, underscores only)'
+      );
     });
 
     test('should accept valid snake_case names', async () => {
@@ -227,7 +239,7 @@ describeIntegration('Supabase Tool Validators', () => {
       const result = await validator.validate('apply_migration', {
         project_id: 'proj_abc123',
         name: 'insert_test_data',
-        query: 'INSERT INTO users (id) VALUES (\'123e4567-e89b-12d3-a456-426614174000\')',
+        query: "INSERT INTO users (id) VALUES ('123e4567-e89b-12d3-a456-426614174000')",
       });
 
       expect(result.valid).toBe(false);
@@ -273,7 +285,9 @@ describeIntegration('Supabase Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('branch name must be lowercase letters, numbers, and hyphens only');
+      expect(result.errors).toContain(
+        'branch name must be lowercase letters, numbers, and hyphens only'
+      );
     });
 
     test('should reject invalid branch name (underscores)', async () => {
@@ -284,7 +298,9 @@ describeIntegration('Supabase Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('branch name must be lowercase letters, numbers, and hyphens only');
+      expect(result.errors).toContain(
+        'branch name must be lowercase letters, numbers, and hyphens only'
+      );
     });
 
     test('should accept valid branch names', async () => {
@@ -303,9 +319,7 @@ describeIntegration('Supabase Tool Validators', () => {
       const result = await validator.validate('deploy_edge_function', {
         project_id: 'proj_abc123',
         name: 'my-function',
-        files: [
-          { name: 'index.ts', content: 'Deno.serve(() => new Response("Hello"))' },
-        ],
+        files: [{ name: 'index.ts', content: 'Deno.serve(() => new Response("Hello"))' }],
       });
 
       expect(result.valid).toBe(true);
@@ -357,9 +371,7 @@ describeIntegration('Supabase Tool Validators', () => {
       const result = await validator.validate('deploy_edge_function', {
         project_id: 'proj_abc123',
         name: 'my-function',
-        files: [
-          { content: 'test' },
-        ],
+        files: [{ content: 'test' }],
       });
 
       expect(result.valid).toBe(false);
@@ -370,9 +382,7 @@ describeIntegration('Supabase Tool Validators', () => {
       const result = await validator.validate('deploy_edge_function', {
         project_id: 'proj_abc123',
         name: 'my-function',
-        files: [
-          { name: 'index.ts' },
-        ],
+        files: [{ name: 'index.ts' }],
       });
 
       expect(result.valid).toBe(false);
@@ -463,9 +473,17 @@ describeIntegration('Supabase Tool Validators', () => {
 
     test('should accept all valid regions', async () => {
       const validRegions = [
-        'us-west-1', 'us-east-1', 'us-east-2', 'ca-central-1',
-        'eu-west-1', 'eu-west-2', 'eu-west-3', 'eu-central-1',
-        'ap-south-1', 'ap-southeast-1', 'ap-northeast-1',
+        'us-west-1',
+        'us-east-1',
+        'us-east-2',
+        'ca-central-1',
+        'eu-west-1',
+        'eu-west-2',
+        'eu-west-3',
+        'eu-central-1',
+        'ap-south-1',
+        'ap-southeast-1',
+        'ap-northeast-1',
       ];
 
       for (const region of validRegions) {
@@ -498,7 +516,9 @@ describeIntegration('Supabase Tool Validators', () => {
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nSupabase Validator Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nSupabase Validator Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(50);
     });

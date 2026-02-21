@@ -12,12 +12,32 @@ const REGISTRY_PATH = path.resolve(__dirname, '../../data/entity-registry.yaml')
 
 const SCAN_CONFIG = [
   { category: 'tasks', basePath: '.aios-core/development/tasks', glob: '**/*.md', type: 'task' },
-  { category: 'templates', basePath: '.aios-core/product/templates', glob: '**/*.{yaml,yml,md}', type: 'template' },
-  { category: 'scripts', basePath: '.aios-core/development/scripts', glob: '**/*.{js,mjs}', type: 'script' },
+  {
+    category: 'templates',
+    basePath: '.aios-core/product/templates',
+    glob: '**/*.{yaml,yml,md}',
+    type: 'template',
+  },
+  {
+    category: 'scripts',
+    basePath: '.aios-core/development/scripts',
+    glob: '**/*.{js,mjs}',
+    type: 'script',
+  },
   { category: 'modules', basePath: '.aios-core/core', glob: '**/*.{js,mjs}', type: 'module' },
-  { category: 'agents', basePath: '.aios-core/development/agents', glob: '**/*.{md,yaml,yml}', type: 'agent' },
-  { category: 'checklists', basePath: '.aios-core/development/checklists', glob: '**/*.md', type: 'checklist' },
-  { category: 'data', basePath: '.aios-core/data', glob: '**/*.{yaml,yml,md}', type: 'data' }
+  {
+    category: 'agents',
+    basePath: '.aios-core/development/agents',
+    glob: '**/*.{md,yaml,yml}',
+    type: 'agent',
+  },
+  {
+    category: 'checklists',
+    basePath: '.aios-core/development/checklists',
+    glob: '**/*.md',
+    type: 'checklist',
+  },
+  { category: 'data', basePath: '.aios-core/data', glob: '**/*.{yaml,yml,md}', type: 'data' },
 ];
 
 const ADAPTABILITY_DEFAULTS = {
@@ -27,7 +47,7 @@ const ADAPTABILITY_DEFAULTS = {
   checklist: 0.6,
   data: 0.5,
   script: 0.7,
-  task: 0.8
+  task: 0.8,
 };
 
 function computeChecksum(filePath) {
@@ -48,7 +68,9 @@ function extractKeywords(filePath, content) {
     const headerWords = headerMatch[1]
       .toLowerCase()
       .split(/\s+/)
-      .filter((w) => w.length > 2 && !['the', 'and', 'for', 'with', 'this', 'that', 'from'].includes(w));
+      .filter(
+        (w) => w.length > 2 && !['the', 'and', 'for', 'with', 'this', 'that', 'from'].includes(w)
+      );
     parts.push(...headerWords.slice(0, 5));
   }
 
@@ -125,7 +147,9 @@ function scanCategory(config) {
     const entityId = extractEntityId(filePath);
 
     if (seenIds.has(entityId)) {
-      console.warn(`[IDS] Duplicate entity ID "${entityId}" at ${path.relative(REPO_ROOT, filePath)} — skipping`);
+      console.warn(
+        `[IDS] Duplicate entity ID "${entityId}" at ${path.relative(REPO_ROOT, filePath)} — skipping`
+      );
       continue;
     }
     seenIds.add(entityId);
@@ -155,10 +179,10 @@ function scanCategory(config) {
       adaptability: {
         score: defaultScore,
         constraints: [],
-        extensionPoints: []
+        extensionPoints: [],
       },
       checksum,
-      lastVerified: new Date().toISOString()
+      lastVerified: new Date().toISOString(),
     };
   }
 
@@ -209,7 +233,7 @@ function populate() {
   const categories = SCAN_CONFIG.map((c) => ({
     id: c.category,
     description: getCategoryDescription(c.category),
-    basePath: c.basePath
+    basePath: c.basePath,
   }));
 
   const registry = {
@@ -217,16 +241,16 @@ function populate() {
       version: '1.0.0',
       lastUpdated: new Date().toISOString(),
       entityCount: totalCount,
-      checksumAlgorithm: 'sha256'
+      checksumAlgorithm: 'sha256',
     },
     entities: allEntities,
-    categories
+    categories,
   };
 
   const yamlContent = yaml.dump(registry, {
     lineWidth: 120,
     noRefs: true,
-    sortKeys: false
+    sortKeys: false,
   });
 
   try {
@@ -248,7 +272,7 @@ function getCategoryDescription(category) {
     modules: 'Core framework modules and libraries',
     agents: 'Agent persona definitions and configurations',
     checklists: 'Validation and review checklists',
-    data: 'Configuration and reference data files'
+    data: 'Configuration and reference data files',
   };
   return descriptions[category] || category;
 }
@@ -276,5 +300,5 @@ module.exports = {
   SCAN_CONFIG,
   ADAPTABILITY_DEFAULTS,
   REPO_ROOT,
-  REGISTRY_PATH
+  REGISTRY_PATH,
 };

@@ -7,7 +7,9 @@
  * @story 3.5 - Human Review Orchestration
  */
 
-const { NotificationManager } = require('../../../.aios-core/core/quality-gates/notification-manager');
+const {
+  NotificationManager,
+} = require('../../../.aios-core/core/quality-gates/notification-manager');
 
 describe('NotificationManager', () => {
   let notificationManager;
@@ -71,9 +73,7 @@ describe('NotificationManager', () => {
         expiresAt: '2025-12-04T00:00:00Z',
         automatedSummary: {
           layer1: {
-            checks: [
-              { check: 'lint', status: 'passed', message: 'No errors' },
-            ],
+            checks: [{ check: 'lint', status: 'passed', message: 'No errors' }],
           },
           layer2: {
             coderabbit: {
@@ -89,9 +89,7 @@ describe('NotificationManager', () => {
               questions: ['Is input validation comprehensive?'],
             },
           ],
-          secondary: [
-            { area: 'ux', reason: 'UI changes' },
-          ],
+          secondary: [{ area: 'ux', reason: 'UI changes' }],
         },
         skipAreas: ['syntax', 'formatting'],
       };
@@ -136,12 +134,8 @@ describe('NotificationManager', () => {
       const blockResult = {
         stoppedAt: 'layer1',
         reason: 'Lint errors found',
-        issues: [
-          { severity: 'HIGH', check: 'lint', message: '5 errors' },
-        ],
-        fixFirst: [
-          { issue: 'Lint errors', suggestion: 'Run npm run lint:fix' },
-        ],
+        issues: [{ severity: 'HIGH', check: 'lint', message: '5 errors' }],
+        fixFirst: [{ issue: 'Lint errors', suggestion: 'Run npm run lint:fix' }],
       };
 
       const content = notificationManager.formatBlockingContent(blockResult);
@@ -157,9 +151,7 @@ describe('NotificationManager', () => {
         stoppedAt: 'layer2',
         reason: 'CodeRabbit issues',
         issues: [],
-        fixFirst: [
-          { issue: 'Critical issues', suggestion: 'Review CodeRabbit feedback' },
-        ],
+        fixFirst: [{ issue: 'Critical issues', suggestion: 'Review CodeRabbit feedback' }],
       };
 
       const content = notificationManager.formatBlockingContent(blockResult);

@@ -3,7 +3,7 @@
 # Last Updated: 2026-01-28
 
 name: hybrid-ops-pv
-version: "1.0"
+version: '1.0'
 description: |
   HybridOps workflow template implementing the Pedro Valerio methodology
   for human-agent collaboration in software development.

@@ -21,7 +21,15 @@ const command = args[0];
 // Helper: Run initialization wizard
 async function runWizard(options = {}) {
   // Use the v4 wizard from packages/installer/src/wizard/index.js
-  const wizardPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'wizard', 'index.js');
+  const wizardPath = path.join(
+    __dirname,
+    '..',
+    'packages',
+    'installer',
+    'src',
+    'wizard',
+    'index.js'
+  );
 
   if (!fs.existsSync(wizardPath)) {
     // Fallback to legacy wizard if new wizard not found
@@ -162,7 +170,7 @@ async function showVersion() {
         console.log('\n⚠️  Version mismatch!');
         console.log(`  Local:  ${versionInfo.version}`);
         console.log(`  Latest: ${packageJson.version}`);
-        console.log('  Run \'npx aios-core update\' to update.');
+        console.log("  Run 'npx aios-core update' to update.");
       } else {
         console.log('\n✅ Up to date');
       }
@@ -171,7 +179,7 @@ async function showVersion() {
     }
   } else {
     console.log('\n📭 No local installation found');
-    console.log('  Run \'npx aios-core install\' to install AIOS in this project.');
+    console.log("  Run 'npx aios-core install' to install AIOS in this project.");
   }
 }
 
@@ -218,9 +226,9 @@ function showInfo() {
       const info = featureGate.getLicenseInfo();
 
       const stateEmoji = {
-        'Active': '✅',
-        'Grace': '⚠️',
-        'Expired': '❌',
+        Active: '✅',
+        Grace: '⚠️',
+        Expired: '❌',
         'Not Activated': '➖',
       };
 
@@ -259,7 +267,7 @@ async function runValidate() {
         'installer',
         'src',
         'installer',
-        'post-install-validator.js',
+        'post-install-validator.js'
       );
       const { PostInstallValidator, formatReport } = require(validatorPath);
 
@@ -295,7 +303,15 @@ async function runUpdate() {
   const isVerbose = updateArgs.includes('--verbose') || updateArgs.includes('-v');
 
   try {
-    const updaterPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'updater', 'index.js');
+    const updaterPath = path.join(
+      __dirname,
+      '..',
+      'packages',
+      'installer',
+      'src',
+      'updater',
+      'index.js'
+    );
 
     if (!fs.existsSync(updaterPath)) {
       console.error('❌ Updater module not found');
@@ -406,7 +422,7 @@ Examples:
     hasErrors = true;
   }
   console.log(
-    `${nodeOk ? '✔' : '✗'} Node.js version: ${process.version} ${nodeOk ? '(meets requirement: >=18.0.0)' : '(requires >=18.0.0)'}`,
+    `${nodeOk ? '✔' : '✗'} Node.js version: ${process.version} ${nodeOk ? '(meets requirement: >=18.0.0)' : '(requires >=18.0.0)'}`
   );
 
   // Check 2: npm
@@ -445,7 +461,15 @@ Examples:
 
     // Check for corruption using validate (if available)
     try {
-      const validatorPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'installer', 'post-install-validator');
+      const validatorPath = path.join(
+        __dirname,
+        '..',
+        'packages',
+        'installer',
+        'src',
+        'installer',
+        'post-install-validator'
+      );
       const { PostInstallValidator } = require(validatorPath);
       const validator = new PostInstallValidator(process.cwd(), path.join(__dirname, '..'));
       const report = await validator.validate();
@@ -462,7 +486,9 @@ Examples:
           },
         });
         hasErrors = true;
-        console.log(`⚠️  AIOS Core: ${report.stats.missingFiles} missing, ${report.stats.corruptedFiles} corrupted files`);
+        console.log(
+          `⚠️  AIOS Core: ${report.stats.missingFiles} missing, ${report.stats.corruptedFiles} corrupted files`
+        );
       }
     } catch {
       // Validation not available, skip corruption check
@@ -496,9 +522,9 @@ Examples:
       const state = featureGate.getLicenseState();
 
       const stateEmoji = {
-        'Active': '✔',
-        'Grace': '⚠️',
-        'Expired': '✗',
+        Active: '✔',
+        Grace: '⚠️',
+        Expired: '✗',
         'Not Activated': '➖',
       };
 
@@ -711,9 +737,7 @@ async function runUninstall(options = {}) {
   }
 
   // Check what exists
-  const existingItems = itemsToRemove.filter(item =>
-    fs.existsSync(path.join(cwd, item.path)),
-  );
+  const existingItems = itemsToRemove.filter((item) => fs.existsSync(path.join(cwd, item.path)));
 
   if (existingItems.length === 0) {
     console.log('ℹ️  No AIOS installation found in this directory.');
@@ -743,7 +767,9 @@ async function runUninstall(options = {}) {
                 size += stat.size;
               }
             }
-          } catch { /* ignore errors */ }
+          } catch {
+            /* ignore errors */
+          }
           return size;
         };
         const size = getSize(itemPath);
@@ -792,7 +818,7 @@ async function runUninstall(options = {}) {
       output: process.stdout,
     });
 
-    const answer = await new Promise(resolve => {
+    const answer = await new Promise((resolve) => {
       rl.question('⚠️  Are you sure you want to uninstall AIOS? (y/N): ', resolve);
     });
     rl.close();

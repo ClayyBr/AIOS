@@ -1,7 +1,7 @@
 # Test fixture: Legacy monolithic config
 project:
-  name: "legacy-project"
-  version: "2.0.0"
+  name: 'legacy-project'
+  version: '2.0.0'
 
 ide:
   selected:
@@ -15,12 +15,12 @@ performance_defaults:
   cache_ttl_seconds: 300
 
 github_integration:
-  owner: "legacy-org"
-  repo: "legacy-repo"
+  owner: 'legacy-org'
+  repo: 'legacy-repo'
 
 squads:
   enabled: true
   max_squads: 3
 
 logging:
-  level: "warn"
+  level: 'warn'

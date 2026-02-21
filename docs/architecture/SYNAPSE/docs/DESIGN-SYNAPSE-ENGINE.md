@@ -27,9 +27,9 @@
 
 // Hook entry point — called by Claude Code on every user prompt
 async function main() {
-  const input = readStdin();      // { cwd, sessionId, prompt }
+  const input = readStdin(); // { cwd, sessionId, prompt }
   const result = await process(input);
-  writeStdout(result);            // { hookSpecificOutput: { additionalContext } }
+  writeStdout(result); // { hookSpecificOutput: { additionalContext } }
 }
 ```
 
@@ -79,47 +79,47 @@ class LayerProcessor {
 }
 
 // Concrete implementations:
-class ConstitutionLayer extends LayerProcessor {}    // L0
-class GlobalLayer extends LayerProcessor {}          // L1
-class AgentScopedLayer extends LayerProcessor {}     // L2
-class WorkflowLayer extends LayerProcessor {}        // L3
-class TaskLayer extends LayerProcessor {}            // L4
-class SquadLayer extends LayerProcessor {}           // L5
-class KeywordLayer extends LayerProcessor {}         // L6
-class StarCommandLayer extends LayerProcessor {}     // L7
+class ConstitutionLayer extends LayerProcessor {} // L0
+class GlobalLayer extends LayerProcessor {} // L1
+class AgentScopedLayer extends LayerProcessor {} // L2
+class WorkflowLayer extends LayerProcessor {} // L3
+class TaskLayer extends LayerProcessor {} // L4
+class SquadLayer extends LayerProcessor {} // L5
+class KeywordLayer extends LayerProcessor {} // L6
+class StarCommandLayer extends LayerProcessor {} // L7
 ```
 
 ### 1.4 Exported Types
 
 ```typescript
 interface SynapseConfig {
-  manifestPath: string;           // .synapse/manifest
-  domainsDir: string;             // .synapse/
-  sessionsDir: string;            // .synapse/sessions/
-  maxContext: number;              // 200000 (token limit)
-  staleSessionHours: number;      // 24
-  devmode: boolean;               // from manifest
+  manifestPath: string; // .synapse/manifest
+  domainsDir: string; // .synapse/
+  sessionsDir: string; // .synapse/sessions/
+  maxContext: number; // 200000 (token limit)
+  staleSessionHours: number; // 24
+  devmode: boolean; // from manifest
 }
 
 interface SessionState {
   uuid: string;
-  started: string;                // ISO 8601
+  started: string; // ISO 8601
   cwd: string;
   label: string;
   title: string | null;
   prompt_count: number;
-  last_activity: string;          // ISO 8601
-  active_agent: string | null;    // e.g., "dev", "qa"
+  last_activity: string; // ISO 8601
+  active_agent: string | null; // e.g., "dev", "qa"
   active_workflow: string | null; // e.g., "story_development"
-  active_squad: string | null;    // e.g., "etl-squad"
-  active_task: string | null;     // e.g., "implement-user-auth"
+  active_squad: string | null; // e.g., "etl-squad"
+  active_task: string | null; // e.g., "implement-user-auth"
   overrides: Record<string, boolean | null>;
 }
 
 interface ActivationResult {
   greeting: string;
   context: EnrichedContext;
-  duration: number;               // ms
+  duration: number; // ms
   quality: 'full' | 'partial' | 'fallback';
   metrics: LoaderMetrics;
 }
@@ -131,7 +131,7 @@ interface LayerResult {
   metadata: {
     layer: number;
     name: string;
-    source: string;               // file path or "computed"
+    source: string; // file path or "computed"
     tokens_estimate: number;
   };
 }
@@ -143,16 +143,16 @@ interface LayerResult {
 
 ### 2.1 Layer Specification
 
-| Layer | Nome | Tipo | Ativacao | Desativavel? | Timeout | Token Budget |
-|-------|------|------|---------|-------------|---------|-------------|
-| L0 | CONSTITUTION | Static | ALWAYS_ON | **Nunca** | 5ms | ~100 tokens |
-| L1 | GLOBAL | Static + Dynamic | ALWAYS_ON | Via manifest | 10ms | ~200 tokens |
-| L2 | AGENT-SCOPED | Dynamic | Agent ativo | Por session | 15ms | ~300 tokens |
-| L3 | WORKFLOW | Dynamic | Workflow state | Por session | 15ms | ~200 tokens |
-| L4 | TASK | Dynamic | Task ativa | Por session | 20ms | ~300 tokens |
-| L5 | SQUAD | Dynamic | Squad ativo | Por session | 20ms | ~200 tokens |
-| L6 | KEYWORD | Dynamic | Prompt keywords | Via EXCLUDE | 15ms | ~200 tokens |
-| L7 | STAR-COMMAND | Explicit | `*command` no prompt | N/A | 5ms | ~200 tokens |
+| Layer | Nome         | Tipo             | Ativacao             | Desativavel? | Timeout | Token Budget |
+| ----- | ------------ | ---------------- | -------------------- | ------------ | ------- | ------------ |
+| L0    | CONSTITUTION | Static           | ALWAYS_ON            | **Nunca**    | 5ms     | ~100 tokens  |
+| L1    | GLOBAL       | Static + Dynamic | ALWAYS_ON            | Via manifest | 10ms    | ~200 tokens  |
+| L2    | AGENT-SCOPED | Dynamic          | Agent ativo          | Por session  | 15ms    | ~300 tokens  |
+| L3    | WORKFLOW     | Dynamic          | Workflow state       | Por session  | 15ms    | ~200 tokens  |
+| L4    | TASK         | Dynamic          | Task ativa           | Por session  | 20ms    | ~300 tokens  |
+| L5    | SQUAD        | Dynamic          | Squad ativo          | Por session  | 20ms    | ~200 tokens  |
+| L6    | KEYWORD      | Dynamic          | Prompt keywords      | Via EXCLUDE  | 15ms    | ~200 tokens  |
+| L7    | STAR-COMMAND | Explicit         | `*command` no prompt | N/A          | 5ms     | ~200 tokens  |
 
 **Total budget maximo:** ~1700 tokens (FRESH) a ~2500 tokens (DEPLETED)
 
@@ -180,12 +180,12 @@ flowchart LR
 
 ### 2.3 Bracket-Aware Token Budget
 
-| Bracket | Context % | Injection Strategy | Max Tokens |
-|---------|----------|-------------------|------------|
-| FRESH | 60-100% | Lean — only L0, L1, active L2/L7 | ~800 |
-| MODERATE | 40-60% | Standard — all active layers | ~1500 |
-| DEPLETED | 25-40% | Reinforcement — full injection + memory hints | ~2000 |
-| CRITICAL | <25% | Warning — DEPLETED + handoff prep | ~2500 |
+| Bracket  | Context % | Injection Strategy                            | Max Tokens |
+| -------- | --------- | --------------------------------------------- | ---------- |
+| FRESH    | 60-100%   | Lean — only L0, L1, active L2/L7              | ~800       |
+| MODERATE | 40-60%    | Standard — all active layers                  | ~1500      |
+| DEPLETED | 25-40%    | Reinforcement — full injection + memory hints | ~2000      |
+| CRITICAL | <25%      | Warning — DEPLETED + handoff prep             | ~2500      |
 
 **Logica de corte por bracket:**
 
@@ -194,9 +194,7 @@ function filterByBracket(layers, bracket) {
   switch (bracket) {
     case 'FRESH':
       // Only L0, L1, active L2, L7 (if explicit command)
-      return layers.filter(l =>
-        l.layer <= 1 || l.layer === 2 || l.layer === 7
-      );
+      return layers.filter((l) => l.layer <= 1 || l.layer === 2 || l.layer === 7);
     case 'MODERATE':
       // All active layers
       return layers;
@@ -429,10 +427,12 @@ flowchart TD
 
 ```markdown
 <!-- SYNAPSE-MANAGED: Do not remove this section -->
+
 ## SYNAPSE Integration
 
 Follow all rules in <synapse-rules> blocks from system-reminders.
 These are dynamically injected based on context and MUST be obeyed.
+
 <!-- END SYNAPSE-MANAGED -->
 ```
 
@@ -467,8 +467,7 @@ function detectActiveAgent(session) {
 ```javascript
 async function loadAgentDomain(agentId, manifest) {
   // 1. Find domain with matching AGENT_TRIGGER
-  const domainKey = Object.keys(manifest)
-    .find(k => manifest[k].agent_trigger === agentId);
+  const domainKey = Object.keys(manifest).find((k) => manifest[k].agent_trigger === agentId);
 
   if (!domainKey) return null;
 
@@ -476,12 +475,12 @@ async function loadAgentDomain(agentId, manifest) {
   const rules = parseDomainFile(`.synapse/agent-${agentId}`);
 
   // 3. Authority boundaries are ALWAYS included
-  const authRules = rules.filter(r => r.key.includes('AUTH'));
+  const authRules = rules.filter((r) => r.key.includes('AUTH'));
 
   return {
     rules: rules,
     authority: authRules,
-    metadata: { layer: 2, source: `agent-${agentId}` }
+    metadata: { layer: 2, source: `agent-${agentId}` },
   };
 }
 ```
@@ -559,20 +558,20 @@ function mergeSquadDomains(globalManifest, squadDomains, extendsMode) {
 
 ## 8. Workflow-to-Domain Mapping Table
 
-| Workflow ID | Trigger | Phases → Domains |
-|-------------|---------|------------------|
-| `story_development` | `*develop`, `*develop-yolo` | validated→STORIES, in_development→DEV, qa_review→QA, push_ready→DEVOPS |
-| `epic_creation` | `*create-epic` | planning→STORIES, breakdown→PROCESS, tech_review→ARCHITECTURE |
-| `architecture_review` | `*arch-review` | impact_analysis→ARCHITECTURE, qa_review→QA, implementation→DEV |
-| `git_workflow` | `*push`, `*pre-push` | staged→DEV, quality_gate→QA, push→DEVOPS |
-| `database_development` | `*create-schema` | schema_design→DATA, migration→DEV, smoke_test→QA |
-| `code_quality` | `*quality-improve` | assessment→QA, refactoring→DEV, verification→QA |
-| `documentation` | `*document` | research→RESEARCH, creation→ARCHITECTURE, sync→STORIES |
-| `ux_design` | `*design-ux` | wireframes→UX, implementation→DEV, validation→QA |
-| `brainstorming` | `*brainstorm` | research→RESEARCH, facilitation→RESEARCH, documentation→ARCHITECTURE |
-| `qa_loop` | `*review-qa`, `*gate` | review→QA, fixes→DEV (max 5 iterations) |
-| `bob_orchestration` | `*bob-execute` | assign→PRODUCT, execute→*, quality→QA, push→DEVOPS |
-| `cross_agent_handoff` | Agent switch | dev_complete→DEV, qa_issues→QA, fixes→DEV, push→DEVOPS |
+| Workflow ID            | Trigger                     | Phases → Domains                                                       |
+| ---------------------- | --------------------------- | ---------------------------------------------------------------------- |
+| `story_development`    | `*develop`, `*develop-yolo` | validated→STORIES, in_development→DEV, qa_review→QA, push_ready→DEVOPS |
+| `epic_creation`        | `*create-epic`              | planning→STORIES, breakdown→PROCESS, tech_review→ARCHITECTURE          |
+| `architecture_review`  | `*arch-review`              | impact_analysis→ARCHITECTURE, qa_review→QA, implementation→DEV         |
+| `git_workflow`         | `*push`, `*pre-push`        | staged→DEV, quality_gate→QA, push→DEVOPS                               |
+| `database_development` | `*create-schema`            | schema_design→DATA, migration→DEV, smoke_test→QA                       |
+| `code_quality`         | `*quality-improve`          | assessment→QA, refactoring→DEV, verification→QA                        |
+| `documentation`        | `*document`                 | research→RESEARCH, creation→ARCHITECTURE, sync→STORIES                 |
+| `ux_design`            | `*design-ux`                | wireframes→UX, implementation→DEV, validation→QA                       |
+| `brainstorming`        | `*brainstorm`               | research→RESEARCH, facilitation→RESEARCH, documentation→ARCHITECTURE   |
+| `qa_loop`              | `*review-qa`, `*gate`       | review→QA, fixes→DEV (max 5 iterations)                                |
+| `bob_orchestration`    | `*bob-execute`              | assign→PRODUCT, execute→\*, quality→QA, push→DEVOPS                    |
+| `cross_agent_handoff`  | Agent switch                | dev_complete→DEV, qa_issues→QA, fixes→DEV, push→DEVOPS                 |
 
 ### State File Reading
 
@@ -594,8 +593,8 @@ async function detectWorkflowDomain(session) {
       layer: 3,
       workflow: id,
       phase: current_phase,
-      domain: domain
-    }
+      domain: domain,
+    },
   };
 }
 ```
@@ -627,7 +626,7 @@ async function detectActiveTask(session, cwd) {
     post_conditions: task.checklist?.post_conditions || [],
     acceptance_criteria: task.checklist?.acceptance_criteria || [],
     file_list: task.template?.files || [],
-    rules: formatTaskRules(task)
+    rules: formatTaskRules(task),
   };
 }
 ```
@@ -690,37 +689,37 @@ CONSTITUTION_RULE_ART6_0=Absolute Imports (SHOULD): Always use @/ alias imports 
 
 ### Per-Layer Budget
 
-| Layer | Target | Hard Limit | Fallback |
-|-------|--------|------------|----------|
-| L0: Constitution | 2ms | 5ms | Static cache (never fails) |
-| L1: Global | 5ms | 10ms | Cached rules (never fails) |
-| L2: Agent-Scoped | 10ms | 15ms | Skip (no agent domain) |
-| L3: Workflow | 10ms | 15ms | Skip (no workflow domain) |
-| L4: Task | 15ms | 20ms | Skip (no task context) |
-| L5: Squad | 15ms | 20ms | Skip (no squad domains) |
-| L6: Keyword | 10ms | 15ms | Skip (no keyword matches) |
-| L7: Star-Command | 2ms | 5ms | Skip (no star commands) |
-| **Total Pipeline** | **<70ms** | **<100ms** | Fallback with L0+L1 only |
+| Layer              | Target    | Hard Limit | Fallback                   |
+| ------------------ | --------- | ---------- | -------------------------- |
+| L0: Constitution   | 2ms       | 5ms        | Static cache (never fails) |
+| L1: Global         | 5ms       | 10ms       | Cached rules (never fails) |
+| L2: Agent-Scoped   | 10ms      | 15ms       | Skip (no agent domain)     |
+| L3: Workflow       | 10ms      | 15ms       | Skip (no workflow domain)  |
+| L4: Task           | 15ms      | 20ms       | Skip (no task context)     |
+| L5: Squad          | 15ms      | 20ms       | Skip (no squad domains)    |
+| L6: Keyword        | 10ms      | 15ms       | Skip (no keyword matches)  |
+| L7: Star-Command   | 2ms       | 5ms        | Skip (no star commands)    |
+| **Total Pipeline** | **<70ms** | **<100ms** | Fallback with L0+L1 only   |
 
 ### Agent Activation Budget
 
-| Phase | Target | Hard Limit |
-|-------|--------|------------|
-| Tier 1: AgentConfigLoader | 50ms | 80ms |
-| Tier 2: Permission + Git (parallel) | 80ms | 120ms |
-| Tier 3: Session + Project (parallel) | 120ms | 180ms |
-| Memory Loader (optional) | 300ms | 500ms |
-| Greeting Builder | 100ms | 150ms |
-| **Total Activation** | **<350ms** | **<500ms** |
+| Phase                                | Target     | Hard Limit |
+| ------------------------------------ | ---------- | ---------- |
+| Tier 1: AgentConfigLoader            | 50ms       | 80ms       |
+| Tier 2: Permission + Git (parallel)  | 80ms       | 120ms      |
+| Tier 3: Session + Project (parallel) | 120ms      | 180ms      |
+| Memory Loader (optional)             | 300ms      | 500ms      |
+| Greeting Builder                     | 100ms      | 150ms      |
+| **Total Activation**                 | **<350ms** | **<500ms** |
 
 ### Token Budget
 
-| Bracket | Max Injection | Estimated % of Context |
-|---------|-------------|----------------------|
-| FRESH | 800 tokens | 0.4% of 200K |
-| MODERATE | 1500 tokens | 0.75% |
-| DEPLETED | 2000 tokens | 1.0% |
-| CRITICAL | 2500 tokens | 1.25% |
+| Bracket  | Max Injection | Estimated % of Context |
+| -------- | ------------- | ---------------------- |
+| FRESH    | 800 tokens    | 0.4% of 200K           |
+| MODERATE | 1500 tokens   | 0.75%                  |
+| DEPLETED | 2000 tokens   | 1.0%                   |
+| CRITICAL | 2500 tokens   | 1.25%                  |
 
 ---
 
@@ -844,11 +843,11 @@ class PipelineMetrics {
   getSummary() {
     return {
       total_ms: this.totalEnd - this.totalStart,
-      layers_loaded: Object.values(this.layers).filter(l => l.status === 'ok').length,
-      layers_skipped: Object.values(this.layers).filter(l => l.status === 'skipped').length,
-      layers_errored: Object.values(this.layers).filter(l => l.status === 'error').length,
+      layers_loaded: Object.values(this.layers).filter((l) => l.status === 'ok').length,
+      layers_skipped: Object.values(this.layers).filter((l) => l.status === 'skipped').length,
+      layers_errored: Object.values(this.layers).filter((l) => l.status === 'error').length,
       total_rules: Object.values(this.layers).reduce((sum, l) => sum + (l.rules || 0), 0),
-      per_layer: this.layers
+      per_layer: this.layers,
     };
   }
 }
@@ -950,21 +949,21 @@ CONTEXT BRACKET: [{bracket}] ({percent}% remaining)
 
 ### Available Commands
 
-| Command | Purpose | Layer |
-|---------|---------|-------|
-| `*synapse` | Help — show all available commands and status | L7 |
-| `*synapse debug` | Toggle DEVMODE for current session | L7 |
-| `*synapse status` | Show loaded domains, active agent, workflow, bracket | L7 |
-| `*synapse domains` | List all available domains with keywords | L7 |
-| `*synapse session` | Show current session info and overrides | L7 |
-| `*synapse reload` | Force reload manifest and clear caches | L7 |
-| `*brief` | Bullet points only, max 5 items | L7 |
-| `*dev` | Code over explanation, minimal changes | L7 |
-| `*review` | Security, performance, edge cases focus | L7 |
-| `*plan` | Explore, identify deps, plan before code | L7 |
-| `*discuss` | Multiple approaches, pros/cons | L7 |
-| `*debug` | Gather context, hypothesis, root cause | L7 |
-| `*explain` | High-level first, examples, incremental | L7 |
+| Command            | Purpose                                              | Layer |
+| ------------------ | ---------------------------------------------------- | ----- |
+| `*synapse`         | Help — show all available commands and status        | L7    |
+| `*synapse debug`   | Toggle DEVMODE for current session                   | L7    |
+| `*synapse status`  | Show loaded domains, active agent, workflow, bracket | L7    |
+| `*synapse domains` | List all available domains with keywords             | L7    |
+| `*synapse session` | Show current session info and overrides              | L7    |
+| `*synapse reload`  | Force reload manifest and clear caches               | L7    |
+| `*brief`           | Bullet points only, max 5 items                      | L7    |
+| `*dev`             | Code over explanation, minimal changes               | L7    |
+| `*review`          | Security, performance, edge cases focus              | L7    |
+| `*plan`            | Explore, identify deps, plan before code             | L7    |
+| `*discuss`         | Multiple approaches, pros/cons                       | L7    |
+| `*debug`           | Gather context, hypothesis, root cause               | L7    |
+| `*explain`         | High-level first, examples, incremental              | L7    |
 
 ### `*synapse` Help Output
 
@@ -1001,38 +1000,38 @@ Current Status:
 
 ### Feature Parity Checklist (carl-hook.py → synapse-engine.js)
 
-| Feature | carl-hook.py | synapse-engine.js | Status |
-|---------|-------------|-------------------|--------|
-| stdin/stdout JSON | ✅ | Required | Pending |
-| Manifest parsing | ✅ | Required | Pending |
-| Session management | ✅ | Required (enhanced) | Pending |
-| Context bracket calculation | ✅ | Required | Pending |
-| Star-command detection | ✅ | Required | Pending |
-| Keyword matching | ✅ | Required | Pending |
-| Exclusion system | ✅ | Required | Pending |
-| Domain rule parsing | ✅ | Required | Pending |
-| XML output formatting | ✅ | Required (enhanced) | Pending |
-| DEVMODE | ✅ | Required (enhanced) | Pending |
-| Auto-title generation | ✅ | Required | Pending |
-| Stale session cleanup | ✅ | Required | Pending |
-| Directory walking (.carl/ discovery) | ✅ | Required (.synapse/) | Pending |
-| Session JSONL token reading | ✅ | Required | Pending |
+| Feature                              | carl-hook.py | synapse-engine.js    | Status  |
+| ------------------------------------ | ------------ | -------------------- | ------- |
+| stdin/stdout JSON                    | ✅           | Required             | Pending |
+| Manifest parsing                     | ✅           | Required             | Pending |
+| Session management                   | ✅           | Required (enhanced)  | Pending |
+| Context bracket calculation          | ✅           | Required             | Pending |
+| Star-command detection               | ✅           | Required             | Pending |
+| Keyword matching                     | ✅           | Required             | Pending |
+| Exclusion system                     | ✅           | Required             | Pending |
+| Domain rule parsing                  | ✅           | Required             | Pending |
+| XML output formatting                | ✅           | Required (enhanced)  | Pending |
+| DEVMODE                              | ✅           | Required (enhanced)  | Pending |
+| Auto-title generation                | ✅           | Required             | Pending |
+| Stale session cleanup                | ✅           | Required             | Pending |
+| Directory walking (.carl/ discovery) | ✅           | Required (.synapse/) | Pending |
+| Session JSONL token reading          | ✅           | Required             | Pending |
 
 ### New Features (not in carl-hook.py)
 
-| Feature | Priority | Complexity |
-|---------|----------|-----------|
-| L0: Constitution enforcement | High | Low |
-| L2: Agent-scoped domains | High | Medium |
-| L3: Workflow domain activation | Medium | Medium |
-| L4: Task context injection | Medium | Medium |
-| L5: Squad domain discovery | Medium | High |
-| Enhanced session store | High | Medium |
-| Pipeline metrics | Low | Low |
-| Squad manifest caching | Low | Low |
+| Feature                        | Priority | Complexity |
+| ------------------------------ | -------- | ---------- |
+| L0: Constitution enforcement   | High     | Low        |
+| L2: Agent-scoped domains       | High     | Medium     |
+| L3: Workflow domain activation | Medium   | Medium     |
+| L4: Task context injection     | Medium   | Medium     |
+| L5: Squad domain discovery     | Medium   | High       |
+| Enhanced session store         | High     | Medium     |
+| Pipeline metrics               | Low      | Low        |
+| Squad manifest caching         | Low      | Low        |
 
 ---
 
-*DESIGN Document v1.0.0 — SYNAPSE Engine*
-*Synkra Adaptive Processing & State Engine*
-*CLI First | Task-First | Constitution*
+_DESIGN Document v1.0.0 — SYNAPSE Engine_
+_Synkra Adaptive Processing & State Engine_
+_CLI First | Task-First | Constitution_

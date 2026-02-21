@@ -15,10 +15,7 @@ describe('ensure-manifest', () => {
     it('returns true when any other .aios-core file is staged', () => {
       expect(shouldCheckManifest(['.aios-core/core-config.yaml'])).toBe(true);
       expect(
-        shouldCheckManifest([
-          'README.md',
-          '.aios-core/infrastructure/scripts/ide-sync/index.js',
-        ]),
+        shouldCheckManifest(['README.md', '.aios-core/infrastructure/scripts/ide-sync/index.js'])
       ).toBe(true);
     });
 
@@ -27,4 +24,3 @@ describe('ensure-manifest', () => {
     });
   });
 });
-

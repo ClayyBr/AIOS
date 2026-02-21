@@ -29,8 +29,12 @@ function writeJson(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
 }
 
-beforeEach(() => { tmpDir = createTmpDir(); });
-afterEach(() => { fs.rmSync(tmpDir, { recursive: true, force: true }); });
+beforeEach(() => {
+  tmpDir = createTmpDir();
+});
+afterEach(() => {
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+});
 
 describe('collectRelevanceMatrix', () => {
   test('available=false when no metrics', () => {
@@ -41,7 +45,8 @@ describe('collectRelevanceMatrix', () => {
 
   test('builds matrix for default agent', () => {
     writeJson(path.join(tmpDir, '.synapse', 'metrics', 'uap-metrics.json'), {
-      agentId: 'analyst', loaders: { agentConfig: { status: 'ok' } },
+      agentId: 'analyst',
+      loaders: { agentConfig: { status: 'ok' } },
     });
     const result = collectRelevanceMatrix(tmpDir);
     expect(result.available).toBe(true);
@@ -51,19 +56,21 @@ describe('collectRelevanceMatrix', () => {
 
   test('uses agent overrides for dev agent', () => {
     writeJson(path.join(tmpDir, '.synapse', 'metrics', 'uap-metrics.json'), {
-      agentId: 'dev', loaders: { agentConfig: { status: 'ok' }, gitConfig: { status: 'ok' } },
+      agentId: 'dev',
+      loaders: { agentConfig: { status: 'ok' }, gitConfig: { status: 'ok' } },
     });
     const result = collectRelevanceMatrix(tmpDir);
-    const git = result.matrix.find(m => m.component === 'gitConfig');
+    const git = result.matrix.find((m) => m.component === 'gitConfig');
     expect(git.importance).toBe(IMPORTANCE.IMPORTANT); // dev override
   });
 
   test('identifies gaps for critical missing components', () => {
     writeJson(path.join(tmpDir, '.synapse', 'metrics', 'uap-metrics.json'), {
-      agentId: 'dev', loaders: {},
+      agentId: 'dev',
+      loaders: {},
     });
     const result = collectRelevanceMatrix(tmpDir);
-    const agentGap = result.gaps.find(g => g.component === 'agentConfig');
+    const agentGap = result.gaps.find((g) => g.component === 'agentConfig');
     expect(agentGap).toBeDefined();
     expect(agentGap.importance).toBe(IMPORTANCE.CRITICAL);
   });
@@ -74,7 +81,8 @@ describe('collectRelevanceMatrix', () => {
       loaders[key] = { status: 'ok' };
     }
     writeJson(path.join(tmpDir, '.synapse', 'metrics', 'uap-metrics.json'), {
-      agentId: 'dev', loaders,
+      agentId: 'dev',
+      loaders,
     });
     writeJson(path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'), {
       perLayer: {

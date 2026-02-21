@@ -52,7 +52,7 @@ describeIntegration('ClickUp Tool Validators', () => {
     });
 
     test('should have all required validator IDs', () => {
-      const validatorIds = clickupTool.executable_knowledge.validators.map(v => v.id);
+      const validatorIds = clickupTool.executable_knowledge.validators.map((v) => v.id);
       expect(validatorIds).toContain('validate-create-task');
       expect(validatorIds).toContain('validate-update-task');
       expect(validatorIds).toContain('validate-webhook-payload');
@@ -139,9 +139,7 @@ describeIntegration('ClickUp Tool Validators', () => {
       const result = await validator.validate('create_task', {
         name: 'Test Task',
         list_id: '123456789',
-        custom_fields: [
-          { value: 'High' },
-        ],
+        custom_fields: [{ value: 'High' }],
       });
 
       expect(result.valid).toBe(false);
@@ -152,9 +150,7 @@ describeIntegration('ClickUp Tool Validators', () => {
       const result = await validator.validate('create_task', {
         name: 'Test Task',
         list_id: '123456789',
-        custom_fields: [
-          { id: 'field-uuid-1' },
-        ],
+        custom_fields: [{ id: 'field-uuid-1' }],
       });
 
       expect(result.valid).toBe(false);
@@ -209,7 +205,9 @@ describeIntegration('ClickUp Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('assignees must be object {add: [], rem: []} for update_task, got array');
+      expect(result.errors).toContain(
+        'assignees must be object {add: [], rem: []} for update_task, got array'
+      );
     });
 
     test('should fail if add is not an array', async () => {
@@ -264,9 +262,7 @@ describeIntegration('ClickUp Tool Validators', () => {
 
     test('should pass with history_items format', async () => {
       const result = await validator.validate('parse_webhook', {
-        history_items: [
-          { field: 'status', before: 'todo', after: 'in progress' },
-        ],
+        history_items: [{ field: 'status', before: 'todo', after: 'in progress' }],
       });
 
       expect(result.valid).toBe(true);
@@ -276,7 +272,9 @@ describeIntegration('ClickUp Tool Validators', () => {
       const result = await validator.validate('parse_webhook', {});
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('Invalid webhook payload: missing event, webhook_id, or history_items');
+      expect(result.errors).toContain(
+        'Invalid webhook payload: missing event, webhook_id, or history_items'
+      );
     });
 
     test('should fail with invalid webhook payload (missing all identification fields)', async () => {
@@ -285,7 +283,9 @@ describeIntegration('ClickUp Tool Validators', () => {
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('Invalid webhook payload: missing event, webhook_id, or history_items');
+      expect(result.errors).toContain(
+        'Invalid webhook payload: missing event, webhook_id, or history_items'
+      );
     });
   });
 
@@ -486,7 +486,9 @@ describeIntegration('ClickUp Tool Validators', () => {
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nClickUp Validator Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nClickUp Validator Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(50);
     });

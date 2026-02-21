@@ -54,7 +54,8 @@ class WorkflowValidator {
   constructor(options = {}) {
     this.verbose = options.verbose || false;
     this.strict = options.strict || false;
-    this.agentsPath = options.agentsPath || path.join(process.cwd(), '.aios-core', 'development', 'agents');
+    this.agentsPath =
+      options.agentsPath || path.join(process.cwd(), '.aios-core', 'development', 'agents');
     this.squadAgentsPath = options.squadAgentsPath || null;
   }
 
@@ -223,7 +224,8 @@ class WorkflowValidator {
         code: WorkflowValidationErrorCodes.WF_MISSING_REQUIRED_FIELD,
         message: 'Missing or empty "sequence:" array',
         file: filename,
-        suggestion: 'Add sequence: with at least one step entry containing agent and creates/action',
+        suggestion:
+          'Add sequence: with at least one step entry containing agent and creates/action',
       });
     }
 
@@ -276,7 +278,8 @@ class WorkflowValidator {
         result.warnings.push({
           code: WorkflowValidationErrorCodes.WF_INVALID_SEQUENCE,
           message: `Step ${i + 1} (agent: ${step.agent || 'unknown'}) has no action (creates/updates/validates/action)`,
-          suggestion: 'Add creates:, updates:, validates:, or action: to define what this step does',
+          suggestion:
+            'Add creates:, updates:, validates:, or action: to define what this step does',
         });
       }
     }
@@ -304,7 +307,7 @@ class WorkflowValidator {
     for (const step of sequence) {
       if (step.agent) {
         // Handle compound agents like "analyst/pm"
-        const agentNames = step.agent.split('/').map(a => a.trim());
+        const agentNames = step.agent.split('/').map((a) => a.trim());
         for (const a of agentNames) {
           agents.add(a);
         }
@@ -329,7 +332,12 @@ class WorkflowValidator {
       }
 
       // Sanitize agent name to prevent path traversal
-      if (!agentName || agentName.includes('..') || agentName.includes('/') || agentName.includes('\\')) {
+      if (
+        !agentName ||
+        agentName.includes('..') ||
+        agentName.includes('/') ||
+        agentName.includes('\\')
+      ) {
         result.warnings.push({
           code: WorkflowValidationErrorCodes.WF_AGENT_NOT_FOUND,
           message: `Agent "${agent}" has an invalid name`,
@@ -421,7 +429,11 @@ class WorkflowValidator {
       if (step.requires) {
         const required = step.requires;
         // Handle both string and special values
-        if (typeof required === 'string' && !required.startsWith('all_') && !required.startsWith('sharded_')) {
+        if (
+          typeof required === 'string' &&
+          !required.startsWith('all_') &&
+          !required.startsWith('sharded_')
+        ) {
           if (!createdArtifacts.has(required)) {
             result.warnings.push({
               code: WorkflowValidationErrorCodes.WF_ARTIFACT_CHAIN_BROKEN,
@@ -480,7 +492,7 @@ class WorkflowValidator {
       visited.add(node);
       inStack.add(node);
 
-      for (const neighbor of (edges.get(node) || [])) {
+      for (const neighbor of edges.get(node) || []) {
         if (!visited.has(neighbor)) {
           if (hasCycle(neighbor)) return true;
         } else if (inStack.has(neighbor)) {
@@ -527,7 +539,8 @@ class WorkflowValidator {
           result.warnings.push({
             code: WorkflowValidationErrorCodes.WF_INVALID_CONDITIONAL,
             message: `Step ${i + 1} has empty or invalid condition`,
-            suggestion: 'Conditions should be descriptive identifiers (e.g., "architecture_suggests_prd_changes")',
+            suggestion:
+              'Conditions should be descriptive identifiers (e.g., "architecture_suggests_prd_changes")',
           });
         }
       }

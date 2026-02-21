@@ -44,7 +44,13 @@ function hasAgent(projectRoot, agentId) {
 }
 
 function renderGreeting(projectRoot, agentId) {
-  const scriptPath = path.join(projectRoot, '.aios-core', 'development', 'scripts', 'generate-greeting.js');
+  const scriptPath = path.join(
+    projectRoot,
+    '.aios-core',
+    'development',
+    'scripts',
+    'generate-greeting.js'
+  );
   if (!fs.existsSync(scriptPath)) {
     return null;
   }

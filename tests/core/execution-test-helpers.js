@@ -117,7 +117,7 @@ function createMockTask(overrides = {}) {
  */
 function createMockTasks(count, overrides = {}) {
   return Array.from({ length: count }, (_, i) =>
-    createMockTask({ id: `task-${i + 1}`, ...overrides }),
+    createMockTask({ id: `task-${i + 1}`, ...overrides })
   );
 }
 
@@ -140,9 +140,7 @@ function createMockWaveResults(taskCount = 3, successRate = 1.0) {
       success,
       critical: false,
       duration: Math.floor(Math.random() * 5000) + 100,
-      result: success
-        ? { success: true, output: `Output for task-${i + 1}` }
-        : undefined,
+      result: success ? { success: true, output: `Output for task-${i + 1}` } : undefined,
       error: success ? undefined : 'Simulated task failure',
     });
   }
@@ -160,9 +158,7 @@ function createDeterministicWaveResults(outcomes) {
     success,
     critical: false,
     duration: (i + 1) * 1000,
-    result: success
-      ? { success: true, output: `Output for task-${i + 1}` }
-      : undefined,
+    result: success ? { success: true, output: `Output for task-${i + 1}` } : undefined,
     error: success ? undefined : `Task task-${i + 1} failed`,
   }));
 }
@@ -237,9 +233,7 @@ function createMockPlan(overrides = {}) {
       },
       {
         id: 'task-2',
-        subtasks: [
-          { id: '2.1', description: 'Subtask 2.1' },
-        ],
+        subtasks: [{ id: '2.1', description: 'Subtask 2.1' }],
       },
     ],
     ...overrides,

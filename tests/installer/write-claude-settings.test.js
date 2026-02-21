@@ -67,16 +67,14 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
       await fse.writeFile(
         path.join(claudeDir, 'settings.json'),
         JSON.stringify({ permissions: { allow: ['Read'] }, theme: 'dark' }, null, 2) + '\n',
-        'utf8',
+        'utf8'
       );
 
       const result = await writeClaudeSettings('pt', tempDir);
 
       expect(result).toBe(true);
 
-      const content = JSON.parse(
-        await fse.readFile(path.join(claudeDir, 'settings.json'), 'utf8'),
-      );
+      const content = JSON.parse(await fse.readFile(path.join(claudeDir, 'settings.json'), 'utf8'));
 
       expect(content.language).toBe('portuguese');
       expect(content.permissions).toEqual({ allow: ['Read'] });
@@ -89,14 +87,12 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
       await fse.writeFile(
         path.join(claudeDir, 'settings.json'),
         JSON.stringify({ language: 'english' }, null, 2) + '\n',
-        'utf8',
+        'utf8'
       );
 
       await writeClaudeSettings('es', tempDir);
 
-      const content = JSON.parse(
-        await fse.readFile(path.join(claudeDir, 'settings.json'), 'utf8'),
-      );
+      const content = JSON.parse(await fse.readFile(path.join(claudeDir, 'settings.json'), 'utf8'));
 
       expect(content.language).toBe('spanish');
     });
@@ -119,7 +115,7 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
       await fse.writeFile(
         path.join(claudeDir, 'settings.json'),
         JSON.stringify({ language: 'portuguese' }, null, 2) + '\n',
-        'utf8',
+        'utf8'
       );
 
       const result = await getExistingLanguage(tempDir);
@@ -137,7 +133,7 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
       await fse.writeFile(
         path.join(claudeDir, 'settings.json'),
         JSON.stringify({ theme: 'dark' }, null, 2) + '\n',
-        'utf8',
+        'utf8'
       );
 
       const result = await getExistingLanguage(tempDir);
@@ -150,7 +146,7 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
       await fse.writeFile(
         path.join(claudeDir, 'settings.json'),
         JSON.stringify({ language: 'french' }, null, 2) + '\n',
-        'utf8',
+        'utf8'
       );
 
       const result = await getExistingLanguage(tempDir);
@@ -160,11 +156,7 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
     test('should handle malformed JSON gracefully', async () => {
       const claudeDir = path.join(tempDir, '.claude');
       await fse.ensureDir(claudeDir);
-      await fse.writeFile(
-        path.join(claudeDir, 'settings.json'),
-        'not valid json{{{',
-        'utf8',
-      );
+      await fse.writeFile(path.join(claudeDir, 'settings.json'), 'not valid json{{{', 'utf8');
 
       const result = await getExistingLanguage(tempDir);
       expect(result).toBeNull();

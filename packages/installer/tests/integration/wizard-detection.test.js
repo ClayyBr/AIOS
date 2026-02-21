@@ -143,9 +143,7 @@ describe('Wizard Integration with Project Type Detection', () => {
       const confirmed = await confirmProjectType('EXISTING_AIOS');
 
       expect(confirmed).toBe('EXISTING_AIOS');
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('update or reinstall'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('update or reinstall'));
     });
 
     test('getProjectType helper returns EXISTING_AIOS when .aios-core exists', () => {
@@ -188,17 +186,13 @@ describe('Wizard Integration with Project Type Detection', () => {
     test('confirmProjectType provides description for GREENFIELD', async () => {
       await confirmProjectType('GREENFIELD');
 
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('New project'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('New project'));
     });
 
     test('confirmProjectType provides description for BROWNFIELD', async () => {
       await confirmProjectType('BROWNFIELD');
 
-      expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('Existing project'),
-      );
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Existing project'));
     });
   });
 
@@ -214,7 +208,7 @@ describe('Wizard Integration with Project Type Detection', () => {
       });
 
       await expect(runWizard({ targetDir: '/invalid' })).rejects.toThrow(
-        'Directory does not exist',
+        'Directory does not exist'
       );
     });
 
@@ -227,8 +221,8 @@ describe('Wizard Integration with Project Type Detection', () => {
       await expect(runWizard({ targetDir: '/denied' })).rejects.toThrow();
       // Check that console.error was called with the error message
       const errorCalls = console.error.mock.calls;
-      const hasInstallationFailed = errorCalls.some(call => 
-        call.some(arg => String(arg).includes('Installation failed')),
+      const hasInstallationFailed = errorCalls.some((call) =>
+        call.some((arg) => String(arg).includes('Installation failed'))
       );
       expect(hasInstallationFailed).toBe(true);
     });
@@ -238,7 +232,7 @@ describe('Wizard Integration with Project Type Detection', () => {
 
       expect(confirmed).toBe('UNKNOWN');
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('Manual selection required'),
+        expect.stringContaining('Manual selection required')
       );
     });
   });
@@ -312,7 +306,7 @@ describe('Wizard Integration with Project Type Detection', () => {
   describe('Default Wizard Behavior', () => {
     test('wizard uses process.cwd() when no targetDir provided', async () => {
       const mockCwd = process.cwd();
-      
+
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve(mockCwd)) return true;
         return false;
@@ -332,7 +326,7 @@ describe('Wizard Integration with Project Type Detection', () => {
       await runWizard({ targetDir: '/test' });
 
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('Welcome to AIOS Installer'),
+        expect.stringContaining('Welcome to AIOS Installer')
       );
     });
 
@@ -343,9 +337,8 @@ describe('Wizard Integration with Project Type Detection', () => {
       await runWizard({ targetDir: '/test' });
 
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('Analyzing project directory'),
+        expect.stringContaining('Analyzing project directory')
       );
     });
   });
 });
-

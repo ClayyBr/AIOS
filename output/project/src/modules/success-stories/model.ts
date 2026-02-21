@@ -23,4 +23,7 @@ SuccessStorySchema.pre('save', function (next) {
   next();
 });
 
-export const SuccessStoryModel = mongoose.model<SuccessStoryDocument>('SuccessStory', SuccessStorySchema);
+export const SuccessStoryModel = mongoose.model<SuccessStoryDocument>(
+  'SuccessStory',
+  SuccessStorySchema
+);

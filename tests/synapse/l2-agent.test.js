@@ -56,11 +56,14 @@ describe('L2AgentProcessor', () => {
 
   describe('process()', () => {
     test('should load agent-specific rules when agent is active', () => {
-      fs.writeFileSync(path.join(tempDir, 'agent-dev'), [
-        'DEV_RULE_1=Follow coding standards',
-        'DEV_RULE_2=Only @devops can push (AUTH boundary)',
-        'DEV_RULE_3=Write tests for all features',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'agent-dev'),
+        [
+          'DEV_RULE_1=Follow coding standards',
+          'DEV_RULE_2=Only @devops can push (AUTH boundary)',
+          'DEV_RULE_3=Write tests for all features',
+        ].join('\n')
+      );
 
       const context = {
         prompt: '',
@@ -165,10 +168,13 @@ describe('L2AgentProcessor', () => {
     });
 
     test('should detect authority boundaries (rules containing AUTH)', () => {
-      fs.writeFileSync(path.join(tempDir, 'agent-qa'), [
-        'QA_RULE_1=Run quality checks',
-        'QA_RULE_2=QA agent AUTH boundary: can approve or reject stories',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'agent-qa'),
+        [
+          'QA_RULE_1=Run quality checks',
+          'QA_RULE_2=QA agent AUTH boundary: can approve or reject stories',
+        ].join('\n')
+      );
 
       const context = {
         prompt: '',

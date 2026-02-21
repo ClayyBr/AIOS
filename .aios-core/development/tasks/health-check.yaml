@@ -5,7 +5,7 @@
 
 name: health-check
 id: health-check
-version: "2.0"
+version: '2.0'
 description: |
   Run comprehensive health checks on your AIOS project.
   Diagnoses configuration issues, environment problems, and provides
@@ -15,16 +15,16 @@ category: development
 owner: devops
 
 # CLI integration
-command: "*health-check"
+command: '*health-check'
 aliases:
-  - "*hc"
-  - "*doctor"
+  - '*hc'
+  - '*doctor'
 
 # Task parameters
 parameters:
   - name: mode
     type: string
-    default: "quick"
+    default: 'quick'
     description: "Execution mode: 'quick' (<10s, critical/high only) or 'full' (<60s, all checks)"
     options:
       - quick
@@ -32,8 +32,8 @@ parameters:
 
   - name: domain
     type: string
-    default: "all"
-    description: "Domain to check: project, local, repository, deployment, services, or all"
+    default: 'all'
+    description: 'Domain to check: project, local, repository, deployment, services, or all'
     options:
       - all
       - project
@@ -45,19 +45,19 @@ parameters:
   - name: fix
     type: boolean
     default: true
-    description: "Enable auto-fixing for Tier 1 issues"
+    description: 'Enable auto-fixing for Tier 1 issues'
 
   - name: fix-tier
     type: number
     default: 1
-    description: "Maximum tier for auto-fixing (1=silent, 2=prompted, 3=manual guide only)"
+    description: 'Maximum tier for auto-fixing (1=silent, 2=prompted, 3=manual guide only)'
     min: 1
     max: 3
 
   - name: output
     type: string
-    default: "console"
-    description: "Output format"
+    default: 'console'
+    description: 'Output format'
     options:
       - console
       - markdown
@@ -66,23 +66,23 @@ parameters:
   - name: verbose
     type: boolean
     default: false
-    description: "Show all checks, not just issues"
+    description: 'Show all checks, not just issues'
 
   - name: save
     type: boolean
     default: false
-    description: "Save report to .aios/reports/health-check-latest.json"
+    description: 'Save report to .aios/reports/health-check-latest.json'
 
 # Execution steps
 steps:
   - id: initialize
-    name: "Initialize Health Check"
+    name: 'Initialize Health Check'
     action: log
     params:
-      message: "🏥 Starting AIOS Health Check (mode: {{mode}})"
+      message: '🏥 Starting AIOS Health Check (mode: {{mode}})'
 
   - id: run-checks
-    name: "Run Health Checks"
+    name: 'Run Health Checks'
     action: script
     script: |
       const { HealthCheck } = require('../../core/health-check');
@@ -131,7 +131,7 @@ steps:
       };
 
   - id: summary
-    name: "Display Summary"
+    name: 'Display Summary'
     action: log
     params:
       message: |
@@ -148,42 +148,42 @@ output:
   properties:
     score:
       type: number
-      description: "Overall health score (0-100)"
+      description: 'Overall health score (0-100)'
     status:
       type: string
-      description: "Health status: healthy, degraded, warning, critical"
+      description: 'Health status: healthy, degraded, warning, critical'
     issues:
       type: number
-      description: "Number of issues found"
+      description: 'Number of issues found'
     autoFixed:
       type: number
-      description: "Number of issues auto-fixed"
+      description: 'Number of issues auto-fixed'
 
 # Examples
 examples:
-  - name: "Quick check"
-    command: "*health-check"
-    description: "Run quick health check (critical and high severity)"
+  - name: 'Quick check'
+    command: '*health-check'
+    description: 'Run quick health check (critical and high severity)'
 
-  - name: "Full check"
-    command: "*health-check --mode=full"
-    description: "Run comprehensive health check"
+  - name: 'Full check'
+    command: '*health-check --mode=full'
+    description: 'Run comprehensive health check'
 
-  - name: "Check specific domain"
-    command: "*health-check --domain=repository"
-    description: "Check only repository health"
+  - name: 'Check specific domain'
+    command: '*health-check --domain=repository'
+    description: 'Check only repository health'
 
-  - name: "With auto-fix confirmation"
-    command: "*health-check --fix-tier=2"
-    description: "Allow prompted auto-fixes"
+  - name: 'With auto-fix confirmation'
+    command: '*health-check --fix-tier=2'
+    description: 'Allow prompted auto-fixes'
 
-  - name: "Save JSON report"
-    command: "*health-check --output=json --save"
-    description: "Generate and save JSON report"
+  - name: 'Save JSON report'
+    command: '*health-check --output=json --save'
+    description: 'Generate and save JSON report'
 
-  - name: "Verbose output"
-    command: "*health-check --verbose"
-    description: "Show all checks including passed ones"
+  - name: 'Verbose output'
+    command: '*health-check --verbose'
+    description: 'Show all checks including passed ones'
 
 # Help text
 help: |

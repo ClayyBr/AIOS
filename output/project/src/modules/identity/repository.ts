@@ -19,13 +19,16 @@ export const findUserByEmail = (email: string): TE.TaskEither<AppError, User | n
           const collection = getUsersCollection(dbInstance);
           return collection.findOne({ email });
         },
-        (reason) => new AppError('DatabaseError', `Failed to find user by email: ${String(reason)}`, 500)
+        (reason) =>
+          new AppError('DatabaseError', `Failed to find user by email: ${String(reason)}`, 500)
       )
     )
   );
 
 // Cria um novo usuário
-export const createUser = (userData: Omit<User, '_id' | 'createdAt' | 'updatedAt'>): TE.TaskEither<AppError, User> =>
+export const createUser = (
+  userData: Omit<User, '_id' | 'createdAt' | 'updatedAt'>
+): TE.TaskEither<AppError, User> =>
   pipe(
     getDB(),
     TE.chain((dbInstance) =>
@@ -38,7 +41,7 @@ export const createUser = (userData: Omit<User, '_id' | 'createdAt' | 'updatedAt
             _id: '', // Será preenchido pelo driver ou pelo mongo
             createdAt: now,
             updatedAt: now,
-            status: 'pending' // Exemplo: usuário recém-criado pode ter status pendente
+            status: 'pending', // Exemplo: usuário recém-criado pode ter status pendente
           };
           const result = await collection.insertOne(userToInsert);
           // Retorna o documento inserido com o _id gerado

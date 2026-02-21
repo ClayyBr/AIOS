@@ -19,12 +19,12 @@ Imagine que você pudesse contratar uma **equipe inteira de profissionais especi
 
 ### Analogia Simples
 
-| Sem AIOS | Com AIOS |
-|----------|----------|
+| Sem AIOS                                   | Com AIOS                                                                                                                          |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
 | Você pede a uma IA genérica: "faça um app" | Você ativa o `@analyst` que pesquisa, depois o `@architect` que projeta, depois o `@dev` que implementa, depois o `@qa` que testa |
-| A IA "esquece" o contexto entre conversas | Cada agente recebe o documento completo do anterior |
-| Você não sabe se o resultado está bom | Quality Gates bloqueiam código ruim automaticamente |
-| Resultado inconsistente | Processo padronizado e repetível |
+| A IA "esquece" o contexto entre conversas  | Cada agente recebe o documento completo do anterior                                                                               |
+| Você não sabe se o resultado está bom      | Quality Gates bloqueiam código ruim automaticamente                                                                               |
+| Resultado inconsistente                    | Processo padronizado e repetível                                                                                                  |
 
 ---
 
@@ -35,27 +35,30 @@ Imagine que você pudesse contratar uma **equipe inteira de profissionais especi
 O AIOS vem com **11+ agentes**, cada um com uma persona, habilidades e autoridades específicas:
 
 #### Agentes de Planejamento
-| Agente | Persona | O que faz |
-|--------|---------|-----------|
-| `@analyst` | Alex | Pesquisa mercado, analisa concorrentes, cria briefings |
-| `@pm` | Morgan | Gerencia o produto, cria o PRD (documento de requisitos), prioriza features |
-| `@architect` | Aria | Projeta a arquitetura técnica, decide tecnologias, cria diagramas |
-| `@ux-design-expert` | Uma | Design de interfaces, experiência do usuário, wireframes |
+
+| Agente              | Persona | O que faz                                                                   |
+| ------------------- | ------- | --------------------------------------------------------------------------- |
+| `@analyst`          | Alex    | Pesquisa mercado, analisa concorrentes, cria briefings                      |
+| `@pm`               | Morgan  | Gerencia o produto, cria o PRD (documento de requisitos), prioriza features |
+| `@architect`        | Aria    | Projeta a arquitetura técnica, decide tecnologias, cria diagramas           |
+| `@ux-design-expert` | Uma     | Design de interfaces, experiência do usuário, wireframes                    |
 
 #### Agentes de Desenvolvimento
-| Agente | Persona | O que faz |
-|--------|---------|-----------|
-| `@po` | Pax | Cria e gerencia stories (tarefas detalhadas de desenvolvimento) |
-| `@sm` | River | Scrum Master — organiza sprints, transforma planos em stories hiper-detalhadas |
-| `@dev` | Dex | O desenvolvedor — escreve código, implementa features |
-| `@qa` | Quinn | Testa tudo, roda validações, garante qualidade |
-| `@devops` | Gage | O único que pode fazer deploy e push para o repositório |
+
+| Agente    | Persona | O que faz                                                                      |
+| --------- | ------- | ------------------------------------------------------------------------------ |
+| `@po`     | Pax     | Cria e gerencia stories (tarefas detalhadas de desenvolvimento)                |
+| `@sm`     | River   | Scrum Master — organiza sprints, transforma planos em stories hiper-detalhadas |
+| `@dev`    | Dex     | O desenvolvedor — escreve código, implementa features                          |
+| `@qa`     | Quinn   | Testa tudo, roda validações, garante qualidade                                 |
+| `@devops` | Gage    | O único que pode fazer deploy e push para o repositório                        |
 
 #### Agentes Meta
-| Agente | O que faz |
-|--------|-----------|
-| `@aios-master` | Orquestra todo o sistema, gerencia o framework |
-| `@data-engineer` | Projeta bancos de dados, schemas, migrações |
+
+| Agente           | O que faz                                      |
+| ---------------- | ---------------------------------------------- |
+| `@aios-master`   | Orquestra todo o sistema, gerencia o framework |
+| `@data-engineer` | Projeta bancos de dados, schemas, migrações    |
 
 > [!IMPORTANT]
 > **Cada agente tem autoridade exclusiva.** Por exemplo, apenas o `@devops` pode fazer `git push`. Isso evita que um agente de desenvolvimento acidentalmente publique código não testado.
@@ -85,15 +88,15 @@ Cada agente marca os checkboxes conforme completa suas tarefas, e o próximo age
 
 Em vez de começar do zero, o AIOS oferece **18 templates** profissionais para diferentes tipos de documentos:
 
-| Categoria | Templates |
-|-----------|-----------|
-| **Produto** | PRD, Project Brief, Brownfield PRD |
-| **Arquitetura** | Sistema, Full-Stack, Front-end, Brownfield |
-| **Desenvolvimento** | Story, Task, Workflow, QA Gate |
-| **Pesquisa** | Brainstorming, Market Research, Competitor Analysis |
-| **Dados** | Database Schema (Full e Lite) |
-| **Agentes** | Agent Template |
-| **Front-end** | Spec Front-end |
+| Categoria           | Templates                                           |
+| ------------------- | --------------------------------------------------- |
+| **Produto**         | PRD, Project Brief, Brownfield PRD                  |
+| **Arquitetura**     | Sistema, Full-Stack, Front-end, Brownfield          |
+| **Desenvolvimento** | Story, Task, Workflow, QA Gate                      |
+| **Pesquisa**        | Brainstorming, Market Research, Competitor Analysis |
+| **Dados**           | Database Schema (Full e Lite)                       |
+| **Agentes**         | Agent Template                                      |
+| **Front-end**       | Spec Front-end                                      |
 
 Quando você pede `@pm *create-story`, o agente **lê o template** e gera um documento completo, padronizado e profissional.
 
@@ -103,16 +106,16 @@ Quando você pede `@pm *create-story`, o agente **lê o template** e gera um doc
 
 Skills são **capacidades especiais** que os agentes podem usar. São como "superpoderes" que vão além das tarefas básicas:
 
-| Skill | O que faz |
-|-------|-----------|
-| **Squad Creator** | Cria novas equipes de agentes para qualquer domínio |
-| **Mind Clone** | Clona o conhecimento de um especialista humano para um agente |
-| **Enhance Workflow** | Melhora workflows existentes automaticamente |
-| **MCP Builder** | Constrói servidores MCP (Model Context Protocol) |
-| **Skill Creator** | Cria novas skills |
-| **Architect First** | Workflow que garante que a arquitetura vem antes do código |
-| **Course Generation** | Gera cursos educacionais completos |
-| **Ralph** | Assistente personalizado |
+| Skill                 | O que faz                                                     |
+| --------------------- | ------------------------------------------------------------- |
+| **Squad Creator**     | Cria novas equipes de agentes para qualquer domínio           |
+| **Mind Clone**        | Clona o conhecimento de um especialista humano para um agente |
+| **Enhance Workflow**  | Melhora workflows existentes automaticamente                  |
+| **MCP Builder**       | Constrói servidores MCP (Model Context Protocol)              |
+| **Skill Creator**     | Cria novas skills                                             |
+| **Architect First**   | Workflow que garante que a arquitetura vem antes do código    |
+| **Course Generation** | Gera cursos educacionais completos                            |
+| **Ralph**             | Assistente personalizado                                      |
 
 ---
 
@@ -120,14 +123,14 @@ Skills são **capacidades especiais** que os agentes podem usar. São como "supe
 
 O AIOS tem uma **constituição formal** — um documento com regras inegociáveis que todos os agentes devem seguir. Isso garante consistência e qualidade:
 
-| Princípio | O que significa | Severidade |
-|-----------|-----------------|------------|
-| **CLI First** | Tudo funciona primeiro via linha de comando, não depende de interface gráfica | NON-NEGOTIABLE |
-| **Agent Authority** | Cada agente tem autoridades exclusivas que não podem ser violadas | NON-NEGOTIABLE |
-| **Story-Driven** | Todo desenvolvimento começa com uma story | MUST |
-| **No Invention** | Ninguém inventa requisitos — tudo vem de dados reais | MUST |
-| **Quality First** | Código ruim é bloqueado automaticamente | MUST |
-| **Absolute Imports** | Padrão técnico para organização de código | SHOULD |
+| Princípio            | O que significa                                                               | Severidade     |
+| -------------------- | ----------------------------------------------------------------------------- | -------------- |
+| **CLI First**        | Tudo funciona primeiro via linha de comando, não depende de interface gráfica | NON-NEGOTIABLE |
+| **Agent Authority**  | Cada agente tem autoridades exclusivas que não podem ser violadas             | NON-NEGOTIABLE |
+| **Story-Driven**     | Todo desenvolvimento começa com uma story                                     | MUST           |
+| **No Invention**     | Ninguém inventa requisitos — tudo vem de dados reais                          | MUST           |
+| **Quality First**    | Código ruim é bloqueado automaticamente                                       | MUST           |
+| **Absolute Imports** | Padrão técnico para organização de código                                     | SHOULD         |
 
 **Gates automáticos** verificam essas regras e **bloqueiam** violações antes que causem problemas.
 
@@ -162,14 +165,14 @@ Seu pedido → Spec Pipeline → Execution Engine → QA Review → Código pron
                             Memory Layer (aprende com o processo)
 ```
 
-| Sistema | O que faz |
-|---------|-----------|
-| Worktree Manager | Isola cada feature em uma branch separada |
-| Spec Pipeline | Transforma requisitos em especificações executáveis |
-| Execution Engine | Executa as specs em 13 passos com autocrítica |
-| Recovery System | Recupera automaticamente de falhas |
-| QA Evolution | Review estruturado em 10 fases |
-| Memory Layer | Memória persistente — o sistema aprende com cada projeto |
+| Sistema          | O que faz                                                |
+| ---------------- | -------------------------------------------------------- |
+| Worktree Manager | Isola cada feature em uma branch separada                |
+| Spec Pipeline    | Transforma requisitos em especificações executáveis      |
+| Execution Engine | Executa as specs em 13 passos com autocrítica            |
+| Recovery System  | Recupera automaticamente de falhas                       |
+| QA Evolution     | Review estruturado em 10 fases                           |
+| Memory Layer     | Memória persistente — o sistema aprende com cada projeto |
 
 ---
 
@@ -185,29 +188,29 @@ Este é o melhor exemplo de como o AIOS funciona **além do desenvolvimento de s
    └── 📦 Controlador de Estoque (Ops)
 ```
 
-| Agente | Papel | Exemplos do que faz |
-|--------|-------|-------------------|
-| **Gerente Geral** | Seu ponto de contato | Recebe pedidos, orquestra os outros, dá visão estratégica |
-| **Arquiteto do Lucro** | Financeiro | Calcula custos, precifica pratos, gera DRE, analisa CMV |
-| **Controlador de Estoque** | Operacional | Registra entradas/saídas, faz inventário, alerta sobre estoque baixo |
+| Agente                     | Papel                | Exemplos do que faz                                                  |
+| -------------------------- | -------------------- | -------------------------------------------------------------------- |
+| **Gerente Geral**          | Seu ponto de contato | Recebe pedidos, orquestra os outros, dá visão estratégica            |
+| **Arquiteto do Lucro**     | Financeiro           | Calcula custos, precifica pratos, gera DRE, analisa CMV              |
+| **Controlador de Estoque** | Operacional          | Registra entradas/saídas, faz inventário, alerta sobre estoque baixo |
 
 ### As 13 Tarefas Disponíveis
 
-| Tarefa | O que faz |
-|--------|-----------|
-| `*dashboard` | Resumo 360° do negócio |
-| `*novo-prato` | Lançar novo prato (custo, preço, ficha técnica) |
-| `*ficha-tecnica` | Criar ficha técnica com todos os ingredientes e custos |
-| `*precificar` | Calcular preço de venda ideal |
-| `*cmv` | Analisar custo da mercadoria vendida |
-| `*dre` | Gerar DRE (Demonstração do Resultado) mensal |
-| `*entrada` | Registrar entrada de mercadoria |
-| `*saida` | Registrar saída de mercadoria |
-| `*inventario` | Fazer inventário completo |
-| `*alerta` | Alertas de estoque baixo |
-| `*curva-abc` | Análise de Curva ABC dos produtos |
-| `*avaliar-fornecedor` | Avaliar e comparar fornecedores |
-| `*analise-estrategica` | Insights profundos sobre saúde financeira |
+| Tarefa                 | O que faz                                              |
+| ---------------------- | ------------------------------------------------------ |
+| `*dashboard`           | Resumo 360° do negócio                                 |
+| `*novo-prato`          | Lançar novo prato (custo, preço, ficha técnica)        |
+| `*ficha-tecnica`       | Criar ficha técnica com todos os ingredientes e custos |
+| `*precificar`          | Calcular preço de venda ideal                          |
+| `*cmv`                 | Analisar custo da mercadoria vendida                   |
+| `*dre`                 | Gerar DRE (Demonstração do Resultado) mensal           |
+| `*entrada`             | Registrar entrada de mercadoria                        |
+| `*saida`               | Registrar saída de mercadoria                          |
+| `*inventario`          | Fazer inventário completo                              |
+| `*alerta`              | Alertas de estoque baixo                               |
+| `*curva-abc`           | Análise de Curva ABC dos produtos                      |
+| `*avaliar-fornecedor`  | Avaliar e comparar fornecedores                        |
+| `*analise-estrategica` | Insights profundos sobre saúde financeira              |
 
 ### Base de Conhecimento Incluída
 
@@ -234,27 +237,27 @@ O CFO não trabalha "no escuro". Ele vem com **9 arquivos de conhecimento embuti
 
 Se você tentar criar agentes de IA por conta própria, vai enfrentar esses problemas:
 
-| Problema | Descrição |
-|----------|-----------|
-| **Perda de contexto** | Cada conversa com a IA começa do zero — ela "esquece" tudo |
-| **Inconsistência** | Sem padrões, cada resposta é diferente |
-| **Sem controle de qualidade** | Ninguém verifica se o resultado está correto |
-| **Sem colaboração** | Um agente não consegue passar informações para outro |
-| **Reinventar a roda** | Você precisa criar toda a estrutura do zero |
-| **Sem governança** | Qualquer agente pode fazer qualquer coisa, sem limites |
-| **Sem memória** | O sistema não aprende com experiências anteriores |
+| Problema                      | Descrição                                                  |
+| ----------------------------- | ---------------------------------------------------------- |
+| **Perda de contexto**         | Cada conversa com a IA começa do zero — ela "esquece" tudo |
+| **Inconsistência**            | Sem padrões, cada resposta é diferente                     |
+| **Sem controle de qualidade** | Ninguém verifica se o resultado está correto               |
+| **Sem colaboração**           | Um agente não consegue passar informações para outro       |
+| **Reinventar a roda**         | Você precisa criar toda a estrutura do zero                |
+| **Sem governança**            | Qualquer agente pode fazer qualquer coisa, sem limites     |
+| **Sem memória**               | O sistema não aprende com experiências anteriores          |
 
 ### O Que o AIOS Resolve
 
-| Problema | Solução AIOS |
-|----------|-------------|
-| Perda de contexto | Stories e documentos passam contexto completo entre agentes |
-| Inconsistência | Constitution + Templates garantem padrão |
-| Sem controle de qualidade | Quality Gates bloqueiam erros automaticamente |
-| Sem colaboração | Agentes delegam entre si com autoridades claras |
-| Reinventar a roda | Framework pronto com 18 templates, 8 skills, 11+ agentes |
-| Sem governança | Constitution com gates automáticos |
-| Sem memória | Memory Layer persiste aprendizados |
+| Problema                  | Solução AIOS                                                |
+| ------------------------- | ----------------------------------------------------------- |
+| Perda de contexto         | Stories e documentos passam contexto completo entre agentes |
+| Inconsistência            | Constitution + Templates garantem padrão                    |
+| Sem controle de qualidade | Quality Gates bloqueiam erros automaticamente               |
+| Sem colaboração           | Agentes delegam entre si com autoridades claras             |
+| Reinventar a roda         | Framework pronto com 18 templates, 8 skills, 11+ agentes    |
+| Sem governança            | Constitution com gates automáticos                          |
+| Sem memória               | Memory Layer persiste aprendizados                          |
 
 ### Comparação Direta
 
@@ -303,12 +306,12 @@ Isso verifica se tudo está funcionando corretamente.
 
 O AIOS funciona dentro do seu IDE (editor de código):
 
-| IDE | Configuração |
-|-----|-------------|
-| **Antigravity** | ✅ Automático via `GEMINI.md` |
-| **Claude Code** | ✅ Automático via `.claude/CLAUDE.md` |
-| **Cursor** | Copiar regras de `.cursor/global-rules.md` |
-| **Windsurf** | Copiar regras de `.windsurf/global-rules.md` |
+| IDE             | Configuração                                 |
+| --------------- | -------------------------------------------- |
+| **Antigravity** | ✅ Automático via `GEMINI.md`                |
+| **Claude Code** | ✅ Automático via `.claude/CLAUDE.md`        |
+| **Cursor**      | Copiar regras de `.cursor/global-rules.md`   |
+| **Windsurf**    | Copiar regras de `.windsurf/global-rules.md` |
 
 ### Passo 4: Ativar Seu Primeiro Agente
 
@@ -323,10 +326,11 @@ Isso ativa o agente Analyst (Alex) e mostra os comandos disponíveis.
 ### Passo 5: Criar Algo
 
 **Para criar um projeto do zero:**
+
 ```
 @analyst     → Pesquisa e cria briefing
 @pm          → Transforma o briefing em PRD
-@architect   → Cria arquitetura técnica  
+@architect   → Cria arquitetura técnica
 @sm          → Cria stories de desenvolvimento
 @dev         → Implementa cada story
 @qa          → Testa e valida
@@ -334,6 +338,7 @@ Isso ativa o agente Analyst (Alex) e mostra os comandos disponíveis.
 ```
 
 **Para usar o Squad CFO do Restaurante:**
+
 ```
 @gerente-geral *dashboard       → Ver panorama geral
 @gerente-geral *novo-prato      → Lançar um prato novo
@@ -346,13 +351,13 @@ Isso ativa o agente Analyst (Alex) e mostra os comandos disponíveis.
 
 Além do CFO, o repositório já tem outros squads prontos:
 
-| Squad | Descrição | Agentes |
-|-------|-----------|---------|
-| **CFO Restaurante** | Gestão financeira, estoque e estratégia de restaurante | 3 agentes, 13 tarefas |
-| **LP Creator** | Criação de landing pages profissionais | 3 agentes |
-| **Squad Creator** | Meta-squad que cria outros squads | 3 agentes, 16 tarefas |
-| **MMOS Squad** | Squad de grande porte (1395 arquivos) | Squad complexo |
-| **Video Downloader** | Download e processamento de vídeos | Squad utilitário |
+| Squad                | Descrição                                              | Agentes               |
+| -------------------- | ------------------------------------------------------ | --------------------- |
+| **CFO Restaurante**  | Gestão financeira, estoque e estratégia de restaurante | 3 agentes, 13 tarefas |
+| **LP Creator**       | Criação de landing pages profissionais                 | 3 agentes             |
+| **Squad Creator**    | Meta-squad que cria outros squads                      | 3 agentes, 16 tarefas |
+| **MMOS Squad**       | Squad de grande porte (1395 arquivos)                  | Squad complexo        |
+| **Video Downloader** | Download e processamento de vídeos                     | Squad utilitário      |
 
 ---
 
@@ -381,25 +386,25 @@ aios-core/
 
 O coração do AIOS tem módulos para cada aspecto do desenvolvimento:
 
-| Módulo | Função |
-|--------|--------|
-| `orchestration/` | Coordena agentes e workflows |
-| `memory/` | Memória persistente entre sessões |
-| `execution/` | Motor de execução de tarefas |
-| `quality-gates/` | Portões automáticos de qualidade |
-| `permissions/` | Controle de autoridade dos agentes |
-| `events/` | Sistema de eventos entre componentes |
-| `session/` | Gerenciamento de sessões |
-| `registry/` | Registro de agentes e capabilities |
-| `config/` | Sistema de configuração |
-| `manifest/` | Manifestos de componentes |
-| `health-check/` | Diagnóstico do sistema |
-| `migration/` | Migração entre versões |
-| `elicitation/` | Extração de requisitos |
-| `ideation/` | Geração de ideias |
-| `mcp/` | Model Context Protocol |
-| `ui/` | Componentes visuais |
-| `utils/` | Utilitários |
+| Módulo           | Função                               |
+| ---------------- | ------------------------------------ |
+| `orchestration/` | Coordena agentes e workflows         |
+| `memory/`        | Memória persistente entre sessões    |
+| `execution/`     | Motor de execução de tarefas         |
+| `quality-gates/` | Portões automáticos de qualidade     |
+| `permissions/`   | Controle de autoridade dos agentes   |
+| `events/`        | Sistema de eventos entre componentes |
+| `session/`       | Gerenciamento de sessões             |
+| `registry/`      | Registro de agentes e capabilities   |
+| `config/`        | Sistema de configuração              |
+| `manifest/`      | Manifestos de componentes            |
+| `health-check/`  | Diagnóstico do sistema               |
+| `migration/`     | Migração entre versões               |
+| `elicitation/`   | Extração de requisitos               |
+| `ideation/`      | Geração de ideias                    |
+| `mcp/`           | Model Context Protocol               |
+| `ui/`            | Componentes visuais                  |
+| `utils/`         | Utilitários                          |
 
 ---
 
@@ -408,14 +413,16 @@ O coração do AIOS tem módulos para cada aspecto do desenvolvimento:
 O AIOS resolve os **dois maiores problemas** do desenvolvimento assistido por IA:
 
 ### 1. Inconsistência de Planejamento
+
 Sem o AIOS, cada vez que você pede algo a uma IA, ela pode dar uma resposta completamente diferente. O AIOS resolve isso com **templates, constitution e agentes especializados** que garantem saídas consistentes e profissionais.
 
 ### 2. Perda de Contexto
+
 Sem o AIOS, quando o agente de development começa a codar, ele não sabe o que o analista descobriu ou o que o arquiteto decidiu. O AIOS resolve isso com **stories hiper-detalhadas** que carregam todo o contexto de um agente para outro.
 
 ```
      O AIOS é como a diferença entre:
-     
+
      🏚️  Construir uma casa pedindo favores aleatórios para amigos
      🏗️  Contratar uma construtora com engenheiro, arquiteto, mestre de obras e pedreiros
 ```
@@ -441,5 +448,5 @@ R: Os squads foram projetados para funcionar dentro do ecossistema AIOS, mas os 
 
 ---
 
-*Synkra AIOS — CLI First | Observability Second | UI Third*
-*Versão deste guia: 1.0 | Fevereiro 2026*
+_Synkra AIOS — CLI First | Observability Second | UI Third_
+_Versão deste guia: 1.0 | Fevereiro 2026_

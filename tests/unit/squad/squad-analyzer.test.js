@@ -116,14 +116,16 @@ describe('SquadAnalyzer', () => {
     });
 
     it('should throw SquadAnalyzerError for non-existent squad', async () => {
-      await expect(analyzer.analyze('non-existent-squad'))
-        .rejects
-        .toThrow(SquadAnalyzerError);
+      await expect(analyzer.analyze('non-existent-squad')).rejects.toThrow(SquadAnalyzerError);
     });
 
     it('should respect suggestions option', async () => {
-      const resultWithSuggestions = await analyzer.analyze('analyze-test-squad', { suggestions: true });
-      const resultWithoutSuggestions = await analyzer.analyze('analyze-test-squad', { suggestions: false });
+      const resultWithSuggestions = await analyzer.analyze('analyze-test-squad', {
+        suggestions: true,
+      });
+      const resultWithoutSuggestions = await analyzer.analyze('analyze-test-squad', {
+        suggestions: false,
+      });
 
       expect(resultWithSuggestions.suggestions.length).toBeGreaterThanOrEqual(0);
       expect(resultWithoutSuggestions.suggestions).toHaveLength(0);
@@ -143,9 +145,7 @@ describe('SquadAnalyzer', () => {
     it('should throw error for missing manifest', async () => {
       const squadPath = path.join(FIXTURES_PATH, 'non-existent');
 
-      await expect(analyzer.loadManifest(squadPath))
-        .rejects
-        .toThrow(SquadAnalyzerError);
+      await expect(analyzer.loadManifest(squadPath)).rejects.toThrow(SquadAnalyzerError);
     });
   });
 
@@ -221,7 +221,7 @@ describe('SquadAnalyzer', () => {
       const coverage = analyzer.calculateCoverage(inventory, manifest, squadPath);
       const suggestions = analyzer.generateSuggestions(inventory, coverage, manifest);
 
-      const taskSuggestion = suggestions.find(s => s.category === 'tasks');
+      const taskSuggestion = suggestions.find((s) => s.category === 'tasks');
       expect(taskSuggestion).toBeDefined();
       expect(taskSuggestion.priority).toBe('high');
     });
@@ -233,7 +233,7 @@ describe('SquadAnalyzer', () => {
       const coverage = analyzer.calculateCoverage(inventory, manifest, squadPath);
       const suggestions = analyzer.generateSuggestions(inventory, coverage, manifest);
 
-      const checklistSuggestion = suggestions.find(s => s.category === 'checklists');
+      const checklistSuggestion = suggestions.find((s) => s.category === 'checklists');
       expect(checklistSuggestion).toBeDefined();
     });
   });

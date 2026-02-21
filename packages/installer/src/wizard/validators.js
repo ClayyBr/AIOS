@@ -1,9 +1,9 @@
 /**
  * Input Validators with Security Best Practices
- * 
+ *
  * OWASP-compliant validators for all wizard inputs
  * Protects against: command injection, path traversal, XSS, buffer overflow
- * 
+ *
  * @see docs/stories/v4.0.4/sprint-1/story-1.2-interactive-wizard-foundation.md
  * @module wizard/validators
  */
@@ -31,7 +31,7 @@ const SHELL_SPECIAL_CHARS = /[;&|$`()\\<>\n]/;
 
 /**
  * Validate project type against whitelist
- * 
+ *
  * @param {string} input - User input
  * @returns {boolean|string} True if valid, error message if invalid
  */
@@ -41,7 +41,7 @@ function validateProjectType(input) {
   }
 
   const normalized = input.toLowerCase().trim();
-  
+
   if (!ALLOWED_PROJECT_TYPES.includes(normalized)) {
     return `Invalid project type. Must be one of: ${ALLOWED_PROJECT_TYPES.join(', ')}`;
   }
@@ -52,12 +52,12 @@ function validateProjectType(input) {
 /**
  * Validate and sanitize path input
  * Prevents path traversal attacks (../../../etc/passwd)
- * 
+ *
  * Security policy:
  * - Cross-drive access is DISALLOWED for security (e.g., C:\ vs D:\ on Windows)
  * - Path must resolve within baseDir (no up-level traversal)
  * - Uses path.relative() and root comparison for robust validation across platforms
- * 
+ *
  * @param {string} input - Path input
  * @param {string} baseDir - Base directory (default: process.cwd())
  * @returns {boolean|string} True if valid, error message if invalid
@@ -81,20 +81,20 @@ function validatePath(input, baseDir = process.cwd()) {
   // Normalize both paths to handle trailing slashes and relative segments
   const normalizedBaseDir = path.resolve(baseDir);
   const resolved = path.resolve(normalizedBaseDir, input);
-  
+
   // On Windows, check for cross-drive access (e.g., C:\ vs D:\)
   // Cross-drive targets are disallowed for security - path must stay within same root
   const baseRoot = path.parse(normalizedBaseDir).root;
   const resolvedRoot = path.parse(resolved).root;
-  
+
   if (baseRoot !== resolvedRoot) {
     return 'Path must be within project directory (cross-drive access not allowed)';
   }
-  
+
   // Use path.relative to detect traversal attempts
   // If resolved is within baseDir, relative path won't start with '..'
   const relativePath = path.relative(normalizedBaseDir, resolved);
-  
+
   // Check for up-level traversal indicators
   // Empty string means paths are identical, which is valid
   if (relativePath && (relativePath.startsWith('..') || relativePath.includes('..'))) {
@@ -107,7 +107,7 @@ function validatePath(input, baseDir = process.cwd()) {
 /**
  * Sanitize text input
  * Removes/escapes shell-special characters
- * 
+ *
  * @param {string} input - Text input
  * @param {number} maxLength - Maximum length (default: INPUT_LIMITS.generic)
  * @returns {boolean|string} True if valid, error message if invalid
@@ -136,12 +136,12 @@ function validateTextInput(input, maxLength = INPUT_LIMITS.generic) {
 
   // Check for potential command injection patterns
   const injectionPatterns = [
-    /\$\(/,           // $(command)
-    /`[^`]+`/,        // `command`
-    /&&/,             // command chaining
-    /\|\|/,           // command chaining
-    /<script/i,       // XSS-style
-    /<img/i,          // XSS-style
+    /\$\(/, // $(command)
+    /`[^`]+`/, // `command`
+    /&&/, // command chaining
+    /\|\|/, // command chaining
+    /<script/i, // XSS-style
+    /<img/i, // XSS-style
   ];
 
   for (const pattern of injectionPatterns) {
@@ -156,7 +156,7 @@ function validateTextInput(input, maxLength = INPUT_LIMITS.generic) {
 /**
  * Validate project name
  * Stricter than generic text - only alphanumeric, dash, underscore
- * 
+ *
  * @param {string} input - Project name
  * @returns {boolean|string} True if valid, error message if invalid
  */
@@ -192,7 +192,7 @@ function validateProjectName(input) {
 /**
  * Create inquirer-compatible validator function
  * Converts validator return to inquirer format
- * 
+ *
  * @param {Function} validatorFn - Validator function
  * @returns {Function} Inquirer-compatible validator
  */
@@ -207,7 +207,7 @@ function createInquirerValidator(validatorFn) {
  * Sanitize string by escaping shell-special characters
  * Use ONLY if you absolutely need to preserve special chars
  * Prefer validation/rejection instead
- * 
+ *
  * @param {string} input - String to sanitize
  * @returns {string} Sanitized string
  */
@@ -231,13 +231,13 @@ function sanitizeShellInput(input) {
     .replace(/\(/g, '\\(')
     .replace(/\)/g, '\\)')
     .replace(/\n/g, '\\n');
-  
+
   return sanitized;
 }
 
 /**
  * Validate list selection (for IDE, MCP, etc.)
- * 
+ *
  * @param {string} input - Selected value
  * @param {string[]} allowedValues - Whitelist of allowed values
  * @returns {boolean|string} True if valid, error message if invalid
@@ -261,14 +261,13 @@ module.exports = {
   validateTextInput,
   validateProjectName,
   validateListSelection,
-  
+
   // Utility functions
   createInquirerValidator,
   sanitizeShellInput,
-  
+
   // Constants (export for testing)
   INPUT_LIMITS,
   ALLOWED_PROJECT_TYPES,
   SHELL_SPECIAL_CHARS,
 };
-

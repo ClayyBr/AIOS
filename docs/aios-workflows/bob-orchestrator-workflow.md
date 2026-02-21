@@ -28,22 +28,22 @@ O **Bob Orchestrator** é o meta-workflow central do AIOS que orquestra todo o c
 CLI First → Observability Second → UI Third
 ```
 
-| Camada | Prioridade | Descrição |
-|--------|------------|-----------|
-| **CLI** | Máxima | Onde a inteligência vive. Toda execução, decisões e automação. |
-| **Observability** | Secundária | Observar e monitorar o que acontece no CLI em tempo real. |
-| **UI** | Terciária | Gestão pontual e visualizações quando necessário. |
+| Camada            | Prioridade | Descrição                                                      |
+| ----------------- | ---------- | -------------------------------------------------------------- |
+| **CLI**           | Máxima     | Onde a inteligência vive. Toda execução, decisões e automação. |
+| **Observability** | Secundária | Observar e monitorar o que acontece no CLI em tempo real.      |
+| **UI**            | Terciária  | Gestão pontual e visualizações quando necessário.              |
 
 ### Casos de Uso Principais
 
-| Cenário | Recomendado |
-|---------|-------------|
-| Projeto novo do zero | Sim (PATH D: Greenfield) |
+| Cenário                         | Recomendado                        |
+| ------------------------------- | ---------------------------------- |
+| Projeto novo do zero            | Sim (PATH D: Greenfield)           |
 | Projeto existente sem docs AIOS | Sim (PATH B: Brownfield Discovery) |
-| Projeto AIOS com novas features | Sim (PATH C: Enhancement) |
-| Primeira vez no AIOS | Sim (PATH A: Onboarding) |
-| Hotfixes urgentes | Não - use @dev diretamente |
-| Tasks pontuais | Não - use agentes individuais |
+| Projeto AIOS com novas features | Sim (PATH C: Enhancement)          |
+| Primeira vez no AIOS            | Sim (PATH A: Onboarding)           |
+| Hotfixes urgentes               | Não - use @dev diretamente         |
+| Tasks pontuais                  | Não - use agentes individuais      |
 
 ---
 
@@ -252,12 +252,12 @@ sequenceDiagram
 
 ### 1. STARTUP SEQUENCE
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `startup` |
-| **Trigger** | Ativação de `@pm` |
-| **Timeout** | 30s |
-| **Módulo** | `config-resolver.js` |
+| Atributo    | Valor                |
+| ----------- | -------------------- |
+| **Step ID** | `startup`            |
+| **Trigger** | Ativação de `@pm`    |
+| **Timeout** | 30s                  |
+| **Módulo**  | `config-resolver.js` |
 
 #### Processo
 
@@ -277,42 +277,42 @@ flowchart LR
 
 #### Config Hierarchy (PRO-4 + Epic 12.1/12.2)
 
-| Layer | Local | Escopo | Git |
-|-------|-------|--------|-----|
-| **L1 Framework** | `.aios-core/framework-config.yaml` | Read-only, ships com npm | ✗ |
-| **L2 Project** | `.aios-core/project-config.yaml` | Team-shared | ✓ |
-| **Pro Extension** | `pro/pro-config.yaml` | Opcional | ✓ |
-| **L3 App** | `apps/*/aios-app.config.yaml` | Monorepo | ✓ |
-| **L4 Local** | `.aios-core/local-config.yaml` | Machine-specific | ✗ |
-| **L5 User** | `~/.aios/user-config.yaml` | Cross-project, per-user | ✗ |
+| Layer             | Local                              | Escopo                   | Git |
+| ----------------- | ---------------------------------- | ------------------------ | --- |
+| **L1 Framework**  | `.aios-core/framework-config.yaml` | Read-only, ships com npm | ✗   |
+| **L2 Project**    | `.aios-core/project-config.yaml`   | Team-shared              | ✓   |
+| **Pro Extension** | `pro/pro-config.yaml`              | Opcional                 | ✓   |
+| **L3 App**        | `apps/*/aios-app.config.yaml`      | Monorepo                 | ✓   |
+| **L4 Local**      | `.aios-core/local-config.yaml`     | Machine-specific         | ✗   |
+| **L5 User**       | `~/.aios/user-config.yaml`         | Cross-project, per-user  | ✗   |
 
 #### Config Resolvido
 
-| Campo | Descrição | Default |
-|-------|-----------|---------|
-| `user_profile` | `bob` ou `advanced` | `bob` |
-| `educational_mode` | Painel detalhado | `false` |
-| `coderabbit_integration` | Self-healing ativo | `true` |
-| `default_model` | Modelo padrão | `claude-opus-4-5-20250514` |
-| `default_language` | Idioma | `pt` |
+| Campo                    | Descrição           | Default                    |
+| ------------------------ | ------------------- | -------------------------- |
+| `user_profile`           | `bob` ou `advanced` | `bob`                      |
+| `educational_mode`       | Painel detalhado    | `false`                    |
+| `coderabbit_integration` | Self-healing ativo  | `true`                     |
+| `default_model`          | Modelo padrão       | `claude-opus-4-5-20250514` |
+| `default_language`       | Idioma              | `pt`                       |
 
 ---
 
 ### 2. CLEANUP AUTOMÁTICO
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `cleanup` |
-| **Módulo** | `session-state.js` |
+| Atributo     | Valor                 |
+| ------------ | --------------------- |
+| **Step ID**  | `cleanup`             |
+| **Módulo**   | `session-state.js`    |
 | **Execução** | Automática no startup |
 
 #### O que é limpo
 
-| Item | Critério | Ação |
-|------|----------|------|
-| Lock files | TTL expirado ou PID morto | Remover |
-| Sessions | > 30 dias sem update | Arquivar |
-| Snapshots | > 90 dias | Remover (manter index) |
+| Item       | Critério                  | Ação                   |
+| ---------- | ------------------------- | ---------------------- |
+| Lock files | TTL expirado ou PID morto | Remover                |
+| Sessions   | > 30 dias sem update      | Arquivar               |
+| Snapshots  | > 90 dias                 | Remover (manter index) |
 
 #### Output
 
@@ -324,11 +324,11 @@ Cleanup: 2 locks, 1 session, 0 snapshots removed
 
 ### 3. SESSION CHECK
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `session_check` |
+| Atributo    | Valor                       |
+| ----------- | --------------------------- |
+| **Step ID** | `session_check`             |
 | **Arquivo** | `.aios/.session-state.yaml` |
-| **Módulo** | `session-state.js` |
+| **Módulo**  | `session-state.js`          |
 
 #### Detecção de Crash
 
@@ -343,22 +343,22 @@ flowchart TB
 
 #### Opções de Resume
 
-| Opção | Descrição | Ação |
-|-------|-----------|------|
-| **CONTINUE** | Retoma de onde parou | `loadSessionState()` → execute() |
-| **REVIEW** | Mostra o que foi feito | `getProgressSummary()` → pergunta |
-| **RESTART** | Reinicia story atual | reset story → execute() do início |
-| **DISCARD** | Arquiva sessão | `discard()` → DECISION TREE |
+| Opção        | Descrição              | Ação                              |
+| ------------ | ---------------------- | --------------------------------- |
+| **CONTINUE** | Retoma de onde parou   | `loadSessionState()` → execute()  |
+| **REVIEW**   | Mostra o que foi feito | `getProgressSummary()` → pergunta |
+| **RESTART**  | Reinicia story atual   | reset story → execute() do início |
+| **DISCARD**  | Arquiva sessão         | `discard()` → DECISION TREE       |
 
 ---
 
 ### 4. DECISION TREE
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `decision_tree` |
-| **Tipo** | Script determinístico (NÃO LLM) |
-| **Módulo** | `bob-orchestrator.js` |
+| Atributo    | Valor                           |
+| ----------- | ------------------------------- |
+| **Step ID** | `decision_tree`                 |
+| **Tipo**    | Script determinístico (NÃO LLM) |
+| **Módulo**  | `bob-orchestrator.js`           |
 
 #### Árvore de Decisão
 
@@ -385,12 +385,12 @@ flowchart TB
 
 ### 5. PATH A: ONBOARDING
 
-| Atributo | Valor |
-|----------|-------|
-| **Condição** | Config não resolvido |
-| **Duração** | 10-15 min |
-| **Story Epic 12** | 12.1, 12.9 |
-| **Interativo** | Sim |
+| Atributo          | Valor                |
+| ----------------- | -------------------- |
+| **Condição**      | Config não resolvido |
+| **Duração**       | 10-15 min            |
+| **Story Epic 12** | 12.1, 12.9           |
+| **Interativo**    | Sim                  |
 
 #### Processo
 
@@ -422,6 +422,7 @@ npx @synkra/aios-install
 ```
 
 O instalador:
+
 - Detecta OS (macOS, Windows/WSL, Linux)
 - Verifica dependências (Node ≥18, Git, Docker, gh)
 - Pergunta perfil
@@ -433,12 +434,12 @@ O instalador:
 
 ### 6. PATH B: BROWNFIELD DISCOVERY
 
-| Atributo | Valor |
-|----------|-------|
-| **Condição** | Projeto existente SEM docs AIOS |
-| **Duração** | 2-4 horas |
-| **Story Epic 12** | 12.8 |
-| **Módulo** | `terminal-spawner.js` |
+| Atributo          | Valor                           |
+| ----------------- | ------------------------------- |
+| **Condição**      | Projeto existente SEM docs AIOS |
+| **Duração**       | 2-4 horas                       |
+| **Story Epic 12** | 12.8                            |
+| **Módulo**        | `terminal-spawner.js`           |
 
 #### Diagrama de Sequência
 
@@ -489,20 +490,20 @@ sequenceDiagram
 
 ### 7. PATH C: ENHANCEMENT WORKFLOW
 
-| Atributo | Valor |
-|----------|-------|
-| **Condição** | Projeto AIOS com docs existentes |
-| **Story Epic 12** | 12.3 |
-| **Módulo** | `executor-assignment.js` |
+| Atributo          | Valor                            |
+| ----------------- | -------------------------------- |
+| **Condição**      | Projeto AIOS com docs existentes |
+| **Story Epic 12** | 12.3                             |
+| **Módulo**        | `executor-assignment.js`         |
 
 #### Classificação do Pedido
 
-| Tipo | Workflow | PRD Necessário |
-|------|----------|----------------|
+| Tipo          | Workflow             | PRD Necessário  |
+| ------------- | -------------------- | --------------- |
 | `new_feature` | Enhancement completo | Sim (se grande) |
-| `bug_fix` | Bug Fix Flow | Não |
-| `refactoring` | Refactoring Flow | Não |
-| `tech_debt` | Tech Debt Flow | Não |
+| `bug_fix`     | Bug Fix Flow         | Não             |
+| `refactoring` | Refactoring Flow     | Não             |
+| `tech_debt`   | Tech Debt Flow       | Não             |
 
 #### Diagrama do Enhancement
 
@@ -537,22 +538,22 @@ flowchart TB
 
 Dentro do Epic, cada story recebe:
 
-| Campo | Descrição | Exemplo |
-|-------|-----------|---------|
-| `executor` | Agente que implementa | `@dev`, `@data-engineer` |
-| `quality_gate` | Agente que revisa (≠ executor) | `@architect`, `@dev` |
-| `quality_gate_tools` | Ferramentas do QG | `[code_review, arch_review]` |
+| Campo                | Descrição                      | Exemplo                      |
+| -------------------- | ------------------------------ | ---------------------------- |
+| `executor`           | Agente que implementa          | `@dev`, `@data-engineer`     |
+| `quality_gate`       | Agente que revisa (≠ executor) | `@architect`, `@dev`         |
+| `quality_gate_tools` | Ferramentas do QG              | `[code_review, arch_review]` |
 
 ---
 
 ### 7b. PATH D: GREENFIELD WORKFLOW
 
-| Atributo | Valor |
-|----------|-------|
-| **Condição** | Projeto novo (sem `package.json`, `.git`, `docs/`) |
-| **Story Epic 12** | 12.13 |
-| **Módulo** | `greenfield-handler.js` |
-| **Workflow** | `greenfield-fullstack.yaml` |
+| Atributo          | Valor                                              |
+| ----------------- | -------------------------------------------------- |
+| **Condição**      | Projeto novo (sem `package.json`, `.git`, `docs/`) |
+| **Story Epic 12** | 12.13                                              |
+| **Módulo**        | `greenfield-handler.js`                            |
+| **Workflow**      | `greenfield-fullstack.yaml`                        |
 
 #### Diagrama do Greenfield
 
@@ -593,13 +594,13 @@ flowchart TB
 
 #### Sequência de Agentes (Phase 1)
 
-| Ordem | Agente | Task | Output |
-|-------|--------|------|--------|
-| 1 | @analyst | market-research | `docs/research/market-analysis.md` |
-| 2 | @pm | create-prd | `docs/prd/PRD.md` |
-| 3 | @ux-design-expert | user-journeys | `docs/ux/user-journeys.md` |
-| 4 | @architect | create-full-stack-architecture | `docs/architecture/architecture.md` |
-| 5 | @po | validate-architecture | Aprovação |
+| Ordem | Agente            | Task                           | Output                              |
+| ----- | ----------------- | ------------------------------ | ----------------------------------- |
+| 1     | @analyst          | market-research                | `docs/research/market-analysis.md`  |
+| 2     | @pm               | create-prd                     | `docs/prd/PRD.md`                   |
+| 3     | @ux-design-expert | user-journeys                  | `docs/ux/user-journeys.md`          |
+| 4     | @architect        | create-full-stack-architecture | `docs/architecture/architecture.md` |
+| 5     | @po               | validate-architecture          | Aprovação                           |
 
 #### Surface Decisions
 
@@ -612,12 +613,12 @@ flowchart TB
 
 ### 8. DEVELOPMENT CYCLE
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `development_cycle` |
-| **Story Epic 12** | 12.3 |
-| **Módulo** | `workflow-executor.js` |
-| **Repetição** | Uma vez por story |
+| Atributo          | Valor                  |
+| ----------------- | ---------------------- |
+| **Step ID**       | `development_cycle`    |
+| **Story Epic 12** | 12.3                   |
+| **Módulo**        | `workflow-executor.js` |
+| **Repetição**     | Uma vez por story      |
 
 #### Visão Geral das Fases
 
@@ -641,10 +642,10 @@ flowchart LR
 
 ### 8.1 PHASE 1: VALIDATION
 
-| Atributo | Valor |
-|----------|-------|
-| **Agente** | @po (Pax) |
-| **Timeout** | 10 min |
+| Atributo          | Valor                                |
+| ----------------- | ------------------------------------ |
+| **Agente**        | @po (Pax)                            |
+| **Timeout**       | 10 min                               |
 | **Error Handler** | `reject_with_feedback` → volta ao SM |
 
 #### Checklist de Validação
@@ -682,17 +683,19 @@ flowchart LR
 
 **Níveis de Compressão:**
 
-| Nível | Campos | Aplica-se a | Tokens |
-|-------|--------|-------------|--------|
-| `full_detail` | id, title, executor, quality_gate, status, acceptance_criteria, files_modified, dev_notes | N-3 to N-1 | ≤600/story |
-| `metadata_plus_files` | id, title, executor, status, files_modified | N-6 to N-4 | ~200/story |
-| `metadata_only` | id, executor, status | 1 to N-7 | ~50/story |
+| Nível                 | Campos                                                                                    | Aplica-se a | Tokens     |
+| --------------------- | ----------------------------------------------------------------------------------------- | ----------- | ---------- |
+| `full_detail`         | id, title, executor, quality_gate, status, acceptance_criteria, files_modified, dev_notes | N-3 to N-1  | ≤600/story |
+| `metadata_plus_files` | id, title, executor, status, files_modified                                               | N-6 to N-4  | ~200/story |
+| `metadata_only`       | id, executor, status                                                                      | 1 to N-7    | ~50/story  |
 
 **Exceções (override para `metadata_plus_files`):**
+
 - Story tocou arquivos que Story N vai modificar (file overlap)
 - Story do mesmo executor que Story N
 
 **Cascata de Compressão (se exceder 8000 tokens):**
+
 1. `metadata_only` nas stories mais antigas
 2. Remover `files_modified` das médias
 3. Truncar `dev_notes` das recentes
@@ -702,11 +705,11 @@ flowchart LR
 
 ### 8.2 PHASE 2: DEVELOPMENT
 
-| Atributo | Valor |
-|----------|-------|
-| **Agente** | `${story.executor}` (dinâmico) |
-| **Timeout** | 2 horas |
-| **Módulo** | `terminal-spawner.js` |
+| Atributo          | Valor                             |
+| ----------------- | --------------------------------- |
+| **Agente**        | `${story.executor}` (dinâmico)    |
+| **Timeout**       | 2 horas                           |
+| **Módulo**        | `terminal-spawner.js`             |
 | **Error Handler** | `return_to_po` (max 3 tentativas) |
 
 #### Surface Check Antes de Spawnar
@@ -715,8 +718,8 @@ flowchart LR
 surfaceChecker.shouldSurface({
   action_type: 'spawn_agent',
   estimated_cost: calculado,
-  risk_level: calculado
-})
+  risk_level: calculado,
+});
 ```
 
 Se `should_surface: true` → Bob interrompe e mostra ao usuário.
@@ -747,12 +750,12 @@ flowchart TB
 
 ### 8.3 PHASE 3: SELF-HEALING
 
-| Atributo | Valor |
-|----------|-------|
-| **Agente** | @dev |
-| **Timeout** | 30 min |
-| **Condição** | `coderabbit_integration.enabled == true` |
-| **Max Iterations** | 3 |
+| Atributo           | Valor                                    |
+| ------------------ | ---------------------------------------- |
+| **Agente**         | @dev                                     |
+| **Timeout**        | 30 min                                   |
+| **Condição**       | `coderabbit_integration.enabled == true` |
+| **Max Iterations** | 3                                        |
 
 #### Fluxo Self-Healing
 
@@ -776,19 +779,19 @@ flowchart TB
 
 ### 8.4 PHASE 4: QUALITY GATE
 
-| Atributo | Valor |
-|----------|-------|
-| **Agente** | `${story.quality_gate}` (sempre ≠ executor) |
-| **Timeout** | 30 min |
-| **Error Handler** | `return_to_development` (max 3 tentativas) |
+| Atributo          | Valor                                       |
+| ----------------- | ------------------------------------------- |
+| **Agente**        | `${story.quality_gate}` (sempre ≠ executor) |
+| **Timeout**       | 30 min                                      |
+| **Error Handler** | `return_to_development` (max 3 tentativas)  |
 
 #### Regra de Assignment
 
-| Executor | Quality Gate |
-|----------|--------------|
-| @dev | @architect |
-| @data-engineer | @dev |
-| @devops | @architect |
+| Executor       | Quality Gate |
+| -------------- | ------------ |
+| @dev           | @architect   |
+| @data-engineer | @dev         |
+| @devops        | @architect   |
 
 #### Checklist do Reviewer
 
@@ -799,9 +802,9 @@ flowchart TB
 
 #### Resultado
 
-| Decisão | Ação |
-|---------|------|
-| **APPROVED** | → Phase 5 |
+| Decisão      | Ação                         |
+| ------------ | ---------------------------- |
+| **APPROVED** | → Phase 5                    |
 | **REJECTED** | → volta Phase 2 com feedback |
 
 Se 3 falhas → SURFACE: Bob pede ajuda humana.
@@ -810,10 +813,10 @@ Se 3 falhas → SURFACE: Bob pede ajuda humana.
 
 ### 8.5 PHASE 5: PUSH
 
-| Atributo | Valor |
-|----------|-------|
-| **Agente** | @devops (Gage) |
-| **Timeout** | 10 min |
+| Atributo    | Valor                                  |
+| ----------- | -------------------------------------- |
+| **Agente**  | @devops (Gage)                         |
+| **Timeout** | 10 min                                 |
 | **Surface** | Obrigatório (C005: destructive_action) |
 
 #### Processo
@@ -841,13 +844,13 @@ Bob: "Vou fazer push da Story 7.4 para main. Confirma?"
 
 ### 8.6 PHASE 6: CHECKPOINT
 
-| Atributo | Valor |
-|----------|-------|
-| **Agente** | @po |
-| **Timeout** | 30 min |
-| **Elicit** | **SEMPRE** (humano decide) |
+| Atributo    | Valor                      |
+| ----------- | -------------------------- |
+| **Agente**  | @po                        |
+| **Timeout** | 30 min                     |
+| **Elicit**  | **SEMPRE** (humano decide) |
 
-#### *** AQUI O BOB SEMPRE PARA E PERGUNTA AO HUMANO ***
+#### **_ AQUI O BOB SEMPRE PARA E PERGUNTA AO HUMANO _**
 
 ```
 Bob: "✅ Story 7.4 completa! PR #42 criada.
@@ -864,12 +867,12 @@ Bob: "✅ Story 7.4 completa! PR #42 criada.
 
 #### Ações
 
-| Opção | Ação |
-|-------|------|
-| **GO** | `recordPhaseChange()` → próxima story → Phase 1 |
-| **PAUSE** | `recordPause()` → salva estado → "Até logo!" |
-| **REVIEW** | mostra changes, files, PRs → pergunta de novo |
-| **ABORT** | "Epic interrompido. Progresso salvo." → FIM |
+| Opção      | Ação                                            |
+| ---------- | ----------------------------------------------- |
+| **GO**     | `recordPhaseChange()` → próxima story → Phase 1 |
+| **PAUSE**  | `recordPause()` → salva estado → "Até logo!"    |
+| **REVIEW** | mostra changes, files, PRs → pergunta de novo   |
+| **ABORT**  | "Epic interrompido. Progresso salvo." → FIM     |
 
 ---
 
@@ -878,20 +881,20 @@ Bob: "✅ Story 7.4 completa! PR #42 criada.
 A cada decisão significativa, ANTES de agir:
 
 ```javascript
-surfaceChecker.shouldSurface(context)
+surfaceChecker.shouldSurface(context);
 ```
 
 ### Ordem de Avaliação (primeira match ganha)
 
-| Código | Critério | Ação |
-|--------|----------|------|
-| **C005** | Ação destrutiva? (delete, drop, force_push, rm_rf) | **SEMPRE confirma. NUNCA bypassável.** |
-| **C002** | Risco HIGH? | "🔴 Risco alto. GO/NO-GO?" |
-| **C004** | 2+ erros na mesma task? | "⏸ Encontrei problemas. Preciso de ajuda." |
-| **C001** | Custo > $5? | "💰 Isso vai consumir ~$X. Confirma?" |
-| **C006** | Escopo expandiu? | "📏 Escopo cresceu. Confirma expansão?" |
-| **C003** | 2+ opções válidas sem info? | "🔀 Encontrei N opções. Qual?" |
-| **C007** | Dependência externa? | "🔗 Preciso de [chave/acesso]. Pode fornecer?" |
+| Código   | Critério                                           | Ação                                           |
+| -------- | -------------------------------------------------- | ---------------------------------------------- |
+| **C005** | Ação destrutiva? (delete, drop, force_push, rm_rf) | **SEMPRE confirma. NUNCA bypassável.**         |
+| **C002** | Risco HIGH?                                        | "🔴 Risco alto. GO/NO-GO?"                     |
+| **C004** | 2+ erros na mesma task?                            | "⏸ Encontrei problemas. Preciso de ajuda."     |
+| **C001** | Custo > $5?                                        | "💰 Isso vai consumir ~$X. Confirma?"          |
+| **C006** | Escopo expandiu?                                   | "📏 Escopo cresceu. Confirma expansão?"        |
+| **C003** | 2+ opções válidas sem info?                        | "🔀 Encontrei N opções. Qual?"                 |
+| **C007** | Dependência externa?                               | "🔗 Preciso de [chave/acesso]. Pode fornecer?" |
 
 ---
 
@@ -909,6 +912,7 @@ surfaceChecker.shouldSurface(context)
 │ Terminals: 2 (@dev, @data-engineer)         │
 └─────────────────────────────────────────────┘
 ```
+
 ~8 linhas, refresh 1s
 
 #### Modo Detailed (educational_mode: true)
@@ -933,6 +937,7 @@ surfaceChecker.shouldSurface(context)
 │ Next: Quality Gate → @architect             │
 └─────────────────────────────────────────────┘
 ```
+
 ~20 linhas, refresh 1s
 
 ### Dashboard (OPCIONAL — consome bob-status.json + WebSocket)
@@ -949,32 +954,34 @@ flowchart LR
 
 #### Dashboard Components
 
-| Component | Descrição |
-|-----------|-----------|
-| `BobPipelinePanel` | Progress visual do pipeline |
-| `BobAgentActivity` | Terminais ativos com status |
-| `BobSurfaceAlert` | Alertas quando checkpoint pendente |
-| Kanban badges | Badge 🤖 quando Bob orquestra |
-| Status bar | "Bob: active \| @dev working \| Story 3/8" |
+| Component          | Descrição                                  |
+| ------------------ | ------------------------------------------ |
+| `BobPipelinePanel` | Progress visual do pipeline                |
+| `BobAgentActivity` | Terminais ativos com status                |
+| `BobSurfaceAlert`  | Alertas quando checkpoint pendente         |
+| Kanban badges      | Badge 🤖 quando Bob orquestra              |
+| Status bar         | "Bob: active \| @dev working \| Story 3/8" |
 
 ---
 
 ## Modo Educativo (Story 12.7)
 
-| Atributo | Valor |
-|----------|-------|
-| **Config** | `educational_mode: false` em L5 (default OFF) |
-| **Toggle Sessão** | Persiste em `session-state.yaml` (`overrides.educational_mode`) |
-| **Toggle Permanente** | Persiste em `user-config.yaml` (L5) |
+| Atributo              | Valor                                                           |
+| --------------------- | --------------------------------------------------------------- |
+| **Config**            | `educational_mode: false` em L5 (default OFF)                   |
+| **Toggle Sessão**     | Persiste em `session-state.yaml` (`overrides.educational_mode`) |
+| **Toggle Permanente** | Persiste em `user-config.yaml` (L5)                             |
 
 ### Comparação de Modos
 
 **Modo OFF (default):**
+
 ```
 Bob: "✅ Autenticação JWT implementada. 4 arquivos criados."
 ```
 
 **Modo ON:**
+
 ```
 Bob: "Vou criar autenticação JWT. Isso envolve:
 📚 Por que JWT? Stateless, escalável...
@@ -994,29 +1001,30 @@ Quer que eu execute?"
 
 ### Mapa de Persistência
 
-| Dado | Formato | Local | Ciclo de Vida | Consumidores |
-|------|---------|-------|---------------|--------------|
-| User Config (L5) | YAML | `~/.aios/user-config.yaml` | Permanente (cross-project) | Bob, greeting-builder |
-| Project Config (L2) | YAML | `.aios-core/project-config.yaml` | Permanente (per-project, git) | Bob, agents |
-| Session State | YAML | `docs/stories/.session-state.yaml` | Ativo → Arquivar após 30 dias | Bob, Epic Context |
-| Lock Files | YAML | `.aios/locks/*.lock` | TTL 300s + auto-cleanup | Bob |
-| Epic Context | In-memory | N/A (computed on-demand) | Efêmero | PO |
-| Bob Status | JSON | `.aios/dashboard/bob-status.json` | Atualizado a cada fase, stale após 5min | CLI Panel, Dashboard |
-| Snapshots | JSON | `.aios/snapshots/*.json` | Remover após 90 dias | Bob |
-| Timeline | JSON | `.aios/timeline/unified-timeline.json` | Permanente (append-only) | Dashboard |
+| Dado                | Formato   | Local                                  | Ciclo de Vida                           | Consumidores          |
+| ------------------- | --------- | -------------------------------------- | --------------------------------------- | --------------------- |
+| User Config (L5)    | YAML      | `~/.aios/user-config.yaml`             | Permanente (cross-project)              | Bob, greeting-builder |
+| Project Config (L2) | YAML      | `.aios-core/project-config.yaml`       | Permanente (per-project, git)           | Bob, agents           |
+| Session State       | YAML      | `docs/stories/.session-state.yaml`     | Ativo → Arquivar após 30 dias           | Bob, Epic Context     |
+| Lock Files          | YAML      | `.aios/locks/*.lock`                   | TTL 300s + auto-cleanup                 | Bob                   |
+| Epic Context        | In-memory | N/A (computed on-demand)               | Efêmero                                 | PO                    |
+| Bob Status          | JSON      | `.aios/dashboard/bob-status.json`      | Atualizado a cada fase, stale após 5min | CLI Panel, Dashboard  |
+| Snapshots           | JSON      | `.aios/snapshots/*.json`               | Remover após 90 dias                    | Bob                   |
+| Timeline            | JSON      | `.aios/timeline/unified-timeline.json` | Permanente (append-only)                | Dashboard             |
 
 ### Lock File Schema (Story 12.3)
 
 ```yaml
 # .aios/locks/<resource>.lock
-pid: 12345                    # PID do processo que adquiriu o lock
-owner: "bob-orchestrator"     # Identificador do módulo
-created_at: "2026-02-05T..."  # ISO timestamp de aquisição
-ttl_seconds: 300              # Auto-expire após 5 minutos (default)
-resource: "session-state"     # Recurso sendo protegido
+pid: 12345 # PID do processo que adquiriu o lock
+owner: 'bob-orchestrator' # Identificador do módulo
+created_at: '2026-02-05T...' # ISO timestamp de aquisição
+ttl_seconds: 300 # Auto-expire após 5 minutos (default)
+resource: 'session-state' # Recurso sendo protegido
 ```
 
 **Cleanup automático no startup:**
+
 - Lock files com TTL expirado → remover
 - Lock files de PIDs inexistentes → remover
 - Retry strategy: se lock ativo, esperar 2s e re-checar (max 3 tentativas)
@@ -1046,9 +1054,7 @@ resource: "session-state"     # Recurso sendo protegido
     "reason": "Story type: code_general → executor: dev",
     "started_at": "ISO8601"
   },
-  "active_terminals": [
-    { "agent": "dev", "pid": 12345, "task": "jwt-handler", "elapsed": "4m32s" }
-  ],
+  "active_terminals": [{ "agent": "dev", "pid": 12345, "task": "jwt-handler", "elapsed": "4m32s" }],
   "surface_decisions": [
     { "criteria": "C003", "action": "present_options", "timestamp": "ISO8601", "resolved": false }
   ],
@@ -1073,7 +1079,7 @@ type BobEvent =
   | { type: 'BobAgentSpawned'; agent: string; pid: number; task: string }
   | { type: 'BobAgentCompleted'; agent: string; pid: number; success: boolean; duration: number }
   | { type: 'BobSurfaceDecision'; criteria: string; action: string; context: object }
-  | { type: 'BobError'; phase: string; message: string; recoverable: boolean }
+  | { type: 'BobError'; phase: string; message: string; recoverable: boolean };
 ```
 
 ### Fluxo de Dados CLI + Dashboard
@@ -1123,6 +1129,7 @@ type BobEvent =
 ```
 
 **Princípio CLI First aplicado:**
+
 - CLI Panel (stdout) **SEMPRE funciona** — zero dependências externas
 - Dashboard é **consumidor opcional** — enriquece mas nunca é requisito
 - Bob escreve para ambos via mesma Observability Layer (single writer)
@@ -1134,29 +1141,30 @@ type BobEvent =
 
 ### Cross-Platform Validation
 
-| Plataforma | Terminal | Status |
-|------------|----------|--------|
-| macOS | Terminal.app, iTerm2 | ✅ |
-| Windows | WSL + Windows Terminal | ✅ |
-| Linux | gnome-terminal, xterm | ✅ |
-| CI/CD | GitHub Actions (ubuntu-latest) | ✅ (fallback inline) |
-| Docker | node:18-alpine | ✅ (fallback inline) |
+| Plataforma | Terminal                       | Status               |
+| ---------- | ------------------------------ | -------------------- |
+| macOS      | Terminal.app, iTerm2           | ✅                   |
+| Windows    | WSL + Windows Terminal         | ✅                   |
+| Linux      | gnome-terminal, xterm          | ✅                   |
+| CI/CD      | GitHub Actions (ubuntu-latest) | ✅ (fallback inline) |
+| Docker     | node:18-alpine                 | ✅ (fallback inline) |
 
 ### Fallback Strategy
 
 Se terminal spawn falha:
+
 1. Fallback para execução **inline** (child_process sem terminal visual)
 2. Degradação graceful com aviso ao usuário
 3. Output corretamente capturado e retornado ao Bob
 
 ### Ambientes que Precisam Fallback
 
-| Ambiente | Motivo | Fallback |
-|----------|--------|----------|
-| VS Code Integrated Terminal | Não suporta spawn externo | Inline |
-| SSH sessions | Sem display | Inline |
-| Docker containers | Sem GUI | Inline |
-| CI/CD pipelines | Headless | Inline |
+| Ambiente                    | Motivo                    | Fallback |
+| --------------------------- | ------------------------- | -------- |
+| VS Code Integrated Terminal | Não suporta spawn externo | Inline   |
+| SSH sessions                | Sem display               | Inline   |
+| Docker containers           | Sem GUI                   | Inline   |
+| CI/CD pipelines             | Headless                  | Inline   |
 
 ---
 
@@ -1164,12 +1172,12 @@ Se terminal spawn falha:
 
 ### GitHub Actions Workflows
 
-| Workflow | Trigger | Propósito |
-|----------|---------|-----------|
-| `bob-integration.yml` | PR para `.aios-core/core/` | Valida bob-orchestrator.js |
-| `npm-publish.yml` | Tag `v*.*.*` | Publica @synkra/aios-install |
-| `cross-platform.yml` | PR | Testa pm.sh em matrix |
-| `release.yml` | Release | Gera release notes |
+| Workflow              | Trigger                    | Propósito                    |
+| --------------------- | -------------------------- | ---------------------------- |
+| `bob-integration.yml` | PR para `.aios-core/core/` | Valida bob-orchestrator.js   |
+| `npm-publish.yml`     | Tag `v*.*.*`               | Publica @synkra/aios-install |
+| `cross-platform.yml`  | PR                         | Testa pm.sh em matrix        |
+| `release.yml`         | Release                    | Gera release notes           |
 
 ### Quality Gates (Required Status Checks)
 
@@ -1184,12 +1192,12 @@ Se terminal spawn falha:
 
 ## Critérios de Sucesso (PRD §14)
 
-| Critério | Teste | Meta |
-|----------|-------|------|
-| **Onboarding Zero-Friction** | Usuário novo instala via NPX e inicia projeto | < 15min |
-| **Ciclo de Dev Autônomo** | Epic de 5 stories executado | GO/PAUSE apenas entre stories |
-| **Qualidade de Código** | Stories passam no quality gate na 1ª tentativa | ≥70% |
-| **Proteção de Guardrails** | Usuário Modo Bob nunca vê | Merge conflict ou story inconsistente |
+| Critério                     | Teste                                          | Meta                                  |
+| ---------------------------- | ---------------------------------------------- | ------------------------------------- |
+| **Onboarding Zero-Friction** | Usuário novo instala via NPX e inicia projeto  | < 15min                               |
+| **Ciclo de Dev Autônomo**    | Epic de 5 stories executado                    | GO/PAUSE apenas entre stories         |
+| **Qualidade de Código**      | Stories passam no quality gate na 1ª tentativa | ≥70%                                  |
+| **Proteção de Guardrails**   | Usuário Modo Bob nunca vê                      | Merge conflict ou story inconsistente |
 
 ---
 
@@ -1215,16 +1223,16 @@ mindmap
 
 ### Perfil dos Agentes
 
-| Agente | ID | Arquétipo | Papel no Bob |
-|--------|----|-----------|--------------|
-| Morgan | `@pm` | Strategist | Bob Orchestrator (modo bob) |
-| Aria | `@architect` | Visionary | Análise estrutural, arquitetura |
-| River | `@sm` | Facilitator | Criação de stories |
-| Pax | `@po` | Balancer | Validação, checkpoints |
-| Dex | `@dev` | Builder | Implementação de código |
-| Dara | `@data-engineer` | Sage | Database, migrations |
-| Quinn | `@qa` | Guardian | Quality gates |
-| Gage | `@devops` | Operator | Push, PR, CI/CD |
+| Agente | ID               | Arquétipo   | Papel no Bob                    |
+| ------ | ---------------- | ----------- | ------------------------------- |
+| Morgan | `@pm`            | Strategist  | Bob Orchestrator (modo bob)     |
+| Aria   | `@architect`     | Visionary   | Análise estrutural, arquitetura |
+| River  | `@sm`            | Facilitator | Criação de stories              |
+| Pax    | `@po`            | Balancer    | Validação, checkpoints          |
+| Dex    | `@dev`           | Builder     | Implementação de código         |
+| Dara   | `@data-engineer` | Sage        | Database, migrations            |
+| Quinn  | `@qa`            | Guardian    | Quality gates                   |
+| Gage   | `@devops`        | Operator    | Push, PR, CI/CD                 |
 
 ---
 
@@ -1232,23 +1240,23 @@ mindmap
 
 ### Mapa de Tasks por Módulo
 
-| Etapa | Módulo(s) Epic 11 | Story Epic 12 | O que acontece |
-|-------|-------------------|---------------|----------------|
-| Startup | config-resolver (PRO-4) | 12.1, 12.2 | Carrega config L1→L5, determina modo |
-| Cleanup | session-state.js | 12.5 | Remove locks expirados, arquiva sessions |
-| Resume | session-state.js | 12.5 | Detecta crash ou pause, oferece opções |
-| Decision Tree | — | 12.3 | bob-orchestrator.js decide path |
-| Brownfield | terminal-spawner.js | 12.8 | Spawna 4 agentes em paralelo |
-| PRD/Epic | executor-assignment.js | 12.3 | Cada story recebe executor + QG |
-| Story Validation | — | 12.4 | PO valida com epic context (≤8000 tokens) |
-| Development | terminal-spawner.js | 12.3 | Executor roda em terminal limpo |
-| Self-Healing | workflow-executor.js | 12.3 | CodeRabbit scan, filter CRITICAL/HIGH |
-| Quality Gate | terminal-spawner.js | 12.3 | Reviewer ≠ executor, terminal separado |
-| Push | terminal-spawner.js | 12.3 | @devops faz pre-checks + push + PR |
-| Checkpoint | surface-checker.js | 12.3 | SEMPRE para. GO/PAUSE/REVIEW/ABORT |
-| Observability CLI | observability-panel.js | 12.6 | panel-renderer.js → stdout ANSI |
-| Dashboard Bridge | — | 12.6 | bob-status.json + WebSocket events |
-| Dashboard UI | — | 12.12 | BobPipelinePanel + BobAgentActivity |
+| Etapa             | Módulo(s) Epic 11       | Story Epic 12 | O que acontece                            |
+| ----------------- | ----------------------- | ------------- | ----------------------------------------- |
+| Startup           | config-resolver (PRO-4) | 12.1, 12.2    | Carrega config L1→L5, determina modo      |
+| Cleanup           | session-state.js        | 12.5          | Remove locks expirados, arquiva sessions  |
+| Resume            | session-state.js        | 12.5          | Detecta crash ou pause, oferece opções    |
+| Decision Tree     | —                       | 12.3          | bob-orchestrator.js decide path           |
+| Brownfield        | terminal-spawner.js     | 12.8          | Spawna 4 agentes em paralelo              |
+| PRD/Epic          | executor-assignment.js  | 12.3          | Cada story recebe executor + QG           |
+| Story Validation  | —                       | 12.4          | PO valida com epic context (≤8000 tokens) |
+| Development       | terminal-spawner.js     | 12.3          | Executor roda em terminal limpo           |
+| Self-Healing      | workflow-executor.js    | 12.3          | CodeRabbit scan, filter CRITICAL/HIGH     |
+| Quality Gate      | terminal-spawner.js     | 12.3          | Reviewer ≠ executor, terminal separado    |
+| Push              | terminal-spawner.js     | 12.3          | @devops faz pre-checks + push + PR        |
+| Checkpoint        | surface-checker.js      | 12.3          | SEMPRE para. GO/PAUSE/REVIEW/ABORT        |
+| Observability CLI | observability-panel.js  | 12.6          | panel-renderer.js → stdout ANSI           |
+| Dashboard Bridge  | —                       | 12.6          | bob-status.json + WebSocket events        |
+| Dashboard UI      | —                       | 12.12         | BobPipelinePanel + BobAgentActivity       |
 
 ---
 
@@ -1262,23 +1270,23 @@ mindmap
 
 ### Módulos Necessários (Epic 11)
 
-| Módulo | Story | Propósito |
-|--------|-------|-----------|
-| `config-resolver.js` | PRO-4 | Config hierarchy L1→L5 |
-| `session-state.js` | 11.5 | Persistência de sessão |
-| `surface-checker.js` | 11.3 | Critérios de interrupção |
-| `workflow-executor.js` | 11.4 | Execução de workflows |
-| `terminal-spawner.js` | 11.2 | Spawn de agentes |
-| `observability-panel.js` | 11.6 | CLI rendering |
+| Módulo                   | Story | Propósito                |
+| ------------------------ | ----- | ------------------------ |
+| `config-resolver.js`     | PRO-4 | Config hierarchy L1→L5   |
+| `session-state.js`       | 11.5  | Persistência de sessão   |
+| `surface-checker.js`     | 11.3  | Critérios de interrupção |
+| `workflow-executor.js`   | 11.4  | Execução de workflows    |
+| `terminal-spawner.js`    | 11.2  | Spawn de agentes         |
+| `observability-panel.js` | 11.6  | CLI rendering            |
 
 ### Ferramentas Integradas
 
-| Ferramenta | Agente | Propósito |
-|------------|--------|-----------|
-| `git` | @devops | Push, PR |
+| Ferramenta   | Agente    | Propósito            |
+| ------------ | --------- | -------------------- |
+| `git`        | @devops   | Push, PR             |
 | `coderabbit` | @dev, @qa | Self-healing, review |
-| `context7` | @analyst | Docs de libs |
-| `exa` | @analyst | Research |
+| `context7`   | @analyst  | Docs de libs         |
+| `exa`        | @analyst  | Research             |
 
 ---
 
@@ -1286,22 +1294,22 @@ mindmap
 
 ### Entradas do Workflow
 
-| Entrada | Tipo | Fonte | Descrição |
-|---------|------|-------|-----------|
-| User request | string | Usuário | Descrição do que quer fazer |
-| Config | object | resolveConfig() | Configurações do projeto |
-| Session state | file | .session-state.yaml | Estado da sessão anterior |
-| Epic context | file | docs/stories/ | Contexto do epic atual |
+| Entrada       | Tipo   | Fonte               | Descrição                   |
+| ------------- | ------ | ------------------- | --------------------------- |
+| User request  | string | Usuário             | Descrição do que quer fazer |
+| Config        | object | resolveConfig()     | Configurações do projeto    |
+| Session state | file   | .session-state.yaml | Estado da sessão anterior   |
+| Epic context  | file   | docs/stories/       | Contexto do epic atual      |
 
 ### Saídas do Workflow
 
-| Saída | Tipo | Destino | Descrição |
-|-------|------|---------|-----------|
-| Story files | .md | docs/stories/ | Stories implementadas |
-| Code | files | src/ | Código implementado |
-| PRs | GitHub | remote | Pull requests criadas |
-| Session state | .yaml | .aios/ | Estado para resume |
-| bob-status.json | .json | .aios/dashboard/ | Estado para dashboard |
+| Saída           | Tipo   | Destino          | Descrição             |
+| --------------- | ------ | ---------------- | --------------------- |
+| Story files     | .md    | docs/stories/    | Stories implementadas |
+| Code            | files  | src/             | Código implementado   |
+| PRs             | GitHub | remote           | Pull requests criadas |
+| Session state   | .yaml  | .aios/           | Estado para resume    |
+| bob-status.json | .json  | .aios/dashboard/ | Estado para dashboard |
 
 ---
 
@@ -1321,21 +1329,21 @@ flowchart TB
 
 ### Decision Point 2: Precisa de PRD?
 
-| Tipo | PRD Necessário |
-|------|----------------|
-| Feature grande | Sim |
-| Bug fix | Não |
-| Refactor | Não |
-| Tech debt | Não |
+| Tipo           | PRD Necessário |
+| -------------- | -------------- |
+| Feature grande | Sim            |
+| Bug fix        | Não            |
+| Refactor       | Não            |
+| Tech debt      | Não            |
 
 ### Decision Point 3: Checkpoint
 
-| Opção | Próxima Ação |
-|-------|--------------|
-| GO | Próxima story |
-| PAUSE | Salvar e sair |
+| Opção  | Próxima Ação        |
+| ------ | ------------------- |
+| GO     | Próxima story       |
+| PAUSE  | Salvar e sair       |
 | REVIEW | Mostrar e perguntar |
-| ABORT | Encerrar epic |
+| ABORT  | Encerrar epic       |
 
 ---
 
@@ -1346,10 +1354,12 @@ flowchart TB
 **Sintoma:** `@pm` ativa sem modo Bob
 
 **Causas:**
+
 - `user_profile` não é `bob` no config
 - Config não resolvido corretamente
 
 **Solução:**
+
 ```yaml
 # .aios/config.yaml
 user_profile: bob
@@ -1362,10 +1372,12 @@ user_profile: bob
 **Sintoma:** Não consegue retomar sessão anterior
 
 **Causas:**
+
 - `.session-state.yaml` corrompido
 - PID de terminal morto
 
 **Solução:**
+
 ```bash
 # Remover session state
 rm .aios/.session-state.yaml
@@ -1381,10 +1393,12 @@ rm .aios/.session-state.yaml
 **Sintoma:** Agente não spawna em terminal separado
 
 **Causas:**
+
 - `terminal-spawner.js` não encontrado
 - Timeout muito curto
 
 **Solução:**
+
 1. Verificar Epic 11.2 implementado
 2. Aumentar timeout no config
 
@@ -1395,10 +1409,12 @@ rm .aios/.session-state.yaml
 **Sintoma:** QG rejeita repetidamente
 
 **Causas:**
+
 - Issues não corrigidos
 - Feedback não claro
 
 **Solução:**
+
 1. Revisar feedback do QG
 2. Se 3 falhas → SURFACE ativado
 3. Humano intervém
@@ -1410,10 +1426,12 @@ rm .aios/.session-state.yaml
 **Sintoma:** Dashboard mostra estado desatualizado
 
 **Causas:**
+
 - `bob-status.json` não escrito
 - WebSocket não conectado
 
 **Solução:**
+
 1. Verificar `.aios/dashboard/bob-status.json` existe
 2. Verificar WebSocket `:4001` ativo
 3. **Lembrar:** CLI SEMPRE funciona (CLI First)
@@ -1424,30 +1442,30 @@ rm .aios/.session-state.yaml
 
 ### Arquivos do Workflow
 
-| Arquivo | Localização |
-|---------|-------------|
-| Bob Orchestrator | `.aios-core/core/orchestration/bob-orchestrator.js` |
-| Config Resolver | `.aios-core/core/orchestration/config-resolver.js` |
-| Session State | `.aios-core/core/orchestration/session-state.js` |
-| Surface Checker | `.aios-core/core/orchestration/surface-checker.js` |
-| Workflow Executor | `.aios-core/core/orchestration/workflow-executor.js` |
-| Terminal Spawner | `.aios-core/core/orchestration/terminal-spawner.js` |
+| Arquivo             | Localização                                            |
+| ------------------- | ------------------------------------------------------ |
+| Bob Orchestrator    | `.aios-core/core/orchestration/bob-orchestrator.js`    |
+| Config Resolver     | `.aios-core/core/orchestration/config-resolver.js`     |
+| Session State       | `.aios-core/core/orchestration/session-state.js`       |
+| Surface Checker     | `.aios-core/core/orchestration/surface-checker.js`     |
+| Workflow Executor   | `.aios-core/core/orchestration/workflow-executor.js`   |
+| Terminal Spawner    | `.aios-core/core/orchestration/terminal-spawner.js`    |
 | Observability Panel | `.aios-core/core/orchestration/observability-panel.js` |
-| Panel Renderer | `.aios-core/core/orchestration/panel-renderer.js` |
+| Panel Renderer      | `.aios-core/core/orchestration/panel-renderer.js`      |
 | Executor Assignment | `.aios-core/core/orchestration/executor-assignment.js` |
 
 ### Agentes
 
-| Agente | Localização |
-|--------|-------------|
-| @pm (Morgan) | `.aios-core/development/agents/pm.md` |
-| @architect (Aria) | `.aios-core/development/agents/architect.md` |
-| @sm (River) | `.aios-core/development/agents/sm.md` |
-| @po (Pax) | `.aios-core/development/agents/po.md` |
-| @dev (Dex) | `.aios-core/development/agents/dev.md` |
+| Agente                | Localização                                      |
+| --------------------- | ------------------------------------------------ |
+| @pm (Morgan)          | `.aios-core/development/agents/pm.md`            |
+| @architect (Aria)     | `.aios-core/development/agents/architect.md`     |
+| @sm (River)           | `.aios-core/development/agents/sm.md`            |
+| @po (Pax)             | `.aios-core/development/agents/po.md`            |
+| @dev (Dex)            | `.aios-core/development/agents/dev.md`           |
 | @data-engineer (Dara) | `.aios-core/development/agents/data-engineer.md` |
-| @qa (Quinn) | `.aios-core/development/agents/qa.md` |
-| @devops (Gage) | `.aios-core/development/agents/devops.md` |
+| @qa (Quinn)           | `.aios-core/development/agents/qa.md`            |
+| @devops (Gage)        | `.aios-core/development/agents/devops.md`        |
 
 ### Documentação Relacionada
 
@@ -1458,21 +1476,21 @@ rm .aios/.session-state.yaml
 
 ### Stories Relacionadas (Epic 12)
 
-| Story | Nome | Prioridade | Descrição |
-|-------|------|------------|-----------|
-| 12.1 | User Profile System | P1-HIGH | L5 User layer, toggle-profile |
-| 12.2 | Core Config + Project Config | P1-HIGH | L1-L5 hierarchy, JSON Schema validation |
-| 12.3 | Bob Orchestration Logic | P0-CRITICAL | Entry point, Decision Tree, integração Epic 11 |
-| 12.4 | Epic Context Accumulator | P0-CRITICAL | Sumarização progressiva, token limits |
-| 12.5 | Session State Integration | P1-HIGH | Crash detection, resume, data lifecycle cleanup |
-| 12.6 | Observability Panel + Dashboard Bridge | P1-HIGH | panel-renderer.js, bob-status.json, WebSocket |
-| 12.7 | Modo Educativo | P2-MEDIUM | Flag educational_mode, toggle |
-| 12.8 | Brownfield Discovery | P2-MEDIUM | Detecção, análise paralela |
-| 12.9 | NPX Installer | P2-MEDIUM | npx @synkra/aios-install |
-| 12.10 | Terminal Spawning E2E | P0-CRITICAL | Cross-platform, fallback inline |
-| 12.11 | CI/CD Pipeline | P1-HIGH | GitHub Actions, quality gates |
-| 12.12 | Dashboard Bob Panel | P1-HIGH | bob-store.ts, componentes UI |
-| 12.13 | Greenfield Workflow | P1-HIGH | Pipeline completo: idea → code |
+| Story | Nome                                   | Prioridade  | Descrição                                       |
+| ----- | -------------------------------------- | ----------- | ----------------------------------------------- |
+| 12.1  | User Profile System                    | P1-HIGH     | L5 User layer, toggle-profile                   |
+| 12.2  | Core Config + Project Config           | P1-HIGH     | L1-L5 hierarchy, JSON Schema validation         |
+| 12.3  | Bob Orchestration Logic                | P0-CRITICAL | Entry point, Decision Tree, integração Epic 11  |
+| 12.4  | Epic Context Accumulator               | P0-CRITICAL | Sumarização progressiva, token limits           |
+| 12.5  | Session State Integration              | P1-HIGH     | Crash detection, resume, data lifecycle cleanup |
+| 12.6  | Observability Panel + Dashboard Bridge | P1-HIGH     | panel-renderer.js, bob-status.json, WebSocket   |
+| 12.7  | Modo Educativo                         | P2-MEDIUM   | Flag educational_mode, toggle                   |
+| 12.8  | Brownfield Discovery                   | P2-MEDIUM   | Detecção, análise paralela                      |
+| 12.9  | NPX Installer                          | P2-MEDIUM   | npx @synkra/aios-install                        |
+| 12.10 | Terminal Spawning E2E                  | P0-CRITICAL | Cross-platform, fallback inline                 |
+| 12.11 | CI/CD Pipeline                         | P1-HIGH     | GitHub Actions, quality gates                   |
+| 12.12 | Dashboard Bob Panel                    | P1-HIGH     | bob-store.ts, componentes UI                    |
+| 12.13 | Greenfield Workflow                    | P1-HIGH     | Pipeline completo: idea → code                  |
 
 ### Execution Phases (Ordem Recomendada)
 
@@ -1507,30 +1525,30 @@ gantt
 
 ## Risk Assessment
 
-| Risco | Probabilidade | Impacto | Mitigação |
-|-------|---------------|---------|-----------|
-| Terminal spawning falha em alguns OSs | High | High | Fallback para execução inline |
-| Epic Context consome muitos tokens | Medium | Medium | Sumarização progressiva com hard cap 600 tokens/story |
-| User Profile complica UX | Low | Medium | Default para "bob", fácil trocar |
-| NPX installer falha em máquinas específicas | Medium | High | Community QA testing |
-| Config hierarchy conflict | High | High | Estender config-resolver.js com L5 User layer |
-| Lock files órfãos | Medium | Medium | Schema formal com TTL 300s + auto-cleanup |
-| Dashboard desacoplado | Medium | High | Single source of truth: bob-status.json |
-| WebSocket indisponível | High | Low | Fallback: file → polling → SSE (3 camadas) |
-| Greenfield pipeline longo | Medium | Medium | Retry/Skip/Abort por agente + session resume |
+| Risco                                       | Probabilidade | Impacto | Mitigação                                             |
+| ------------------------------------------- | ------------- | ------- | ----------------------------------------------------- |
+| Terminal spawning falha em alguns OSs       | High          | High    | Fallback para execução inline                         |
+| Epic Context consome muitos tokens          | Medium        | Medium  | Sumarização progressiva com hard cap 600 tokens/story |
+| User Profile complica UX                    | Low           | Medium  | Default para "bob", fácil trocar                      |
+| NPX installer falha em máquinas específicas | Medium        | High    | Community QA testing                                  |
+| Config hierarchy conflict                   | High          | High    | Estender config-resolver.js com L5 User layer         |
+| Lock files órfãos                           | Medium        | Medium  | Schema formal com TTL 300s + auto-cleanup             |
+| Dashboard desacoplado                       | Medium        | High    | Single source of truth: bob-status.json               |
+| WebSocket indisponível                      | High          | Low     | Fallback: file → polling → SSE (3 camadas)            |
+| Greenfield pipeline longo                   | Medium        | Medium  | Retry/Skip/Abort por agente + session resume          |
 
 ---
 
 ## Changelog
 
-| Versão | Data | Mudanças |
-|--------|------|----------|
-| 1.0 | 2026-02-05 | Versão inicial do workflow |
-| 1.1 | 2026-02-05 | Completado com todas as 13 stories do Epic 12: Config Hierarchy L1-L5, Epic Context Accumulator, Greenfield Workflow, Modo Educativo, Data Architecture, Schemas (bob-status.json, lock files), Terminal Spawning E2E, CI/CD Pipeline, Critérios de Sucesso, Risk Assessment |
+| Versão | Data       | Mudanças                                                                                                                                                                                                                                                                     |
+| ------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.0    | 2026-02-05 | Versão inicial do workflow                                                                                                                                                                                                                                                   |
+| 1.1    | 2026-02-05 | Completado com todas as 13 stories do Epic 12: Config Hierarchy L1-L5, Epic Context Accumulator, Greenfield Workflow, Modo Educativo, Data Architecture, Schemas (bob-status.json, lock files), Terminal Spawning E2E, CI/CD Pipeline, Critérios de Sucesso, Risk Assessment |
 
 ---
 
-*Documentação gerada por @architect (Aria)*
-*Workflow Version: 1.1*
-*CLI First | Observability Second | UI Third*
-*Baseado em: Epic 12 - Bob Full Integration v1.6*
+_Documentação gerada por @architect (Aria)_
+_Workflow Version: 1.1_
+_CLI First | Observability Second | UI Third_
+_Baseado em: Epic 12 - Bob Full Integration v1.6_

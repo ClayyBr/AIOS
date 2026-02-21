@@ -4,7 +4,9 @@
  * @story 2.10 - Quality Gate Manager
  */
 
-const { QualityGateManager } = require('../../../.aios-core/core/quality-gates/quality-gate-manager');
+const {
+  QualityGateManager,
+} = require('../../../.aios-core/core/quality-gates/quality-gate-manager');
 
 describe('QualityGateManager', () => {
   let manager;
@@ -156,18 +158,22 @@ describe('QualityGateManager', () => {
     });
 
     it('should return layer2-blocked when layer2 failed', () => {
-      expect(manager.determineOverallStatus({
-        layer1: { pass: true },
-        layer2: { pass: false },
-      })).toBe('layer2-blocked');
+      expect(
+        manager.determineOverallStatus({
+          layer1: { pass: true },
+          layer2: { pass: false },
+        })
+      ).toBe('layer2-blocked');
     });
 
     it('should return layer3-pending when awaiting human review', () => {
-      expect(manager.determineOverallStatus({
-        layer1: { pass: true },
-        layer2: { pass: true },
-        layer3: { pass: true },
-      })).toBe('layer3-pending');
+      expect(
+        manager.determineOverallStatus({
+          layer1: { pass: true },
+          layer2: { pass: true },
+          layer3: { pass: true },
+        })
+      ).toBe('layer3-pending');
     });
   });
 });

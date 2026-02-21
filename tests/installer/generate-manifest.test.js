@@ -109,7 +109,7 @@ describe('generate-install-manifest', () => {
 
     it('should return absolute paths', () => {
       const files = scanDirectory(tempDir, tempDir);
-      files.forEach(file => {
+      files.forEach((file) => {
         expect(path.isAbsolute(file)).toBe(true);
       });
     });
@@ -125,7 +125,7 @@ describe('generate-install-manifest', () => {
       fs.writeFileSync(path.join(nodeModulesDir, 'package.json'), '{}');
 
       const files = scanDirectory(tempDir, tempDir);
-      const hasNodeModules = files.some(f => f.includes('node_modules'));
+      const hasNodeModules = files.some((f) => f.includes('node_modules'));
       expect(hasNodeModules).toBe(false);
 
       fs.removeSync(nodeModulesDir);
@@ -166,14 +166,14 @@ describe('generate-install-manifest', () => {
     it('should use forward slashes in paths', async () => {
       const manifest = await generateManifest();
 
-      manifest.files.forEach(file => {
+      manifest.files.forEach((file) => {
         expect(file.path).not.toContain('\\');
       });
     });
 
     it('should have files in consistent order', async () => {
       const manifest = await generateManifest();
-      const paths = manifest.files.map(f => f.path);
+      const paths = manifest.files.map((f) => f.path);
 
       // Verify there are no duplicates (consistent ordering requirement)
       const uniquePaths = new Set(paths);
@@ -181,7 +181,7 @@ describe('generate-install-manifest', () => {
 
       // Run twice and verify same order
       const manifest2 = await generateManifest();
-      const paths2 = manifest2.files.map(f => f.path);
+      const paths2 = manifest2.files.map((f) => f.path);
       expect(paths).toEqual(paths2);
     });
   });

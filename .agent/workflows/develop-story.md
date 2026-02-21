@@ -5,6 +5,7 @@ description: Fluxo completo de desenvolvimento de uma story AIOS — desde ativa
 # Develop Story — Workflow AIOS
 
 ## Pré-requisito
+
 - Ter uma story criada em `docs/stories/active/`
 
 ## Passos
@@ -35,6 +36,7 @@ description: Fluxo completo de desenvolvimento de uma story AIOS — desde ativa
    Diga `@devops` para fazer push (apenas devops tem autoridade de push)
 
 ## Referências
+
 - Agentes: `.antigravity/rules/agents/`
 - Templates de story: `.claude/templates/story-tmpl.yaml`
 - Constitution: `.aios-core/constitution.md`

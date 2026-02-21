@@ -8,7 +8,7 @@ services:
     image: ghcr.io/berriai/litellm:v1.55.10-stable
     container_name: aios-litellm-proxy
     ports:
-      - "4000:4000"
+      - '4000:4000'
     volumes:
       - ./config.yaml:/app/config.yaml:ro
     environment:
@@ -23,9 +23,9 @@ services:
 
       # Logging
       - LITELLM_LOG_LEVEL=${LITELLM_LOG_LEVEL:-INFO}
-    command: ["--config", "/app/config.yaml", "--port", "4000", "--host", "0.0.0.0"]
+    command: ['--config', '/app/config.yaml', '--port', '4000', '--host', '0.0.0.0']
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:4000/health']
       interval: 30s
       timeout: 10s
       retries: 3

@@ -164,6 +164,7 @@ git commit -m "chore: update pro submodule ref"
 ### Push Order
 
 Always push in this order:
+
 1. Push `pro/` changes first: `cd pro && git push`
 2. Push `aios-core` changes second: `cd .. && git push`
 
@@ -194,10 +195,10 @@ if (isProAvailable()) {
 
 ## CI/CD Behavior
 
-| Repository | Checkout | Tests | Publish |
-|------------|----------|-------|---------|
-| **aios-core** | Without submodules | Core-only (pro/ absent) | npm (excludes pro/) |
-| **aios-pro** | With aios-core cloned | Integration (pro/ symlinked) | GitHub Packages |
+| Repository    | Checkout              | Tests                        | Publish             |
+| ------------- | --------------------- | ---------------------------- | ------------------- |
+| **aios-core** | Without submodules    | Core-only (pro/ absent)      | npm (excludes pro/) |
+| **aios-pro**  | With aios-core cloned | Integration (pro/ symlinked) | GitHub Packages     |
 
 ---
 

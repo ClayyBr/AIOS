@@ -17,7 +17,9 @@ const {
 } = require('./execution-test-helpers');
 
 // Mock gotchas-memory (exists but exports object, not constructor directly)
-jest.mock('../../.aios-core/core/memory/gotchas-memory', () => { throw new Error('mocked'); });
+jest.mock('../../.aios-core/core/memory/gotchas-memory', () => {
+  throw new Error('mocked');
+});
 
 const { ContextInjector } = require('../../.aios-core/core/execution/context-injector');
 
@@ -159,8 +161,8 @@ describe('ContextInjector', () => {
       const ci = new ContextInjector({ rootPath: tmpDir });
       const task = { id: 't1', description: 'Update `src/utils.js` and `lib/helper.ts`' };
       const files = await ci.getRelevantFiles(task);
-      expect(files.some(f => f.path === 'src/utils.js')).toBe(true);
-      expect(files.some(f => f.path === 'lib/helper.ts')).toBe(true);
+      expect(files.some((f) => f.path === 'src/utils.js')).toBe(true);
+      expect(files.some((f) => f.path === 'lib/helper.ts')).toBe(true);
     });
 
     test('limits to 10 files', async () => {
@@ -296,7 +298,7 @@ describe('ContextInjector', () => {
     test('updateMetrics computes running average', () => {
       const ci = new ContextInjector();
       ci.updateMetrics('aaaa', 10); // size=4, time=10
-      ci.updateMetrics('bb', 20);   // size=2, time=20
+      ci.updateMetrics('bb', 20); // size=2, time=20
       expect(ci.metrics.injections).toBe(2);
       expect(ci.metrics.avgContextSize).toBe(3); // (4+2)/2
       expect(ci.metrics.avgInjectionTime).toBe(15); // (10+20)/2

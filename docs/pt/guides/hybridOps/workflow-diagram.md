@@ -12,12 +12,12 @@ HybridOps (Hybrid Operations) e uma metodologia para orquestrar a colaboracao en
 
 ### Principios Fundamentais
 
-| Principio                  | Descricao                                                                        |
-| -------------------------- | -------------------------------------------------------------------------------- |
-| **Execucao Hibrida**       | Tasks podem ser executadas por humanos, agents ou ambos em colaboracao           |
-| **Delegacao Progressiva**  | Comece com supervisao humana, delegue gradualmente aos agents conforme a confianca aumenta |
-| **Checkpoints de Qualidade** | Revisao humana em pontos de decisao criticos                                   |
-| **Handoff Contextual**     | Transferencia de contexto sem interrupcoes entre humano e agent                  |
+| Principio                    | Descricao                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------ |
+| **Execucao Hibrida**         | Tasks podem ser executadas por humanos, agents ou ambos em colaboracao                     |
+| **Delegacao Progressiva**    | Comece com supervisao humana, delegue gradualmente aos agents conforme a confianca aumenta |
+| **Checkpoints de Qualidade** | Revisao humana em pontos de decisao criticos                                               |
+| **Handoff Contextual**       | Transferencia de contexto sem interrupcoes entre humano e agent                            |
 
 ---
 
@@ -205,22 +205,22 @@ pie title Task Delegation Distribution
 
 ### Com Agents AIOS
 
-| Integracao     | Descricao                                                   |
-| -------------- | ----------------------------------------------------------- |
-| **@dev**       | Implementador principal para tasks de codificacao           |
-| **@qa**        | Execucao de testes e verificacao de qualidade               |
-| **@architect** | Revisao de design e orientacao tecnica                      |
-| **@pm**        | Acompanhamento de progresso e comunicacao com stakeholders  |
+| Integracao     | Descricao                                                  |
+| -------------- | ---------------------------------------------------------- |
+| **@dev**       | Implementador principal para tasks de codificacao          |
+| **@qa**        | Execucao de testes e verificacao de qualidade              |
+| **@architect** | Revisao de design e orientacao tecnica                     |
+| **@pm**        | Acompanhamento de progresso e comunicacao com stakeholders |
 
 ### Com Quality Gates
 
 HybridOps integra com os quality gates de 3 camadas do AIOS:
 
-| Camada                      | Papel no HybridOps                  |
-| --------------------------- | ----------------------------------- |
-| Camada 1 (Pre-commit)       | Agent executa, humano monitora      |
-| Camada 2 (Automacao de PR)  | Revisao de agent + humano           |
-| Camada 3 (Revisao Final)    | Aprovacao humana obrigatoria        |
+| Camada                     | Papel no HybridOps             |
+| -------------------------- | ------------------------------ |
+| Camada 1 (Pre-commit)      | Agent executa, humano monitora |
+| Camada 2 (Automacao de PR) | Revisao de agent + humano      |
+| Camada 3 (Revisao Final)   | Aprovacao humana obrigatoria   |
 
 ### Com Story Workflow
 

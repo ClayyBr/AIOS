@@ -282,7 +282,7 @@ describe('WorkflowExecutor', () => {
 story_id: "test"
 status: "Approved"
 \`\`\`
-      `,
+      `
       );
 
       executor.state = {
@@ -315,7 +315,7 @@ status: "Approved"
 executor: "@dev"
 quality_gate: "@dev"
 \`\`\`
-      `,
+      `
       );
 
       executor.state = {
@@ -328,7 +328,7 @@ quality_gate: "@dev"
 
       expect(result.status).toBe(PhaseStatus.FAILED);
       expect(result.validation_result.issues).toContain(
-        'Executor and Quality Gate must be different agents',
+        'Executor and Quality Gate must be different agents'
       );
     });
 
@@ -350,7 +350,7 @@ status: "Approved"
 executor: "@dev"
 quality_gate: "@architect"
 \`\`\`
-      `,
+      `
       );
 
       executor.state = {
@@ -565,7 +565,7 @@ Some footer text
 
       const result = await executor.executeSelfHealingPhase(
         { config: { severity_filter: ['CRITICAL'] } },
-        '@dev',
+        '@dev'
       );
 
       expect(result.status).toBe(PhaseStatus.COMPLETED);
@@ -643,7 +643,7 @@ describe('development-cycle.yaml', () => {
   test('should be valid YAML', async () => {
     const content = await fs.readFile(
       path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
-      'utf8',
+      'utf8'
     );
 
     expect(() => yaml.load(content)).not.toThrow();
@@ -652,7 +652,7 @@ describe('development-cycle.yaml', () => {
   test('should have required workflow structure', async () => {
     const content = await fs.readFile(
       path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
-      'utf8',
+      'utf8'
     );
     const workflow = yaml.load(content);
 
@@ -666,7 +666,7 @@ describe('development-cycle.yaml', () => {
   test('should have all 6 phases', async () => {
     const content = await fs.readFile(
       path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
-      'utf8',
+      'utf8'
     );
     const workflow = yaml.load(content);
     const phases = Object.keys(workflow.workflow.phases);
@@ -682,7 +682,7 @@ describe('development-cycle.yaml', () => {
   test('checkpoint phase should have elicit: true', async () => {
     const content = await fs.readFile(
       path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
-      'utf8',
+      'utf8'
     );
     const workflow = yaml.load(content);
 
@@ -692,13 +692,13 @@ describe('development-cycle.yaml', () => {
   test('self_healing phase should have condition', async () => {
     const content = await fs.readFile(
       path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
-      'utf8',
+      'utf8'
     );
     const workflow = yaml.load(content);
 
     expect(workflow.workflow.phases['3_self_healing'].condition).toBeDefined();
     expect(workflow.workflow.phases['3_self_healing'].condition).toContain(
-      'coderabbit_integration.enabled',
+      'coderabbit_integration.enabled'
     );
   });
 });

@@ -12,7 +12,8 @@ export const submitContactFormHandler = (req: Request, res: Response) =>
         logger.error('Failed to submit contact form:', error);
         res.status(error.type === 'ValidationError' ? 400 : 500).json({ error });
       },
-      (submission) => res.status(201).json({ message: 'Contact form submitted successfully!', submission })
+      (submission) =>
+        res.status(201).json({ message: 'Contact form submitted successfully!', submission })
     )
   )();
 

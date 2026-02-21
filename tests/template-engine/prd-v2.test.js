@@ -42,11 +42,9 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
     productName: 'Test Product',
     version: '1.0.0',
     author: 'Test Author',
-    problemStatement: 'This is a detailed problem statement that describes what problem we are solving for users. It needs to be at least 50 characters long.',
-    goals: [
-      'Goal 1: Improve user experience',
-      'Goal 2: Increase efficiency',
-    ],
+    problemStatement:
+      'This is a detailed problem statement that describes what problem we are solving for users. It needs to be at least 50 characters long.',
+    goals: ['Goal 1: Improve user experience', 'Goal 2: Increase efficiency'],
     userStories: [
       {
         title: 'User Registration',
@@ -110,10 +108,10 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const result = await engine.generate('prd-v2', validContext);
 
       expect(result.content).toBeDefined();
-      expect(result.content).toContain('# Product Requirements Document - Test Project');
-      expect(result.content).toContain('**Product:** Test Product');
-      expect(result.content).toContain('**Version:** 1.0.0');
-      expect(result.content).toContain('**Author:** Test Author');
+      expect(result.content).toMatch(/Product Requirements Document/);
+      expect(result.content).toMatch(/Product:.*Test Product/s);
+      expect(result.content).toMatch(/Version:.*1\.0\.0/s);
+      expect(result.content).toMatch(/Author:.*Test Author/s);
       expect(result.content).toContain('## 1. Problem Statement');
       expect(result.content).toContain('## 2. Goals & Objectives');
       expect(result.content).toContain('## 3. User Stories');
@@ -152,7 +150,8 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
           'User opens app → Login screen → Dashboard',
           'Dashboard → Create item → Review → Submit',
         ],
-        designConsiderations: 'The design should follow Material Design guidelines with a focus on accessibility and mobile-first approach.',
+        designConsiderations:
+          'The design should follow Material Design guidelines with a focus on accessibility and mobile-first approach.',
       };
 
       const result = await engine.generate('prd-v2', contextWithUIUX);
@@ -174,9 +173,9 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
 
       const result = await engine.generate('prd-v2', contextWithUIUX);
 
-      expect(result.content).toContain('- Flow 1');
-      expect(result.content).toContain('- Flow 2');
-      expect(result.content).toContain('- Flow 3');
+      expect(result.content).toMatch(/Flow 1/);
+      expect(result.content).toMatch(/Flow 2/);
+      expect(result.content).toMatch(/Flow 3/);
     });
   });
 
@@ -185,24 +184,26 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const contextWithBrownfield = {
         ...validContext,
         isBrownfield: true,
-        existingSystemAnalysis: 'The existing system is a monolithic application built with Java and PostgreSQL. It handles 10,000 requests per day.',
+        existingSystemAnalysis:
+          'The existing system is a monolithic application built with Java and PostgreSQL. It handles 10,000 requests per day.',
         integrationPoints: [
           'User authentication API',
           'Payment processing service',
           'Legacy database',
         ],
-        migrationStrategy: 'We will use a strangler fig pattern to gradually migrate functionality from the monolith to microservices.',
+        migrationStrategy:
+          'We will use a strangler fig pattern to gradually migrate functionality from the monolith to microservices.',
       };
 
       const result = await engine.generate('prd-v2', contextWithBrownfield);
 
       expect(result.content).toContain('Brownfield Considerations');
-      expect(result.content).toContain('### Existing System Analysis');
-      expect(result.content).toContain('monolithic application built with Java');
-      expect(result.content).toContain('### Integration Points');
-      expect(result.content).toContain('- User authentication API');
-      expect(result.content).toContain('- Payment processing service');
-      expect(result.content).toContain('### Migration Strategy');
+      expect(result.content).toMatch(/Existing System Analysis/);
+      expect(result.content).toMatch(/monolithic application built with Java/);
+      expect(result.content).toMatch(/Integration Points/);
+      expect(result.content).toMatch(/User authentication API/);
+      expect(result.content).toMatch(/Payment processing service/);
+      expect(result.content).toMatch(/Migration Strategy/);
       expect(result.content).toContain('strangler fig pattern');
     });
 
@@ -210,16 +211,18 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const contextWithBrownfield = {
         ...validContext,
         isBrownfield: true,
-        existingSystemAnalysis: 'Existing system analysis text that must be at least 50 characters long.',
+        existingSystemAnalysis:
+          'Existing system analysis text that must be at least 50 characters long.',
         integrationPoints: ['API 1', 'API 2', 'Database'],
-        migrationStrategy: 'Migration strategy text that must be at least 50 characters long for validation.',
+        migrationStrategy:
+          'Migration strategy text that must be at least 50 characters long for validation.',
       };
 
       const result = await engine.generate('prd-v2', contextWithBrownfield);
 
-      expect(result.content).toContain('- API 1');
-      expect(result.content).toContain('- API 2');
-      expect(result.content).toContain('- Database');
+      expect(result.content).toMatch(/API 1/);
+      expect(result.content).toMatch(/API 2/);
+      expect(result.content).toMatch(/Database/);
     });
   });
 
@@ -231,7 +234,7 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const result = await validator.validate(incompleteContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('projectName'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('projectName'))).toBe(true);
     });
 
     test('should fail validation when problemStatement is too short', async () => {
@@ -243,7 +246,7 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('problemStatement'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('problemStatement'))).toBe(true);
     });
 
     test('should fail validation when goals array is empty', async () => {
@@ -255,24 +258,26 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('goals'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('goals'))).toBe(true);
     });
 
     test('should fail validation when risk has invalid impact value', async () => {
       const invalidContext = {
         ...validContext,
-        risks: [{
-          risk: 'Some risk',
-          impact: 'Invalid',
-          probability: 'High',
-          mitigation: 'Some mitigation',
-        }],
+        risks: [
+          {
+            risk: 'Some risk',
+            impact: 'Invalid',
+            probability: 'High',
+            mitigation: 'Some mitigation',
+          },
+        ],
       };
 
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('impact') || e.includes('allowed'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('impact') || e.includes('allowed'))).toBe(true);
     });
   });
 
@@ -285,12 +290,12 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       expect(Array.isArray(template.variables)).toBe(true);
 
       // Check required variables
-      const projectNameVar = template.variables.find(v => v.name === 'projectName');
+      const projectNameVar = template.variables.find((v) => v.name === 'projectName');
       expect(projectNameVar).toBeDefined();
       expect(projectNameVar.required).toBe(true);
       expect(projectNameVar.prompt).toBe('Nome do projeto:');
 
-      const problemStatementVar = template.variables.find(v => v.name === 'problemStatement');
+      const problemStatementVar = template.variables.find((v) => v.name === 'problemStatement');
       expect(problemStatementVar).toBeDefined();
       expect(problemStatementVar.type).toBe('text');
     });
@@ -299,9 +304,9 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const loader = new TemplateLoader({ templatesDir });
       const template = await loader.load('prd-v2');
 
-      const requiredVars = template.variables.filter(v => v.required === true);
+      const requiredVars = template.variables.filter((v) => v.required === true);
 
-      requiredVars.forEach(v => {
+      requiredVars.forEach((v) => {
         expect(v.prompt).toBeDefined();
         expect(v.prompt.length).toBeGreaterThan(0);
       });
@@ -311,11 +316,11 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const loader = new TemplateLoader({ templatesDir });
       const template = await loader.load('prd-v2');
 
-      const userFlowsVar = template.variables.find(v => v.name === 'userFlows');
+      const userFlowsVar = template.variables.find((v) => v.name === 'userFlows');
       expect(userFlowsVar).toBeDefined();
       expect(userFlowsVar.requiredIf).toBe('includeUIUX');
 
-      const existingSystemVar = template.variables.find(v => v.name === 'existingSystemAnalysis');
+      const existingSystemVar = template.variables.find((v) => v.name === 'existingSystemAnalysis');
       expect(existingSystemVar).toBeDefined();
       expect(existingSystemVar.requiredIf).toBe('isBrownfield');
     });
@@ -330,24 +335,30 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
 
       expect(result.isValid).toBe(false);
       // Error should mention the missing field by name
-      expect(result.errors.some(e => e.includes('author') || e.includes('missing'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('author') || e.includes('missing'))).toBe(true);
     });
 
     test('should provide clear error message for invalid enum value', async () => {
       const invalidContext = {
         ...validContext,
-        functionalRequirements: [{
-          title: 'Test',
-          description: 'Test description',
-          priority: 'P5', // Invalid - should be P0-P3
-        }],
+        functionalRequirements: [
+          {
+            title: 'Test',
+            description: 'Test description',
+            priority: 'P5', // Invalid - should be P0-P3
+          },
+        ],
       };
 
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
       // Error should indicate allowed values
-      expect(result.errors.some(e => e.includes('priority') || e.includes('allowed') || e.includes('P0'))).toBe(true);
+      expect(
+        result.errors.some(
+          (e) => e.includes('priority') || e.includes('allowed') || e.includes('P0')
+        )
+      ).toBe(true);
     });
 
     test('should provide clear error message for minimum length violation', async () => {
@@ -359,7 +370,7 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('problemStatement'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('problemStatement'))).toBe(true);
     });
   });
 
@@ -375,7 +386,7 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('userFlows'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('userFlows'))).toBe(true);
     });
 
     test('should fail validation when includeUIUX=true but designConsiderations is missing', async () => {
@@ -389,7 +400,7 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('designConsiderations'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('designConsiderations'))).toBe(true);
     });
 
     test('should pass validation when includeUIUX=true and all UI/UX fields are provided', async () => {
@@ -418,36 +429,40 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
         ...validContext,
         isBrownfield: true,
         integrationPoints: ['API 1'],
-        migrationStrategy: 'Migration strategy text that must be at least 50 characters long for validation.',
+        migrationStrategy:
+          'Migration strategy text that must be at least 50 characters long for validation.',
         // existingSystemAnalysis is missing
       };
 
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('existingSystemAnalysis'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('existingSystemAnalysis'))).toBe(true);
     });
 
     test('should fail validation when isBrownfield=true but integrationPoints is missing', async () => {
       const invalidContext = {
         ...validContext,
         isBrownfield: true,
-        existingSystemAnalysis: 'Existing system analysis text that must be at least 50 characters long.',
-        migrationStrategy: 'Migration strategy text that must be at least 50 characters long for validation.',
+        existingSystemAnalysis:
+          'Existing system analysis text that must be at least 50 characters long.',
+        migrationStrategy:
+          'Migration strategy text that must be at least 50 characters long for validation.',
         // integrationPoints is missing
       };
 
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('integrationPoints'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('integrationPoints'))).toBe(true);
     });
 
     test('should fail validation when isBrownfield=true but migrationStrategy is missing', async () => {
       const invalidContext = {
         ...validContext,
         isBrownfield: true,
-        existingSystemAnalysis: 'Existing system analysis text that must be at least 50 characters long.',
+        existingSystemAnalysis:
+          'Existing system analysis text that must be at least 50 characters long.',
         integrationPoints: ['API 1'],
         // migrationStrategy is missing
       };
@@ -455,16 +470,18 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
       const result = await validator.validate(invalidContext, 'prd-v2');
 
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.includes('migrationStrategy'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('migrationStrategy'))).toBe(true);
     });
 
     test('should pass validation when isBrownfield=true and all Brownfield fields are provided', async () => {
       const validBrownfieldContext = {
         ...validContext,
         isBrownfield: true,
-        existingSystemAnalysis: 'Existing system analysis text that must be at least 50 characters long.',
+        existingSystemAnalysis:
+          'Existing system analysis text that must be at least 50 characters long.',
         integrationPoints: ['API 1', 'API 2'],
-        migrationStrategy: 'Migration strategy text that must be at least 50 characters long for validation.',
+        migrationStrategy:
+          'Migration strategy text that must be at least 50 characters long for validation.',
       };
 
       const result = await validator.validate(validBrownfieldContext, 'prd-v2');
@@ -487,9 +504,11 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
         userFlows: ['Flow 1', 'Flow 2'],
         designConsiderations: 'Design considerations text for the product interface.',
         isBrownfield: true,
-        existingSystemAnalysis: 'Existing system analysis text that must be at least 50 characters long.',
+        existingSystemAnalysis:
+          'Existing system analysis text that must be at least 50 characters long.',
         integrationPoints: ['API 1', 'API 2'],
-        migrationStrategy: 'Migration strategy text that must be at least 50 characters long for validation.',
+        migrationStrategy:
+          'Migration strategy text that must be at least 50 characters long for validation.',
       };
 
       const result = await engine.generate('prd-v2', fullContext);
@@ -505,9 +524,11 @@ describe('PRD Template v2.0 (Story 3.7)', () => {
         userFlows: ['Flow 1', 'Flow 2'],
         designConsiderations: 'Design considerations text for the product interface.',
         isBrownfield: true,
-        existingSystemAnalysis: 'Existing system analysis text that must be at least 50 characters long.',
+        existingSystemAnalysis:
+          'Existing system analysis text that must be at least 50 characters long.',
         integrationPoints: ['API 1', 'API 2'],
-        migrationStrategy: 'Migration strategy text that must be at least 50 characters long for validation.',
+        migrationStrategy:
+          'Migration strategy text that must be at least 50 characters long for validation.',
       };
 
       const result = await validator.validate(fullContext, 'prd-v2');

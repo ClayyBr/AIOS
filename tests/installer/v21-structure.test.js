@@ -15,13 +15,13 @@ jest.mock('../../tools/installer/lib/module-manager', () => ({
   getModules: jest.fn().mockResolvedValue({
     glob: jest.fn().mockResolvedValue([]),
     chalk: {
-      blue: jest.fn(x => x),
-      green: jest.fn(x => x),
-      yellow: jest.fn(x => x),
-      red: jest.fn(x => x),
-      dim: jest.fn(x => x),
-      bold: jest.fn(x => x),
-      cyan: jest.fn(x => x),
+      blue: jest.fn((x) => x),
+      green: jest.fn((x) => x),
+      yellow: jest.fn((x) => x),
+      red: jest.fn((x) => x),
+      dim: jest.fn((x) => x),
+      bold: jest.fn((x) => x),
+      cyan: jest.fn((x) => x),
     },
   }),
 }));
@@ -83,7 +83,9 @@ describe('v2.1 Module Structure Tests', () => {
       // Dependencies should use v2.1 module paths
       for (const depPath of deps.all) {
         // Should not have flat structure paths like .aios-core/tasks/
-        expect(depPath).not.toMatch(/\.aios-core\/(tasks|templates|checklists|workflows|utils|data)\//);
+        expect(depPath).not.toMatch(
+          /\.aios-core\/(tasks|templates|checklists|workflows|utils|data)\//
+        );
 
         // Should have modular paths
         const hasModularPath =
@@ -117,7 +119,11 @@ describe('v2.1 Module Structure Tests', () => {
     });
 
     it('should have workers.csv manifest', async () => {
-      const workersCsvPath = path.join(resourceLocator.getAiosCorePath(), 'manifests', 'workers.csv');
+      const workersCsvPath = path.join(
+        resourceLocator.getAiosCorePath(),
+        'manifests',
+        'workers.csv'
+      );
       const exists = await fs.pathExists(workersCsvPath);
       expect(exists).toBe(true);
     });
@@ -125,7 +131,11 @@ describe('v2.1 Module Structure Tests', () => {
 
   describe('INS-06: Module Directory Structure Verification', () => {
     it('should have development module with agents subdirectory', async () => {
-      const developmentAgents = path.join(resourceLocator.getAiosCorePath(), 'development', 'agents');
+      const developmentAgents = path.join(
+        resourceLocator.getAiosCorePath(),
+        'development',
+        'agents'
+      );
       const exists = await fs.pathExists(developmentAgents);
       expect(exists).toBe(true);
     });
@@ -143,7 +153,11 @@ describe('v2.1 Module Structure Tests', () => {
     });
 
     it('should have product module with checklists subdirectory', async () => {
-      const productChecklists = path.join(resourceLocator.getAiosCorePath(), 'product', 'checklists');
+      const productChecklists = path.join(
+        resourceLocator.getAiosCorePath(),
+        'product',
+        'checklists'
+      );
       const exists = await fs.pathExists(productChecklists);
       expect(exists).toBe(true);
     });

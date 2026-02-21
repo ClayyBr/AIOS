@@ -80,7 +80,11 @@ function buildTestRegistry(entities = {}) {
 function writeTestRegistry(entities = {}) {
   const registry = buildTestRegistry(entities);
   fs.mkdirSync(path.dirname(TEST_REGISTRY_PATH), { recursive: true });
-  fs.writeFileSync(TEST_REGISTRY_PATH, yaml.dump(registry, { lineWidth: 120, noRefs: true }), 'utf8');
+  fs.writeFileSync(
+    TEST_REGISTRY_PATH,
+    yaml.dump(registry, { lineWidth: 120, noRefs: true }),
+    'utf8'
+  );
   return registry;
 }
 
@@ -308,7 +312,10 @@ describe('RegistryHealer', () => {
       const orphanedIssues = result.issues.filter((i) => i.ruleId === 'orphaned-usedBy');
       expect(orphanedIssues).toHaveLength(1);
       expect(orphanedIssues[0].severity).toBe('medium');
-      expect(orphanedIssues[0].details.orphanedRefs).toEqual(['nonexistent-entity', 'another-missing']);
+      expect(orphanedIssues[0].details.orphanedRefs).toEqual([
+        'nonexistent-entity',
+        'another-missing',
+      ]);
     });
 
     it('detects orphaned dependency references (MEDIUM)', () => {
@@ -467,7 +474,7 @@ describe('RegistryHealer', () => {
             checksum: 'sha256:abc',
             lastVerified: new Date().toISOString(),
           },
-          'multi': {
+          multi: {
             path: 'tasks/multi.md',
             type: 'task',
             keywords: [],
@@ -841,7 +848,7 @@ describe('RegistryHealer', () => {
       const warnings = await healer.emitWarnings(manualIssues);
 
       expect(warnings[0].suggestedActions).toEqual(
-        expect.arrayContaining([expect.stringContaining('git log --follow')]),
+        expect.arrayContaining([expect.stringContaining('git log --follow')])
       );
 
       console.warn.mockRestore();
@@ -1057,8 +1064,7 @@ describe('RegistryHealer', () => {
       }
 
       // Count backup files
-      const backupFiles = fs.readdirSync(TEST_BACKUP_DIR)
-        .filter((f) => f.endsWith('.yaml'));
+      const backupFiles = fs.readdirSync(TEST_BACKUP_DIR).filter((f) => f.endsWith('.yaml'));
       expect(backupFiles.length).toBeLessThanOrEqual(MAX_BACKUPS);
     });
   });
@@ -1089,10 +1095,10 @@ describe('RegistryHealer', () => {
             path: 'tasks/rate-test.md',
             type: 'task',
             keywords: ['rate'],
-            usedBy: ['phantom-ref'],       // orphaned-usedBy (medium, auto-healable) = 1
+            usedBy: ['phantom-ref'], // orphaned-usedBy (medium, auto-healable) = 1
             dependencies: ['phantom-dep'], // orphaned-dependency (medium, auto-healable) = 1
             checksum: 'sha256:wrong_checksum_here',
-            lastVerified: tenDaysAgo,      // stale-verification (low, auto-healable) = 1
+            lastVerified: tenDaysAgo, // stale-verification (low, auto-healable) = 1
           },
           // missing-keywords (low, auto-healable) = 1
           'no-kw-entity': {

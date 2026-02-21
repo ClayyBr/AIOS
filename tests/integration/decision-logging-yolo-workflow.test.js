@@ -125,7 +125,10 @@ describeIntegration('Decision Logging + Yolo Mode Integration', () => {
       expect(logPath).toContain(`decision-log-${testStoryId}.md`);
 
       // Verify log file was created
-      const logExists = await fs.access(logPath).then(() => true).catch(() => false);
+      const logExists = await fs
+        .access(logPath)
+        .then(() => true)
+        .catch(() => false);
       expect(logExists).toBe(true);
 
       // Verify log content
@@ -162,7 +165,10 @@ describeIntegration('Decision Logging + Yolo Mode Integration', () => {
       expect(logContent).toContain('Task Execution Time'); // Calculated automatically based on duration
 
       // Verify index was updated
-      const indexExists = await fs.access('.ai/decision-logs-index.md').then(() => true).catch(() => false);
+      const indexExists = await fs
+        .access('.ai/decision-logs-index.md')
+        .then(() => true)
+        .catch(() => false);
       expect(indexExists).toBe(true);
 
       const indexContent = await fs.readFile('.ai/decision-logs-index.md', 'utf8');
@@ -318,7 +324,10 @@ describeIntegration('Decision Logging + Yolo Mode Integration', () => {
 
       await completeDecisionLogging(testStoryId, 'completed');
 
-      const indexExists = await fs.access('.ai/decision-logs-index.md').then(() => true).catch(() => false);
+      const indexExists = await fs
+        .access('.ai/decision-logs-index.md')
+        .then(() => true)
+        .catch(() => false);
       expect(indexExists).toBe(true);
 
       const indexContent = await fs.readFile('.ai/decision-logs-index.md', 'utf8');

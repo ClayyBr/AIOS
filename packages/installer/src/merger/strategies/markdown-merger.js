@@ -63,9 +63,7 @@ class MarkdownMerger extends BaseMerger {
     for (const section of existing.sections) {
       if (section.managed) {
         // AIOS-managed section - update with template content if available
-        const templateSection = template.sections.find(
-          s => s.managed && s.id === section.id,
-        );
+        const templateSection = template.sections.find((s) => s.managed && s.id === section.id);
 
         if (templateSection) {
           // Update with new content from template
@@ -113,7 +111,7 @@ class MarkdownMerger extends BaseMerger {
 
     // Add new AIOS sections that don't exist in current file
     const newSections = template.sections.filter(
-      s => s.managed && !processedAiosSections.has(s.id),
+      (s) => s.managed && !processedAiosSections.has(s.id)
     );
 
     if (newSections.length > 0) {
@@ -153,7 +151,7 @@ class MarkdownMerger extends BaseMerger {
     const changes = [];
 
     // Get all AIOS-managed sections from template
-    const aiosSections = template.sections.filter(s => s.managed);
+    const aiosSections = template.sections.filter((s) => s.managed);
 
     // Start with existing content
     let merged = existingContent;
@@ -173,7 +171,8 @@ class MarkdownMerger extends BaseMerger {
     if (aiosSections.length > 0) {
       merged += '\n---\n\n';
       merged += '<!-- AIOS-MANAGED SECTIONS -->\n';
-      merged += '<!-- These sections are managed by AIOS. Edit content between markers carefully. -->\n';
+      merged +=
+        '<!-- These sections are managed by AIOS. Edit content between markers carefully. -->\n';
       merged += '<!-- Your custom content above will be preserved during updates. -->\n\n';
 
       for (const section of aiosSections) {

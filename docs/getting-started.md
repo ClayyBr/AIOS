@@ -44,6 +44,7 @@ cd my-first-project
 ### Step 3: Validate first value
 
 First value is achieved when all 3 conditions are true:
+
 1. You activate one AIOS agent.
 2. You receive a valid greeting/activation response.
 3. You run one starter command (`*help` or equivalent) and get useful output.
@@ -141,18 +142,18 @@ AIOS agents are activated through your IDE. Once activated, agents respond to co
 
 ### Available Agents
 
-| Agent | Name | Focus |
-| --- | --- | --- |
-| `@dev` | Dex | Code implementation, bug fixes, refactoring |
-| `@qa` | Quinn | Testing, quality gates, code review |
-| `@architect` | Aria | System design, technical decisions |
-| `@pm` | Bob | PRDs, strategy, roadmap |
-| `@po` | Pax | Backlog, story validation, prioritization |
-| `@sm` | River | Story creation, sprint planning |
-| `@analyst` | Alex | Research, competitive analysis |
-| `@data-engineer` | Dara | Database design, migrations |
-| `@ux-design-expert` | Uma | UI/UX design, accessibility |
-| `@devops` | Gage | Git operations, CI/CD, deployments |
+| Agent               | Name  | Focus                                       |
+| ------------------- | ----- | ------------------------------------------- |
+| `@dev`              | Dex   | Code implementation, bug fixes, refactoring |
+| `@qa`               | Quinn | Testing, quality gates, code review         |
+| `@architect`        | Aria  | System design, technical decisions          |
+| `@pm`               | Bob   | PRDs, strategy, roadmap                     |
+| `@po`               | Pax   | Backlog, story validation, prioritization   |
+| `@sm`               | River | Story creation, sprint planning             |
+| `@analyst`          | Alex  | Research, competitive analysis              |
+| `@data-engineer`    | Dara  | Database design, migrations                 |
+| `@ux-design-expert` | Uma   | UI/UX design, accessibility                 |
+| `@devops`           | Gage  | Git operations, CI/CD, deployments          |
 
 ### Typical Workflow
 
@@ -172,14 +173,14 @@ Not all IDEs support AIOS features equally. See the full comparison at [`docs/id
 
 Summary:
 
-| IDE/CLI | Overall Status | How to Activate |
-| --- | --- | --- |
-| Claude Code | Works | `/agent-name` commands |
-| Gemini CLI | Works | `/aios-menu` then `/aios-<agent>` |
-| Codex CLI | Limited | `/skills` then `aios-<agent-id>` |
-| Cursor | Limited | `@agent` + synced rules |
-| GitHub Copilot | Limited | chat modes + repo instructions |
-| AntiGravity | Limited | workflow-driven activation |
+| IDE/CLI        | Overall Status | How to Activate                   |
+| -------------- | -------------- | --------------------------------- |
+| Claude Code    | Works          | `/agent-name` commands            |
+| Gemini CLI     | Works          | `/aios-menu` then `/aios-<agent>` |
+| Codex CLI      | Limited        | `/skills` then `aios-<agent-id>`  |
+| Cursor         | Limited        | `@agent` + synced rules           |
+| GitHub Copilot | Limited        | chat modes + repo instructions    |
+| AntiGravity    | Limited        | workflow-driven activation        |
 
 - **Works**: fully recommended for new users.
 - **Limited**: usable with documented workarounds.
@@ -212,12 +213,12 @@ When you first activate an AIOS agent in an existing project:
 
 ### Brownfield Workflow Options
 
-| Your Situation | Recommended Workflow |
-|----------------|---------------------|
-| Add major feature to existing project | `@pm → *create-doc brownfield-prd` |
-| Audit legacy codebase | `brownfield-discovery.yaml` (full workflow) |
-| Quick enhancement | `@pm → *brownfield-create-epic` |
-| Single bug fix | `@pm → *brownfield-create-story` |
+| Your Situation                        | Recommended Workflow                        |
+| ------------------------------------- | ------------------------------------------- |
+| Add major feature to existing project | `@pm → *create-doc brownfield-prd`          |
+| Audit legacy codebase                 | `brownfield-discovery.yaml` (full workflow) |
+| Quick enhancement                     | `@pm → *brownfield-create-epic`             |
+| Single bug fix                        | `@pm → *brownfield-create-story`            |
 
 ### Safety Guarantees
 
@@ -253,6 +254,7 @@ npm run lint && npm run typecheck && npm test
 ### Story-Driven Development
 
 All AIOS development follows stories in `docs/stories/`. Each story contains:
+
 - Acceptance criteria with checkboxes
 - Tasks mapped to specific ACs
 - CodeRabbit integration for automated review

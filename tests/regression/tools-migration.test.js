@@ -49,12 +49,7 @@ describeIntegration('Tools Migration Regression Suite', () => {
     'exa',
   ];
 
-  const v2Tools = [
-    'clickup',
-    'google-workspace',
-    'n8n',
-    'supabase',
-  ];
+  const v2Tools = ['clickup', 'google-workspace', 'n8n', 'supabase'];
 
   beforeAll(() => {
     toolResolver.setSearchPaths([toolsPath]);
@@ -85,7 +80,7 @@ describeIntegration('Tools Migration Regression Suite', () => {
       }
 
       // All should have core fields
-      results.forEach(result => {
+      results.forEach((result) => {
         expect(result.hasId).toBe(true);
         expect(result.hasType).toBe(true);
         expect(result.hasName).toBe(true);
@@ -252,12 +247,12 @@ describeIntegration('Tools Migration Regression Suite', () => {
     test('agents can reference mixed v1/v2 tools', async () => {
       // Simulate agent with mixed tool dependencies (like dev agent)
       const agentTools = [
-        'github-cli',    // v1.0
-        'context7',      // v1.0
-        'supabase',      // v2.0
-        'n8n',           // v2.0
-        'browser',       // v1.0
-        'ffmpeg',         // v1.0
+        'github-cli', // v1.0
+        'context7', // v1.0
+        'supabase', // v2.0
+        'n8n', // v2.0
+        'browser', // v1.0
+        'ffmpeg', // v1.0
       ];
 
       const results = [];
@@ -275,8 +270,8 @@ describeIntegration('Tools Migration Regression Suite', () => {
       expect(results).toHaveLength(6);
 
       // Check version distribution
-      const v1Count = results.filter(r => r.version === 1).length;
-      const v2Count = results.filter(r => r.version === 2).length;
+      const v1Count = results.filter((r) => r.version === 1).length;
+      const v2Count = results.filter((r) => r.version === 2).length;
 
       expect(v1Count).toBe(4);
       expect(v2Count).toBe(2);
@@ -317,9 +312,7 @@ describeIntegration('Tools Migration Regression Suite', () => {
     });
 
     test('concurrent operations performance maintained', async () => {
-      const promises = allTools.map(toolName =>
-        toolResolver.resolveTool(toolName),
-      );
+      const promises = allTools.map((toolName) => toolResolver.resolveTool(toolName));
 
       const start = Date.now();
       const tools = await Promise.all(promises);
@@ -333,9 +326,7 @@ describeIntegration('Tools Migration Regression Suite', () => {
 
   describeIntegration('Error Handling Regression', () => {
     test('invalid tool name throws same error as before', async () => {
-      await expect(
-        toolResolver.resolveTool('non-existent-tool'),
-      ).rejects.toThrow();
+      await expect(toolResolver.resolveTool('non-existent-tool')).rejects.toThrow();
     });
 
     test('validation errors format unchanged', async () => {
@@ -409,7 +400,8 @@ describeIntegration('Tools Migration Regression Suite', () => {
           await toolResolver.resolveTool(toolName);
           const duration = Date.now() - start;
 
-          if (duration > 5) { // Cached should be <5ms
+          if (duration > 5) {
+            // Cached should be <5ms
             report.performance_issues.push({
               tool: toolName,
               duration,
@@ -427,7 +419,6 @@ describeIntegration('Tools Migration Regression Suite', () => {
           }
 
           report.tools_passed++;
-
         } catch (error) {
           report.resolution_failures.push({
             tool: toolName,

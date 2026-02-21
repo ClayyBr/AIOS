@@ -65,9 +65,10 @@ async function checkBinaryInstalled() {
   } catch (error) {
     return {
       installed: false,
-      error: error.code === 'ENOENT'
-        ? 'code-graph-mcp binary not found in PATH'
-        : `Binary check failed: ${error.message}`,
+      error:
+        error.code === 'ENOENT'
+          ? 'code-graph-mcp binary not found in PATH'
+          : `Binary check failed: ${error.message}`,
     };
   }
 }
@@ -123,8 +124,14 @@ async function checkServerAndTools(projectRoot) {
 
       // Send MCP initialize + tools/list via JSON-RPC over stdio
       const initMsg = JSON.stringify({
-        jsonrpc: '2.0', id: 1, method: 'initialize',
-        params: { protocolVersion: '2024-11-05', capabilities: {}, clientInfo: { name: 'health-check', version: '1.0' } },
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'initialize',
+        params: {
+          protocolVersion: '2024-11-05',
+          capabilities: {},
+          clientInfo: { name: 'health-check', version: '1.0' },
+        },
       });
       const notifyMsg = JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' });
       const listMsg = JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} });
@@ -328,9 +335,7 @@ async function runHealthCheck() {
     };
   }
 
-  const exitCode = report.status === 'available' ? 0
-    : report.status === 'degraded' ? 1
-      : 2;
+  const exitCode = report.status === 'available' ? 0 : report.status === 'degraded' ? 1 : 2;
 
   outputReport(report, exitCode);
 }

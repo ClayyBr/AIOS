@@ -35,7 +35,11 @@ describe('gemini command sync', () => {
   it('builds menu + one command per agent', () => {
     const agents = [
       { id: 'dev', error: null, agent: { title: 'Developer', whenToUse: 'Implementar features' } },
-      { id: 'architect', error: null, agent: { title: 'Architect', whenToUse: 'Definir arquitetura' } },
+      {
+        id: 'architect',
+        error: null,
+        agent: { title: 'Architect', whenToUse: 'Definir arquitetura' },
+      },
       { id: 'qa', error: null, agent: { title: 'QA', whenToUse: 'Validar qualidade' } },
     ];
     const files = buildGeminiCommandFiles(agents);
@@ -60,7 +64,9 @@ describe('gemini command sync', () => {
     ]);
 
     const dev = files.find((f) => f.filename === 'aios-dev.toml');
-    expect(dev.content).toContain('description = "Full Stack Developer (Use para implementação e debugging)"');
+    expect(dev.content).toContain(
+      'description = "Full Stack Developer (Use para implementação e debugging)"'
+    );
   });
 
   it('falls back to generic description when metadata is missing', () => {
@@ -74,7 +80,8 @@ describe('gemini command sync', () => {
       id: 'architect',
       agent: {
         title: 'Architect',
-        whenToUse: 'Use para arquitetura\ncomplexa em sistemas distribuídos. NOT for gestão de sprint',
+        whenToUse:
+          'Use para arquitetura\ncomplexa em sistemas distribuídos. NOT for gestão de sprint',
       },
     });
     expect(description).toBe('Architect (Use para arquitetura complexa em sistemas distribuídos)');

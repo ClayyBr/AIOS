@@ -11,35 +11,40 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    quote: 'Nunca imaginei que poderia alcançar tamanha força e condicionamento. A comunidade é incrível e os coaches são super atenciosos!',
+    quote:
+      'Nunca imaginei que poderia alcançar tamanha força e condicionamento. A comunidade é incrível e os coaches são super atenciosos!',
     author: 'Mariana Silva',
     role: 'Membro há 1 ano',
     rating: 5,
     image: '/member-mariana.webp', // Replace with actual image
   },
   {
-    quote: 'Minha vida mudou completamente depois que entrei na Crosfit Academy. Mais energia, mais foco e menos estresse.',
+    quote:
+      'Minha vida mudou completamente depois que entrei na Crosfit Academy. Mais energia, mais foco e menos estresse.',
     author: 'João Pereira',
     role: 'Membro há 6 meses',
     rating: 5,
     image: '/member-joao.webp', // Replace with actual image
   },
   {
-    quote: 'Adoro a intensidade dos treinos e o acompanhamento personalizado. É um investimento na minha saúde que realmente vale a pena.',
+    quote:
+      'Adoro a intensidade dos treinos e o acompanhamento personalizado. É um investimento na minha saúde que realmente vale a pena.',
     author: 'Paula Fernandes',
     role: 'Membro há 2 anos',
     rating: 4,
     image: '/member-paula.webp', // Replace with actual image
   },
   {
-    quote: 'O ambiente é muito acolhedor e desafiador ao mesmo tempo. Cada aula é uma superação e uma dose extra de motivação.',
+    quote:
+      'O ambiente é muito acolhedor e desafiador ao mesmo tempo. Cada aula é uma superação e uma dose extra de motivação.',
     author: 'Rafael Almeida',
     role: 'Membro há 8 meses',
     rating: 5,
     image: '/member-rafael.webp', // Replace with actual image
   },
   {
-    quote: 'A melhor academia de Crosfit que já frequentei! Treinadores experientes e uma estrutura fantástica.',
+    quote:
+      'A melhor academia de Crosfit que já frequentei! Treinadores experientes e uma estrutura fantástica.',
     author: 'Carla Oliveira',
     role: 'Membro há 1 ano e meio',
     rating: 5,
@@ -82,7 +87,9 @@ export default function Testimonials() {
                 ))}
               </div>
               <p className="text-gray-200 text-lg italic mb-4">"{testimonial.quote}"</p>
-              <p className="font-oswald font-semibold text-primary-500 text-xl">{testimonial.author}</p>
+              <p className="font-oswald font-semibold text-primary-500 text-xl">
+                {testimonial.author}
+              </p>
               <p className="text-gray-400 text-sm">{testimonial.role}</p>
             </div>
           ))}

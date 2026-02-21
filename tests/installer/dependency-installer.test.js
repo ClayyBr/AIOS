@@ -377,9 +377,7 @@ describe('Dependency Installer', () => {
       expect(result.success).toBe(true);
       expect(result.offlineMode).toBe(true);
       expect(spawn).not.toHaveBeenCalled();
-      expect(consoleLogSpy).toHaveBeenCalledWith(
-        expect.stringContaining('offline mode'),
-      );
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('offline mode'));
     });
 
     it('should reject invalid package manager', async () => {

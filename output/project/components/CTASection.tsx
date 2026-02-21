@@ -29,7 +29,8 @@ export default function CTASection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg md:text-xl max-w-3xl mx-auto mb-10"
         >
-          Não espere mais para iniciar a transformação que você deseja. Junte-se à Crosfit Academy e libere todo o seu potencial.
+          Não espere mais para iniciar a transformação que você deseja. Junte-se à Crosfit Academy e
+          libere todo o seu potencial.
         </motion.p>
         <motion.button
           initial={{ opacity: 0, scale: 0.8 }}

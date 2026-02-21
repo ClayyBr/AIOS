@@ -41,4 +41,3 @@ describe('validate-claude-integration', () => {
     expect(result.errors.some((e) => e.includes('Missing Claude agents dir'))).toBe(true);
   });
 });
-

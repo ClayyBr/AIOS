@@ -56,8 +56,17 @@ describe('SECTION_ORDER', () => {
 
   test('should include all expected sections', () => {
     const expected = [
-      'CONTEXT_BRACKET', 'CONSTITUTION', 'AGENT', 'WORKFLOW',
-      'TASK', 'SQUAD', 'KEYWORD', 'MEMORY_HINTS', 'STAR_COMMANDS', 'DEVMODE', 'SUMMARY',
+      'CONTEXT_BRACKET',
+      'CONSTITUTION',
+      'AGENT',
+      'WORKFLOW',
+      'TASK',
+      'SQUAD',
+      'KEYWORD',
+      'MEMORY_HINTS',
+      'STAR_COMMANDS',
+      'DEVMODE',
+      'SUMMARY',
     ];
     expect(SECTION_ORDER).toEqual(expected);
   });
@@ -131,12 +140,22 @@ describe('enforceTokenBudget', () => {
   test('should remove sections in truncation order', () => {
     const long = 'x'.repeat(200);
     const sections = ['c', 'a', 'w', 't', 's', 'k', 'sc', 'd', 'sum'];
-    const ids = ['CONSTITUTION', 'AGENT', 'WORKFLOW', 'TASK', 'SQUAD', 'KEYWORD', 'STAR_COMMANDS', 'DEVMODE', 'SUMMARY'];
+    const ids = [
+      'CONSTITUTION',
+      'AGENT',
+      'WORKFLOW',
+      'TASK',
+      'SQUAD',
+      'KEYWORD',
+      'STAR_COMMANDS',
+      'DEVMODE',
+      'SUMMARY',
+    ];
     // Budget that forces removal of several sections
     const result = enforceTokenBudget(sections, ids, 5);
     // Protected sections should survive
-    expect(result).toContain('c');  // CONSTITUTION
-    expect(result).toContain('a');  // AGENT
+    expect(result).toContain('c'); // CONSTITUTION
+    expect(result).toContain('a'); // AGENT
   });
 });
 
@@ -154,7 +173,16 @@ describe('formatSynapseRules', () => {
   }
 
   function getLayerNum(source) {
-    const map = { constitution: 0, global: 1, agent: 2, workflow: 3, task: 4, squad: 5, keyword: 6, 'star-command': 7 };
+    const map = {
+      constitution: 0,
+      global: 1,
+      agent: 2,
+      workflow: 3,
+      task: 4,
+      squad: 5,
+      keyword: 6,
+      'star-command': 7,
+    };
     return map[source] != null ? map[source] : -1;
   }
 
@@ -178,14 +206,32 @@ describe('formatSynapseRules', () => {
 
   test('should wrap output in <synapse-rules> tags', () => {
     const results = [makeResult('constitution', ['Rule 1'])];
-    const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'FRESH',
+      85,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toMatch(/^<synapse-rules>/);
     expect(xml).toMatch(/<\/synapse-rules>$/);
   });
 
   test('should include CONTEXT BRACKET section', () => {
     const results = [makeResult('constitution', ['Rule 1'])];
-    const xml = formatSynapseRules(results, 'FRESH', 85.0, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'FRESH',
+      85.0,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[CONTEXT BRACKET]');
     expect(xml).toContain('CONTEXT BRACKET: [FRESH]');
     expect(xml).toContain('85.0% remaining');
@@ -193,7 +239,16 @@ describe('formatSynapseRules', () => {
 
   test('should include CONSTITUTION section', () => {
     const results = [makeResult('constitution', ['ART.I: CLI First', 'ART.II: Agent Authority'])];
-    const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'FRESH',
+      85,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[CONSTITUTION] (NON-NEGOTIABLE)');
     expect(xml).toContain('ART.I: CLI First');
     expect(xml).toContain('ART.II: Agent Authority');
@@ -207,7 +262,16 @@ describe('formatSynapseRules', () => {
         authority: ['code implementation', 'testing'],
       }),
     ];
-    const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'MODERATE',
+      50,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[ACTIVE AGENT: @dev]');
     expect(xml).toContain('DOMAIN: development');
     expect(xml).toContain('AUTHORITY BOUNDARIES:');
@@ -221,7 +285,16 @@ describe('formatSynapseRules', () => {
         phase: 'implement',
       }),
     ];
-    const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'MODERATE',
+      50,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[ACTIVE WORKFLOW: story-dev-cycle]');
     expect(xml).toContain('PHASE: implement');
   });
@@ -233,17 +306,33 @@ describe('formatSynapseRules', () => {
         storyId: 'SYN-6',
       }),
     ];
-    const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'MODERATE',
+      50,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[TASK CONTEXT]');
     expect(xml).toContain('Active Task: SYN-6-T5');
     expect(xml).toContain('Story: SYN-6');
   });
 
   test('should include SQUAD section', () => {
-    const results = [
-      makeResult('squad', ['Use design tokens'], { squadName: 'design-system' }),
-    ];
-    const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+    const results = [makeResult('squad', ['Use design tokens'], { squadName: 'design-system' })];
+    const xml = formatSynapseRules(
+      results,
+      'MODERATE',
+      50,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[SQUAD: design-system]');
     expect(xml).toContain('Use design tokens');
   });
@@ -254,7 +343,16 @@ describe('formatSynapseRules', () => {
         matches: [{ keyword: 'supabase', domain: 'data-engineer', reason: 'keyword match' }],
       }),
     ];
-    const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'MODERATE',
+      50,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[KEYWORD MATCHES]');
     expect(xml).toContain('"supabase" matched data-engineer');
   });
@@ -263,17 +361,33 @@ describe('formatSynapseRules', () => {
     const results = [
       makeResult('star-command', ['Execute build loop'], { command: 'build-autonomous' }),
     ];
-    const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'MODERATE',
+      50,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[STAR-COMMANDS]');
     expect(xml).toContain('[*build-autonomous] COMMAND:');
     expect(xml).toContain('============================================================');
   });
 
   test('should include SUMMARY section', () => {
-    const results = [
-      makeResult('constitution', ['Rule 1'], { activationReason: 'always active' }),
-    ];
-    const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+    const results = [makeResult('constitution', ['Rule 1'], { activationReason: 'always active' })];
+    const xml = formatSynapseRules(
+      results,
+      'FRESH',
+      85,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).toContain('[LOADED DOMAINS SUMMARY]');
     expect(xml).toContain('LOADED DOMAINS:');
   });
@@ -283,7 +397,16 @@ describe('formatSynapseRules', () => {
       { rules: [], metadata: { source: 'agent', layer: 2 } },
       makeResult('constitution', ['Rule 1']),
     ];
-    const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'FRESH',
+      85,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).not.toContain('[ACTIVE AGENT:');
     expect(xml).toContain('[CONSTITUTION]');
   });
@@ -293,7 +416,16 @@ describe('formatSynapseRules', () => {
       { rules: null, metadata: { source: 'agent', layer: 2 } },
       makeResult('constitution', ['Rule 1']),
     ];
-    const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+    const xml = formatSynapseRules(
+      results,
+      'FRESH',
+      85,
+      defaultSession,
+      false,
+      defaultMetrics,
+      2000,
+      false
+    );
     expect(xml).not.toContain('[ACTIVE AGENT:');
   });
 
@@ -303,7 +435,16 @@ describe('formatSynapseRules', () => {
         makeResult('constitution', ['Rule 1']),
         makeResult('global', ['Global rule']),
       ];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2000,
+        false
+      );
       const bracketIdx = xml.indexOf('[CONTEXT BRACKET]');
       const constIdx = xml.indexOf('[CONSTITUTION]');
       expect(bracketIdx).toBeLessThan(constIdx);
@@ -314,7 +455,16 @@ describe('formatSynapseRules', () => {
         makeResult('constitution', ['Rule 1']),
         makeResult('agent', ['Agent rule'], { agentId: 'dev' }),
       ];
-      const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'MODERATE',
+        50,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2000,
+        false
+      );
       const constIdx = xml.indexOf('[CONSTITUTION]');
       const agentIdx = xml.indexOf('[ACTIVE AGENT:');
       expect(constIdx).toBeLessThan(agentIdx);
@@ -325,7 +475,16 @@ describe('formatSynapseRules', () => {
         makeResult('constitution', ['Rule 1']),
         makeResult('agent', ['Agent rule'], { agentId: 'dev' }),
       ];
-      const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'MODERATE',
+        50,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2000,
+        false
+      );
       const summaryIdx = xml.indexOf('[LOADED DOMAINS SUMMARY]');
       const agentIdx = xml.indexOf('[ACTIVE AGENT:');
       expect(summaryIdx).toBeGreaterThan(agentIdx);
@@ -349,41 +508,95 @@ describe('formatSynapseRules', () => {
 
     test('should include DEVMODE section when devmode=true', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, true, devMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        true,
+        devMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('[DEVMODE STATUS]');
       expect(xml).toContain('SYNAPSE DEVMODE');
     });
 
     test('should NOT include DEVMODE section when devmode=false', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, devMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        false,
+        devMetrics,
+        2000,
+        false
+      );
       expect(xml).not.toContain('[DEVMODE STATUS]');
     });
 
     test('should show bracket info in DEVMODE', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, true, devMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        true,
+        devMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('Bracket: [FRESH]');
       expect(xml).toContain('85.0% remaining');
     });
 
     test('should show pipeline metrics in DEVMODE', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, true, devMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        true,
+        devMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('Pipeline Metrics:');
       expect(xml).toContain('Total: 42ms');
     });
 
     test('should show loaded layers in DEVMODE', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, true, devMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        true,
+        devMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('Layers Loaded:');
       expect(xml).toContain('CONSTITUTION');
     });
 
     test('should show skipped layers in DEVMODE', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, true, devMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        true,
+        devMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('Layers Skipped:');
       expect(xml).toContain('WORKFLOW');
     });
@@ -392,14 +605,32 @@ describe('formatSynapseRules', () => {
   describe('handoff warning', () => {
     test('should include handoff warning when showHandoffWarning=true', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'CRITICAL', 15, defaultSession, false, defaultMetrics, 2500, true);
+      const xml = formatSynapseRules(
+        results,
+        'CRITICAL',
+        15,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2500,
+        true
+      );
       expect(xml).toContain('[HANDOFF WARNING]');
       expect(xml).toContain('Context is nearly exhausted');
     });
 
     test('should NOT include handoff warning when showHandoffWarning=false', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 800, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        false,
+        defaultMetrics,
+        800,
+        false
+      );
       expect(xml).not.toContain('[HANDOFF WARNING]');
     });
   });
@@ -413,7 +644,16 @@ describe('formatSynapseRules', () => {
         makeResult('keyword', ['Keyword rule'], { matches: [{ keyword: 'test', domain: 'dev' }] }),
       ];
       // Very small budget — should trigger truncation
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 10, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        false,
+        defaultMetrics,
+        10,
+        false
+      );
       // Output should still be valid XML (wrapped)
       expect(xml).toContain('<synapse-rules>');
     });
@@ -431,7 +671,16 @@ describe('formatSynapseRules', () => {
           metadata: { source: 'memory', layer: 'memory' },
         },
       ];
-      const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'MODERATE',
+        50,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('[MEMORY HINTS]');
       expect(xml).toContain('[procedural] (relevance: 90%) Use absolute imports');
       expect(xml).toContain('[semantic] (relevance: 70%) Avoid any type');
@@ -439,7 +688,16 @@ describe('formatSynapseRules', () => {
 
     test('should NOT include [MEMORY HINTS] section when no memory results', () => {
       const results = [makeResult('constitution', ['Rule 1'])];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2000,
+        false
+      );
       expect(xml).not.toContain('[MEMORY HINTS]');
     });
 
@@ -447,13 +705,20 @@ describe('formatSynapseRules', () => {
       const results = [
         makeResult('constitution', ['Rule 1']),
         {
-          rules: [
-            { content: 'Some hint', tokens: 3 },
-          ],
+          rules: [{ content: 'Some hint', tokens: 3 }],
           metadata: { source: 'memory', layer: 'memory' },
         },
       ];
-      const xml = formatSynapseRules(results, 'MODERATE', 50, defaultSession, false, defaultMetrics, 2000, false);
+      const xml = formatSynapseRules(
+        results,
+        'MODERATE',
+        50,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('[MEMORY HINTS]');
       expect(xml).toContain('[memory] (relevance: ?%) Some hint');
     });
@@ -461,19 +726,33 @@ describe('formatSynapseRules', () => {
 
   describe('global/context layer fallback', () => {
     test('should categorize layer by layer number when source unknown', () => {
-      const results = [
-        { rules: ['Fallback rule'], metadata: { layer: 0 } },
-      ];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+      const results = [{ rules: ['Fallback rule'], metadata: { layer: 0 } }];
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('[CONSTITUTION]');
       expect(xml).toContain('Fallback rule');
     });
 
     test('should handle global results in context bracket section', () => {
-      const results = [
-        makeResult('global', ['Global context rule']),
-      ];
-      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+      const results = [makeResult('global', ['Global context rule'])];
+      const xml = formatSynapseRules(
+        results,
+        'FRESH',
+        85,
+        defaultSession,
+        false,
+        defaultMetrics,
+        2000,
+        false
+      );
       expect(xml).toContain('[CONTEXT BRACKET]');
       expect(xml).toContain('CONTEXT RULES:');
       expect(xml).toContain('Global context rule');

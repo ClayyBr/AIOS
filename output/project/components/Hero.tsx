@@ -34,7 +34,8 @@ export default function Hero({ onCtaClick }: HeroProps) {
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
           className="text-lg sm:text-xl md:text-2xl mb-10 max-w-3xl mx-auto drop-shadow-md font-inter"
         >
-          Join the premier CrossFit Academy and redefine your limits with expert coaching, cutting-edge facilities, and a thriving community.
+          Join the premier CrossFit Academy and redefine your limits with expert coaching,
+          cutting-edge facilities, and a thriving community.
         </motion.p>
         <motion.button
           whileHover={{ scale: 1.05, backgroundColor: 'var(--color-accent-600)' }}

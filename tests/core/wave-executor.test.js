@@ -341,7 +341,7 @@ describe('WaveExecutor', () => {
       jest.useFakeTimers();
 
       const neverResolves = jest.fn().mockImplementation(
-        () => new Promise(() => {}), // Never resolves
+        () => new Promise(() => {}) // Never resolves
       );
 
       executor = new WaveExecutor({
@@ -427,7 +427,10 @@ describe('WaveExecutor', () => {
 
     test('should chunk array evenly (WE-15)', () => {
       const result = executor.chunkArray([1, 2, 3, 4], 2);
-      expect(result).toEqual([[1, 2], [3, 4]]);
+      expect(result).toEqual([
+        [1, 2],
+        [3, 4],
+      ]);
     });
 
     test('should handle uneven chunks (WE-16)', () => {
@@ -516,9 +519,7 @@ describe('WaveExecutor', () => {
       const waveResults = [
         {
           wave: 1,
-          results: [
-            { taskId: 't1', success: true, duration: 1000 },
-          ],
+          results: [{ taskId: 't1', success: true, duration: 1000 }],
         },
         {
           wave: 2,

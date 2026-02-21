@@ -103,7 +103,7 @@ class MetricsCollector {
 
     const schemaPath = path.join(
       this.projectRoot,
-      '.aios-core/quality/schemas/quality-metrics.schema.json',
+      '.aios-core/quality/schemas/quality-metrics.schema.json'
     );
 
     try {
@@ -251,11 +251,7 @@ class MetricsCollector {
     try {
       await this._ensureDataDir();
       metricsToSave.lastUpdated = new Date().toISOString();
-      await fs.writeFile(
-        this.dataFile,
-        JSON.stringify(metricsToSave, null, 2),
-        'utf8',
-      );
+      await fs.writeFile(this.dataFile, JSON.stringify(metricsToSave, null, 2), 'utf8');
       this._metrics = metricsToSave;
     } finally {
       await this._releaseLock();
@@ -327,16 +323,21 @@ class MetricsCollector {
     if (result.coderabbit) {
       metrics.layers.layer2.coderabbit = {
         active: true,
-        findingsCount: (metrics.layers.layer2.coderabbit?.findingsCount || 0) +
+        findingsCount:
+          (metrics.layers.layer2.coderabbit?.findingsCount || 0) +
           (result.coderabbit.findingsCount || 0),
         severityBreakdown: {
-          critical: (metrics.layers.layer2.coderabbit?.severityBreakdown?.critical || 0) +
+          critical:
+            (metrics.layers.layer2.coderabbit?.severityBreakdown?.critical || 0) +
             (result.coderabbit.severityBreakdown?.critical || 0),
-          high: (metrics.layers.layer2.coderabbit?.severityBreakdown?.high || 0) +
+          high:
+            (metrics.layers.layer2.coderabbit?.severityBreakdown?.high || 0) +
             (result.coderabbit.severityBreakdown?.high || 0),
-          medium: (metrics.layers.layer2.coderabbit?.severityBreakdown?.medium || 0) +
+          medium:
+            (metrics.layers.layer2.coderabbit?.severityBreakdown?.medium || 0) +
             (result.coderabbit.severityBreakdown?.medium || 0),
-          low: (metrics.layers.layer2.coderabbit?.severityBreakdown?.low || 0) +
+          low:
+            (metrics.layers.layer2.coderabbit?.severityBreakdown?.low || 0) +
             (result.coderabbit.severityBreakdown?.low || 0),
         },
       };
@@ -359,8 +360,8 @@ class MetricsCollector {
         .map(([cat]) => cat);
 
       metrics.layers.layer2.quinn = {
-        findingsCount: (metrics.layers.layer2.quinn?.findingsCount || 0) +
-          (result.quinn.findingsCount || 0),
+        findingsCount:
+          (metrics.layers.layer2.quinn?.findingsCount || 0) + (result.quinn.findingsCount || 0),
         topCategories,
       };
     }
@@ -368,10 +369,7 @@ class MetricsCollector {
     // Calculate auto-catch rate
     const layer2History = metrics.history.filter((r) => r.layer === 2);
     if (layer2History.length > 0) {
-      const totalFindings = layer2History.reduce(
-        (sum, r) => sum + (r.findingsCount || 0),
-        0,
-      );
+      const totalFindings = layer2History.reduce((sum, r) => sum + (r.findingsCount || 0), 0);
       // Auto-catch rate = findings caught automatically / total potential issues
       // Estimate: if passed with 0 findings, assume 1 potential issue caught
       const totalRuns = layer2History.length;
@@ -450,18 +448,14 @@ class MetricsCollector {
     const today = new Date().toISOString().split('T')[0];
 
     // Calculate daily pass rate
-    const todayRuns = metrics.history.filter((r) =>
-      r.timestamp.startsWith(today),
-    );
+    const todayRuns = metrics.history.filter((r) => r.timestamp.startsWith(today));
 
     if (todayRuns.length > 0) {
       const passedToday = todayRuns.filter((r) => r.passed).length;
       const passRate = passedToday / todayRuns.length;
 
       // Update or add today's pass rate trend
-      const existingIndex = metrics.trends.passRates.findIndex(
-        (t) => t.date === today,
-      );
+      const existingIndex = metrics.trends.passRates.findIndex((t) => t.date === today);
       if (existingIndex >= 0) {
         metrics.trends.passRates[existingIndex].value = passRate;
       } else {
@@ -471,12 +465,9 @@ class MetricsCollector {
 
     // Update auto-catch rate trend (Layer 2)
     if (metrics.layers.layer2.autoCatchRate > 0) {
-      const existingIndex = metrics.trends.autoCatchRate.findIndex(
-        (t) => t.date === today,
-      );
+      const existingIndex = metrics.trends.autoCatchRate.findIndex((t) => t.date === today);
       if (existingIndex >= 0) {
-        metrics.trends.autoCatchRate[existingIndex].value =
-          metrics.layers.layer2.autoCatchRate;
+        metrics.trends.autoCatchRate[existingIndex].value = metrics.layers.layer2.autoCatchRate;
       } else {
         metrics.trends.autoCatchRate.push({
           date: today,
@@ -490,12 +481,8 @@ class MetricsCollector {
     cutoffDate.setDate(cutoffDate.getDate() - this.retentionDays);
     const cutoffStr = cutoffDate.toISOString().split('T')[0];
 
-    metrics.trends.passRates = metrics.trends.passRates.filter(
-      (t) => t.date >= cutoffStr,
-    );
-    metrics.trends.autoCatchRate = metrics.trends.autoCatchRate.filter(
-      (t) => t.date >= cutoffStr,
-    );
+    metrics.trends.passRates = metrics.trends.passRates.filter((t) => t.date >= cutoffStr);
+    metrics.trends.autoCatchRate = metrics.trends.autoCatchRate.filter((t) => t.date >= cutoffStr);
 
     this._metrics = metrics;
   }
@@ -509,9 +496,7 @@ class MetricsCollector {
     const cutoff = Date.now() - this.retentionDays * 24 * 60 * 60 * 1000;
     const originalCount = metrics.history.length;
 
-    metrics.history = metrics.history.filter(
-      (r) => new Date(r.timestamp).getTime() > cutoff,
-    );
+    metrics.history = metrics.history.filter((r) => new Date(r.timestamp).getTime() > cutoff);
 
     const removedCount = originalCount - metrics.history.length;
 
@@ -537,12 +522,14 @@ class MetricsCollector {
 
     const originalCount = metrics.history.length;
     metrics.history = metrics.history.filter(
-      (entry) => new Date(entry.timestamp).getTime() > cutoffTimestamp,
+      (entry) => new Date(entry.timestamp).getTime() > cutoffTimestamp
     );
 
     const removedCount = originalCount - metrics.history.length;
     if (removedCount > 0) {
-      console.log(`[metrics] Retention policy: removed ${removedCount} old entries (> ${metrics.retentionDays || this.retentionDays} days)`);
+      console.log(
+        `[metrics] Retention policy: removed ${removedCount} old entries (> ${metrics.retentionDays || this.retentionDays} days)`
+      );
     }
   }
 
@@ -554,9 +541,7 @@ class MetricsCollector {
    */
   async getLayerHistory(layer, limit = 100) {
     const metrics = await this.load();
-    const layerHistory = metrics.history
-      .filter((r) => r.layer === layer)
-      .slice(-limit);
+    const layerHistory = metrics.history.filter((r) => r.layer === layer).slice(-limit);
     return layerHistory;
   }
 
@@ -571,9 +556,7 @@ class MetricsCollector {
     if (format === 'csv') {
       // Export history as CSV
       const headers = ['timestamp', 'layer', 'passed', 'durationMs', 'findingsCount'];
-      const rows = metrics.history.map((r) =>
-        headers.map((h) => r[h] ?? '').join(','),
-      );
+      const rows = metrics.history.map((r) => headers.map((h) => r[h] ?? '').join(','));
       return [headers.join(','), ...rows].join('\n');
     }
 

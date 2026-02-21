@@ -44,7 +44,9 @@ describe('BobStatusWriter', () => {
     });
 
     it('should throw if projectRoot is not a string', () => {
-      expect(() => new BobStatusWriter(123)).toThrow('projectRoot is required and must be a string');
+      expect(() => new BobStatusWriter(123)).toThrow(
+        'projectRoot is required and must be a string'
+      );
     });
 
     it('should set correct paths', () => {
@@ -103,7 +105,7 @@ describe('BobStatusWriter', () => {
       const status2 = await fs.readJson(writer.statusPath);
 
       expect(new Date(status2.timestamp).getTime()).toBeGreaterThan(
-        new Date(status1.timestamp).getTime(),
+        new Date(status1.timestamp).getTime()
       );
     });
 
@@ -154,9 +156,7 @@ describe('BobStatusWriter', () => {
       await writer.completePhase('validation');
 
       const status = await fs.readJson(writer.statusPath);
-      const count = status.pipeline.completed_stages.filter(
-        (s) => s === 'validation',
-      ).length;
+      const count = status.pipeline.completed_stages.filter((s) => s === 'validation').length;
       expect(count).toBe(1);
     });
   });

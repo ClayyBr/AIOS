@@ -140,7 +140,7 @@ describe('Quality Gate Pipeline Integration', () => {
         changedFiles: ['tests/unit/something.test.js'],
       });
 
-      const testItem = checklist.items.find(i => i.id === 'test-coverage');
+      const testItem = checklist.items.find((i) => i.id === 'test-coverage');
       expect(testItem).toBeDefined();
     });
 
@@ -149,7 +149,7 @@ describe('Quality Gate Pipeline Integration', () => {
         changedFiles: ['config/app.yaml'],
       });
 
-      const configItem = checklist.items.find(i => i.id === 'config-changes');
+      const configItem = checklist.items.find((i) => i.id === 'config-changes');
       expect(configItem).toBeDefined();
     });
 
@@ -258,7 +258,7 @@ describe('Quality Gate Pipeline Integration', () => {
       const result = await manager.orchestrate();
 
       // All layers should be skipped
-      result.layers.forEach(layer => {
+      result.layers.forEach((layer) => {
         expect(layer.results[0].skipped).toBe(true);
       });
     });
@@ -343,10 +343,16 @@ describe('Smoke Tests', () => {
     });
 
     manager.layers.layer1.runCommand = jest.fn().mockResolvedValue({
-      exitCode: 0, stdout: '', stderr: '', duration: 100,
+      exitCode: 0,
+      stdout: '',
+      stderr: '',
+      duration: 100,
     });
     manager.layers.layer2.runCommand = jest.fn().mockResolvedValue({
-      exitCode: 0, stdout: '', stderr: '', duration: 100,
+      exitCode: 0,
+      stdout: '',
+      stderr: '',
+      duration: 100,
     });
 
     const result = await manager.orchestrate();
@@ -361,7 +367,10 @@ describe('Smoke Tests', () => {
     });
 
     manager.layers.layer1.runCommand = jest.fn().mockResolvedValue({
-      exitCode: 1, stdout: 'error', stderr: '', duration: 100,
+      exitCode: 1,
+      stdout: 'error',
+      stderr: '',
+      duration: 100,
     });
 
     const result = await manager.orchestrate();
@@ -378,7 +387,10 @@ describe('Smoke Tests', () => {
     });
 
     manager.layers.layer1.runCommand = jest.fn().mockResolvedValue({
-      exitCode: 0, stdout: '', stderr: '', duration: 100,
+      exitCode: 0,
+      stdout: '',
+      stderr: '',
+      duration: 100,
     });
 
     const result = await manager.runLayer(1);
@@ -395,10 +407,16 @@ describe('Smoke Tests', () => {
 
     // Pass case
     manager.layers.layer1.runCommand = jest.fn().mockResolvedValue({
-      exitCode: 0, stdout: '', stderr: '', duration: 100,
+      exitCode: 0,
+      stdout: '',
+      stderr: '',
+      duration: 100,
     });
     manager.layers.layer2.runCommand = jest.fn().mockResolvedValue({
-      exitCode: 0, stdout: '', stderr: '', duration: 100,
+      exitCode: 0,
+      stdout: '',
+      stderr: '',
+      duration: 100,
     });
 
     let result = await manager.orchestrate();
@@ -406,7 +424,10 @@ describe('Smoke Tests', () => {
 
     // Fail case
     manager.layers.layer1.runCommand = jest.fn().mockResolvedValue({
-      exitCode: 1, stdout: 'error', stderr: '', duration: 100,
+      exitCode: 1,
+      stdout: 'error',
+      stderr: '',
+      duration: 100,
     });
 
     result = await manager.orchestrate();

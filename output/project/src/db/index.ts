@@ -13,7 +13,7 @@ export const createConnection = (): TE.TaskEither<Error, mongoose.Mongoose> => {
   return pipe(
     TE.tryCatch(
       () => mongoose.connect(mongoUri),
-      (reason) => reason instanceof Error ? reason : new Error(String(reason))
+      (reason) => (reason instanceof Error ? reason : new Error(String(reason)))
     ),
     TE.mapLeft((error) => {
       logger.error('Database connection error:', error.message);

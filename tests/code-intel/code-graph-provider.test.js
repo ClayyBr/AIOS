@@ -1,6 +1,9 @@
 'use strict';
 
-const { CodeGraphProvider, TOOL_MAP } = require('../../.aios-core/core/code-intel/providers/code-graph-provider');
+const {
+  CodeGraphProvider,
+  TOOL_MAP,
+} = require('../../.aios-core/core/code-intel/providers/code-graph-provider');
 
 describe('CodeGraphProvider', () => {
   let provider;
@@ -40,7 +43,9 @@ describe('CodeGraphProvider', () => {
       });
 
       const result = await provider.findDefinition('foo');
-      expect(mockMcpCallFn).toHaveBeenCalledWith('code-graph', 'find_definition', { symbol: 'foo' });
+      expect(mockMcpCallFn).toHaveBeenCalledWith('code-graph', 'find_definition', {
+        symbol: 'foo',
+      });
       expect(result).toEqual({
         file: 'src/index.js',
         line: 42,

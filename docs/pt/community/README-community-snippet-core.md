@@ -37,11 +37,11 @@ Este repositório hospeda o **hub central da comunidade** para todos os projetos
 
 ### Repositórios Relacionados
 
-| Repositório                                                | Descrição                            | Licença        |
-| ---------------------------------------------------------- | ------------------------------------ | -------------- |
-| [aios-core](https://github.com/SynkraAI/aios-core)         | Framework principal (você está aqui) | MIT            |
-| [aios-squads](https://github.com/SynkraAI/aios-squads)     | AIOS Squads (ETL, Creator, MMOS)     | MIT            |
-| [mcp-ecosystem](https://github.com/SynkraAI/mcp-ecosystem) | Docker MCP Toolkit & configs de IDE  | Apache 2.0     |
+| Repositório                                                | Descrição                            | Licença    |
+| ---------------------------------------------------------- | ------------------------------------ | ---------- |
+| [aios-core](https://github.com/SynkraAI/aios-core)         | Framework principal (você está aqui) | MIT        |
+| [aios-squads](https://github.com/SynkraAI/aios-squads)     | AIOS Squads (ETL, Creator, MMOS)     | MIT        |
+| [mcp-ecosystem](https://github.com/SynkraAI/mcp-ecosystem) | Docker MCP Toolkit & configs de IDE  | Apache 2.0 |
 
 ### Contribuindo
 

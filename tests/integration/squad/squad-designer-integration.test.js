@@ -109,7 +109,7 @@ Order Management / E-commerce
 - PostgreSQL database
 - Redis caching
 - REST API endpoints
-`,
+`
       );
 
       // Step 2: Initialize Designer and Generator
@@ -222,12 +222,15 @@ Order Management / E-commerce
         minimalDocPath,
         `# Simple Task Manager
 Create, update, and delete tasks. Users can manage their task lists.
-`,
+`
       );
 
       const designer = new SquadDesigner({ designsPath: designsDir });
 
-      const docs = await designer.collectDocumentation({ docs: [minimalDocPath], domain: 'task-management' });
+      const docs = await designer.collectDocumentation({
+        docs: [minimalDocPath],
+        domain: 'task-management',
+      });
       const analysis = designer.analyzeDomain(docs);
 
       expect(analysis.domain).toBe('task-management');
@@ -241,15 +244,15 @@ Create, update, and delete tasks. Users can manage their task lists.
 
       await fs.writeFile(
         doc1Path,
-        '# Order Features\nCreate orders, update orders, cancel orders.',
+        '# Order Features\nCreate orders, update orders, cancel orders.'
       );
       await fs.writeFile(
         doc2Path,
-        '# Payment Features\nProcess payments via Stripe, refund payments.',
+        '# Payment Features\nProcess payments via Stripe, refund payments.'
       );
       await fs.writeFile(
         doc3Path,
-        '# Shipping Features\nCreate shipments, track packages via FedEx.',
+        '# Shipping Features\nCreate shipments, track packages via FedEx.'
       );
 
       const designer = new SquadDesigner({ designsPath: designsDir });
@@ -276,12 +279,15 @@ Create, update, and delete tasks. Users can manage their task lists.
       const docPath = path.join(docsDir, 'schema-test.md');
       await fs.writeFile(
         docPath,
-        '# Inventory System\nManage products and stock levels. Track inventory movements.',
+        '# Inventory System\nManage products and stock levels. Track inventory movements.'
       );
 
       const designer = new SquadDesigner({ designsPath: designsDir });
 
-      const docs = await designer.collectDocumentation({ docs: [docPath], domain: 'inventory-system' });
+      const docs = await designer.collectDocumentation({
+        docs: [docPath],
+        domain: 'inventory-system',
+      });
       const analysis = designer.analyzeDomain(docs);
       const agents = designer.generateAgentRecommendations(analysis);
       const tasks = designer.generateTaskRecommendations(analysis, agents);
@@ -332,7 +338,7 @@ Create, update, and delete tasks. Users can manage their task lists.
       const designer = new SquadDesigner({ designsPath: designsDir });
 
       await expect(
-        designer.collectDocumentation({ docs: ['/nonexistent/file.md'] }),
+        designer.collectDocumentation({ docs: ['/nonexistent/file.md'] })
       ).rejects.toThrow();
     });
 
@@ -353,7 +359,7 @@ Create, update, and delete tasks. Users can manage their task lists.
         invalidBlueprintPath,
         yaml.dump({
           squad: { name: 'InvalidName' }, // Invalid name format
-        }),
+        })
       );
 
       const generator = new SquadGenerator({ squadsPath: squadsDir });
@@ -382,7 +388,7 @@ Create, update, and delete tasks. Users can manage their task lists.
 
 ## Integrations
 - Auth0 API for authentication
-`,
+`
       );
 
       // Vague documentation
@@ -392,19 +398,25 @@ Create, update, and delete tasks. Users can manage their task lists.
         `# Some System
 
 It does things with stuff. Users can do stuff.
-`,
+`
       );
 
       const designer = new SquadDesigner({ designsPath: designsDir });
 
       // Analyze clear documentation
-      const clearDocs = await designer.collectDocumentation({ docs: [clearDocPath], domain: 'user-mgmt' });
+      const clearDocs = await designer.collectDocumentation({
+        docs: [clearDocPath],
+        domain: 'user-mgmt',
+      });
       const clearAnalysis = designer.analyzeDomain(clearDocs);
       const clearAgents = designer.generateAgentRecommendations(clearAnalysis);
       const clearTasks = designer.generateTaskRecommendations(clearAnalysis, clearAgents);
 
       // Analyze vague documentation
-      const vagueDocs = await designer.collectDocumentation({ docs: [vagueDocPath], domain: 'vague-system' });
+      const vagueDocs = await designer.collectDocumentation({
+        docs: [vagueDocPath],
+        domain: 'vague-system',
+      });
       const vagueAnalysis = designer.analyzeDomain(vagueDocs);
       const vagueAgents = designer.generateAgentRecommendations(vagueAnalysis);
       const vagueTasks = designer.generateTaskRecommendations(vagueAnalysis, vagueAgents);
@@ -437,7 +449,7 @@ It does things with stuff. Users can do stuff.
 Create items, update items, delete items, list items, search items.
 Entities: Item, Category, User.
 Integrations: ElasticSearch, Redis.
-`,
+`
       );
 
       const designer = new SquadDesigner({ designsPath: designsDir });
@@ -445,7 +457,10 @@ Integrations: ElasticSearch, Redis.
 
       const start = Date.now();
 
-      const docs = await designer.collectDocumentation({ docs: [perfDocPath], domain: 'perf-test' });
+      const docs = await designer.collectDocumentation({
+        docs: [perfDocPath],
+        domain: 'perf-test',
+      });
       const analysis = designer.analyzeDomain(docs);
       const agents = designer.generateAgentRecommendations(analysis);
       const tasks = designer.generateTaskRecommendations(analysis, agents);

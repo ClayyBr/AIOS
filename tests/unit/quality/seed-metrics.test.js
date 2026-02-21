@@ -117,7 +117,7 @@ describe('Seed Metrics Generator', () => {
       }
 
       const passRate = runs.filter((r) => r.passed).length / runs.length;
-      expect(passRate).toBeGreaterThan(0.90);
+      expect(passRate).toBeGreaterThan(0.9);
       expect(passRate).toBeLessThan(0.99);
     });
 
@@ -214,7 +214,9 @@ describe('Seed Metrics Generator', () => {
       expect(metrics.layers.layer1.passRate).toBeLessThanOrEqual(1);
 
       // Layer 1 should have more runs than Layer 3 (60% vs 10% probability)
-      expect(metrics.layers.layer1.totalRuns).toBeGreaterThanOrEqual(metrics.layers.layer3.totalRuns);
+      expect(metrics.layers.layer1.totalRuns).toBeGreaterThanOrEqual(
+        metrics.layers.layer3.totalRuns
+      );
     });
 
     it('should include CodeRabbit aggregates', () => {

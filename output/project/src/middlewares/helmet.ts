@@ -10,14 +10,14 @@ const helmetMiddleware = helmet({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'"], // Ajustar conforme necessário para scripts
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      imgSrc: ["'self'", "data:", "https://res.cloudinary.com"], // Ajustar para fontes de imagens
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+      imgSrc: ["'self'", 'data:', 'https://res.cloudinary.com'], // Ajustar para fontes de imagens
       connectSrc: ["'self'"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      fontSrc: ["'self'", 'https://fonts.gstatic.com'],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
-      frameSrc: ["'none'"]
-    }
+      frameSrc: ["'none'"],
+    },
   },
   // Proteção contra ataques de Clickjacking
   frameguard: { action: 'deny' },
@@ -29,10 +29,10 @@ const helmetMiddleware = helmet({
   hsts: {
     maxAge: 31536000, // 1 ano em segundos
     includeSubDomains: true,
-    preload: true
+    preload: true,
   },
   // Desativa o cache de requisições em alguns browsers
-  noCache: false
+  noCache: false,
 });
 
 export default helmetMiddleware;

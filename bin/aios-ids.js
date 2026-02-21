@@ -25,15 +25,25 @@
 'use strict';
 
 const path = require('path');
-const { RegistryLoader } = require(path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'registry-loader'));
-const { IncrementalDecisionEngine } = require(path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'incremental-decision-engine'));
-const { RegistryUpdater } = require(path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'registry-updater'));
-const { FrameworkGovernor } = require(path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'framework-governor'));
+const { RegistryLoader } = require(
+  path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'registry-loader')
+);
+const { IncrementalDecisionEngine } = require(
+  path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'incremental-decision-engine')
+);
+const { RegistryUpdater } = require(
+  path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'registry-updater')
+);
+const { FrameworkGovernor } = require(
+  path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'framework-governor')
+);
 
 // Optional: RegistryHealer (IDS-4a — may not exist yet)
 let RegistryHealer = null;
 try {
-  RegistryHealer = require(path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'registry-healer')).RegistryHealer;
+  RegistryHealer = require(
+    path.resolve(__dirname, '..', '.aios-core', 'core', 'ids', 'registry-healer')
+  ).RegistryHealer;
 } catch (_err) {
   // RegistryHealer not available — health commands degrade gracefully
 }
@@ -112,13 +122,16 @@ function collectPositionalArgs(startIdx) {
 
 function formatRecommendation(rec, index) {
   const lines = [];
-  const icon = rec.decision === 'REUSE' ? '\u2705' : rec.decision === 'ADAPT' ? '\u{1F504}' : '\u2728';
+  const icon =
+    rec.decision === 'REUSE' ? '\u2705' : rec.decision === 'ADAPT' ? '\u{1F504}' : '\u2728';
   lines.push(`  ${index + 1}. ${icon} ${rec.decision} (${rec.confidence}) — ${rec.entityId}`);
   lines.push(`     Path: ${rec.entityPath}`);
   lines.push(`     Type: ${rec.entityType} | Relevance: ${(rec.relevanceScore * 100).toFixed(1)}%`);
   lines.push(`     ${rec.rationale}`);
   if (rec.adaptationImpact) {
-    lines.push(`     Impact: ${rec.adaptationImpact.directCount} direct, ${rec.adaptationImpact.indirectCount} indirect consumers`);
+    lines.push(
+      `     Impact: ${rec.adaptationImpact.directCount} direct, ${rec.adaptationImpact.indirectCount} indirect consumers`
+    );
   }
   return lines.join('\n');
 }
@@ -126,7 +139,7 @@ function formatRecommendation(rec, index) {
 function formatCreateReviewEntry(entry) {
   const statusIcon = {
     'promotion-candidate': '\u{1F31F}',
-    'monitoring': '\u{1F50D}',
+    monitoring: '\u{1F50D}',
     'deprecation-review': '\u26A0\uFE0F',
   };
   const icon = statusIcon[entry.status] || '\u2753';
@@ -185,7 +198,9 @@ function runQuery() {
   // Formatted output
   console.log(`\nIDS Analysis: "${intent}"`);
   console.log(`${'─'.repeat(60)}`);
-  console.log(`Registry: ${result.summary.totalEntities} entities | Matches: ${result.summary.matchesFound}`);
+  console.log(
+    `Registry: ${result.summary.totalEntities} entities | Matches: ${result.summary.matchesFound}`
+  );
   console.log(`Decision: ${result.summary.decision} (${result.summary.confidence} confidence)`);
 
   if (result.warnings && result.warnings.length > 0) {
@@ -370,7 +385,9 @@ function formatHealthReport(result) {
     };
     const icon = severityIcon[issue.severity] || '\u2753';
     const healable = issue.autoHealable ? ' [auto-fixable]' : ' [manual]';
-    console.log(`  ${icon} ${issue.severity.toUpperCase()} ${issue.ruleId}: ${issue.entityId}${healable}`);
+    console.log(
+      `  ${icon} ${issue.severity.toUpperCase()} ${issue.ruleId}: ${issue.entityId}${healable}`
+    );
     console.log(`     ${issue.description}`);
   }
 
@@ -408,7 +425,9 @@ function formatHealingReport(result) {
   if (result.errors.length > 0) {
     console.log('\nErrors:');
     for (const item of result.errors) {
-      console.log(`  \u274C ${item.ruleId || 'unknown'}: ${item.entityId || 'batch'} — ${item.error}`);
+      console.log(
+        `  \u274C ${item.ruleId || 'unknown'}: ${item.entityId || 'batch'} — ${item.error}`
+      );
     }
   }
 }

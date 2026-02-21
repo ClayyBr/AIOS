@@ -14,4 +14,7 @@ const ContactFormSchema: Schema = new Schema({
 
 ContactFormSchema.index({ email: 1 });
 
-export const ContactFormModel = mongoose.model<ContactFormDocument>('ContactForm', ContactFormSchema);
+export const ContactFormModel = mongoose.model<ContactFormDocument>(
+  'ContactForm',
+  ContactFormSchema
+);

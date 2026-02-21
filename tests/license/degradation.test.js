@@ -76,7 +76,7 @@ describe('degradation', () => {
       const result = withGracefulDegradation(
         'pro.squads.premium',
         () => 'pro-result',
-        () => 'fallback-result',
+        () => 'fallback-result'
       );
 
       expect(result).toBe('pro-result');
@@ -88,7 +88,7 @@ describe('degradation', () => {
       const result = withGracefulDegradation(
         'pro.squads.premium',
         () => 'pro-result',
-        () => 'fallback-result',
+        () => 'fallback-result'
       );
 
       expect(result).toBe('fallback-result');
@@ -98,11 +98,11 @@ describe('degradation', () => {
       withGracefulDegradation(
         'pro.squads.premium',
         () => 'pro-result',
-        () => 'fallback-result',
+        () => 'fallback-result'
       );
 
       expect(consoleLogSpy).toHaveBeenCalled();
-      const logOutput = consoleLogSpy.mock.calls.map(c => c[0]).join(' ');
+      const logOutput = consoleLogSpy.mock.calls.map((c) => c[0]).join(' ');
       expect(logOutput).toContain('requires an active AIOS Pro license');
     });
 
@@ -111,18 +111,15 @@ describe('degradation', () => {
         'pro.squads.premium',
         () => 'pro-result',
         () => 'fallback-result',
-        { silent: true },
+        { silent: true }
       );
 
-      const logOutput = consoleLogSpy.mock.calls.map(c => c[0] || '').join(' ');
+      const logOutput = consoleLogSpy.mock.calls.map((c) => c[0] || '').join(' ');
       expect(logOutput).not.toContain('requires an active AIOS Pro license');
     });
 
     it('should return null when no fallback provided', () => {
-      const result = withGracefulDegradation(
-        'pro.squads.premium',
-        () => 'pro-result',
-      );
+      const result = withGracefulDegradation('pro.squads.premium', () => 'pro-result');
 
       expect(result).toBeNull();
     });
@@ -175,7 +172,7 @@ describe('degradation', () => {
 
       writeLicenseCache(
         createTestCache(['pro.squads.*'], { activatedAt: activatedAt.toISOString() }),
-        testDir,
+        testDir
       );
 
       expect(isInDegradedMode()).toBe(false);
@@ -187,7 +184,7 @@ describe('degradation', () => {
 
       writeLicenseCache(
         createTestCache(['pro.squads.*'], { activatedAt: activatedAt.toISOString() }),
-        testDir,
+        testDir
       );
 
       expect(isInDegradedMode()).toBe(true);
@@ -211,7 +208,7 @@ describe('degradation', () => {
 
       writeLicenseCache(
         createTestCache(['pro.squads.*'], { activatedAt: activatedAt.toISOString() }),
-        testDir,
+        testDir
       );
 
       const status = getDegradationStatus();
@@ -227,7 +224,7 @@ describe('degradation', () => {
 
       writeLicenseCache(
         createTestCache(['pro.squads.*'], { activatedAt: activatedAt.toISOString() }),
-        testDir,
+        testDir
       );
 
       const status = getDegradationStatus();

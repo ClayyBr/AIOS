@@ -204,7 +204,7 @@ describe('SquadDownloader', () => {
     it('should create error with code and message', () => {
       const error = new SquadDownloaderError(
         DownloaderErrorCodes.SQUAD_NOT_FOUND,
-        'Squad not found',
+        'Squad not found'
       );
 
       expect(error).toBeInstanceOf(Error);
@@ -217,7 +217,7 @@ describe('SquadDownloader', () => {
       const error = new SquadDownloaderError(
         DownloaderErrorCodes.SQUAD_NOT_FOUND,
         'Squad not found',
-        'Use --list to see available squads',
+        'Use --list to see available squads'
       );
 
       expect(error.suggestion).toBe('Use --list to see available squads');
@@ -227,7 +227,7 @@ describe('SquadDownloader', () => {
       const error = new SquadDownloaderError(
         DownloaderErrorCodes.SQUAD_NOT_FOUND,
         'Squad not found',
-        'Use --list',
+        'Use --list'
       );
 
       const str = error.toString();
@@ -299,10 +299,7 @@ describe('SquadDownloader', () => {
       // Create existing squad directory
       const squadDir = path.join(TEMP_PATH, 'existing-squad');
       await fs.mkdir(squadDir, { recursive: true });
-      await fs.writeFile(
-        path.join(squadDir, 'squad.yaml'),
-        'name: existing-squad\nversion: 1.0.0',
-      );
+      await fs.writeFile(path.join(squadDir, 'squad.yaml'), 'name: existing-squad\nversion: 1.0.0');
 
       // Mock registry fetch
       https.get.mockImplementation((url, options, callback) => {
@@ -311,9 +308,7 @@ describe('SquadDownloader', () => {
         return { on: jest.fn() };
       });
 
-      await expect(downloader.download('existing-squad')).rejects.toThrow(
-        SquadDownloaderError,
-      );
+      await expect(downloader.download('existing-squad')).rejects.toThrow(SquadDownloaderError);
       await expect(downloader.download('existing-squad')).rejects.toMatchObject({
         code: 'SQUAD_EXISTS',
       });
@@ -351,7 +346,7 @@ describe('SquadDownloader', () => {
 
       // Should not throw SQUAD_EXISTS
       await expect(
-        overwriteDownloader.download('etl-squad', { validate: false }),
+        overwriteDownloader.download('etl-squad', { validate: false })
       ).resolves.toBeDefined();
     }, 15000);
 
@@ -362,9 +357,7 @@ describe('SquadDownloader', () => {
         return { on: jest.fn() };
       });
 
-      await expect(downloader.download('non-existent-squad')).rejects.toThrow(
-        SquadDownloaderError,
-      );
+      await expect(downloader.download('non-existent-squad')).rejects.toThrow(SquadDownloaderError);
       await expect(downloader.download('non-existent-squad')).rejects.toMatchObject({
         code: 'SQUAD_NOT_FOUND',
       });
@@ -447,10 +440,14 @@ describe('SquadDownloader', () => {
 
     it('should handle rate limit response', async () => {
       https.get.mockImplementation((url, options, callback) => {
-        const response = createMockResponse(403, {}, {
-          'x-ratelimit-remaining': '0',
-          'x-ratelimit-reset': Math.floor(Date.now() / 1000) + 3600,
-        });
+        const response = createMockResponse(
+          403,
+          {},
+          {
+            'x-ratelimit-remaining': '0',
+            'x-ratelimit-reset': Math.floor(Date.now() / 1000) + 3600,
+          }
+        );
         callback(response);
         return { on: jest.fn() };
       });
@@ -531,7 +528,7 @@ describe('SquadDownloader', () => {
 
       expect(consoleLogSpy).toHaveBeenCalled();
       expect(consoleLogSpy.mock.calls.some((call) => call[0].includes('[SquadDownloader]'))).toBe(
-        true,
+        true
       );
     });
 
@@ -545,7 +542,7 @@ describe('SquadDownloader', () => {
       await downloader.listAvailable();
 
       expect(
-        consoleLogSpy.mock.calls.filter((call) => call[0].includes('[SquadDownloader]')).length,
+        consoleLogSpy.mock.calls.filter((call) => call[0].includes('[SquadDownloader]')).length
       ).toBe(0);
     });
   });

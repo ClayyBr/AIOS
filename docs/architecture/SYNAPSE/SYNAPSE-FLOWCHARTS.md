@@ -149,12 +149,12 @@ flowchart TD
 
 ### Tabela de Brackets
 
-| Bracket | Context % | Layers Ativos | Token Budget | Memory Hints | Handoff Warning |
-|---------|-----------|---------------|-------------|-------------|-----------------|
-| FRESH | 60-100% | L0, L1, L2, L7 | 800 | Nao | Nao |
-| MODERATE | 40-60% | L0-L7 (todos) | 1500 | Nao | Nao |
-| DEPLETED | 25-40% | L0-L7 (todos) | 2000 | Sim | Nao |
-| CRITICAL | 0-25% | L0-L7 (todos) | 2500 | Sim | Sim |
+| Bracket  | Context % | Layers Ativos  | Token Budget | Memory Hints | Handoff Warning |
+| -------- | --------- | -------------- | ------------ | ------------ | --------------- |
+| FRESH    | 60-100%   | L0, L1, L2, L7 | 800          | Nao          | Nao             |
+| MODERATE | 40-60%    | L0-L7 (todos)  | 1500         | Nao          | Nao             |
+| DEPLETED | 25-40%    | L0-L7 (todos)  | 2000         | Sim          | Nao             |
+| CRITICAL | 0-25%     | L0-L7 (todos)  | 2500         | Sim          | Sim             |
 
 ---
 
@@ -196,15 +196,15 @@ flowchart TD
 
 ### Domain Attributes
 
-| Attribute | Formato | Funcao |
-|-----------|---------|--------|
-| `{DOMAIN}_STATE` | `active\|inactive` | Liga/desliga o domain |
-| `{DOMAIN}_ALWAYS_ON` | `true` | Carrega em TODO prompt |
-| `{DOMAIN}_NON_NEGOTIABLE` | `true` | Nao pode ser desligado |
-| `{DOMAIN}_AGENT_TRIGGER` | `agent_id` | Ativa quando agent ativo |
-| `{DOMAIN}_WORKFLOW_TRIGGER` | `workflow_id` | Ativa quando workflow ativo |
-| `{DOMAIN}_RECALL` | `kw1,kw2,...` | Ativa por keyword match |
-| `{DOMAIN}_EXCLUDE` | `skip1,skip2,...` | Exclui quando keyword presente |
+| Attribute                   | Formato            | Funcao                         |
+| --------------------------- | ------------------ | ------------------------------ |
+| `{DOMAIN}_STATE`            | `active\|inactive` | Liga/desliga o domain          |
+| `{DOMAIN}_ALWAYS_ON`        | `true`             | Carrega em TODO prompt         |
+| `{DOMAIN}_NON_NEGOTIABLE`   | `true`             | Nao pode ser desligado         |
+| `{DOMAIN}_AGENT_TRIGGER`    | `agent_id`         | Ativa quando agent ativo       |
+| `{DOMAIN}_WORKFLOW_TRIGGER` | `workflow_id`      | Ativa quando workflow ativo    |
+| `{DOMAIN}_RECALL`           | `kw1,kw2,...`      | Ativa por keyword match        |
+| `{DOMAIN}_EXCLUDE`          | `skip1,skip2,...`  | Exclui quando keyword presente |
 
 ---
 
@@ -294,13 +294,13 @@ flowchart TD
 
 ### Separacao de Responsabilidades
 
-| Aspecto | UAP (Activation Pipeline) | SYNAPSE Engine |
-|---------|--------------------------|----------------|
-| **Trigger** | `@agent` command (uma vez) | Cada prompt (automatico) |
-| **Funcao** | Greeting + agent config | Context injection |
-| **Performance** | 168ms p50 (one-shot) | <100ms per-prompt |
-| **Output** | Greeting visual no terminal | `<synapse-rules>` invisivel |
-| **Session** | Escreve `active_agent` | Le `active_agent` para L2 |
+| Aspecto         | UAP (Activation Pipeline)   | SYNAPSE Engine              |
+| --------------- | --------------------------- | --------------------------- |
+| **Trigger**     | `@agent` command (uma vez)  | Cada prompt (automatico)    |
+| **Funcao**      | Greeting + agent config     | Context injection           |
+| **Performance** | 168ms p50 (one-shot)        | <100ms per-prompt           |
+| **Output**      | Greeting visual no terminal | `<synapse-rules>` invisivel |
+| **Session**     | Escreve `active_agent`      | Le `active_agent` para L2   |
 
 ---
 
@@ -355,14 +355,14 @@ flowchart TD
 
 ### Caracteristicas do MemoryBridge
 
-| Aspecto | Detalhe |
-|---------|---------|
-| **Tipo** | Consumer only (read-only) |
-| **Feature Gate** | `pro.memory.synapse` |
-| **Timeout** | 15ms (hard limit) |
-| **Fallback** | return [] (graceful no-op) |
-| **Cache** | Session-level via provider |
-| **Lazy Load** | Provider carregado sob demanda |
+| Aspecto          | Detalhe                        |
+| ---------------- | ------------------------------ |
+| **Tipo**         | Consumer only (read-only)      |
+| **Feature Gate** | `pro.memory.synapse`           |
+| **Timeout**      | 15ms (hard limit)              |
+| **Fallback**     | return [] (graceful no-op)     |
+| **Cache**        | Session-level via provider     |
+| **Lazy Load**    | Provider carregado sob demanda |
 
 ---
 
@@ -409,19 +409,19 @@ flowchart TD
 
 Quando o token budget e excedido, secoes sao removidas do FIM primeiro:
 
-| # | Secao | Protegida? | Truncamento |
-|---|-------|-----------|-------------|
-| 1 | CONTEXT_BRACKET | Sim | Nunca removida |
-| 2 | CONSTITUTION | Sim | Nunca removida |
-| 3 | AGENT | Sim | Nunca removida |
-| 4 | WORKFLOW | Nao | Removida por ultimo |
-| 5 | TASK | Nao | Removida 5o |
-| 6 | SQUAD | Nao | Removida 4o |
-| 7 | KEYWORD | Nao | Removida 2o |
-| 8 | MEMORY_HINTS | Nao | Removida 3o |
-| 9 | STAR_COMMANDS | Nao | Removida 4o |
-| 10 | DEVMODE | Nao | Removida 5o |
-| 11 | SUMMARY | Nao | Removida 1o (primeiro a sair) |
+| #   | Secao           | Protegida? | Truncamento                   |
+| --- | --------------- | ---------- | ----------------------------- |
+| 1   | CONTEXT_BRACKET | Sim        | Nunca removida                |
+| 2   | CONSTITUTION    | Sim        | Nunca removida                |
+| 3   | AGENT           | Sim        | Nunca removida                |
+| 4   | WORKFLOW        | Nao        | Removida por ultimo           |
+| 5   | TASK            | Nao        | Removida 5o                   |
+| 6   | SQUAD           | Nao        | Removida 4o                   |
+| 7   | KEYWORD         | Nao        | Removida 2o                   |
+| 8   | MEMORY_HINTS    | Nao        | Removida 3o                   |
+| 9   | STAR_COMMANDS   | Nao        | Removida 4o                   |
+| 10  | DEVMODE         | Nao        | Removida 5o                   |
+| 11  | SUMMARY         | Nao        | Removida 1o (primeiro a sair) |
 
 ---
 
@@ -752,7 +752,7 @@ flowchart LR
 
 ---
 
-## 15. Diagnostics Pipeline — *synapse-diagnose (SYN-13/SYN-14)
+## 15. Diagnostics Pipeline — \*synapse-diagnose (SYN-13/SYN-14)
 
 O comando `*synapse-diagnose` executa 10 collectors em sequencia,
 cada um isolado via `_safeCollect()` (nunca crasha o diagnostico inteiro).
@@ -791,20 +791,20 @@ flowchart TD
 
 ### Report Sections (12 total)
 
-| # | Section | Collector Source | Key Data |
-|---|---------|----------------|----------|
-| 1 | Header | All | Timestamp, bracket, overall status |
-| 2 | Hook Status | hook-collector | Registration checks, .claude/hooks/ |
-| 3 | Session Status | session-collector | Active agent, prompt count, bridge |
-| 4 | Manifest Integrity | manifest-collector | Domain file validation |
-| 5 | Pipeline Simulation | pipeline-collector | Active layers for current bracket |
-| 6 | UAP Bridge Status | uap-collector | _active-agent.json, quality |
-| 7 | Gaps & Recommendations | All (aggregated) | Prioritized gap list |
-| 8 | Timing Analysis | timing-collector | Per-loader + per-layer timing |
-| 9 | Context Quality | quality-collector | Weighted scoring, grade A-F |
-| 10 | Consistency Checks | consistency-collector | 4 cross-pipeline validations |
-| 11 | Output Analysis | output-analyzer | Per-component quality assessment |
-| 12 | Relevance Matrix | relevance-matrix | Agent-specific importance map |
+| #   | Section                | Collector Source      | Key Data                            |
+| --- | ---------------------- | --------------------- | ----------------------------------- |
+| 1   | Header                 | All                   | Timestamp, bracket, overall status  |
+| 2   | Hook Status            | hook-collector        | Registration checks, .claude/hooks/ |
+| 3   | Session Status         | session-collector     | Active agent, prompt count, bridge  |
+| 4   | Manifest Integrity     | manifest-collector    | Domain file validation              |
+| 5   | Pipeline Simulation    | pipeline-collector    | Active layers for current bracket   |
+| 6   | UAP Bridge Status      | uap-collector         | \_active-agent.json, quality        |
+| 7   | Gaps & Recommendations | All (aggregated)      | Prioritized gap list                |
+| 8   | Timing Analysis        | timing-collector      | Per-loader + per-layer timing       |
+| 9   | Context Quality        | quality-collector     | Weighted scoring, grade A-F         |
+| 10  | Consistency Checks     | consistency-collector | 4 cross-pipeline validations        |
+| 11  | Output Analysis        | output-analyzer       | Per-component quality assessment    |
+| 12  | Relevance Matrix       | relevance-matrix      | Agent-specific importance map       |
 
 ### Quality Scoring Formula
 
@@ -834,12 +834,12 @@ flowchart LR
 
 ### Staleness & Degradation
 
-| Condition | Threshold | Action |
-|-----------|-----------|--------|
-| Fresh data | < 30 min | Score at 100% |
-| Stale data | > 30 min | Score at 50% (degradation) |
-| UAP stale (normal) | > 30 min after activation | Expected in long sessions |
-| Hook stale | > 30 min since last prompt | Unusual — possible issue |
+| Condition          | Threshold                  | Action                     |
+| ------------------ | -------------------------- | -------------------------- |
+| Fresh data         | < 30 min                   | Score at 100%              |
+| Stale data         | > 30 min                   | Score at 50% (degradation) |
+| UAP stale (normal) | > 30 min after activation  | Expected in long sessions  |
+| Hook stale         | > 30 min since last prompt | Unusual — possible issue   |
 
 ---
 
@@ -914,17 +914,17 @@ sequenceDiagram
 
 ### Consistency Checks (4 validations)
 
-| Check | What it validates | PASS condition |
-|-------|-------------------|---------------|
-| Bracket | Hook bracket is known value | FRESH/MODERATE/DEPLETED/CRITICAL |
-| Agent | UAP agentId matches _active-agent.json | IDs match |
-| Timestamp | UAP and Hook timestamps within 10 min | Gap < 600s |
-| Quality | UAP quality aligns with Hook layer count | full+layers or fallback |
+| Check     | What it validates                        | PASS condition                   |
+| --------- | ---------------------------------------- | -------------------------------- |
+| Bracket   | Hook bracket is known value              | FRESH/MODERATE/DEPLETED/CRITICAL |
+| Agent     | UAP agentId matches \_active-agent.json  | IDs match                        |
+| Timestamp | UAP and Hook timestamps within 10 min    | Gap < 600s                       |
+| Quality   | UAP quality aligns with Hook layer count | full+layers or fallback          |
 
 ---
 
-*Documento gerado por @architect (Aria)*
-*Baseado na implementacao real do codebase — nao especulativo*
-*Atualizado: 2026-02-14 — SYN-14 Diagnostics v2*
+_Documento gerado por @architect (Aria)_
+_Baseado na implementacao real do codebase — nao especulativo_
+_Atualizado: 2026-02-14 — SYN-14 Diagnostics v2_
 
 — Aria, arquitetando o futuro 🏗️

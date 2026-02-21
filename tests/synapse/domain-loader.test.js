@@ -52,23 +52,26 @@ describe('parseManifest', () => {
   test('should parse a valid manifest with all domain attributes', () => {
     // Given: a manifest file with all supported attributes
     const manifestPath = path.join(tempDir, 'manifest');
-    fs.writeFileSync(manifestPath, [
-      '# SYNAPSE Manifest',
-      'GLOBAL_STATE=active',
-      'GLOBAL_ALWAYS_ON=true',
-      'CONSTITUTION_STATE=active',
-      'CONSTITUTION_ALWAYS_ON=true',
-      'CONSTITUTION_NON_NEGOTIABLE=true',
-      'AGENT_DEV_STATE=active',
-      'AGENT_DEV_AGENT_TRIGGER=dev',
-      'WORKFLOW_STORY_DEV_STATE=active',
-      'WORKFLOW_STORY_DEV_WORKFLOW_TRIGGER=story_development',
-      'MYDOMAIN_STATE=active',
-      'MYDOMAIN_RECALL=keyword1,keyword2',
-      'MYDOMAIN_EXCLUDE=skip,ignore',
-      'DEVMODE=false',
-      'GLOBAL_EXCLUDE=skip,ignore',
-    ].join('\n'));
+    fs.writeFileSync(
+      manifestPath,
+      [
+        '# SYNAPSE Manifest',
+        'GLOBAL_STATE=active',
+        'GLOBAL_ALWAYS_ON=true',
+        'CONSTITUTION_STATE=active',
+        'CONSTITUTION_ALWAYS_ON=true',
+        'CONSTITUTION_NON_NEGOTIABLE=true',
+        'AGENT_DEV_STATE=active',
+        'AGENT_DEV_AGENT_TRIGGER=dev',
+        'WORKFLOW_STORY_DEV_STATE=active',
+        'WORKFLOW_STORY_DEV_WORKFLOW_TRIGGER=story_development',
+        'MYDOMAIN_STATE=active',
+        'MYDOMAIN_RECALL=keyword1,keyword2',
+        'MYDOMAIN_EXCLUDE=skip,ignore',
+        'DEVMODE=false',
+        'GLOBAL_EXCLUDE=skip,ignore',
+      ].join('\n')
+    );
 
     // When: parsing the manifest
     const result = parseManifest(manifestPath);
@@ -135,13 +138,16 @@ describe('parseManifest', () => {
   test('should skip comments and empty lines', () => {
     // Given: manifest with comments and blank lines
     const manifestPath = path.join(tempDir, 'manifest');
-    fs.writeFileSync(manifestPath, [
-      '# This is a comment',
-      '',
-      '  # Another comment with leading spaces',
-      '  ',
-      'GLOBAL_STATE=active',
-    ].join('\n'));
+    fs.writeFileSync(
+      manifestPath,
+      [
+        '# This is a comment',
+        '',
+        '  # Another comment with leading spaces',
+        '  ',
+        'GLOBAL_STATE=active',
+      ].join('\n')
+    );
 
     // When: parsing
     const result = parseManifest(manifestPath);
@@ -154,12 +160,10 @@ describe('parseManifest', () => {
   test('should handle malformed lines gracefully', () => {
     // Given: manifest with malformed lines (no '=' sign)
     const manifestPath = path.join(tempDir, 'manifest');
-    fs.writeFileSync(manifestPath, [
-      'NO_EQUALS_SIGN',
-      'VALID_STATE=active',
-      '=no_key',
-      'ANOTHER_MALFORMED',
-    ].join('\n'));
+    fs.writeFileSync(
+      manifestPath,
+      ['NO_EQUALS_SIGN', 'VALID_STATE=active', '=no_key', 'ANOTHER_MALFORMED'].join('\n')
+    );
 
     // When: parsing
     const result = parseManifest(manifestPath);
@@ -198,11 +202,10 @@ describe('parseManifest', () => {
   test('should skip keys with no known suffix', () => {
     // Given: manifest with keys that have no recognized suffix
     const manifestPath = path.join(tempDir, 'manifest');
-    fs.writeFileSync(manifestPath, [
-      'RANDOM_KEY=value',
-      'ANOTHER_UNKNOWN=data',
-      'GLOBAL_STATE=active',
-    ].join('\n'));
+    fs.writeFileSync(
+      manifestPath,
+      ['RANDOM_KEY=value', 'ANOTHER_UNKNOWN=data', 'GLOBAL_STATE=active'].join('\n')
+    );
 
     // When: parsing
     const result = parseManifest(manifestPath);
@@ -239,12 +242,15 @@ describe('loadDomainFile', () => {
   test('should load domain file in KEY=VALUE format', () => {
     // Given: a domain file with DOMAIN_RULE_N=text format
     const domainPath = path.join(tempDir, 'agent-dev');
-    fs.writeFileSync(domainPath, [
-      '# Agent Dev Domain Rules',
-      'AGENT_DEV_RULE_1=Always use kebab-case for file names',
-      'AGENT_DEV_RULE_2=Follow conventional commits',
-      'AGENT_DEV_RULE_3=Write tests for every feature',
-    ].join('\n'));
+    fs.writeFileSync(
+      domainPath,
+      [
+        '# Agent Dev Domain Rules',
+        'AGENT_DEV_RULE_1=Always use kebab-case for file names',
+        'AGENT_DEV_RULE_2=Follow conventional commits',
+        'AGENT_DEV_RULE_3=Write tests for every feature',
+      ].join('\n')
+    );
 
     // When: loading the domain file
     const rules = loadDomainFile(domainPath);
@@ -260,12 +266,15 @@ describe('loadDomainFile', () => {
   test('should load domain file in plain text format', () => {
     // Given: a domain file with plain text lines
     const domainPath = path.join(tempDir, 'constitution');
-    fs.writeFileSync(domainPath, [
-      '# Constitution Rules',
-      'CLI First is non-negotiable',
-      'Story-driven development always',
-      'No invention beyond specs',
-    ].join('\n'));
+    fs.writeFileSync(
+      domainPath,
+      [
+        '# Constitution Rules',
+        'CLI First is non-negotiable',
+        'Story-driven development always',
+        'No invention beyond specs',
+      ].join('\n')
+    );
 
     // When: loading the domain file
     const rules = loadDomainFile(domainPath);
@@ -304,13 +313,16 @@ describe('loadDomainFile', () => {
   test('should extract AUTH and RULE entries from agent domain files', () => {
     // Given: agent domain file with AUTH + RULE keys
     const domainPath = path.join(tempDir, 'agent-devops');
-    fs.writeFileSync(domainPath, [
-      '# Agent devops domain',
-      'AGENT_DEVOPS_AUTH_0=EXCLUSIVE: git push',
-      'AGENT_DEVOPS_AUTH_1=EXCLUSIVE: gh pr create',
-      'AGENT_DEVOPS_RULE_0=Run pre-push quality gates',
-      'AGENT_DEVOPS_RULE_1=Confirm version bump with user',
-    ].join('\n'));
+    fs.writeFileSync(
+      domainPath,
+      [
+        '# Agent devops domain',
+        'AGENT_DEVOPS_AUTH_0=EXCLUSIVE: git push',
+        'AGENT_DEVOPS_AUTH_1=EXCLUSIVE: gh pr create',
+        'AGENT_DEVOPS_RULE_0=Run pre-push quality gates',
+        'AGENT_DEVOPS_RULE_1=Confirm version bump with user',
+      ].join('\n')
+    );
 
     // When: loading the domain file
     const rules = loadDomainFile(domainPath);
@@ -327,12 +339,15 @@ describe('loadDomainFile', () => {
   test('should extract values from context bracket keys (RULE_BRACKET_N)', () => {
     // Given: context domain file with bracket-level keys
     const domainPath = path.join(tempDir, 'context');
-    fs.writeFileSync(domainPath, [
-      '# Context brackets',
-      'CONTEXT_RULE_FRESH_0=Context is fresh',
-      'CONTEXT_RULE_MODERATE_0=Standard context level',
-      'CONTEXT_RULE_CRITICAL_0=Context nearly exhausted',
-    ].join('\n'));
+    fs.writeFileSync(
+      domainPath,
+      [
+        '# Context brackets',
+        'CONTEXT_RULE_FRESH_0=Context is fresh',
+        'CONTEXT_RULE_MODERATE_0=Standard context level',
+        'CONTEXT_RULE_CRITICAL_0=Context nearly exhausted',
+      ].join('\n')
+    );
 
     // When: loading the domain file
     const rules = loadDomainFile(domainPath);
@@ -348,12 +363,15 @@ describe('loadDomainFile', () => {
   test('should extract values from constitution keys (RULE_ARTN_M)', () => {
     // Given: constitution domain file with article-numbered keys
     const domainPath = path.join(tempDir, 'constitution');
-    fs.writeFileSync(domainPath, [
-      '# Constitution',
-      'CONSTITUTION_RULE_ART1_0=CLI First (NON-NEGOTIABLE)',
-      'CONSTITUTION_RULE_ART1_1=MUST: All functionality works via CLI first',
-      'CONSTITUTION_RULE_ART6_0=Absolute Imports (SHOULD)',
-    ].join('\n'));
+    fs.writeFileSync(
+      domainPath,
+      [
+        '# Constitution',
+        'CONSTITUTION_RULE_ART1_0=CLI First (NON-NEGOTIABLE)',
+        'CONSTITUTION_RULE_ART1_1=MUST: All functionality works via CLI first',
+        'CONSTITUTION_RULE_ART6_0=Absolute Imports (SHOULD)',
+      ].join('\n')
+    );
 
     // When: loading the domain file
     const rules = loadDomainFile(domainPath);
@@ -369,12 +387,15 @@ describe('loadDomainFile', () => {
   test('should extract values from commands keys (RULE_COMMAND_N)', () => {
     // Given: commands domain file with command-category keys
     const domainPath = path.join(tempDir, 'commands');
-    fs.writeFileSync(domainPath, [
-      '# Commands',
-      'COMMANDS_RULE_BRIEF_0=Use bullet points only',
-      'COMMANDS_RULE_DEV_0=Code over explanation',
-      'COMMANDS_RULE_SYNAPSE_STATUS_0=Display current SYNAPSE state',
-    ].join('\n'));
+    fs.writeFileSync(
+      domainPath,
+      [
+        '# Commands',
+        'COMMANDS_RULE_BRIEF_0=Use bullet points only',
+        'COMMANDS_RULE_DEV_0=Code over explanation',
+        'COMMANDS_RULE_SYNAPSE_STATUS_0=Display current SYNAPSE state',
+      ].join('\n')
+    );
 
     // When: loading the domain file
     const rules = loadDomainFile(domainPath);

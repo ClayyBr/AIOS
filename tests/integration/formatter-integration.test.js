@@ -1,6 +1,6 @@
 /**
  * Integration Tests for Output Formatter
- * 
+ *
  * Story: 6.1.6 - Output Formatter Implementation
  * Tests formatter integration with real task execution
  */
@@ -109,9 +109,9 @@ persona_profile:
 
     // 6. Verify metrics section last
     const lines = formattedOutput.split('\n');
-    const metricsIndex = lines.findIndex(line => line === '### Metrics');
-    const signatureIndex = lines.findIndex(line => line.includes('— Dex'));
-    
+    const metricsIndex = lines.findIndex((line) => line === '### Metrics');
+    const signatureIndex = lines.findIndex((line) => line.includes('— Dex'));
+
     expect(metricsIndex).toBeGreaterThan(-1);
     expect(signatureIndex).toBeGreaterThan(metricsIndex);
 
@@ -139,7 +139,7 @@ persona_profile:
     const lines = output.split('\n');
 
     // Find header start
-    const headerIndex = lines.findIndex(line => line === '## 📊 Task Execution Report');
+    const headerIndex = lines.findIndex((line) => line === '## 📊 Task Execution Report');
     expect(headerIndex).toBeGreaterThan(-1);
 
     // Duration should be on line 7 (headerIndex + 6)
@@ -201,4 +201,3 @@ persona_profile:
     expect(p95Time).toBeLessThan(50);
   });
 });
-

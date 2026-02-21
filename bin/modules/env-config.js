@@ -26,11 +26,7 @@ const chalk = require('chalk');
  * @returns {Promise<Object>} Configuration result
  */
 async function configureEnvironment(options = {}) {
-  const {
-    projectPath = process.cwd(),
-    wizardState = {},
-    onProgress = () => {},
-  } = options;
+  const { projectPath = process.cwd(), wizardState = {}, onProgress = () => {} } = options;
 
   const results = {
     success: false,
@@ -91,7 +87,6 @@ async function configureEnvironment(options = {}) {
 
     results.success = true;
     return results;
-
   } catch (error) {
     spinner.fail('Environment configuration failed');
     results.success = false;
@@ -228,7 +223,6 @@ async function generateEnvFile(projectPath, apiKeys, _wizardState) {
     }
 
     return { success: true, file: envPath };
-
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -249,7 +243,6 @@ async function generateEnvExampleFile(projectPath) {
     await fs.copy(templatePath, examplePath);
 
     return { success: true, file: examplePath };
-
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -273,11 +266,11 @@ async function ensureEnvInGitignore(projectPath) {
     // Check if .env is already in .gitignore
     if (!gitignoreContent.includes('.env')) {
       // Add .env to .gitignore
-      const envSection = '\n# Environment variables (contains secrets)\n.env\n.env.local\n.env.*.local\n';
+      const envSection =
+        '\n# Environment variables (contains secrets)\n.env\n.env.local\n.env.*.local\n';
       gitignoreContent += envSection;
       await fs.writeFile(gitignorePath, gitignoreContent, 'utf8');
     }
-
   } catch (error) {
     console.warn(chalk.yellow(`  Warning: Could not update .gitignore: ${error.message}`));
   }
@@ -309,7 +302,8 @@ async function generateCoreConfigYAML(projectPath, wizardState) {
     const installedMCPs = wizardState.installedMCPs || [];
 
     // Format IDE config files list
-    const ideConfigFiles = selectedIDEs.map(ide => `    - "${getIDEConfigFile(ide)}"`).join('\n') || '    []';
+    const ideConfigFiles =
+      selectedIDEs.map((ide) => `    - "${getIDEConfigFile(ide)}"`).join('\n') || '    []';
 
     const variables = {
       aiosVersion: '2.1.0',
@@ -338,7 +332,6 @@ async function generateCoreConfigYAML(projectPath, wizardState) {
     await fs.writeFile(yamlPath, template, 'utf8');
 
     return { success: true, file: yamlPath };
-
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -394,7 +387,7 @@ function validateEnvFormat(content) {
  *
  * @param {Object} results - Configuration results
  */
- 
+
 function displayConfigSummary(results) {
   console.log('');
   console.log(chalk.cyan('📊 Environment Configuration Summary:'));
@@ -402,7 +395,7 @@ function displayConfigSummary(results) {
 
   if (results.files.length > 0) {
     console.log(chalk.green('✓ Files created:'));
-    results.files.forEach(file => {
+    results.files.forEach((file) => {
       console.log(`  - ${path.basename(file)}`);
     });
     console.log('');
@@ -410,7 +403,7 @@ function displayConfigSummary(results) {
 
   if (results.skippedKeys.length > 0) {
     console.log(chalk.yellow('⏭️  Skipped API keys:'));
-    results.skippedKeys.forEach(key => {
+    results.skippedKeys.forEach((key) => {
       console.log(`  - ${key} (configure later in .env)`);
     });
     console.log('');
@@ -422,7 +415,6 @@ function displayConfigSummary(results) {
   console.log(chalk.gray('  3. Never commit .env file (already in .gitignore)'));
   console.log('');
 }
- 
 
 module.exports = {
   configureEnvironment,

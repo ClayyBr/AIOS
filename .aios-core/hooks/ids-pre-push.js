@@ -105,7 +105,9 @@ async function main() {
   }
 
   try {
-    const { RegistryUpdater } = require(path.resolve(REPO_ROOT, '.aios-core/core/ids/registry-updater.js'));
+    const { RegistryUpdater } = require(
+      path.resolve(REPO_ROOT, '.aios-core/core/ids/registry-updater.js')
+    );
     const updater = new RegistryUpdater();
     const result = await updater.processChanges(changes);
 

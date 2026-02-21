@@ -68,7 +68,7 @@ function validatePackageManager(packageManager) {
   if (!ALLOWED_PACKAGE_MANAGERS.includes(packageManager)) {
     throw new Error(
       `Invalid package manager: ${packageManager}. ` +
-      `Allowed: ${ALLOWED_PACKAGE_MANAGERS.join(', ')}`,
+        `Allowed: ${ALLOWED_PACKAGE_MANAGERS.join(', ')}`
     );
   }
 }
@@ -89,7 +89,7 @@ function hasExistingDependencies(projectPath = process.cwd()) {
   try {
     const contents = fs.readdirSync(nodeModulesPath);
     // node_modules exists and has more than just .bin or .cache
-    return contents.length > 0 && contents.some(item => !item.startsWith('.'));
+    return contents.length > 0 && contents.some((item) => !item.startsWith('.'));
   } catch {
     return false;
   }
@@ -155,8 +155,12 @@ function categorizeError(error) {
   const errorMsg = typeof error === 'string' ? error : error.message;
 
   // Network errors
-  if (errorMsg.includes('ENOTFOUND') || errorMsg.includes('ETIMEDOUT') ||
-      errorMsg.includes('EAI_AGAIN') || errorMsg.includes('fetch failed')) {
+  if (
+    errorMsg.includes('ENOTFOUND') ||
+    errorMsg.includes('ETIMEDOUT') ||
+    errorMsg.includes('EAI_AGAIN') ||
+    errorMsg.includes('fetch failed')
+  ) {
     return {
       category: 'network',
       message: 'Network connection failed',
@@ -165,8 +169,11 @@ function categorizeError(error) {
   }
 
   // Permission errors
-  if (errorMsg.includes('EACCES') || errorMsg.includes('EPERM') ||
-      errorMsg.includes('permission denied')) {
+  if (
+    errorMsg.includes('EACCES') ||
+    errorMsg.includes('EPERM') ||
+    errorMsg.includes('permission denied')
+  ) {
     return {
       category: 'permission',
       message: 'Permission denied',
@@ -198,7 +205,7 @@ function categorizeError(error) {
  * @returns {Promise<void>}
  */
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**

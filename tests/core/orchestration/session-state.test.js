@@ -248,7 +248,7 @@ describe('SessionState', () => {
 
     it('should throw if state not initialized', async () => {
       await expect(sessionState.updateSessionState({})).rejects.toThrow(
-        'Session state not initialized',
+        'Session state not initialized'
       );
     });
   });
@@ -366,7 +366,7 @@ describe('SessionState', () => {
 
       // Manually set old timestamp
       sessionState.state.session_state.last_updated = new Date(
-        Date.now() - 35 * 60 * 1000,
+        Date.now() - 35 * 60 * 1000
       ).toISOString();
       sessionState.state.session_state.last_action.type = ActionType.PHASE_CHANGE;
       await sessionState.save();
@@ -388,7 +388,7 @@ describe('SessionState', () => {
 
       // Manually set old timestamp but with PAUSE action
       sessionState.state.session_state.last_updated = new Date(
-        Date.now() - 35 * 60 * 1000,
+        Date.now() - 35 * 60 * 1000
       ).toISOString();
       sessionState.state.session_state.last_action.type = ActionType.PAUSE;
       await sessionState.save();
@@ -690,7 +690,7 @@ describe('SessionState Migration (ADR-011)', () => {
 
     await fs.writeFile(
       path.join(LEGACY_STATE_PATH, '11.3-state.yaml'),
-      require('js-yaml').dump(legacyState),
+      require('js-yaml').dump(legacyState)
     );
 
     // Create new session state instance with auto-migrate
@@ -720,7 +720,7 @@ describe('SessionState Migration (ADR-011)', () => {
 
     await fs.writeFile(
       path.join(LEGACY_STATE_PATH, '11.3-state.yaml'),
-      require('js-yaml').dump(legacyState),
+      require('js-yaml').dump(legacyState)
     );
 
     // Create instance with autoMigrate disabled

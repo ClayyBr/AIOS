@@ -36,7 +36,12 @@ function writeSynapseSession(agentId, quality, metrics) {
     const sessionsDir = path.join(this.projectRoot, '.synapse', 'sessions');
     if (!fsSync.existsSync(path.join(this.projectRoot, '.synapse'))) {
       const duration = Date.now() - start;
-      metrics.loaders.synapseSession = { duration, status: 'skipped', start, end: start + duration };
+      metrics.loaders.synapseSession = {
+        duration,
+        status: 'skipped',
+        start,
+        end: start + duration,
+      };
       return;
     }
     if (!fsSync.existsSync(sessionsDir)) {
@@ -54,7 +59,13 @@ function writeSynapseSession(agentId, quality, metrics) {
     metrics.loaders.synapseSession = { duration, status: 'ok', start, end: start + duration };
   } catch (error) {
     const duration = Date.now() - start;
-    metrics.loaders.synapseSession = { duration, status: 'error', start, end: start + duration, error: error.message };
+    metrics.loaders.synapseSession = {
+      duration,
+      status: 'error',
+      start,
+      end: start + duration,
+      error: error.message,
+    };
     console.warn(`[UnifiedActivationPipeline] SYNAPSE session write failed: ${error.message}`);
   }
 }
@@ -360,7 +371,9 @@ describe('UAP Session Bridge — Content Validation', () => {
       const metrics = createMetrics();
       callBridge(ctx, 'dev', quality, metrics);
 
-      const data = JSON.parse(fs.readFileSync(path.join(sessionsDir, '_active-agent.json'), 'utf8'));
+      const data = JSON.parse(
+        fs.readFileSync(path.join(sessionsDir, '_active-agent.json'), 'utf8')
+      );
       expect(data.activation_quality).toBe(quality);
     }
   });
@@ -574,9 +587,18 @@ describe('UAP Session Bridge — Edge Cases', () => {
 
   test('handles all 12 agent IDs without error', () => {
     const agentIds = [
-      'dev', 'qa', 'architect', 'pm', 'po', 'sm',
-      'analyst', 'data-engineer', 'ux-design-expert', 'devops',
-      'aios-master', 'content-creator',
+      'dev',
+      'qa',
+      'architect',
+      'pm',
+      'po',
+      'sm',
+      'analyst',
+      'data-engineer',
+      'ux-design-expert',
+      'devops',
+      'aios-master',
+      'content-creator',
     ];
 
     const sessionsDir = path.join(tmpDir, '.synapse', 'sessions');

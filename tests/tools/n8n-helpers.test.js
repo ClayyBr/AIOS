@@ -46,7 +46,7 @@ describeIntegration('n8n Tool Helpers', () => {
     });
 
     test('should have all required helper IDs', () => {
-      const helperIds = n8nTool.executable_knowledge.helpers.map(h => h.id);
+      const helperIds = n8nTool.executable_knowledge.helpers.map((h) => h.id);
       expect(helperIds).toContain('extract-workflow-state');
       expect(helperIds).toContain('validate-node-connections');
       expect(helperIds).toContain('format-workflow-data');
@@ -132,7 +132,7 @@ describeIntegration('n8n Tool Helpers', () => {
           { name: 'HTTP Request', type: 'n8n-nodes-base.httpRequest' },
         ],
         connections: {
-          'Start': {
+          Start: {
             main: [[{ node: 'HTTP Request', type: 'main', index: 0 }]],
           },
         },
@@ -146,11 +146,9 @@ describeIntegration('n8n Tool Helpers', () => {
 
     test('should detect missing source node', async () => {
       const result = await executor.execute('validate-node-connections', {
-        nodes: [
-          { name: 'Start', type: 'n8n-nodes-base.start' },
-        ],
+        nodes: [{ name: 'Start', type: 'n8n-nodes-base.start' }],
         connections: {
-          'NonExistent': {
+          NonExistent: {
             main: [[{ node: 'Start', type: 'main', index: 0 }]],
           },
         },
@@ -162,11 +160,9 @@ describeIntegration('n8n Tool Helpers', () => {
 
     test('should detect missing target node', async () => {
       const result = await executor.execute('validate-node-connections', {
-        nodes: [
-          { name: 'Start', type: 'n8n-nodes-base.start' },
-        ],
+        nodes: [{ name: 'Start', type: 'n8n-nodes-base.start' }],
         connections: {
-          'Start': {
+          Start: {
             main: [[{ node: 'MissingTarget', type: 'main', index: 0 }]],
           },
         },
@@ -375,18 +371,16 @@ describeIntegration('n8n Tool Helpers', () => {
     test('should build workflow with nodes and connections', async () => {
       const result = await executor.execute('build-workflow-structure', {
         name: 'Test Workflow',
-        nodes: [
-          { name: 'Start', type: 'n8n-nodes-base.start' },
-        ],
+        nodes: [{ name: 'Start', type: 'n8n-nodes-base.start' }],
         connections: {
-          'Start': { main: [[{ node: 'End' }]] },
+          Start: { main: [[{ node: 'End' }]] },
         },
       });
 
       expect(result).toEqual({
         name: 'Test Workflow',
         nodes: [{ name: 'Start', type: 'n8n-nodes-base.start' }],
-        connections: { 'Start': { main: [[{ node: 'End' }]] } },
+        connections: { Start: { main: [[{ node: 'End' }]] } },
         active: false,
         settings: {},
         staticData: null,
@@ -427,7 +421,7 @@ describeIntegration('n8n Tool Helpers', () => {
           { name: 'HTTP', type: 'n8n-nodes-base.httpRequest' },
         ],
         connections: {
-          'Start': { main: [[{ node: 'HTTP' }]] },
+          Start: { main: [[{ node: 'HTTP' }]] },
         },
       });
 
@@ -446,12 +440,9 @@ describeIntegration('n8n Tool Helpers', () => {
           { name: 'Action2', type: 'n8n-nodes-base.httpRequest' },
         ],
         connections: {
-          'Start': { main: [[{ node: 'IF' }]] },
-          'IF': {
-            main: [
-              [{ node: 'Action1' }],
-              [{ node: 'Action2' }],
-            ],
+          Start: { main: [[{ node: 'IF' }]] },
+          IF: {
+            main: [[{ node: 'Action1' }], [{ node: 'Action2' }]],
           },
         },
       });
@@ -468,7 +459,7 @@ describeIntegration('n8n Tool Helpers', () => {
           { name: 'Switch', type: 'n8n-nodes-base.switch' },
         ],
         connections: {
-          'Start': { main: [[{ node: 'Switch' }]] },
+          Start: { main: [[{ node: 'Switch' }]] },
         },
       });
 
@@ -478,9 +469,7 @@ describeIntegration('n8n Tool Helpers', () => {
 
     test('should calculate complexity with function node', async () => {
       const result = await executor.execute('calculate-workflow-complexity', {
-        nodes: [
-          { name: 'Function', type: 'n8n-nodes-base.function' },
-        ],
+        nodes: [{ name: 'Function', type: 'n8n-nodes-base.function' }],
         connections: {},
       });
 
@@ -510,7 +499,7 @@ describeIntegration('n8n Tool Helpers', () => {
             { name: 'End', type: 'n8n-nodes-base.httpRequest' },
           ],
           connections: {
-            'Start': { main: [[{ node: 'End' }]] },
+            Start: { main: [[{ node: 'End' }]] },
           },
         });
         const duration = Date.now() - start;
@@ -520,7 +509,9 @@ describeIntegration('n8n Tool Helpers', () => {
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nn8n Helper Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nn8n Helper Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(100);
     });

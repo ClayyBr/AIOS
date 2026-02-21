@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import rateLimit from 'express-rate-limit';
 
-// Basic rate limiter using express-rate-limit. 
-// For Token Bucket with Redis as mandated in blueprint, 
+// Basic rate limiter using express-rate-limit.
+// For Token Bucket with Redis as mandated in blueprint,
 // a more sophisticated implementation would be required.
 export const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

@@ -24,7 +24,7 @@ describe('validate-parity', () => {
         '| GitHub Copilot | Limited |',
         '| AntiGravity | Limited |',
       ].join('\n'),
-      'utf8',
+      'utf8'
     );
     return root;
   }
@@ -34,12 +34,42 @@ describe('validate-parity', () => {
       release: 'AIOS 4.0.4',
       global_required_checks: ['paths'],
       ide_matrix: [
-        { ide: 'claude-code', display_name: 'Claude Code', expected_status: 'Works', required_checks: ['claude-sync', 'claude-integration'] },
-        { ide: 'gemini', display_name: 'Gemini CLI', expected_status: 'Works', required_checks: ['gemini-sync', 'gemini-integration'] },
-        { ide: 'codex', display_name: 'Codex CLI', expected_status: 'Limited', required_checks: ['codex-sync', 'codex-integration', 'codex-skills'] },
-        { ide: 'cursor', display_name: 'Cursor', expected_status: 'Limited', required_checks: ['cursor-sync'] },
-        { ide: 'github-copilot', display_name: 'GitHub Copilot', expected_status: 'Limited', required_checks: ['github-copilot-sync'] },
-        { ide: 'antigravity', display_name: 'AntiGravity', expected_status: 'Limited', required_checks: ['antigravity-sync'] },
+        {
+          ide: 'claude-code',
+          display_name: 'Claude Code',
+          expected_status: 'Works',
+          required_checks: ['claude-sync', 'claude-integration'],
+        },
+        {
+          ide: 'gemini',
+          display_name: 'Gemini CLI',
+          expected_status: 'Works',
+          required_checks: ['gemini-sync', 'gemini-integration'],
+        },
+        {
+          ide: 'codex',
+          display_name: 'Codex CLI',
+          expected_status: 'Limited',
+          required_checks: ['codex-sync', 'codex-integration', 'codex-skills'],
+        },
+        {
+          ide: 'cursor',
+          display_name: 'Cursor',
+          expected_status: 'Limited',
+          required_checks: ['cursor-sync'],
+        },
+        {
+          ide: 'github-copilot',
+          display_name: 'GitHub Copilot',
+          expected_status: 'Limited',
+          required_checks: ['github-copilot-sync'],
+        },
+        {
+          ide: 'antigravity',
+          display_name: 'AntiGravity',
+          expected_status: 'Limited',
+          required_checks: ['antigravity-sync'],
+        },
       ],
     };
   }
@@ -57,7 +87,7 @@ describe('validate-parity', () => {
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
         loadCompatibilityContract: () => buildMockContract(),
-      },
+      }
     );
 
     expect(result.ok).toBe(true);
@@ -84,7 +114,7 @@ describe('validate-parity', () => {
         validateCodexSkills: () => ({ ok: true, errors: [], warnings: [] }),
         validatePaths: () => ({ ok: true, errors: [], warnings: [] }),
         loadCompatibilityContract: () => buildMockContract(),
-      },
+      }
     );
 
     expect(result.ok).toBe(false);
@@ -94,7 +124,11 @@ describe('validate-parity', () => {
   it('fails when docs matrix claim diverges from contract', () => {
     const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-parity-mismatch-'));
     fs.mkdirSync(path.join(projectRoot, 'docs'), { recursive: true });
-    fs.writeFileSync(path.join(projectRoot, 'docs', 'ide-integration.md'), '| IDE/CLI | Overall Status |\n| --- | --- |\n| Codex CLI | Works |\n', 'utf8');
+    fs.writeFileSync(
+      path.join(projectRoot, 'docs', 'ide-integration.md'),
+      '| IDE/CLI | Overall Status |\n| --- | --- |\n| Codex CLI | Works |\n',
+      'utf8'
+    );
 
     const ok = { ok: true, errors: [], warnings: [] };
     const result = runParityValidation(
@@ -107,7 +141,7 @@ describe('validate-parity', () => {
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
         loadCompatibilityContract: () => buildMockContract(),
-      },
+      }
     );
 
     expect(result.ok).toBe(false);
@@ -139,7 +173,10 @@ describe('validate-parity', () => {
     const projectRoot = createMockProjectRoot();
     const ok = { ok: true, errors: [], warnings: [] };
     const result = runParityValidation(
-      { projectRoot, diffPath: '.aios-core/infrastructure/contracts/compatibility/aios-4.0.3.yaml' },
+      {
+        projectRoot,
+        diffPath: '.aios-core/infrastructure/contracts/compatibility/aios-4.0.3.yaml',
+      },
       {
         runSyncValidate: () => ok,
         validateClaudeIntegration: () => ok,
@@ -153,13 +190,18 @@ describe('validate-parity', () => {
               release: 'AIOS 4.0.3',
               global_required_checks: ['paths'],
               ide_matrix: [
-                { ide: 'codex', display_name: 'Codex CLI', expected_status: 'Experimental', required_checks: ['codex-sync'] },
+                {
+                  ide: 'codex',
+                  display_name: 'Codex CLI',
+                  expected_status: 'Experimental',
+                  required_checks: ['codex-sync'],
+                },
               ],
             };
           }
           return buildMockContract();
         },
-      },
+      }
     );
 
     expect(result.ok).toBe(true);

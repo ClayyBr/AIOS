@@ -122,7 +122,7 @@ describeIntegration('Agent Backward Compatibility - Missing Tools Field', () => 
         expect(tools.length).toBeGreaterThan(0);
 
         // Each tool should be a string (tool ID)
-        tools.forEach(toolId => {
+        tools.forEach((toolId) => {
           expect(typeof toolId).toBe('string');
           expect(toolId.length).toBeGreaterThan(0);
         });
@@ -151,9 +151,7 @@ describeIntegration('Agent Backward Compatibility - Missing Tools Field', () => 
     });
 
     test('agents without tools can still be loaded and parsed', async () => {
-      const configs = await Promise.all(
-        agentsWithoutTools.map(id => loadAgentYaml(_id)),
-      );
+      const configs = await Promise.all(agentsWithoutTools.map((id) => loadAgentYaml(_id)));
 
       configs.forEach((config, index) => {
         expect(config).toBeDefined();
@@ -308,7 +306,7 @@ describeIntegration('Agent Backward Compatibility - Missing Tools Field', () => 
 
         expect(Array.isArray(tools)).toBe(true);
         expect(() => {
-          tools.forEach(tool => {
+          tools.forEach((tool) => {
             expect(typeof tool).toBe('string');
           });
         }).not.toThrow();
@@ -354,7 +352,6 @@ describeIntegration('Agent Backward Compatibility - Missing Tools Field', () => 
               issue: 'Missing agent.id',
             });
           }
-
         } catch (error) {
           report.errors.push({
             agent: agentId,
@@ -370,7 +367,7 @@ describeIntegration('Agent Backward Compatibility - Missing Tools Field', () => 
       expect(report.agents_without_tools.length).toBe(agentsWithoutTools.length);
 
       // All agents without tools should have 0 tool count
-      report.agents_without_tools.forEach(agent => {
+      report.agents_without_tools.forEach((agent) => {
         expect(agent.tool_count).toBe(0);
         expect(agent.has_dependencies).toBe(true);
       });

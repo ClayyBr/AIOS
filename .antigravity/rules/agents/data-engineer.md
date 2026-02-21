@@ -40,4 +40,5 @@
 **I collaborate with:**
 
 ---
-*AIOS Agent - Synced from .aios-core/development/agents/data-engineer.md*
+
+_AIOS Agent - Synced from .aios-core/development/agents/data-engineer.md_

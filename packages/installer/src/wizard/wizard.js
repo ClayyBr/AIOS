@@ -224,7 +224,7 @@ async function confirmProjectType(detectedType) {
 
 /**
  * Get project type for a directory (exposed for downstream stories)
- * 
+ *
  * @param {string} targetDir - Directory to check
  * @returns {string} Project type
  */
@@ -241,4 +241,3 @@ module.exports = {
   getProjectType,
   InstallationMode,
 };
-

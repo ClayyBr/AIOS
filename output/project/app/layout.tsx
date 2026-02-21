@@ -17,7 +17,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'CrossFit Academy - Maximize Your Potential',
-  description: 'Join the premier CrossFit Academy and achieve your fitness goals. High-intensity training, expert coaches, and a supportive community.',
+  description:
+    'Join the premier CrossFit Academy and achieve your fitness goals. High-intensity training, expert coaches, and a supportive community.',
   keywords: ['CrossFit', 'Fitness', 'Workout', 'Gym', 'Training', 'Academy'],
   openGraph: {
     title: 'CrossFit Academy',

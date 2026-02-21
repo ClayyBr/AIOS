@@ -61,6 +61,10 @@ module.exports = [
       'pro/**',
       // Glue scripts
       'scripts/glue/**',
+      // Generated output
+      'output/**',
+      // Type definitions
+      '**/*.d.ts',
     ],
   },
 
@@ -117,17 +121,19 @@ module.exports = [
       'no-undef': 'error',
       'no-console': 'off', // We need console for CLI tool
 
-      // Code style
-      semi: ['error', 'always'],
-      quotes: ['warn', 'single', { avoidEscape: true }],
-      indent: ['warn', 2, { SwitchCase: 1 }],
-      'comma-dangle': ['warn', 'always-multiline'],
-
       // Best practices
       eqeqeq: ['error', 'always', { null: 'ignore' }],
       'no-var': 'error',
       'prefer-const': 'warn',
       'no-throw-literal': 'error',
+
+      // Style rules - delegated to Prettier
+      semi: 'off',
+      quotes: 'off',
+      indent: 'off',
+      'comma-dangle': 'off',
+      'arrow-parens': 'off',
+      'object-curly-spacing': 'off',
 
       // Relaxed rules for legacy code (TODO: fix and re-enable as errors)
       'no-case-declarations': 'warn',

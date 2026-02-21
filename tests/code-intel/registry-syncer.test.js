@@ -3,7 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
-const { RegistrySyncer, inferRole, ROLE_MAP } = require('../../.aios-core/core/code-intel/registry-syncer');
+const {
+  RegistrySyncer,
+  inferRole,
+  ROLE_MAP,
+} = require('../../.aios-core/core/code-intel/registry-syncer');
 
 // Mock fs module for controlled testing
 jest.mock('fs');
@@ -60,14 +64,11 @@ jest.mock('../../.aios-core/core/ids/registry-loader', () => {
 
 function createMockClient(overrides = {}) {
   return {
-    findReferences: jest.fn().mockResolvedValue([
-      { file: '.aios-core/development/tasks/create-next-story.md' },
-    ]),
+    findReferences: jest
+      .fn()
+      .mockResolvedValue([{ file: '.aios-core/development/tasks/create-next-story.md' }]),
     analyzeDependencies: jest.fn().mockResolvedValue({
-      dependencies: [
-        { path: '../ids/registry-loader' },
-        { path: 'fs' },
-      ],
+      dependencies: [{ path: '../ids/registry-loader' }, { path: 'fs' }],
     }),
     _activeProvider: { name: 'code-graph' },
     ...overrides,
@@ -125,9 +126,9 @@ describe('RegistrySyncer', () => {
   describe('usedBy population (T2 — AC2)', () => {
     it('should populate usedBy with entity IDs from findReferences', async () => {
       const mockClient = createMockClient({
-        findReferences: jest.fn().mockResolvedValue([
-          { file: '.aios-core/development/tasks/create-next-story.md' },
-        ]),
+        findReferences: jest
+          .fn()
+          .mockResolvedValue([{ file: '.aios-core/development/tasks/create-next-story.md' }]),
       });
       const syncer = createSyncer({ client: mockClient });
       await syncer.sync({ full: true });
@@ -176,10 +177,7 @@ describe('RegistrySyncer', () => {
     it('should populate dependencies for JS files via analyzeDependencies', async () => {
       const mockClient = createMockClient({
         analyzeDependencies: jest.fn().mockResolvedValue({
-          dependencies: [
-            { path: '../ids/registry-loader' },
-            { path: './helper' },
-          ],
+          dependencies: [{ path: '../ids/registry-loader' }, { path: './helper' }],
         }),
       });
       const syncer = createSyncer({ client: mockClient });
@@ -252,10 +250,12 @@ describe('RegistrySyncer', () => {
 
     it('should set callerCount based on usedBy length', async () => {
       const mockClient = createMockClient({
-        findReferences: jest.fn().mockResolvedValue([
-          { file: '.aios-core/development/tasks/create-next-story.md' },
-          { file: '.aios-core/development/scripts/greeting-builder.js' },
-        ]),
+        findReferences: jest
+          .fn()
+          .mockResolvedValue([
+            { file: '.aios-core/development/tasks/create-next-story.md' },
+            { file: '.aios-core/development/scripts/greeting-builder.js' },
+          ]),
       });
       const syncer = createSyncer({ client: mockClient });
 

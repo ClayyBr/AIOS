@@ -6,7 +6,9 @@
 
 const fs = require('fs');
 const yaml = require('js-yaml');
-const { validateConfigs } = require('../../../../packages/installer/src/wizard/validation/validators/config-validator');
+const {
+  validateConfigs,
+} = require('../../../../packages/installer/src/wizard/validation/validators/config-validator');
 
 // Mock dependencies
 jest.mock('fs');
@@ -48,7 +50,7 @@ describeIntegration('Config Validator', () => {
 
       // Then
       expect(result.success).toBe(true);
-      const envCheck = result.checks.find(c => c.component === 'Environment Config');
+      const envCheck = result.checks.find((c) => c.component === 'Environment Config');
       expect(envCheck).toBeDefined();
       expect(envCheck.status).toBe('success');
     });
@@ -67,7 +69,7 @@ describeIntegration('Config Validator', () => {
           expect.objectContaining({
             code: 'ENV_FILE_MISSING',
           }),
-        ]),
+        ])
       );
     });
 
@@ -95,7 +97,7 @@ describeIntegration('Config Validator', () => {
           expect.objectContaining({
             code: 'ENV_VAR_MISSING',
           }),
-        ]),
+        ])
       );
     });
 
@@ -123,7 +125,7 @@ describeIntegration('Config Validator', () => {
           expect.objectContaining({
             code: 'POTENTIAL_HARDCODED_CREDENTIAL',
           }),
-        ]),
+        ])
       );
     });
 
@@ -156,7 +158,7 @@ describeIntegration('Config Validator', () => {
       });
 
       // Then
-      const coreCheck = result.checks.find(c => c.component === 'Core Config');
+      const coreCheck = result.checks.find((c) => c.component === 'Core Config');
       expect(coreCheck).toBeDefined();
       expect(coreCheck.status).toBe('success');
       expect(coreCheck.message).toContain('Valid YAML');
@@ -189,7 +191,7 @@ describeIntegration('Config Validator', () => {
           expect.objectContaining({
             code: 'CORE_CONFIG_MISSING',
           }),
-        ]),
+        ])
       );
     });
 
@@ -225,7 +227,7 @@ describeIntegration('Config Validator', () => {
           expect.objectContaining({
             code: 'CORE_CONFIG_PARSE_ERROR',
           }),
-        ]),
+        ])
       );
     });
 
@@ -261,7 +263,7 @@ describeIntegration('Config Validator', () => {
           expect.objectContaining({
             code: 'CORE_CONFIG_INCOMPLETE',
           }),
-        ]),
+        ])
       );
     });
 
@@ -292,7 +294,7 @@ describeIntegration('Config Validator', () => {
       const result = await validateConfigs({});
 
       // Then
-      const mcpCheck = result.checks.find(c => c.component === 'MCP Config');
+      const mcpCheck = result.checks.find((c) => c.component === 'MCP Config');
       expect(mcpCheck).toBeDefined();
       expect(mcpCheck.status).toBe('success');
       expect(mcpCheck.message).toContain('2 MCPs');
@@ -317,7 +319,7 @@ describeIntegration('Config Validator', () => {
       const result = await validateConfigs({});
 
       // Then
-      const mcpCheck = result.checks.find(c => c.component === 'MCP Config');
+      const mcpCheck = result.checks.find((c) => c.component === 'MCP Config');
       expect(mcpCheck).toBeDefined();
       expect(mcpCheck.status).toBe('skipped');
       expect(mcpCheck.message).toContain('optional');
@@ -350,7 +352,7 @@ describeIntegration('Config Validator', () => {
           expect.objectContaining({
             code: 'MCP_CONFIG_PARSE_ERROR',
           }),
-        ]),
+        ])
       );
     });
 
@@ -373,7 +375,7 @@ describeIntegration('Config Validator', () => {
       const result = await validateConfigs({});
 
       // Then
-      const gitCheck = result.checks.find(c => c.component === 'Git Ignore');
+      const gitCheck = result.checks.find((c) => c.component === 'Git Ignore');
       expect(gitCheck).toBeDefined();
       expect(gitCheck.status).toBe('success');
     });
@@ -408,7 +410,7 @@ describeIntegration('Config Validator', () => {
             code: 'GITIGNORE_CRITICAL_MISSING',
             message: expect.stringContaining('node_modules'),
           }),
-        ]),
+        ])
       );
     });
 
@@ -436,7 +438,7 @@ describeIntegration('Config Validator', () => {
           expect.objectContaining({
             code: 'GITIGNORE_RECOMMENDED_MISSING',
           }),
-        ]),
+        ])
       );
     });
   });

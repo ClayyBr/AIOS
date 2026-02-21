@@ -32,14 +32,15 @@ async function cleanupWithRetry(dir, maxRetries = 3, retryDelay = 100) {
       }
       return;
     } catch (error) {
-      const isRetryable = error.code && ['ENOTEMPTY', 'EBUSY', 'EPERM', 'EACCES'].includes(error.code);
+      const isRetryable =
+        error.code && ['ENOTEMPTY', 'EBUSY', 'EPERM', 'EACCES'].includes(error.code);
       if (attempt === maxRetries || !isRetryable) {
         // Last attempt failed or non-retryable error, log but don't throw
         console.warn(`Warning: Failed to cleanup ${dir} after ${attempt} attempts:`, error.code);
         return;
       }
       // Linear backoff (100ms, 200ms, 300ms...)
-      await new Promise(resolve => setTimeout(resolve, retryDelay * attempt));
+      await new Promise((resolve) => setTimeout(resolve, retryDelay * attempt));
     }
   }
 }
@@ -57,7 +58,7 @@ describe('Migration Backup Module', () => {
 
   afterEach(async () => {
     // Small delay to allow file handles to close
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     // Cleanup test directory with retry logic
     await cleanupWithRetry(testDir);
   });
@@ -138,8 +139,8 @@ describe('Migration Backup Module', () => {
       const files = await getAllFiles(testDir);
 
       expect(files).toHaveLength(2);
-      expect(files.some(f => f.includes('file1.txt'))).toBe(true);
-      expect(files.some(f => f.includes('file2.txt'))).toBe(true);
+      expect(files.some((f) => f.includes('file1.txt'))).toBe(true);
+      expect(files.some((f) => f.includes('file2.txt'))).toBe(true);
     });
 
     it('should return empty array for empty directory', async () => {

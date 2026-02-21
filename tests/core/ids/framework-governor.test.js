@@ -2,8 +2,14 @@
 
 const path = require('path');
 const { RegistryLoader } = require('../../../.aios-core/core/ids/registry-loader');
-const { IncrementalDecisionEngine } = require('../../../.aios-core/core/ids/incremental-decision-engine');
-const { FrameworkGovernor, TIMEOUT_MS, RISK_THRESHOLDS } = require('../../../.aios-core/core/ids/framework-governor');
+const {
+  IncrementalDecisionEngine,
+} = require('../../../.aios-core/core/ids/incremental-decision-engine');
+const {
+  FrameworkGovernor,
+  TIMEOUT_MS,
+  RISK_THRESHOLDS,
+} = require('../../../.aios-core/core/ids/framework-governor');
 
 const FIXTURES = path.resolve(__dirname, 'fixtures');
 const VALID_REGISTRY = path.join(FIXTURES, 'valid-registry.yaml');
@@ -65,19 +71,19 @@ describe('FrameworkGovernor', () => {
 
     it('should throw if registryLoader is missing', () => {
       expect(() => new FrameworkGovernor(null, engine, updater)).toThrow(
-        '[IDS-Governor] RegistryLoader instance is required',
+        '[IDS-Governor] RegistryLoader instance is required'
       );
     });
 
     it('should throw if decisionEngine is missing', () => {
       expect(() => new FrameworkGovernor(loader, null, updater)).toThrow(
-        '[IDS-Governor] IncrementalDecisionEngine instance is required',
+        '[IDS-Governor] IncrementalDecisionEngine instance is required'
       );
     });
 
     it('should throw if registryUpdater is missing', () => {
       expect(() => new FrameworkGovernor(loader, engine, null)).toThrow(
-        '[IDS-Governor] RegistryUpdater instance is required',
+        '[IDS-Governor] RegistryUpdater instance is required'
       );
     });
 
@@ -160,15 +166,21 @@ describe('FrameworkGovernor', () => {
 
   describe('preCheck() input validation', () => {
     it('should throw on null intent', async () => {
-      await expect(governor.preCheck(null)).rejects.toThrow('[IDS-Governor] preCheck requires a string intent parameter');
+      await expect(governor.preCheck(null)).rejects.toThrow(
+        '[IDS-Governor] preCheck requires a string intent parameter'
+      );
     });
 
     it('should throw on undefined intent', async () => {
-      await expect(governor.preCheck(undefined)).rejects.toThrow('[IDS-Governor] preCheck requires a string intent parameter');
+      await expect(governor.preCheck(undefined)).rejects.toThrow(
+        '[IDS-Governor] preCheck requires a string intent parameter'
+      );
     });
 
     it('should throw on numeric intent', async () => {
-      await expect(governor.preCheck(123)).rejects.toThrow('[IDS-Governor] preCheck requires a string intent parameter');
+      await expect(governor.preCheck(123)).rejects.toThrow(
+        '[IDS-Governor] preCheck requires a string intent parameter'
+      );
     });
   });
 
@@ -191,11 +203,15 @@ describe('FrameworkGovernor', () => {
 
   describe('impactAnalysis() input validation', () => {
     it('should throw on null entityId', async () => {
-      await expect(governor.impactAnalysis(null)).rejects.toThrow('[IDS-Governor] impactAnalysis requires a non-empty entityId string');
+      await expect(governor.impactAnalysis(null)).rejects.toThrow(
+        '[IDS-Governor] impactAnalysis requires a non-empty entityId string'
+      );
     });
 
     it('should throw on empty entityId', async () => {
-      await expect(governor.impactAnalysis('')).rejects.toThrow('[IDS-Governor] impactAnalysis requires a non-empty entityId string');
+      await expect(governor.impactAnalysis('')).rejects.toThrow(
+        '[IDS-Governor] impactAnalysis requires a non-empty entityId string'
+      );
     });
   });
 
@@ -260,11 +276,15 @@ describe('FrameworkGovernor', () => {
 
   describe('postRegister() input validation', () => {
     it('should throw on null filePath', async () => {
-      await expect(governor.postRegister(null)).rejects.toThrow('[IDS-Governor] postRegister requires a non-empty filePath string');
+      await expect(governor.postRegister(null)).rejects.toThrow(
+        '[IDS-Governor] postRegister requires a non-empty filePath string'
+      );
     });
 
     it('should throw on empty filePath', async () => {
-      await expect(governor.postRegister('')).rejects.toThrow('[IDS-Governor] postRegister requires a non-empty filePath string');
+      await expect(governor.postRegister('')).rejects.toThrow(
+        '[IDS-Governor] postRegister requires a non-empty filePath string'
+      );
     });
   });
 
@@ -272,10 +292,11 @@ describe('FrameworkGovernor', () => {
 
   describe('postRegister()', () => {
     it('should register file via RegistryUpdater.onAgentTaskComplete', async () => {
-      const result = await governor.postRegister(
-        '.aios-core/development/tasks/test-task.md',
-        { type: 'task', purpose: 'Test task', agent: 'aios-master' },
-      );
+      const result = await governor.postRegister('.aios-core/development/tasks/test-task.md', {
+        type: 'task',
+        purpose: 'Test task',
+        agent: 'aios-master',
+      });
       expect(result.registered).toBeDefined();
       expect(result.filePath).toBe('.aios-core/development/tasks/test-task.md');
       expect(updater.onAgentTaskCompleteCalls.length).toBe(1);
@@ -390,7 +411,12 @@ describe('FrameworkGovernor', () => {
       const result = await governor.getStats();
       expect(result.healerAvailable).toBe(false);
 
-      const govWithHealer = new FrameworkGovernor(loader, engine, updater, new MockRegistryHealer());
+      const govWithHealer = new FrameworkGovernor(
+        loader,
+        engine,
+        updater,
+        new MockRegistryHealer()
+      );
       const resultWithHealer = await govWithHealer.getStats();
       expect(resultWithHealer.healerAvailable).toBe(true);
     });
@@ -451,7 +477,9 @@ describe('FrameworkGovernor', () => {
     it('should return fallback on impactAnalysis error', async () => {
       // Force error by using a loader that throws on _findById
       const brokenLoader = {
-        _ensureLoaded: () => { throw new Error('Loader broken'); },
+        _ensureLoaded: () => {
+          throw new Error('Loader broken');
+        },
         _findById: () => null,
         getEntityCount: () => 0,
       };
@@ -512,12 +540,14 @@ describe('FrameworkGovernor', () => {
           entityType: 'task',
           topDecision: 'ADAPT',
           matchesFound: 1,
-          recommendations: [{
-            entityId: 'create-doc',
-            decision: 'ADAPT',
-            relevanceScore: 0.75,
-            entityPath: '.aios-core/development/tasks/create-doc.md',
-          }],
+          recommendations: [
+            {
+              entityId: 'create-doc',
+              decision: 'ADAPT',
+              relevanceScore: 0.75,
+              entityPath: '.aios-core/development/tasks/create-doc.md',
+            },
+          ],
         };
         const output = FrameworkGovernor.formatPreCheckOutput(result);
         expect(output).toContain('create-doc');

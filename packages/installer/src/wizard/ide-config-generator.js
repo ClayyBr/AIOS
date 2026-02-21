@@ -103,7 +103,7 @@ async function promptFileExists(filePath, options = {}) {
   choices.push(
     { name: 'Overwrite completely', value: 'overwrite' },
     { name: 'Create backup and overwrite', value: 'backup' },
-    { name: 'Skip', value: 'skip' },
+    { name: 'Skip', value: 'skip' }
   );
 
   // Default to merge for brownfield if available, otherwise backup
@@ -125,7 +125,7 @@ async function promptFileExists(filePath, options = {}) {
 /**
  * Sanitize and validate a candidate project name
  * Converts unsafe directory names to safe project names
- * 
+ *
  * @param {string} candidate - Candidate project name (e.g., from path.basename)
  * @returns {string} Safe, validated project name
  */
@@ -144,7 +144,7 @@ function sanitizeProjectName(candidate) {
 
   // Step 2: Ensure it starts with alphanumeric
   sanitized = sanitized.replace(/^[^a-zA-Z0-9]+/, '');
-  
+
   // Step 3: Limit length (validateProjectName allows up to 100)
   if (sanitized.length > 100) {
     sanitized = sanitized.substring(0, 100);
@@ -154,7 +154,7 @@ function sanitizeProjectName(candidate) {
 
   // Step 4: Validate the sanitized name
   const validation = validateProjectName(sanitized);
-  
+
   if (validation === true && sanitized.length > 0) {
     return sanitized;
   }
@@ -215,7 +215,16 @@ function generateTemplateVariables(wizardState) {
  */
 async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
   // v4: Agents are in development/agents/ (not root agents/)
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.aios-core', 'development', 'agents');
+  const sourceDir = path.join(
+    __dirname,
+    '..',
+    '..',
+    '..',
+    '..',
+    '.aios-core',
+    'development',
+    'agents'
+  );
   const targetDir = path.join(projectRoot, agentFolder);
   const copiedFiles = [];
 
@@ -224,14 +233,13 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
 
   // Get all agent files (excluding backup files)
   const files = await fs.readdir(sourceDir);
-  const agentFiles = files.filter(file =>
-    file.endsWith('.md') &&
-    !file.includes('.backup') &&
-    !file.startsWith('test-'),  // Exclude test agents
+  const agentFiles = files.filter(
+    (file) => file.endsWith('.md') && !file.includes('.backup') && !file.startsWith('test-') // Exclude test agents
   );
 
   // Check if this is AntiGravity - needs workflow files instead of direct copy
-  const isAntiGravity = ideConfig && ideConfig.specialConfig && ideConfig.specialConfig.type === 'antigravity';
+  const isAntiGravity =
+    ideConfig && ideConfig.specialConfig && ideConfig.specialConfig.type === 'antigravity';
 
   for (const file of agentFiles) {
     const sourcePath = path.join(sourceDir, file);
@@ -276,7 +284,7 @@ async function copyClaudeRulesFolder(projectRoot) {
   const copiedFiles = [];
 
   // Check if source exists
-  if (!await fs.pathExists(sourceDir)) {
+  if (!(await fs.pathExists(sourceDir))) {
     return copiedFiles;
   }
 
@@ -449,9 +457,19 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
         }
 
         // Load template from .aios-core/product/templates/
-        const templatePath = path.join(__dirname, '..', '..', '..', '..', '.aios-core', 'product', 'templates', ide.template);
+        const templatePath = path.join(
+          __dirname,
+          '..',
+          '..',
+          '..',
+          '..',
+          '.aios-core',
+          'product',
+          'templates',
+          ide.template
+        );
 
-        if (!await fs.pathExists(templatePath)) {
+        if (!(await fs.pathExists(templatePath))) {
           throw new Error(`Template file not found: ${ide.template}`);
         }
 
@@ -477,9 +495,13 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
 
           // Show merge summary
           spinner.succeed(`Merged ${ide.configFile}`);
-          console.log(`   📋 Preserved: ${mergeResult.stats.preserved}, Updated: ${mergeResult.stats.updated}, Added: ${mergeResult.stats.added}`);
+          console.log(
+            `   📋 Preserved: ${mergeResult.stats.preserved}, Updated: ${mergeResult.stats.updated}, Added: ${mergeResult.stats.added}`
+          );
           if (mergeResult.stats.conflicts > 0) {
-            console.log(`   ⚠️  Suggestions: ${mergeResult.stats.conflicts} (see comments in file)`);
+            console.log(
+              `   ⚠️  Suggestions: ${mergeResult.stats.conflicts} (see comments in file)`
+            );
           }
           spinner.start(`Finishing ${ide.name}...`);
         }
@@ -572,7 +594,6 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
             spinner.info(`Skipped Gemini extension linking (${extensionResult.reason})`);
           }
         }
-
       } catch (error) {
         spinner.fail(`Failed to configure ${ide.name}`);
         errors.push({ ide: ide.name, error: error.message });
@@ -589,7 +610,10 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
 
         // Restore backups
         for (const backup of backupFiles) {
-          const original = backup.replace(/\.backup\.\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z$/, '');
+          const original = backup.replace(
+            /\.backup\.\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z$/,
+            ''
+          );
           await fs.move(backup, original, { overwrite: true }).catch(() => {});
         }
 
@@ -602,7 +626,6 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
       files: createdFiles,
       errors: errors.length > 0 ? errors : undefined,
     };
-
   } catch (error) {
     return {
       success: false,
@@ -646,7 +669,7 @@ async function copyClaudeHooksFolder(projectRoot) {
   const targetDir = path.join(projectRoot, '.claude', 'hooks');
   const copiedFiles = [];
 
-  if (!await fs.pathExists(sourceDir)) {
+  if (!(await fs.pathExists(sourceDir))) {
     return copiedFiles;
   }
 
@@ -658,11 +681,7 @@ async function copyClaudeHooksFolder(projectRoot) {
   await fs.ensureDir(targetDir);
 
   // Only copy JS hooks that work standalone (no Python/shell deps)
-  const HOOKS_TO_COPY = [
-    'synapse-engine.js',
-    'precompact-session-digest.js',
-    'README.md',
-  ];
+  const HOOKS_TO_COPY = ['synapse-engine.js', 'precompact-session-digest.js', 'README.md'];
 
   const files = await fs.readdir(sourceDir);
 
@@ -695,7 +714,7 @@ async function createClaudeSettingsLocal(projectRoot) {
   const hookFile = path.join(projectRoot, '.claude', 'hooks', 'synapse-engine.js');
 
   // Only create if the hook file was actually copied
-  if (!await fs.pathExists(hookFile)) {
+  if (!(await fs.pathExists(hookFile))) {
     return null;
   }
 
@@ -733,10 +752,10 @@ async function createClaudeSettingsLocal(projectRoot) {
   }
 
   // Check if synapse hook is already registered (supports both nested and flat formats)
-  const alreadyRegistered = settings.hooks.UserPromptSubmit.some(entry => {
+  const alreadyRegistered = settings.hooks.UserPromptSubmit.some((entry) => {
     // Nested format: entry.hooks[].command
     if (Array.isArray(entry.hooks)) {
-      return entry.hooks.some(h => h.command && h.command.includes('synapse-engine.js'));
+      return entry.hooks.some((h) => h.command && h.command.includes('synapse-engine.js'));
     }
     // Flat format (legacy): entry.command
     return entry.command && entry.command.includes('synapse-engine.js');
@@ -767,7 +786,7 @@ async function copyGeminiHooksFolder(projectRoot) {
   const targetDir = path.join(projectRoot, '.gemini', 'hooks');
   const copiedFiles = [];
 
-  if (!await fs.pathExists(sourceDir)) {
+  if (!(await fs.pathExists(sourceDir))) {
     return copiedFiles;
   }
 
@@ -802,7 +821,7 @@ async function createGeminiSettings(projectRoot) {
   const settingsPath = path.join(projectRoot, '.gemini', 'settings.json');
   const hooksDir = path.join(projectRoot, '.gemini', 'hooks');
 
-  if (!await fs.pathExists(hooksDir)) {
+  if (!(await fs.pathExists(hooksDir))) {
     return null;
   }
 
@@ -914,16 +933,16 @@ async function linkGeminiExtension(projectRoot) {
   const manifestPath = path.join(extensionDir, 'gemini-extension.json');
   const legacyManifestPath = path.join(extensionDir, 'extension.json');
 
-  if (!await fs.pathExists(extensionDir)) {
+  if (!(await fs.pathExists(extensionDir))) {
     return { status: 'skipped', reason: 'extension-dir-not-found' };
   }
 
   // Gemini CLI >=0.28 expects gemini-extension.json
-  if (!await fs.pathExists(manifestPath) && await fs.pathExists(legacyManifestPath)) {
+  if (!(await fs.pathExists(manifestPath)) && (await fs.pathExists(legacyManifestPath))) {
     await fs.copy(legacyManifestPath, manifestPath);
   }
 
-  if (!await fs.pathExists(manifestPath)) {
+  if (!(await fs.pathExists(manifestPath))) {
     return { status: 'skipped', reason: 'manifest-not-found' };
   }
 

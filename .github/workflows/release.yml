@@ -13,7 +13,7 @@ on:
 
 concurrency:
   group: release-${{ github.ref }}
-  cancel-in-progress: false  # Never cancel releases in progress
+  cancel-in-progress: false # Never cancel releases in progress
 
 env:
   NODE_VERSION: '20'
@@ -52,7 +52,7 @@ jobs:
           # Create a changelog based on recent commits
           echo "## 📋 What's New in v${{ steps.version.outputs.version }}" > CHANGELOG.md
           echo "" >> CHANGELOG.md
-          
+
           # Get commits since last tag
           LAST_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
           if [ -n "$LAST_TAG" ]; then
@@ -66,7 +66,7 @@ jobs:
             echo "* 📊 Privacy-conscious telemetry system" >> CHANGELOG.md
             echo "* 📦 Modular NPM package distribution" >> CHANGELOG.md
           fi
-          
+
           echo "" >> CHANGELOG.md
           echo "## 📦 Installation" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
@@ -95,7 +95,7 @@ jobs:
             --title "AIOS-FullStack ${{ steps.version.outputs.tag }}" \
             --notes-file CHANGELOG.md \
             --verify-tag || true
-          
+
           # Get release info for outputs
           RELEASE_INFO=$(gh api repos/${{ github.repository }}/releases/tags/${{ steps.version.outputs.tag }})
           echo "id=$(echo "$RELEASE_INFO" | jq -r '.id')" >> $GITHUB_OUTPUT

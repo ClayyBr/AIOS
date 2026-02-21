@@ -15,6 +15,7 @@ Epic 12 completa a implementação do **Bob** (PM Orchestrator), o orquestrador 
 ## ✨ Principais Features
 
 ### 🤖 Bob Orchestrator
+
 - **Decision Tree Inteligente** — Detecta automaticamente o estado do projeto (greenfield, brownfield, enhancement)
 - **3 Workflows Especializados:**
   - **Greenfield** — Projetos novos, setup completo
@@ -23,21 +24,25 @@ Epic 12 completa a implementação do **Bob** (PM Orchestrator), o orquestrador 
 - **File Locking** — Proteção contra conflitos em multi-terminal (PID/TTL)
 
 ### 🔄 Session State Management
+
 - **Persistência de Sessão** — Resume automático de workflows interrompidos
 - **bob-status.json** — Single source of truth para estado do Bob
 - **Context Accumulator** — Acumula conhecimento do projeto entre sessões
 
 ### 📊 Observabilidade & Dashboard
+
 - **Real-time Updates** — WebSocket + SSE + polling fallback
 - **Bob Panel** — Visualização do estado do Bob no Dashboard
 - **Event System** — Eventos tipados para integração com ferramentas externas
 
 ### 📦 Instalação & Distribuição
+
 - **NPX Package** — `npx @synkra/aios-install` para instalação rápida
 - **Cross-Platform** — Suporte completo para macOS, Windows/WSL, Linux
 - **Terminal Spawner** — Suporte a múltiplos terminais e iTerm2
 
 ### 🔧 CI/CD Pipeline
+
 - **bob-integration.yml** — Validação automática em PRs
 - **cross-platform-bob.yml** — Matrix testing (Ubuntu, macOS, Windows)
 - **CodeRabbit Integration** — Reviews automáticos com path-based rules
@@ -47,36 +52,36 @@ Epic 12 completa a implementação do **Bob** (PM Orchestrator), o orquestrador 
 
 ## 📋 Stories Completadas (13/13)
 
-| Story | Título | Descrição |
-|-------|--------|-----------|
-| 12.1 | User Profile System | Sistema de perfis de usuário para personalização |
-| 12.2 | Core Config + Project Config | Configuração hierárquica (global → projeto) |
-| 12.3 | Bob Orchestration Logic | Lógica central de orquestração e decision tree |
-| 12.4 | Epic Context Accumulator | Acumulador de contexto entre sessões |
-| 12.5 | Session State Integration | Integração de estado de sessão com persistência |
-| 12.6 | Observability Panel + Dashboard Bridge | Bridge entre CLI e Dashboard |
-| 12.7 | Modo Educativo (Opt-in) | Modo verboso para aprendizado |
-| 12.8 | First Execution (Brownfield) | Fluxo para projetos existentes |
-| 12.9 | NPX Installer | Pacote de instalação via NPX |
-| 12.10 | Terminal Spawning E2E | Suporte cross-platform para terminais |
-| 12.11 | CI/CD Pipeline for Bob | Infraestrutura de CI/CD completa |
-| 12.12 | Dashboard Bob Panel | Painel de Bob no Dashboard |
-| 12.13 | Greenfield Workflow | Fluxo para projetos novos |
+| Story | Título                                 | Descrição                                        |
+| ----- | -------------------------------------- | ------------------------------------------------ |
+| 12.1  | User Profile System                    | Sistema de perfis de usuário para personalização |
+| 12.2  | Core Config + Project Config           | Configuração hierárquica (global → projeto)      |
+| 12.3  | Bob Orchestration Logic                | Lógica central de orquestração e decision tree   |
+| 12.4  | Epic Context Accumulator               | Acumulador de contexto entre sessões             |
+| 12.5  | Session State Integration              | Integração de estado de sessão com persistência  |
+| 12.6  | Observability Panel + Dashboard Bridge | Bridge entre CLI e Dashboard                     |
+| 12.7  | Modo Educativo (Opt-in)                | Modo verboso para aprendizado                    |
+| 12.8  | First Execution (Brownfield)           | Fluxo para projetos existentes                   |
+| 12.9  | NPX Installer                          | Pacote de instalação via NPX                     |
+| 12.10 | Terminal Spawning E2E                  | Suporte cross-platform para terminais            |
+| 12.11 | CI/CD Pipeline for Bob                 | Infraestrutura de CI/CD completa                 |
+| 12.12 | Dashboard Bob Panel                    | Painel de Bob no Dashboard                       |
+| 12.13 | Greenfield Workflow                    | Fluxo para projetos novos                        |
 
 ---
 
 ## 📊 Métricas
 
-| Métrica | Valor |
-|---------|-------|
-| **Commits** | 24 |
-| **Files Changed** | 103 |
-| **Lines Added** | +24,946 |
-| **Lines Removed** | -1,068 |
-| **Tests Passed** | 4,225 |
-| **Lint Errors** | 0 |
-| **TypeCheck** | ✅ Pass |
-| **Bob Coverage** | 95% |
+| Métrica           | Valor   |
+| ----------------- | ------- |
+| **Commits**       | 24      |
+| **Files Changed** | 103     |
+| **Lines Added**   | +24,946 |
+| **Lines Removed** | -1,068  |
+| **Tests Passed**  | 4,225   |
+| **Lint Errors**   | 0       |
+| **TypeCheck**     | ✅ Pass |
+| **Bob Coverage**  | 95%     |
 
 ---
 
@@ -99,11 +104,13 @@ Required Status Checks configurados:
 ## 🚀 Como Usar
 
 ### Instalação
+
 ```bash
 npx @synkra/aios-install
 ```
 
 ### Ativar Bob
+
 ```bash
 # Via AIOS Master
 npx aios-core
@@ -114,6 +121,7 @@ npx aios-core bob
 ```
 
 ### Comandos Bob
+
 ```bash
 *status      # Ver status atual
 *resume      # Retomar sessão anterior
@@ -152,12 +160,12 @@ npx aios-core bob
 
 ## 🔜 Próximos Passos (Backlog)
 
-| Item | Prioridade | Descrição |
-|------|------------|-----------|
-| EPIC12-D1 | 🟡 MEDIUM | Aumentar cobertura de docstrings para 80% |
-| EPIC12-F4 | 🟡 MEDIUM | Script Lifecycle Audit |
-| EPIC12-T1 | 🟡 MEDIUM | Criar templates de backlog |
-| EPIC12-O1 | 🟢 LOW | Atualizar story index |
+| Item      | Prioridade | Descrição                                 |
+| --------- | ---------- | ----------------------------------------- |
+| EPIC12-D1 | 🟡 MEDIUM  | Aumentar cobertura de docstrings para 80% |
+| EPIC12-F4 | 🟡 MEDIUM  | Script Lifecycle Audit                    |
+| EPIC12-T1 | 🟡 MEDIUM  | Criar templates de backlog                |
+| EPIC12-O1 | 🟢 LOW     | Atualizar story index                     |
 
 ---
 
@@ -166,6 +174,7 @@ npx aios-core bob
 Epic 12 foi desenvolvido seguindo a metodologia **Story-Driven Development** do AIOS, com validação contínua via CodeRabbit e CI/CD automatizado.
 
 **Agentes envolvidos:**
+
 - @po (Pax) — Product Owner, gestão de stories
 - @dev (Dex) — Desenvolvimento
 - @devops (Gage) — CI/CD e merge
@@ -173,4 +182,4 @@ Epic 12 foi desenvolvido seguindo a metodologia **Story-Driven Development** do 
 
 ---
 
-*Generated with [Claude Code](https://claude.ai/code) via [Happy](https://happy.engineering)*
+_Generated with [Claude Code](https://claude.ai/code) via [Happy](https://happy.engineering)_

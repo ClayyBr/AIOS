@@ -430,10 +430,20 @@ async function main() {
   // Step 4a: Check and offer to install CLI tools
   const cliToolsToCheck = [];
   if (ides.includes('claude')) {
-    cliToolsToCheck.push({ ide: 'claude', command: 'claude', name: 'Claude Code', npm: '@anthropic-ai/claude-code' });
+    cliToolsToCheck.push({
+      ide: 'claude',
+      command: 'claude',
+      name: 'Claude Code',
+      npm: '@anthropic-ai/claude-code',
+    });
   }
   if (ides.includes('gemini')) {
-    cliToolsToCheck.push({ ide: 'gemini', command: 'gemini', name: 'Gemini CLI', npm: '@google/gemini-cli' });
+    cliToolsToCheck.push({
+      ide: 'gemini',
+      command: 'gemini',
+      name: 'Gemini CLI',
+      npm: '@google/gemini-cli',
+    });
   }
 
   if (cliToolsToCheck.length > 0) {
@@ -444,7 +454,8 @@ async function main() {
     const toolCheckResults = await Promise.all(
       cliToolsToCheck.map(async (tool) => {
         try {
-          const checkCmd = process.platform === 'win32' ? `where ${tool.command}` : `command -v ${tool.command}`;
+          const checkCmd =
+            process.platform === 'win32' ? `where ${tool.command}` : `command -v ${tool.command}`;
           await execAsync(checkCmd);
           return { tool, installed: true };
         } catch {
@@ -465,7 +476,7 @@ async function main() {
 
     if (missingTools.length > 0) {
       console.log('');
-      const toolNames = missingTools.map(t => t.name).join(', ');
+      const toolNames = missingTools.map((t) => t.name).join(', ');
       const { installClis } = await inquirer.prompt([
         {
           type: 'confirm',
@@ -514,8 +525,7 @@ async function main() {
     const copySpinner = ora('Installing AIOS Core files...').start();
     await fse.copy(sourceCoreDir, targetCoreDir);
     copySpinner.succeed(
-      'AIOS Core files installed ' +
-        chalk.gray('(11 agents, 68 tasks, 23 templates)')
+      'AIOS Core files installed ' + chalk.gray('(11 agents, 68 tasks, 23 templates)')
     );
 
     // Create installed manifest for brownfield upgrades (Story 6.18)
@@ -566,7 +576,13 @@ async function main() {
     for (const ide of ides) {
       if (ide !== 'none' && ideRulesMap[ide]) {
         const ideConfig = ideRulesMap[ide];
-        const sourceRules = path.join(targetCoreDir, 'product', 'templates', 'ide-rules', ideConfig.source);
+        const sourceRules = path.join(
+          targetCoreDir,
+          'product',
+          'templates',
+          'ide-rules',
+          ideConfig.source
+        );
         const targetRules = path.join(context.projectRoot, ideConfig.target);
 
         if (fs.existsSync(sourceRules)) {
@@ -616,12 +632,17 @@ async function main() {
 
       if (cachedAgentFiles.length > 0) {
         await fse.copy(coreAgentsSource, coreAgentsTarget);
-        console.log(chalk.green('✓') + ` Claude Code CORE agents installed (${cachedAgentFiles.length} agents)`);
+        console.log(
+          chalk.green('✓') +
+            ` Claude Code CORE agents installed (${cachedAgentFiles.length} agents)`
+        );
       }
 
       if (cachedTaskFiles.length > 0) {
         await fse.copy(coreTasksSource, coreTasksTarget);
-        console.log(chalk.green('✓') + ` Claude Code CORE tasks installed (${cachedTaskFiles.length} tasks)`);
+        console.log(
+          chalk.green('✓') + ` Claude Code CORE tasks installed (${cachedTaskFiles.length} tasks)`
+        );
       }
 
       // Create AIOS README for Claude Code
@@ -725,7 +746,8 @@ See .aios-core/user-guide.md for complete documentation.
 
           const ideName = ide.charAt(0).toUpperCase() + ide.slice(1);
           console.log(
-            chalk.green('✓') + ` ${ideName} CORE agents installed (${cachedAgentFiles.length} agents)`
+            chalk.green('✓') +
+              ` ${ideName} CORE agents installed (${cachedAgentFiles.length} agents)`
           );
         }
       }
@@ -749,7 +771,8 @@ See .aios-core/user-guide.md for complete documentation.
         }
 
         console.log(
-          chalk.green('✓') + ` GitHub Copilot chat modes installed (${cachedAgentFiles.length} modes)`
+          chalk.green('✓') +
+            ` GitHub Copilot chat modes installed (${cachedAgentFiles.length} modes)`
         );
       }
     }
@@ -864,14 +887,18 @@ See .aios-core/user-guide.md for complete documentation.
           if (squadAgentFiles.length > 0) {
             const squadAgentsTarget = path.join(squadClaudeTarget, 'agents');
             await fse.copy(squadAgentsSource, squadAgentsTarget);
-            console.log(chalk.green('  ✓') + ` Claude Code ${squad} agents (${squadAgentFiles.length} agents)`);
+            console.log(
+              chalk.green('  ✓') + ` Claude Code ${squad} agents (${squadAgentFiles.length} agents)`
+            );
           }
 
           // Copy tasks (using cached list)
           if (squadTaskFiles.length > 0) {
             const squadTasksTarget = path.join(squadClaudeTarget, 'tasks');
             await fse.copy(squadTasksSource, squadTasksTarget);
-            console.log(chalk.green('  ✓') + ` Claude Code ${squad} tasks (${squadTaskFiles.length} tasks)`);
+            console.log(
+              chalk.green('  ✓') + ` Claude Code ${squad} tasks (${squadTaskFiles.length} tasks)`
+            );
           }
 
           // Copy README (using cached check)
@@ -899,7 +926,9 @@ See .aios-core/user-guide.md for complete documentation.
             await fse.copy(sourcePath, targetPath);
           }
 
-          console.log(chalk.green('  ✓') + ` Cursor ${squad} rules (${squadAgentFiles.length} agents)`);
+          console.log(
+            chalk.green('  ✓') + ` Cursor ${squad} rules (${squadAgentFiles.length} agents)`
+          );
 
           // Copy README for Cursor (using cached check)
           if (hasSquadReadme) {
@@ -920,7 +949,9 @@ See .aios-core/user-guide.md for complete documentation.
 
   let validationPassed = true;
   try {
-    const { PostInstallValidator } = require('../packages/installer/src/installer/post-install-validator');
+    const {
+      PostInstallValidator,
+    } = require('../packages/installer/src/installer/post-install-validator');
     const validator = new PostInstallValidator(context.projectRoot, context.frameworkLocation, {
       verifyHashes: false,
       verbose: false,
@@ -1013,9 +1044,7 @@ See .aios-core/user-guide.md for complete documentation.
   }
 
   // Show other IDE installations
-  const otherInstalledIdes = ['gemini', 'antigravity'].filter((ide) =>
-    ides.includes(ide)
-  );
+  const otherInstalledIdes = ['gemini', 'antigravity'].filter((ide) => ides.includes(ide));
   for (const ide of otherInstalledIdes) {
     const ideDir = ide === 'gemini' ? '.gemini' : `.${ide}`;
     console.log(
@@ -1194,9 +1223,9 @@ async function setupGlobalStatuslineLegacy(sourceCoreDir) {
   }
 
   const hookPathEscaped = hookTarget.replace(/\\/g, '\\\\');
-  const alreadyHasTrackAgent = settings.hooks.UserPromptSubmit.some(entry => {
+  const alreadyHasTrackAgent = settings.hooks.UserPromptSubmit.some((entry) => {
     if (Array.isArray(entry.hooks)) {
-      return entry.hooks.some(h => h.command && h.command.includes('track-agent'));
+      return entry.hooks.some((h) => h.command && h.command.includes('track-agent'));
     }
     return entry.command && entry.command.includes('track-agent');
   });

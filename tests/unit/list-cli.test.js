@@ -9,9 +9,24 @@
 const path = require('path');
 
 // Test modules
-const { formatTree, formatTreeCollapsed, groupWorkers } = require('../../.aios-core/cli/commands/workers/formatters/list-tree');
-const { formatTable, formatJSON, formatYAML, formatList, formatCount, truncate } = require('../../.aios-core/cli/commands/workers/formatters/list-table');
-const { paginate, formatPaginationInfo, formatPaginationHint } = require('../../.aios-core/cli/commands/workers/utils/pagination');
+const {
+  formatTree,
+  formatTreeCollapsed,
+  groupWorkers,
+} = require('../../.aios-core/cli/commands/workers/formatters/list-tree');
+const {
+  formatTable,
+  formatJSON,
+  formatYAML,
+  formatList,
+  formatCount,
+  truncate,
+} = require('../../.aios-core/cli/commands/workers/formatters/list-table');
+const {
+  paginate,
+  formatPaginationInfo,
+  formatPaginationHint,
+} = require('../../.aios-core/cli/commands/workers/utils/pagination');
 
 // Mock workers for testing
 const mockWorkers = [

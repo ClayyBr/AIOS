@@ -664,7 +664,12 @@ describe('Terminal Spawner (Story 12.10)', () => {
       // Given
       const testResults = [
         { testName: 'detectEnvironment', result: 'pass', duration: 10 },
-        { testName: 'spawnInline', result: 'fail', failureReason: 'Script not found', duration: 50 },
+        {
+          testName: 'spawnInline',
+          result: 'fail',
+          failureReason: 'Script not found',
+          duration: 50,
+        },
       ];
       const report = generateCompatibilityReport(testResults);
 
@@ -723,22 +728,22 @@ describe('Terminal Spawner (Story 12.10)', () => {
     });
 
     it('should include macOS Sonoma in must_pass', () => {
-      const hasSonoma = OS_COMPATIBILITY_MATRIX.must_pass.some(
-        (c) => c.os.toLowerCase().includes('sonoma'),
+      const hasSonoma = OS_COMPATIBILITY_MATRIX.must_pass.some((c) =>
+        c.os.toLowerCase().includes('sonoma')
       );
       expect(hasSonoma).toBe(true);
     });
 
     it('should include Windows 11 + WSL in must_pass', () => {
       const hasWindows11WSL = OS_COMPATIBILITY_MATRIX.must_pass.some(
-        (c) => c.os.toLowerCase().includes('windows 11') && c.wsl,
+        (c) => c.os.toLowerCase().includes('windows 11') && c.wsl
       );
       expect(hasWindows11WSL).toBe(true);
     });
 
     it('should include Ubuntu 22.04 in must_pass', () => {
-      const hasUbuntu = OS_COMPATIBILITY_MATRIX.must_pass.some(
-        (c) => c.os.toLowerCase().includes('ubuntu 22.04'),
+      const hasUbuntu = OS_COMPATIBILITY_MATRIX.must_pass.some((c) =>
+        c.os.toLowerCase().includes('ubuntu 22.04')
       );
       expect(hasUbuntu).toBe(true);
     });

@@ -32,13 +32,13 @@ Application Logic (aios-core, aios-pro)
 
 **Event Mapping:**
 
-| Unified Event | Claude Code | Gemini Code |
-|---------------|-------------|-------------|
-| `sessionStart` | N/A | `SessionStart` |
-| `beforeAgent` | `PreToolUse` | `BeforeAgent` |
-| `beforeTool` | `PreToolUse` | `BeforeTool` |
-| `afterTool` | `PostToolUse` | `AfterTool` |
-| `sessionEnd` | `Stop` | `SessionEnd` |
+| Unified Event  | Claude Code   | Gemini Code    |
+| -------------- | ------------- | -------------- |
+| `sessionStart` | N/A           | `SessionStart` |
+| `beforeAgent`  | `PreToolUse`  | `BeforeAgent`  |
+| `beforeTool`   | `PreToolUse`  | `BeforeTool`   |
+| `afterTool`    | `PostToolUse` | `AfterTool`    |
+| `sessionEnd`   | `Stop`        | `SessionEnd`   |
 
 **Usage:**
 
@@ -268,12 +268,12 @@ catch (err) {
 ```javascript
 // ✓ Good: < 5s timeout
 {
-  timeout: 5000
+  timeout: 5000;
 }
 
 // ✗ Bad: Long timeout
 {
-  timeout: 30000 // May delay user
+  timeout: 30000; // May delay user
 }
 ```
 
@@ -303,5 +303,5 @@ const proModule = require('../../pro/...'); // Fails if pro absent
 
 ---
 
-*Unified Hooks System - AIOS Core*
-*Updated: 2026-02-09 - Story MIS-3*
+_Unified Hooks System - AIOS Core_
+_Updated: 2026-02-09 - Story MIS-3_

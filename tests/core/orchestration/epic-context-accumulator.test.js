@@ -369,7 +369,7 @@ describe('EpicContextAccumulator', () => {
             id: `story-${i}`,
             title: `Story ${i}`,
             files_modified: [`src/file${i}.js`],
-          }),
+          })
         );
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
@@ -384,7 +384,7 @@ describe('EpicContextAccumulator', () => {
         // Old stories (N-7+) = stories 0, 1, 2, 3 → metadata_only (no title)
         // These should NOT contain 'title: Story 0' etc.
         const lines = result.split('\n');
-        const story0Line = lines.find(l => l.includes('story-0'));
+        const story0Line = lines.find((l) => l.includes('story-0'));
         if (story0Line) {
           expect(story0Line).not.toContain('title:');
         }
@@ -397,7 +397,7 @@ describe('EpicContextAccumulator', () => {
         const stories = [
           createStory({ id: 'old-story', files_modified: ['src/shared.js'] }),
           ...Array.from({ length: 9 }, (_, i) =>
-            createStory({ id: `story-${i + 1}`, files_modified: [`src/file${i}.js`] }),
+            createStory({ id: `story-${i + 1}`, files_modified: [`src/file${i}.js`] })
           ),
         ];
         const mockState = createMockSessionState(stories);
@@ -409,15 +409,13 @@ describe('EpicContextAccumulator', () => {
 
         // old-story should have been upgraded to metadata_plus_files (has title)
         const lines = result.split('\n');
-        const oldStoryLine = lines.find(l => l.includes('old-story'));
+        const oldStoryLine = lines.find((l) => l.includes('old-story'));
         expect(oldStoryLine).toContain('title:');
         expect(oldStoryLine).toContain('files_modified:');
       });
 
       it('should NOT upgrade to full_detail on file overlap', () => {
-        const stories = [
-          createStory({ id: 'old-story', files_modified: ['src/shared.js'] }),
-        ];
+        const stories = [createStory({ id: 'old-story', files_modified: ['src/shared.js'] })];
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
 
@@ -427,16 +425,14 @@ describe('EpicContextAccumulator', () => {
 
         // Should be metadata_plus_files, NOT full_detail (no quality_gate)
         const lines = result.split('\n');
-        const storyLine = lines.find(l => l.includes('old-story'));
+        const storyLine = lines.find((l) => l.includes('old-story'));
         expect(storyLine).not.toContain('quality_gate:');
       });
     });
 
     describe('Exception: executor match', () => {
       it('should upgrade metadata_only to metadata_plus_files on executor match', () => {
-        const stories = [
-          createStory({ id: 'old-story', executor: '@dev' }),
-        ];
+        const stories = [createStory({ id: 'old-story', executor: '@dev' })];
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
 
@@ -445,14 +441,12 @@ describe('EpicContextAccumulator', () => {
         });
 
         const lines = result.split('\n');
-        const storyLine = lines.find(l => l.includes('old-story'));
+        const storyLine = lines.find((l) => l.includes('old-story'));
         expect(storyLine).toContain('title:');
       });
 
       it('should NOT upgrade if executor does not match', () => {
-        const stories = [
-          createStory({ id: 'old-story', executor: '@qa' }),
-        ];
+        const stories = [createStory({ id: 'old-story', executor: '@qa' })];
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
 
@@ -461,7 +455,7 @@ describe('EpicContextAccumulator', () => {
         });
 
         const lines = result.split('\n');
-        const storyLine = lines.find(l => l.includes('old-story'));
+        const storyLine = lines.find((l) => l.includes('old-story'));
         // metadata_only → no title
         expect(storyLine).not.toContain('title:');
       });
@@ -469,7 +463,7 @@ describe('EpicContextAccumulator', () => {
       it('should NOT upgrade full_detail stories (no downgrade from exceptions)', () => {
         // Story at index 9, storyN = 10 → distance 1 → full_detail
         const stories = Array.from({ length: 10 }, (_, i) =>
-          createStory({ id: `story-${i}`, executor: '@dev' }),
+          createStory({ id: `story-${i}`, executor: '@dev' })
         );
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
@@ -478,7 +472,7 @@ describe('EpicContextAccumulator', () => {
 
         // Recent story should still be full_detail
         const lines = result.split('\n');
-        const recentLine = lines.find(l => l.includes('story-9'));
+        const recentLine = lines.find((l) => l.includes('story-9'));
         expect(recentLine).toContain('quality_gate:');
       });
     });
@@ -493,7 +487,7 @@ describe('EpicContextAccumulator', () => {
             dev_notes: `Notes for story ${i} ${'detail '.repeat(200)}`,
             acceptance_criteria: `AC for story ${i} ${'criteria '.repeat(200)}`,
             files_modified: Array.from({ length: 10 }, (_, j) => `src/module${i}/file${j}.js`),
-          }),
+          })
         );
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
@@ -511,7 +505,7 @@ describe('EpicContextAccumulator', () => {
             dev_notes: 'x'.repeat(500),
             acceptance_criteria: 'y'.repeat(500),
             files_modified: Array.from({ length: 5 }, (_, j) => `src/f${i}_${j}.js`),
-          }),
+          })
         );
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
@@ -589,7 +583,7 @@ describe('EpicContextAccumulator', () => {
 
         // Should be metadata_plus_files (upgraded), not full_detail
         const lines = result.split('\n');
-        const storyLine = lines.find(l => l.includes('old-story'));
+        const storyLine = lines.find((l) => l.includes('old-story'));
         expect(storyLine).toContain('title:');
         expect(storyLine).not.toContain('quality_gate:');
       });

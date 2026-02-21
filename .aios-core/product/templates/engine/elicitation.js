@@ -92,7 +92,10 @@ function createQuestion(variable, context = {}) {
   if (variable.type === 'array') {
     question.filter = (input) => {
       if (typeof input === 'string') {
-        return input.split(',').map(s => s.trim()).filter(Boolean);
+        return input
+          .split(',')
+          .map((s) => s.trim())
+          .filter(Boolean);
       }
       return input;
     };
@@ -157,7 +160,7 @@ class VariableElicitation {
 
     try {
       const files = glob.sync(pattern, { cwd: process.cwd() });
-      const numbers = files.map(f => {
+      const numbers = files.map((f) => {
         const match = path.basename(f).match(new RegExp(`${docType}-(\\d+)`));
         return match ? parseInt(match[1], 10) : 0;
       });
@@ -230,7 +233,9 @@ class VariableElicitation {
       if (this.interactive) {
         questions.push(createQuestion(variable, context));
       } else if (variable.required && variable.default === undefined) {
-        throw new Error(`Required variable ${variable.name} has no default and interactive mode is disabled`);
+        throw new Error(
+          `Required variable ${variable.name} has no default and interactive mode is disabled`
+        );
       } else {
         values[variable.name] = variable.default;
       }

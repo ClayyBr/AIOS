@@ -137,7 +137,7 @@ describe('SessionContextLoader', () => {
       const activity1 = state1.lastActivity;
 
       // Wait a bit
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       loader.updateSession('dev', 'Dex', 'run-tests');
       const state2 = loader.loadSessionState();
@@ -257,8 +257,18 @@ describe('SessionContextLoader', () => {
     test('returns most recent different agent', () => {
       const sessionState = {
         agentSequence: [
-          { agentId: 'po', agentName: 'Pax', activatedAt: Date.now() - 10000, lastCommand: 'create-story' },
-          { agentId: 'dev', agentName: 'Dex', activatedAt: Date.now() - 5000, lastCommand: 'develop' },
+          {
+            agentId: 'po',
+            agentName: 'Pax',
+            activatedAt: Date.now() - 10000,
+            lastCommand: 'create-story',
+          },
+          {
+            agentId: 'dev',
+            agentName: 'Dex',
+            activatedAt: Date.now() - 5000,
+            lastCommand: 'develop',
+          },
           { agentId: 'qa', agentName: 'Quinn', activatedAt: Date.now(), lastCommand: 'review' },
         ],
       };
@@ -453,9 +463,15 @@ describe('SessionContextLoader', () => {
   describe('_inferWorkflowState() - Workflow State Inference (WIS-3)', () => {
     test('infers story_development workflow states', () => {
       const states = [
-        { task: 'validate-story-draft', expected: { workflow: 'story_development', state: 'validated' } },
+        {
+          task: 'validate-story-draft',
+          expected: { workflow: 'story_development', state: 'validated' },
+        },
         { task: 'develop', expected: { workflow: 'story_development', state: 'in_development' } },
-        { task: 'develop-yolo', expected: { workflow: 'story_development', state: 'in_development' } },
+        {
+          task: 'develop-yolo',
+          expected: { workflow: 'story_development', state: 'in_development' },
+        },
         { task: 'review-qa', expected: { workflow: 'story_development', state: 'qa_reviewed' } },
       ];
 

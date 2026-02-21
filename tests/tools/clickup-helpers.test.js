@@ -45,7 +45,7 @@ describeIntegration('ClickUp Tool Helpers', () => {
     });
 
     test('should have all required helper IDs', () => {
-      const helperIds = clickupTool.executable_knowledge.helpers.map(h => h.id);
+      const helperIds = clickupTool.executable_knowledge.helpers.map((h) => h.id);
       expect(helperIds).toContain('extract-custom-field');
       expect(helperIds).toContain('format-assignee-for-create');
       expect(helperIds).toContain('format-assignee-for-update');
@@ -74,9 +74,7 @@ describeIntegration('ClickUp Tool Helpers', () => {
     test('should return null for non-existent field', async () => {
       const result = await executor.execute('extract-custom-field', {
         response: {
-          custom_fields: [
-            { name: 'Priority', value: 'High' },
-          ],
+          custom_fields: [{ name: 'Priority', value: 'High' }],
         },
         fieldName: 'NonExistent',
       });
@@ -244,9 +242,7 @@ describeIntegration('ClickUp Tool Helpers', () => {
     test('should detect history_items format', async () => {
       const result = await executor.execute('parse-webhook-type', {
         payload: {
-          history_items: [
-            { field: 'status', before: 'todo', after: 'done' },
-          ],
+          history_items: [{ field: 'status', before: 'todo', after: 'done' }],
         },
       });
 
@@ -312,9 +308,7 @@ describeIntegration('ClickUp Tool Helpers', () => {
 
     test('should extract from history_items format', async () => {
       const historyItems = {
-        history_items: [
-          { field: 'status', before: 'todo', after: 'done' },
-        ],
+        history_items: [{ field: 'status', before: 'todo', after: 'done' }],
       };
 
       const result = await executor.execute('extract-webhook-payload', {
@@ -368,11 +362,7 @@ describeIntegration('ClickUp Tool Helpers', () => {
   describeIntegration('calculate-time-tracking-total', () => {
     test('should sum time entries', async () => {
       const result = await executor.execute('calculate-time-tracking-total', {
-        timeEntries: [
-          { duration: 3600000 },
-          { duration: 1800000 },
-          { duration: 900000 },
-        ],
+        timeEntries: [{ duration: 3600000 }, { duration: 1800000 }, { duration: 900000 }],
       });
 
       expect(result).toBe(6300000);
@@ -380,9 +370,7 @@ describeIntegration('ClickUp Tool Helpers', () => {
 
     test('should handle single entry', async () => {
       const result = await executor.execute('calculate-time-tracking-total', {
-        timeEntries: [
-          { duration: 5000 },
-        ],
+        timeEntries: [{ duration: 5000 }],
       });
 
       expect(result).toBe(5000);
@@ -398,11 +386,7 @@ describeIntegration('ClickUp Tool Helpers', () => {
 
     test('should ignore entries without duration', async () => {
       const result = await executor.execute('calculate-time-tracking-total', {
-        timeEntries: [
-          { duration: 1000 },
-          { id: 'entry2' },
-          { duration: 2000 },
-        ],
+        timeEntries: [{ duration: 1000 }, { id: 'entry2' }, { duration: 2000 }],
       });
 
       expect(result).toBe(3000);
@@ -426,10 +410,7 @@ describeIntegration('ClickUp Tool Helpers', () => {
 
     test('should handle large duration values', async () => {
       const result = await executor.execute('calculate-time-tracking-total', {
-        timeEntries: [
-          { duration: 36000000 },
-          { duration: 72000000 },
-        ],
+        timeEntries: [{ duration: 36000000 }, { duration: 72000000 }],
       });
 
       expect(result).toBe(108000000);
@@ -527,7 +508,9 @@ describeIntegration('ClickUp Tool Helpers', () => {
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nClickUp Helper Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nClickUp Helper Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(100);
     });

@@ -39,7 +39,7 @@ on:
 
 concurrency:
   group: semantic-release-${{ github.ref }}
-  cancel-in-progress: false  # Never cancel releases in progress
+  cancel-in-progress: false # Never cancel releases in progress
 
 permissions:
   contents: write

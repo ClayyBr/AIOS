@@ -81,7 +81,7 @@ describe('Status Mapper - Bidirectional Mapping', () => {
     test('should maintain consistency through round-trip for all standard statuses', () => {
       const statuses = ['Draft', 'Ready for Review', 'Review', 'In Progress', 'Done', 'Blocked'];
 
-      statuses.forEach(status => {
+      statuses.forEach((status) => {
         const toClickUp = mapStatusToClickUp(status);
         const backToLocal = mapStatusFromClickUp(toClickUp);
         expect(backToLocal).toBe(status);
@@ -129,7 +129,7 @@ describe('Story Status Progression Flow', () => {
   test('should handle blocked status at any stage', async () => {
     const statuses = ['Draft', 'In Progress', 'Review', 'Done'];
 
-    statuses.forEach(status => {
+    statuses.forEach((status) => {
       // Any status can transition to Blocked
       expect(mapStatusToClickUp('Blocked')).toBe('Blocked');
 
@@ -143,7 +143,7 @@ describe('Epic Status Handling (Native Field)', () => {
   test('should validate Epic status values', () => {
     const validEpicStatuses = ['Planning', 'In Progress', 'Done'];
 
-    validEpicStatuses.forEach(status => {
+    validEpicStatuses.forEach((status) => {
       // Epic statuses don't go through mapper (native field)
       // They should be passed directly to ClickUp
       expect(status).toMatch(/^(Planning|In Progress|Done)$/);
@@ -154,7 +154,7 @@ describe('Epic Status Handling (Native Field)', () => {
     const invalidStatuses = ['Draft', 'Review', 'Blocked', 'Unknown'];
     const validEpicStatuses = ['Planning', 'In Progress', 'Done'];
 
-    invalidStatuses.forEach(status => {
+    invalidStatuses.forEach((status) => {
       expect(validEpicStatuses.includes(status)).toBe(false);
     });
   });
@@ -167,7 +167,7 @@ describe('Epic Status Handling (Native Field)', () => {
     const storyStatuses = ['Draft', 'Ready for Review', 'Review', 'In Progress', 'Done', 'Blocked'];
 
     // Only 'In Progress' and 'Done' overlap
-    const overlapping = epicStatuses.filter(s => storyStatuses.includes(s));
+    const overlapping = epicStatuses.filter((s) => storyStatuses.includes(s));
     expect(overlapping).toEqual(['In Progress', 'Done']);
   });
 });

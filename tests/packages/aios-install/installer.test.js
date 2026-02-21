@@ -226,7 +226,7 @@ describe('installer', () => {
       expect(fs.writeFile).toHaveBeenCalledWith(
         expect.stringContaining('user-config.yaml'),
         expect.stringContaining('user_profile: bob'),
-        'utf8',
+        'utf8'
       );
     });
 
@@ -242,7 +242,7 @@ describe('installer', () => {
       expect(fs.writeFile).toHaveBeenCalledWith(
         expect.stringContaining('user-config.yaml'),
         expect.stringContaining('user_profile: advanced'),
-        'utf8',
+        'utf8'
       );
     });
 

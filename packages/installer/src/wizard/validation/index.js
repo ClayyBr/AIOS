@@ -53,21 +53,21 @@ async function validateInstallation(installationContext, onProgress = () => {}) 
     // Phase 4: Dependency Validation (Task 1.8.4)
     onProgress({ step: 'dependencies', message: 'Validating dependencies...', progress: 75 });
     validationResults.components.dependencies = await validateDependencies(
-      installationContext.dependencies,
+      installationContext.dependencies
     );
 
     // Aggregate errors and warnings
     for (const [component, result] of Object.entries(validationResults.components)) {
       if (result.errors) {
-        validationResults.errors.push(...result.errors.map(e => ({ component, ...e })));
+        validationResults.errors.push(...result.errors.map((e) => ({ component, ...e })));
       }
       if (result.warnings) {
-        validationResults.warnings.push(...result.warnings.map(w => ({ component, ...w })));
+        validationResults.warnings.push(...result.warnings.map((w) => ({ component, ...w })));
       }
     }
 
     // Determine overall status
-    const criticalErrors = validationResults.errors.filter(e => e.severity === 'critical');
+    const criticalErrors = validationResults.errors.filter((e) => e.severity === 'critical');
     if (criticalErrors.length > 0) {
       validationResults.overallStatus = 'failed';
     } else if (validationResults.errors.length > 0) {

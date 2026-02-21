@@ -36,7 +36,7 @@ describe('GreetingPreferenceManager', () => {
 
   beforeEach(() => {
     manager = new GreetingPreferenceManager();
-    
+
     // Backup original config if exists
     if (fs.existsSync(CONFIG_PATH)) {
       originalConfig = fs.readFileSync(CONFIG_PATH, 'utf8');
@@ -61,7 +61,7 @@ describe('GreetingPreferenceManager', () => {
     } else if (fs.existsSync(CONFIG_PATH)) {
       fs.unlinkSync(CONFIG_PATH);
     }
-    
+
     // Clean up backup
     if (fs.existsSync(BACKUP_PATH)) {
       fs.unlinkSync(BACKUP_PATH);
@@ -78,7 +78,7 @@ describe('GreetingPreferenceManager', () => {
     test('returns configured preference', () => {
       testConfig.agentIdentity.greeting.preference = 'minimal';
       fs.writeFileSync(CONFIG_PATH, yaml.dump(testConfig), 'utf8');
-      
+
       const preference = manager.getPreference();
       expect(preference).toBe('minimal');
     });
@@ -87,7 +87,7 @@ describe('GreetingPreferenceManager', () => {
       if (fs.existsSync(CONFIG_PATH)) {
         fs.unlinkSync(CONFIG_PATH);
       }
-      
+
       const preference = manager.getPreference();
       expect(preference).toBe('auto');
     });
@@ -96,11 +96,11 @@ describe('GreetingPreferenceManager', () => {
   describe('setPreference', () => {
     test('sets valid preference successfully', () => {
       fs.writeFileSync(CONFIG_PATH, yaml.dump(testConfig), 'utf8');
-      
+
       const result = manager.setPreference('minimal');
       expect(result.success).toBe(true);
       expect(result.preference).toBe('minimal');
-      
+
       // Verify config was updated
       const updatedConfig = yaml.load(fs.readFileSync(CONFIG_PATH, 'utf8'));
       expect(updatedConfig.agentIdentity.greeting.preference).toBe('minimal');
@@ -108,7 +108,7 @@ describe('GreetingPreferenceManager', () => {
 
     test('throws error for invalid preference', () => {
       fs.writeFileSync(CONFIG_PATH, yaml.dump(testConfig), 'utf8');
-      
+
       expect(() => manager.setPreference('invalid')).toThrow('Invalid preference');
       expect(() => manager.setPreference('Auto')).toThrow('Invalid preference');
       expect(() => manager.setPreference('')).toThrow('Invalid preference');
@@ -116,7 +116,7 @@ describe('GreetingPreferenceManager', () => {
 
     test('accepts all valid preferences', () => {
       fs.writeFileSync(CONFIG_PATH, yaml.dump(testConfig), 'utf8');
-      
+
       expect(() => manager.setPreference('auto')).not.toThrow();
       expect(() => manager.setPreference('minimal')).not.toThrow();
       expect(() => manager.setPreference('named')).not.toThrow();
@@ -125,9 +125,9 @@ describe('GreetingPreferenceManager', () => {
 
     test('creates backup before modification', () => {
       fs.writeFileSync(CONFIG_PATH, yaml.dump(testConfig), 'utf8');
-      
+
       manager.setPreference('minimal');
-      
+
       expect(fs.existsSync(BACKUP_PATH)).toBe(true);
       const backupConfig = yaml.load(fs.readFileSync(BACKUP_PATH, 'utf8'));
       expect(backupConfig.agentIdentity.greeting.preference).toBe('auto');
@@ -135,18 +135,18 @@ describe('GreetingPreferenceManager', () => {
 
     test('restores backup on YAML error', () => {
       fs.writeFileSync(CONFIG_PATH, yaml.dump(testConfig), 'utf8');
-      
+
       // Mock yaml.dump to throw error
       const originalDump = yaml.dump;
       yaml.dump = jest.fn(() => {
         throw new Error('YAML error');
       });
-      
+
       expect(() => manager.setPreference('minimal')).toThrow();
-      
+
       // Restore
       yaml.dump = originalDump;
-      
+
       // Config should be restored
       const restoredConfig = yaml.load(fs.readFileSync(CONFIG_PATH, 'utf8'));
       expect(restoredConfig.agentIdentity.greeting.preference).toBe('auto');
@@ -155,9 +155,9 @@ describe('GreetingPreferenceManager', () => {
     test('creates config structure if missing', () => {
       const minimalConfig = {};
       fs.writeFileSync(CONFIG_PATH, yaml.dump(minimalConfig), 'utf8');
-      
+
       manager.setPreference('named');
-      
+
       const updatedConfig = yaml.load(fs.readFileSync(CONFIG_PATH, 'utf8'));
       expect(updatedConfig.agentIdentity.greeting.preference).toBe('named');
     });
@@ -168,7 +168,7 @@ describe('GreetingPreferenceManager', () => {
       testConfig.agentIdentity.greeting.preference = 'archetypal';
       testConfig.agentIdentity.greeting.showArchetype = false;
       fs.writeFileSync(CONFIG_PATH, yaml.dump(testConfig), 'utf8');
-      
+
       const config = manager.getConfig();
       expect(config.preference).toBe('archetypal');
       expect(config.showArchetype).toBe(false);
@@ -179,7 +179,7 @@ describe('GreetingPreferenceManager', () => {
       if (fs.existsSync(CONFIG_PATH)) {
         fs.unlinkSync(CONFIG_PATH);
       }
-      
+
       const config = manager.getConfig();
       expect(config).toEqual({});
     });
@@ -237,7 +237,7 @@ describe('GreetingBuilder with Preferences', () => {
         id: 'test',
         icon: '🤖',
       };
-      
+
       const greeting = builder.buildFixedLevelGreeting(agentWithoutLevels, 'minimal');
       expect(greeting).toBeTruthy();
       expect(greeting).toContain('*help');
@@ -254,7 +254,7 @@ describe('GreetingBuilder with Preferences', () => {
           },
         },
       };
-      
+
       const greeting = builder.buildFixedLevelGreeting(agentPartialLevels, 'minimal');
       expect(greeting).toContain('test Agent ready');
     });
@@ -301,4 +301,3 @@ describe('GreetingBuilder with Preferences', () => {
     });
   });
 });
-

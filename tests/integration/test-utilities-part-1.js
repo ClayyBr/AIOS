@@ -1,9 +1,9 @@
 /**
  * Integration Test Suite: Utility Scripts Integration - Part 1
- * 
+ *
  * Story: 3.4 - Utility Script Integration Part 1
  * Purpose: Validate integration of 23 utility scripts into AIOS framework
- * 
+ *
  * Tests:
  * 1. Load all 23 utilities successfully (no errors)
  * 2. Validate all utility references resolve correctly
@@ -30,7 +30,7 @@ const UTILITIES_TO_TEST = [
   { name: 'coverage-analyzer', category: 'helpers', path: UTILS_PATH },
   { name: 'compatibility-checker', category: 'helpers', path: UTILS_PATH },
   { name: 'dependency-analyzer', category: 'helpers', path: UTILS_PATH },
-  
+
   // Git/Workflow (7)
   { name: 'approval-workflow', category: 'executors', path: UTILS_PATH },
   { name: 'branch-manager', category: 'executors', path: UTILS_PATH },
@@ -39,18 +39,18 @@ const UTILITIES_TO_TEST = [
   { name: 'conflict-resolver', category: 'executors', path: UTILS_PATH },
   { name: 'diff-generator', category: 'helpers', path: UTILS_PATH },
   { name: 'change-propagation-predictor', category: 'helpers', path: UTILS_PATH },
-  
+
   // Component Management (5)
   { name: 'component-generator', category: 'executors', path: UTILS_PATH },
   { name: 'component-metadata', category: 'helpers', path: UTILS_PATH },
   { name: 'component-preview', category: 'helpers', path: UTILS_PATH },
   { name: 'component-search', category: 'executors', path: UTILS_PATH },
   { name: 'deprecation-manager', category: 'executors', path: UTILS_PATH },
-  
+
   // Documentation (2)
   { name: 'documentation-synchronizer', category: 'executors', path: UTILS_PATH },
   { name: 'dependency-impact-analyzer', category: 'executors', path: UTILS_PATH },
-  
+
   // Batch/Helpers (4)
   { name: 'batch-creator', category: 'helpers', path: UTILS_PATH },
   { name: 'clickup-helpers', category: 'helpers', path: COMMON_UTILS_PATH },
@@ -59,14 +59,7 @@ const UTILITIES_TO_TEST = [
 ];
 
 // Agents to test
-const AGENTS_TO_TEST = [
-  'dev',
-  'qa',
-  'architect',
-  'po',
-  'pm',
-  'devops',
-];
+const AGENTS_TO_TEST = ['dev', 'qa', 'architect', 'po', 'pm', 'devops'];
 
 // Test results
 const testResults = {
@@ -89,7 +82,7 @@ console.log('-'.repeat(70));
 
 for (const util of UTILITIES_TO_TEST) {
   const utilPath = path.join(util.path, `${util.name}.js`);
-  
+
   try {
     // Try to load the utility
     require(utilPath);
@@ -106,7 +99,9 @@ for (const util of UTILITIES_TO_TEST) {
 }
 
 console.log('');
-console.log(`Result: ${testResults.test1.passed}/${UTILITIES_TO_TEST.length} utilities loaded successfully`);
+console.log(
+  `Result: ${testResults.test1.passed}/${UTILITIES_TO_TEST.length} utilities loaded successfully`
+);
 console.log('');
 
 // ============================================================================
@@ -117,22 +112,28 @@ console.log('-'.repeat(70));
 
 try {
   // Check if validation script exists
-  const validateScriptPath = path.join(ROOT_PATH, 'outputs', 'architecture-map', 'schemas', 'validate-tool-references.js');
-  
+  const validateScriptPath = path.join(
+    ROOT_PATH,
+    'outputs',
+    'architecture-map',
+    'schemas',
+    'validate-tool-references.js'
+  );
+
   if (fs.existsSync(validateScriptPath)) {
     console.log('Running: validate-tool-references.js');
-    
+
     try {
       const output = execSync(`node "${validateScriptPath}"`, {
         cwd: ROOT_PATH,
         encoding: 'utf8',
         stdio: 'pipe',
       });
-      
+
       // Check if output indicates success
       const hasErrors = output.includes('ERROR') || output.includes('FAIL');
       testResults.test2.passed = !hasErrors;
-      
+
       if (testResults.test2.passed) {
         console.log('✓ All utility references resolve correctly');
       } else {
@@ -162,18 +163,24 @@ console.log('Test 3: Gap Detection');
 console.log('-'.repeat(70));
 
 try {
-  const detectGapsPath = path.join(ROOT_PATH, 'outputs', 'architecture-map', 'schemas', 'detect-gaps.js');
-  
+  const detectGapsPath = path.join(
+    ROOT_PATH,
+    'outputs',
+    'architecture-map',
+    'schemas',
+    'detect-gaps.js'
+  );
+
   if (fs.existsSync(detectGapsPath)) {
     console.log('Running: detect-gaps.js');
-    
+
     try {
       const output = execSync(`node "${detectGapsPath}"`, {
         cwd: ROOT_PATH,
         encoding: 'utf8',
         stdio: 'pipe',
       });
-      
+
       // Count gaps related to our utilities
       let gapsFound = 0;
       for (const util of UTILITIES_TO_TEST) {
@@ -183,10 +190,10 @@ try {
           console.log(`⚠ Gap found for: ${util.name}`);
         }
       }
-      
+
       testResults.test3.gapsFound = gapsFound;
       testResults.test3.passed = gapsFound === 0;
-      
+
       if (testResults.test3.passed) {
         console.log('✓ Zero gaps found for integrated utilities');
       } else {
@@ -216,19 +223,21 @@ console.log('-'.repeat(70));
 
 for (const agentName of AGENTS_TO_TEST) {
   const agentPath = path.join(AGENTS_PATH, `${agentName}.md`);
-  
+
   try {
     // Read agent file
     if (fs.existsSync(agentPath)) {
       const agentContent = fs.readFileSync(agentPath, 'utf8');
-      
+
       // Check if agent file contains YAML block
       const yamlMatch = agentContent.match(/```yaml\n([\s\S]+?)\n```/);
-      
+
       if (yamlMatch) {
         // Validate that dependencies.utils section exists if utility is referenced
-        const utilsMatch = yamlMatch[1].match(/dependencies:\s*[\s\S]*?utils:\s*\n([\s\S]*?)(?:\n\s*\w+:|```)/);
-        
+        const utilsMatch = yamlMatch[1].match(
+          /dependencies:\s*[\s\S]*?utils:\s*\n([\s\S]*?)(?:\n\s*\w+:|```)/
+        );
+
         if (utilsMatch) {
           console.log(`✓ ${agentName} - dependencies.utils section found`);
           testResults.test4.passed++;
@@ -255,7 +264,9 @@ for (const agentName of AGENTS_TO_TEST) {
 }
 
 console.log('');
-console.log(`Result: ${testResults.test4.passed}/${AGENTS_TO_TEST.length} agents loaded successfully`);
+console.log(
+  `Result: ${testResults.test4.passed}/${AGENTS_TO_TEST.length} agents loaded successfully`
+);
 console.log('');
 
 // ============================================================================
@@ -265,11 +276,17 @@ console.log('Test 5: Relationship Synthesis');
 console.log('-'.repeat(70));
 
 try {
-  const synthesizePath = path.join(ROOT_PATH, 'outputs', 'architecture-map', 'schemas', 'synthesize-relationships.js');
-  
+  const synthesizePath = path.join(
+    ROOT_PATH,
+    'outputs',
+    'architecture-map',
+    'schemas',
+    'synthesize-relationships.js'
+  );
+
   if (fs.existsSync(synthesizePath)) {
     console.log('Running: synthesize-relationships.js');
-    
+
     try {
       const output = execSync(`node "${synthesizePath}"`, {
         cwd: ROOT_PATH,
@@ -277,28 +294,31 @@ try {
         stdio: 'pipe',
         timeout: 30000, // 30 second timeout
       });
-      
+
       // Check if MASTER-RELATIONSHIP-MAP.json was updated
-      const masterMapPath = path.join(ROOT_PATH, 'outputs', 'architecture-map', 'MASTER-RELATIONSHIP-MAP.json');
-      
+      const masterMapPath = path.join(
+        ROOT_PATH,
+        'outputs',
+        'architecture-map',
+        'MASTER-RELATIONSHIP-MAP.json'
+      );
+
       if (fs.existsSync(masterMapPath)) {
         const masterMap = JSON.parse(fs.readFileSync(masterMapPath, 'utf8'));
-        
+
         // Count how many of our utilities are in the map
         let utilsInMap = 0;
         if (masterMap.nodes) {
           for (const util of UTILITIES_TO_TEST) {
-            const utilNode = masterMap.nodes.find(n => 
-              n.id === `util-${util.name}` || 
-              n.id === util.name ||
-              n.name === util.name,
+            const utilNode = masterMap.nodes.find(
+              (n) => n.id === `util-${util.name}` || n.id === util.name || n.name === util.name
             );
             if (utilNode) {
               utilsInMap++;
             }
           }
         }
-        
+
         console.log('✓ Relationship map regenerated');
         console.log(`  Utilities found in map: ${utilsInMap}/${UTILITIES_TO_TEST.length}`);
         testResults.test5.passed = true;
@@ -331,21 +351,31 @@ console.log('Test Suite Summary');
 console.log('='.repeat(70));
 console.log('');
 
-const allTestsPassed = 
+const allTestsPassed =
   testResults.test1.failed === 0 &&
   (testResults.test2.passed === true || testResults.test2.passed === null) &&
   (testResults.test3.passed === true || testResults.test3.passed === null) &&
   testResults.test4.failed === 0 &&
   (testResults.test5.passed === true || testResults.test5.passed === null);
 
-console.log(`Test 1 (Utility Load):        ${testResults.test1.passed}/${UTILITIES_TO_TEST.length} ${testResults.test1.failed === 0 ? '✓' : '✗'}`);
-console.log(`Test 2 (Reference Validation): ${testResults.test2.passed === true ? '✓ PASS' : testResults.test2.passed === null ? '⚠ SKIP' : '✗ FAIL'}`);
-console.log(`Test 3 (Gap Detection):        ${testResults.test3.passed === true ? '✓ PASS' : testResults.test3.passed === null ? '⚠ SKIP' : '✗ FAIL'}`);
+console.log(
+  `Test 1 (Utility Load):        ${testResults.test1.passed}/${UTILITIES_TO_TEST.length} ${testResults.test1.failed === 0 ? '✓' : '✗'}`
+);
+console.log(
+  `Test 2 (Reference Validation): ${testResults.test2.passed === true ? '✓ PASS' : testResults.test2.passed === null ? '⚠ SKIP' : '✗ FAIL'}`
+);
+console.log(
+  `Test 3 (Gap Detection):        ${testResults.test3.passed === true ? '✓ PASS' : testResults.test3.passed === null ? '⚠ SKIP' : '✗ FAIL'}`
+);
 if (testResults.test3.gapsFound !== null) {
   console.log(`                                (${testResults.test3.gapsFound} gaps found)`);
 }
-console.log(`Test 4 (Agent Load):           ${testResults.test4.passed}/${AGENTS_TO_TEST.length} ${testResults.test4.failed === 0 ? '✓' : '✗'}`);
-console.log(`Test 5 (Relationship Synth):   ${testResults.test5.passed === true ? '✓ PASS' : testResults.test5.passed === null ? '⚠ SKIP' : '✗ FAIL'}`);
+console.log(
+  `Test 4 (Agent Load):           ${testResults.test4.passed}/${AGENTS_TO_TEST.length} ${testResults.test4.failed === 0 ? '✓' : '✗'}`
+);
+console.log(
+  `Test 5 (Relationship Synth):   ${testResults.test5.passed === true ? '✓ PASS' : testResults.test5.passed === null ? '⚠ SKIP' : '✗ FAIL'}`
+);
 
 console.log('');
 console.log(`Overall Status: ${allTestsPassed ? '✓ ALL TESTS PASSED' : '✗ SOME TESTS FAILED'}`);
@@ -369,10 +399,9 @@ if (!allTestsPassed) {
   if (testResults.test5.errors.length > 0) {
     console.log('  Test 5:', testResults.test5.errors);
   }
-  
+
   process.exit(1);
 } else {
   console.log('✓ Story 3.4 utility integration validation complete!');
   process.exit(0);
 }
-

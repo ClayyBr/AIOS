@@ -43,14 +43,15 @@ First value is achieved only when all three are true:
 
 **Breakdown by step:**
 
-| Step | Estimated Time | Bottleneck |
-|------|---------------|------------|
-| Find install command in README | 3-5 min | README is dense, no single "start here" pointer |
-| Run `npx aios-core install` | 2-3 min | npm dependency download (network-bound) |
-| Figure out IDE-specific activation | 5-8 min | Activation differs by IDE, docs use technical language |
-| See agent greeting with commands | 30 sec | Fast once activation is found |
+| Step                               | Estimated Time | Bottleneck                                             |
+| ---------------------------------- | -------------- | ------------------------------------------------------ |
+| Find install command in README     | 3-5 min        | README is dense, no single "start here" pointer        |
+| Run `npx aios-core install`        | 2-3 min        | npm dependency download (network-bound)                |
+| Figure out IDE-specific activation | 5-8 min        | Activation differs by IDE, docs use technical language |
+| See agent greeting with commands   | 30 sec         | Fast once activation is found                          |
 
 **Top 3 bottlenecks to address:**
+
 1. Finding the install command in a dense README (Story 4.0.2 will fix)
 2. Understanding IDE-specific activation syntax (Story 4.0.3 will fix)
 3. No single "start here" -> "do this" -> "you're done" linear path (Story 4.0.2 will fix)
@@ -64,17 +65,18 @@ First value is achieved only when all three are true:
 
 ## First-Value Checklist (reproducible, binary pass/fail)
 
-| # | Step | Time Budget | Pass Criteria | Fail Criteria |
-|---|------|-------------|---------------|---------------|
-| 1 | Find install command | <= 2 min | User finds `npx aios-core install` from README | Cannot locate command or tries wrong one |
-| 2 | Run install | <= 3 min | `npx aios-core install` exits code 0 | Install fails, hangs, or errors |
-| 3 | Identify activation method | <= 2 min | User knows IDE-specific activation syntax | Tries wrong syntax or searches > 2 min |
-| 4 | Activate agent | <= 1 min | Agent activation command succeeds | Command fails or no output |
-| 5 | See greeting + commands | <= 30 sec | Greeting with available commands displayed | No greeting, partial output, or error |
-| 6 | Run starter command | <= 1 min | `*help` (or equivalent) returns useful output | Command not recognized or errors |
-| **Total** | | **<= 10 min** | All 6 steps pass within budget | Any step fails or total > 10 min |
+| #         | Step                       | Time Budget   | Pass Criteria                                  | Fail Criteria                            |
+| --------- | -------------------------- | ------------- | ---------------------------------------------- | ---------------------------------------- |
+| 1         | Find install command       | <= 2 min      | User finds `npx aios-core install` from README | Cannot locate command or tries wrong one |
+| 2         | Run install                | <= 3 min      | `npx aios-core install` exits code 0           | Install fails, hangs, or errors          |
+| 3         | Identify activation method | <= 2 min      | User knows IDE-specific activation syntax      | Tries wrong syntax or searches > 2 min   |
+| 4         | Activate agent             | <= 1 min      | Agent activation command succeeds              | Command fails or no output               |
+| 5         | See greeting + commands    | <= 30 sec     | Greeting with available commands displayed     | No greeting, partial output, or error    |
+| 6         | Run starter command        | <= 1 min      | `*help` (or equivalent) returns useful output  | Command not recognized or errors         |
+| **Total** |                            | **<= 10 min** | All 6 steps pass within budget                 | Any step fails or total > 10 min         |
 
 **Protocol:**
+
 - Start timer: user opens README.md
 - Stop timer: `*help` output displayed
 - Environment: clean directory, no prior AIOS config, Node.js >= 18, network available
@@ -83,20 +85,24 @@ First value is achieved only when all three are true:
 ## Execution Tracks
 
 1. Onboarding-first docs and UX
+
 - `README.md` and `docs/getting-started.md` as single "start here" path.
 - Explicit "next step" pointers at each major section.
 - Dual path: quickstart (new users) and advanced (power users).
 
 2. Runtime-guided next action
+
 - Move from menu-first to state-first recommendation.
 - Align `.aios-core/development/tasks/next.md` with state signals (story, qa, ci, diff).
 
 3. IDE activation clarity
+
 - Normalize activation examples and constraints in:
   - `docs/ide-integration.md`
   - `docs/codex-integration-process.md`
 
 4. Guardrail-backed claims
+
 - Keep promises aligned with implementation via:
   - `.aios-core/infrastructure/scripts/validate-parity.js`
 

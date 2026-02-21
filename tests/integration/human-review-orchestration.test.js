@@ -7,8 +7,12 @@
  * @story 3.5 - Human Review Orchestration
  */
 
-const { HumanReviewOrchestrator } = require('../../.aios-core/core/quality-gates/human-review-orchestrator');
-const { FocusAreaRecommender } = require('../../.aios-core/core/quality-gates/focus-area-recommender');
+const {
+  HumanReviewOrchestrator,
+} = require('../../.aios-core/core/quality-gates/human-review-orchestrator');
+const {
+  FocusAreaRecommender,
+} = require('../../.aios-core/core/quality-gates/focus-area-recommender');
 const { NotificationManager } = require('../../.aios-core/core/quality-gates/notification-manager');
 const { QualityGateManager } = require('../../.aios-core/core/quality-gates/quality-gate-manager');
 
@@ -71,9 +75,7 @@ describe('Human Review Orchestration Integration Tests', () => {
 
       const layer1Result = {
         pass: false,
-        results: [
-          { check: 'lint', pass: false, message: '5 errors found' },
-        ],
+        results: [{ check: 'lint', pass: false, message: '5 errors found' }],
       };
 
       const layer2Result = { pass: true }; // Should not matter
@@ -93,7 +95,12 @@ describe('Human Review Orchestration Integration Tests', () => {
       const layer2Result = {
         pass: false,
         results: [
-          { check: 'coderabbit', pass: false, issues: { critical: 1 }, message: 'Critical issue found' },
+          {
+            check: 'coderabbit',
+            pass: false,
+            issues: { critical: 1 },
+            message: 'Critical issue found',
+          },
         ],
       };
 
@@ -128,7 +135,7 @@ describe('Human Review Orchestration Integration Tests', () => {
       expect(result.status).toBe('blocked');
       expect(result.fixFirst).toBeDefined();
       expect(result.fixFirst.length).toBeGreaterThan(0);
-      expect(result.fixFirst.some(f => f.suggestion.includes('lint'))).toBe(true);
+      expect(result.fixFirst.some((f) => f.suggestion.includes('lint'))).toBe(true);
     });
 
     it('should include clear blocking message', async () => {
@@ -156,7 +163,8 @@ describe('Human Review Orchestration Integration Tests', () => {
       orchestrator.saveReviewRequest = jest.fn().mockResolvedValue();
 
       // Spy on notification manager
-      notificationSpy = jest.spyOn(orchestrator.notificationManager, 'sendReviewRequest')
+      notificationSpy = jest
+        .spyOn(orchestrator.notificationManager, 'sendReviewRequest')
         .mockResolvedValue({ success: true, notificationId: 'notif-test' });
     });
 
@@ -213,38 +221,32 @@ describe('Human Review Orchestration Integration Tests', () => {
 
       const recommendations = await recommender.recommend(context);
 
-      expect(recommendations.primary.some(p => p.area === 'security')).toBe(true);
+      expect(recommendations.primary.some((p) => p.area === 'security')).toBe(true);
       expect(recommendations.highlightedAspects).toContain('Security-sensitive code changes');
     });
 
     it('should highlight strategic aspects - architecture', async () => {
       const context = {
         prContext: {
-          changedFiles: [
-            'src/core/base-service.js',
-            'src/interfaces/repository.interface.ts',
-          ],
+          changedFiles: ['src/core/base-service.js', 'src/interfaces/repository.interface.ts'],
         },
       };
 
       const recommendations = await recommender.recommend(context);
 
-      expect(recommendations.primary.some(p => p.area === 'architecture')).toBe(true);
+      expect(recommendations.primary.some((p) => p.area === 'architecture')).toBe(true);
     });
 
     it('should highlight strategic aspects - business logic', async () => {
       const context = {
         prContext: {
-          changedFiles: [
-            'src/services/order.service.js',
-            'src/handlers/checkout.handler.js',
-          ],
+          changedFiles: ['src/services/order.service.js', 'src/handlers/checkout.handler.js'],
         },
       };
 
       const recommendations = await recommender.recommend(context);
 
-      expect(recommendations.primary.some(p => p.area === 'business-logic')).toBe(true);
+      expect(recommendations.primary.some((p) => p.area === 'business-logic')).toBe(true);
     });
 
     it('should provide review questions for focus areas', async () => {
@@ -255,7 +257,7 @@ describe('Human Review Orchestration Integration Tests', () => {
       };
 
       const recommendations = await recommender.recommend(context);
-      const securityArea = recommendations.primary.find(p => p.area === 'security');
+      const securityArea = recommendations.primary.find((p) => p.area === 'security');
 
       expect(securityArea).toBeDefined();
       expect(securityArea.questions).toBeDefined();
@@ -354,7 +356,9 @@ describe('Human Review Orchestration Integration Tests', () => {
 
       // Mock file operations
       manager.humanReviewOrchestrator.saveReviewRequest = jest.fn().mockResolvedValue();
-      manager.humanReviewOrchestrator.notifyReviewer = jest.fn().mockResolvedValue({ success: true });
+      manager.humanReviewOrchestrator.notifyReviewer = jest
+        .fn()
+        .mockResolvedValue({ success: true });
 
       const result = await manager.orchestrateHumanReview({
         prNumber: 123,

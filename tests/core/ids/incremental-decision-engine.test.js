@@ -34,11 +34,9 @@ describe('IncrementalDecisionEngine', () => {
   describe('constructor', () => {
     it('requires a RegistryLoader instance', () => {
       expect(() => new IncrementalDecisionEngine(null)).toThrow(
-        /requires a RegistryLoader instance/,
+        /requires a RegistryLoader instance/
       );
-      expect(() => new IncrementalDecisionEngine()).toThrow(
-        /requires a RegistryLoader instance/,
-      );
+      expect(() => new IncrementalDecisionEngine()).toThrow(/requires a RegistryLoader instance/);
     });
 
     it('creates engine with valid loader', () => {
@@ -67,7 +65,7 @@ describe('IncrementalDecisionEngine', () => {
       if (result.recommendations.length > 1) {
         for (let i = 0; i < result.recommendations.length - 1; i++) {
           expect(result.recommendations[i].relevanceScore).toBeGreaterThanOrEqual(
-            result.recommendations[i + 1].relevanceScore,
+            result.recommendations[i + 1].relevanceScore
           );
         }
       }
@@ -158,9 +156,7 @@ describe('IncrementalDecisionEngine', () => {
       expect(result.summary.confidence).toBe('low');
       expect(result.summary.totalEntities).toBe(0);
       expect(result.rationale).toContain('empty');
-      expect(result.warnings).toContain(
-        'Registry is empty — no existing artifacts to evaluate',
-      );
+      expect(result.warnings).toContain('Registry is empty — no existing artifacts to evaluate');
     });
 
     it('returns CREATE justification for empty registry', () => {
@@ -396,7 +392,7 @@ describe('IncrementalDecisionEngine', () => {
       const decision = engine._applyDecisionMatrix({
         relevanceScore: 0.89,
         canAdapt: { score: 0.8, constraints: [], extensionPoints: [] },
-        adaptationImpact: { percentage: 0.30 },
+        adaptationImpact: { percentage: 0.3 },
       });
 
       expect(decision.action).toBe('CREATE');
@@ -733,7 +729,7 @@ describe('IncrementalDecisionEngine', () => {
   describe('exported constants', () => {
     it('exports all configuration constants', () => {
       expect(THRESHOLD_MINIMUM).toBe(0.4);
-      expect(ADAPT_IMPACT_THRESHOLD).toBe(0.30);
+      expect(ADAPT_IMPACT_THRESHOLD).toBe(0.3);
       expect(KEYWORD_OVERLAP_WEIGHT).toBe(0.6);
       expect(PURPOSE_SIMILARITY_WEIGHT).toBe(0.4);
       expect(MAX_RESULTS).toBe(20);
@@ -765,10 +761,9 @@ describe('IncrementalDecisionEngine', () => {
     });
 
     it('returns JSON output with --json flag', () => {
-      const output = execSync(
-        `node "${cliPath}" ids:query "validate story" --json`,
-        { encoding: 'utf8' },
-      );
+      const output = execSync(`node "${cliPath}" ids:query "validate story" --json`, {
+        encoding: 'utf8',
+      });
 
       const result = JSON.parse(output);
       expect(result).toHaveProperty('intent');
@@ -777,10 +772,9 @@ describe('IncrementalDecisionEngine', () => {
     });
 
     it('returns formatted output for query', () => {
-      const output = execSync(
-        `node "${cliPath}" ids:query "documentation template"`,
-        { encoding: 'utf8' },
-      );
+      const output = execSync(`node "${cliPath}" ids:query "documentation template"`, {
+        encoding: 'utf8',
+      });
 
       expect(output).toContain('IDS Analysis');
       expect(output).toContain('Decision:');
@@ -788,10 +782,7 @@ describe('IncrementalDecisionEngine', () => {
     });
 
     it('handles create-review command', () => {
-      const output = execSync(
-        `node "${cliPath}" ids:create-review --json`,
-        { encoding: 'utf8' },
-      );
+      const output = execSync(`node "${cliPath}" ids:create-review --json`, { encoding: 'utf8' });
 
       const result = JSON.parse(output);
       expect(result).toHaveProperty('totalReviewed');

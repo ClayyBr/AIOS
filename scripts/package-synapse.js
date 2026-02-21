@@ -39,24 +39,37 @@ const FILES = {
   'core/memory/memory-bridge.js': '.aios-core/core/synapse/memory/memory-bridge.js',
   'core/output/formatter.js': '.aios-core/core/synapse/output/formatter.js',
   'core/session/session-manager.js': '.aios-core/core/synapse/session/session-manager.js',
-  'core/scripts/generate-constitution.js': '.aios-core/core/synapse/scripts/generate-constitution.js',
+  'core/scripts/generate-constitution.js':
+    '.aios-core/core/synapse/scripts/generate-constitution.js',
   'core/utils/paths.js': '.aios-core/core/synapse/utils/paths.js',
   'core/utils/tokens.js': '.aios-core/core/synapse/utils/tokens.js',
 
   // Diagnostics
-  'core/diagnostics/synapse-diagnostics.js': '.aios-core/core/synapse/diagnostics/synapse-diagnostics.js',
+  'core/diagnostics/synapse-diagnostics.js':
+    '.aios-core/core/synapse/diagnostics/synapse-diagnostics.js',
   'core/diagnostics/report-formatter.js': '.aios-core/core/synapse/diagnostics/report-formatter.js',
-  'core/diagnostics/collectors/safe-read-json.js': '.aios-core/core/synapse/diagnostics/collectors/safe-read-json.js',
-  'core/diagnostics/collectors/hook-collector.js': '.aios-core/core/synapse/diagnostics/collectors/hook-collector.js',
-  'core/diagnostics/collectors/session-collector.js': '.aios-core/core/synapse/diagnostics/collectors/session-collector.js',
-  'core/diagnostics/collectors/manifest-collector.js': '.aios-core/core/synapse/diagnostics/collectors/manifest-collector.js',
-  'core/diagnostics/collectors/pipeline-collector.js': '.aios-core/core/synapse/diagnostics/collectors/pipeline-collector.js',
-  'core/diagnostics/collectors/uap-collector.js': '.aios-core/core/synapse/diagnostics/collectors/uap-collector.js',
-  'core/diagnostics/collectors/timing-collector.js': '.aios-core/core/synapse/diagnostics/collectors/timing-collector.js',
-  'core/diagnostics/collectors/quality-collector.js': '.aios-core/core/synapse/diagnostics/collectors/quality-collector.js',
-  'core/diagnostics/collectors/consistency-collector.js': '.aios-core/core/synapse/diagnostics/collectors/consistency-collector.js',
-  'core/diagnostics/collectors/output-analyzer.js': '.aios-core/core/synapse/diagnostics/collectors/output-analyzer.js',
-  'core/diagnostics/collectors/relevance-matrix.js': '.aios-core/core/synapse/diagnostics/collectors/relevance-matrix.js',
+  'core/diagnostics/collectors/safe-read-json.js':
+    '.aios-core/core/synapse/diagnostics/collectors/safe-read-json.js',
+  'core/diagnostics/collectors/hook-collector.js':
+    '.aios-core/core/synapse/diagnostics/collectors/hook-collector.js',
+  'core/diagnostics/collectors/session-collector.js':
+    '.aios-core/core/synapse/diagnostics/collectors/session-collector.js',
+  'core/diagnostics/collectors/manifest-collector.js':
+    '.aios-core/core/synapse/diagnostics/collectors/manifest-collector.js',
+  'core/diagnostics/collectors/pipeline-collector.js':
+    '.aios-core/core/synapse/diagnostics/collectors/pipeline-collector.js',
+  'core/diagnostics/collectors/uap-collector.js':
+    '.aios-core/core/synapse/diagnostics/collectors/uap-collector.js',
+  'core/diagnostics/collectors/timing-collector.js':
+    '.aios-core/core/synapse/diagnostics/collectors/timing-collector.js',
+  'core/diagnostics/collectors/quality-collector.js':
+    '.aios-core/core/synapse/diagnostics/collectors/quality-collector.js',
+  'core/diagnostics/collectors/consistency-collector.js':
+    '.aios-core/core/synapse/diagnostics/collectors/consistency-collector.js',
+  'core/diagnostics/collectors/output-analyzer.js':
+    '.aios-core/core/synapse/diagnostics/collectors/output-analyzer.js',
+  'core/diagnostics/collectors/relevance-matrix.js':
+    '.aios-core/core/synapse/diagnostics/collectors/relevance-matrix.js',
 
   // Hook Entry Point
   'hook/synapse-engine.js': '.claude/hooks/synapse-engine.js',
@@ -71,8 +84,10 @@ const FILES = {
   'commands/tasks/suggest-domain.md': '.claude/commands/synapse/tasks/suggest-domain.md',
   'commands/tasks/toggle-domain.md': '.claude/commands/synapse/tasks/toggle-domain.md',
   'commands/templates/domain-template': '.claude/commands/synapse/templates/domain-template',
-  'commands/templates/manifest-entry-template': '.claude/commands/synapse/templates/manifest-entry-template',
-  'commands/utils/manifest-parser-reference.md': '.claude/commands/synapse/utils/manifest-parser-reference.md',
+  'commands/templates/manifest-entry-template':
+    '.claude/commands/synapse/templates/manifest-entry-template',
+  'commands/utils/manifest-parser-reference.md':
+    '.claude/commands/synapse/utils/manifest-parser-reference.md',
 
   // Skills
   'skills/SKILL.md': '.claude/skills/synapse/SKILL.md',
@@ -90,11 +105,26 @@ const FILES = {
 
 // Runtime domain files to copy from .synapse/
 const RUNTIME_DOMAINS = [
-  'manifest', 'constitution', 'global', 'context', 'commands',
-  'agent-dev', 'agent-qa', 'agent-architect', 'agent-pm', 'agent-po',
-  'agent-sm', 'agent-devops', 'agent-analyst', 'agent-data-engineer',
-  'agent-ux', 'agent-aios-master', 'agent-squad-creator',
-  'workflow-story-dev', 'workflow-epic-create', 'workflow-arch-review',
+  'manifest',
+  'constitution',
+  'global',
+  'context',
+  'commands',
+  'agent-dev',
+  'agent-qa',
+  'agent-architect',
+  'agent-pm',
+  'agent-po',
+  'agent-sm',
+  'agent-devops',
+  'agent-analyst',
+  'agent-data-engineer',
+  'agent-ux',
+  'agent-aios-master',
+  'agent-squad-creator',
+  'workflow-story-dev',
+  'workflow-epic-create',
+  'workflow-arch-review',
 ];
 
 // ── Build ──────────────────────────────────────────────────────────────────
@@ -153,7 +183,7 @@ function main() {
     // Use PowerShell Compress-Archive on Windows
     execSync(
       `powershell -Command "Compress-Archive -Path '${OUT_DIR}\\*' -DestinationPath '${zipPath}' -Force"`,
-      { stdio: 'inherit' },
+      { stdio: 'inherit' }
     );
     console.log(`\nZIP created: ${ZIP_NAME}`);
     console.log(`Size: ${(fs.statSync(zipPath).size / 1024).toFixed(1)} KB`);

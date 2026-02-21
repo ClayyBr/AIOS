@@ -22,7 +22,7 @@ const plansWithoutTrainer: Plan[] = [
       'Acesso ilimitado à academia',
       'Aulas em grupo (Crosfit, LPO, Ginástica)',
       'Comunidade ativa',
-      'Plano de treino básico'
+      'Plano de treino básico',
     ],
   },
   {
@@ -35,7 +35,7 @@ const plansWithoutTrainer: Plan[] = [
       'Comunidade ativa',
       'Plano de treino avançado',
       'Avaliação física trimestral',
-      'Desconto em workshops'
+      'Desconto em workshops',
     ],
     isPopular: true,
   },
@@ -43,11 +43,7 @@ const plansWithoutTrainer: Plan[] = [
     name: 'Flex',
     price: 'R$ 79/mês',
     description: 'Acesso em horários específicos, ideal para quem tem agenda flexível.',
-    features: [
-      'Acesso em horários selecionados',
-      'Aulas em grupo (Crosfit)',
-      'Comunidade básica'
-    ],
+    features: ['Acesso em horários selecionados', 'Aulas em grupo (Crosfit)', 'Comunidade básica'],
   },
 ];
 
@@ -72,7 +68,7 @@ const plansWithTrainer: Plan[] = [
       '8 sessões personalizadas com treinador',
       'Plano de nutrição completo',
       'Suporte via WhatsApp 24/7',
-      'Acesso VIP a eventos'
+      'Acesso VIP a eventos',
     ],
     isPopular: true,
   },
@@ -84,7 +80,7 @@ const plansWithTrainer: Plan[] = [
       'Treino em grupo (equipes)',
       'Workshops de bem-estar corporativo',
       'Programas de team building',
-      'Flexibilidade de horários e local'
+      'Flexibilidade de horários e local',
     ],
   },
 ];
@@ -102,7 +98,8 @@ export default function Pricing() {
           Nossos <span className="text-primary-500">Planos</span>
         </h2>
         <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-12">
-          Encontre o plano perfeito para você, seja qual for seu objetivo. Temos opções com e sem acompanhamento personalizado.
+          Encontre o plano perfeito para você, seja qual for seu objetivo. Temos opções com e sem
+          acompanhamento personalizado.
         </p>
 
         {/* Toggle */}
@@ -149,7 +146,9 @@ export default function Pricing() {
               <div>
                 <h3 className="text-3xl font-oswald font-bold text-white mb-2">{plan.name}</h3>
                 <p className="text-gray-400 mb-6 min-h-[48px]">{plan.description}</p>
-                <p className="text-5xl font-oswald font-extrabold text-primary-500 mb-6">{plan.price}</p>
+                <p className="text-5xl font-oswald font-extrabold text-primary-500 mb-6">
+                  {plan.price}
+                </p>
                 <ul className="text-gray-200 text-left space-y-3 mb-8">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center">

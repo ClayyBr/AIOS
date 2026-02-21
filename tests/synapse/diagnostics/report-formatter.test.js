@@ -17,7 +17,7 @@
 // jest.mock for report-formatter is hoisted for Part 2 (orchestrator tests).
 // We use requireActual here to get the REAL formatReport for Part 1.
 const { formatReport } = jest.requireActual(
-  '../../../.aios-core/core/synapse/diagnostics/report-formatter',
+  '../../../.aios-core/core/synapse/diagnostics/report-formatter'
 );
 
 /**
@@ -285,7 +285,12 @@ describe('formatReport()', () => {
 
     it('aggregates FAIL items from session fields', () => {
       const data = buildFullData();
-      data.session.fields[0] = { field: 'session_id', expected: 'UUID', actual: 'missing', status: 'FAIL' };
+      data.session.fields[0] = {
+        field: 'session_id',
+        expected: 'UUID',
+        actual: 'missing',
+        status: 'FAIL',
+      };
       const report = formatReport(data);
       expect(report).toContain('Session: session_id');
       expect(report).toContain('missing');
@@ -293,7 +298,12 @@ describe('formatReport()', () => {
 
     it('aggregates FAIL items from manifest entries', () => {
       const data = buildFullData();
-      data.manifest.entries[0] = { domain: 'constitution', inManifest: true, fileExists: false, status: 'FAIL' };
+      data.manifest.entries[0] = {
+        domain: 'constitution',
+        inManifest: true,
+        fileExists: false,
+        status: 'FAIL',
+      };
       const report = formatReport(data);
       expect(report).toContain('Manifest: domain "constitution" file missing');
       expect(report).toContain('MEDIUM');
@@ -310,7 +320,12 @@ describe('formatReport()', () => {
     it('sorts gaps by severity (HIGH before MEDIUM)', () => {
       const data = buildFullData();
       // Add a MEDIUM (manifest) and a HIGH (hook) failure
-      data.manifest.entries[0] = { domain: 'constitution', inManifest: true, fileExists: false, status: 'FAIL' };
+      data.manifest.entries[0] = {
+        domain: 'constitution',
+        inManifest: true,
+        fileExists: false,
+        status: 'FAIL',
+      };
       data.hook.checks[0] = { name: 'hook-installed', status: 'FAIL', detail: 'Missing hook' };
       const report = formatReport(data);
 
@@ -341,10 +356,21 @@ describe('formatReport()', () => {
       const data = buildFullData({
         timing: {
           uap: {
-            available: true, totalDuration: 145, quality: 'full', stale: false, ageMs: 100,
+            available: true,
+            totalDuration: 145,
+            quality: 'full',
+            stale: false,
+            ageMs: 100,
             loaders: [{ name: 'agentConfig', duration: 45, status: 'ok', tier: 'Critical' }],
           },
-          hook: { available: false, totalDuration: 0, bracket: 'unknown', layers: [], stale: false, ageMs: 0 },
+          hook: {
+            available: false,
+            totalDuration: 0,
+            bracket: 'unknown',
+            layers: [],
+            stale: false,
+            ageMs: 0,
+          },
           combined: { totalMs: 145 },
         },
       });
@@ -357,9 +383,21 @@ describe('formatReport()', () => {
     it('renders Hook timing table with hookBootMs', () => {
       const data = buildFullData({
         timing: {
-          uap: { available: false, totalDuration: 0, quality: 'unknown', loaders: [], stale: false, ageMs: 0 },
+          uap: {
+            available: false,
+            totalDuration: 0,
+            quality: 'unknown',
+            loaders: [],
+            stale: false,
+            ageMs: 0,
+          },
           hook: {
-            available: true, totalDuration: 87, hookBootMs: 42, bracket: 'MODERATE', stale: false, ageMs: 50,
+            available: true,
+            totalDuration: 87,
+            hookBootMs: 42,
+            bracket: 'MODERATE',
+            stale: false,
+            ageMs: 50,
             layers: [{ name: 'constitution', duration: 12, status: 'ok', rules: 5 }],
           },
           combined: { totalMs: 87 },
@@ -374,8 +412,22 @@ describe('formatReport()', () => {
     it('shows [STALE] tag when data is stale', () => {
       const data = buildFullData({
         timing: {
-          uap: { available: true, totalDuration: 100, quality: 'full', stale: true, ageMs: 400000, loaders: [] },
-          hook: { available: false, totalDuration: 0, bracket: 'unknown', layers: [], stale: false, ageMs: 0 },
+          uap: {
+            available: true,
+            totalDuration: 100,
+            quality: 'full',
+            stale: true,
+            ageMs: 400000,
+            loaders: [],
+          },
+          hook: {
+            available: false,
+            totalDuration: 0,
+            bracket: 'unknown',
+            layers: [],
+            stale: false,
+            ageMs: 0,
+          },
           combined: { totalMs: 100 },
         },
       });
@@ -397,7 +449,14 @@ describe('formatReport()', () => {
       const data = buildFullData({
         quality: {
           uap: { available: true, score: 85, maxPossible: 90, loaders: [], stale: false },
-          hook: { available: true, score: 92, maxPossible: 100, bracket: 'MODERATE', layers: [], stale: false },
+          hook: {
+            available: true,
+            score: 92,
+            maxPossible: 100,
+            bracket: 'MODERATE',
+            layers: [],
+            stale: false,
+          },
           overall: { score: 89, grade: 'B', label: 'GOOD' },
         },
       });
@@ -412,7 +471,14 @@ describe('formatReport()', () => {
       const data = buildFullData({
         quality: {
           uap: { available: true, score: 0, maxPossible: 0, loaders: [], stale: true },
-          hook: { available: true, score: 100, maxPossible: 100, bracket: 'MODERATE', layers: [], stale: false },
+          hook: {
+            available: true,
+            score: 100,
+            maxPossible: 100,
+            bracket: 'MODERATE',
+            layers: [],
+            stale: false,
+          },
           overall: { score: 60, grade: 'C', label: 'ADEQUATE' },
         },
       });
@@ -433,7 +499,9 @@ describe('formatReport()', () => {
     it('renders consistency checks table', () => {
       const data = buildFullData({
         consistency: {
-          available: true, score: 3, maxScore: 4,
+          available: true,
+          score: 3,
+          maxScore: 4,
           checks: [
             { name: 'bracket', status: 'PASS', detail: 'MODERATE is valid' },
             { name: 'agent', status: 'FAIL', detail: 'UAP=dev, bridge=qa' },
@@ -462,8 +530,12 @@ describe('formatReport()', () => {
         outputAnalysis: {
           available: true,
           summary: { uapHealthy: 5, uapTotal: 6, hookHealthy: 4, hookTotal: 5 },
-          uapAnalysis: [{ name: 'agentConfig', status: 'ok', quality: 'good', detail: 'Loaded OK' }],
-          hookAnalysis: [{ name: 'constitution', status: 'ok', rules: 5, quality: 'good', detail: '5 rules' }],
+          uapAnalysis: [
+            { name: 'agentConfig', status: 'ok', quality: 'good', detail: 'Loaded OK' },
+          ],
+          hookAnalysis: [
+            { name: 'constitution', status: 'ok', rules: 5, quality: 'good', detail: '5 rules' },
+          ],
         },
       });
       const report = formatReport(data);
@@ -486,7 +558,9 @@ describe('formatReport()', () => {
     it('renders relevance matrix table', () => {
       const data = buildFullData({
         relevance: {
-          available: true, agentId: 'dev', score: 85,
+          available: true,
+          agentId: 'dev',
+          score: 85,
           matrix: [{ component: 'agentConfig', importance: 'critical', status: 'ok', gap: false }],
           gaps: [],
         },
@@ -501,8 +575,12 @@ describe('formatReport()', () => {
     it('renders critical gaps section', () => {
       const data = buildFullData({
         relevance: {
-          available: true, agentId: 'dev', score: 50,
-          matrix: [{ component: 'agentConfig', importance: 'critical', status: 'missing', gap: true }],
+          available: true,
+          agentId: 'dev',
+          score: 50,
+          matrix: [
+            { component: 'agentConfig', importance: 'critical', status: 'missing', gap: true },
+          ],
           gaps: [{ component: 'agentConfig', importance: 'critical' }],
         },
       });
@@ -575,15 +653,30 @@ jest.mock('../../../.aios-core/core/synapse/diagnostics/collectors/uap-collector
 jest.mock('../../../.aios-core/core/synapse/diagnostics/report-formatter');
 jest.mock('../../../.aios-core/core/synapse/domain/domain-loader');
 
-const { collectHookStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/hook-collector');
-const { collectSessionStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/session-collector');
-const { collectManifestIntegrity } = require('../../../.aios-core/core/synapse/diagnostics/collectors/manifest-collector');
-const { collectPipelineSimulation } = require('../../../.aios-core/core/synapse/diagnostics/collectors/pipeline-collector');
-const { collectUapBridgeStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/uap-collector');
-const { formatReport: mockFormatReport } = require('../../../.aios-core/core/synapse/diagnostics/report-formatter');
+const {
+  collectHookStatus,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/hook-collector');
+const {
+  collectSessionStatus,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/session-collector');
+const {
+  collectManifestIntegrity,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/manifest-collector');
+const {
+  collectPipelineSimulation,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/pipeline-collector');
+const {
+  collectUapBridgeStatus,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/uap-collector');
+const {
+  formatReport: mockFormatReport,
+} = require('../../../.aios-core/core/synapse/diagnostics/report-formatter');
 const { parseManifest } = require('../../../.aios-core/core/synapse/domain/domain-loader');
 
-const { runDiagnostics, runDiagnosticsRaw } = require('../../../.aios-core/core/synapse/diagnostics/synapse-diagnostics');
+const {
+  runDiagnostics,
+  runDiagnosticsRaw,
+} = require('../../../.aios-core/core/synapse/diagnostics/synapse-diagnostics');
 
 describe('synapse-diagnostics orchestrator', () => {
   const projectRoot = '/fake/project';
@@ -653,7 +746,7 @@ describe('synapse-diagnostics orchestrator', () => {
       expect(collectPipelineSimulation).toHaveBeenCalledWith(
         7, // prompt_count from mockSession.raw.session
         'dev', // id from mockSession.raw.bridgeData
-        mockParsedManifest,
+        mockParsedManifest
       );
     });
 

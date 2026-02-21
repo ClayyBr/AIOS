@@ -145,7 +145,9 @@ describe('Tools System Performance Benchmarks', () => {
       const avgDuration = average(durations);
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nUncached resolution: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nUncached resolution: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       // Allow some variance - check that average is under target
       expect(avgDuration).toBeLessThan(50);
@@ -170,7 +172,9 @@ describe('Tools System Performance Benchmarks', () => {
       const avgDuration = average(durations);
       const maxDuration = Math.max(...durations);
 
-      console.log(`Cached resolution: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `Cached resolution: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       // Cached should be very fast
       expect(avgDuration).toBeLessThan(5);
@@ -188,9 +192,8 @@ describe('Tools System Performance Benchmarks', () => {
       const tool2 = await toolResolver.resolveTool('benchmark_tool');
       const cachedDuration = Date.now() - cachedStart;
 
-      const speedup = cachedDuration === 0
-        ? 'Instant'
-        : `${(uncachedDuration / cachedDuration).toFixed(2)}x`;
+      const speedup =
+        cachedDuration === 0 ? 'Instant' : `${(uncachedDuration / cachedDuration).toFixed(2)}x`;
       console.log(`Speedup: ${speedup}`);
 
       // Always verify caching works by checking same reference is returned
@@ -296,7 +299,9 @@ describe('Tools System Performance Benchmarks', () => {
       const avgDuration = average(durations);
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nHelper execution: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nHelper execution: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(100);
     });
@@ -357,7 +362,9 @@ describe('Tools System Performance Benchmarks', () => {
       const avgDuration = average(durations);
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nEnd-to-end workflow: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nEnd-to-end workflow: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       // Combined workflow should still be reasonably fast
       // Target: <200ms (50ms resolve + 50ms validate + 100ms execute)

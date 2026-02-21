@@ -3,22 +3,22 @@ const path = require('path');
 
 /**
  * Detects the type of project in the current directory
- * 
+ *
  * Detection Priority Order:
  * 1. EXISTING_AIOS - .aios-core/ directory exists
  * 2. GREENFIELD - directory is empty
  * 3. BROWNFIELD - package.json OR .git exists
  * 4. UNKNOWN - directory has files but no recognized markers
- * 
+ *
  * @param {string} targetDir - Directory to analyze (defaults to process.cwd())
  * @returns {string} 'GREENFIELD' | 'BROWNFIELD' | 'EXISTING_AIOS' | 'UNKNOWN'
  * @throws {Error} If directory cannot be accessed
- * 
+ *
  * @example
  * // Detect current directory
  * const type = detectProjectType();
  * console.log(type); // 'GREENFIELD'
- * 
+ *
  * @example
  * // Detect specific directory
  * const type = detectProjectType('/path/to/project');
@@ -41,7 +41,7 @@ function detectProjectType(targetDir = process.cwd()) {
 
     // Check for AIOS installation markers (use path.join for security)
     const hasAiosCore = fs.existsSync(path.join(normalizedDir, '.aios-core'));
-    
+
     // If AIOS already installed, return immediately (highest priority)
     if (hasAiosCore) {
       return 'EXISTING_AIOS';
@@ -50,7 +50,7 @@ function detectProjectType(targetDir = process.cwd()) {
     // Check directory contents
     const dirContents = fs.readdirSync(normalizedDir);
     const isEmpty = dirContents.length === 0;
-    
+
     // Empty directory = greenfield (second priority)
     if (isEmpty) {
       return 'GREENFIELD';
@@ -59,7 +59,7 @@ function detectProjectType(targetDir = process.cwd()) {
     // Check for project markers (third priority)
     const hasPackageJson = fs.existsSync(path.join(normalizedDir, 'package.json'));
     const hasGit = fs.existsSync(path.join(normalizedDir, '.git'));
-    
+
     // Existing project markers = brownfield
     if (hasPackageJson || hasGit) {
       return 'BROWNFIELD';
@@ -67,15 +67,15 @@ function detectProjectType(targetDir = process.cwd()) {
 
     // Directory has files but no recognized markers = unknown
     return 'UNKNOWN';
-
   } catch (error) {
     // Log error with context for debugging
-    console.error(`[detect-project-type] Error detecting project type in '${targetDir}': ${error.message}`);
-    
+    console.error(
+      `[detect-project-type] Error detecting project type in '${targetDir}': ${error.message}`
+    );
+
     // Re-throw with more context for caller to handle
     throw new Error(`Failed to detect project type: ${error.message}`);
   }
 }
 
 module.exports = { detectProjectType };
-

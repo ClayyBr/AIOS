@@ -29,7 +29,7 @@ class RefactoringSuggester {
       description: 'Extract long methods into smaller, focused methods',
       detector: this.detectLongMethods.bind(this),
       suggester: this.suggestMethodExtraction.bind(this),
-      priority: 'high'
+      priority: 'high',
     });
 
     // Variable extraction pattern
@@ -38,7 +38,7 @@ class RefactoringSuggester {
       description: 'Extract complex expressions into named variables',
       detector: this.detectComplexExpressions.bind(this),
       suggester: this.suggestVariableExtraction.bind(this),
-      priority: 'medium'
+      priority: 'medium',
     });
 
     // Parameter object pattern
@@ -47,7 +47,7 @@ class RefactoringSuggester {
       description: 'Group related parameters into an object',
       detector: this.detectLongParameterLists.bind(this),
       suggester: this.suggestParameterObject.bind(this),
-      priority: 'medium'
+      priority: 'medium',
     });
 
     // Replace conditional with polymorphism
@@ -56,7 +56,7 @@ class RefactoringSuggester {
       description: 'Replace complex conditionals with polymorphic behavior',
       detector: this.detectComplexConditionals.bind(this),
       suggester: this.suggestPolymorphism.bind(this),
-      priority: 'high'
+      priority: 'high',
     });
 
     // Inline temp pattern
@@ -65,7 +65,7 @@ class RefactoringSuggester {
       description: 'Replace temporary variables used only once',
       detector: this.detectSingleUseTempVariables.bind(this),
       suggester: this.suggestInlineTemp.bind(this),
-      priority: 'low'
+      priority: 'low',
     });
 
     // Remove dead code
@@ -74,7 +74,7 @@ class RefactoringSuggester {
       description: 'Remove unreachable or unused code',
       detector: this.detectDeadCode.bind(this),
       suggester: this.suggestDeadCodeRemoval.bind(this),
-      priority: 'high'
+      priority: 'high',
     });
 
     // Consolidate duplicate code
@@ -83,7 +83,7 @@ class RefactoringSuggester {
       description: 'Extract duplicate code into shared functions',
       detector: this.detectDuplicateCode.bind(this),
       suggester: this.suggestCodeConsolidation.bind(this),
-      priority: 'high'
+      priority: 'high',
     });
 
     // Simplify nested conditionals
@@ -92,7 +92,7 @@ class RefactoringSuggester {
       description: 'Flatten deeply nested if-else chains',
       detector: this.detectNestedConditionals.bind(this),
       suggester: this.suggestConditionalSimplification.bind(this),
-      priority: 'medium'
+      priority: 'medium',
     });
 
     // Replace magic numbers
@@ -101,7 +101,7 @@ class RefactoringSuggester {
       description: 'Replace hard-coded numbers with named constants',
       detector: this.detectMagicNumbers.bind(this),
       suggester: this.suggestConstantExtraction.bind(this),
-      priority: 'low'
+      priority: 'low',
     });
 
     // Decompose complex class
@@ -110,7 +110,7 @@ class RefactoringSuggester {
       description: 'Split large classes into smaller, focused classes',
       detector: this.detectLargeClasses.bind(this),
       suggester: this.suggestClassDecomposition.bind(this),
-      priority: 'high'
+      priority: 'high',
     });
   }
 
@@ -119,22 +119,22 @@ class RefactoringSuggester {
    */
   async analyzeCode(filePath, options = {}) {
     console.log(chalk.blue(`🔍 Analyzing: ${filePath}`));
-    
+
     try {
       const _content = await fs.readFile(filePath, 'utf-8');
       const fileType = path.extname(filePath);
-      
+
       if (!['.js', '.jsx', '.ts', '.tsx'].includes(fileType)) {
         return {
           filePath,
           suggestions: [],
-          error: 'Unsupported file type'
+          error: 'Unsupported file type',
         };
       }
 
       // Parse code
       const _ast = this.parseCode(_content, filePath);
-      
+
       // Calculate code metrics
       const _metrics = this.calculateCodeMetrics(_ast, content);
       this.codeMetrics.set(filePath, metrics);
@@ -159,7 +159,7 @@ class RefactoringSuggester {
                   patternId,
                   pattern: pattern.name,
                   priority: pattern.priority,
-                  filePath
+                  filePath,
                 });
               }
             }
@@ -180,14 +180,13 @@ class RefactoringSuggester {
       return {
         filePath,
         _metrics,
-        suggestions: this.suggestions
+        suggestions: this.suggestions,
       };
-
     } catch (error) {
       return {
         filePath,
         suggestions: [],
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -206,9 +205,9 @@ class RefactoringSuggester {
         'asyncGenerators',
         'dynamicImport',
         'optionalChaining',
-        'nullishCoalescingOperator'
+        'nullishCoalescingOperator',
       ],
-      errorRecovery: true
+      errorRecovery: true,
     };
 
     try {
@@ -232,7 +231,7 @@ class RefactoringSuggester {
       maxNesting: 0,
       duplicateBlocks: 0,
       comments: 0,
-      imports: 0
+      imports: 0,
     };
 
     let currentNesting = 0;
@@ -243,17 +242,17 @@ class RefactoringSuggester {
       ArrowFunctionExpression: () => metrics.functions++,
       ClassDeclaration: () => metrics.classes++,
       ImportDeclaration: () => metrics.imports++,
-      
+
       IfStatement: {
         enter: () => {
           metrics.complexity++;
           currentNesting++;
           metrics.maxNesting = Math.max(metrics.maxNesting, currentNesting);
         },
-        exit: () => currentNesting--
+        exit: () => currentNesting--,
       },
-      
-      SwitchStatement: () => metrics.complexity += 2,
+
+      SwitchStatement: () => (metrics.complexity += 2),
       ForStatement: () => metrics.complexity++,
       WhileStatement: () => metrics.complexity++,
       DoWhileStatement: () => metrics.complexity++,
@@ -263,8 +262,8 @@ class RefactoringSuggester {
           metrics.complexity++;
         }
       },
-      
-      Comment: () => metrics.comments++
+
+      Comment: () => metrics.comments++,
     });
 
     return metrics;
@@ -292,10 +291,10 @@ class RefactoringSuggester {
             lines: methodLines,
             startLine: start,
             endLine: end,
-            complexity: this.calculateMethodComplexity(path)
+            complexity: this.calculateMethodComplexity(path),
           });
         }
-      }
+      },
     });
 
     return longMethods;
@@ -315,10 +314,10 @@ class RefactoringSuggester {
             path: path,
             complexity: complexity,
             startLine: path.node.loc?.start.line,
-            endLine: path.node.loc?.end.line
+            endLine: path.node.loc?.end.line,
           });
         }
-      }
+      },
     });
 
     return complexExpressions;
@@ -339,11 +338,11 @@ class RefactoringSuggester {
             path: path,
             name: methodName,
             parameterCount: params.length,
-            parameters: params.map(p => p.name || 'unknown'),
-            startLine: path.node.loc?.start.line
+            parameters: params.map((p) => p.name || 'unknown'),
+            startLine: path.node.loc?.start.line,
           });
         }
-      }
+      },
     });
 
     return longParameterLists;
@@ -363,11 +362,11 @@ class RefactoringSuggester {
             path: path,
             branches: branches,
             startLine: path.node.loc?.start.line,
-            endLine: path.node.loc?.end.line
+            endLine: path.node.loc?.end.line,
           });
         }
       },
-      
+
       SwitchStatement: (path) => {
         const cases = path.node.cases.length;
         if (cases > branchThreshold) {
@@ -377,10 +376,10 @@ class RefactoringSuggester {
             path: path,
             cases: cases,
             startLine: path.node.loc?.start.line,
-            endLine: path.node.loc?.end.line
+            endLine: path.node.loc?.end.line,
           });
         }
-      }
+      },
     });
 
     return complexConditionals;
@@ -398,12 +397,12 @@ class RefactoringSuggester {
           if (!varUsage.has(varName)) {
             varUsage.set(varName, {
               declaration: path,
-              uses: []
+              uses: [],
             });
           }
         }
       },
-      
+
       Identifier: (path) => {
         if (path.isReferencedIdentifier()) {
           const varName = path.node.name;
@@ -411,7 +410,7 @@ class RefactoringSuggester {
             varUsage.get(varName).uses.push(path);
           }
         }
-      }
+      },
     });
 
     // Second pass: find single-use variables
@@ -422,7 +421,7 @@ class RefactoringSuggester {
           name: varName,
           declaration: usage.declaration,
           use: usage.uses[0],
-          startLine: usage.declaration.node.loc?.start.line
+          startLine: usage.declaration.node.loc?.start.line,
         });
       }
     }
@@ -440,18 +439,18 @@ class RefactoringSuggester {
         if (parent.type === 'BlockStatement') {
           const siblings = parent.body;
           const currentIndex = siblings.indexOf(path.node);
-          
+
           for (let i = currentIndex + 1; i < siblings.length; i++) {
             deadCode.push({
               type: 'unreachable_code',
               node: siblings[i],
               reason: 'after_return_throw',
-              startLine: siblings[i].loc?.start.line
+              startLine: siblings[i].loc?.start.line,
             });
           }
         }
       },
-      
+
       // Unused functions
       FunctionDeclaration: (path) => {
         const functionName = path.node.id?.name;
@@ -460,11 +459,11 @@ class RefactoringSuggester {
             type: 'unused_function',
             node: path.node,
             name: functionName,
-            startLine: path.node.loc?.start.line
+            startLine: path.node.loc?.start.line,
           });
         }
       },
-      
+
       // Always false conditions
       IfStatement: (path) => {
         if (path.node.test.type === 'BooleanLiteral' && !path.node.test.value) {
@@ -472,10 +471,10 @@ class RefactoringSuggester {
             type: 'dead_branch',
             node: path.node.consequent,
             reason: 'always_false',
-            startLine: path.node.loc?.start.line
+            startLine: path.node.loc?.start.line,
           });
         }
-      }
+      },
     });
 
     return deadCode;
@@ -490,7 +489,7 @@ class RefactoringSuggester {
       BlockStatement: (path) => {
         if (path.node.body.length >= minBlockSize) {
           const blockHash = this.hashCodeBlock(path.node);
-          
+
           if (codeBlocks.has(blockHash)) {
             const original = codeBlocks.get(blockHash);
             duplicates.push({
@@ -499,13 +498,13 @@ class RefactoringSuggester {
               duplicate: path,
               startLine: path.node.loc?.start.line,
               endLine: path.node.loc?.end.line,
-              lines: path.node.loc?.end.line - path.node.loc?.start.line + 1
+              lines: path.node.loc?.end.line - path.node.loc?.start.line + 1,
             });
           } else {
             codeBlocks.set(blockHash, path);
           }
         }
-      }
+      },
     });
 
     return duplicates;
@@ -523,23 +522,28 @@ class RefactoringSuggester {
           path: path,
           depth: depth,
           startLine: path.node.loc?.start.line,
-          endLine: path.node.loc?.end.line
+          endLine: path.node.loc?.end.line,
         });
       }
 
       // Check nested ifs
-      traverse(path.node, {
-        IfStatement: (innerPath) => {
-          if (innerPath.node !== path.node) {
-            checkNesting(innerPath, depth + 1);
-            innerPath.skip();
-          }
-        }
-      }, path.scope, path);
+      traverse(
+        path.node,
+        {
+          IfStatement: (innerPath) => {
+            if (innerPath.node !== path.node) {
+              checkNesting(innerPath, depth + 1);
+              innerPath.skip();
+            }
+          },
+        },
+        path.scope,
+        path
+      );
     };
 
     traverse(_ast, {
-      IfStatement: (path) => checkNesting(path, 1)
+      IfStatement: (path) => checkNesting(path, 1),
     });
 
     return nestedConditionals;
@@ -552,16 +556,15 @@ class RefactoringSuggester {
     traverse(_ast, {
       NumericLiteral: (path) => {
         const value = path.node.value;
-        
+
         // Skip common/obvious numbers
         if (ignoredNumbers.has(value)) return;
-        
+
         // Skip array indices
         if (path.parent.type === 'MemberExpression' && path.parent.computed) return;
-        
+
         // Skip in constant declarations
-        if (path.findParent(p => p.isVariableDeclarator() && 
-            p.parent.kind === 'const')) return;
+        if (path.findParent((p) => p.isVariableDeclarator() && p.parent.kind === 'const')) return;
 
         magicNumbers.push({
           type: 'magic_number',
@@ -569,9 +572,9 @@ class RefactoringSuggester {
           path: path,
           value: value,
           context: path.parent.type,
-          startLine: path.node.loc?.start.line
+          startLine: path.node.loc?.start.line,
         });
-      }
+      },
     });
 
     return magicNumbers;
@@ -584,12 +587,12 @@ class RefactoringSuggester {
 
     traverse(_ast, {
       ClassDeclaration: (path) => {
-        const methods = path.node.body.body.filter(m => 
-          m.type === 'ClassMethod' || m.type === 'ClassProperty'
+        const methods = path.node.body.body.filter(
+          (m) => m.type === 'ClassMethod' || m.type === 'ClassProperty'
         );
-        
-        const methodCount = methods.filter(m => m.type === 'ClassMethod').length;
-        const propertyCount = methods.filter(m => m.type === 'ClassProperty').length;
+
+        const methodCount = methods.filter((m) => m.type === 'ClassMethod').length;
+        const propertyCount = methods.filter((m) => m.type === 'ClassProperty').length;
 
         if (methodCount > methodThreshold || propertyCount > propertyThreshold) {
           largeClasses.push({
@@ -601,10 +604,10 @@ class RefactoringSuggester {
             propertyCount: propertyCount,
             totalMembers: methods.length,
             startLine: path.node.loc?.start.line,
-            endLine: path.node.loc?.end.line
+            endLine: path.node.loc?.end.line,
           });
         }
-      }
+      },
     });
 
     return largeClasses;
@@ -618,11 +621,11 @@ class RefactoringSuggester {
       description: `Extract method '${detection.name}' (${detection.lines} lines)`,
       location: {
         start: detection.startLine,
-        end: detection.endLine
+        end: detection.endLine,
       },
       impact: Math.min(10, Math.floor(detection.lines / 10) + Math.floor(detection.complexity / 5)),
       details: `Method has ${detection.lines} lines and complexity of ${detection.complexity}. Consider extracting logical sections into separate methods.`,
-      suggestedRefactoring: this.generateMethodExtractionSuggestion(_detection)
+      suggestedRefactoring: this.generateMethodExtractionSuggestion(_detection),
     };
 
     return suggestion;
@@ -634,11 +637,11 @@ class RefactoringSuggester {
       description: 'Extract complex expression into variable',
       location: {
         start: detection.startLine,
-        end: detection.endLine
+        end: detection.endLine,
       },
       impact: Math.min(5, detection.complexity - 2),
       details: `Expression has complexity of ${detection.complexity}. Extract into a named variable for better readability.`,
-      suggestedRefactoring: this.generateVariableExtractionSuggestion(_detection)
+      suggestedRefactoring: this.generateVariableExtractionSuggestion(_detection),
     };
 
     return suggestion;
@@ -650,11 +653,11 @@ class RefactoringSuggester {
       description: `Group ${detection.parameterCount} parameters in '${detection.name}'`,
       location: {
         start: detection.startLine,
-        end: detection.startLine
+        end: detection.startLine,
       },
       impact: Math.min(7, detection.parameterCount - 3),
       details: `Method has ${detection.parameterCount} parameters: ${detection.parameters.join(', ')}. Consider grouping related parameters into an object.`,
-      suggestedRefactoring: this.generateParameterObjectSuggestion(_detection)
+      suggestedRefactoring: this.generateParameterObjectSuggestion(_detection),
     };
 
     return suggestion;
@@ -666,11 +669,11 @@ class RefactoringSuggester {
       description: `Replace ${detection.type === 'complex_switch' ? 'switch' : 'conditional'} with polymorphism`,
       location: {
         start: detection.startLine,
-        end: detection.endLine
+        end: detection.endLine,
       },
       impact: Math.min(8, detection.branches || detection.cases),
       details: `Complex ${detection.type === 'complex_switch' ? 'switch' : 'conditional'} with ${detection.branches || detection.cases} branches. Consider using polymorphism or strategy pattern.`,
-      suggestedRefactoring: this.generatePolymorphismSuggestion(_detection)
+      suggestedRefactoring: this.generatePolymorphismSuggestion(_detection),
     };
 
     return suggestion;
@@ -682,11 +685,11 @@ class RefactoringSuggester {
       description: `Inline temporary variable '${detection.name}'`,
       location: {
         start: detection.startLine,
-        end: detection.startLine
+        end: detection.startLine,
       },
       impact: 2,
       details: `Variable '${detection.name}' is used only once. Consider inlining it.`,
-      suggestedRefactoring: this.generateInlineTempSuggestion(_detection)
+      suggestedRefactoring: this.generateInlineTempSuggestion(_detection),
     };
 
     return suggestion;
@@ -698,14 +701,14 @@ class RefactoringSuggester {
       description: `Remove ${detection.type.replace('_', ' ')}${detection.name ? `: ${detection.name}` : ''}`,
       location: {
         start: detection.startLine,
-        end: detection.node.loc?.end.line || detection.startLine
+        end: detection.node.loc?.end.line || detection.startLine,
       },
       impact: 5,
       details: `${detection.type === 'unreachable_code' ? 'Code is unreachable' : detection.type === 'unused_function' ? 'Function is never called' : 'Code is dead'}`,
       suggestedRefactoring: {
         action: 'delete',
-        lines: [detection.startLine, detection.node.loc?.end.line || detection.startLine]
-      }
+        lines: [detection.startLine, detection.node.loc?.end.line || detection.startLine],
+      },
     };
 
     return suggestion;
@@ -717,11 +720,11 @@ class RefactoringSuggester {
       description: `Extract duplicate code block (${detection.lines} lines)`,
       location: {
         start: detection.startLine,
-        end: detection.endLine
+        end: detection.endLine,
       },
       impact: Math.min(9, detection.lines),
       details: `Found duplicate code block. Extract into a shared function.`,
-      suggestedRefactoring: this.generateConsolidationSuggestion(_detection)
+      suggestedRefactoring: this.generateConsolidationSuggestion(_detection),
     };
 
     return suggestion;
@@ -733,11 +736,11 @@ class RefactoringSuggester {
       description: `Simplify nested conditionals (depth: ${detection.depth})`,
       location: {
         start: detection.startLine,
-        end: detection.endLine
+        end: detection.endLine,
       },
       impact: Math.min(7, detection.depth * 2),
       details: `Deeply nested conditionals (${detection.depth} levels). Consider early returns or guard clauses.`,
-      suggestedRefactoring: this.generateConditionalSimplificationSuggestion(_detection)
+      suggestedRefactoring: this.generateConditionalSimplificationSuggestion(_detection),
     };
 
     return suggestion;
@@ -749,11 +752,11 @@ class RefactoringSuggester {
       description: `Replace magic number ${detection.value}`,
       location: {
         start: detection.startLine,
-        end: detection.startLine
+        end: detection.startLine,
       },
       impact: 3,
       details: `Magic number ${detection.value} found in ${detection.context}. Extract to named constant.`,
-      suggestedRefactoring: this.generateConstantExtractionSuggestion(_detection)
+      suggestedRefactoring: this.generateConstantExtractionSuggestion(_detection),
     };
 
     return suggestion;
@@ -765,11 +768,11 @@ class RefactoringSuggester {
       description: `Decompose large class '${detection.name}' (${detection.totalMembers} members)`,
       location: {
         start: detection.startLine,
-        end: detection.endLine
+        end: detection.endLine,
       },
       impact: Math.min(10, Math.floor(detection.totalMembers / 5)),
       details: `Class has ${detection.methodCount} methods and ${detection.propertyCount} properties. Consider splitting into smaller, focused classes.`,
-      suggestedRefactoring: this.generateClassDecompositionSuggestion(_detection)
+      suggestedRefactoring: this.generateClassDecompositionSuggestion(_detection),
     };
 
     return suggestion;
@@ -781,50 +784,55 @@ class RefactoringSuggester {
     if (path.node.id) {
       return path.node.id.name;
     }
-    
+
     // Check if it's a method in a class
     if (path.parent.type === 'ClassMethod') {
       return path.parent.key.name;
     }
-    
+
     // Check if it's assigned to a variable
     if (path.parent.type === 'VariableDeclarator') {
       return path.parent.id.name;
     }
-    
+
     // Check if it's a property
     if (path.parent.type === 'ObjectProperty') {
       return path.parent.key.name || path.parent.key.value;
     }
-    
+
     return 'anonymous';
   }
 
   calculateMethodComplexity(path) {
     let complexity = 1;
-    
-    traverse(path.node, {
-      IfStatement: () => complexity++,
-      ConditionalExpression: () => complexity++,
-      SwitchCase: () => complexity++,
-      WhileStatement: () => complexity++,
-      ForStatement: () => complexity++,
-      DoWhileStatement: () => complexity++,
-      LogicalExpression: (innerPath) => {
-        if (innerPath.node.operator === '&&' || innerPath.node.operator === '||') {
-          complexity++;
-        }
-      }
-    }, path.scope, path);
-    
+
+    traverse(
+      path.node,
+      {
+        IfStatement: () => complexity++,
+        ConditionalExpression: () => complexity++,
+        SwitchCase: () => complexity++,
+        WhileStatement: () => complexity++,
+        ForStatement: () => complexity++,
+        DoWhileStatement: () => complexity++,
+        LogicalExpression: (innerPath) => {
+          if (innerPath.node.operator === '&&' || innerPath.node.operator === '||') {
+            complexity++;
+          }
+        },
+      },
+      path.scope,
+      path
+    );
+
     return complexity;
   }
 
   calculateExpressionComplexity(node, depth = 0) {
     if (!node) return depth;
-    
+
     let maxDepth = depth;
-    
+
     // Check different expression types
     if (node.type === 'CallExpression') {
       maxDepth = Math.max(maxDepth, this.calculateExpressionComplexity(node.callee, depth + 1));
@@ -834,24 +842,26 @@ class RefactoringSuggester {
     } else if (node.type === 'MemberExpression') {
       maxDepth = Math.max(maxDepth, this.calculateExpressionComplexity(node.object, depth + 1));
     } else if (node.type === 'ConditionalExpression') {
-      maxDepth = Math.max(maxDepth, 
+      maxDepth = Math.max(
+        maxDepth,
         this.calculateExpressionComplexity(node.test, depth + 1),
         this.calculateExpressionComplexity(node.consequent, depth + 1),
         this.calculateExpressionComplexity(node.alternate, depth + 1)
       );
     } else if (node.type === 'BinaryExpression' || node.type === 'LogicalExpression') {
-      maxDepth = Math.max(maxDepth,
+      maxDepth = Math.max(
+        maxDepth,
         this.calculateExpressionComplexity(node.left, depth + 1),
         this.calculateExpressionComplexity(node.right, depth + 1)
       );
     }
-    
+
     return maxDepth;
   }
 
   countConditionalBranches(path) {
     let branches = 1; // Initial if branch
-    
+
     let current = path.node;
     while (current.alternate) {
       branches++;
@@ -861,31 +871,32 @@ class RefactoringSuggester {
         break;
       }
     }
-    
+
     return branches;
   }
 
   isFunctionUsed(functionName, ast) {
     let used = false;
-    
+
     traverse(_ast, {
       CallExpression: (path) => {
-        if (path.node.callee.type === 'Identifier' && 
-            path.node.callee.name === functionName) {
+        if (path.node.callee.type === 'Identifier' && path.node.callee.name === functionName) {
           used = true;
           path.stop();
         }
       },
       Identifier: (path) => {
-        if (path.node.name === functionName && 
-            path.isReferencedIdentifier() &&
-            !path.isFunction()) {
+        if (
+          path.node.name === functionName &&
+          path.isReferencedIdentifier() &&
+          !path.isFunction()
+        ) {
           used = true;
           path.stop();
         }
-      }
+      },
     });
-    
+
     return used;
   }
 
@@ -904,14 +915,14 @@ class RefactoringSuggester {
         {
           name: `extracted${detection.name.charAt(0).toUpperCase() + detection.name.slice(1)}Part1`,
           description: 'Extract first logical section',
-          suggestedLines: [detection.startLine + 5, detection.startLine + 15]
+          suggestedLines: [detection.startLine + 5, detection.startLine + 15],
         },
         {
           name: `extracted${detection.name.charAt(0).toUpperCase() + detection.name.slice(1)}Part2`,
           description: 'Extract second logical section',
-          suggestedLines: [detection.startLine + 16, detection.endLine - 5]
-        }
-      ]
+          suggestedLines: [detection.startLine + 16, detection.endLine - 5],
+        },
+      ],
     };
   }
 
@@ -919,7 +930,7 @@ class RefactoringSuggester {
     return {
       action: 'extract_variable',
       variableName: 'extractedExpression',
-      insertBefore: detection.startLine
+      insertBefore: detection.startLine,
     };
   }
 
@@ -928,7 +939,7 @@ class RefactoringSuggester {
       action: 'introduce_parameter_object',
       objectName: `${detection.name}Options`,
       groupedParameters: detection.parameters.slice(2), // Keep first 2 params separate
-      keepParameters: detection.parameters.slice(0, 2)
+      keepParameters: detection.parameters.slice(0, 2),
     };
   }
 
@@ -937,7 +948,7 @@ class RefactoringSuggester {
       action: 'replace_with_polymorphism',
       strategyPattern: true,
       suggestedClasses: ['BaseHandler', 'TypeAHandler', 'TypeBHandler'],
-      interfaceMethod: 'handle'
+      interfaceMethod: 'handle',
     };
   }
 
@@ -946,7 +957,7 @@ class RefactoringSuggester {
       action: 'inline_variable',
       variableName: detection.name,
       declarationLine: detection.declaration.node.loc?.start.line,
-      usageLine: detection.use.node.loc?.start.line
+      usageLine: detection.use.node.loc?.start.line,
     };
   }
 
@@ -957,13 +968,13 @@ class RefactoringSuggester {
       originalLocations: [
         {
           start: detection.original.node.loc?.start.line,
-          end: detection.original.node.loc?.end.line
+          end: detection.original.node.loc?.end.line,
         },
         {
           start: detection.duplicate.node.loc?.start.line,
-          end: detection.duplicate.node.loc?.end.line
-        }
-      ]
+          end: detection.duplicate.node.loc?.end.line,
+        },
+      ],
     };
   }
 
@@ -971,7 +982,7 @@ class RefactoringSuggester {
     return {
       action: 'simplify_nested_conditionals',
       techniques: ['early_return', 'guard_clauses', 'extract_condition'],
-      suggestedStructure: 'Use guard clauses for edge cases and early returns'
+      suggestedStructure: 'Use guard clauses for edge cases and early returns',
     };
   }
 
@@ -981,7 +992,7 @@ class RefactoringSuggester {
       action: 'extract_constant',
       constantName: constantName,
       value: detection.value,
-      scope: 'module' // or 'class' depending on context
+      scope: 'module', // or 'class' depending on context
     };
   }
 
@@ -992,31 +1003,31 @@ class RefactoringSuggester {
         {
           name: `${detection.name}Core`,
           description: 'Core functionality',
-          methods: 'Core business logic methods'
+          methods: 'Core business logic methods',
         },
         {
           name: `${detection.name}Utils`,
           description: 'Utility methods',
-          methods: 'Helper and utility methods'
+          methods: 'Helper and utility methods',
         },
         {
           name: `${detection.name}Config`,
           description: 'Configuration and setup',
-          methods: 'Configuration-related methods'
-        }
-      ]
+          methods: 'Configuration-related methods',
+        },
+      ],
     };
   }
 
   suggestConstantName(value, context) {
     // Generate meaningful constant names based on value and context
     const contextMap = {
-      'BinaryExpression': 'THRESHOLD',
-      'IfStatement': 'CONDITION',
-      'ForStatement': 'LIMIT',
-      'CallExpression': 'PARAMETER'
+      BinaryExpression: 'THRESHOLD',
+      IfStatement: 'CONDITION',
+      ForStatement: 'LIMIT',
+      CallExpression: 'PARAMETER',
     };
-    
+
     const baseContext = contextMap[context] || 'VALUE';
     return `${baseContext}_${Math.abs(value).toString().replace('.', '_')}`;
   }
@@ -1026,15 +1037,15 @@ class RefactoringSuggester {
    */
   async applySuggestion(suggestion, options = {}) {
     console.log(chalk.blue(`🔧 Applying ${suggestion.type} refactoring...`));
-    
+
     try {
       // This would integrate with the actual refactoring implementation
       // For now, it's a placeholder showing the structure
-      
+
       const result = {
         success: false,
         changes: [],
-        error: null
+        error: null,
       };
 
       switch (suggestion.type) {
@@ -1056,13 +1067,12 @@ class RefactoringSuggester {
 
       result.success = true;
       return result;
-
     } catch (error) {
       console.error(chalk.red(`Failed to apply refactoring: ${error.message}`));
       return {
         success: false,
         changes: [],
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -1070,35 +1080,43 @@ class RefactoringSuggester {
   // Placeholder methods for applying refactorings
   async applyMethodExtraction(suggestion) {
     // Implementation would use AST transformation
-    return [{
-      type: 'extract_method',
-      file: suggestion.filePath,
-      description: `Extracted method from lines ${suggestion.location.start}-${suggestion.location.end}`
-    }];
+    return [
+      {
+        type: 'extract_method',
+        file: suggestion.filePath,
+        description: `Extracted method from lines ${suggestion.location.start}-${suggestion.location.end}`,
+      },
+    ];
   }
 
   async applyVariableExtraction(suggestion) {
-    return [{
-      type: 'extract_variable',
-      file: suggestion.filePath,
-      description: `Extracted variable at line ${suggestion.location.start}`
-    }];
+    return [
+      {
+        type: 'extract_variable',
+        file: suggestion.filePath,
+        description: `Extracted variable at line ${suggestion.location.start}`,
+      },
+    ];
   }
 
   async applyInlineTemp(suggestion) {
-    return [{
-      type: 'inline_temp',
-      file: suggestion.filePath,
-      description: `Inlined variable at line ${suggestion.location.start}`
-    }];
+    return [
+      {
+        type: 'inline_temp',
+        file: suggestion.filePath,
+        description: `Inlined variable at line ${suggestion.location.start}`,
+      },
+    ];
   }
 
   async applyDeadCodeRemoval(suggestion) {
-    return [{
-      type: 'remove_dead_code',
-      file: suggestion.filePath,
-      description: `Removed dead code at lines ${suggestion.location.start}-${suggestion.location.end}`
-    }];
+    return [
+      {
+        type: 'remove_dead_code',
+        file: suggestion.filePath,
+        description: `Removed dead code at lines ${suggestion.location.start}-${suggestion.location.end}`,
+      },
+    ];
   }
 
   /**
@@ -1111,26 +1129,26 @@ class RefactoringSuggester {
       byPriority: {
         high: 0,
         medium: 0,
-        low: 0
+        low: 0,
       },
-      averageImpact: 0
+      averageImpact: 0,
     };
 
     let totalImpact = 0;
-    
+
     for (const suggestion of this.suggestions) {
       // By type
       stats.byType[suggestion.type] = (stats.byType[suggestion.type] || 0) + 1;
-      
+
       // By priority
       stats.byPriority[suggestion.priority]++;
-      
+
       // Impact
       totalImpact += suggestion.impact || 0;
     }
 
-    stats.averageImpact = stats.totalSuggestions > 0 ? 
-      (totalImpact / stats.totalSuggestions).toFixed(2) : 0;
+    stats.averageImpact =
+      stats.totalSuggestions > 0 ? (totalImpact / stats.totalSuggestions).toFixed(2) : 0;
 
     return stats;
   }

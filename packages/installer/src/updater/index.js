@@ -21,7 +21,10 @@ const path = require('path');
 const https = require('https');
 const { execSync } = require('child_process');
 const { hashFile, hashesMatch } = require('../installer/file-hasher');
-const { PostInstallValidator, formatReport: formatValidationReport } = require('../installer/post-install-validator');
+const {
+  PostInstallValidator,
+  formatReport: formatValidationReport,
+} = require('../installer/post-install-validator');
 
 /**
  * Update status types
@@ -118,7 +121,8 @@ class AIOSUpdater {
         if (!isOnline) {
           result.error = 'You appear to be offline. Please check your internet connection.';
         } else {
-          result.error = 'Package @synkra/aios-core not found on npm registry. This may be a local development installation.';
+          result.error =
+            'Package @synkra/aios-core not found on npm registry. This may be a local development installation.';
         }
         return result;
       }
@@ -165,7 +169,13 @@ class AIOSUpdater {
     }
 
     // Fallback to package.json
-    const packageJsonPath = path.join(this.projectRoot, 'node_modules', '@synkra', 'aios-core', 'package.json');
+    const packageJsonPath = path.join(
+      this.projectRoot,
+      'node_modules',
+      '@synkra',
+      'aios-core',
+      'package.json'
+    );
     if (fs.existsSync(packageJsonPath)) {
       try {
         const pkg = await fs.readJson(packageJsonPath);
@@ -216,7 +226,7 @@ class AIOSUpdater {
               resolve(null);
             }
           });
-        },
+        }
       );
 
       request.on('error', (error) => {
@@ -239,13 +249,9 @@ class AIOSUpdater {
    */
   async checkConnectivity() {
     return new Promise((resolve) => {
-      const request = https.get(
-        'https://registry.npmjs.org/',
-        { timeout: 5000 },
-        (res) => {
-          resolve(res.statusCode === 200);
-        },
-      );
+      const request = https.get('https://registry.npmjs.org/', { timeout: 5000 }, (res) => {
+        resolve(res.statusCode === 200);
+      });
 
       request.on('error', () => resolve(false));
       request.on('timeout', () => {
@@ -522,10 +528,7 @@ class AIOSUpdater {
     await fs.ensureDir(this.backupDir);
 
     // Copy critical files
-    const filesToBackup = [
-      'version.json',
-      'install-manifest.yaml',
-    ];
+    const filesToBackup = ['version.json', 'install-manifest.yaml'];
 
     for (const file of filesToBackup) {
       const src = path.join(this.aiosCoreDir, file);
@@ -711,7 +714,9 @@ function formatCheckResult(result, options = {}) {
   lines.push('');
 
   if (result.installed) {
-    lines.push(`📦 Current: ${c.cyan}v${result.installed}${c.reset}${result.installedAt ? ` ${c.dim}(installed ${result.installedAt})${c.reset}` : ''}`);
+    lines.push(
+      `📦 Current: ${c.cyan}v${result.installed}${c.reset}${result.installedAt ? ` ${c.dim}(installed ${result.installedAt})${c.reset}` : ''}`
+    );
   } else {
     lines.push(`📦 Current: ${c.red}Not installed${c.reset}`);
   }

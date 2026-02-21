@@ -80,9 +80,11 @@ describe('Smoke Tests - Search CLI', () => {
     const results = await searchKeyword('check');
     const filteredResults = applyFilters(results, { category: 'checklist' });
 
-    expect(filteredResults.every(r => r.category === 'checklist')).toBe(true);
+    expect(filteredResults.every((r) => r.category === 'checklist')).toBe(true);
 
-    console.log(`SEARCH-04: Filtered to ${filteredResults.length} results with category "checklist"`);
+    console.log(
+      `SEARCH-04: Filtered to ${filteredResults.length} results with category "checklist"`
+    );
   });
 
   /**
@@ -93,18 +95,22 @@ describe('Smoke Tests - Search CLI', () => {
   test('SEARCH-05: Tag filter works correctly', async () => {
     // Get all workers and find one with tags
     const allWorkers = await registry.getAll();
-    const workerWithTags = allWorkers.find(w => w.tags && w.tags.length > 0);
+    const workerWithTags = allWorkers.find((w) => w.tags && w.tags.length > 0);
 
     if (workerWithTags) {
       const targetTag = workerWithTags.tags[0];
       const results = await searchKeyword(workerWithTags.name.split(' ')[0]);
       const filteredResults = applyFilters(results, { tags: [targetTag] });
 
-      expect(filteredResults.every(r => r.tags && r.tags.some(t =>
-        t.toLowerCase().includes(targetTag.toLowerCase()),
-      ))).toBe(true);
+      expect(
+        filteredResults.every(
+          (r) => r.tags && r.tags.some((t) => t.toLowerCase().includes(targetTag.toLowerCase()))
+        )
+      ).toBe(true);
 
-      console.log(`SEARCH-05: Filtered by tag "${targetTag}" returned ${filteredResults.length} results`);
+      console.log(
+        `SEARCH-05: Filtered by tag "${targetTag}" returned ${filteredResults.length} results`
+      );
     } else {
       console.log('SEARCH-05: Skipped - no workers with tags found');
     }
@@ -137,7 +143,18 @@ describe('Smoke Tests - Search CLI', () => {
 
 describe('Performance Benchmarks', () => {
   test('Search 10 times and measure average', async () => {
-    const queries = ['test', 'config', 'validator', 'check', 'agent', 'template', 'workflow', 'script', 'data', 'task'];
+    const queries = [
+      'test',
+      'config',
+      'validator',
+      'check',
+      'agent',
+      'template',
+      'workflow',
+      'script',
+      'data',
+      'task',
+    ];
     const times = [];
 
     for (const query of queries) {

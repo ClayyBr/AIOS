@@ -73,7 +73,7 @@ async function validateEnvFile(results) {
   try {
     const envContent = fs.readFileSync(envPath, 'utf8');
     const lines = envContent.split('\n');
-    const validLines = lines.filter(line => {
+    const validLines = lines.filter((line) => {
       const trimmed = line.trim();
       return trimmed && !trimmed.startsWith('#');
     });
@@ -82,7 +82,7 @@ async function validateEnvFile(results) {
     const requiredVars = ['NODE_ENV'];
     const envVars = {};
 
-    validLines.forEach(line => {
+    validLines.forEach((line) => {
       const match = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
       if (match) {
         envVars[match[1]] = match[2];
@@ -163,7 +163,7 @@ async function validateCoreConfig(results, configPath = '.aios-core/core-config.
 
     // Basic schema validation
     const requiredKeys = ['markdownExploder', 'qa', 'prd', 'architecture'];
-    const missingKeys = requiredKeys.filter(key => !(key in parsed));
+    const missingKeys = requiredKeys.filter((key) => !(key in parsed));
 
     if (missingKeys.length > 0) {
       results.warnings.push({
@@ -260,14 +260,16 @@ function hasGitignoreEntry(lines, entry) {
   // Normalize the entry to check (remove leading/trailing slashes)
   const normalizedEntry = entry.replace(/^\//, '').replace(/\/$/, '');
 
-  return lines.some(line => {
+  return lines.some((line) => {
     const normalizedLine = line.replace(/^\//, '').replace(/\/$/, '');
     // Check exact match or variations
-    return normalizedLine === normalizedEntry ||
-           normalizedLine === entry ||
-           line === entry ||
-           line === `/${entry}` ||
-           line === `${entry}/`;
+    return (
+      normalizedLine === normalizedEntry ||
+      normalizedLine === entry ||
+      line === entry ||
+      line === `/${entry}` ||
+      line === `${entry}/`
+    );
   });
 }
 
@@ -290,7 +292,7 @@ async function validateGitignore(results) {
 
   try {
     const gitignoreContent = fs.readFileSync(gitignorePath, 'utf8');
-    const lines = gitignoreContent.split('\n').map(l => l.trim());
+    const lines = gitignoreContent.split('\n').map((l) => l.trim());
 
     // Critical entries - .env is always critical, node_modules is critical but has variations
     const criticalEntries = ['.env'];
@@ -324,7 +326,7 @@ async function validateGitignore(results) {
 
     // Check recommended entries
     for (const entry of recommendedEntries) {
-      const hasEntry = lines.some(line => {
+      const hasEntry = lines.some((line) => {
         if (entry.includes('*')) {
           const pattern = entry.replace(/\*/g, '.*');
           return new RegExp(`^${pattern}$`).test(line);

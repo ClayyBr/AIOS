@@ -190,7 +190,9 @@ describe('IDE Config Generator', () => {
 
       // Agent folders should also exist
       expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules'))).toBe(true);
-      expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules', 'AIOS', 'agents'))).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules', 'AIOS', 'agents'))).toBe(
+        true
+      );
     });
 
     it('should create directory for IDEs that require it', async () => {
@@ -280,7 +282,7 @@ describe('IDE Config Generator', () => {
       expect(settings.hooks).toBeDefined();
       expect(Array.isArray(settings.hooks.BeforeAgent)).toBe(true);
       const beforeAgentWrapper = settings.hooks.BeforeAgent.find(
-        (w) => Array.isArray(w.hooks) && w.hooks.some((h) => h.name === 'aios-context-inject'),
+        (w) => Array.isArray(w.hooks) && w.hooks.some((h) => h.name === 'aios-context-inject')
       );
       expect(beforeAgentWrapper).toBeDefined();
       const hook = beforeAgentWrapper.hooks.find((h) => h.name === 'aios-context-inject');

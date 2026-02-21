@@ -18,7 +18,11 @@ jest.setTimeout(30000);
 jest.mock('../../.aios-core/core/synapse/context/context-tracker', () => ({
   estimateContextPercent: jest.fn(() => 85),
   calculateBracket: jest.fn(() => 'FRESH'),
-  getActiveLayers: jest.fn(() => ({ layers: [0, 1, 2, 7], memoryHints: false, handoffWarning: false })),
+  getActiveLayers: jest.fn(() => ({
+    layers: [0, 1, 2, 7],
+    memoryHints: false,
+    handoffWarning: false,
+  })),
   getTokenBudget: jest.fn(() => 800),
   needsMemoryHints: jest.fn(() => false),
   needsHandoffWarning: jest.fn(() => false),
@@ -32,66 +36,122 @@ jest.mock('../../.aios-core/core/synapse/output/formatter', () => ({
 // Mock layer modules — provide fake layer classes
 const mockLayerModules = {};
 
-jest.mock('../../.aios-core/core/synapse/layers/l0-constitution', () => {
-  const cls = class MockL0 {
-    constructor() { this.name = 'constitution'; this.layer = 0; this.timeout = 5; }
-    _safeProcess(ctx) { return { rules: ['ART.I: CLI First'], metadata: { layer: 0, source: 'constitution' } }; }
-  };
-  mockLayerModules.L0 = cls;
-  return cls;
-}, { virtual: true });
+jest.mock(
+  '../../.aios-core/core/synapse/layers/l0-constitution',
+  () => {
+    const cls = class MockL0 {
+      constructor() {
+        this.name = 'constitution';
+        this.layer = 0;
+        this.timeout = 5;
+      }
+      _safeProcess(ctx) {
+        return { rules: ['ART.I: CLI First'], metadata: { layer: 0, source: 'constitution' } };
+      }
+    };
+    mockLayerModules.L0 = cls;
+    return cls;
+  },
+  { virtual: true }
+);
 
-jest.mock('../../.aios-core/core/synapse/layers/l1-global', () => {
-  const cls = class MockL1 {
-    constructor() { this.name = 'global'; this.layer = 1; this.timeout = 10; }
-    _safeProcess(ctx) { return { rules: ['Global rule 1'], metadata: { layer: 1, source: 'global' } }; }
-  };
-  mockLayerModules.L1 = cls;
-  return cls;
-}, { virtual: true });
+jest.mock(
+  '../../.aios-core/core/synapse/layers/l1-global',
+  () => {
+    const cls = class MockL1 {
+      constructor() {
+        this.name = 'global';
+        this.layer = 1;
+        this.timeout = 10;
+      }
+      _safeProcess(ctx) {
+        return { rules: ['Global rule 1'], metadata: { layer: 1, source: 'global' } };
+      }
+    };
+    mockLayerModules.L1 = cls;
+    return cls;
+  },
+  { virtual: true }
+);
 
-jest.mock('../../.aios-core/core/synapse/layers/l2-agent', () => {
-  const cls = class MockL2 {
-    constructor() { this.name = 'agent'; this.layer = 2; this.timeout = 10; }
-    _safeProcess(ctx) { return { rules: ['Agent rule 1'], metadata: { layer: 2, source: 'agent' } }; }
-  };
-  mockLayerModules.L2 = cls;
-  return cls;
-}, { virtual: true });
+jest.mock(
+  '../../.aios-core/core/synapse/layers/l2-agent',
+  () => {
+    const cls = class MockL2 {
+      constructor() {
+        this.name = 'agent';
+        this.layer = 2;
+        this.timeout = 10;
+      }
+      _safeProcess(ctx) {
+        return { rules: ['Agent rule 1'], metadata: { layer: 2, source: 'agent' } };
+      }
+    };
+    mockLayerModules.L2 = cls;
+    return cls;
+  },
+  { virtual: true }
+);
 
-jest.mock('../../.aios-core/core/synapse/layers/l3-workflow', () => {
-  const cls = class MockL3 {
-    constructor() { this.name = 'workflow'; this.layer = 3; this.timeout = 10; }
-    _safeProcess(ctx) { return { rules: ['Workflow rule 1'], metadata: { layer: 3, source: 'workflow' } }; }
-  };
-  mockLayerModules.L3 = cls;
-  return cls;
-}, { virtual: true });
+jest.mock(
+  '../../.aios-core/core/synapse/layers/l3-workflow',
+  () => {
+    const cls = class MockL3 {
+      constructor() {
+        this.name = 'workflow';
+        this.layer = 3;
+        this.timeout = 10;
+      }
+      _safeProcess(ctx) {
+        return { rules: ['Workflow rule 1'], metadata: { layer: 3, source: 'workflow' } };
+      }
+    };
+    mockLayerModules.L3 = cls;
+    return cls;
+  },
+  { virtual: true }
+);
 
 // L4-L7: simulate missing modules (MODULE_NOT_FOUND with proper code)
-jest.mock('../../.aios-core/core/synapse/layers/l4-task', () => {
-  const err = new Error("Cannot find module './layers/l4-task'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
+jest.mock(
+  '../../.aios-core/core/synapse/layers/l4-task',
+  () => {
+    const err = new Error("Cannot find module './layers/l4-task'");
+    err.code = 'MODULE_NOT_FOUND';
+    throw err;
+  },
+  { virtual: true }
+);
 
-jest.mock('../../.aios-core/core/synapse/layers/l5-squad', () => {
-  const err = new Error("Cannot find module './layers/l5-squad'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
+jest.mock(
+  '../../.aios-core/core/synapse/layers/l5-squad',
+  () => {
+    const err = new Error("Cannot find module './layers/l5-squad'");
+    err.code = 'MODULE_NOT_FOUND';
+    throw err;
+  },
+  { virtual: true }
+);
 
-jest.mock('../../.aios-core/core/synapse/layers/l6-keyword', () => {
-  const err = new Error("Cannot find module './layers/l6-keyword'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
+jest.mock(
+  '../../.aios-core/core/synapse/layers/l6-keyword',
+  () => {
+    const err = new Error("Cannot find module './layers/l6-keyword'");
+    err.code = 'MODULE_NOT_FOUND';
+    throw err;
+  },
+  { virtual: true }
+);
 
-jest.mock('../../.aios-core/core/synapse/layers/l7-star-command', () => {
-  const err = new Error("Cannot find module './layers/l7-star-command'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
+jest.mock(
+  '../../.aios-core/core/synapse/layers/l7-star-command',
+  () => {
+    const err = new Error("Cannot find module './layers/l7-star-command'");
+    err.code = 'MODULE_NOT_FOUND';
+    throw err;
+  },
+  { virtual: true }
+);
 
 // Mock memory bridge (SYN-10)
 const mockGetMemoryHints = jest.fn(() => Promise.resolve([]));
@@ -109,7 +169,11 @@ jest.mock('../../.aios-core/core/synapse/memory/memory-bridge', () => ({
 // Imports (after mocks)
 // ---------------------------------------------------------------------------
 
-const { SynapseEngine, PipelineMetrics, PIPELINE_TIMEOUT_MS } = require('../../.aios-core/core/synapse/engine');
+const {
+  SynapseEngine,
+  PipelineMetrics,
+  PIPELINE_TIMEOUT_MS,
+} = require('../../.aios-core/core/synapse/engine');
 const contextTracker = require('../../.aios-core/core/synapse/context/context-tracker');
 const formatter = require('../../.aios-core/core/synapse/output/formatter');
 
@@ -283,11 +347,11 @@ describe('SynapseEngine', () => {
 
       const args = formatter.formatSynapseRules.mock.calls[0];
       // results, bracket, contextPercent, session, devmode, metrics, tokenBudget, showHandoffWarning
-      expect(args[1]).toBe('FRESH');        // bracket
-      expect(args[2]).toBe(85);             // contextPercent
-      expect(args[4]).toBe(false);          // devmode (default)
-      expect(args[6]).toBe(800);            // tokenBudget
-      expect(args[7]).toBe(false);          // showHandoffWarning
+      expect(args[1]).toBe('FRESH'); // bracket
+      expect(args[2]).toBe(85); // contextPercent
+      expect(args[4]).toBe(false); // devmode (default)
+      expect(args[6]).toBe(800); // tokenBudget
+      expect(args[7]).toBe(false); // showHandoffWarning
     });
 
     test('should pass devmode=true when config has devmode', async () => {
@@ -451,7 +515,7 @@ describe('SynapseEngine', () => {
       // Verify hints were passed to formatter via results array
       const formatterCall = formatter.formatSynapseRules.mock.calls[0];
       const resultsArg = formatterCall[0]; // first arg = results array
-      const memoryResult = resultsArg.find(r => r.metadata?.source === 'memory');
+      const memoryResult = resultsArg.find((r) => r.metadata?.source === 'memory');
       expect(memoryResult).toBeDefined();
       expect(memoryResult.rules).toEqual([
         { content: 'Use absolute imports', source: 'procedural', relevance: 0.9, tokens: 5 },
@@ -523,8 +587,9 @@ describe('SynapseEngine', () => {
       Date.now = realDateNow;
 
       // Some layers should be skipped due to pipeline timeout
-      const skipped = Object.values(result.metrics.per_layer)
-        .filter(l => l.status === 'skipped' && l.reason === 'Pipeline timeout');
+      const skipped = Object.values(result.metrics.per_layer).filter(
+        (l) => l.status === 'skipped' && l.reason === 'Pipeline timeout'
+      );
       expect(skipped.length).toBeGreaterThanOrEqual(0);
       expect(result).toHaveProperty('xml');
     });

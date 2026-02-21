@@ -56,11 +56,14 @@ describe('L3WorkflowProcessor', () => {
 
   describe('process()', () => {
     test('should load workflow-specific rules when workflow is active', () => {
-      fs.writeFileSync(path.join(tempDir, 'workflow-sdc'), [
-        'SDC_RULE_1=Follow story development cycle',
-        'SDC_RULE_2=Update checkboxes as tasks complete',
-        'SDC_RULE_3=Run tests before marking complete',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'workflow-sdc'),
+        [
+          'SDC_RULE_1=Follow story development cycle',
+          'SDC_RULE_2=Update checkboxes as tasks complete',
+          'SDC_RULE_3=Run tests before marking complete',
+        ].join('\n')
+      );
 
       const context = {
         prompt: '',

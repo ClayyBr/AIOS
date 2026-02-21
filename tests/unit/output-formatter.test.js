@@ -1,6 +1,6 @@
 /**
  * Unit Tests for PersonalizedOutputFormatter and OutputPatternValidator
- * 
+ *
  * Story: 6.1.6 - Output Formatter Implementation
  * Test Coverage: 50+ test cases
  * Target: ≥80% coverage
@@ -126,9 +126,9 @@ persona_profile:
       const output = formatter.format();
       const lines = output.split('\n');
 
-      const metricsIndex = lines.findIndex(line => line === '### Metrics');
+      const metricsIndex = lines.findIndex((line) => line === '### Metrics');
       const lastSectionIndex = lines.length - 1;
-      
+
       // Metrics should be before signature (last line)
       expect(metricsIndex).toBeLessThan(lastSectionIndex);
       expect(lines[lastSectionIndex]).toContain('— Dex');
@@ -194,7 +194,7 @@ persona_profile:
   describe('Error Handling', () => {
     test('graceful degradation if persona_profile missing', () => {
       fs.existsSync.mockReturnValue(false);
-      
+
       const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
 
       expect(formatter.personaProfile).toBeDefined();
@@ -262,7 +262,7 @@ persona_profile:
       { id: 'aios-master', name: 'Orion', archetype: 'Orchestrator', tone: 'collaborative' },
     ];
 
-    agents.forEach(agent => {
+    agents.forEach((agent) => {
       test(`generates valid output for ${agent.name} (${agent.archetype})`, () => {
         const mockContent = `# ${agent.id}
 \`\`\`yaml
@@ -284,7 +284,7 @@ persona_profile:
         const formatter = new PersonalizedOutputFormatter(
           { id: agent.id, name: agent.name },
           mockTask,
-          mockResults,
+          mockResults
         );
         const output = formatter.format();
 
@@ -306,10 +306,10 @@ persona_profile:
 
     test('vocabulary lookup is cached', () => {
       const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-      
+
       // First call
       const verb1 = formatter.selectVerbFromVocabulary(['construir', 'implementar']);
-      
+
       // Second call should use cache (same result)
       const verb2 = formatter.selectVerbFromVocabulary(['construir', 'implementar']);
 
@@ -379,7 +379,9 @@ Content here
       const result = validator.validate(invalidOutput);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.type === 'missing_section' && e.section === 'Header')).toBe(true);
+      expect(
+        result.errors.some((e) => e.type === 'missing_section' && e.section === 'Header')
+      ).toBe(true);
     });
 
     test('detects missing Status section', () => {
@@ -399,7 +401,9 @@ Content
       const result = validator.validate(invalidOutput);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.type === 'missing_section' && e.section === 'Status')).toBe(true);
+      expect(
+        result.errors.some((e) => e.type === 'missing_section' && e.section === 'Status')
+      ).toBe(true);
     });
 
     test('detects missing Metrics section', () => {
@@ -419,7 +423,9 @@ Content
       const result = validator.validate(invalidOutput);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.type === 'missing_section' && e.section === 'Metrics')).toBe(true);
+      expect(
+        result.errors.some((e) => e.type === 'missing_section' && e.section === 'Metrics')
+      ).toBe(true);
     });
 
     test('detects wrong Duration line position', () => {
@@ -447,7 +453,9 @@ Content
       const result = validator.validate(invalidOutput);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.type === 'wrong_position' && e.field === 'Duration')).toBe(true);
+      expect(result.errors.some((e) => e.type === 'wrong_position' && e.field === 'Duration')).toBe(
+        true
+      );
     });
 
     test('detects wrong Tokens line position', () => {
@@ -475,7 +483,9 @@ Content
       const result = validator.validate(invalidOutput);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.type === 'wrong_position' && e.field === 'Tokens')).toBe(true);
+      expect(result.errors.some((e) => e.type === 'wrong_position' && e.field === 'Tokens')).toBe(
+        true
+      );
     });
 
     test('detects Metrics not last', () => {
@@ -500,7 +510,7 @@ Content after metrics
       const result = validator.validate(invalidOutput);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.type === 'wrong_order')).toBe(true);
+      expect(result.errors.some((e) => e.type === 'wrong_order')).toBe(true);
     });
   });
 
@@ -584,7 +594,7 @@ Content
       const result = validator.validate(invalidOutput);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.type === 'missing_section')).toBe(true);
+      expect(result.errors.some((e) => e.type === 'missing_section')).toBe(true);
     });
 
     test('handles missing required fields', () => {
@@ -609,8 +619,9 @@ Content
       const result = validator.validate(invalidOutput);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.type === 'missing_field' || e.type === 'wrong_position')).toBe(true);
+      expect(
+        result.errors.some((e) => e.type === 'missing_field' || e.type === 'wrong_position')
+      ).toBe(true);
     });
   });
 });
-

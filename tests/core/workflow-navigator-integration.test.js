@@ -159,19 +159,23 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
 
     test('buildWorkflowSuggestions calls detectWorkflowState + suggestNextCommands', () => {
       // Spy on the navigator methods
-      const detectSpy = jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
+      const detectSpy = jest
+        .spyOn(builder.workflowNavigator, 'detectWorkflowState')
         .mockReturnValue({
           workflow: 'story_development',
           state: 'validated',
           context: { story_path: 'docs/stories/test.md' },
         });
-      const suggestSpy = jest.spyOn(builder.workflowNavigator, 'suggestNextCommands')
+      const suggestSpy = jest
+        .spyOn(builder.workflowNavigator, 'suggestNextCommands')
         .mockReturnValue([
           { command: '*develop-yolo docs/stories/test.md', description: 'YOLO mode' },
         ]);
-      jest.spyOn(builder.workflowNavigator, 'getGreetingMessage')
+      jest
+        .spyOn(builder.workflowNavigator, 'getGreetingMessage')
         .mockReturnValue('Story validated!');
-      jest.spyOn(builder.workflowNavigator, 'formatSuggestions')
+      jest
+        .spyOn(builder.workflowNavigator, 'formatSuggestions')
         .mockReturnValue('Story validated!\n\n1. `*develop-yolo docs/stories/test.md` - YOLO mode');
 
       const result = builder.buildWorkflowSuggestions({
@@ -180,7 +184,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
 
       expect(detectSpy).toHaveBeenCalledWith(
         ['validate-story-draft completed'],
-        expect.any(Object),
+        expect.any(Object)
       );
       expect(suggestSpy).toHaveBeenCalledWith({
         workflow: 'story_development',
@@ -196,19 +200,19 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
   // =========================================================================
   describe('AC2: Relaxed trigger conditions', () => {
     test('workflow suggestions shown for existing sessions with workflow state', async () => {
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue({
-          workflow: 'story_development',
-          state: 'in_development',
-          context: {},
-        });
-      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands')
-        .mockReturnValue([
-          { command: '*review-qa', description: 'Run QA review' },
-        ]);
-      jest.spyOn(builder.workflowNavigator, 'getGreetingMessage')
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue({
+        workflow: 'story_development',
+        state: 'in_development',
+        context: {},
+      });
+      jest
+        .spyOn(builder.workflowNavigator, 'suggestNextCommands')
+        .mockReturnValue([{ command: '*review-qa', description: 'Run QA review' }]);
+      jest
+        .spyOn(builder.workflowNavigator, 'getGreetingMessage')
         .mockReturnValue('Development complete!');
-      jest.spyOn(builder.workflowNavigator, 'formatSuggestions')
+      jest
+        .spyOn(builder.workflowNavigator, 'formatSuggestions')
         .mockReturnValue('Development complete!\n\n1. `*review-qa` - Run QA review');
 
       const context = {
@@ -226,12 +230,11 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
     });
 
     test('no workflow suggestions for new sessions', async () => {
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue({
-          workflow: 'story_development',
-          state: 'validated',
-          context: {},
-        });
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue({
+        workflow: 'story_development',
+        state: 'validated',
+        context: {},
+      });
 
       const context = {
         sessionType: 'new',
@@ -249,19 +252,19 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
     });
 
     test('workflow suggestions shown for workflow session type', async () => {
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue({
-          workflow: 'story_development',
-          state: 'qa_reviewed',
-          context: {},
-        });
-      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands')
-        .mockReturnValue([
-          { command: '*apply-qa-fixes', description: 'Apply QA feedback' },
-        ]);
-      jest.spyOn(builder.workflowNavigator, 'getGreetingMessage')
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue({
+        workflow: 'story_development',
+        state: 'qa_reviewed',
+        context: {},
+      });
+      jest
+        .spyOn(builder.workflowNavigator, 'suggestNextCommands')
+        .mockReturnValue([{ command: '*apply-qa-fixes', description: 'Apply QA feedback' }]);
+      jest
+        .spyOn(builder.workflowNavigator, 'getGreetingMessage')
         .mockReturnValue('QA review complete!');
-      jest.spyOn(builder.workflowNavigator, 'formatSuggestions')
+      jest
+        .spyOn(builder.workflowNavigator, 'formatSuggestions')
         .mockReturnValue('QA review complete!\n\n1. `*apply-qa-fixes` - Apply QA feedback');
 
       const context = {
@@ -328,19 +331,19 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       const originalExistsSync = fs.existsSync;
       fs.existsSync = jest.fn().mockReturnValue(false);
 
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue({
-          workflow: 'story_development',
-          state: 'validated',
-          context: {},
-        });
-      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands')
-        .mockReturnValue([
-          { command: '*develop-yolo', description: 'YOLO mode' },
-        ]);
-      jest.spyOn(builder.workflowNavigator, 'getGreetingMessage')
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue({
+        workflow: 'story_development',
+        state: 'validated',
+        context: {},
+      });
+      jest
+        .spyOn(builder.workflowNavigator, 'suggestNextCommands')
+        .mockReturnValue([{ command: '*develop-yolo', description: 'YOLO mode' }]);
+      jest
+        .spyOn(builder.workflowNavigator, 'getGreetingMessage')
         .mockReturnValue('Ready to develop!');
-      jest.spyOn(builder.workflowNavigator, 'formatSuggestions')
+      jest
+        .spyOn(builder.workflowNavigator, 'formatSuggestions')
         .mockReturnValue('Ready to develop!\n\n1. `*develop-yolo` - YOLO mode');
 
       const result = builder.buildWorkflowSuggestions({
@@ -361,8 +364,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
 
       // Should not throw, should return null from _detectWorkflowFromSessionState
       // and fall back to command history detection
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue(null);
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue(null);
 
       const result = builder.buildWorkflowSuggestions({ lastCommands: [] });
 
@@ -396,8 +398,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       fs.existsSync = jest.fn().mockReturnValue(true);
       fs.readFileSync = jest.fn().mockReturnValue(yaml.dump(sessionStateData));
 
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue(null);
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue(null);
 
       const result = builder.buildWorkflowSuggestions({ lastCommands: [] });
 
@@ -430,21 +431,26 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
         }),
       }));
 
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue({
-          workflow: 'story_development',
-          state: 'in_development',
-          context: {},
-        });
-      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands')
-        .mockReturnValue([
-          { command: '*review-qa', description: 'Run QA review', raw_command: 'review-qa', args: '' },
-        ]);
-      jest.spyOn(builder.workflowNavigator, 'getGreetingMessage')
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue({
+        workflow: 'story_development',
+        state: 'in_development',
+        context: {},
+      });
+      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands').mockReturnValue([
+        {
+          command: '*review-qa',
+          description: 'Run QA review',
+          raw_command: 'review-qa',
+          args: '',
+        },
+      ]);
+      jest
+        .spyOn(builder.workflowNavigator, 'getGreetingMessage')
         .mockReturnValue('Development complete!');
 
       // The formatSuggestions call should receive enhanced suggestions (with warning prepended)
-      const formatSpy = jest.spyOn(builder.workflowNavigator, 'formatSuggestions')
+      const formatSpy = jest
+        .spyOn(builder.workflowNavigator, 'formatSuggestions')
         .mockImplementation((suggestions, header) => {
           return `${header}\n\n${suggestions.map((s, i) => `${i + 1}. \`${s.command}\` - ${s.description}`).join('\n')}`;
         });
@@ -474,19 +480,22 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
         shouldSurface: jest.fn(),
       }));
 
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue({
-          workflow: 'story_development',
-          state: 'validated',
-          context: {},
-        });
-      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands')
-        .mockReturnValue([
-          { command: '*develop-yolo', description: 'YOLO mode', raw_command: 'develop-yolo', args: '' },
-        ]);
-      jest.spyOn(builder.workflowNavigator, 'getGreetingMessage')
-        .mockReturnValue('Ready!');
-      const formatSpy = jest.spyOn(builder.workflowNavigator, 'formatSuggestions')
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue({
+        workflow: 'story_development',
+        state: 'validated',
+        context: {},
+      });
+      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands').mockReturnValue([
+        {
+          command: '*develop-yolo',
+          description: 'YOLO mode',
+          raw_command: 'develop-yolo',
+          args: '',
+        },
+      ]);
+      jest.spyOn(builder.workflowNavigator, 'getGreetingMessage').mockReturnValue('Ready!');
+      const formatSpy = jest
+        .spyOn(builder.workflowNavigator, 'formatSuggestions')
         .mockReturnValue('Ready!\n\n1. `*develop-yolo` - YOLO mode');
 
       const result = builder.buildWorkflowSuggestions({
@@ -510,10 +519,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
     let patterns;
 
     beforeAll(() => {
-      const patternsPath = path.join(
-        __dirname,
-        '../../.aios-core/data/workflow-patterns.yaml',
-      );
+      const patternsPath = path.join(__dirname, '../../.aios-core/data/workflow-patterns.yaml');
       const content = fs.readFileSync(patternsPath, 'utf8');
       patterns = yaml.load(content);
     });
@@ -582,8 +588,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       const originalExistsSync = fs.existsSync;
       fs.existsSync = jest.fn().mockReturnValue(false);
 
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue(null);
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue(null);
 
       const result = builder.buildWorkflowSuggestions({
         lastCommands: ['some-random-command'],
@@ -598,10 +603,10 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       const originalExistsSync = fs.existsSync;
       fs.existsSync = jest.fn().mockReturnValue(false);
 
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
+      jest
+        .spyOn(builder.workflowNavigator, 'detectWorkflowState')
         .mockReturnValue({ workflow: 'test', state: 'unknown', context: {} });
-      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands')
-        .mockReturnValue([]);
+      jest.spyOn(builder.workflowNavigator, 'suggestNextCommands').mockReturnValue([]);
 
       const result = builder.buildWorkflowSuggestions({
         lastCommands: ['test-command completed'],
@@ -616,8 +621,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       const originalExistsSync = fs.existsSync;
       fs.existsSync = jest.fn().mockReturnValue(false);
 
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockReturnValue(null);
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockReturnValue(null);
 
       const result = builder.buildWorkflowSuggestions({
         lastCommands: [],
@@ -633,10 +637,9 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       const originalExistsSync = fs.existsSync;
       fs.existsSync = jest.fn().mockReturnValue(false);
 
-      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState')
-        .mockImplementation(() => {
-          throw new Error('Unexpected error in navigator');
-        });
+      jest.spyOn(builder.workflowNavigator, 'detectWorkflowState').mockImplementation(() => {
+        throw new Error('Unexpected error in navigator');
+      });
 
       // Should not throw
       const result = builder.buildWorkflowSuggestions({
@@ -758,10 +761,9 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
     test('detects bob_orchestration from execute-epic command', () => {
       const navigator = new WorkflowNavigator();
 
-      const state = navigator.detectWorkflowState(
-        ['execute-epic started'],
-        { story_path: 'docs/stories/epic-test.md' },
-      );
+      const state = navigator.detectWorkflowState(['execute-epic started'], {
+        story_path: 'docs/stories/epic-test.md',
+      });
 
       expect(state).not.toBeNull();
       expect(state.workflow).toBe('bob_orchestration');
@@ -771,10 +773,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
     test('detects agent_handoff from develop completed', () => {
       const navigator = new WorkflowNavigator();
 
-      const state = navigator.detectWorkflowState(
-        ['develop completed'],
-        {},
-      );
+      const state = navigator.detectWorkflowState(['develop completed'], {});
 
       expect(state).not.toBeNull();
       // Could match story_development in_development OR agent_handoff dev_complete
@@ -786,10 +785,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
     test('returns null for unrecognized commands', () => {
       const navigator = new WorkflowNavigator();
 
-      const state = navigator.detectWorkflowState(
-        ['random-unmatched-command'],
-        {},
-      );
+      const state = navigator.detectWorkflowState(['random-unmatched-command'], {});
 
       expect(state).toBeNull();
     });
@@ -867,7 +863,9 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       jest.mock('../../.aios-core/core/session/context-detector');
       jest.mock('../../.aios-core/development/scripts/workflow-navigator');
 
-      const { UnifiedActivationPipeline } = require('../../.aios-core/development/scripts/unified-activation-pipeline');
+      const {
+        UnifiedActivationPipeline,
+      } = require('../../.aios-core/development/scripts/unified-activation-pipeline');
       const MockWorkflowNavigator = require('../../.aios-core/development/scripts/workflow-navigator');
 
       MockWorkflowNavigator.mockImplementation(() => ({

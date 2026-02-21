@@ -36,8 +36,12 @@ function runHook(stdinData, timeout = 5000) {
     });
     let stdout = '';
     let stderr = '';
-    proc.stdout.on('data', (d) => { stdout += d; });
-    proc.stderr.on('data', (d) => { stderr += d; });
+    proc.stdout.on('data', (d) => {
+      stdout += d;
+    });
+    proc.stderr.on('data', (d) => {
+      stderr += d;
+    });
     proc.on('close', (code) => {
       resolve({ stdout, stderr, code: code || 0 });
     });
@@ -70,7 +74,9 @@ function createMockProject(opts = {}) {
   const engineDir = path.join(tmpDir, '.aios-core', 'core', 'synapse');
   fs.mkdirSync(engineDir, { recursive: true });
 
-  const engineCode = opts.engineCode || `
+  const engineCode =
+    opts.engineCode ||
+    `
     class SynapseEngine {
       constructor(synapsePath) { this.synapsePath = synapsePath; }
       process(prompt, session) {
@@ -87,7 +93,9 @@ function createMockProject(opts = {}) {
   const sessionDir = path.join(engineDir, 'session');
   fs.mkdirSync(sessionDir, { recursive: true });
 
-  const sessionCode = opts.sessionCode || `
+  const sessionCode =
+    opts.sessionCode ||
+    `
     function loadSession(sessionId, sessionsDir) {
       return { prompt_count: 5 };
     }
@@ -251,7 +259,7 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.js)', () => {
 
     test('exits silently when session-manager module is missing', async () => {
       tmpDir = createMockProject({
-        sessionCode: 'throw new Error(\'module broken\');',
+        sessionCode: "throw new Error('module broken');",
       });
       const input = buildInput(tmpDir);
       const { stdout, code } = await runHook(input);
@@ -444,8 +452,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.js)', () => {
       }
 
       const hookEntries = settings.hooks.UserPromptSubmit;
-      const synapseHook = hookEntries.find((entry) =>
-        entry.hooks && entry.hooks.some((h) => h.command && h.command.includes('synapse-engine.js')),
+      const synapseHook = hookEntries.find(
+        (entry) =>
+          entry.hooks &&
+          entry.hooks.some((h) => h.command && h.command.includes('synapse-engine.js'))
       );
       expect(synapseHook).toBeDefined();
     });
@@ -517,7 +527,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.js)', () => {
       Object.defineProperty(process, 'stdin', { value: mockStdin, writable: true });
 
       let captured = '';
-      process.stdout.write = (data) => { captured += data; return true; };
+      process.stdout.write = (data) => {
+        captured += data;
+        return true;
+      };
 
       try {
         const mainPromise = hookModule.main();
@@ -543,7 +556,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.js)', () => {
       Object.defineProperty(process, 'stdin', { value: mockStdin, writable: true });
 
       let captured = '';
-      process.stdout.write = (data) => { captured += data; return true; };
+      process.stdout.write = (data) => {
+        captured += data;
+        return true;
+      };
 
       try {
         const mainPromise = hookModule.main();
@@ -582,7 +598,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.js)', () => {
       Object.defineProperty(process, 'stdin', { value: mockStdin, writable: true });
 
       let captured = '';
-      process.stdout.write = (data) => { captured += data; return true; };
+      process.stdout.write = (data) => {
+        captured += data;
+        return true;
+      };
 
       try {
         const mainPromise = hookModule.main();
@@ -628,9 +647,7 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.js)', () => {
         await new Promise((r) => setTimeout(r, 50));
 
         expect(exitSpy).toHaveBeenCalledWith(0);
-        expect(errorSpy).toHaveBeenCalledWith(
-          expect.stringContaining('[synapse-hook]'),
-        );
+        expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining('[synapse-hook]'));
       } finally {
         // Restore JEST_WORKER_ID before restoring other mocks
         if (savedWorkerId !== undefined) {

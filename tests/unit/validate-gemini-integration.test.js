@@ -31,9 +31,18 @@ describe('validate-gemini-integration', () => {
     write(path.join(tmpRoot, '.aios-core', 'development', 'agents', 'dev.md'), '# dev');
     write(path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'extension.json'), '{}');
     write(path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'README.md'), '# readme');
-    write(path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'commands', 'aios-status.js'), '');
-    write(path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'commands', 'aios-agents.js'), '');
-    write(path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'commands', 'aios-validate.js'), '');
+    write(
+      path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'commands', 'aios-status.js'),
+      ''
+    );
+    write(
+      path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'commands', 'aios-agents.js'),
+      ''
+    );
+    write(
+      path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'commands', 'aios-validate.js'),
+      ''
+    );
     write(path.join(tmpRoot, 'packages', 'gemini-aios-extension', 'hooks', 'hooks.json'), '{}');
 
     const result = validateGeminiIntegration({ projectRoot: tmpRoot });

@@ -47,10 +47,10 @@ beforeEach(async () => {
     path.join(proSourceDir, 'feature-registry.yaml'),
     yaml.dump({ features: [{ id: 'squads-pro', enabled: true }] })
   );
-  await fs.writeJson(
-    path.join(proSourceDir, 'package.json'),
-    { name: '@aios-fullstack/pro', version: '2.0.0' }
-  );
+  await fs.writeJson(path.join(proSourceDir, 'package.json'), {
+    name: '@aios-fullstack/pro',
+    version: '2.0.0',
+  });
 });
 
 afterEach(async () => {
@@ -66,19 +66,17 @@ describe('scaffoldProContent', () => {
     expect(result.errors).toHaveLength(0);
 
     // AC1: squads exist
-    expect(await fs.pathExists(
-      path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml')
-    )).toBe(true);
+    expect(await fs.pathExists(path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml'))).toBe(
+      true
+    );
 
     // AC2: pro-config.yaml exists in .aios-core/
-    expect(await fs.pathExists(
-      path.join(targetDir, '.aios-core', 'pro-config.yaml')
-    )).toBe(true);
+    expect(await fs.pathExists(path.join(targetDir, '.aios-core', 'pro-config.yaml'))).toBe(true);
 
     // AC3: feature-registry.yaml exists in .aios-core/
-    expect(await fs.pathExists(
-      path.join(targetDir, '.aios-core', 'feature-registry.yaml')
-    )).toBe(true);
+    expect(await fs.pathExists(path.join(targetDir, '.aios-core', 'feature-registry.yaml'))).toBe(
+      true
+    );
   });
 
   // AC4: pro-version.json with SHA256 hashes
@@ -134,12 +132,12 @@ describe('scaffoldProContent', () => {
 
     expect(result.success).toBe(false);
     expect(result.errors.length).toBeGreaterThan(0);
-    expect(result.warnings.some(w => w.includes('Scaffolding failed'))).toBe(true);
+    expect(result.warnings.some((w) => w.includes('Scaffolding failed'))).toBe(true);
 
     // Verify rollback: squads copied before failure should be cleaned up
-    expect(await fs.pathExists(
-      path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml')
-    )).toBe(false);
+    expect(await fs.pathExists(path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml'))).toBe(
+      false
+    );
 
     // pro-version.json and pro-installed-manifest.yaml should not exist
     expect(await fs.pathExists(path.join(targetDir, 'pro-version.json'))).toBe(false);
@@ -187,7 +185,7 @@ describe('scaffoldProContent', () => {
 
     // Should still succeed (feature-registry is not required)
     expect(result.success).toBe(true);
-    expect(result.warnings.some(w => w.includes('Feature registry'))).toBe(true);
+    expect(result.warnings.some((w) => w.includes('Feature registry'))).toBe(true);
   });
 
   it('should return error when pro source directory does not exist', async () => {
@@ -205,7 +203,7 @@ describe('scaffoldProContent', () => {
     });
 
     expect(progress.length).toBeGreaterThan(0);
-    expect(progress.some(p => p.status === 'done')).toBe(true);
+    expect(progress.some((p) => p.status === 'done')).toBe(true);
   });
 });
 
@@ -237,11 +235,7 @@ describe('generateProVersionJson', () => {
     const testFile = path.join(targetDir, 'test.yaml');
     await fs.writeFile(testFile, 'test: true');
 
-    const versionInfo = await generateProVersionJson(
-      targetDir,
-      proSourceDir,
-      ['test.yaml']
-    );
+    const versionInfo = await generateProVersionJson(targetDir, proSourceDir, ['test.yaml']);
 
     expect(versionInfo.proVersion).toBe('2.0.0');
     expect(versionInfo.fileCount).toBe(1);
@@ -254,10 +248,7 @@ describe('generateInstalledManifest', () => {
     const testFile = path.join(targetDir, 'manifest-test.yaml');
     await fs.writeFile(testFile, 'content');
 
-    const manifest = await generateInstalledManifest(
-      targetDir,
-      ['manifest-test.yaml']
-    );
+    const manifest = await generateInstalledManifest(targetDir, ['manifest-test.yaml']);
 
     expect(manifest.totalFiles).toBe(1);
     expect(manifest.files[0].path).toBe('manifest-test.yaml');

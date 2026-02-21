@@ -108,9 +108,7 @@ describe('SquadLoader', () => {
     });
 
     it('should throw SQUAD_NOT_FOUND for non-existent squad (Test 4.2)', async () => {
-      await expect(loader.resolve('non-existent-squad')).rejects.toThrow(
-        SquadLoaderError,
-      );
+      await expect(loader.resolve('non-existent-squad')).rejects.toThrow(SquadLoaderError);
 
       try {
         await loader.resolve('non-existent-squad');
@@ -123,9 +121,7 @@ describe('SquadLoader', () => {
     });
 
     it('should throw MANIFEST_NOT_FOUND for squad without manifest', async () => {
-      await expect(loader.resolve('invalid-squad')).rejects.toThrow(
-        SquadLoaderError,
-      );
+      await expect(loader.resolve('invalid-squad')).rejects.toThrow(SquadLoaderError);
 
       try {
         await loader.resolve('invalid-squad');
@@ -171,9 +167,7 @@ describe('SquadLoader', () => {
     it('should throw MANIFEST_NOT_FOUND for directory without manifest', async () => {
       const squadPath = path.join(FIXTURES_PATH, 'invalid-squad');
 
-      await expect(loader.loadManifest(squadPath)).rejects.toThrow(
-        SquadLoaderError,
-      );
+      await expect(loader.loadManifest(squadPath)).rejects.toThrow(SquadLoaderError);
 
       try {
         await loader.loadManifest(squadPath);
@@ -185,9 +179,7 @@ describe('SquadLoader', () => {
     it('should throw YAML_PARSE_ERROR for malformed YAML', async () => {
       const squadPath = path.join(FIXTURES_PATH, 'malformed-squad');
 
-      await expect(loader.loadManifest(squadPath)).rejects.toThrow(
-        SquadLoaderError,
-      );
+      await expect(loader.loadManifest(squadPath)).rejects.toThrow(SquadLoaderError);
 
       try {
         await loader.loadManifest(squadPath);
@@ -256,17 +248,14 @@ describe('SquadLoader', () => {
         ErrorCodes.SQUAD_NOT_FOUND,
         'Test message',
         'Test suggestion',
-        '/test/path',
+        '/test/path'
       );
 
       expect(error.name).toBe('SquadLoaderError');
     });
 
     it('should extend Error', () => {
-      const error = new SquadLoaderError(
-        ErrorCodes.SQUAD_NOT_FOUND,
-        'Test message',
-      );
+      const error = new SquadLoaderError(ErrorCodes.SQUAD_NOT_FOUND, 'Test message');
 
       expect(error).toBeInstanceOf(Error);
       expect(error).toBeInstanceOf(SquadLoaderError);
@@ -277,7 +266,7 @@ describe('SquadLoader', () => {
         ErrorCodes.SQUAD_NOT_FOUND,
         'Test message',
         'Test suggestion',
-        '/test/path',
+        '/test/path'
       );
 
       expect(error.code).toBe(ErrorCodes.SQUAD_NOT_FOUND);
@@ -290,7 +279,7 @@ describe('SquadLoader', () => {
       const error = new SquadLoaderError(
         ErrorCodes.SQUAD_NOT_FOUND,
         'Squad not found',
-        'Create the squad',
+        'Create the squad'
       );
 
       const str = error.toString();
@@ -346,9 +335,7 @@ describe('SquadLoader', () => {
       await verboseLoader.resolve('valid-squad');
 
       expect(consoleLogSpy).toHaveBeenCalled();
-      expect(consoleLogSpy.mock.calls.some((call) =>
-        call[0].includes('[SquadLoader]'),
-      )).toBe(true);
+      expect(consoleLogSpy.mock.calls.some((call) => call[0].includes('[SquadLoader]'))).toBe(true);
     });
 
     it('should not log when verbose is disabled', async () => {
@@ -356,7 +343,7 @@ describe('SquadLoader', () => {
 
       // Should not have SquadLoader logs (only possible warn from deprecation)
       const squadLoaderLogs = consoleLogSpy.mock.calls.filter((call) =>
-        call[0].includes('[SquadLoader]'),
+        call[0].includes('[SquadLoader]')
       );
       expect(squadLoaderLogs.length).toBe(0);
     });
@@ -369,9 +356,7 @@ describe('SquadLoader', () => {
 
       // Path should be normalized by path.join
       expect(result.path).toBe(path.join(FIXTURES_PATH, 'valid-squad'));
-      expect(result.manifestPath).toBe(
-        path.join(FIXTURES_PATH, 'valid-squad', 'squad.yaml'),
-      );
+      expect(result.manifestPath).toBe(path.join(FIXTURES_PATH, 'valid-squad', 'squad.yaml'));
     });
   });
 });

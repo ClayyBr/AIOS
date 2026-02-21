@@ -52,10 +52,7 @@ function loadManifest(basePath, manifestName = 'install-manifest.yaml') {
  * @returns {Object|null} - Installed manifest or null if not found
  */
 function loadInstalledManifest(targetDir) {
-  return loadManifest(
-    path.join(targetDir, '.aios-core'),
-    '.installed-manifest.yaml',
-  );
+  return loadManifest(path.join(targetDir, '.aios-core'), '.installed-manifest.yaml');
 }
 
 /**
@@ -116,7 +113,8 @@ function isUserModified(filePath, expectedHash) {
 function generateUpgradeReport(sourceManifest, installedManifest, targetDir) {
   const report = {
     sourceVersion: sourceManifest?.version || 'unknown',
-    installedVersion: installedManifest?.installed_version || installedManifest?.version || 'unknown',
+    installedVersion:
+      installedManifest?.installed_version || installedManifest?.version || 'unknown',
     newFiles: [],
     modifiedFiles: [],
     userModifiedFiles: [],
@@ -292,10 +290,10 @@ function updateInstalledManifest(targetDir, sourceManifest, sourcePackage) {
     installed_from: sourcePackage,
     installed_version: sourceManifest.version,
     source_manifest_hash: `sha256:${require('./file-hasher').hashString(
-      JSON.stringify(sourceManifest.files),
+      JSON.stringify(sourceManifest.files)
     )}`,
     file_count: sourceManifest.files.length,
-    files: sourceManifest.files.map(f => ({
+    files: sourceManifest.files.map((f) => ({
       path: f.path,
       hash: f.hash,
       modified_by_user: false,

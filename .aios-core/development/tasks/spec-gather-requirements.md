@@ -338,7 +338,9 @@ structuring:
         "properties": {
           "id": { "type": "string", "pattern": "^NFR-\\d+$" },
           "description": { "type": "string", "minLength": 10 },
-          "category": { "enum": ["performance", "security", "scalability", "usability", "reliability"] }
+          "category": {
+            "enum": ["performance", "security", "scalability", "usability", "reliability"]
+          }
         }
       }
     },

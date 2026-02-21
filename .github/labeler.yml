@@ -11,30 +11,30 @@
 
 core:
   - changed-files:
-    - any-glob-to-any-file:
-      - '.aios-core/**/*'
-      - 'aios-core/**/*'
-      - 'src/core/**/*'
+      - any-glob-to-any-file:
+          - '.aios-core/**/*'
+          - 'aios-core/**/*'
+          - 'src/core/**/*'
 
 agents:
   - changed-files:
-    - any-glob-to-any-file:
-      - '.aios-core/agents/**/*'
-      - '**/*.agent.md'
-      - '.claude/commands/**/*'
+      - any-glob-to-any-file:
+          - '.aios-core/agents/**/*'
+          - '**/*.agent.md'
+          - '.claude/commands/**/*'
 
 templates:
   - changed-files:
-    - any-glob-to-any-file:
-      - '.aios-core/**/templates/**/*'
-      - '**/*-tmpl.yaml'
-      - '**/*-tmpl.md'
+      - any-glob-to-any-file:
+          - '.aios-core/**/templates/**/*'
+          - '**/*-tmpl.yaml'
+          - '**/*-tmpl.md'
 
 workflows:
   - changed-files:
-    - any-glob-to-any-file:
-      - '.aios-core/workflows/**/*'
-      - '**/*.workflow.yaml'
+      - any-glob-to-any-file:
+          - '.aios-core/workflows/**/*'
+          - '**/*.workflow.yaml'
 
 # ============================================
 # SQUAD LABELS
@@ -42,21 +42,21 @@ workflows:
 
 squad:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'aios-squads/**/*'
-      - 'squads/**/*'
+      - any-glob-to-any-file:
+          - 'aios-squads/**/*'
+          - 'squads/**/*'
 
 'squad: etl':
   - changed-files:
-    - any-glob-to-any-file:
-      - 'aios-squads/etl-squad/**/*'
-      - 'squads/etl/**/*'
+      - any-glob-to-any-file:
+          - 'aios-squads/etl-squad/**/*'
+          - 'squads/etl/**/*'
 
 'squad: creator':
   - changed-files:
-    - any-glob-to-any-file:
-      - 'aios-squads/creator-squad/**/*'
-      - 'squads/creator/**/*'
+      - any-glob-to-any-file:
+          - 'aios-squads/creator-squad/**/*'
+          - 'squads/creator/**/*'
 
 # ============================================
 # MCP ECOSYSTEM LABELS
@@ -64,25 +64,25 @@ squad:
 
 mcp:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'mcp-ecosystem/**/*'
-      - '.aios-core/tools/mcp/**/*'
-      - '**/*mcp*.yaml'
-      - '**/*mcp*.json'
+      - any-glob-to-any-file:
+          - 'mcp-ecosystem/**/*'
+          - '.aios-core/tools/mcp/**/*'
+          - '**/*mcp*.yaml'
+          - '**/*mcp*.json'
 
 docker-mcp:
   - changed-files:
-    - any-glob-to-any-file:
-      - '.docker/mcp/**/*'
-      - '**/docker-mcp*.yml'
-      - '**/gateway-service.yml'
+      - any-glob-to-any-file:
+          - '.docker/mcp/**/*'
+          - '**/docker-mcp*.yml'
+          - '**/gateway-service.yml'
 
 preset:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'mcp-ecosystem/presets/**/*'
-      - '**/*preset*.yaml'
-      - '**/*preset*.json'
+      - any-glob-to-any-file:
+          - 'mcp-ecosystem/presets/**/*'
+          - '**/*preset*.yaml'
+          - '**/*preset*.json'
 
 # ============================================
 # INFRASTRUCTURE LABELS
@@ -90,20 +90,20 @@ preset:
 
 ci/cd:
   - changed-files:
-    - any-glob-to-any-file:
-      - '.github/**/*'
-      - '.github/workflows/**/*'
-      - 'Dockerfile'
-      - 'docker-compose*.yml'
-      - '.docker/**/*'
+      - any-glob-to-any-file:
+          - '.github/**/*'
+          - '.github/workflows/**/*'
+          - 'Dockerfile'
+          - 'docker-compose*.yml'
+          - '.docker/**/*'
 
 installer:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'tools/installer/**/*'
-      - 'bin/**/*'
-      - 'install*.js'
-      - 'setup*.js'
+      - any-glob-to-any-file:
+          - 'tools/installer/**/*'
+          - 'bin/**/*'
+          - 'install*.js'
+          - 'setup*.js'
 
 # ============================================
 # DOCUMENTATION LABELS
@@ -111,11 +111,11 @@ installer:
 
 documentation:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'docs/**/*'
-      - '**/*.md'
-      - '!node_modules/**/*'
-      - '!.github/ISSUE_TEMPLATE/**/*'
+      - any-glob-to-any-file:
+          - 'docs/**/*'
+          - '**/*.md'
+          - '!node_modules/**/*'
+          - '!.github/ISSUE_TEMPLATE/**/*'
 
 # ============================================
 # DEVELOPMENT TOOLS LABELS
@@ -123,10 +123,10 @@ documentation:
 
 tools:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'tools/**/*'
-      - 'bin/**/*'
-      - 'scripts/**/*'
+      - any-glob-to-any-file:
+          - 'tools/**/*'
+          - 'bin/**/*'
+          - 'scripts/**/*'
 
 # ============================================
 # TESTING LABELS
@@ -134,8 +134,8 @@ tools:
 
 tests:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'tests/**/*'
-      - '**/*.test.js'
-      - '**/*.spec.js'
-      - 'jest.config.*'
+      - any-glob-to-any-file:
+          - 'tests/**/*'
+          - '**/*.test.js'
+          - '**/*.spec.js'
+          - 'jest.config.*'

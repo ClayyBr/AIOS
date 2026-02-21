@@ -63,11 +63,13 @@ describe('Migration Execute Module', () => {
       await fs.promises.writeFile(path.join(aiosCoreDir, 'agents', 'dev.md'), 'Agent');
 
       const moduleData = {
-        files: [{
-          sourcePath: path.join(aiosCoreDir, 'agents', 'dev.md'),
-          relativePath: path.join('agents', 'dev.md'),
-          size: 5,
-        }],
+        files: [
+          {
+            sourcePath: path.join(aiosCoreDir, 'agents', 'dev.md'),
+            relativePath: path.join('agents', 'dev.md'),
+            size: 5,
+          },
+        ],
       };
 
       const result = await migrateModule(moduleData, 'development', aiosCoreDir);
@@ -83,11 +85,13 @@ describe('Migration Execute Module', () => {
       await fs.promises.writeFile(path.join(aiosCoreDir, 'agents', 'dev.md'), 'Agent');
 
       const moduleData = {
-        files: [{
-          sourcePath: path.join(aiosCoreDir, 'agents', 'dev.md'),
-          relativePath: path.join('agents', 'dev.md'),
-          size: 5,
-        }],
+        files: [
+          {
+            sourcePath: path.join(aiosCoreDir, 'agents', 'dev.md'),
+            relativePath: path.join('agents', 'dev.md'),
+            size: 5,
+          },
+        ],
       };
 
       const result = await migrateModule(moduleData, 'development', aiosCoreDir, { dryRun: true });

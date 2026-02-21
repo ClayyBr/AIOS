@@ -17,7 +17,11 @@ jest.mock('child_process', () => ({
   exec: jest.fn(),
 }));
 
-const { installProjectMCPs, displayInstallationStatus, MCP_CONFIGS } = require('../../bin/modules/mcp-installer');
+const {
+  installProjectMCPs,
+  displayInstallationStatus,
+  MCP_CONFIGS,
+} = require('../../bin/modules/mcp-installer');
 
 // Test fixtures directory
 const FIXTURES_DIR = path.join(__dirname, '__fixtures__', 'mcp-installation');
@@ -51,7 +55,7 @@ describe('MCP Installation Module', () => {
         } catch (error) {
           if (error.code === 'EBUSY' && retries > 1) {
             // Wait a bit and retry
-            await new Promise(resolve => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 100));
             retries--;
           } else {
             // Last retry failed or different error
@@ -139,7 +143,7 @@ describe('MCP Installation Module', () => {
       const exa = MCP_CONFIGS.exa;
       const config = exa.getConfig('linux', 'test-api-key');
 
-      const toolsArg = config.args.find(arg => arg.startsWith('--tools='));
+      const toolsArg = config.args.find((arg) => arg.startsWith('--tools='));
       expect(toolsArg).toBeDefined();
       expect(toolsArg).toContain('web_search_exa');
     });
@@ -257,7 +261,7 @@ describe('MCP Installation Module', () => {
       });
 
       expect(progressCalls.length).toBeGreaterThan(0);
-      expect(progressCalls.some(c => c.phase === 'installation')).toBe(true);
+      expect(progressCalls.some((c) => c.phase === 'installation')).toBe(true);
     });
 
     test('should handle empty MCP selection', async () => {

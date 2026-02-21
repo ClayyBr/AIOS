@@ -31,7 +31,7 @@ describe('WorkflowOrchestrator execution profile propagation', () => {
         '    agent: "qa"',
         '    action: "review"',
       ].join('\n'),
-      'utf8',
+      'utf8'
     );
   });
 
@@ -51,7 +51,11 @@ describe('WorkflowOrchestrator execution profile propagation', () => {
 
     // Isolate this test to dispatch payload semantics.
     orchestrator.preparePhase = jest.fn(async () => ({}));
-    orchestrator.validatePhaseOutput = jest.fn(async () => ({ passed: true, checks: [], errors: [] }));
+    orchestrator.validatePhaseOutput = jest.fn(async () => ({
+      passed: true,
+      checks: [],
+      errors: [],
+    }));
     orchestrator.promptBuilder.buildPrompt = jest.fn(async () => 'test prompt');
     orchestrator.contextManager.getContextForPhase = jest.fn(async () => ({
       workflowId: 'test-workflow',

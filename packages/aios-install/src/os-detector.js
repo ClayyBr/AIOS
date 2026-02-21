@@ -146,10 +146,7 @@ function detectOS() {
         docker: 'winget install Docker.DockerDesktop',
         gh: 'winget install GitHub.cli',
       };
-      result.notes = [
-        'For best experience, consider using WSL',
-        'Install WSL: wsl --install',
-      ];
+      result.notes = ['For best experience, consider using WSL', 'Install WSL: wsl --install'];
       break;
 
     default:

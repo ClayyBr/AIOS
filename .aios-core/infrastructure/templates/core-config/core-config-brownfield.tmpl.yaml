@@ -12,16 +12,16 @@
 project:
   type: USER_PROJECT
   mode: brownfield
-  name: "{{PROJECT_NAME}}"
-  analyzed: "{{GENERATED_DATE}}"
-  version: "{{PROJECT_VERSION}}"
+  name: '{{PROJECT_NAME}}'
+  analyzed: '{{GENERATED_DATE}}'
+  version: '{{PROJECT_VERSION}}'
 
   # Analysis metadata from brownfield analyzer
   analysis:
     existing_structure: {{HAS_EXISTING_STRUCTURE}}
     existing_workflows: {{HAS_EXISTING_WORKFLOWS}}
     existing_standards: {{HAS_EXISTING_STANDARDS}}
-    merge_strategy: "{{MERGE_STRATEGY}}"  # parallel | replace | manual
+    merge_strategy: '{{MERGE_STRATEGY}}' # parallel | replace | manual
 
     # Detected configurations (for reference)
     detected:
@@ -52,15 +52,15 @@ deployment:
   # Branch routing configuration (analyzed from existing PR patterns)
   branches:
     staging_targets:
-      - "feature/*"
-      - "fix/*"
-      - "docs/*"
-      - "chore/*"
-      - "refactor/*"
-      - "test/*"
+      - 'feature/*'
+      - 'fix/*'
+      - 'docs/*'
+      - 'chore/*'
+      - 'refactor/*'
+      - 'test/*'
 
     production_targets:
-      - "hotfix/*"
+      - 'hotfix/*'
 
     # Detected branch names (may differ from defaults)
     staging_branch: {{STAGING_BRANCH}}
@@ -70,20 +70,20 @@ deployment:
   # Environment configuration (detected from existing deploy configs)
   environments:
     staging:
-      name: "{{STAGING_ENV_NAME}}"
+      name: '{{STAGING_ENV_NAME}}'
       branch: {{STAGING_BRANCH}}
       auto_deploy: {{STAGING_AUTO_DEPLOY}}
-      platform: "{{DEPLOYMENT_PLATFORM}}"
-      url: "${STAGING_URL}"
-      promotion_message: "After validation, create PR to {{PRODUCTION_BRANCH}} for production"
+      platform: '{{DEPLOYMENT_PLATFORM}}'
+      url: '${STAGING_URL}'
+      promotion_message: 'After validation, create PR to {{PRODUCTION_BRANCH}} for production'
 
     production:
-      name: "{{PRODUCTION_ENV_NAME}}"
+      name: '{{PRODUCTION_ENV_NAME}}'
       branch: {{PRODUCTION_BRANCH}}
       auto_deploy: {{PRODUCTION_AUTO_DEPLOY}}
-      platform: "{{DEPLOYMENT_PLATFORM}}"
-      url: "${PRODUCTION_URL}"
-      promotion_message: "This is the final production deployment"
+      platform: '{{DEPLOYMENT_PLATFORM}}'
+      url: '${PRODUCTION_URL}'
+      promotion_message: 'This is the final production deployment'
 
   # Quality gates (detected from existing CI)
   quality_gates:
@@ -150,7 +150,7 @@ features:
     generate_tech_stack: true
     brownfield_analysis: true
     gitignore_generation: true
-    merge_gitignore: true  # Merge with existing instead of replace
+    merge_gitignore: true # Merge with existing instead of replace
 
 # =============================================================================
 # MIGRATION NOTES
@@ -158,7 +158,7 @@ features:
 # =============================================================================
 migration_notes:
   # Summary of what was detected vs generated
-  summary: "{{MIGRATION_SUMMARY}}"
+  summary: '{{MIGRATION_SUMMARY}}'
 
   # Items requiring manual review
   manual_review_items: {{MANUAL_REVIEW_ITEMS_YAML}}

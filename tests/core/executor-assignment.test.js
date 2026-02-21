@@ -97,7 +97,8 @@ describe('ExecutorAssignment', () => {
 
     it('should handle mixed keywords with highest score', () => {
       // More database keywords than code_general
-      const content = 'Create schema for user table with migration, add index and constraints for foreign_key';
+      const content =
+        'Create schema for user table with migration, add index and constraints for foreign_key';
       expect(detectStoryType(content)).toBe('database');
     });
 

@@ -49,24 +49,12 @@ const REQUIRED_PATHS = [
 /**
  * Paths that MUST NOT appear in the tarball (leak prevention).
  */
-const EXCLUDED_PATHS = [
-  'pro/',
-  '.env',
-  '.git/',
-  'node_modules/',
-  '.aios/',
-  'tests/',
-];
+const EXCLUDED_PATHS = ['pro/', '.env', '.git/', 'node_modules/', '.aios/', 'tests/'];
 
 /**
  * Entries required in package.json "files" array.
  */
-const REQUIRED_FILES_ENTRIES = [
-  '.claude/hooks/',
-  '.claude/rules/',
-  '.aios-core/',
-  'bin/',
-];
+const REQUIRED_FILES_ENTRIES = ['.claude/hooks/', '.claude/rules/', '.aios-core/', 'bin/'];
 
 /**
  * Bin entries that must point to existing files.
@@ -177,7 +165,9 @@ function validateTarballContents(tarballFiles) {
     let found;
 
     if (isDir) {
-      found = tarballFiles.some((f) => f.startsWith(required) || f.startsWith(`package/${required}`));
+      found = tarballFiles.some(
+        (f) => f.startsWith(required) || f.startsWith(`package/${required}`)
+      );
     } else {
       found = tarballFiles.some((f) => f === required || f === `package/${required}`);
     }

@@ -56,8 +56,14 @@ describe('L1GlobalProcessor', () => {
 
   describe('process()', () => {
     test('should load and combine both global and context rules', () => {
-      fs.writeFileSync(path.join(tempDir, 'global'), 'GLOBAL_RULE_1=Use TypeScript\nGLOBAL_RULE_2=Use ESLint\n');
-      fs.writeFileSync(path.join(tempDir, 'context'), 'CONTEXT_RULE_1=FRESH bracket: lean injection\n');
+      fs.writeFileSync(
+        path.join(tempDir, 'global'),
+        'GLOBAL_RULE_1=Use TypeScript\nGLOBAL_RULE_2=Use ESLint\n'
+      );
+      fs.writeFileSync(
+        path.join(tempDir, 'context'),
+        'CONTEXT_RULE_1=FRESH bracket: lean injection\n'
+      );
 
       const context = {
         prompt: '',

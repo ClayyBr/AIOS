@@ -40,6 +40,8 @@ describe('validate-codex-integration', () => {
     expect(result.ok).toBe(false);
     expect(result.errors.some((e) => e.includes('Missing Codex agents dir'))).toBe(true);
     expect(result.errors.some((e) => e.includes('Missing Codex skills dir'))).toBe(true);
-    expect(result.warnings.some((w) => w.includes('Codex instructions file not found yet'))).toBe(true);
+    expect(result.warnings.some((w) => w.includes('Codex instructions file not found yet'))).toBe(
+      true
+    );
   });
 });

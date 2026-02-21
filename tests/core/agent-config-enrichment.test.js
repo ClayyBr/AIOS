@@ -59,10 +59,23 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
 
     test('all expected agents have entries', () => {
       const expectedAgents = [
-        'aios-master', 'dev', 'qa', 'devops', 'github-devops',
-        'architect', 'po', 'sm', 'data-engineer', 'db-sage',
-        'pm', 'analyst', 'ux-design-expert', 'squad-creator',
-        'aios-developer', 'aios-orchestrator', 'default',
+        'aios-master',
+        'dev',
+        'qa',
+        'devops',
+        'github-devops',
+        'architect',
+        'po',
+        'sm',
+        'data-engineer',
+        'db-sage',
+        'pm',
+        'analyst',
+        'ux-design-expert',
+        'squad-creator',
+        'aios-developer',
+        'aios-orchestrator',
+        'default',
       ];
 
       for (const agentId of expectedAgents) {
@@ -92,7 +105,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
       const missing = [];
 
       for (const [agentId, config] of Object.entries(agentConfig.agents)) {
-        for (const fileEntry of (config.files_loaded || [])) {
+        for (const fileEntry of config.files_loaded || []) {
           const fp = typeof fileEntry === 'string' ? fileEntry : fileEntry.path;
           if (fp && !fileExists(fp)) {
             missing.push({ agent: agentId, file: fp });
@@ -110,7 +123,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
       expect(pm.files_loaded).toBeDefined();
       expect(pm.files_loaded.length).toBe(2);
 
-      const paths = pm.files_loaded.map(f => f.path);
+      const paths = pm.files_loaded.map((f) => f.path);
       expect(paths).toContain('docs/framework/coding-standards.md');
       expect(paths).toContain('docs/framework/tech-stack.md');
     });
@@ -126,7 +139,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
       expect(ux.files_loaded).toBeDefined();
       expect(ux.files_loaded.length).toBe(2);
 
-      const paths = ux.files_loaded.map(f => f.path);
+      const paths = ux.files_loaded.map((f) => f.path);
       expect(paths).toContain('docs/framework/tech-stack.md');
       expect(paths).toContain('docs/framework/coding-standards.md');
     });
@@ -142,7 +155,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
       expect(analyst.files_loaded).toBeDefined();
       expect(analyst.files_loaded.length).toBe(3);
 
-      const paths = analyst.files_loaded.map(f => f.path);
+      const paths = analyst.files_loaded.map((f) => f.path);
       expect(paths).toContain('.aios-core/product/data/brainstorming-techniques.md');
       expect(paths).toContain('docs/framework/tech-stack.md');
       expect(paths).toContain('docs/framework/source-tree.md');
@@ -159,7 +172,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
       expect(sm.files_loaded).toBeDefined();
       expect(sm.files_loaded.length).toBe(3);
 
-      const paths = sm.files_loaded.map(f => f.path);
+      const paths = sm.files_loaded.map((f) => f.path);
       expect(paths).toContain('.aios-core/product/data/mode-selection-best-practices.md');
       expect(paths).toContain('.aios-core/data/workflow-patterns.yaml');
       expect(paths).toContain('docs/framework/coding-standards.md');
@@ -191,7 +204,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
   describe('Shared Files Consumers Updated', () => {
     test('coding-standards.md lists pm, ux-design-expert, sm as users', () => {
       const csFile = agentConfig.lazy_loading_strategy.shared_files.find(
-        f => f.path === 'docs/framework/coding-standards.md',
+        (f) => f.path === 'docs/framework/coding-standards.md'
       );
       expect(csFile).toBeDefined();
       expect(csFile.used_by).toContain('pm');
@@ -201,7 +214,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
 
     test('tech-stack.md lists pm, ux-design-expert, analyst as users', () => {
       const tsFile = agentConfig.lazy_loading_strategy.shared_files.find(
-        f => f.path === 'docs/framework/tech-stack.md',
+        (f) => f.path === 'docs/framework/tech-stack.md'
       );
       expect(tsFile).toBeDefined();
       expect(tsFile.used_by).toContain('pm');
@@ -211,7 +224,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
 
     test('source-tree.md lists analyst as user', () => {
       const stFile = agentConfig.lazy_loading_strategy.shared_files.find(
-        f => f.path === 'docs/framework/source-tree.md',
+        (f) => f.path === 'docs/framework/source-tree.md'
       );
       expect(stFile).toBeDefined();
       expect(stFile.used_by).toContain('analyst');

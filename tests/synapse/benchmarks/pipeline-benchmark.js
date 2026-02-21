@@ -55,10 +55,15 @@ function parseArgs() {
   const options = { warm: true, cold: false, iterations: DEFAULT_ITERATIONS, json: false };
 
   for (const arg of args) {
-    if (arg === '--cold') { options.cold = true; options.warm = false; }
-    else if (arg === '--warm') { options.warm = true; options.cold = false; }
-    else if (arg === '--json') { options.json = true; }
-    else if (arg.startsWith('--iterations=')) {
+    if (arg === '--cold') {
+      options.cold = true;
+      options.warm = false;
+    } else if (arg === '--warm') {
+      options.warm = true;
+      options.cold = false;
+    } else if (arg === '--json') {
+      options.json = true;
+    } else if (arg.startsWith('--iterations=')) {
       options.iterations = parseInt(arg.split('=')[1], 10) || DEFAULT_ITERATIONS;
     }
   }
@@ -94,13 +99,13 @@ function calcStats(values) {
 
 async function runBenchmark(options) {
   const { SynapseEngine } = require(
-    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js'),
+    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js')
   );
   const { loadSession } = require(
-    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'session', 'session-manager.js'),
+    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'session', 'session-manager.js')
   );
   const { parseManifest } = require(
-    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js'),
+    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js')
   );
 
   const manifestPath = path.join(SYNAPSE_PATH, 'manifest');
@@ -119,7 +124,7 @@ async function runBenchmark(options) {
   }
 
   const { formatSynapseRules } = require(
-    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'output', 'formatter.js'),
+    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'output', 'formatter.js')
   );
 
   // Measure startup (manifest parse + engine construction)
@@ -162,14 +167,16 @@ async function runBenchmark(options) {
     const startupStart = performance.now();
     const engine = options.cold
       ? new SynapseEngine(SYNAPSE_PATH, { manifest, devmode: false })
-      : (i === 0 ? new SynapseEngine(SYNAPSE_PATH, { manifest, devmode: false }) : null);
+      : i === 0
+        ? new SynapseEngine(SYNAPSE_PATH, { manifest, devmode: false })
+        : null;
     const startupEnd = performance.now();
 
     if (options.cold || i === 0) {
       startupDurations.push(startupEnd - startupStart);
     }
 
-    const engineToUse = options.cold ? engine : (engine || cachedEngine);
+    const engineToUse = options.cold ? engine : engine || cachedEngine;
     if (i === 0 && !options.cold) {
       cachedEngine = engine;
     }
@@ -207,7 +214,7 @@ async function runBenchmark(options) {
       false,
       result && result.metrics ? result.metrics : {},
       1500,
-      false,
+      false
     );
     const fmtEnd = performance.now();
     formatterDurations.push(fmtEnd - fmtStart);
@@ -248,25 +255,45 @@ async function runBenchmark(options) {
   console.log('SYNAPSE PIPELINE BENCHMARK RESULTS');
   console.log('='.repeat(80));
 
-  const fmt = (v) => typeof v === 'number' ? v.toFixed(2) : '?';
+  const fmt = (v) => (typeof v === 'number' ? v.toFixed(2) : '?');
 
   console.log('\nPipeline (total):');
-  console.log(`  p50: ${fmt(results.pipeline.p50)}ms  p95: ${fmt(results.pipeline.p95)}ms  p99: ${fmt(results.pipeline.p99)}ms`);
-  console.log(`  Target: <${TARGETS.pipeline.target}ms  Hard limit: <${TARGETS.pipeline.hardLimit}ms`);
-  console.log(`  Status: ${results.pipeline.p95 < TARGETS.pipeline.target ? 'PASS' : results.pipeline.p95 < TARGETS.pipeline.hardLimit ? 'WARN' : 'FAIL'}`);
+  console.log(
+    `  p50: ${fmt(results.pipeline.p50)}ms  p95: ${fmt(results.pipeline.p95)}ms  p99: ${fmt(results.pipeline.p99)}ms`
+  );
+  console.log(
+    `  Target: <${TARGETS.pipeline.target}ms  Hard limit: <${TARGETS.pipeline.hardLimit}ms`
+  );
+  console.log(
+    `  Status: ${results.pipeline.p95 < TARGETS.pipeline.target ? 'PASS' : results.pipeline.p95 < TARGETS.pipeline.hardLimit ? 'WARN' : 'FAIL'}`
+  );
 
   console.log('\nFormatter (isolated):');
-  console.log(`  p50: ${fmt(results.formatter.p50)}ms  p95: ${fmt(results.formatter.p95)}ms  p99: ${fmt(results.formatter.p99)}ms`);
-  console.log(`  Target: <${TARGETS.layerL0.target}ms  Hard limit: <${TARGETS.layerL0.hardLimit}ms`);
-  console.log(`  Status: ${results.formatter.p95 < TARGETS.layerL0.target ? 'PASS' : results.formatter.p95 < TARGETS.layerL0.hardLimit ? 'WARN' : 'FAIL'}`);
+  console.log(
+    `  p50: ${fmt(results.formatter.p50)}ms  p95: ${fmt(results.formatter.p95)}ms  p99: ${fmt(results.formatter.p99)}ms`
+  );
+  console.log(
+    `  Target: <${TARGETS.layerL0.target}ms  Hard limit: <${TARGETS.layerL0.hardLimit}ms`
+  );
+  console.log(
+    `  Status: ${results.formatter.p95 < TARGETS.layerL0.target ? 'PASS' : results.formatter.p95 < TARGETS.layerL0.hardLimit ? 'WARN' : 'FAIL'}`
+  );
 
   console.log('\nStartup (.synapse/ discovery):');
-  console.log(`  p50: ${fmt(results.startup.p50)}ms  p95: ${fmt(results.startup.p95)}ms  p99: ${fmt(results.startup.p99)}ms`);
-  console.log(`  Target: <${TARGETS.startup.target}ms  Hard limit: <${TARGETS.startup.hardLimit}ms`);
+  console.log(
+    `  p50: ${fmt(results.startup.p50)}ms  p95: ${fmt(results.startup.p95)}ms  p99: ${fmt(results.startup.p99)}ms`
+  );
+  console.log(
+    `  Target: <${TARGETS.startup.target}ms  Hard limit: <${TARGETS.startup.hardLimit}ms`
+  );
 
   console.log('\nSession I/O:');
-  console.log(`  p50: ${fmt(results.sessionIO.p50)}ms  p95: ${fmt(results.sessionIO.p95)}ms  p99: ${fmt(results.sessionIO.p99)}ms`);
-  console.log(`  Target: <${TARGETS.sessionIO.target}ms  Hard limit: <${TARGETS.sessionIO.hardLimit}ms`);
+  console.log(
+    `  p50: ${fmt(results.sessionIO.p50)}ms  p95: ${fmt(results.sessionIO.p95)}ms  p99: ${fmt(results.sessionIO.p99)}ms`
+  );
+  console.log(
+    `  Target: <${TARGETS.sessionIO.target}ms  Hard limit: <${TARGETS.sessionIO.hardLimit}ms`
+  );
 
   console.log('\nPer-Layer Timings:');
   console.log('-'.repeat(80));
@@ -276,14 +303,15 @@ async function runBenchmark(options) {
     'p95'.padStart(8),
     'p99'.padStart(8),
     'Target'.padStart(10),
-    'Status'.padStart(10),
+    'Status'.padStart(10)
   );
   console.log('-'.repeat(80));
 
   for (const [name, stats] of Object.entries(results.layers)) {
     const isEdge = name === 'constitution' || name === 'star-command';
     const target = isEdge ? TARGETS.layerL0 : TARGETS.layer;
-    const status = stats.p95 < target.target ? 'PASS' : stats.p95 < target.hardLimit ? 'WARN' : 'FAIL';
+    const status =
+      stats.p95 < target.target ? 'PASS' : stats.p95 < target.hardLimit ? 'WARN' : 'FAIL';
 
     console.log(
       name.padEnd(20),
@@ -291,7 +319,7 @@ async function runBenchmark(options) {
       fmt(stats.p95).padStart(8),
       fmt(stats.p99).padStart(8),
       `<${target.target}ms`.padStart(10),
-      status.padStart(10),
+      status.padStart(10)
     );
   }
 

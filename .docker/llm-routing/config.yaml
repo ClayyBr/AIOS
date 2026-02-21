@@ -4,36 +4,36 @@
 
 model_list:
   # DeepSeek - Primary cost-effective option
-  - model_name: "deepseek-chat"
+  - model_name: 'deepseek-chat'
     litellm_params:
-      model: "deepseek/deepseek-chat"
-      api_base: "https://api.deepseek.com/v1"
-      api_key: "os.environ/DEEPSEEK_API_KEY"
+      model: 'deepseek/deepseek-chat'
+      api_base: 'https://api.deepseek.com/v1'
+      api_key: 'os.environ/DEEPSEEK_API_KEY'
       drop_params: true
 
   # Claude mappings -> DeepSeek (for cost optimization)
   # NOTE: These aliases route Claude model names to DeepSeek for ~99% cost savings
   # Users calling these model names will receive DeepSeek responses
-  - model_name: "claude-3-5-sonnet-20241022"
+  - model_name: 'claude-3-5-sonnet-20241022'
     litellm_params:
-      model: "deepseek/deepseek-chat"
-      api_base: "https://api.deepseek.com/v1"
-      api_key: "os.environ/DEEPSEEK_API_KEY"
+      model: 'deepseek/deepseek-chat'
+      api_base: 'https://api.deepseek.com/v1'
+      api_key: 'os.environ/DEEPSEEK_API_KEY'
       drop_params: true
 
-  - model_name: "claude-3-5-haiku-20241022"
+  - model_name: 'claude-3-5-haiku-20241022'
     litellm_params:
-      model: "deepseek/deepseek-chat"
-      api_base: "https://api.deepseek.com/v1"
-      api_key: "os.environ/DEEPSEEK_API_KEY"
+      model: 'deepseek/deepseek-chat'
+      api_base: 'https://api.deepseek.com/v1'
+      api_key: 'os.environ/DEEPSEEK_API_KEY'
       drop_params: true
 
   # OpenRouter fallback (optional)
-  - model_name: "openrouter-fallback"
+  - model_name: 'openrouter-fallback'
     litellm_params:
-      model: "openrouter/deepseek/deepseek-chat"
-      api_base: "https://openrouter.ai/api/v1"
-      api_key: "os.environ/OPENROUTER_API_KEY"
+      model: 'openrouter/deepseek/deepseek-chat'
+      api_base: 'https://openrouter.ai/api/v1'
+      api_key: 'os.environ/OPENROUTER_API_KEY'
       drop_params: true
 
 # LiteLLM Settings
@@ -46,7 +46,7 @@ litellm_settings:
 
 # Proxy Settings
 general_settings:
-  master_key: "os.environ/LITELLM_MASTER_KEY"
+  master_key: 'os.environ/LITELLM_MASTER_KEY'
   health_check: true
   health_check_interval: 60
 

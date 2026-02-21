@@ -79,7 +79,9 @@ jest.mock('../../.aios-core/core/permissions', () => ({
 const fs = require('fs');
 const yaml = require('js-yaml');
 const { resolveConfig } = require('../../.aios-core/core/config/config-resolver');
-const { validateUserProfile } = require('../../.aios-core/infrastructure/scripts/validate-user-profile');
+const {
+  validateUserProfile,
+} = require('../../.aios-core/infrastructure/scripts/validate-user-profile');
 
 // Import modules under test after mocks
 const GreetingPreferenceManager = require('../../.aios-core/development/scripts/greeting-preference-manager');
@@ -307,9 +309,7 @@ describe('AC3: validate-user-profile integrated into activation pipeline', () =>
     const result = builder.loadUserProfile();
 
     expect(result).toBe('advanced');
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining('validation failed'),
-    );
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('validation failed'));
     consoleSpy.mockRestore();
   });
 
@@ -410,9 +410,7 @@ describe('AC4: Bob mode command visibility restrictions', () => {
   it('should return commands with "full" visibility for advanced mode new session', () => {
     const commands = builder.filterCommandsByVisibility(mockAgentDev, 'new', 'advanced');
     // 'new' session = 'full' visibility filter
-    const allHaveFull = commands.every(
-      (cmd) => cmd.visibility && cmd.visibility.includes('full'),
-    );
+    const allHaveFull = commands.every((cmd) => cmd.visibility && cmd.visibility.includes('full'));
     expect(allHaveFull).toBe(true);
     expect(commands.length).toBe(4); // help, develop, explain, exit
   });
@@ -420,7 +418,7 @@ describe('AC4: Bob mode command visibility restrictions', () => {
   it('should return commands with "quick" visibility for advanced mode existing session', () => {
     const commands = builder.filterCommandsByVisibility(mockAgentDev, 'existing', 'advanced');
     const allHaveQuick = commands.every(
-      (cmd) => cmd.visibility && cmd.visibility.includes('quick'),
+      (cmd) => cmd.visibility && cmd.visibility.includes('quick')
     );
     expect(allHaveQuick).toBe(true);
     expect(commands.length).toBe(5); // help, develop, apply-qa-fixes, run-tests, exit
@@ -428,9 +426,7 @@ describe('AC4: Bob mode command visibility restrictions', () => {
 
   it('should return commands with "key" visibility for advanced mode workflow session', () => {
     const commands = builder.filterCommandsByVisibility(mockAgentDev, 'workflow', 'advanced');
-    const allHaveKey = commands.every(
-      (cmd) => cmd.visibility && cmd.visibility.includes('key'),
-    );
+    const allHaveKey = commands.every((cmd) => cmd.visibility && cmd.visibility.includes('key'));
     expect(allHaveKey).toBe(true);
     expect(commands.length).toBe(4); // help, apply-qa-fixes, run-tests, exit
   });
@@ -549,7 +545,7 @@ describe('Integration: Bob mode greeting flow', () => {
 describe('validate-user-profile standalone', () => {
   // Use unmocked version for these tests
   const actualValidateUserProfile = jest.requireActual(
-    '../../.aios-core/infrastructure/scripts/validate-user-profile',
+    '../../.aios-core/infrastructure/scripts/validate-user-profile'
   ).validateUserProfile;
 
   it('should validate "bob" as valid', () => {

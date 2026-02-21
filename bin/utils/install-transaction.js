@@ -21,11 +21,11 @@ const ERROR_TYPES = {
 
 // Critical errors that trigger immediate rollback
 const CRITICAL_ERRORS = [
-  'EACCES',   // Permission denied
-  'ENOSPC',   // No space left on device
-  'EROFS',    // Read-only file system
-  'ENOTDIR',  // Not a directory
-  'EISDIR',   // Is a directory
+  'EACCES', // Permission denied
+  'ENOSPC', // No space left on device
+  'EROFS', // Read-only file system
+  'ENOTDIR', // Not a directory
+  'EISDIR', // Is a directory
 ];
 
 class InstallTransaction {
@@ -37,10 +37,11 @@ class InstallTransaction {
    * @param {string} [options.logFile] - Custom log file path
    */
   constructor(options = {}) {
-    this.backupDir = options.backupDir || path.join(process.cwd(), '.aios-backup', this._generateTimestamp());
+    this.backupDir =
+      options.backupDir || path.join(process.cwd(), '.aios-backup', this._generateTimestamp());
     this.logFile = options.logFile || path.join(process.cwd(), '.aios-install.log');
-    this.backups = [];  // [{original, backup, hash, isDirectory}]
-    this.operations = [];  // [{timestamp, level, message}]
+    this.backups = []; // [{original, backup, hash, isDirectory}]
+    this.operations = []; // [{timestamp, level, message}]
     this.isCommitted = false;
     this.isRolledBack = false;
   }
@@ -54,10 +55,7 @@ class InstallTransaction {
    */
   _generateTimestamp() {
     // Replace colons, dots, and T separator for Windows compatibility
-    return new Date().toISOString()
-      .replace(/:/g, '-')
-      .replace(/\./g, '-')
-      .replace('T', '_');
+    return new Date().toISOString().replace(/:/g, '-').replace(/\./g, '-').replace('T', '_');
   }
 
   /**
@@ -277,7 +275,10 @@ class InstallTransaction {
     this.isRolledBack = true;
 
     if (failedRestores.length > 0) {
-      this.log('ERROR', `Rollback completed with errors. Failed to restore: ${failedRestores.join(', ')}`);
+      this.log(
+        'ERROR',
+        `Rollback completed with errors. Failed to restore: ${failedRestores.join(', ')}`
+      );
     } else {
       this.log('INFO', 'Rollback completed successfully');
     }
@@ -360,10 +361,16 @@ class InstallTransaction {
     sanitized = sanitized.replace(/Bearer\s+[^\s]+/gi, 'Bearer [REDACTED]');
 
     // Pattern 3: Password fields (password=xxx, pwd=xxx)
-    sanitized = sanitized.replace(/(password|pwd|token|key|secret|auth)[:=]\s*[^\s,}]+/gi, '$1=[REDACTED]');
+    sanitized = sanitized.replace(
+      /(password|pwd|token|key|secret|auth)[:=]\s*[^\s,}]+/gi,
+      '$1=[REDACTED]'
+    );
 
     // Pattern 4: Environment variables that look like secrets
-    sanitized = sanitized.replace(/([A-Z_]+_(?:KEY|TOKEN|SECRET|PASSWORD|AUTH))[:=]\s*[^\s,}]+/gi, '$1=[REDACTED]');
+    sanitized = sanitized.replace(
+      /([A-Z_]+_(?:KEY|TOKEN|SECRET|PASSWORD|AUTH))[:=]\s*[^\s,}]+/gi,
+      '$1=[REDACTED]'
+    );
 
     return sanitized;
   }

@@ -245,10 +245,7 @@ describe('stepVerify', () => {
       'squads/premium-squad/readme.md',
     ]);
     // .yaml and .json files
-    expect(result.configs).toEqual([
-      '.aios-core/pro-config.yaml',
-      'pro-version.json',
-    ]);
+    expect(result.configs).toEqual(['.aios-core/pro-config.yaml', 'pro-version.json']);
   });
 
   test('handles null scaffoldResult', async () => {
@@ -379,7 +376,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return false; }
+        async isOnline() {
+          return false;
+        }
       },
     });
 
@@ -396,7 +395,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Network error');
           err.code = 'NETWORK_ERROR';
@@ -418,7 +419,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Invalid');
           err.code = 'INVALID_KEY';
@@ -440,7 +443,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Expired');
           err.code = 'EXPIRED_KEY';
@@ -462,7 +467,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Rate limited');
           err.code = 'RATE_LIMITED';
@@ -484,7 +491,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Seats');
           err.code = 'SEAT_LIMIT_EXCEEDED';
@@ -506,7 +515,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           return {
             key: 'PRO-AAAA-BBBB-CCCC-DDDD',

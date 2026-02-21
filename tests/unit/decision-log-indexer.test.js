@@ -203,7 +203,9 @@ Some content without proper metadata
 
       fs.readFile.mockImplementation((filePath) => {
         if (filePath.endsWith('core-config.yaml')) {
-          return Promise.resolve('decisionLogging:\n  enabled: true\n  location: .ai/\n  indexFile: decision-logs-index.md');
+          return Promise.resolve(
+            'decisionLogging:\n  enabled: true\n  location: .ai/\n  indexFile: decision-logs-index.md'
+          );
         }
         if (filePath.includes('decision-log-6.1.2.6.2')) {
           return Promise.resolve(mockLogContent);

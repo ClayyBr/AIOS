@@ -1,7 +1,7 @@
 // Wizard test - uses describeIntegration due to file dependencies
 /**
  * Questions Test Suite
- * 
+ *
  * Tests question definitions and sequencing logic
  */
 
@@ -37,13 +37,13 @@ describeIntegration('questions', () => {
 
     test('includes validator function', () => {
       const question = getProjectTypeQuestion();
-      
+
       expect(typeof question.validate).toBe('function');
     });
 
     test('validator accepts valid project types', () => {
       const question = getProjectTypeQuestion();
-      
+
       expect(question.validate('greenfield')).toBe(true);
       expect(question.validate('brownfield')).toBe(true);
     });
@@ -207,17 +207,16 @@ describeIntegration('questions', () => {
 
     test('choices have descriptive names', () => {
       const question = getProjectTypeQuestion();
-      
+
       expect(question.choices[0].name).toContain('Greenfield');
       expect(question.choices[1].name).toContain('Brownfield');
     });
 
     test('choices include helpful descriptions', () => {
       const question = getProjectTypeQuestion();
-      
+
       expect(question.choices[0].name).toContain('new project');
       expect(question.choices[1].name).toContain('existing project');
     });
   });
 });
-

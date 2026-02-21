@@ -24,8 +24,8 @@
 
 ### 📚 Documentos Relacionados
 
-| Documento                                        | Descripción                                                |
-| ------------------------------------------------ | -------------------------------------------------------- |
+| Documento                                        | Descripción                                                     |
+| ------------------------------------------------ | --------------------------------------------------------------- |
 | [dashboard-realtime.md](./dashboard-realtime.md) | Arquitectura de Observabilidad en Tiempo Real (CLI → Dashboard) |
 
 ---
@@ -117,35 +117,35 @@ El AIOS Dashboard es una aplicación Next.js que proporciona una interfaz visual
 
 ### Core Framework
 
-| Tecnología     | Versión | Propósito                           |
-| -------------- | ------- | ----------------------------------- |
-| **Next.js**    | 16.1.6  | Framework full-stack con App Router |
-| **React**      | 19.2.3  | Librería UI con Server Components    |
-| **TypeScript** | 5.x     | Seguridad de tipos en toda la base de código      |
+| Tecnología     | Versión | Propósito                                    |
+| -------------- | ------- | -------------------------------------------- |
+| **Next.js**    | 16.1.6  | Framework full-stack con App Router          |
+| **React**      | 19.2.3  | Librería UI con Server Components            |
+| **TypeScript** | 5.x     | Seguridad de tipos en toda la base de código |
 
 ### Gestión de Estado
 
-| Tecnología  | Versión | Propósito                     |
-| ----------- | ------- | ----------------------------- |
+| Tecnología  | Versión | Propósito                      |
+| ----------- | ------- | ------------------------------ |
 | **Zustand** | 5.0.10  | Estado global con persistencia |
-| **SWR**     | 2.3.8   | Obtención de datos y caché         |
+| **SWR**     | 2.3.8   | Obtención de datos y caché     |
 
 ### UI y Estilos
 
-| Tecnología       | Versión  | Propósito                                    |
-| ---------------- | -------- | -------------------------------------------- |
-| **Tailwind CSS** | 4.x      | CSS de utilidad                            |
-| **Radix UI**     | latest   | Primitivos accesibles (Dialog, Context Menu) |
-| **Lucide React** | 0.563.0  | Sistema de iconos SVG                        |
-| **dnd-kit**      | 6.3.1    | Arrastra y suelta para Kanban                    |
+| Tecnología       | Versión | Propósito                                    |
+| ---------------- | ------- | -------------------------------------------- |
+| **Tailwind CSS** | 4.x     | CSS de utilidad                              |
+| **Radix UI**     | latest  | Primitivos accesibles (Dialog, Context Menu) |
+| **Lucide React** | 0.563.0 | Sistema de iconos SVG                        |
+| **dnd-kit**      | 6.3.1   | Arrastra y suelta para Kanban                |
 
 ### Utilidades
 
-| Tecnología         | Versión | Propósito                             |
-| ------------------ | ------- | ------------------------------------- |
+| Tecnología         | Versión | Propósito                              |
+| ------------------ | ------- | -------------------------------------- |
 | **gray-matter**    | 4.0.3   | Parseo de frontmatter YAML en Markdown |
-| **clsx**           | 2.1.1   | Nombres de clases condicionales               |
-| **tailwind-merge** | 3.4.0   | Fusión de clases Tailwind             |
+| **clsx**           | 2.1.1   | Nombres de clases condicionales        |
+| **tailwind-merge** | 3.4.0   | Fusión de clases Tailwind              |
 
 ---
 
@@ -425,12 +425,12 @@ interface KanbanBoardProps {
 
 ### Persistencia
 
-| Store            | Clave de localStorage          | Lo que persiste                   |
-| ---------------- | ----------------------------- | -------------------------------- |
+| Store            | Clave de localStorage     | Lo que persiste                      |
+| ---------------- | ------------------------- | ------------------------------------ |
 | `story-store`    | `aios-stories`            | `storyOrder` (orden de las columnas) |
-| `ui-store`       | `aios-ui`                 | `sidebarCollapsed`, `activeView` |
-| `projects-store` | `aios-projects`           | `projects`, `activeProjectId`    |
-| `settings-store` | `aios-dashboard-settings` | Todo el objeto `settings`         |
+| `ui-store`       | `aios-ui`                 | `sidebarCollapsed`, `activeView`     |
+| `projects-store` | `aios-projects`           | `projects`, `activeProjectId`        |
+| `settings-store` | `aios-dashboard-settings` | Todo el objeto `settings`            |
 
 ### Patrón de Listeners
 
@@ -676,7 +676,7 @@ const IconComponent = iconMap['code']; // <Code /> de Lucide
 
 Iconos disponibles por categoría:
 
-- **Navigation**: dashboard, kanban, terminal, settings, menu, chevron-*
+- **Navigation**: dashboard, kanban, terminal, settings, menu, chevron-\*
 - **Status**: circle, check-circle, x-circle, alert-circle, clock, loader
 - **Actions**: play, pause, refresh, search, copy, plus, trash, edit, save
 - **Agents**: bot, code, test-tube, building, bar-chart, target, wrench

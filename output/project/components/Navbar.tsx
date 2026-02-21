@@ -43,7 +43,11 @@ export default function Navbar({ onCtaClick }: NavbarProps) {
         ${isScrolled ? 'bg-primary-900 bg-opacity-90 shadow-lg backdrop-blur-sm py-3' : 'bg-transparent py-5'}`}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center max-w-7xl">
-        <Link href="/" className="text-white text-3xl font-extrabold uppercase font-oswald tracking-wide flex items-center group" aria-label="CrossFit Academy Homepage">
+        <Link
+          href="/"
+          className="text-white text-3xl font-extrabold uppercase font-oswald tracking-wide flex items-center group"
+          aria-label="CrossFit Academy Homepage"
+        >
           <Dumbbell className="w-8 h-8 mr-2 text-accent-500 group-hover:rotate-12 transition-transform duration-300" />
           Academy
         </Link>
@@ -100,7 +104,9 @@ export default function Navbar({ onCtaClick }: NavbarProps) {
             >
               <X size={30} />
             </button>
-            <h2 id="mobile-menu-title" className="sr-only">Mobile Navigation</h2>
+            <h2 id="mobile-menu-title" className="sr-only">
+              Mobile Navigation
+            </h2>
             <nav className="flex flex-col space-y-8 text-center">
               {navLinks.map((link) => (
                 <Link

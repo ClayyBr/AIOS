@@ -12,27 +12,27 @@
 
 # --- Metadata (framework portion) ---
 metadata:
-  name: "Synkra AIOS"
-  framework_version: "4.0.0"
+  name: 'Synkra AIOS'
+  framework_version: '4.0.0'
 
 markdownExploder: true
 
 # --- Resource Locations (Section 3) ---
 resource_locations:
-  agents_dir: ".aios-core/development/agents"
-  tasks_dir: ".aios-core/development/tasks"
-  templates_dir: ".aios-core/development/templates"
-  checklists_dir: ".aios-core/development/checklists"
-  tools_dir: ".aios-core/tools"
+  agents_dir: '.aios-core/development/agents'
+  tasks_dir: '.aios-core/development/tasks'
+  templates_dir: '.aios-core/development/templates'
+  checklists_dir: '.aios-core/development/checklists'
+  tools_dir: '.aios-core/tools'
   scripts:
-    core: ".aios-core/core"
-    development: ".aios-core/development/scripts"
-    infrastructure: ".aios-core/infrastructure/scripts"
-    legacy: ".aios-core/scripts"
-  data_dir: ".aios-core/data"
-  elicitation_dir: ".aios-core/elicitation"
-  squads_template_dir: "templates/squad"
-  minds_dir: "outputs/minds"
+    core: '.aios-core/core'
+    development: '.aios-core/development/scripts'
+    infrastructure: '.aios-core/infrastructure/scripts'
+    legacy: '.aios-core/scripts'
+  data_dir: '.aios-core/data'
+  elicitation_dir: '.aios-core/elicitation'
+  squads_template_dir: 'templates/squad'
+  minds_dir: 'outputs/minds'
 
 # --- Performance Defaults (Section 6 - defaults only) ---
 performance_defaults:
@@ -117,32 +117,32 @@ utility_scripts_registry:
 # --- IDE Sync System (Section 12) ---
 ide_sync_system:
   enabled: true
-  source: ".aios-core/development/agents"
+  source: '.aios-core/development/agents'
   targets:
     claude-code:
       enabled: true
-      path: ".claude/commands/AIOS/agents"
-      format: "full-markdown-yaml"
+      path: '.claude/commands/AIOS/agents'
+      format: 'full-markdown-yaml'
     codex:
       enabled: true
-      path: ".codex/agents"
-      format: "full-markdown-yaml"
+      path: '.codex/agents'
+      format: 'full-markdown-yaml'
     gemini:
       enabled: true
-      path: ".gemini/rules/AIOS/agents"
-      format: "full-markdown-yaml"
+      path: '.gemini/rules/AIOS/agents'
+      format: 'full-markdown-yaml'
     github-copilot:
       enabled: true
-      path: ".github/agents"
-      format: "full-markdown-yaml"
+      path: '.github/agents'
+      format: 'full-markdown-yaml'
     cursor:
       enabled: true
-      path: ".cursor/rules/agents"
-      format: "condensed-rules"
+      path: '.cursor/rules/agents'
+      format: 'condensed-rules'
     antigravity:
       enabled: true
-      path: ".antigravity/rules/agents"
-      format: "cursor-style"
+      path: '.antigravity/rules/agents'
+      format: 'cursor-style'
   redirects: {}
   validation:
     strict_mode: true

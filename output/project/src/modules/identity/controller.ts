@@ -10,7 +10,9 @@ import { AppError } from '../../middlewares/errorHandler';
 export const handleRegisterUser = (req: Request, res: Response, next: NextFunction) =>
   pipe(
     userRegistrationInputSchema.safeParse(req.body), // Valida o input com Zod
-    E.mapLeft((error) => new AppError('ValidationError', 'Invalid registration input.', 400, error.issues)),
+    E.mapLeft(
+      (error) => new AppError('ValidationError', 'Invalid registration input.', 400, error.issues)
+    ),
     TE.fromEither, // Converte Either para TaskEither
     TE.chainW(registerUser), // Chama o serviço de registro
     TE.map((user) => userPublicSchema.parse(user)), // Garante que a senha não seja enviada na resposta

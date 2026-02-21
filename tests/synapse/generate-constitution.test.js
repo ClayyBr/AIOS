@@ -18,7 +18,10 @@ const {
   main,
   ROMAN_TO_ARABIC,
 } = require('../../.aios-core/core/synapse/scripts/generate-constitution');
-const { parseManifest, loadDomainFile } = require('../../.aios-core/core/synapse/domain/domain-loader');
+const {
+  parseManifest,
+  loadDomainFile,
+} = require('../../.aios-core/core/synapse/domain/domain-loader');
 
 // Set timeout for all tests
 jest.setTimeout(30000);
@@ -321,7 +324,9 @@ describe('generateConstitution', () => {
     const output = generateConstitution(articles);
 
     expect(output).toContain('CONSTITUTION_RULE_ART1_0=CLI First (NON-NEGOTIABLE)');
-    expect(output).toContain('CONSTITUTION_RULE_ART1_1=MUST: All functionality works via CLI first');
+    expect(output).toContain(
+      'CONSTITUTION_RULE_ART1_1=MUST: All functionality works via CLI first'
+    );
     expect(output).toContain('CONSTITUTION_RULE_ART2_0=Agent Authority (NON-NEGOTIABLE)');
     expect(output).toContain('CONSTITUTION_RULE_ART2_1=MUST: Only @devops can git push');
   });
@@ -347,7 +352,7 @@ describe('generateConstitution', () => {
     const output = generateConstitution([]);
     expect(output).toContain('# SYNAPSE Constitution Domain (L0)');
     // Should only have header lines, no rules
-    const ruleLines = output.split('\n').filter(l => l.startsWith('CONSTITUTION_RULE'));
+    const ruleLines = output.split('\n').filter((l) => l.startsWith('CONSTITUTION_RULE'));
     expect(ruleLines).toHaveLength(0);
   });
 
@@ -368,8 +373,8 @@ describe('generateConstitution', () => {
       // First rule is Article 1 title (value extracted from key)
       expect(rules[0]).toBe('CLI First (NON-NEGOTIABLE)');
       // Should contain rules from Article 1 and Article 6
-      expect(rules.some(r => r.includes('CLI'))).toBe(true);
-      expect(rules.some(r => r.includes('Absolute Imports'))).toBe(true);
+      expect(rules.some((r) => r.includes('CLI'))).toBe(true);
+      expect(rules.some((r) => r.includes('Absolute Imports'))).toBe(true);
     } finally {
       if (tempDir) cleanupTempDir(tempDir);
     }

@@ -30,8 +30,9 @@ class TestProcessor extends LayerProcessor {
 describe('LayerProcessor', () => {
   describe('abstract class enforcement', () => {
     test('should throw when instantiated directly', () => {
-      expect(() => new LayerProcessor({ name: 'direct', layer: 0 }))
-        .toThrow('LayerProcessor is abstract and cannot be instantiated directly');
+      expect(() => new LayerProcessor({ name: 'direct', layer: 0 })).toThrow(
+        'LayerProcessor is abstract and cannot be instantiated directly'
+      );
     });
 
     test('should allow subclass instantiation', () => {
@@ -65,8 +66,9 @@ describe('LayerProcessor', () => {
       }
 
       const processor = new EmptyProcessor();
-      expect(() => processor.process({}))
-        .toThrow('empty: process() must be implemented by subclass');
+      expect(() => processor.process({})).toThrow(
+        'empty: process() must be implemented by subclass'
+      );
     });
 
     test('should return result when overridden', () => {
@@ -104,9 +106,7 @@ describe('LayerProcessor', () => {
       const result = processor._safeProcess({});
 
       expect(result).toBeNull();
-      expect(warnSpy).toHaveBeenCalledWith(
-        '[synapse:error-test] Error: Something went wrong',
-      );
+      expect(warnSpy).toHaveBeenCalledWith('[synapse:error-test] Error: Something went wrong');
       warnSpy.mockRestore();
     });
 
@@ -118,7 +118,9 @@ describe('LayerProcessor', () => {
         process() {
           // Simulate slow operation
           const start = Date.now();
-          while (Date.now() - start < 5) { /* busy wait */ }
+          while (Date.now() - start < 5) {
+            /* busy wait */
+          }
           return { rules: ['slow-rule'], metadata: {} };
         }
       }
@@ -129,7 +131,7 @@ describe('LayerProcessor', () => {
 
       expect(result).toEqual({ rules: ['slow-rule'], metadata: {} });
       expect(warnSpy).toHaveBeenCalledWith(
-        expect.stringContaining('[synapse:slow] Warning: Layer exceeded timeout'),
+        expect.stringContaining('[synapse:slow] Warning: Layer exceeded timeout')
       );
       warnSpy.mockRestore();
     });

@@ -13,7 +13,9 @@ const fse = require('fs-extra');
 const os = require('os');
 const yaml = require('js-yaml');
 
-const { configureEnvironment } = require('../../packages/installer/src/config/configure-environment');
+const {
+  configureEnvironment,
+} = require('../../packages/installer/src/config/configure-environment');
 
 describe('ACT-12: Language delegated to Claude Code settings.json', () => {
   let tempDir;

@@ -135,13 +135,5 @@
   "hooks": {
     "configPath": "hooks/hooks.json"
   },
-  "keywords": [
-    "aios",
-    "agents",
-    "orchestration",
-    "development",
-    "ai",
-    "claude",
-    "multi-agent"
-  ]
+  "keywords": ["aios", "agents", "orchestration", "development", "ai", "claude", "multi-agent"]
 }

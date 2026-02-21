@@ -34,12 +34,20 @@ describe('PMDR Template', () => {
         status: 'Draft',
         owner: 'Product Manager',
         stakeholders: ['Engineering Lead', 'QA Lead', 'Designer'],
-        context: 'We need a way to safely roll out new features to production without full deployment risk.',
-        decision: 'We will implement a feature flag system using LaunchDarkly to enable gradual rollouts and A/B testing.',
-        businessImpact: 'This will reduce deployment risk by 80% and enable faster iteration on features.',
+        context:
+          'We need a way to safely roll out new features to production without full deployment risk.',
+        decision:
+          'We will implement a feature flag system using LaunchDarkly to enable gradual rollouts and A/B testing.',
+        businessImpact:
+          'This will reduce deployment risk by 80% and enable faster iteration on features.',
         successMetrics: [
           { metric: 'Deployment failures', current: '15%', target: '3%', timeline: 'Q2 2025' },
-          { metric: 'Feature iteration time', current: '2 weeks', target: '3 days', timeline: 'Q3 2025' },
+          {
+            metric: 'Feature iteration time',
+            current: '2 weeks',
+            target: '3 days',
+            timeline: 'Q3 2025',
+          },
         ],
       };
 
@@ -66,7 +74,7 @@ describe('PMDR Template', () => {
       };
 
       await expect(
-        engine.generate('pmdr', incompleteContext, { validate: true, save: false }),
+        engine.generate('pmdr', incompleteContext, { validate: true, save: false })
       ).rejects.toThrow(/required.*has no default|missing required/i);
     });
   });
@@ -177,7 +185,7 @@ describe('PMDR Template', () => {
       };
 
       await expect(
-        engine.generate('pmdr', context, { validate: true, save: false }),
+        engine.generate('pmdr', context, { validate: true, save: false })
       ).rejects.toThrow();
     });
 
@@ -198,7 +206,7 @@ describe('PMDR Template', () => {
 
       // Should have validation errors
       expect(result.validation.isValid).toBe(false);
-      expect(result.validation.errors.some(e => e.includes('businessImpact'))).toBe(true);
+      expect(result.validation.errors.some((e) => e.includes('businessImpact'))).toBe(true);
     });
   });
 
@@ -221,8 +229,8 @@ describe('PMDR Template', () => {
       expect(Array.isArray(info.variables)).toBe(true);
 
       // Check required variables
-      const requiredVars = info.variables.filter(v => v.required);
-      const requiredNames = requiredVars.map(v => v.name);
+      const requiredVars = info.variables.filter((v) => v.required);
+      const requiredNames = requiredVars.map((v) => v.name);
 
       expect(requiredNames).toContain('number');
       expect(requiredNames).toContain('title');
@@ -232,7 +240,7 @@ describe('PMDR Template', () => {
 
     it('should list pmdr in available templates', async () => {
       const templates = await engine.listTemplates();
-      const pmdrTemplate = templates.find(t => t.type === 'pmdr');
+      const pmdrTemplate = templates.find((t) => t.type === 'pmdr');
 
       expect(pmdrTemplate).toBeDefined();
       expect(pmdrTemplate.status).not.toBe('missing');

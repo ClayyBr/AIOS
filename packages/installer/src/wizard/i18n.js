@@ -69,7 +69,8 @@ const TRANSLATIONS = {
 
     // User Profile (Story 10.2 - Epic 10: User Profile System)
     // PRD: AIOS v2.0 "Projeto Bob" - Seção 2.4 (exact copy)
-    userProfileQuestion: 'Quando uma IA gera código para você, qual dessas opções te descreve melhor?',
+    userProfileQuestion:
+      'Quando uma IA gera código para você, qual dessas opções te descreve melhor?',
     modoAssistido: 'Modo Assistido',
     modoAssistidoDesc: 'Não sei avaliar se o código está certo ou errado',
     modoAssistidoHint: 'Você conversa com Bob, que cuida de toda a validação',
@@ -125,7 +126,8 @@ const TRANSLATIONS = {
     selectLanguage: 'Seleccione idioma:',
 
     // User Profile (Story 10.2 - Epic 10: User Profile System)
-    userProfileQuestion: 'Cuando una IA genera código para ti, ¿cuál de estas opciones te describe mejor?',
+    userProfileQuestion:
+      'Cuando una IA genera código para ti, ¿cuál de estas opciones te describe mejor?',
     modoAssistido: 'Modo Asistido',
     modoAssistidoDesc: 'No sé evaluar si el código está bien o mal',
     modoAssistidoHint: 'Hablas con Bob, que se encarga de toda la validación',

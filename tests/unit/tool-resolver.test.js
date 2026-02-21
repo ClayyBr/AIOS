@@ -155,9 +155,7 @@ tool:
       const tool = await resolver.resolveTool('test-simple', { expansionPack: 'my-pack' });
 
       // Should have searched squad first
-      expect(glob.sync).toHaveBeenCalledWith(
-        expect.stringContaining('squads/my-pack/tools'),
-      );
+      expect(glob.sync).toHaveBeenCalledWith(expect.stringContaining('squads/my-pack/tools'));
 
       expect(tool.id).toBe('test-simple');
     });
@@ -196,9 +194,7 @@ tool:
       await resolver.resolveTool('test-simple');
 
       // Should have searched common directory
-      expect(glob.sync).toHaveBeenCalledWith(
-        expect.stringContaining('common/tools'),
-      );
+      expect(glob.sync).toHaveBeenCalledWith(expect.stringContaining('common/tools'));
     });
   });
 
@@ -207,7 +203,7 @@ tool:
       glob.sync.mockReturnValue([]);
 
       await expect(resolver.resolveTool('nonexistent-tool')).rejects.toThrow(
-        /Tool 'nonexistent-tool' not found/,
+        /Tool 'nonexistent-tool' not found/
       );
     });
 
@@ -230,9 +226,7 @@ tool:
       glob.sync.mockReturnValue(['aios-core/tools/invalid.yaml']);
       fs.readFile.mockResolvedValue(invalidToolYaml);
 
-      await expect(resolver.resolveTool('invalid-tool')).rejects.toThrow(
-        /required field/i,
-      );
+      await expect(resolver.resolveTool('invalid-tool')).rejects.toThrow(/required field/i);
     });
 
     test('should validate v1.0 tool schema', async () => {

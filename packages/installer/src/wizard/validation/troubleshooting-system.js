@@ -153,14 +153,8 @@ const TROUBLESHOOTING_DATABASE = {
 
   ENV_PERMISSIONS_INSECURE: {
     problem: '.env file permissions too permissive',
-    causes: [
-      'File created with default permissions',
-      'Permissions not set during installation',
-    ],
-    solutions: [
-      'Run: chmod 600 .env',
-      'Verify: ls -la .env',
-    ],
+    causes: ['File created with default permissions', 'Permissions not set during installation'],
+    solutions: ['Run: chmod 600 .env', 'Verify: ls -la .env'],
     docs: 'https://docs.SynkraAI.com/security/file-permissions',
     priority: 'medium',
   },
@@ -184,7 +178,7 @@ async function offerTroubleshooting(errors) {
 
   // Group errors by code
   const errorsByCode = {};
-  errors.forEach(error => {
+  errors.forEach((error) => {
     const code = error.code || 'UNKNOWN';
     if (!errorsByCode[code]) {
       errorsByCode[code] = [];
@@ -261,12 +255,13 @@ async function offerTroubleshooting(errors) {
  * @private
  */
 function displayTroubleshooting(code, troubleshooting, errorInstances) {
-  const priorityIcon = {
-    critical: chalk.red('🔴'),
-    high: chalk.yellow('🟡'),
-    medium: chalk.blue('🔵'),
-    low: chalk.gray('⚪'),
-  }[troubleshooting.priority] || '⚪';
+  const priorityIcon =
+    {
+      critical: chalk.red('🔴'),
+      high: chalk.yellow('🟡'),
+      medium: chalk.blue('🔵'),
+      low: chalk.gray('⚪'),
+    }[troubleshooting.priority] || '⚪';
 
   console.log(chalk.bold(`${priorityIcon} ${troubleshooting.problem}`));
   console.log('');
@@ -274,7 +269,7 @@ function displayTroubleshooting(code, troubleshooting, errorInstances) {
   // Show affected items
   if (errorInstances.length > 1) {
     console.log(chalk.dim(`Affected items (${errorInstances.length}):`));
-    errorInstances.slice(0, 3).forEach(err => {
+    errorInstances.slice(0, 3).forEach((err) => {
       if (err.file) {
         console.log(chalk.dim(`  - ${err.file}`));
       } else if (err.mcp) {
@@ -321,7 +316,7 @@ function displayGenericTroubleshooting(code, errorInstances) {
   console.log(chalk.bold(`⚠️  ${code}`));
   console.log('');
 
-  errorInstances.forEach(err => {
+  errorInstances.forEach((err) => {
     console.log(`  ${err.message}`);
     if (err.solution) {
       console.log(chalk.green(`  → ${err.solution}`));

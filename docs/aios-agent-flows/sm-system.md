@@ -12,6 +12,7 @@
 O agente **@sm (River)** e o Scrum Master tecnico do AIOS, especializado em preparacao de stories e facilitacao de processos ageis. Seu papel principal e criar stories detalhadas e acionaveis que agentes desenvolvedores possam implementar com minima necessidade de pesquisa adicional.
 
 **Responsabilidades Principais:**
+
 - Criacao e refinamento de user stories
 - Gerenciamento de epics e breakdown de requisitos
 - Facilitacao de sprint planning
@@ -29,62 +30,62 @@ O agente **@sm (River)** e o Scrum Master tecnico do AIOS, especializado em prep
 
 ### Arquivos Core de Tasks do @sm
 
-| Arquivo | Comando | Propósito |
-|---------|---------|-----------|
-| `.aios-core/development/tasks/sm-create-next-story.md` | `*draft` | Task principal para criar proxima story do backlog |
-| `.aios-core/development/tasks/create-next-story.md` | `*draft` | Versao completa da task de criação de story |
-| `.aios-core/development/tasks/execute-checklist.md` | `*story-checklist` | Executa checklist de validação de story draft |
-| `.aios-core/development/tasks/correct-course.md` | `*correct-course` | Analisa e corrige desvios de processo |
-| `.aios-core/development/tasks/collaborative-edit.md` | - | Edicao colaborativa de documentos |
-| `.aios-core/development/tasks/init-project-status.md` | - | Inicializacao de status do projeto |
+| Arquivo                                                | Comando            | Propósito                                          |
+| ------------------------------------------------------ | ------------------ | -------------------------------------------------- |
+| `.aios-core/development/tasks/sm-create-next-story.md` | `*draft`           | Task principal para criar proxima story do backlog |
+| `.aios-core/development/tasks/create-next-story.md`    | `*draft`           | Versao completa da task de criação de story        |
+| `.aios-core/development/tasks/execute-checklist.md`    | `*story-checklist` | Executa checklist de validação de story draft      |
+| `.aios-core/development/tasks/correct-course.md`       | `*correct-course`  | Analisa e corrige desvios de processo              |
+| `.aios-core/development/tasks/collaborative-edit.md`   | -                  | Edicao colaborativa de documentos                  |
+| `.aios-core/development/tasks/init-project-status.md`  | -                  | Inicializacao de status do projeto                 |
 
 ### Arquivos de Definição do Agente
 
-| Arquivo | Propósito |
-|---------|-----------|
-| `.aios-core/development/agents/sm.md` | Definição core do agente SM |
-| `.claude/commands/AIOS/agents/sm.md` | Comando Claude Code para ativar @sm |
-| `.cursor/rules/sm.md` | Regras para Cursor IDE |
-| `.cursor/rules/sm.mdc` | Regras compiladas para Cursor |
+| Arquivo                               | Propósito                           |
+| ------------------------------------- | ----------------------------------- |
+| `.aios-core/development/agents/sm.md` | Definição core do agente SM         |
+| `.claude/commands/AIOS/agents/sm.md`  | Comando Claude Code para ativar @sm |
+| `.cursor/rules/sm.md`                 | Regras para Cursor IDE              |
+| `.cursor/rules/sm.mdc`                | Regras compiladas para Cursor       |
 
 ### Arquivos de Checklists Utilizados
 
-| Arquivo | Propósito |
-|---------|-----------|
+| Arquivo                                                  | Propósito                                     |
+| -------------------------------------------------------- | --------------------------------------------- |
 | `.aios-core/product/checklists/story-draft-checklist.md` | Valida qualidade e completude de story drafts |
-| `.aios-core/product/checklists/story-dod-checklist.md` | Definition of Done para stories |
-| `.aios-core/product/checklists/change-checklist.md` | Navegacao de mudancas e correcao de curso |
-| `.aios-core/product/checklists/po-master-checklist.md` | Checklist mestre usado em validação |
+| `.aios-core/product/checklists/story-dod-checklist.md`   | Definition of Done para stories               |
+| `.aios-core/product/checklists/change-checklist.md`      | Navegacao de mudancas e correcao de curso     |
+| `.aios-core/product/checklists/po-master-checklist.md`   | Checklist mestre usado em validação           |
 
 ### Arquivos Relacionados de Outros Agentes
 
-| Arquivo | Agente | Propósito |
-|---------|--------|-----------|
-| `.aios-core/development/agents/po.md` | @po | Coordena com @sm em backlog e sprint planning |
-| `.aios-core/development/agents/dev.md` | @dev | Recebe stories do @sm para implementacao |
-| `.aios-core/development/agents/pm.md` | @pm | Cria epics que @sm quebra em stories |
-| `.aios-core/development/agents/devops.md` | @github-devops | Recebe stories completas para push/PR |
-| `.aios-core/development/agents/qa.md` | @qa | Coordena em risk profiling |
+| Arquivo                                   | Agente         | Propósito                                     |
+| ----------------------------------------- | -------------- | --------------------------------------------- |
+| `.aios-core/development/agents/po.md`     | @po            | Coordena com @sm em backlog e sprint planning |
+| `.aios-core/development/agents/dev.md`    | @dev           | Recebe stories do @sm para implementacao      |
+| `.aios-core/development/agents/pm.md`     | @pm            | Cria epics que @sm quebra em stories          |
+| `.aios-core/development/agents/devops.md` | @github-devops | Recebe stories completas para push/PR         |
+| `.aios-core/development/agents/qa.md`     | @qa            | Coordena em risk profiling                    |
 
 ### Arquivos de Workflows que Utilizam @sm
 
-| Arquivo | Propósito |
-|---------|-----------|
+| Arquivo                                                         | Propósito                                    |
+| --------------------------------------------------------------- | -------------------------------------------- |
 | `.aios-core/development/workflows/story-development-cycle.yaml` | Ciclo completo de desenvolvimento de stories |
-| `.aios-core/development/workflows/greenfield-fullstack.yaml` | Workflow greenfield full-stack |
-| `.aios-core/development/workflows/greenfield-service.yaml` | Workflow greenfield service |
-| `.aios-core/development/workflows/greenfield-ui.yaml` | Workflow greenfield UI |
-| `.aios-core/development/workflows/brownfield-fullstack.yaml` | Workflow brownfield full-stack |
-| `.aios-core/development/workflows/brownfield-service.yaml` | Workflow brownfield service |
-| `.aios-core/development/workflows/brownfield-ui.yaml` | Workflow brownfield UI |
+| `.aios-core/development/workflows/greenfield-fullstack.yaml`    | Workflow greenfield full-stack               |
+| `.aios-core/development/workflows/greenfield-service.yaml`      | Workflow greenfield service                  |
+| `.aios-core/development/workflows/greenfield-ui.yaml`           | Workflow greenfield UI                       |
+| `.aios-core/development/workflows/brownfield-fullstack.yaml`    | Workflow brownfield full-stack               |
+| `.aios-core/development/workflows/brownfield-service.yaml`      | Workflow brownfield service                  |
+| `.aios-core/development/workflows/brownfield-ui.yaml`           | Workflow brownfield UI                       |
 
 ### Arquivos de Configuracao
 
-| Arquivo | Propósito |
-|---------|-----------|
-| `.aios-core/core-config.yaml` | Configuracao central (devStoryLocation, etc.) |
-| `.aios-core/development/scripts/unified-activation-pipeline.js` | Pipeline de saudacao inteligente |
-| `.aios-core/development/scripts/agent-assignment-resolver.js` | Resolucao de assignment de agentes |
+| Arquivo                                                         | Propósito                                     |
+| --------------------------------------------------------------- | --------------------------------------------- |
+| `.aios-core/core-config.yaml`                                   | Configuracao central (devStoryLocation, etc.) |
+| `.aios-core/development/scripts/unified-activation-pipeline.js` | Pipeline de saudacao inteligente              |
+| `.aios-core/development/scripts/agent-assignment-resolver.js`   | Resolucao de assignment de agentes            |
 
 ---
 
@@ -223,15 +224,15 @@ flowchart LR
 
 ## Mapeamento de Comandos para Tasks
 
-| Comando | Task File | Operacao |
-|---------|-----------|----------|
-| `*draft` | `sm-create-next-story.md` / `create-next-story.md` | Cria proxima story do backlog |
-| `*story-checklist` | `execute-checklist.md` | Executa `story-draft-checklist.md` |
-| `*correct-course` | `correct-course.md` | Analisa e corrige desvios de processo |
-| `*help` | (built-in) | Mostra comandos disponiveis |
-| `*guide` | (built-in) | Mostra guia de uso do agente |
-| `*session-info` | (built-in) | Mostra detalhes da sessao atual |
-| `*exit` | (built-in) | Sai do modo Scrum Master |
+| Comando            | Task File                                          | Operacao                              |
+| ------------------ | -------------------------------------------------- | ------------------------------------- |
+| `*draft`           | `sm-create-next-story.md` / `create-next-story.md` | Cria proxima story do backlog         |
+| `*story-checklist` | `execute-checklist.md`                             | Executa `story-draft-checklist.md`    |
+| `*correct-course`  | `correct-course.md`                                | Analisa e corrige desvios de processo |
+| `*help`            | (built-in)                                         | Mostra comandos disponiveis           |
+| `*guide`           | (built-in)                                         | Mostra guia de uso do agente          |
+| `*session-info`    | (built-in)                                         | Mostra detalhes da sessao atual       |
+| `*exit`            | (built-in)                                         | Sai do modo Scrum Master              |
 
 ---
 
@@ -277,20 +278,21 @@ flowchart TB
 
 ### Matriz de Colaboracao
 
-| Agente | Relacionamento | Acao |
-|--------|----------------|------|
-| **@pm (Morgan)** | Recebe de | Epic structure, PRD shardado |
-| **@po (Pax)** | Coordena com | Backlog prioritization, sprint planning |
-| **@dev (Dex)** | Entrega para | Stories prontas para implementacao |
-| **@qa (Quinn)** | Solicita | Risk profiling para stories |
-| **@github-devops (Gage)** | Delega para | Push branches, criar PRs |
-| **@analyst (Sage)** | Consulta | Pesquisa e insights tecnicos |
+| Agente                    | Relacionamento | Acao                                    |
+| ------------------------- | -------------- | --------------------------------------- |
+| **@pm (Morgan)**          | Recebe de      | Epic structure, PRD shardado            |
+| **@po (Pax)**             | Coordena com   | Backlog prioritization, sprint planning |
+| **@dev (Dex)**            | Entrega para   | Stories prontas para implementacao      |
+| **@qa (Quinn)**           | Solicita       | Risk profiling para stories             |
+| **@github-devops (Gage)** | Delega para    | Push branches, criar PRs                |
+| **@analyst (Sage)**       | Consulta       | Pesquisa e insights tecnicos            |
 
 ### Delegacao para @github-devops
 
 O @sm gerencia APENAS operacoes locais de Git. Para operacoes remotas, **sempre** delegar para @github-devops:
 
 **Operacoes Permitidas para @sm:**
+
 - `git checkout -b feature/X.Y-story-name` - Criar branch local
 - `git branch` - Listar branches
 - `git branch -d branch-name` - Deletar branch local
@@ -298,6 +300,7 @@ O @sm gerencia APENAS operacoes locais de Git. Para operacoes remotas, **sempre*
 - `git merge branch-name` - Merge local
 
 **Operacoes Bloqueadas (usar @github-devops):**
+
 - `git push` - Enviar para remoto
 - `git push origin --delete` - Deletar branch remoto
 - `gh pr create` - Criar Pull Request
@@ -326,7 +329,7 @@ qaLocation: docs/qa
 
 # CodeRabbit Integration
 coderabbit_integration:
-  enabled: true  # Controla se @sm popula secao CodeRabbit nas stories
+  enabled: true # Controla se @sm popula secao CodeRabbit nas stories
 ```
 
 ### Dependencies do Agente
@@ -342,9 +345,9 @@ dependencies:
   checklists:
     - story-draft-checklist.md
   tools:
-    - git               # Local branch operations only
-    - clickup           # Track sprint progress
-    - context7          # Research technical requirements
+    - git # Local branch operations only
+    - clickup # Track sprint progress
+    - context7 # Research technical requirements
 ```
 
 ---
@@ -389,6 +392,7 @@ dependencies:
 **Sintoma:** Epic verificacao falha em Step 5.1
 
 **Solucao:**
+
 1. Verificar se Epic existe no ClickUp Backlog list
 2. Confirmar tags: `epic`, `epic-{epicNum}`
 3. Status deve ser "Planning" ou "In Progress"
@@ -405,6 +409,7 @@ dependencies:
 **Sintoma:** Task halts com mensagem de arquivo não encontrado
 
 **Solucao:**
+
 1. Copiar de `GITHUB aios-core/core-config.yaml`
 2. Ou executar AIOS installer: `npm run aios:install`
 3. Configurar `devStoryLocation`, `prdSharded`, etc.
@@ -414,6 +419,7 @@ dependencies:
 **Sintoma:** Story draft com varios problemas de validação
 
 **Solucao:**
+
 1. Revisar arquivos de arquitetura referenciados
 2. Verificar se PRD/Epic esta completo
 3. Usar file fallback strategy para arquivos alternativos
@@ -424,6 +430,7 @@ dependencies:
 **Sintoma:** Merge conflicts ao tentar integrar
 
 **Solucao:**
+
 1. Fazer `git fetch origin` para atualizar referencias
 2. Merge branch base localmente: `git merge main`
 3. Resolver conflitos antes de pedir push para @github-devops
@@ -435,6 +442,7 @@ dependencies:
 **Causa:** `coderabbit_integration.enabled: false` em core-config.yaml
 
 **Solucao:**
+
 1. Verificar `core-config.yaml`
 2. Se intencional, story tera notice de skip
 3. Para habilitar, set `coderabbit_integration.enabled: true`
@@ -444,52 +452,57 @@ dependencies:
 ## Referencias
 
 ### Arquivos do Agente
+
 - [Agent: sm.md](.aios-core/development/agents/sm.md)
 - [Task: create-next-story.md](.aios-core/development/tasks/create-next-story.md)
 - [Task: execute-checklist.md](.aios-core/development/tasks/execute-checklist.md)
 - [Task: correct-course.md](.aios-core/development/tasks/correct-course.md)
 
 ### Checklists
+
 - [Checklist: story-draft-checklist.md](.aios-core/product/checklists/story-draft-checklist.md)
 - [Checklist: story-dod-checklist.md](.aios-core/product/checklists/story-dod-checklist.md)
 - [Checklist: change-checklist.md](.aios-core/product/checklists/change-checklist.md)
 
 ### Workflows
+
 - [Workflow: story-development-cycle.yaml](.aios-core/development/workflows/story-development-cycle.yaml)
 - [Workflow: greenfield-fullstack.yaml](.aios-core/development/workflows/greenfield-fullstack.yaml)
 - [Workflow: brownfield-fullstack.yaml](.aios-core/development/workflows/brownfield-fullstack.yaml)
 
 ### Configuracao
+
 - [Core Config](../.aios-core/core-config.yaml)
 
 ### Documentação Relacionada
+
 - [Backlog Management System](../BACKLOG-MANAGEMENT-SYSTEM.md)
 
 ---
 
 ## Resumo
 
-| Aspecto | Detalhes |
-|---------|----------|
-| **Agente** | @sm (River) - Scrum Master |
-| **Arquetipo** | Facilitator (Pisces) |
-| **Total de Task Files** | 6 tasks core |
-| **Comandos Disponiveis** | 7 (`*draft`, `*story-checklist`, `*correct-course`, `*help`, `*guide`, `*session-info`, `*exit`) |
-| **Checklists Utilizados** | 4 checklists |
-| **Workflows que Usam @sm** | 7 workflows |
-| **Ferramentas** | git (local), clickup, context7 |
-| **Colabora com** | @pm, @po, @dev, @qa, @github-devops, @analyst |
-| **Delega para** | @github-devops (operacoes remotas) |
-| **Responsabilidade Principal** | Criacao de stories detalhadas e acionaveis |
+| Aspecto                        | Detalhes                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------ |
+| **Agente**                     | @sm (River) - Scrum Master                                                                       |
+| **Arquetipo**                  | Facilitator (Pisces)                                                                             |
+| **Total de Task Files**        | 6 tasks core                                                                                     |
+| **Comandos Disponiveis**       | 7 (`*draft`, `*story-checklist`, `*correct-course`, `*help`, `*guide`, `*session-info`, `*exit`) |
+| **Checklists Utilizados**      | 4 checklists                                                                                     |
+| **Workflows que Usam @sm**     | 7 workflows                                                                                      |
+| **Ferramentas**                | git (local), clickup, context7                                                                   |
+| **Colabora com**               | @pm, @po, @dev, @qa, @github-devops, @analyst                                                    |
+| **Delega para**                | @github-devops (operacoes remotas)                                                               |
+| **Responsabilidade Principal** | Criacao de stories detalhadas e acionaveis                                                       |
 
 ---
 
 ## Changelog
 
-| Data | Autor | Descrição |
-|------|-------|-----------|
-| 2026-02-04 | @dev | Documento inicial criado |
+| Data       | Autor | Descrição                |
+| ---------- | ----- | ------------------------ |
+| 2026-02-04 | @dev  | Documento inicial criado |
 
 ---
 
-*-- River, removendo obstaculos*
+_-- River, removendo obstaculos_

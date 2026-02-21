@@ -42,7 +42,13 @@ function run(cmd, options = {}) {
 
 function isProInstalled() {
   try {
-    const pkgPath = path.join(process.cwd(), 'node_modules', '@aios-fullstack', 'pro', 'package.json');
+    const pkgPath = path.join(
+      process.cwd(),
+      'node_modules',
+      '@aios-fullstack',
+      'pro',
+      'package.json'
+    );
     return fs.existsSync(pkgPath);
   } catch {
     return false;
@@ -113,14 +119,17 @@ function runProWizard(key) {
     options.key = key;
   }
 
-  proSetup.runProWizard(options).then((result) => {
-    if (!result.success) {
+  proSetup
+    .runProWizard(options)
+    .then((result) => {
+      if (!result.success) {
+        process.exit(1);
+      }
+    })
+    .catch((err) => {
+      console.error(`\n  Wizard failed: ${err.message}\n`);
       process.exit(1);
-    }
-  }).catch((err) => {
-    console.error(`\n  Wizard failed: ${err.message}\n`);
-    process.exit(1);
-  });
+    });
 }
 
 // ─── Commands ───────────────────────────────────────────────────────────────

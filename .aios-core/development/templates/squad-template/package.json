@@ -8,7 +8,10 @@
     "lint": "eslint src/",
     "dev": "aios-dev-server"
   },
-  "keywords": ["aios", "aios-squad"],
+  "keywords": [
+    "aios",
+    "aios-squad"
+  ],
   "author": "{{author}}",
   "license": "MIT",
   "devDependencies": {

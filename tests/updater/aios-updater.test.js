@@ -8,7 +8,12 @@ const path = require('path');
 const fs = require('fs-extra');
 const os = require('os');
 
-const { AIOSUpdater, UpdateStatus, formatCheckResult, formatUpdateResult } = require('../../packages/installer/src/updater');
+const {
+  AIOSUpdater,
+  UpdateStatus,
+  formatCheckResult,
+  formatUpdateResult,
+} = require('../../packages/installer/src/updater');
 
 describe('AIOSUpdater', () => {
   let tempDir;

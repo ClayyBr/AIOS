@@ -302,10 +302,7 @@ async function runInstaller(options = {}) {
   intro(chalk.bgCyan(' AIOS Installer '));
 
   if (options.dryRun) {
-    note(
-      'Dry-run mode enabled.\nNo changes will be made to your system.',
-      'Preview Mode',
-    );
+    note('Dry-run mode enabled.\nNo changes will be made to your system.', 'Preview Mode');
   }
 
   // Step 1: OS Detection
@@ -470,7 +467,7 @@ async function runInstaller(options = {}) {
     console.log(chalk.dim('  1. Run `npx aios-core info` to see your configuration'));
     console.log(chalk.dim('  2. Activate an agent with @agent-name (e.g., @dev)'));
     if (profile === 'bob') {
-      console.log(chalk.dim('  3. Just talk to Bob - he\'ll orchestrate everything!'));
+      console.log(chalk.dim("  3. Just talk to Bob - he'll orchestrate everything!"));
     }
   }
 }

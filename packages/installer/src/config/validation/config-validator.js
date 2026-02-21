@@ -76,21 +76,30 @@ function validateApiKeyFormat(key, provider = null) {
       case 'openai':
         // OpenAI keys start with sk- and are at least 20 chars
         if (!trimmed.startsWith('sk-') || trimmed.length < 20) {
-          return { valid: false, error: 'OpenAI API keys should start with "sk-" and be at least 20 characters' };
+          return {
+            valid: false,
+            error: 'OpenAI API keys should start with "sk-" and be at least 20 characters',
+          };
         }
         break;
 
       case 'anthropic':
         // Anthropic keys start with sk-ant- and are longer
         if (!trimmed.startsWith('sk-ant-') || trimmed.length < 30) {
-          return { valid: false, error: 'Anthropic API keys should start with "sk-ant-" and be at least 30 characters' };
+          return {
+            valid: false,
+            error: 'Anthropic API keys should start with "sk-ant-" and be at least 30 characters',
+          };
         }
         break;
 
       case 'github':
         // GitHub tokens: ghp_ (personal), gho_ (OAuth), ghs_ (server), ghu_ (user), ghr_ (refresh), github_pat_ (fine-grained)
         if (!trimmed.match(/^(ghp_|gho_|ghs_|ghu_|ghr_|github_pat_)/)) {
-          return { valid: false, error: 'GitHub tokens should start with ghp_, gho_, ghs_, ghu_, ghr_, or github_pat_' };
+          return {
+            valid: false,
+            error: 'GitHub tokens should start with ghp_, gho_, ghs_, ghu_, ghr_, or github_pat_',
+          };
         }
         break;
 
@@ -143,7 +152,7 @@ function validateCoreConfigStructure(config) {
   const requiredFields = ['project', 'qa', 'prd', 'architecture'];
 
   // Check required top-level fields
-  requiredFields.forEach(field => {
+  requiredFields.forEach((field) => {
     if (!config[field]) {
       errors.push(`Missing required field: ${field}`);
     }
@@ -155,9 +164,18 @@ function validateCoreConfigStructure(config) {
       errors.push('Missing project.type');
     } else {
       // Accept both lowercase and uppercase project types
-      const validTypes = ['GREENFIELD', 'BROWNFIELD', 'EXISTING_AIOS', 'greenfield', 'brownfield', 'existing_aios'];
+      const validTypes = [
+        'GREENFIELD',
+        'BROWNFIELD',
+        'EXISTING_AIOS',
+        'greenfield',
+        'brownfield',
+        'existing_aios',
+      ];
       if (!validTypes.includes(config.project.type)) {
-        errors.push(`Invalid project.type: ${config.project.type}. Expected greenfield, brownfield, or existing_aios`);
+        errors.push(
+          `Invalid project.type: ${config.project.type}. Expected greenfield, brownfield, or existing_aios`
+        );
       }
     }
   }

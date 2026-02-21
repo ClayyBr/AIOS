@@ -166,7 +166,7 @@ describe('ProjectStatusLoader', () => {
       expect(execa).toHaveBeenCalledWith(
         'git',
         ['rev-parse', '--is-inside-work-tree'],
-        expect.objectContaining({ cwd: projectRoot }),
+        expect.objectContaining({ cwd: projectRoot })
       );
     });
 
@@ -396,7 +396,9 @@ def5678 fix: bug fix`;
         fs.promises.readFile.mockResolvedValue('{{invalid yaml');
         const yamlError = new Error('Invalid YAML');
         yamlError.name = 'YAMLException';
-        yaml.load.mockImplementation(() => { throw yamlError; });
+        yaml.load.mockImplementation(() => {
+          throw yamlError;
+        });
 
         const result = await loader.loadCache();
 
@@ -808,7 +810,7 @@ def5678 fix: bug fix`;
         expect(fs.promises.writeFile).toHaveBeenCalledWith(
           loader.lockFile,
           expect.any(String),
-          expect.objectContaining({ flag: 'wx' }),
+          expect.objectContaining({ flag: 'wx' })
         );
       });
 
@@ -817,15 +819,17 @@ def5678 fix: bug fix`;
         const eexistError = new Error('File exists');
         eexistError.code = 'EEXIST';
         fs.promises.writeFile.mockRejectedValue(eexistError);
-        fs.promises.readFile.mockResolvedValue(JSON.stringify({
-          pid: 99999,
-          timestamp: Date.now(), // Fresh lock - not stale
-        }));
+        fs.promises.readFile.mockResolvedValue(
+          JSON.stringify({
+            pid: 99999,
+            timestamp: Date.now(), // Fresh lock - not stale
+          })
+        );
 
         // Force timeout by racing with a shorter timeout
         const acquired = await Promise.race([
           loader._acquireLock(),
-          new Promise(resolve => setTimeout(() => resolve(false), 500)),
+          new Promise((resolve) => setTimeout(() => resolve(false), 500)),
         ]);
 
         expect(acquired).toBe(false);
@@ -837,15 +841,15 @@ def5678 fix: bug fix`;
 
         // First call: lock exists (EEXIST)
         // After stale lock cleanup: lock acquired (success)
-        fs.promises.writeFile
-          .mockRejectedValueOnce(eexistError)
-          .mockResolvedValueOnce(undefined);
+        fs.promises.writeFile.mockRejectedValueOnce(eexistError).mockResolvedValueOnce(undefined);
 
         // Lock is stale
-        fs.promises.readFile.mockResolvedValue(JSON.stringify({
-          pid: 12345,
-          timestamp: Date.now() - LOCK_STALE_MS - 1000, // Older than stale threshold
-        }));
+        fs.promises.readFile.mockResolvedValue(
+          JSON.stringify({
+            pid: 12345,
+            timestamp: Date.now() - LOCK_STALE_MS - 1000, // Older than stale threshold
+          })
+        );
 
         const acquired = await loader._acquireLock();
 
@@ -866,19 +870,23 @@ def5678 fix: bug fix`;
 
     describe('_isLockStale', () => {
       it('should return true for old lock file', async () => {
-        fs.promises.readFile.mockResolvedValue(JSON.stringify({
-          pid: 12345,
-          timestamp: Date.now() - LOCK_STALE_MS - 1000,
-        }));
+        fs.promises.readFile.mockResolvedValue(
+          JSON.stringify({
+            pid: 12345,
+            timestamp: Date.now() - LOCK_STALE_MS - 1000,
+          })
+        );
 
         expect(await loader._isLockStale()).toBe(true);
       });
 
       it('should return false for fresh lock file', async () => {
-        fs.promises.readFile.mockResolvedValue(JSON.stringify({
-          pid: 12345,
-          timestamp: Date.now() - 1000, // 1 second old
-        }));
+        fs.promises.readFile.mockResolvedValue(
+          JSON.stringify({
+            pid: 12345,
+            timestamp: Date.now() - 1000, // 1 second old
+          })
+        );
 
         expect(await loader._isLockStale()).toBe(false);
       });
@@ -915,14 +923,14 @@ def5678 fix: bug fix`;
 
         // Lock acquired (writeFile with wx flag)
         const lockCall = fs.promises.writeFile.mock.calls.find(
-          call => typeof call[2] === 'object' && call[2].flag === 'wx',
+          (call) => typeof call[2] === 'object' && call[2].flag === 'wx'
         );
         expect(lockCall).toBeDefined();
         expect(lockCall[0]).toBe(loader.lockFile);
 
         // Cache written (temp file)
         const cacheCall = fs.promises.writeFile.mock.calls.find(
-          call => typeof call[0] === 'string' && call[0].includes('.tmp.'),
+          (call) => typeof call[0] === 'string' && call[0].includes('.tmp.')
         );
         expect(cacheCall).toBeDefined();
 
@@ -942,7 +950,7 @@ def5678 fix: bug fix`;
 
         // Find the cache content write (not the lock write)
         const cacheWrite = fs.promises.writeFile.mock.calls.find(
-          call => typeof call[1] === 'string' && call[1].includes('100:200'),
+          (call) => typeof call[1] === 'string' && call[1].includes('100:200')
         );
         expect(cacheWrite).toBeDefined();
       });
@@ -971,7 +979,7 @@ def5678 fix: bug fix`;
 
         // Should write to a temp file
         const tempWrite = fs.promises.writeFile.mock.calls.find(
-          call => typeof call[0] === 'string' && call[0].includes('.tmp.'),
+          (call) => typeof call[0] === 'string' && call[0].includes('.tmp.')
         );
         expect(tempWrite).toBeDefined();
 
@@ -1028,9 +1036,7 @@ def5678 fix: bug fix`;
         });
 
         const newLoader = new ProjectStatusLoader(projectRoot);
-        expect(newLoader.cacheFile).toBe(
-          path.join(projectRoot, '.aios', 'project-status.yaml'),
-        );
+        expect(newLoader.cacheFile).toBe(path.join(projectRoot, '.aios', 'project-status.yaml'));
       });
 
       it('should use worktree-specific path when in a worktree (AC6)', () => {
@@ -1045,7 +1051,7 @@ def5678 fix: bug fix`;
         expect(newLoader.cacheFile).toContain('project-status-');
         expect(newLoader.cacheFile).toContain('.yaml');
         expect(newLoader.cacheFile).not.toBe(
-          path.join(projectRoot, '.aios', 'project-status.yaml'),
+          path.join(projectRoot, '.aios', 'project-status.yaml')
         );
       });
 
@@ -1055,9 +1061,7 @@ def5678 fix: bug fix`;
         });
 
         const newLoader = new ProjectStatusLoader(projectRoot);
-        expect(newLoader.cacheFile).toBe(
-          path.join(projectRoot, '.aios', 'project-status.yaml'),
-        );
+        expect(newLoader.cacheFile).toBe(path.join(projectRoot, '.aios', 'project-status.yaml'));
       });
     });
 
@@ -1269,7 +1273,7 @@ describe('ACT-3: Git post-commit hook (AC5)', () => {
       'infrastructure',
       'scripts',
       'git-hooks',
-      'post-commit.js',
+      'post-commit.js'
     );
     // The hook file exists (we created it)
     const actualFs = jest.requireActual('fs');
@@ -1277,13 +1281,7 @@ describe('ACT-3: Git post-commit hook (AC5)', () => {
   });
 
   it('husky post-commit hook should exist', () => {
-    const huskyPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      '.husky',
-      'post-commit',
-    );
+    const huskyPath = path.join(__dirname, '..', '..', '.husky', 'post-commit');
     const actualFs = jest.requireActual('fs');
     expect(actualFs.existsSync(huskyPath)).toBe(true);
   });

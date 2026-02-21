@@ -47,4 +47,4 @@ A comprehensive discovery document that enables informed decisions for subsequen
 
 ---
 
-*For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../aios-workflows/brownfield-discovery-workflow.md).*
+_For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../aios-workflows/brownfield-discovery-workflow.md)._

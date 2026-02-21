@@ -20,16 +20,16 @@ O **Brownfield Discovery** é um workflow multi-agente completo para avaliação
 
 ### Casos de Uso Principais
 
-| Cenário | Recomendado |
-|---------|-------------|
-| Migração de projeto Lovable/v0.dev | Sim |
-| Auditoria completa de codebase | Sim |
-| Planejamento de modernização | Sim |
-| Assessment pre-investimento | Sim |
-| Onboarding em projeto legado | Sim |
-| Due diligence técnica | Sim |
-| Novo projeto (greenfield) | Não - use workflows `greenfield-*` |
-| Enhancement isolado | Não - use `brownfield-create-story` |
+| Cenário                            | Recomendado                         |
+| ---------------------------------- | ----------------------------------- |
+| Migração de projeto Lovable/v0.dev | Sim                                 |
+| Auditoria completa de codebase     | Sim                                 |
+| Planejamento de modernização       | Sim                                 |
+| Assessment pre-investimento        | Sim                                 |
+| Onboarding em projeto legado       | Sim                                 |
+| Due diligence técnica              | Sim                                 |
+| Novo projeto (greenfield)          | Não - use workflows `greenfield-*`  |
+| Enhancement isolado                | Não - use `brownfield-create-story` |
 
 ---
 
@@ -170,18 +170,19 @@ sequenceDiagram
 
 ### FASE 1: Coleta - Sistema
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `system_documentation` |
-| **Fase** | 1 |
-| **Nome da Fase** | Coleta: Sistema |
-| **Agente** | `@architect` (Aria) |
-| **Ação** | `*document-project` |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 30-60 min |
-| **Output** | `docs/architecture/system-architecture.md` |
+| Atributo             | Valor                                      |
+| -------------------- | ------------------------------------------ |
+| **Step ID**          | `system_documentation`                     |
+| **Fase**             | 1                                          |
+| **Nome da Fase**     | Coleta: Sistema                            |
+| **Agente**           | `@architect` (Aria)                        |
+| **Ação**             | `*document-project`                        |
+| **Elicitação**       | Sim                                        |
+| **Duração Estimada** | 30-60 min                                  |
+| **Output**           | `docs/architecture/system-architecture.md` |
 
 **O que o agente analisa:**
+
 - Stack tecnológico (React, Vite, Tailwind, etc.)
 - Estrutura de pastas e componentes
 - Dependências e versões
@@ -190,6 +191,7 @@ sequenceDiagram
 - Configurações (env, build, deploy)
 
 **Débitos identificados (nível sistema):**
+
 - Dependências desatualizadas
 - Código duplicado
 - Falta de testes
@@ -200,19 +202,20 @@ sequenceDiagram
 
 ### FASE 2: Coleta - Database
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `database_documentation` |
-| **Fase** | 2 |
-| **Nome da Fase** | Coleta: Database |
-| **Agente** | `@data-engineer` (Dara - Sage) |
-| **Acao** | `*db-schema-audit` + `*security-audit` |
-| **Condição** | `project_has_database` |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 20-40 min |
-| **Outputs** | `supabase/docs/SCHEMA.md`, `supabase/docs/DB-AUDIT.md` |
+| Atributo             | Valor                                                  |
+| -------------------- | ------------------------------------------------------ |
+| **Step ID**          | `database_documentation`                               |
+| **Fase**             | 2                                                      |
+| **Nome da Fase**     | Coleta: Database                                       |
+| **Agente**           | `@data-engineer` (Dara - Sage)                         |
+| **Acao**             | `*db-schema-audit` + `*security-audit`                 |
+| **Condição**         | `project_has_database`                                 |
+| **Elicitação**       | Sim                                                    |
+| **Duração Estimada** | 20-40 min                                              |
+| **Outputs**          | `supabase/docs/SCHEMA.md`, `supabase/docs/DB-AUDIT.md` |
 
 **O que o agente analisa:**
+
 - Schema completo (tabelas, colunas, tipos)
 - Relacionamentos e foreign keys
 - Índices existentes e faltantes
@@ -221,6 +224,7 @@ sequenceDiagram
 - Performance (queries lentas conhecidas)
 
 **Débitos identificados (nível dados):**
+
 - Tabelas sem RLS
 - Índices faltantes
 - Normalização inadequada
@@ -232,18 +236,19 @@ sequenceDiagram
 
 ### FASE 3: Coleta - Frontend/UX
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `frontend_documentation` |
-| **Fase** | 3 |
-| **Nome da Fase** | Coleta: Frontend/UX |
-| **Agente** | `@ux-design-expert` (Uma - Empathizer) |
-| **Acao** | `*create-front-end-spec` |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 30-45 min |
-| **Output** | `docs/frontend/frontend-spec.md` |
+| Atributo             | Valor                                  |
+| -------------------- | -------------------------------------- |
+| **Step ID**          | `frontend_documentation`               |
+| **Fase**             | 3                                      |
+| **Nome da Fase**     | Coleta: Frontend/UX                    |
+| **Agente**           | `@ux-design-expert` (Uma - Empathizer) |
+| **Acao**             | `*create-front-end-spec`               |
+| **Elicitação**       | Sim                                    |
+| **Duração Estimada** | 30-45 min                              |
+| **Output**           | `docs/frontend/frontend-spec.md`       |
 
 **O que o agente analisa:**
+
 - Componentes UI existentes
 - Design system/tokens utilizados
 - Padroes de layout
@@ -254,6 +259,7 @@ sequenceDiagram
 - Performance percebida
 
 **Débitos identificados (nível UX/UI):**
+
 - Inconsistências visuais
 - Componentes duplicados
 - Falta de design system
@@ -266,18 +272,19 @@ sequenceDiagram
 
 ### FASE 4: Consolidação Inicial
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `initial_consolidation` |
-| **Fase** | 4 |
-| **Nome da Fase** | Consolidação Inicial |
-| **Agente** | `@architect` (Aria) |
-| **Ação** | `consolidate_findings_draft` (workflow-action) |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 30-45 min |
-| **Output** | `docs/prd/technical-debt-DRAFT.md` |
+| Atributo             | Valor                                          |
+| -------------------- | ---------------------------------------------- |
+| **Step ID**          | `initial_consolidation`                        |
+| **Fase**             | 4                                              |
+| **Nome da Fase**     | Consolidação Inicial                           |
+| **Agente**           | `@architect` (Aria)                            |
+| **Ação**             | `consolidate_findings_draft` (workflow-action) |
+| **Elicitação**       | Sim                                            |
+| **Duração Estimada** | 30-45 min                                      |
+| **Output**           | `docs/prd/technical-debt-DRAFT.md`             |
 
 **Requer como entrada:**
+
 - `docs/architecture/system-architecture.md`
 - `supabase/docs/SCHEMA.md` (se existir)
 - `supabase/docs/DB-AUDIT.md` (se existir)
@@ -287,24 +294,30 @@ sequenceDiagram
 
 ```markdown
 # Technical Debt Assessment - DRAFT
+
 ## Para Revisão dos Especialistas
 
 ### 1. Debitos de Sistema
+
 [Lista do system-architecture.md]
 
 ### 2. Debitos de Database
+
 [Lista do DB-AUDIT.md]
 PENDENTE: Revisão do @data-engineer
 
 ### 3. Debitos de Frontend/UX
+
 [Lista do frontend-spec.md]
 PENDENTE: Revisão do @ux-design-expert
 
 ### 4. Matriz Preliminar
-| ID | Débito | Área | Impacto | Esforço | Prioridade |
-|----|--------|------|---------|---------|------------|
+
+| ID  | Débito | Área | Impacto | Esforço | Prioridade |
+| --- | ------ | ---- | ------- | ------- | ---------- |
 
 ### 5. Perguntas para Especialistas
+
 - @data-engineer: [perguntas sobre DB]
 - @ux-design-expert: [perguntas sobre UX]
 ```
@@ -313,16 +326,16 @@ PENDENTE: Revisão do @ux-design-expert
 
 ### FASE 5: Validação - Database
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `database_specialist_review` |
-| **Fase** | 5 |
-| **Nome da Fase** | Validação: Database |
-| **Agente** | `@data-engineer` (Dara) |
-| **Ação** | `review_and_validate` (workflow-action) |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 20-30 min |
-| **Output** | `docs/reviews/db-specialist-review.md` |
+| Atributo             | Valor                                   |
+| -------------------- | --------------------------------------- |
+| **Step ID**          | `database_specialist_review`            |
+| **Fase**             | 5                                       |
+| **Nome da Fase**     | Validação: Database                     |
+| **Agente**           | `@data-engineer` (Dara)                 |
+| **Ação**             | `review_and_validate` (workflow-action) |
+| **Elicitação**       | Sim                                     |
+| **Duração Estimada** | 20-30 min                               |
+| **Output**           | `docs/reviews/db-specialist-review.md`  |
 
 **Responsabilidades do Especialista:**
 
@@ -349,16 +362,16 @@ PENDENTE: Revisão do @ux-design-expert
 
 ### FASE 6: Validação - UX/Frontend
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `ux_specialist_review` |
-| **Fase** | 6 |
-| **Nome da Fase** | Validação: UX/Frontend |
-| **Agente** | `@ux-design-expert` (Uma) |
-| **Ação** | `review_and_validate` (workflow-action) |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 20-30 min |
-| **Output** | `docs/reviews/ux-specialist-review.md` |
+| Atributo             | Valor                                   |
+| -------------------- | --------------------------------------- |
+| **Step ID**          | `ux_specialist_review`                  |
+| **Fase**             | 6                                       |
+| **Nome da Fase**     | Validação: UX/Frontend                  |
+| **Agente**           | `@ux-design-expert` (Uma)               |
+| **Ação**             | `review_and_validate` (workflow-action) |
+| **Elicitação**       | Sim                                     |
+| **Duração Estimada** | 20-30 min                               |
+| **Output**           | `docs/reviews/ux-specialist-review.md`  |
 
 **Responsabilidades do Especialista:**
 
@@ -385,16 +398,16 @@ PENDENTE: Revisão do @ux-design-expert
 
 ### FASE 7: Validação - QA Review
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `qa_general_review` |
-| **Fase** | 7 |
-| **Nome da Fase** | Validação: QA Review |
-| **Agente** | `@qa` (Quinn - Guardian) |
-| **Ação** | `review_assessment` (workflow-action) |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 30-45 min |
-| **Output** | `docs/reviews/qa-review.md` |
+| Atributo             | Valor                                 |
+| -------------------- | ------------------------------------- |
+| **Step ID**          | `qa_general_review`                   |
+| **Fase**             | 7                                     |
+| **Nome da Fase**     | Validação: QA Review                  |
+| **Agente**           | `@qa` (Quinn - Guardian)              |
+| **Ação**             | `review_assessment` (workflow-action) |
+| **Elicitação**       | Sim                                   |
+| **Duração Estimada** | 30-45 min                             |
+| **Output**           | `docs/reviews/qa-review.md`           |
 
 **Responsabilidades do QA:**
 
@@ -427,19 +440,20 @@ PENDENTE: Revisão do @ux-design-expert
 
 ### FASE 8: Assessment Final
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `final_assessment` |
-| **Fase** | 8 |
-| **Nome da Fase** | Assessment Final |
-| **Agente** | `@architect` (Aria) |
-| **Ação** | `finalize_assessment` (workflow-action) |
-| **Condição** | `qa_review_approved` |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 30-45 min |
-| **Output** | `docs/prd/technical-debt-assessment.md` |
+| Atributo             | Valor                                   |
+| -------------------- | --------------------------------------- |
+| **Step ID**          | `final_assessment`                      |
+| **Fase**             | 8                                       |
+| **Nome da Fase**     | Assessment Final                        |
+| **Agente**           | `@architect` (Aria)                     |
+| **Ação**             | `finalize_assessment` (workflow-action) |
+| **Condição**         | `qa_review_approved`                    |
+| **Elicitação**       | Sim                                     |
+| **Duração Estimada** | 30-45 min                               |
+| **Output**           | `docs/prd/technical-debt-assessment.md` |
 
 **Consolidação Final inclui:**
+
 1. Incorpora ajustes do @data-engineer
 2. Incorpora ajustes do @ux-design-expert
 3. Endereca gaps do @qa
@@ -452,6 +466,7 @@ PENDENTE: Revisão do @ux-design-expert
 # Technical Debt Assessment - FINAL
 
 ## Executive Summary
+
 - Total de débitos: X
 - Críticos: Y | Altos: Z | Médios: W
 - Esforco total estimado: XXX horas
@@ -459,12 +474,15 @@ PENDENTE: Revisão do @ux-design-expert
 ## Inventário Completo de Débitos
 
 ### Sistema (validado por @architect)
+
 | ID | Débito | Severidade | Horas | Prioridade |
 
 ### Database (validado por @data-engineer)
+
 | ID | Débito | Severidade | Horas | Prioridade |
 
 ### Frontend/UX (validado por @ux-design-expert)
+
 | ID | Débito | Severidade | Horas | Prioridade |
 
 ## Matriz de Priorização Final
@@ -480,16 +498,16 @@ PENDENTE: Revisão do @ux-design-expert
 
 ### FASE 9: Relatório Executivo
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `executive_awareness_report` |
-| **Fase** | 9 |
-| **Nome da Fase** | Relatório Executivo |
-| **Agente** | `@analyst` (Atlas - Decoder) |
-| **Ação** | `create_awareness_report` (workflow-action) |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 30-45 min |
-| **Output** | `docs/reports/TECHNICAL-DEBT-REPORT.md` |
+| Atributo             | Valor                                       |
+| -------------------- | ------------------------------------------- |
+| **Step ID**          | `executive_awareness_report`                |
+| **Fase**             | 9                                           |
+| **Nome da Fase**     | Relatório Executivo                         |
+| **Agente**           | `@analyst` (Atlas - Decoder)                |
+| **Ação**             | `create_awareness_report` (workflow-action) |
+| **Elicitação**       | Sim                                         |
+| **Duração Estimada** | 30-45 min                                   |
+| **Output**           | `docs/reports/TECHNICAL-DEBT-REPORT.md`     |
 
 **Objetivo:** Documento para stakeholders entenderem o CUSTO e IMPACTO dos débitos técnicos identificados.
 
@@ -497,32 +515,45 @@ PENDENTE: Revisão do @ux-design-expert
 
 ```markdown
 # Relatório de Débito Técnico
+
 **Projeto:** [nome]
 **Data:** [data]
 
 ## Executive Summary (1 página)
+
 ### Situação Atual
+
 ### Números Chave
-| Métrica | Valor |
-|---------|-------|
-| Total de Débitos | X |
-| Débitos Críticos | Y |
-| Esforco Total | Z horas |
-| Custo Estimado | R$ XX.XXX |
+
+| Métrica          | Valor     |
+| ---------------- | --------- |
+| Total de Débitos | X         |
+| Débitos Críticos | Y         |
+| Esforco Total    | Z horas   |
+| Custo Estimado   | R$ XX.XXX |
 
 ## Análise de Custos
+
 ### Custo de RESOLVER
+
 ### Custo de NÃO RESOLVER (Risco Acumulado)
 
 ## Impacto no Negócio
+
 ### Performance
+
 ### Segurança
+
 ### Experiência do Usuário
+
 ### Manutenibilidade
 
 ## Timeline Recomendado
+
 ### Fase 1: Quick Wins (1-2 semanas)
+
 ### Fase 2: Fundação (2-4 semanas)
+
 ### Fase 3: Otimização (4-6 semanas)
 
 ## ROI da Resolução
@@ -534,18 +565,19 @@ PENDENTE: Revisão do @ux-design-expert
 
 ### FASE 10: Planning (Epic + Stories)
 
-| Atributo | Valor |
-|----------|-------|
-| **Step ID** | `epic_creation` + `story_creation` |
-| **Fase** | 10 |
-| **Nome da Fase** | Planning |
-| **Agente** | `@pm` (Morgan - Strategist) |
-| **Ações** | `*brownfield-create-epic`, `*brownfield-create-story` |
-| **Elicitação** | Sim |
-| **Duração Estimada** | 30-60 min |
-| **Outputs** | `docs/stories/epic-technical-debt.md`, `docs/stories/story-*.md` |
+| Atributo             | Valor                                                            |
+| -------------------- | ---------------------------------------------------------------- |
+| **Step ID**          | `epic_creation` + `story_creation`                               |
+| **Fase**             | 10                                                               |
+| **Nome da Fase**     | Planning                                                         |
+| **Agente**           | `@pm` (Morgan - Strategist)                                      |
+| **Ações**            | `*brownfield-create-epic`, `*brownfield-create-story`            |
+| **Elicitação**       | Sim                                                              |
+| **Duração Estimada** | 30-60 min                                                        |
+| **Outputs**          | `docs/stories/epic-technical-debt.md`, `docs/stories/story-*.md` |
 
 **Epic inclui:**
+
 - Objetivo do epic
 - Escopo (quais debitos)
 - Critérios de sucesso
@@ -554,6 +586,7 @@ PENDENTE: Revisão do @ux-design-expert
 - Lista de stories
 
 **Cada story inclui:**
+
 - Tasks claras
 - Critérios de aceite específicos
 - Testes requeridos (do QA review)
@@ -583,14 +616,14 @@ mindmap
 
 ### Perfil dos Agentes
 
-| Agente | ID | Arquetipo | Especialidade Principal |
-|--------|-----|-----------|------------------------|
-| Aria | `@architect` | Visionary | Arquitetura de sistemas, design holistico |
-| Dara | `@data-engineer` | Sage | PostgreSQL, Supabase, RLS, migrations |
-| Uma | `@ux-design-expert` | Empathizer | Atomic Design, design tokens, acessibilidade |
-| Quinn | `@qa` | Guardian | Quality gates, testes, rastreabilidade |
-| Atlas | `@analyst` | Decoder | Pesquisa, analise, ROI |
-| Morgan | `@pm` | Strategist | PRDs, epics, priorizacao |
+| Agente | ID                  | Arquetipo  | Especialidade Principal                      |
+| ------ | ------------------- | ---------- | -------------------------------------------- |
+| Aria   | `@architect`        | Visionary  | Arquitetura de sistemas, design holistico    |
+| Dara   | `@data-engineer`    | Sage       | PostgreSQL, Supabase, RLS, migrations        |
+| Uma    | `@ux-design-expert` | Empathizer | Atomic Design, design tokens, acessibilidade |
+| Quinn  | `@qa`               | Guardian   | Quality gates, testes, rastreabilidade       |
+| Atlas  | `@analyst`          | Decoder    | Pesquisa, analise, ROI                       |
+| Morgan | `@pm`               | Strategist | PRDs, epics, priorizacao                     |
 
 ---
 
@@ -598,25 +631,25 @@ mindmap
 
 ### Tasks Automatizadas (task-reference)
 
-| Task | Agente | Fase | Descricao |
-|------|--------|------|-----------|
-| `document-project` | @architect | 1 | Documentacao completa do sistema |
-| `db-schema-audit` | @data-engineer | 2 | Auditoria de schema de banco |
-| `security-audit` | @data-engineer | 2 | Auditoria de seguranca (RLS, PII) |
-| `create-front-end-spec` | @ux-design-expert | 3 | Especificacao de frontend |
-| `brownfield-create-epic` | @pm | 10 | Criacao de epic de debito tecnico |
-| `brownfield-create-story` | @pm | 10 | Criacao de stories (repetivel) |
+| Task                      | Agente            | Fase | Descricao                         |
+| ------------------------- | ----------------- | ---- | --------------------------------- |
+| `document-project`        | @architect        | 1    | Documentacao completa do sistema  |
+| `db-schema-audit`         | @data-engineer    | 2    | Auditoria de schema de banco      |
+| `security-audit`          | @data-engineer    | 2    | Auditoria de seguranca (RLS, PII) |
+| `create-front-end-spec`   | @ux-design-expert | 3    | Especificacao de frontend         |
+| `brownfield-create-epic`  | @pm               | 10   | Criacao de epic de debito tecnico |
+| `brownfield-create-story` | @pm               | 10   | Criacao de stories (repetivel)    |
 
 ### Acoes Manuais (workflow-action)
 
-| Acao | Agente | Fase | Descricao |
-|------|--------|------|-----------|
-| `consolidate_findings_draft` | @architect | 4 | Consolidar DRAFT inicial |
-| `review_and_validate` | @data-engineer | 5 | Validar debitos de DB |
-| `review_and_validate` | @ux-design-expert | 6 | Validar debitos de UX |
-| `review_assessment` | @qa | 7 | Quality Gate review |
-| `finalize_assessment` | @architect | 8 | Assessment final |
-| `create_awareness_report` | @analyst | 9 | Relatorio executivo |
+| Acao                         | Agente            | Fase | Descricao                |
+| ---------------------------- | ----------------- | ---- | ------------------------ |
+| `consolidate_findings_draft` | @architect        | 4    | Consolidar DRAFT inicial |
+| `review_and_validate`        | @data-engineer    | 5    | Validar debitos de DB    |
+| `review_and_validate`        | @ux-design-expert | 6    | Validar debitos de UX    |
+| `review_assessment`          | @qa               | 7    | Quality Gate review      |
+| `finalize_assessment`        | @architect        | 8    | Assessment final         |
+| `create_awareness_report`    | @analyst          | 9    | Relatorio executivo      |
 
 ---
 
@@ -636,13 +669,13 @@ mindmap
 
 ### Ferramentas Utilizadas
 
-| Ferramenta | Agente | Proposito |
-|------------|--------|-----------|
-| `git` | @architect | Analise de repositorio |
-| `supabase-cli` | @data-engineer | Auditoria de database |
-| `psql` | @data-engineer | Queries de auditoria |
-| `coderabbit` | @qa | Review automatizado de codigo |
-| `exa` | @analyst | Pesquisa de mercado/benchmark |
+| Ferramenta     | Agente         | Proposito                     |
+| -------------- | -------------- | ----------------------------- |
+| `git`          | @architect     | Analise de repositorio        |
+| `supabase-cli` | @data-engineer | Auditoria de database         |
+| `psql`         | @data-engineer | Queries de auditoria          |
+| `coderabbit`   | @qa            | Review automatizado de codigo |
+| `exa`          | @analyst       | Pesquisa de mercado/benchmark |
 
 ---
 
@@ -752,6 +785,7 @@ flowchart TD
 ```
 
 **Criterios:**
+
 - Existe pasta `supabase/` ou similar?
 - Ha arquivos de migration?
 - Projeto usa Supabase, PostgreSQL, ou outro DB?
@@ -771,12 +805,14 @@ flowchart TD
 ```
 
 **Criterios para APPROVED:**
+
 - Todos os debitos validados por especialistas
 - Nenhum gap critico identificado
 - Dependencias fazem sentido
 - Riscos estao mapeados
 
 **Criterios para NEEDS WORK:**
+
 - Gaps nao enderecados
 - Debitos faltando validacao
 - Riscos cruzados nao mitigados
@@ -803,6 +839,7 @@ flowchart TD
 **Sintoma:** `psql: connection refused` ou credenciais invalidas
 
 **Solucoes:**
+
 1. Verificar `SUPABASE_DB_URL` no ambiente
 2. Testar conexao manualmente: `psql "$SUPABASE_DB_URL" -c "SELECT 1"`
 3. Confirmar permissoes de rede (VPN, firewall)
@@ -815,6 +852,7 @@ flowchart TD
 **Sintoma:** DRAFT com mais de 50 debitos identificados
 
 **Solucoes:**
+
 1. Priorizar debitos por severidade (CRITICAL > HIGH > MEDIUM)
 2. Agrupar debitos similares em categorias
 3. Considerar multiplos epics por area (DB, Frontend, Infra)
@@ -827,6 +865,7 @@ flowchart TD
 **Sintoma:** @data-engineer e @ux-design-expert tem prioridades conflitantes
 
 **Solucoes:**
+
 1. @architect atua como mediador
 2. Usar framework de priorizacao objetivo (RICE, ICE)
 3. Considerar impacto cruzado (DB lento afeta UX)
@@ -839,6 +878,7 @@ flowchart TD
 **Sintoma:** NEEDS WORK repetido multiplas vezes
 
 **Solucoes:**
+
 1. Revisar criterios de aprovacao com @qa
 2. Focar em enderacar gaps especificos (nao todos)
 3. Considerar aprovar com condicoes documentadas
@@ -851,6 +891,7 @@ flowchart TD
 **Sintoma:** Feedback de que o relatorio e muito tecnico
 
 **Solucoes:**
+
 1. Usar linguagem de negocio, nao tecnica
 2. Focar em custos em R$ (nao horas)
 3. Incluir analogias e comparacoes
@@ -862,24 +903,24 @@ flowchart TD
 
 ### Arquivos do Workflow
 
-| Arquivo | Localizacao |
-|---------|-------------|
-| Definicao do Workflow | `.aios-core/development/workflows/brownfield-discovery.yaml` |
-| Task: brownfield-create-epic | `.aios-core/development/tasks/brownfield-create-epic.md` |
-| Task: brownfield-create-story | `.aios-core/development/tasks/brownfield-create-story.md` |
-| Task: db-schema-audit | `.aios-core/development/tasks/db-schema-audit.md` |
-| Task: security-audit | `.aios-core/development/tasks/security-audit.md` |
+| Arquivo                       | Localizacao                                                  |
+| ----------------------------- | ------------------------------------------------------------ |
+| Definicao do Workflow         | `.aios-core/development/workflows/brownfield-discovery.yaml` |
+| Task: brownfield-create-epic  | `.aios-core/development/tasks/brownfield-create-epic.md`     |
+| Task: brownfield-create-story | `.aios-core/development/tasks/brownfield-create-story.md`    |
+| Task: db-schema-audit         | `.aios-core/development/tasks/db-schema-audit.md`            |
+| Task: security-audit          | `.aios-core/development/tasks/security-audit.md`             |
 
 ### Agentes
 
-| Agente | Localizacao |
-|--------|-------------|
-| @architect | `.aios-core/development/agents/architect.md` |
-| @data-engineer | `.aios-core/development/agents/data-engineer.md` |
+| Agente            | Localizacao                                         |
+| ----------------- | --------------------------------------------------- |
+| @architect        | `.aios-core/development/agents/architect.md`        |
+| @data-engineer    | `.aios-core/development/agents/data-engineer.md`    |
 | @ux-design-expert | `.aios-core/development/agents/ux-design-expert.md` |
-| @qa | `.aios-core/development/agents/qa.md` |
-| @analyst | `.aios-core/development/agents/analyst.md` |
-| @pm | `.aios-core/development/agents/pm.md` |
+| @qa               | `.aios-core/development/agents/qa.md`               |
+| @analyst          | `.aios-core/development/agents/analyst.md`          |
+| @pm               | `.aios-core/development/agents/pm.md`               |
 
 ### Documentacao Relacionada
 
@@ -891,13 +932,14 @@ flowchart TD
 
 ## Estimativas de Tempo
 
-| Complexidade | Tempo Minimo | Tempo Tipico | Tempo Maximo |
-|--------------|--------------|--------------|--------------|
-| Projeto simples (sem DB) | 3 horas | 4 horas | 5 horas |
-| Projeto medio | 4 horas | 5-6 horas | 7 horas |
-| Projeto complexo | 6 horas | 7-8 horas | 10+ horas |
+| Complexidade             | Tempo Minimo | Tempo Tipico | Tempo Maximo |
+| ------------------------ | ------------ | ------------ | ------------ |
+| Projeto simples (sem DB) | 3 horas      | 4 horas      | 5 horas      |
+| Projeto medio            | 4 horas      | 5-6 horas    | 7 horas      |
+| Projeto complexo         | 6 horas      | 7-8 horas    | 10+ horas    |
 
 **Fatores que aumentam tempo:**
+
 - Database grande com muitas tabelas
 - Frontend com muitos componentes
 - Multiplas integracoes externas
@@ -916,6 +958,6 @@ flowchart TD
 
 ---
 
-*Documentacao gerada em: 2026-02-04*
-*Workflow Version: 2.0*
-*Mantido por: @devops*
+_Documentacao gerada em: 2026-02-04_
+_Workflow Version: 2.0_
+_Mantido por: @devops_

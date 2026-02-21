@@ -1,6 +1,6 @@
 /**
  * Validators Test Suite
- * 
+ *
  * Tests security validators with malicious inputs (OWASP compliance)
  */
 
@@ -53,7 +53,9 @@ describe('validators', () => {
     test('rejects path traversal attacks', () => {
       expect(validatePath('../../../etc/passwd', baseDir)).toContain('path traversal');
       // Backslashes are caught by shell-special character check first on Windows
-      expect(validatePath('..\\..\\..\\Windows\\System32', baseDir)).toContain('invalid characters');
+      expect(validatePath('..\\..\\..\\Windows\\System32', baseDir)).toContain(
+        'invalid characters'
+      );
       expect(validatePath('~/../../root', baseDir)).toContain('path traversal');
     });
 
@@ -220,4 +222,3 @@ describe('validators', () => {
     });
   });
 });
-

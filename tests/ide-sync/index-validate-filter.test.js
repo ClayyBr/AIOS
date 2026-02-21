@@ -7,7 +7,9 @@ const path = require('path');
 const { commandValidate } = require('../../.aios-core/infrastructure/scripts/ide-sync/index');
 const { parseAllAgents } = require('../../.aios-core/infrastructure/scripts/ide-sync/agent-parser');
 const claudeTransformer = require('../../.aios-core/infrastructure/scripts/ide-sync/transformers/claude-code');
-const { syncGeminiCommands } = require('../../.aios-core/infrastructure/scripts/ide-sync/gemini-commands');
+const {
+  syncGeminiCommands,
+} = require('../../.aios-core/infrastructure/scripts/ide-sync/gemini-commands');
 
 describe('ide-sync commandValidate --ide filter', () => {
   let tmpRoot;
@@ -36,12 +38,12 @@ describe('ide-sync commandValidate --ide filter', () => {
         '      format: full-markdown-yaml',
         '  redirects: {}',
       ].join('\n'),
-      'utf8',
+      'utf8'
     );
 
     await fs.copy(
       path.join(previousCwd, '.aios-core', 'development', 'agents'),
-      path.join(tmpRoot, '.aios-core', 'development', 'agents'),
+      path.join(tmpRoot, '.aios-core', 'development', 'agents')
     );
 
     await fs.ensureDir(path.join(tmpRoot, '.gemini', 'rules', 'AIOS', 'agents'));
@@ -51,7 +53,7 @@ describe('ide-sync commandValidate --ide filter', () => {
       await fs.writeFile(
         path.join(tmpRoot, '.gemini', 'rules', 'AIOS', 'agents', agent.filename),
         content,
-        'utf8',
+        'utf8'
       );
     }
     syncGeminiCommands(agents, tmpRoot, { dryRun: false });
@@ -63,6 +65,8 @@ describe('ide-sync commandValidate --ide filter', () => {
   });
 
   it('validates only requested IDE when --ide is provided', async () => {
-    await expect(commandValidate({ ide: 'gemini', strict: true, verbose: false })).resolves.toBeUndefined();
+    await expect(
+      commandValidate({ ide: 'gemini', strict: true, verbose: false })
+    ).resolves.toBeUndefined();
   });
 });

@@ -1,9 +1,11 @@
 # Query Original
 
 ## Pergunta
+
 Quais alternativas viaveis existem ao Nogic MCP para resolver os 5 gaps de code intelligence identificados no Epic NoGIC do AIOS?
 
 ## Contexto Inferido
+
 - **Focus:** Comparison (alternativas)
 - **Domain:** Code Intelligence, MCP, AST/Static Analysis, AI Dev Tools
 - **Temporal:** 2025-2026
@@ -15,6 +17,7 @@ Quais alternativas viaveis existem ao Nogic MCP para resolver os 5 gaps de code 
   5. Entity Registry morto (usedBy vazio)
 
 ## Sub-queries Pesquisadas
+
 1. Nogic MCP status, capabilities, pricing, maturity
 2. MCP servers for code intelligence (alternatives)
 3. Static analysis tools (tree-sitter, Sourcegraph, SCIP, LSP)
@@ -22,6 +25,7 @@ Quais alternativas viaveis existem ao Nogic MCP para resolver os 5 gaps de code 
 5. Building custom code intelligence with AST (interrupted)
 
 ## Workers
+
 - Dispatched: 5
 - Succeeded: 4
 - Failed/Interrupted: 1

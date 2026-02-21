@@ -46,7 +46,9 @@ export const updateSuccessStoryHandler = (req: Request, res: Response) =>
     TE.match(
       (error) => {
         logger.error(`Failed to update success story with ID ${req.params.id}:`, error);
-        res.status(error.type === 'ValidationError' || error.type === 'NotFoundError' ? 400 : 500).json({ error });
+        res
+          .status(error.type === 'ValidationError' || error.type === 'NotFoundError' ? 400 : 500)
+          .json({ error });
       },
       (story) => res.status(200).json(story)
     )

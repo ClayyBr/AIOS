@@ -5,7 +5,12 @@ const path = require('path');
 const yaml = require('js-yaml');
 const os = require('os');
 
-const { RegistryUpdater, AUDIT_LOG_PATH, LOCK_FILE, BACKUP_DIR } = require('../../../.aios-core/core/ids/registry-updater');
+const {
+  RegistryUpdater,
+  AUDIT_LOG_PATH,
+  LOCK_FILE,
+  BACKUP_DIR,
+} = require('../../../.aios-core/core/ids/registry-updater');
 
 const FIXTURES = path.resolve(__dirname, 'fixtures');
 const TEMP_DIR = path.join(os.tmpdir(), 'ids-updater-test-' + Date.now());
@@ -144,7 +149,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/new-task.md',
-        '# New Task\n\n## Purpose\nA brand new task for testing.\n',
+        '# New Task\n\n## Purpose\nA brand new task for testing.\n'
       );
 
       const result = await updater.processChanges([{ action: 'add', filePath }]);
@@ -163,7 +168,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/scripts/helper.js',
-        '// Helper script\nmodule.exports = {};\n',
+        '// Helper script\nmodule.exports = {};\n'
       );
 
       await updater.processChanges([{ action: 'add', filePath }]);
@@ -177,7 +182,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/deploy-automation.md',
-        '# Deploy Automation Task\n\n## Purpose\nAutomate deployment pipeline.\n',
+        '# Deploy Automation Task\n\n## Purpose\nAutomate deployment pipeline.\n'
       );
 
       await updater.processChanges([{ action: 'add', filePath }]);
@@ -192,7 +197,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/scripts/consumer.js',
-        "const helper = require('./helper');\nmodule.exports = {};\n",
+        "const helper = require('./helper');\nmodule.exports = {};\n"
       );
 
       await updater.processChanges([{ action: 'add', filePath }]);
@@ -212,7 +217,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/core/utils/new-module.js',
-        '// New module\nmodule.exports = {};\n',
+        '// New module\nmodule.exports = {};\n'
       );
 
       await updater.processChanges([{ action: 'add', filePath }]);
@@ -230,7 +235,7 @@ describe('RegistryUpdater', () => {
       // Create a task file that matches existing entity
       const filePath = createTempFile(
         '.aios-core/development/tasks/test-task.md',
-        '# Test Task Updated\n\n## Purpose\nUpdated purpose for the test task.\n',
+        '# Test Task Updated\n\n## Purpose\nUpdated purpose for the test task.\n'
       );
 
       const result = await updater.processChanges([{ action: 'change', filePath }]);
@@ -239,7 +244,9 @@ describe('RegistryUpdater', () => {
 
       const registry = readRegistry();
       const entity = registry.entities.tasks['test-task'];
-      expect(entity.checksum).not.toBe('sha256:0000000000000000000000000000000000000000000000000000000000000000');
+      expect(entity.checksum).not.toBe(
+        'sha256:0000000000000000000000000000000000000000000000000000000000000000'
+      );
       expect(entity.purpose).toContain('Updated purpose');
     });
 
@@ -247,21 +254,23 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/test-task.md',
-        '# Test Task\n\n## Purpose\nSame content.\n',
+        '# Test Task\n\n## Purpose\nSame content.\n'
       );
 
       await updater.processChanges([{ action: 'change', filePath }]);
 
       const registry = readRegistry();
       const entity = registry.entities.tasks['test-task'];
-      expect(new Date(entity.lastVerified).getTime()).toBeGreaterThan(new Date('2026-02-08T00:00:00Z').getTime());
+      expect(new Date(entity.lastVerified).getTime()).toBeGreaterThan(
+        new Date('2026-02-08T00:00:00Z').getTime()
+      );
     });
 
     it('creates entity if modified file was not in registry', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/brand-new.md',
-        '# Brand New Task\n\n## Purpose\nThis was not tracked before.\n',
+        '# Brand New Task\n\n## Purpose\nThis was not tracked before.\n'
       );
 
       await updater.processChanges([{ action: 'change', filePath }]);
@@ -274,7 +283,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/test-task.md',
-        '# Deployment Orchestration\n\n## Purpose\nOrchestrate deployment workflows.\n',
+        '# Deployment Orchestration\n\n## Purpose\nOrchestrate deployment workflows.\n'
       );
 
       await updater.processChanges([{ action: 'change', filePath }]);
@@ -353,11 +362,11 @@ describe('RegistryUpdater', () => {
 
       const file1 = createTempFile(
         '.aios-core/development/tasks/batch-task-1.md',
-        '# Batch Task 1\n\n## Purpose\nFirst batch task.\n',
+        '# Batch Task 1\n\n## Purpose\nFirst batch task.\n'
       );
       const file2 = createTempFile(
         '.aios-core/development/tasks/batch-task-2.md',
-        '# Batch Task 2\n\n## Purpose\nSecond batch task.\n',
+        '# Batch Task 2\n\n## Purpose\nSecond batch task.\n'
       );
       const deleteFile = path.join(TEMP_DIR, '.aios-core/development/tasks/test-task.md');
 
@@ -381,7 +390,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/scripts/something.test.js',
-        '// test file\n',
+        '// test file\n'
       );
 
       const result = await updater.processChanges([{ action: 'add', filePath }]);
@@ -393,7 +402,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/core/node_modules/pkg/index.js',
-        '// node module\n',
+        '// node module\n'
       );
 
       const result = await updater.processChanges([{ action: 'add', filePath }]);
@@ -403,10 +412,7 @@ describe('RegistryUpdater', () => {
 
     it('ignores README.md files', async () => {
       const updater = createUpdater();
-      const filePath = createTempFile(
-        '.aios-core/development/tasks/README.md',
-        '# README\n',
-      );
+      const filePath = createTempFile('.aios-core/development/tasks/README.md', '# README\n');
 
       const result = await updater.processChanges([{ action: 'add', filePath }]);
 
@@ -424,10 +430,7 @@ describe('RegistryUpdater', () => {
 
     it('ignores unsupported file extensions', async () => {
       const updater = createUpdater();
-      const filePath = createTempFile(
-        '.aios-core/development/tasks/image.png',
-        'binary content',
-      );
+      const filePath = createTempFile('.aios-core/development/tasks/image.png', 'binary content');
 
       const result = await updater.processChanges([{ action: 'add', filePath }]);
 
@@ -440,7 +443,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/locked-file.md',
-        '# Locked File\n',
+        '# Locked File\n'
       );
 
       // Make the file unreadable (platform-dependent)
@@ -463,7 +466,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/agent-output.md',
-        '# Agent Output\n\n## Purpose\nGenerated by agent.\n',
+        '# Agent Output\n\n## Purpose\nGenerated by agent.\n'
       );
 
       const task = { id: 'TASK-42', agent: '@dev' };
@@ -498,21 +501,23 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/ts-check.md',
-        '# Timestamp Check\n\n## Purpose\nVerify timestamps.\n',
+        '# Timestamp Check\n\n## Purpose\nVerify timestamps.\n'
       );
 
       const before = new Date().toISOString();
       await updater.processChanges([{ action: 'add', filePath }]);
 
       const registry = readRegistry();
-      expect(new Date(registry.metadata.lastUpdated).getTime()).toBeGreaterThanOrEqual(new Date(before).getTime());
+      expect(new Date(registry.metadata.lastUpdated).getTime()).toBeGreaterThanOrEqual(
+        new Date(before).getTime()
+      );
     });
 
     it('updates entity count after changes', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/count-check.md',
-        '# Count Check\n',
+        '# Count Check\n'
       );
 
       await updater.processChanges([{ action: 'add', filePath }]);
@@ -545,13 +550,13 @@ describe('RegistryUpdater', () => {
       // Create a script that is depended upon
       createTempFile(
         '.aios-core/development/scripts/test-script.js',
-        '// Test script\nmodule.exports = {};\n',
+        '// Test script\nmodule.exports = {};\n'
       );
 
       // Create a task that depends on test-script
       const consumerPath = createTempFile(
         '.aios-core/development/tasks/consumer.md',
-        '# Consumer Task\n\ndependencies:\n  - test-script\n',
+        '# Consumer Task\n\ndependencies:\n  - test-script\n'
       );
 
       await updater.processChanges([{ action: 'add', filePath: consumerPath }]);
@@ -569,7 +574,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/audit-test.md',
-        '# Audit Test\n\n## Purpose\nTest audit logging.\n',
+        '# Audit Test\n\n## Purpose\nTest audit logging.\n'
       );
 
       await updater.processChanges([{ action: 'add', filePath }]);
@@ -585,7 +590,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/filter-test.md',
-        '# Filter Test\n',
+        '# Filter Test\n'
       );
 
       await updater.processChanges([{ action: 'add', filePath }]);
@@ -627,7 +632,7 @@ describe('RegistryUpdater', () => {
 
       const filePath = createTempFile(
         '.aios-core/development/tasks/rotation-trigger.md',
-        '# Rotation Trigger\n\n## Purpose\nTrigger log rotation.\n',
+        '# Rotation Trigger\n\n## Purpose\nTrigger log rotation.\n'
       );
 
       const result = await updater.processChanges([{ action: 'add', filePath }]);
@@ -653,14 +658,14 @@ describe('RegistryUpdater', () => {
         files.push(
           createTempFile(
             `.aios-core/development/tasks/concurrent-${i}.md`,
-            `# Concurrent ${i}\n\n## Purpose\nConcurrent test ${i}.\n`,
-          ),
+            `# Concurrent ${i}\n\n## Purpose\nConcurrent test ${i}.\n`
+          )
         );
       }
 
       // Fire 5 processChanges in parallel
       const results = await Promise.all(
-        files.map((f) => updater.processChanges([{ action: 'add', filePath: f }])),
+        files.map((f) => updater.processChanges([{ action: 'add', filePath: f }]))
       );
 
       // All should complete (no thrown exceptions)
@@ -682,11 +687,11 @@ describe('RegistryUpdater', () => {
 
       const file1 = createTempFile(
         '.aios-core/development/tasks/instance-a.md',
-        '# Instance A\n\n## Purpose\nFrom updater 1.\n',
+        '# Instance A\n\n## Purpose\nFrom updater 1.\n'
       );
       const file2 = createTempFile(
         '.aios-core/development/tasks/instance-b.md',
-        '# Instance B\n\n## Purpose\nFrom updater 2.\n',
+        '# Instance B\n\n## Purpose\nFrom updater 2.\n'
       );
 
       const [r1, r2] = await Promise.all([
@@ -710,7 +715,7 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aios-core/development/tasks/perf-single.md',
-        '# Performance Single\n\n## Purpose\nBenchmark single file.\n',
+        '# Performance Single\n\n## Purpose\nBenchmark single file.\n'
       );
 
       const start = Date.now();
@@ -726,7 +731,7 @@ describe('RegistryUpdater', () => {
       for (let i = 0; i < 10; i++) {
         const fp = createTempFile(
           `.aios-core/development/tasks/perf-batch-${i}.md`,
-          `# Perf Batch ${i}\n\n## Purpose\nBenchmark batch ${i}.\n`,
+          `# Perf Batch ${i}\n\n## Purpose\nBenchmark batch ${i}.\n`
         );
         changes.push({ action: 'add', filePath: fp });
       }

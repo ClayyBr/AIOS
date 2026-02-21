@@ -154,7 +154,9 @@ describe('decision-recorder', () => {
 
   describe('completeDecisionLogging', () => {
     it('should complete logging and generate log file', async () => {
-      const { generateDecisionLog } = require('../../.aios-core/development/scripts/decision-log-generator');
+      const {
+        generateDecisionLog,
+      } = require('../../.aios-core/development/scripts/decision-log-generator');
 
       await initializeDecisionLogging('dev', 'test.md');
 
@@ -167,13 +169,16 @@ describe('decision-recorder', () => {
       const logPath = await completeDecisionLogging('6.1.2.6.2', 'completed');
 
       expect(logPath).toBe('.ai/decision-log-test.md');
-      expect(generateDecisionLog).toHaveBeenCalledWith('6.1.2.6.2', expect.objectContaining({
-        agentId: 'dev',
-        status: 'completed',
-        decisions: expect.any(Array),
-        filesModified: expect.any(Array),
-        testsRun: expect.any(Array),
-      }));
+      expect(generateDecisionLog).toHaveBeenCalledWith(
+        '6.1.2.6.2',
+        expect.objectContaining({
+          agentId: 'dev',
+          status: 'completed',
+          decisions: expect.any(Array),
+          filesModified: expect.any(Array),
+          testsRun: expect.any(Array),
+        })
+      );
     });
 
     it('should reset global context after completion', async () => {
@@ -191,7 +196,9 @@ describe('decision-recorder', () => {
     });
 
     it('should handle errors during log generation', async () => {
-      const { generateDecisionLog } = require('../../.aios-core/development/scripts/decision-log-generator');
+      const {
+        generateDecisionLog,
+      } = require('../../.aios-core/development/scripts/decision-log-generator');
       generateDecisionLog.mockRejectedValueOnce(new Error('File system error'));
 
       await initializeDecisionLogging('dev', 'test.md');
@@ -200,7 +207,9 @@ describe('decision-recorder', () => {
     });
 
     it('should use default status "completed"', async () => {
-      const { generateDecisionLog } = require('../../.aios-core/development/scripts/decision-log-generator');
+      const {
+        generateDecisionLog,
+      } = require('../../.aios-core/development/scripts/decision-log-generator');
 
       await initializeDecisionLogging('dev', 'test.md');
       await completeDecisionLogging('test');
@@ -247,7 +256,9 @@ describe('decision-recorder', () => {
 
   describe('integration workflow', () => {
     it('should support full yolo mode workflow', async () => {
-      const { generateDecisionLog } = require('../../.aios-core/development/scripts/decision-log-generator');
+      const {
+        generateDecisionLog,
+      } = require('../../.aios-core/development/scripts/decision-log-generator');
 
       // Initialize
       await initializeDecisionLogging('dev', 'docs/stories/story-6.1.2.6.2.md', {

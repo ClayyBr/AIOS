@@ -26,14 +26,17 @@ describe('Path Validator', () => {
 
   it('passes with relative canonical paths', () => {
     write(path.join(tmpRoot, 'AGENTS.md'), '# Agents\n');
-    write(path.join(tmpRoot, '.aios-core', 'product', 'templates', 'ide-rules', 'codex-rules.md'), '# codex\n');
+    write(
+      path.join(tmpRoot, '.aios-core', 'product', 'templates', 'ide-rules', 'codex-rules.md'),
+      '# codex\n'
+    );
     write(
       path.join(skillsDir, 'aios-dev', 'SKILL.md'),
       [
         '# Skill',
         'Load .aios-core/development/agents/dev.md',
         'Run node .aios-core/development/scripts/generate-greeting.js dev',
-      ].join('\n'),
+      ].join('\n')
     );
 
     const result = validatePaths({
@@ -51,14 +54,17 @@ describe('Path Validator', () => {
 
   it('fails when absolute user path is found', () => {
     write(path.join(tmpRoot, 'AGENTS.md'), 'Path /Users/alan/Code/aios-core');
-    write(path.join(tmpRoot, '.aios-core', 'product', 'templates', 'ide-rules', 'codex-rules.md'), '# codex\n');
+    write(
+      path.join(tmpRoot, '.aios-core', 'product', 'templates', 'ide-rules', 'codex-rules.md'),
+      '# codex\n'
+    );
     write(
       path.join(skillsDir, 'aios-dev', 'SKILL.md'),
       [
         '# Skill',
         'Load .aios-core/development/agents/dev.md',
         'Run node .aios-core/development/scripts/generate-greeting.js dev',
-      ].join('\n'),
+      ].join('\n')
     );
 
     const result = validatePaths({
@@ -71,12 +77,15 @@ describe('Path Validator', () => {
     });
 
     expect(result.ok).toBe(false);
-    expect(result.errors.some(error => error.includes('forbidden absolute path'))).toBe(true);
+    expect(result.errors.some((error) => error.includes('forbidden absolute path'))).toBe(true);
   });
 
   it('fails when skill lacks canonical activation paths', () => {
     write(path.join(tmpRoot, 'AGENTS.md'), '# Agents\n');
-    write(path.join(tmpRoot, '.aios-core', 'product', 'templates', 'ide-rules', 'codex-rules.md'), '# codex\n');
+    write(
+      path.join(tmpRoot, '.aios-core', 'product', 'templates', 'ide-rules', 'codex-rules.md'),
+      '# codex\n'
+    );
     write(path.join(skillsDir, 'aios-dev', 'SKILL.md'), '# Skill\nUse dev\n');
 
     const result = validatePaths({
@@ -89,7 +98,11 @@ describe('Path Validator', () => {
     });
 
     expect(result.ok).toBe(false);
-    expect(result.errors.some(error => error.includes('missing canonical source path'))).toBe(true);
-    expect(result.errors.some(error => error.includes('missing canonical greeting script path'))).toBe(true);
+    expect(result.errors.some((error) => error.includes('missing canonical source path'))).toBe(
+      true
+    );
+    expect(
+      result.errors.some((error) => error.includes('missing canonical greeting script path'))
+    ).toBe(true);
   });
 });

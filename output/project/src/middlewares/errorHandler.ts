@@ -7,7 +7,13 @@ export class AppError extends Error {
   public readonly isOperational: boolean;
   public readonly errors?: ZodIssue[]; // Optional: for validation error details
 
-  constructor(name: string, message: string, statusCode: number = 500, errors?: ZodIssue[], isOperational: boolean = true) {
+  constructor(
+    name: string,
+    message: string,
+    statusCode: number = 500,
+    errors?: ZodIssue[],
+    isOperational: boolean = true
+  ) {
     super(message);
     Object.setPrototypeOf(this, new.target.prototype); // Restores prototype chain
     this.name = name;
@@ -19,9 +25,17 @@ export class AppError extends Error {
 }
 
 // Middleware de tratamento de erros centralizado
-export const errorHandlerMiddleware = (err: AppError | Error, req: Request, res: Response, next: NextFunction) => {
+export const errorHandlerMiddleware = (
+  err: AppError | Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (err instanceof AppError) {
-    console.error(`🚨 AppError: [${err.name}] ${err.message} (Status: ${err.statusCode})`, err.errors || err.stack);
+    console.error(
+      `🚨 AppError: [${err.name}] ${err.message} (Status: ${err.statusCode})`,
+      err.errors || err.stack
+    );
     return res.status(err.statusCode).json({
       status: 'error',
       name: err.name,

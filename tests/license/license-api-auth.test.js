@@ -9,7 +9,11 @@
 
 const http = require('http');
 const { LicenseApiClient } = require('../../pro/license/license-api');
-const { AuthError, BuyerValidationError, LicenseActivationError } = require('../../pro/license/errors');
+const {
+  AuthError,
+  BuyerValidationError,
+  LicenseActivationError,
+} = require('../../pro/license/errors');
 
 describe('license-api auth methods', () => {
   let server;
@@ -54,10 +58,12 @@ describe('license-api auth methods', () => {
           expect(data.password).toBe('TestPass123');
 
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({
-            userId: 'user-123',
-            message: 'Verification email sent.',
-          }));
+          res.end(
+            JSON.stringify({
+              userId: 'user-123',
+              message: 'Verification email sent.',
+            })
+          );
         });
       });
 
@@ -71,10 +77,12 @@ describe('license-api auth methods', () => {
     it('should throw AuthError for existing email', async () => {
       await createMockServer((req, res) => {
         res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          message: 'User already registered',
-          code: 'BAD_REQUEST',
-        }));
+        res.end(
+          JSON.stringify({
+            message: 'User already registered',
+            code: 'BAD_REQUEST',
+          })
+        );
       });
 
       const client = new LicenseApiClient({ baseUrl: serverUrl });
@@ -119,11 +127,13 @@ describe('license-api auth methods', () => {
           expect(data.email).toBe('user@example.com');
 
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({
-            accessToken: 'session-token-abc',
-            userId: 'user-123',
-            emailVerified: true,
-          }));
+          res.end(
+            JSON.stringify({
+              accessToken: 'session-token-abc',
+              userId: 'user-123',
+              emailVerified: true,
+            })
+          );
         });
       });
 
@@ -155,11 +165,13 @@ describe('license-api auth methods', () => {
     it('should return emailVerified=false for unverified users', async () => {
       await createMockServer((req, res) => {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          accessToken: 'session-token',
-          userId: 'user-456',
-          emailVerified: false,
-        }));
+        res.end(
+          JSON.stringify({
+            accessToken: 'session-token',
+            userId: 'user-456',
+            emailVerified: false,
+          })
+        );
       });
 
       const client = new LicenseApiClient({ baseUrl: serverUrl });
@@ -175,10 +187,12 @@ describe('license-api auth methods', () => {
         expect(req.url).toBe('/api/v1/auth/verify-status');
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          emailVerified: true,
-          email: 'user@example.com',
-        }));
+        res.end(
+          JSON.stringify({
+            emailVerified: true,
+            email: 'user@example.com',
+          })
+        );
       });
 
       const client = new LicenseApiClient({ baseUrl: serverUrl });
@@ -191,10 +205,12 @@ describe('license-api auth methods', () => {
     it('should return verified=false for unverified email', async () => {
       await createMockServer((req, res) => {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          emailVerified: false,
-          email: 'unverified@example.com',
-        }));
+        res.end(
+          JSON.stringify({
+            emailVerified: false,
+            email: 'unverified@example.com',
+          })
+        );
       });
 
       const client = new LicenseApiClient({ baseUrl: serverUrl });
@@ -243,10 +259,12 @@ describe('license-api auth methods', () => {
     it('should throw BuyerValidationError for non-buyer (AC-4)', async () => {
       await createMockServer((req, res) => {
         res.writeHead(403, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          message: 'Not a buyer',
-          code: 'NOT_A_BUYER',
-        }));
+        res.end(
+          JSON.stringify({
+            message: 'Not a buyer',
+            code: 'NOT_A_BUYER',
+          })
+        );
       });
 
       const client = new LicenseApiClient({ baseUrl: serverUrl });
@@ -263,10 +281,12 @@ describe('license-api auth methods', () => {
     it('should throw AuthError for unverified email', async () => {
       await createMockServer((req, res) => {
         res.writeHead(403, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          message: 'Email not verified',
-          code: 'EMAIL_NOT_VERIFIED',
-        }));
+        res.end(
+          JSON.stringify({
+            message: 'Email not verified',
+            code: 'EMAIL_NOT_VERIFIED',
+          })
+        );
       });
 
       const client = new LicenseApiClient({ baseUrl: serverUrl });
@@ -283,10 +303,12 @@ describe('license-api auth methods', () => {
     it('should throw LicenseActivationError for seat limit', async () => {
       await createMockServer((req, res) => {
         res.writeHead(403, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          code: 'SEAT_LIMIT_EXCEEDED',
-          details: { used: 2, max: 2 },
-        }));
+        res.end(
+          JSON.stringify({
+            code: 'SEAT_LIMIT_EXCEEDED',
+            details: { used: 2, max: 2 },
+          })
+        );
       });
 
       const client = new LicenseApiClient({ baseUrl: serverUrl });
@@ -303,10 +325,12 @@ describe('license-api auth methods', () => {
     it('should throw BuyerValidationError for service unavailable', async () => {
       await createMockServer((req, res) => {
         res.writeHead(503, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          message: 'Buyer service unavailable',
-          code: 'BUYER_SERVICE_UNAVAILABLE',
-        }));
+        res.end(
+          JSON.stringify({
+            message: 'Buyer service unavailable',
+            code: 'BUYER_SERVICE_UNAVAILABLE',
+          })
+        );
       });
 
       const client = new LicenseApiClient({ baseUrl: serverUrl });

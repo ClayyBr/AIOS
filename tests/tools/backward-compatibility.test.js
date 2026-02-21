@@ -213,8 +213,16 @@ describeIntegration('Backward Compatibility - No-Validator Pass-Through', () => 
       const validator = new ToolValidationHelper(undefined);
 
       const commands = [
-        'create', 'update', 'delete', 'list', 'get',
-        'execute', 'run', 'start', 'stop', 'configure',
+        'create',
+        'update',
+        'delete',
+        'list',
+        'get',
+        'execute',
+        'run',
+        'start',
+        'stop',
+        'configure',
       ];
 
       for (const command of commands) {
@@ -360,7 +368,7 @@ describeIntegration('Backward Compatibility - No-Validator Pass-Through', () => 
       const validator = new ToolValidationHelper(null);
 
       const promises = Array.from({ length: 50 }, (_, i) =>
-        validator.validate(`command${i}`, { data: i }),
+        validator.validate(`command${i}`, { data: i })
       );
 
       const start = Date.now();
@@ -415,7 +423,7 @@ describeIntegration('Backward Compatibility - No-Validator Pass-Through', () => 
       expect(report.validation_errors).toHaveLength(0);
       expect(report.performance_issues).toHaveLength(0);
 
-      report.v1_tools.forEach(tool => {
+      report.v1_tools.forEach((tool) => {
         expect(tool.has_exec_knowledge).toBe(false);
         expect(tool.validation_passed).toBe(true);
         expect(tool.duration_ms).toBeLessThan(1);

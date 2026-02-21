@@ -197,7 +197,7 @@ describe('TerminalSpawner', () => {
 
       try {
         await expect(TerminalSpawner.pollForOutput(outputPath, 600)).rejects.toThrow(
-          /Timeout waiting for agent output/,
+          /Timeout waiting for agent output/
         );
       } finally {
         await fs.unlink(lockPath).catch(() => {});
@@ -284,7 +284,7 @@ describe('TerminalSpawner', () => {
   describe('spawnAgent Validation', () => {
     test('should reject invalid agent ID', async () => {
       await expect(TerminalSpawner.spawnAgent('', 'develop')).rejects.toThrow(
-        /Agent ID is required/,
+        /Agent ID is required/
       );
     });
 
@@ -294,13 +294,13 @@ describe('TerminalSpawner', () => {
 
     test('should reject agent ID with invalid characters', async () => {
       await expect(TerminalSpawner.spawnAgent('dev@123', 'develop')).rejects.toThrow(
-        /Invalid agent ID format/,
+        /Invalid agent ID format/
       );
     });
 
     test('should reject task with invalid characters', async () => {
       await expect(TerminalSpawner.spawnAgent('dev', 'develop!test')).rejects.toThrow(
-        /Invalid task format/,
+        /Invalid task format/
       );
     });
 

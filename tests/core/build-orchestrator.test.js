@@ -15,16 +15,16 @@
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const {
-  createTempDir,
-  cleanupTempDir,
-  collectEvents,
-} = require('./execution-test-helpers');
+const { createTempDir, cleanupTempDir, collectEvents } = require('./execution-test-helpers');
 
 // Mock optional modules to prevent constructor errors
 jest.mock('../../.aios-core/workflow-intelligence/engine/wave-analyzer', () => null);
-jest.mock('../../.aios-core/infrastructure/scripts/worktree-manager', () => { throw new Error('not available'); });
-jest.mock('../../.aios-core/core/memory/gotchas-memory', () => { throw new Error('not available'); });
+jest.mock('../../.aios-core/infrastructure/scripts/worktree-manager', () => {
+  throw new Error('not available');
+});
+jest.mock('../../.aios-core/core/memory/gotchas-memory', () => {
+  throw new Error('not available');
+});
 
 const {
   BuildOrchestrator,
@@ -145,16 +145,14 @@ describe('BuildOrchestrator', () => {
     });
 
     test('should emit phase_failed on error (BO-28)', async () => {
-      const tracker = collectEvents(orchestrator, [
-        OrchestratorEvent.PHASE_FAILED,
-      ]);
+      const tracker = collectEvents(orchestrator, [OrchestratorEvent.PHASE_FAILED]);
 
       const ctx = { storyId: 'test-story', phases: {} };
 
       await expect(
         orchestrator.runPhase(ctx, Phase.PLAN, async () => {
           throw new Error('plan failed');
-        }),
+        })
       ).rejects.toThrow('plan failed');
 
       expect(tracker.count(OrchestratorEvent.PHASE_FAILED)).toBe(1);
@@ -181,7 +179,7 @@ describe('BuildOrchestrator', () => {
       orchestrator.activeBuilds.set('story-1', { storyId: 'story-1' });
 
       await expect(orchestrator.build('story-1')).rejects.toThrow(
-        'Build already in progress for story-1',
+        'Build already in progress for story-1'
       );
     });
 
@@ -217,7 +215,9 @@ describe('BuildOrchestrator', () => {
       await orchestrator.build('missing-story', { useWorktree: false, runQA: false });
 
       expect(tracker.count(OrchestratorEvent.BUILD_FAILED)).toBe(1);
-      expect(tracker.getByName(OrchestratorEvent.BUILD_FAILED)[0].data.storyId).toBe('missing-story');
+      expect(tracker.getByName(OrchestratorEvent.BUILD_FAILED)[0].data.storyId).toBe(
+        'missing-story'
+      );
     });
   });
 
@@ -261,10 +261,7 @@ describe('BuildOrchestrator', () => {
       // Create plan dir and file
       const planDir = path.join(testDir, 'plan');
       fs.mkdirSync(planDir, { recursive: true });
-      fs.writeFileSync(
-        path.join(planDir, 'implementation.yaml'),
-        'storyId: test\nphases: []',
-      );
+      fs.writeFileSync(path.join(planDir, 'implementation.yaml'), 'storyId: test\nphases: []');
 
       const ctx = {
         storyId: 'test',
@@ -353,7 +350,7 @@ describe('BuildOrchestrator', () => {
       fs.mkdirSync(storiesDir, { recursive: true });
       fs.writeFileSync(
         path.join(storiesDir, 'gen-plan-story.md'),
-        '# Story\n\n- [ ] AC1: First criteria\n- [ ] AC2: Second criteria\n',
+        '# Story\n\n- [ ] AC1: First criteria\n- [ ] AC2: Second criteria\n'
       );
 
       const ctx = {
@@ -441,7 +438,11 @@ describe('BuildOrchestrator', () => {
       const buildCtx = {
         storyId: 'story-1',
         relevantGotchas: [
-          { title: 'ESM import issue', description: 'Use require() not import', workaround: 'Use CommonJS' },
+          {
+            title: 'ESM import issue',
+            description: 'Use require() not import',
+            workaround: 'Use CommonJS',
+          },
         ],
       };
 

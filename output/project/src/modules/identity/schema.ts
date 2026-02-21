@@ -5,7 +5,7 @@ export const userRegistrationInputSchema = z.object({
   email: z.string().email('Email inválido.').min(1, 'Email é obrigatório.'),
   password: z.string().min(8, 'Senha deve ter no mínimo 8 caracteres.'),
   companyName: z.string().min(1, 'Nome da empresa é obrigatório.').optional(),
-  name: z.string().min(1, 'Nome é obrigatório.').optional()
+  name: z.string().min(1, 'Nome é obrigatório.').optional(),
 });
 
 // Tipo inferido do schema de input

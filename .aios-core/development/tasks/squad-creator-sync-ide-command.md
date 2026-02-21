@@ -271,13 +271,13 @@ Sincroniza TODOS os componentes de um squad:
 
 ## Error Handling
 
-| Error                  | Causa                           | Solução                     |
-| ---------------------- | ------------------------------- | --------------------------- |
-| `Source not found`     | Arquivo não existe em squads/   | Verifique o nome e tipo     |
+| Error                   | Causa                           | Solução                     |
+| ----------------------- | ------------------------------- | --------------------------- |
+| `Source not found`      | Arquivo não existe em squads/   | Verifique o nome e tipo     |
 | `Squad alias not found` | Squad não está em squad_aliases | Adicione ao .aios-sync.yaml |
-| `File exists`          | Destino já existe               | Use --force ou escolha ação |
-| `IDE not active`       | IDE não está em active_ides     | Ative no .aios-sync.yaml    |
-| `Invalid YAML`         | Arquivo fonte com YAML inválido | Corrija o arquivo fonte     |
+| `File exists`           | Destino já existe               | Use --force ou escolha ação |
+| `IDE not active`        | IDE não está em active_ides     | Ative no .aios-sync.yaml    |
+| `Invalid YAML`          | Arquivo fonte com YAML inválido | Corrija o arquivo fonte     |
 
 ## Implementation Guide
 

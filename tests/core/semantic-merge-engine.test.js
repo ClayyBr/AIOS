@@ -8,10 +8,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const {
-  createTempDir,
-  cleanupTempDir,
-} = require('./execution-test-helpers');
+const { createTempDir, cleanupTempDir } = require('./execution-test-helpers');
 
 const {
   SemanticMergeEngine,
@@ -100,7 +97,7 @@ describe('SemanticMergeEngine Module', () => {
     });
 
     test('extractElements finds JS imports', () => {
-      const code = 'import { foo } from \'bar\';\nimport baz from \'qux\';';
+      const code = "import { foo } from 'bar';\nimport baz from 'qux';";
       const result = analyzer.extractElements(code, 'javascript');
       expect(result.imports.length).toBeGreaterThanOrEqual(1);
     });
@@ -130,7 +127,7 @@ describe('SemanticMergeEngine Module', () => {
       const before = 'function oldFunc() { return true; }';
       const after = '';
       const result = analyzer.analyzeDiff('test.js', before, after);
-      const removed = result.changes.filter(c => c.changeType === ChangeType.FUNCTION_REMOVED);
+      const removed = result.changes.filter((c) => c.changeType === ChangeType.FUNCTION_REMOVED);
       expect(removed.length).toBe(1);
     });
 
@@ -169,11 +166,23 @@ describe('SemanticMergeEngine Module', () => {
       const analyses = {
         task1: {
           filePath: 'app.js',
-          changes: [{ changeType: ChangeType.FUNCTION_MODIFIED, target: 'handleSubmit', location: 'line 10' }],
+          changes: [
+            {
+              changeType: ChangeType.FUNCTION_MODIFIED,
+              target: 'handleSubmit',
+              location: 'line 10',
+            },
+          ],
         },
         task2: {
           filePath: 'app.js',
-          changes: [{ changeType: ChangeType.FUNCTION_MODIFIED, target: 'handleSubmit', location: 'line 10' }],
+          changes: [
+            {
+              changeType: ChangeType.FUNCTION_MODIFIED,
+              target: 'handleSubmit',
+              location: 'line 10',
+            },
+          ],
         },
       };
 
@@ -189,7 +198,10 @@ describe('SemanticMergeEngine Module', () => {
     });
 
     test('getCompatibility returns incompatible for function_removed+function_modified', () => {
-      const result = detector.getCompatibility(ChangeType.FUNCTION_REMOVED, ChangeType.FUNCTION_MODIFIED);
+      const result = detector.getCompatibility(
+        ChangeType.FUNCTION_REMOVED,
+        ChangeType.FUNCTION_MODIFIED
+      );
       expect(result.compatible).toBe(false);
       expect(result.severity).toBe(ConflictSeverity.CRITICAL);
     });
@@ -318,7 +330,11 @@ describe('SemanticMergeEngine Module', () => {
         tasksInvolved: ['t1'],
       };
       const ctx = resolver.buildContext(conflict, 'base code', {
-        t1: { intent: 'fix bug', changes: [{ changeType: 'function_modified' }], content: 'new code' },
+        t1: {
+          intent: 'fix bug',
+          changes: [{ changeType: 'function_modified' }],
+          content: 'new code',
+        },
       });
       expect(ctx).toContain('app.js');
       expect(ctx).toContain('fix bug');
@@ -430,7 +446,9 @@ describe('SemanticMergeEngine Module', () => {
 
   describe('SemanticAnalyzer - Python analysis', () => {
     let pyAnalyzer;
-    beforeEach(() => { pyAnalyzer = new SemanticAnalyzer(); });
+    beforeEach(() => {
+      pyAnalyzer = new SemanticAnalyzer();
+    });
 
     test('extractElements detects Python imports and functions', () => {
       const pyCode = `import os
@@ -461,7 +479,9 @@ class MyClass:
 
   describe('AIResolver helpers', () => {
     let resolver;
-    beforeEach(() => { resolver = new AIResolver(); });
+    beforeEach(() => {
+      resolver = new AIResolver();
+    });
 
     test('buildContext returns formatted context string', () => {
       const conflict = {
@@ -480,10 +500,7 @@ class MyClass:
     });
 
     test('buildMergePrompt returns prompt string', () => {
-      const prompt = resolver.buildMergePrompt(
-        { location: 'line 5' },
-        '## Context\nSome context',
-      );
+      const prompt = resolver.buildMergePrompt({ location: 'line 5' }, '## Context\nSome context');
       expect(prompt).toContain('code merge specialist');
       expect(prompt).toContain('Context');
     });
@@ -543,7 +560,7 @@ class MyClass:
         {
           t1: { changes: [{ type: 'edit' }] },
           t2: { changes: [{ type: 'edit' }, { type: 'add' }, { type: 'edit' }] },
-        },
+        }
       );
       expect(result).toBe('much more changed content here');
     });

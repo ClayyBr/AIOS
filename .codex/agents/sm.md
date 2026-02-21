@@ -216,18 +216,18 @@ Type `*help` to see all commands.
 
 **Commands I delegate:**
 
-| Request | Delegate To | Command |
-|---------|-------------|---------|
-| Push to remote | @devops | `*push` |
-| Create PR | @devops | `*create-pr` |
+| Request           | Delegate To  | Command           |
+| ----------------- | ------------ | ----------------- |
+| Push to remote    | @devops      | `*push`           |
+| Create PR         | @devops      | `*create-pr`      |
 | Course correction | @aios-master | `*correct-course` |
 
 **Commands I receive from:**
 
-| From | For | My Action |
-|------|-----|-----------|
-| @pm | Epic ready | `*draft` (create stories) |
-| @po | Story prioritized | `*draft` (refine story) |
+| From | For               | My Action                 |
+| ---- | ----------------- | ------------------------- |
+| @pm  | Epic ready        | `*draft` (create stories) |
+| @po  | Story prioritized | `*draft` (refine story)   |
 
 ---
 
@@ -271,5 +271,7 @@ Type `*help` to see all commands.
 - **@github-devops (Gage)** - Handles push operations
 
 ---
+
 ---
-*AIOS Agent - Synced from .aios-core/development/agents/sm.md*
+
+_AIOS Agent - Synced from .aios-core/development/agents/sm.md_

@@ -15,25 +15,32 @@ const os = require('os');
 const path = require('path');
 
 // Mock parseManifest before requiring manifest-collector
-jest.mock(
-  '../../../.aios-core/core/synapse/domain/domain-loader',
-  () => ({
-    parseManifest: jest.fn(),
-    loadDomainFile: jest.fn(() => []),
-    isExcluded: jest.fn(() => false),
-    matchKeywords: jest.fn(() => false),
-    extractDomainInfo: jest.fn(() => ({ domainName: null, suffix: null })),
-    domainNameToFile: jest.fn((name) => name.toLowerCase().replace(/_/g, '-')),
-    KNOWN_SUFFIXES: [],
-    GLOBAL_KEYS: [],
-  })
-);
+jest.mock('../../../.aios-core/core/synapse/domain/domain-loader', () => ({
+  parseManifest: jest.fn(),
+  loadDomainFile: jest.fn(() => []),
+  isExcluded: jest.fn(() => false),
+  matchKeywords: jest.fn(() => false),
+  extractDomainInfo: jest.fn(() => ({ domainName: null, suffix: null })),
+  domainNameToFile: jest.fn((name) => name.toLowerCase().replace(/_/g, '-')),
+  KNOWN_SUFFIXES: [],
+  GLOBAL_KEYS: [],
+}));
 
-const { collectHookStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/hook-collector');
-const { collectSessionStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/session-collector');
-const { collectManifestIntegrity } = require('../../../.aios-core/core/synapse/diagnostics/collectors/manifest-collector');
-const { collectPipelineSimulation } = require('../../../.aios-core/core/synapse/diagnostics/collectors/pipeline-collector');
-const { collectUapBridgeStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/uap-collector');
+const {
+  collectHookStatus,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/hook-collector');
+const {
+  collectSessionStatus,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/session-collector');
+const {
+  collectManifestIntegrity,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/manifest-collector');
+const {
+  collectPipelineSimulation,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/pipeline-collector');
+const {
+  collectUapBridgeStatus,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/uap-collector');
 const { parseManifest } = require('../../../.aios-core/core/synapse/domain/domain-loader');
 
 // ---------------------------------------------------------------------------
@@ -77,10 +84,7 @@ describe('hook-collector: collectHookStatus', () => {
     });
 
     // Create the hook file so check 2 + 3 also pass
-    writeFile(
-      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'),
-      'module.exports = {};'
-    );
+    writeFile(path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'), 'module.exports = {};');
 
     const result = collectHookStatus(tmpDir);
 
@@ -145,10 +149,7 @@ describe('hook-collector: collectHookStatus', () => {
     writeJson(path.join(tmpDir, '.claude', 'settings.local.json'), {
       hooks: { UserPromptSubmit: [] },
     });
-    writeFile(
-      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'),
-      'module.exports = {};'
-    );
+    writeFile(path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'), 'module.exports = {};');
 
     const result = collectHookStatus(tmpDir);
 
@@ -171,15 +172,10 @@ describe('hook-collector: collectHookStatus', () => {
   test('handles hook entry as object with command property', () => {
     writeJson(path.join(tmpDir, '.claude', 'settings.local.json'), {
       hooks: {
-        UserPromptSubmit: [
-          { command: 'node .claude/hooks/synapse-engine.js', timeout: 5000 },
-        ],
+        UserPromptSubmit: [{ command: 'node .claude/hooks/synapse-engine.js', timeout: 5000 }],
       },
     });
-    writeFile(
-      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'),
-      'module.exports = {};'
-    );
+    writeFile(path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'), 'module.exports = {};');
 
     const result = collectHookStatus(tmpDir);
 
@@ -188,10 +184,7 @@ describe('hook-collector: collectHookStatus', () => {
   });
 
   test('handles malformed JSON in settings.local.json', () => {
-    writeFile(
-      path.join(tmpDir, '.claude', 'settings.local.json'),
-      '{ invalid json'
-    );
+    writeFile(path.join(tmpDir, '.claude', 'settings.local.json'), '{ invalid json');
 
     const result = collectHookStatus(tmpDir);
 

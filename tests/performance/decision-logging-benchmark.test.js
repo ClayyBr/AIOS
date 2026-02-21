@@ -25,14 +25,14 @@ describeIntegration('Decision Logging Performance Benchmarks', () => {
 
   // Performance targets (AC8)
   const TARGETS = {
-    initialization: 50,        // <50ms (includes git, config loading)
-    recordDecision: 5,         // <5ms per call
-    trackFile: 2,              // <2ms per call
-    trackTest: 2,              // <2ms per call
-    updateMetrics: 1,          // <1ms
-    logGeneration: 30,         // <30ms
-    indexUpdate: 5,            // <5ms
-    totalOverhead: 50,          // <50ms (CRITICAL)
+    initialization: 50, // <50ms (includes git, config loading)
+    recordDecision: 5, // <5ms per call
+    trackFile: 2, // <2ms per call
+    trackTest: 2, // <2ms per call
+    updateMetrics: 1, // <1ms
+    logGeneration: 30, // <30ms
+    indexUpdate: 5, // <5ms
+    totalOverhead: 50, // <50ms (CRITICAL)
   };
 
   beforeEach(async () => {
@@ -106,7 +106,9 @@ describeIntegration('Decision Logging Performance Benchmarks', () => {
       expect(avgTime).toBeLessThan(TARGETS.recordDecision);
       expect(maxTime).toBeLessThan(TARGETS.recordDecision * 2); // Allow 2x for outliers
 
-      console.log(`recordDecision: avg=${avgTime.toFixed(2)}ms, max=${maxTime}ms (target: <${TARGETS.recordDecision}ms) ✓`);
+      console.log(
+        `recordDecision: avg=${avgTime.toFixed(2)}ms, max=${maxTime}ms (target: <${TARGETS.recordDecision}ms) ✓`
+      );
     });
 
     it('should track file in <2ms per call', async () => {
@@ -130,7 +132,9 @@ describeIntegration('Decision Logging Performance Benchmarks', () => {
       expect(avgTime).toBeLessThan(TARGETS.trackFile);
       expect(maxTime).toBeLessThan(TARGETS.trackFile * 2);
 
-      console.log(`trackFile: avg=${avgTime.toFixed(2)}ms, max=${maxTime}ms (target: <${TARGETS.trackFile}ms) ✓`);
+      console.log(
+        `trackFile: avg=${avgTime.toFixed(2)}ms, max=${maxTime}ms (target: <${TARGETS.trackFile}ms) ✓`
+      );
     });
 
     it('should track test in <2ms per call', async () => {
@@ -158,7 +162,9 @@ describeIntegration('Decision Logging Performance Benchmarks', () => {
       expect(avgTime).toBeLessThan(TARGETS.trackTest);
       expect(maxTime).toBeLessThan(TARGETS.trackTest * 2);
 
-      console.log(`trackTest: avg=${avgTime.toFixed(2)}ms, max=${maxTime}ms (target: <${TARGETS.trackTest}ms) ✓`);
+      console.log(
+        `trackTest: avg=${avgTime.toFixed(2)}ms, max=${maxTime}ms (target: <${TARGETS.trackTest}ms) ✓`
+      );
     });
 
     it('should update metrics in <1ms', async () => {
@@ -262,11 +268,15 @@ describeIntegration('Decision Logging Performance Benchmarks', () => {
       // CRITICAL: Must be under 50ms
       expect(totalOverhead).toBeLessThan(TARGETS.totalOverhead);
 
-      console.log(`\n📊 TOTAL WORKFLOW OVERHEAD: ${totalOverhead}ms (target: <${TARGETS.totalOverhead}ms) ✓`);
+      console.log(
+        `\n📊 TOTAL WORKFLOW OVERHEAD: ${totalOverhead}ms (target: <${TARGETS.totalOverhead}ms) ✓`
+      );
       console.log('   - Decisions: 7');
       console.log('   - Files: 12');
       console.log('   - Tests: 15');
-      console.log(`   - Status: ${totalOverhead < TARGETS.totalOverhead ? '✅ PASS' : '❌ FAIL'}\n`);
+      console.log(
+        `   - Status: ${totalOverhead < TARGETS.totalOverhead ? '✅ PASS' : '❌ FAIL'}\n`
+      );
     });
 
     it('should handle large workflow (100 decisions) efficiently', async () => {
@@ -304,7 +314,9 @@ describeIntegration('Decision Logging Performance Benchmarks', () => {
       // Allow 2x target for stress test (100ms)
       expect(totalOverhead).toBeLessThan(TARGETS.totalOverhead * 2);
 
-      console.log(`\n⚡ STRESS TEST (100 decisions): ${totalOverhead}ms (max: <${TARGETS.totalOverhead * 2}ms) ✓`);
+      console.log(
+        `\n⚡ STRESS TEST (100 decisions): ${totalOverhead}ms (max: <${TARGETS.totalOverhead * 2}ms) ✓`
+      );
     });
   });
 
@@ -341,7 +353,9 @@ describeIntegration('Decision Logging Performance Benchmarks', () => {
         expect(secondAvg).toBeLessThanOrEqual(1); // Both should be <1ms
       }
 
-      console.log(`Regression check: first=${firstAvg.toFixed(2)}ms, second=${secondAvg.toFixed(2)}ms ✓`);
+      console.log(
+        `Regression check: first=${firstAvg.toFixed(2)}ms, second=${secondAvg.toFixed(2)}ms ✓`
+      );
     });
   });
 

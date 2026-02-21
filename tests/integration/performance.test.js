@@ -18,7 +18,9 @@ jest.mock('../../.aios-core/core/session/context-detector');
 jest.mock('../../.aios-core/infrastructure/scripts/git-config-detector');
 jest.mock('../../.aios-core/infrastructure/scripts/project-status-loader');
 
-const { loadProjectStatus } = require('../../.aios-core/infrastructure/scripts/project-status-loader');
+const {
+  loadProjectStatus,
+} = require('../../.aios-core/infrastructure/scripts/project-status-loader');
 
 describeIntegration('Greeting Performance Tests', () => {
   let builder;
@@ -134,8 +136,8 @@ describeIntegration('Greeting Performance Tests', () => {
       const times = [];
 
       // Mock slow operation to trigger fallback
-      loadProjectStatus.mockImplementation(() =>
-        new Promise(resolve => setTimeout(resolve, 200)),
+      loadProjectStatus.mockImplementation(
+        () => new Promise((resolve) => setTimeout(resolve, 200))
       );
 
       for (let i = 0; i < ITERATIONS; i++) {

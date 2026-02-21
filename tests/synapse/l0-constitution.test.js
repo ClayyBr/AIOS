@@ -58,11 +58,14 @@ describe('L0ConstitutionProcessor', () => {
     test('should load constitution rules from domain file', () => {
       // Given: constitution domain file with rules
       const constitutionFile = path.join(tempDir, 'constitution');
-      fs.writeFileSync(constitutionFile, [
-        'CONSTITUTION_RULE_ART1_0=CLI First (NON-NEGOTIABLE)',
-        'CONSTITUTION_RULE_ART2_0=Agent Authority (NON-NEGOTIABLE)',
-        'CONSTITUTION_RULE_ART3_0=Story-Driven (MUST)',
-      ].join('\n'));
+      fs.writeFileSync(
+        constitutionFile,
+        [
+          'CONSTITUTION_RULE_ART1_0=CLI First (NON-NEGOTIABLE)',
+          'CONSTITUTION_RULE_ART2_0=Agent Authority (NON-NEGOTIABLE)',
+          'CONSTITUTION_RULE_ART3_0=Story-Driven (MUST)',
+        ].join('\n')
+      );
 
       const context = {
         prompt: 'test prompt',

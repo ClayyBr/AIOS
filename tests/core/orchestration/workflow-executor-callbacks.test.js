@@ -44,7 +44,7 @@ workflow:
 `;
     await fs.writeFile(
       path.join(tempDir, '.aios-core/development/workflows/development-cycle.yaml'),
-      workflowContent,
+      workflowContent
     );
 
     executor = new WorkflowExecutor(tempDir, { debug: false });

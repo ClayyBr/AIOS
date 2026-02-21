@@ -25,14 +25,15 @@ async function cleanupWithRetry(dir, maxRetries = 5, retryDelay = 100) {
       }
       return;
     } catch (error) {
-      const isRetryable = error.code && ['ENOTEMPTY', 'EBUSY', 'EPERM', 'EACCES'].includes(error.code);
+      const isRetryable =
+        error.code && ['ENOTEMPTY', 'EBUSY', 'EPERM', 'EACCES'].includes(error.code);
       if (attempt === maxRetries || !isRetryable) {
         // Last attempt failed or non-retryable error, log but don't throw
         console.warn(`Warning: Failed to cleanup ${dir} after ${attempt} attempts:`, error.code);
         return;
       }
       // Linear backoff (100ms, 200ms, 300ms...)
-      await new Promise(resolve => setTimeout(resolve, retryDelay * attempt));
+      await new Promise((resolve) => setTimeout(resolve, retryDelay * attempt));
     }
   }
 }
@@ -50,7 +51,7 @@ describe('Environment Configuration Integration', () => {
 
   afterEach(async () => {
     // Small delay to allow file handles to close
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     // Cleanup test directory with retry logic
     await cleanupWithRetry(testDir);
   });
@@ -213,7 +214,9 @@ describe('Environment Configuration Integration', () => {
       await updateGitignore(testDir);
 
       const content = await fs.readFile(gitignorePath, 'utf8');
-      const lines = content.split('\n').filter(line => line.trim() === '.env' || line.trim() === '/.env');
+      const lines = content
+        .split('\n')
+        .filter((line) => line.trim() === '.env' || line.trim() === '/.env');
       expect(lines.length).toBe(1);
     });
 
@@ -224,7 +227,9 @@ describe('Environment Configuration Integration', () => {
       await updateGitignore(testDir);
 
       const content = await fs.readFile(gitignorePath, 'utf8');
-      const lines = content.split('\n').filter(line => line.trim() === '.env' || line.trim() === '/.env');
+      const lines = content
+        .split('\n')
+        .filter((line) => line.trim() === '.env' || line.trim() === '/.env');
       expect(lines.length).toBe(1);
     });
   });
@@ -301,12 +306,7 @@ describe('Environment Configuration Integration', () => {
       });
 
       // Check all expected files exist
-      const expectedFiles = [
-        '.env',
-        '.env.example',
-        '.gitignore',
-        '.aios-core/core-config.yaml',
-      ];
+      const expectedFiles = ['.env', '.env.example', '.gitignore', '.aios-core/core-config.yaml'];
 
       for (const file of expectedFiles) {
         const filePath = path.join(testDir, file);

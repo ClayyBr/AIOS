@@ -175,7 +175,11 @@ describe('Schema v2.0 Compliance', () => {
   test('loadSession rejects sessions with wrong schema_version', () => {
     fs.mkdirSync(sessionsDir, { recursive: true });
     const filePath = path.join(sessionsDir, 'bad-schema.json');
-    const badSession = { uuid: 'bad-schema', schema_version: '1.0', started: new Date().toISOString() };
+    const badSession = {
+      uuid: 'bad-schema',
+      schema_version: '1.0',
+      started: new Date().toISOString(),
+    };
     fs.writeFileSync(filePath, JSON.stringify(badSession), 'utf8');
 
     const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
@@ -183,9 +187,7 @@ describe('Schema v2.0 Compliance', () => {
     const result = loadSession('bad-schema', sessionsDir);
 
     expect(result).toBeNull();
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('schema_version "1.0"'),
-    );
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('schema_version "1.0"'));
 
     warnSpy.mockRestore();
   });
@@ -210,7 +212,7 @@ describe('Stale Session Cleanup', () => {
     fs.writeFileSync(
       path.join(sessionsDir, 'stale-001.json'),
       JSON.stringify(staleSession),
-      'utf8',
+      'utf8'
     );
 
     // Create a recent session (1 hour old)
@@ -224,7 +226,7 @@ describe('Stale Session Cleanup', () => {
     fs.writeFileSync(
       path.join(sessionsDir, 'recent-001.json'),
       JSON.stringify(recentSession),
-      'utf8',
+      'utf8'
     );
 
     const removed = cleanStaleSessions(sessionsDir, 24);
@@ -395,9 +397,7 @@ describe('Error Handling', () => {
     const result = loadSession('corrupt', sessionsDir);
 
     expect(result).toBeNull();
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Corrupted JSON'),
-    );
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Corrupted JSON'));
 
     warnSpy.mockRestore();
   });
@@ -558,7 +558,9 @@ describe('createSession Permission Error Handling', () => {
     const result = createSession('perm-create', tmpDir, sessionsDir);
 
     expect(result).toBeNull();
-    expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining('Permission denied creating session'));
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Permission denied creating session')
+    );
 
     fs.writeFileSync.mockRestore();
     errorSpy.mockRestore();
@@ -587,7 +589,9 @@ describe('updateSession Write Permission Error Handling', () => {
     const result = updateSession('perm-update', sessionsDir, { title: 'test' });
 
     expect(result).toBeNull();
-    expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining('Permission denied writing session'));
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Permission denied writing session')
+    );
 
     fs.writeFileSync.mockRestore();
     errorSpy.mockRestore();

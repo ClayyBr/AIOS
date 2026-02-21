@@ -142,11 +142,13 @@ describe('MetricsCollector', () => {
     });
 
     it('should reject invalid layer numbers', async () => {
-      await expect(collector.recordRun(0, { passed: true }))
-        .rejects.toThrow('Layer must be 1, 2, or 3');
+      await expect(collector.recordRun(0, { passed: true })).rejects.toThrow(
+        'Layer must be 1, 2, or 3'
+      );
 
-      await expect(collector.recordRun(4, { passed: true }))
-        .rejects.toThrow('Layer must be 1, 2, or 3');
+      await expect(collector.recordRun(4, { passed: true })).rejects.toThrow(
+        'Layer must be 1, 2, or 3'
+      );
     });
 
     it('should include metadata in run record', async () => {

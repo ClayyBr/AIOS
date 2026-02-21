@@ -12,6 +12,7 @@
 ## Resumo Executivo
 
 Este documento fornece a justificativa completa para o sistema de personas dos agentes AIOS, incluindo:
+
 - Por que escolhemos arquétipos do zodíaco
 - Processo de decisão de design
 - Validação de sensibilidade cultural
@@ -29,6 +30,7 @@ Este documento fornece a justificativa completa para o sistema de personas dos a
 Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zodíaco pelas seguintes razões:
 
 #### Vantagens:
+
 1. **Universalmente Reconhecidos** - Conhecidos em todas as culturas, idiomas e demografias
 2. **Framework de Personalidade Rico** - Cada signo tem traços, forças e estilos de comunicação bem definidos
 3. **Perfeito para 12 Agentes** - Mapeamento natural 1:1 (12 signos → 12 agentes)
@@ -39,6 +41,7 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 8. **Pronto para i18n** - Símbolos do zodíaco (♈♉♊) são padrão Unicode, funcionam em todos os idiomas
 
 #### Alternativas Rejeitadas:
+
 - **Myers-Briggs (MBTI)** - 16 tipos não mapeiam para 12 agentes; problemas de licenciamento corporativo
 - **Eneagrama** - Apenas 9 tipos; menos universalmente conhecido
 - **Big Five** - Científico mas abstrato; sem narrativas de personalidade ricas
@@ -49,6 +52,7 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ### Evidências de Pesquisa
 
 **Pesquisa de Usuário Suportando Arquétipos:**
+
 - **+40% conclusão de tarefas** com agentes nomeados (32 estudos de UX)
 - **+20% conformidade com conselhos** quando personalidade é estabelecida (pesquisa de psicologia)
 - **+23% engajamento** com branding arquetípico (estudos de caso de marketing)
@@ -66,6 +70,7 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 **Resposta:** SIM - com implementação cuidadosa
 
 #### Processo de Validação:
+
 1. **Revisão por Equipe Diversa** - 3+ membros diversos da equipe revisaram atribuições de arquétipos
 2. **Pesquisa Cultural** - Verificada aceitação do zodíaco em 10+ culturas
 3. **Evitar Estereótipos** - Garantido que arquétipos são aspiracionais, não limitantes
@@ -74,18 +79,21 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 #### Principais Descobertas:
 
 **Universalmente Reconhecido:**
+
 - Culturas ocidentais: Bem conhecido através da astrologia
 - Culturas orientais: Zodíaco chinês com estrutura similar, astrologia védica compatível
 - América Latina: Profundamente familiar ("signo do zodíaco")
 - Oriente Médio: Origens históricas na astronomia babilônica
 
 **Não-Ofensivo:**
+
 - Sem estereótipos culturais incorporados
 - Não associado a nenhuma religião específica
 - Usado para traços de personalidade, não previsões
 - Arquétipos são positivos e aspiracionais
 
 **Considerações:**
+
 - Alguns usuários podem não acreditar em astrologia (→ opção Nível 1 "Mínimo" disponível)
 - Evitar afirmar poder preditivo (não afirmamos - apenas framework de personalidade)
 - Manter implementação secular e profissional
@@ -118,21 +126,25 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ### Como Mapeamos Agentes para Arquétipos
 
 **Passo 1: Definir Função Principal do Agente**
+
 - O que este agente FAZ?
 - Qual é sua energia primária?
 - Qual personalidade melhor serviria este papel?
 
 **Passo 2: Pesquisar Traços do Zodíaco**
+
 - Revisar todos os 12 signos do zodíaco
 - Identificar características primárias
 - Notar estilos de comunicação e forças
 
 **Passo 3: Combinar Função com Arquétipo**
+
 - Encontrar alinhamento natural entre papel do agente e traços do zodíaco
 - Garantir que não há mapeamentos forçados
 - Validar com equipe
 
 **Passo 4: Equilibrar Elementos**
+
 - Garantir 3 Fogo, 3 Terra, 3 Ar, 3 Água
 - Distribuir cores uniformemente
 - Verificar diversidade funcional
@@ -140,9 +152,11 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ### Exemplos de Mapeamento
 
 #### Exemplo 1: @dev → Aquário (Dex)
+
 **Função do Agente:** Construir código, inovar soluções, resolver problemas técnicos
 
 **Traços de Aquário:**
+
 - Inovador, visionário
 - Ama tecnologia e experimentação
 - Progressivo, orientado ao futuro
@@ -154,9 +168,11 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ---
 
 #### Exemplo 2: @qa → Virgem (Quinn)
+
 **Função do Agente:** Garantia de qualidade, testes, perfeccionismo
 
 **Traços de Virgem:**
+
 - Orientado a detalhes, analítico
 - Perfeccionista, altos padrões
 - Metódico, sistemático
@@ -168,9 +184,11 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ---
 
 #### Exemplo 3: @po → Libra (Pax)
+
 **Função do Agente:** Equilibrar prioridades, mediar stakeholders, criar harmonia
 
 **Traços de Libra:**
+
 - Equilibrado, justo, diplomático
 - Busca harmonia e equilíbrio
 - Excelente comunicador
@@ -184,14 +202,17 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ## Opções Alternativas Consideradas
 
 ### Opção 1: Myers-Briggs (MBTI)
+
 **Framework:** 16 tipos de personalidade (INTJ, ENFP, etc.)
 
 **Prós:**
+
 - Amplamente conhecido em ambientes corporativos
 - Descrições de personalidade ricas
 - Respaldado por pesquisa
 
 **Contras:**
+
 - 16 tipos não mapeiam para 12 agentes
 - Restrições de licenciamento corporativo
 - Menos universalmente conhecido que zodíaco
@@ -202,14 +223,17 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ---
 
 ### Opção 2: Eneagrama
+
 **Framework:** 9 tipos de personalidade + asas
 
 **Prós:**
+
 - Framework psicológico profundo
 - Popularidade crescente
 - Ângulo espiritual/crescimento pessoal
 
 **Contras:**
+
 - Apenas 9 tipos (precisamos de 12)
 - Menos familiar para usuários médios
 - Mais complexo de explicar
@@ -219,14 +243,17 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ---
 
 ### Opção 3: Big Five (OCEAN)
+
 **Framework:** Abertura, Conscienciosidade, Extroversão, Amabilidade, Neuroticismo
 
 **Prós:**
+
 - Modelo de personalidade mais cientificamente válido
 - Respaldado por pesquisa
 - Imparcial
 
 **Contras:**
+
 - Escalas abstratas, não tipos discretos
 - Sem narrativas de personalidade ricas
 - Menos envolvente/memorável
@@ -237,14 +264,17 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ---
 
 ### Opção 4: Mitologia Grega
+
 **Framework:** Deuses e heróis (Zeus, Atena, etc.)
 
 **Prós:**
+
 - Narrativa rica
 - Arquétipos bem conhecidos
 - Associações heroicas
 
 **Contras:**
+
 - Viés cultural ocidental
 - Conotações religiosas para alguns
 - Gênero definido (Zeus masculino, Atena feminina)
@@ -255,14 +285,17 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ---
 
 ### Opção 5: Framework Personalizado
+
 **Framework:** Criar nossos próprios arquétipos do zero
 
 **Prós:**
+
 - Controle completo
 - Perfeitamente combinado com AIOS
 - Sem bagagem cultural
 
 **Contras:**
+
 - Sem familiaridade existente do usuário
 - Requer educação extensiva do usuário
 - Sem respaldo de pesquisa
@@ -277,6 +310,7 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ### Teste de Pronúncia (EN + PT-BR)
 
 **Metodologia:**
+
 - 2+ falantes nativos de inglês
 - 2+ falantes nativos de português (Brasil)
 - Ler todos os 12 nomes em voz alta
@@ -305,23 +339,27 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 ### Revisão de Sensibilidade Cultural
 
 **Revisores:** 3+ membros diversos da equipe
+
 - Diversidade geográfica: EUA, Brasil, Europa
 - Backgrounds culturais: Ocidental, Latino, Asiático-Americano
 - Faixa etária: 25-55
 
 **Perguntas da Revisão:**
+
 1. Algum arquétipo é culturalmente ofensivo?
 2. Algum nome parece inapropriado?
 3. Existem estereótipos não intencionais?
 4. Você se sentiria confortável usando esses agentes?
 
 **Resultados:**
+
 - **100% aprovação** - Nenhuma preocupação levantada
 - **Nenhuma associação ofensiva** identificada
 - **Todos os nomes neutros em gênero** confirmados
 - Consenso **profissional e apropriado**
 
 **Destaques do Feedback:**
+
 - "Zodíaco é familiar mas não vinculado à minha cultura - parece universal"
 - "Nomes são profissionais mas amigáveis"
 - "Aprecio a abordagem neutra em gênero"
@@ -334,21 +372,22 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 **Validação da Paleta de Cores:**
 Todas as 7 cores testadas para contraste contra fundo branco:
 
-| Cor | Hex | Taxa de Contraste | WCAG AA (4.5:1) |
-|-----|-----|-------------------|-----------------|
-| Ciano | #00BCD4 | 4.52:1 | APROVADO |
-| Verde | #4CAF50 | 4.56:1 | APROVADO |
-| Amarelo | #FFC107 | 4.61:1 | APROVADO |
-| Vermelho | #F44336 | 4.84:1 | APROVADO |
-| Cinza | #607D8B | 5.12:1 | APROVADO |
-| Magenta | #E91E63 | 4.67:1 | APROVADO |
-| Azul | #2196F3 | 4.93:1 | APROVADO |
+| Cor      | Hex     | Taxa de Contraste | WCAG AA (4.5:1) |
+| -------- | ------- | ----------------- | --------------- |
+| Ciano    | #00BCD4 | 4.52:1            | APROVADO        |
+| Verde    | #4CAF50 | 4.56:1            | APROVADO        |
+| Amarelo  | #FFC107 | 4.61:1            | APROVADO        |
+| Vermelho | #F44336 | 4.84:1            | APROVADO        |
+| Cinza    | #607D8B | 5.12:1            | APROVADO        |
+| Magenta  | #E91E63 | 4.67:1            | APROVADO        |
+| Azul     | #2196F3 | 4.93:1            | APROVADO        |
 
 **Ferramenta Usada:** WebAIM Contrast Checker
 **Resultado:** **Todas as cores em conformidade com WCAG AA**
 
 **Teste de Daltonismo:**
 Testado com Coblis Color Blindness Simulator:
+
 - Protanopia (cegueira ao vermelho): Todas as cores distinguíveis
 - Deuteranopia (cegueira ao verde): Todas as cores distinguíveis
 - Tritanopia (cegueira ao azul): Todas as cores distinguíveis
@@ -376,6 +415,7 @@ Testado com Coblis Color Blindness Simulator:
 | Orion | Nenhum | Nome de constelação, sem conflitos |
 
 **Conclusão:** **APROVADO** - Sem conflitos bloqueantes
+
 - Conflito Ajax é intencional e positivo (reforça competência técnica)
 
 ---
@@ -383,12 +423,15 @@ Testado com Coblis Color Blindness Simulator:
 ## Princípios de Design Aplicados
 
 ### Princípio 1: Neutro em Gênero por Padrão
+
 **Implementação:**
+
 - Todos os nomes funcionam para qualquer identidade de gênero
 - Sem sufixos de gênero (-son, -daughter)
 - Testado com equipe diversa para viés inconsciente
 
 **Exemplos:**
+
 - Dex, Quinn, Pax (claramente neutros)
 - Morgan, River, Aria (tradicionalmente unissex)
 - Evitado: Alexander, Victoria, Marcus (com gênero)
@@ -396,12 +439,15 @@ Testado com Coblis Color Blindness Simulator:
 ---
 
 ### Princípio 2: Pronúncia Global
+
 **Implementação:**
+
 - Nomes pronunciáveis em EN e PT-BR
 - Evitar sons difíceis em qualquer idioma
 - Nomes curtos (3-6 caracteres) mais fáceis de falar
 
 **Exemplos:**
+
 - Pax (2 sons comuns)
 - Uma (vogais simples)
 - Evitado: Niamh (letras silenciosas), Xiomara (complexo para EN)
@@ -409,12 +455,15 @@ Testado com Coblis Color Blindness Simulator:
 ---
 
 ### Princípio 3: Profissional mas Pessoal
+
 **Implementação:**
+
 - Nomes adequados para contextos empresariais
 - Não muito brincalhões ou infantis
 - Memoráveis mas sérios
 
 **Equilíbrio:**
+
 - Profissional: Morgan, Atlas, Aria
 - Amigável: River, Uma, Dex
 - Muito brincalhão (evitado): Sparky, Chippy, Buddy
@@ -422,12 +471,15 @@ Testado com Coblis Color Blindness Simulator:
 ---
 
 ### Princípio 4: Conexão Semântica com o Papel
+
 **Implementação:**
+
 - Nomes sugerem função do agente quando possível
 - Usar significado/etimologia estrategicamente
 - Criar associações memoráveis
 
 **Exemplos:**
+
 - Pax = "paz" (Latim) → equilibra conflitos como PO
 - Dex = "destreza" → construtor habilidoso
 - Atlas = "suporta" (Grego) → carrega peso da análise
@@ -442,21 +494,25 @@ Testado com Coblis Color Blindness Simulator:
 **Epic 6.1 definiu estas métricas de sucesso (linhas 298-303):**
 
 #### Métrica de Qualidade:
+
 - **Meta:** 5/5 estrelas da revisão da equipe
 - **Real:** A definir (pendente revisão da equipe na Tarefa 2.2)
 - **Medição:** Pesquisar 5+ membros da equipe
 
 #### Métrica de Sensibilidade Cultural:
+
 - **Meta:** 100% aprovação de revisores diversos
 - **Real:** 100% alcançado (3/3 revisores aprovaram)
 - **Medição:** Nenhuma preocupação levantada durante revisão
 
 #### Métrica de Usabilidade:
+
 - **Meta:** Story 6.1.2 pode implementar sem retrabalho
 - **Real:** A definir (pendente validação de handoff)
 - **Medição:** Zero perguntas de esclarecimento da equipe implementadora
 
 #### Métrica de Acessibilidade:
+
 - **Meta:** Paleta de cores passa padrões WCAG AA
 - **Real:** 100% alcançado (todas as 7 cores passam proporção 4.5:1)
 - **Medição:** WebAIM Contrast Checker
@@ -470,28 +526,31 @@ Testado com Coblis Color Blindness Simulator:
 **Para Atualizações de Arquivos de Agentes (Story 6.1.2):**
 
 1. **Adicionar ao Frontmatter YAML:**
+
 ```yaml
 agent:
-  name: Dex          # De persona-definitions.yaml
-  id: dev            # Manter ID existente
-  icon: ⚡           # Das definições de persona
-  color: cyan        # Das definições de persona
+  name: Dex # De persona-definitions.yaml
+  id: dev # Manter ID existente
+  icon: ⚡ # Das definições de persona
+  color: cyan # Das definições de persona
   archetype: Aquarius # Opcional (apenas Nível 3)
 ```
 
 2. **Atualizar Lógica de Saudação:**
+
 ```javascript
 // Nível 1: Mínimo
-greeting = `${icon} ${title} Agent ready`
+greeting = `${icon} ${title} Agent ready`;
 
 // Nível 2: Nomeado
-greeting = `${icon} ${name} (${role}) ready. ${catchphrase}!`
+greeting = `${icon} ${name} (${role}) ready. ${catchphrase}!`;
 
 // Nível 3: Arquetípico
-greeting = `${icon} ${name} the ${role} (${zodiac_symbol} ${archetype}) ready to ${action}!`
+greeting = `${icon} ${name} the ${role} (${zodiac_symbol} ${archetype}) ready to ${action}!`;
 ```
 
 3. **Preservar Funcionalidade Existente:**
+
 - NÃO mudar IDs de agentes (@dev, @qa, etc.)
 - Manter todos os comandos e dependências existentes
 - Apenas ADICIONAR campos de persona, não remover nada
@@ -501,6 +560,7 @@ greeting = `${icon} ${name} the ${role} (${zodiac_symbol} ${archetype}) ready to
 ## Referências & Pesquisa
 
 ### Fontes de Pesquisa UX:
+
 1. "The Impact of Anthropomorphism on Trust in AI Agents" (2023)
    - Descoberta: +40% conclusão de tarefas com agentes nomeados
 
@@ -511,11 +571,13 @@ greeting = `${icon} ${name} the ${role} (${zodiac_symbol} ${archetype}) ready to
    - Descoberta: +23% engajamento com associações arquetípicas
 
 ### Fontes de Pesquisa Cultural:
+
 1. "Global Recognition of Zodiac Archetypes" (Cultural Anthropology, 2020)
 2. "Gender-Neutral Naming Trends in Technology" (2023)
 3. "WCAG 2.1 Accessibility Guidelines" (W3C, 2018)
 
 ### Referências de Design System:
+
 1. Material Design Color System (Google)
 2. IBM Design Language (Personalidade em UX Empresarial)
 3. Atlassian Design System (Tom & Voz)
@@ -551,6 +613,7 @@ greeting = `${icon} ${name} the ${role} (${zodiac_symbol} ${archetype}) ready to
 8. Habilita sistema de personificação de 3 níveis
 
 **Esta fundação habilitará:**
+
 - Story 6.1.2: Atualizações de arquivos de agentes com personas nomeadas
 - Story 6.1.4: Sistema de configuração com níveis de personificação
 - Epic 7: Suporte i18n com conteúdo traduzível

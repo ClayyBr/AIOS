@@ -59,4 +59,4 @@ git worktree remove ../feature-name
 
 ---
 
-*For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../aios-workflows/auto-worktree-workflow.md).*
+_For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../aios-workflows/auto-worktree-workflow.md)._

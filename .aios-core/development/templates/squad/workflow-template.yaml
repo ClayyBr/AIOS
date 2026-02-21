@@ -5,23 +5,23 @@
 # Created: {{CREATEDAT}}
 # Story: {{STORYID}}
 
-name: {{COMPONENTNAME}}
+name: { { COMPONENTNAME } }
 version: 1.0.0
-description: {{DESCRIPTION}}
-squad: {{SQUADNAME}}
+description: { { DESCRIPTION } }
+squad: { { SQUADNAME } }
 
 # Metadata
 metadata:
-  created: {{CREATEDAT}}
+  created: { { CREATEDAT } }
   author: squad-creator
   tags:
     - workflow
-    - {{SQUADNAME}}
+    - { { SQUADNAME } }
 
 # Trigger conditions
 triggers:
   - type: manual
-    command: "*{{COMPONENTNAME}}"
+    command: '*{{COMPONENTNAME}}'
   # - type: event
   #   event: some-event-name
   # - type: schedule
@@ -32,46 +32,46 @@ inputs:
   - name: param1
     type: string
     required: true
-    description: "Description of parameter 1"
+    description: 'Description of parameter 1'
   - name: param2
     type: string
     required: false
-    default: "default-value"
-    description: "Description of parameter 2"
+    default: 'default-value'
+    description: 'Description of parameter 2'
 
 # Workflow steps
 steps:
   - id: step-1
-    name: "Step 1: Initialize"
-    description: "Initialize the workflow"
+    name: 'Step 1: Initialize'
+    description: 'Initialize the workflow'
     action: task
     task: task-name-1
     inputs:
-      param: "{{inputs.param1}}"
+      param: '{{inputs.param1}}'
     on_error: abort
 
   - id: step-2
-    name: "Step 2: Process"
-    description: "Main processing step"
+    name: 'Step 2: Process'
+    description: 'Main processing step'
     action: task
     task: task-name-2
     depends_on:
       - step-1
     inputs:
-      data: "{{steps.step-1.output}}"
+      data: '{{steps.step-1.output}}'
     on_error: retry
     retry:
       max_attempts: 3
       delay: 1000
 
   - id: step-3
-    name: "Step 3: Finalize"
-    description: "Finalize the workflow"
+    name: 'Step 3: Finalize'
+    description: 'Finalize the workflow'
     action: task
     task: task-name-3
     depends_on:
       - step-2
-    condition: "{{steps.step-2.success}}"
+    condition: '{{steps.step-2.success}}'
 
 # Conditional branches (optional)
 # branches:
@@ -85,8 +85,8 @@ steps:
 # Output definition
 outputs:
   - name: result
-    from: "{{steps.step-3.output}}"
-    description: "Final workflow result"
+    from: '{{steps.step-3.output}}'
+    description: 'Final workflow result'
 
 # Completion handlers
 completion:
@@ -101,8 +101,8 @@ completion:
 # Validation
 validation:
   pre_run:
-    - "Check all required inputs are provided"
-    - "Validate input formats"
+    - 'Check all required inputs are provided'
+    - 'Validate input formats'
   post_run:
-    - "Verify output is valid"
-    - "Log completion metrics"
+    - 'Verify output is valid'
+    - 'Log completion metrics'

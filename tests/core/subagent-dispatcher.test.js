@@ -14,7 +14,9 @@ const {
 } = require('./execution-test-helpers');
 
 // Mock gotchas-memory (exists but exports object, not constructor directly)
-jest.mock('../../.aios-core/core/memory/gotchas-memory', () => { throw new Error('mocked'); });
+jest.mock('../../.aios-core/core/memory/gotchas-memory', () => {
+  throw new Error('mocked');
+});
 
 const { SubagentDispatcher } = require('../../.aios-core/core/execution/subagent-dispatcher');
 
@@ -200,12 +202,16 @@ describe('SubagentDispatcher', () => {
   describe('buildPrompt', () => {
     test('includes agent and task info', () => {
       const sd = new SubagentDispatcher();
-      const prompt = sd.buildPrompt('@dev', {
-        id: 't1',
-        description: 'Build feature X',
-        acceptanceCriteria: ['AC1', 'AC2'],
-        files: ['src/app.js'],
-      }, {});
+      const prompt = sd.buildPrompt(
+        '@dev',
+        {
+          id: 't1',
+          description: 'Build feature X',
+          acceptanceCriteria: ['AC1', 'AC2'],
+          files: ['src/app.js'],
+        },
+        {}
+      );
 
       expect(prompt).toContain('@dev');
       expect(prompt).toContain('Build feature X');
@@ -215,10 +221,14 @@ describe('SubagentDispatcher', () => {
 
     test('includes gotchas and patterns from context', () => {
       const sd = new SubagentDispatcher();
-      const prompt = sd.buildPrompt('@dev', { id: 't1', description: 'test' }, {
-        gotchas: [{ pattern: 'avoid X', workaround: 'use Y' }],
-        patterns: [{ name: 'Pattern A', description: 'Desc' }],
-      });
+      const prompt = sd.buildPrompt(
+        '@dev',
+        { id: 't1', description: 'test' },
+        {
+          gotchas: [{ pattern: 'avoid X', workaround: 'use Y' }],
+          patterns: [{ name: 'Pattern A', description: 'Desc' }],
+        }
+      );
 
       expect(prompt).toContain('avoid X');
       expect(prompt).toContain('Pattern A');

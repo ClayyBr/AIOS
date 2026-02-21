@@ -188,13 +188,13 @@
 
 ### Escopo de Pacotes npm
 
-| Pacote                | Registry    | Licença        |
-| --------------------- | ----------- | -------------- |
-| `@aios/core`          | npm público | MIT            |
-| `@aios/squad-etl`     | npm público | MIT            |
-| `@aios/squad-creator` | npm público | MIT            |
-| `@aios/squad-mmos`    | npm público | MIT            |
-| `@aios/mcp-presets`   | npm público | Apache 2.0     |
+| Pacote                | Registry    | Licença    |
+| --------------------- | ----------- | ---------- |
+| `@aios/core`          | npm público | MIT        |
+| `@aios/squad-etl`     | npm público | MIT        |
+| `@aios/squad-creator` | npm público | MIT        |
+| `@aios/squad-mmos`    | npm público | MIT        |
+| `@aios/mcp-presets`   | npm público | Apache 2.0 |
 
 ---
 

@@ -27,19 +27,28 @@ const startServer = (): TE.TaskEither<AppError, void> =>
   pipe(
     TE.tryCatch(
       () => connectDB(config.mongoUri),
-      (reason) => new AppError('DatabaseConnectionError', `Failed to connect to MongoDB: ${String(reason)}`, 500)
+      (reason) =>
+        new AppError(
+          'DatabaseConnectionError',
+          `Failed to connect to MongoDB: ${String(reason)}`,
+          500
+        )
     ),
     TE.chainW(() =>
       TE.tryCatch(
-        () => new Promise<void>((resolve, reject) => {
-          app.listen(config.port, () => {
-            console.log(`🚀 Server running on port ${config.port}`);
-            resolve();
-          }).on('error', (err) => {
-            reject(err);
-          });
-        }),
-        (reason) => new AppError('ServerError', `Failed to start HTTP server: ${String(reason)}`, 500)
+        () =>
+          new Promise<void>((resolve, reject) => {
+            app
+              .listen(config.port, () => {
+                console.log(`🚀 Server running on port ${config.port}`);
+                resolve();
+              })
+              .on('error', (err) => {
+                reject(err);
+              });
+          }),
+        (reason) =>
+          new AppError('ServerError', `Failed to start HTTP server: ${String(reason)}`, 500)
       )
     )
   );

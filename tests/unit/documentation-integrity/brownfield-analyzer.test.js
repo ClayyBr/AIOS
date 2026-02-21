@@ -51,7 +51,7 @@ describe('Brownfield Analyzer', () => {
     it('should detect Node.js project', () => {
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'test-app', version: '1.0.0' }),
+        JSON.stringify({ name: 'test-app', version: '1.0.0' })
       );
 
       const result = analyzeProject(tempDir);
@@ -63,7 +63,7 @@ describe('Brownfield Analyzer', () => {
     it('should generate summary', () => {
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'test-app', version: '1.0.0' }),
+        JSON.stringify({ name: 'test-app', version: '1.0.0' })
       );
 
       const result = analyzeProject(tempDir);
@@ -77,7 +77,7 @@ describe('Brownfield Analyzer', () => {
     it('should detect Node.js from package.json', () => {
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'test', version: '1.0.0' }),
+        JSON.stringify({ name: 'test', version: '1.0.0' })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {} };
@@ -92,7 +92,7 @@ describe('Brownfield Analyzer', () => {
         JSON.stringify({
           name: 'test',
           dependencies: { react: '^18.0.0' },
-        }),
+        })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {} };
@@ -107,7 +107,7 @@ describe('Brownfield Analyzer', () => {
         JSON.stringify({
           name: 'test',
           dependencies: { vue: '^3.0.0' },
-        }),
+        })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {} };
@@ -122,7 +122,7 @@ describe('Brownfield Analyzer', () => {
         JSON.stringify({
           name: 'test',
           dependencies: { '@angular/core': '^15.0.0' },
-        }),
+        })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {} };
@@ -137,7 +137,7 @@ describe('Brownfield Analyzer', () => {
         JSON.stringify({
           name: 'test',
           dependencies: { next: '^13.0.0' },
-        }),
+        })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {} };
@@ -152,7 +152,7 @@ describe('Brownfield Analyzer', () => {
         JSON.stringify({
           name: 'test',
           dependencies: { '@nestjs/core': '^9.0.0' },
-        }),
+        })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {} };
@@ -167,7 +167,7 @@ describe('Brownfield Analyzer', () => {
         JSON.stringify({
           name: 'test',
           devDependencies: { typescript: '^5.0.0' },
-        }),
+        })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {} };
@@ -177,10 +177,7 @@ describe('Brownfield Analyzer', () => {
     });
 
     it('should detect TypeScript from tsconfig.json', () => {
-      fs.writeFileSync(
-        path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'test' }),
-      );
+      fs.writeFileSync(path.join(tempDir, 'package.json'), JSON.stringify({ name: 'test' }));
       fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), '{}');
 
       const analysis = { techStack: [], frameworks: [], configs: {} };
@@ -195,7 +192,7 @@ describe('Brownfield Analyzer', () => {
         JSON.stringify({
           name: 'test',
           devDependencies: { jest: '^29.0.0' },
-        }),
+        })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {}, testing: 'none' };
@@ -210,7 +207,7 @@ describe('Brownfield Analyzer', () => {
         JSON.stringify({
           name: 'test',
           devDependencies: { vitest: '^0.34.0' },
-        }),
+        })
       );
 
       const analysis = { techStack: [], frameworks: [], configs: {}, testing: 'none' };
@@ -287,7 +284,7 @@ describe('Brownfield Analyzer', () => {
     it('should detect multiple technologies', () => {
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'test', dependencies: { react: '^18.0.0' } }),
+        JSON.stringify({ name: 'test', dependencies: { react: '^18.0.0' } })
       );
       fs.writeFileSync(path.join(tempDir, 'requirements.txt'), 'flask\n');
 
@@ -305,7 +302,12 @@ describe('Brownfield Analyzer', () => {
     it('should detect ESLint from .eslintrc.js', () => {
       fs.writeFileSync(path.join(tempDir, '.eslintrc.js'), 'module.exports = {};');
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.configs.eslint).toBe('.eslintrc.js');
@@ -316,7 +318,12 @@ describe('Brownfield Analyzer', () => {
     it('should detect ESLint from .eslintrc.json', () => {
       fs.writeFileSync(path.join(tempDir, '.eslintrc.json'), '{}');
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.configs.eslint).toBe('.eslintrc.json');
@@ -325,7 +332,12 @@ describe('Brownfield Analyzer', () => {
     it('should detect ESLint flat config', () => {
       fs.writeFileSync(path.join(tempDir, 'eslint.config.js'), 'export default [];');
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.configs.eslint).toBe('eslint.config.js');
@@ -334,7 +346,12 @@ describe('Brownfield Analyzer', () => {
     it('should detect Prettier from .prettierrc', () => {
       fs.writeFileSync(path.join(tempDir, '.prettierrc'), '{}');
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.configs.prettier).toBe('.prettierrc');
@@ -345,7 +362,12 @@ describe('Brownfield Analyzer', () => {
     it('should detect Prettier from prettier.config.js', () => {
       fs.writeFileSync(path.join(tempDir, 'prettier.config.js'), 'module.exports = {};');
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.configs.prettier).toBe('prettier.config.js');
@@ -354,7 +376,12 @@ describe('Brownfield Analyzer', () => {
     it('should detect TypeScript config', () => {
       fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), '{}');
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.configs.tsconfig).toBe('tsconfig.json');
@@ -364,7 +391,12 @@ describe('Brownfield Analyzer', () => {
     it('should detect Flake8', () => {
       fs.writeFileSync(path.join(tempDir, '.flake8'), '[flake8]\nmax-line-length = 100');
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.configs.flake8).toBe('.flake8');
@@ -374,10 +406,15 @@ describe('Brownfield Analyzer', () => {
     it('should detect Black from pyproject.toml', () => {
       fs.writeFileSync(
         path.join(tempDir, 'pyproject.toml'),
-        '[project]\nname = "test"\n\n[tool.black]\nline-length = 100',
+        '[project]\nname = "test"\n\n[tool.black]\nline-length = 100'
       );
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.formatting).toBe('Black');
@@ -389,7 +426,12 @@ describe('Brownfield Analyzer', () => {
       fs.writeFileSync(path.join(tempDir, '.prettierrc'), '{}');
       fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), '{}');
 
-      const analysis = { configs: {}, linting: 'none', formatting: 'none', hasExistingStandards: false };
+      const analysis = {
+        configs: {},
+        linting: 'none',
+        formatting: 'none',
+        hasExistingStandards: false,
+      };
       analyzeCodeStandards(tempDir, analysis);
 
       expect(analysis.configs.eslint).toBe('.eslintrc.js');
@@ -409,9 +451,7 @@ describe('Brownfield Analyzer', () => {
 
       expect(analysis.hasExistingWorkflows).toBe(true);
       expect(analysis.configs.githubWorkflows).toBe('.github/workflows/');
-      expect(analysis.manualReviewItems).toContainEqual(
-        expect.stringContaining('GitHub workflow'),
-      );
+      expect(analysis.manualReviewItems).toContainEqual(expect.stringContaining('GitHub workflow'));
     });
 
     it('should count GitHub workflows', () => {
@@ -425,7 +465,7 @@ describe('Brownfield Analyzer', () => {
       analyzeWorkflows(tempDir, analysis);
 
       expect(analysis.manualReviewItems).toContainEqual(
-        expect.stringContaining('3 existing GitHub workflow'),
+        expect.stringContaining('3 existing GitHub workflow')
       );
     });
 
@@ -437,9 +477,7 @@ describe('Brownfield Analyzer', () => {
 
       expect(analysis.hasExistingWorkflows).toBe(true);
       expect(analysis.configs.gitlabCi).toBe('.gitlab-ci.yml');
-      expect(analysis.manualReviewItems).toContainEqual(
-        expect.stringContaining('GitLab CI'),
-      );
+      expect(analysis.manualReviewItems).toContainEqual(expect.stringContaining('GitLab CI'));
     });
 
     it('should detect CircleCI', () => {
@@ -451,9 +489,7 @@ describe('Brownfield Analyzer', () => {
       analyzeWorkflows(tempDir, analysis);
 
       expect(analysis.hasExistingWorkflows).toBe(true);
-      expect(analysis.manualReviewItems).toContainEqual(
-        expect.stringContaining('CircleCI'),
-      );
+      expect(analysis.manualReviewItems).toContainEqual(expect.stringContaining('CircleCI'));
     });
 
     it('should detect multiple CI systems', () => {
@@ -514,9 +550,7 @@ describe('Brownfield Analyzer', () => {
       const analysis = { hasExistingStructure: false, conflicts: [] };
       analyzeDirectoryStructure(tempDir, analysis);
 
-      expect(analysis.conflicts).toContainEqual(
-        expect.stringContaining('docs/architecture/'),
-      );
+      expect(analysis.conflicts).toContainEqual(expect.stringContaining('docs/architecture/'));
     });
 
     it('should not flag docs without architecture as conflict', () => {
@@ -544,7 +578,7 @@ describe('Brownfield Analyzer', () => {
       generateRecommendations(analysis);
 
       expect(analysis.recommendations).toContainEqual(
-        expect.stringContaining('Preserve existing ESLint'),
+        expect.stringContaining('Preserve existing ESLint')
       );
     });
 
@@ -562,7 +596,7 @@ describe('Brownfield Analyzer', () => {
       generateRecommendations(analysis);
 
       expect(analysis.recommendations).toContainEqual(
-        expect.stringContaining('Consider adding ESLint/Flake8'),
+        expect.stringContaining('Consider adding ESLint/Flake8')
       );
     });
 
@@ -580,7 +614,7 @@ describe('Brownfield Analyzer', () => {
       generateRecommendations(analysis);
 
       expect(analysis.recommendations).toContainEqual(
-        expect.stringContaining('Keep existing Prettier'),
+        expect.stringContaining('Keep existing Prettier')
       );
     });
 
@@ -598,7 +632,7 @@ describe('Brownfield Analyzer', () => {
       generateRecommendations(analysis);
 
       expect(analysis.recommendations).toContainEqual(
-        expect.stringContaining('Review existing CI/CD'),
+        expect.stringContaining('Review existing CI/CD')
       );
       expect(analysis.mergeStrategy).toBe('manual');
     });
@@ -616,9 +650,7 @@ describe('Brownfield Analyzer', () => {
 
       generateRecommendations(analysis);
 
-      expect(analysis.recommendations).toContainEqual(
-        expect.stringContaining('*setup-github'),
-      );
+      expect(analysis.recommendations).toContainEqual(expect.stringContaining('*setup-github'));
     });
 
     it('should add TypeScript recommendation', () => {
@@ -635,7 +667,7 @@ describe('Brownfield Analyzer', () => {
       generateRecommendations(analysis);
 
       expect(analysis.recommendations).toContainEqual(
-        expect.stringContaining('existing tsconfig.json'),
+        expect.stringContaining('existing tsconfig.json')
       );
     });
 
@@ -652,9 +684,7 @@ describe('Brownfield Analyzer', () => {
 
       generateRecommendations(analysis);
 
-      expect(analysis.recommendations).toContainEqual(
-        expect.stringContaining('Next.js detected'),
-      );
+      expect(analysis.recommendations).toContainEqual(expect.stringContaining('Next.js detected'));
     });
 
     it('should add NestJS specific recommendation', () => {
@@ -670,9 +700,7 @@ describe('Brownfield Analyzer', () => {
 
       generateRecommendations(analysis);
 
-      expect(analysis.recommendations).toContainEqual(
-        expect.stringContaining('NestJS detected'),
-      );
+      expect(analysis.recommendations).toContainEqual(expect.stringContaining('NestJS detected'));
     });
   });
 
@@ -783,7 +811,7 @@ describe('Brownfield Analyzer', () => {
             typescript: '^5.0.0',
             jest: '^29.0.0',
           },
-        }),
+        })
       );
       fs.writeFileSync(path.join(tempDir, 'tsconfig.json'), '{}');
       fs.writeFileSync(path.join(tempDir, '.eslintrc.js'), 'module.exports = {};');
@@ -825,18 +853,12 @@ describe('Brownfield Analyzer', () => {
     });
 
     it('should analyze a Python project', () => {
-      fs.writeFileSync(
-        path.join(tempDir, 'requirements.txt'),
-        'django==4.0.0\npytest==7.0.0\n',
-      );
+      fs.writeFileSync(path.join(tempDir, 'requirements.txt'), 'django==4.0.0\npytest==7.0.0\n');
       fs.writeFileSync(
         path.join(tempDir, 'pyproject.toml'),
-        '[project]\nname = "myapp"\n\n[tool.black]\nline-length = 100',
+        '[project]\nname = "myapp"\n\n[tool.black]\nline-length = 100'
       );
-      fs.writeFileSync(
-        path.join(tempDir, '.flake8'),
-        '[flake8]\nmax-line-length = 100',
-      );
+      fs.writeFileSync(path.join(tempDir, '.flake8'), '[flake8]\nmax-line-length = 100');
       fs.mkdirSync(path.join(tempDir, 'src'));
       fs.mkdirSync(path.join(tempDir, 'tests'));
 

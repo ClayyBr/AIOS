@@ -1,11 +1,7 @@
 'use strict';
 
-const {
-  CodeIntelClient,
-} = require('../../.aios-core/core/code-intel/code-intel-client');
-const {
-  CodeIntelEnricher,
-} = require('../../.aios-core/core/code-intel/code-intel-enricher');
+const { CodeIntelClient } = require('../../.aios-core/core/code-intel/code-intel-client');
+const { CodeIntelEnricher } = require('../../.aios-core/core/code-intel/code-intel-enricher');
 const {
   isCodeIntelAvailable,
   enrichWithCodeIntel,
@@ -74,7 +70,7 @@ describe('Fallback Graceful (AC4, NFR-1, NFR-4)', () => {
       await client.analyzeCodebase('c');
 
       const noProviderWarnings = warnSpy.mock.calls.filter((call) =>
-        call[0].includes('No provider available'),
+        call[0].includes('No provider available')
       );
       expect(noProviderWarnings).toHaveLength(1);
       warnSpy.mockRestore();
@@ -194,7 +190,7 @@ describe('Fallback Graceful (AC4, NFR-1, NFR-4)', () => {
       });
       // No enrichment warnings should be logged in silent mode
       const enrichmentWarnings = warnSpy.mock.calls.filter((call) =>
-        call[0].includes('Enrichment failed'),
+        call[0].includes('Enrichment failed')
       );
       expect(enrichmentWarnings).toHaveLength(0);
       warnSpy.mockRestore();

@@ -556,7 +556,6 @@ describe('MasterOrchestrator', () => {
       expect(context.codeChanges).toContain('/src/file.js');
     });
 
-
     // AC7: TechStackProfile injected em todos os contextos
     it('AC7: TechStackProfile should be injected in all contexts', async () => {
       const epics = [3, 4, 5, 6, 7];

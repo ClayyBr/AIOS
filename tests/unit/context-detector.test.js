@@ -41,10 +41,7 @@ describe('ContextDetector', () => {
       });
 
       test('should detect existing session with conversation history', () => {
-        const conversation = [
-          { content: 'Hello' },
-          { content: 'How are you?' },
-        ];
+        const conversation = [{ content: 'Hello' }, { content: 'How are you?' }];
         const result = detector.detectSessionType(conversation);
         expect(result).toBe('existing');
       });
@@ -70,10 +67,7 @@ describe('ContextDetector', () => {
       });
 
       test('should detect workflow session with backlog management pattern', () => {
-        const conversation = [
-          { content: '*backlog-review' },
-          { content: '*backlog-prioritize' },
-        ];
+        const conversation = [{ content: '*backlog-review' }, { content: '*backlog-prioritize' }];
         const result = detector.detectSessionType(conversation);
         expect(result).toBe('workflow');
       });
@@ -123,7 +117,7 @@ describe('ContextDetector', () => {
       test('should detect new session when file is expired (TTL)', () => {
         const sessionData = {
           sessionId: 'test-session',
-          lastActivity: Date.now() - (2 * 60 * 60 * 1000), // 2 hours ago
+          lastActivity: Date.now() - 2 * 60 * 60 * 1000, // 2 hours ago
           lastCommands: ['help'],
         };
         fs.writeFileSync(testSessionFile, JSON.stringify(sessionData), 'utf8');
@@ -164,10 +158,7 @@ describe('ContextDetector', () => {
         fs.writeFileSync(testSessionFile, JSON.stringify(sessionData), 'utf8');
 
         // Conversation indicates existing (no workflow)
-        const conversation = [
-          { content: 'Hello' },
-          { content: '*help' },
-        ];
+        const conversation = [{ content: 'Hello' }, { content: '*help' }];
 
         const result = detector.detectSessionType(conversation, testSessionFile);
         expect(result).toBe('existing'); // Should use conversation, not file
@@ -201,9 +192,11 @@ describe('ContextDetector', () => {
     });
 
     test('should limit to last 10 commands', () => {
-      const conversation = Array(15).fill(null).map((_, i) => ({
-        content: `*command-${i}`,
-      }));
+      const conversation = Array(15)
+        .fill(null)
+        .map((_, i) => ({
+          content: `*command-${i}`,
+        }));
 
       const commands = detector._extractCommands(conversation);
       expect(commands.length).toBe(10);
@@ -211,10 +204,7 @@ describe('ContextDetector', () => {
     });
 
     test('should handle messages without commands', () => {
-      const conversation = [
-        { content: 'Hello' },
-        { content: 'How are you?' },
-      ];
+      const conversation = [{ content: 'Hello' }, { content: 'How are you?' }];
 
       const commands = detector._extractCommands(conversation);
       expect(commands).toEqual([]);
@@ -267,7 +257,7 @@ describe('ContextDetector', () => {
     test('should remove expired session file', () => {
       const sessionData = {
         sessionId: 'test-session',
-        lastActivity: Date.now() - (2 * 60 * 60 * 1000), // 2 hours ago
+        lastActivity: Date.now() - 2 * 60 * 60 * 1000, // 2 hours ago
         lastCommands: ['help'],
       };
       fs.writeFileSync(testSessionFile, JSON.stringify(sessionData), 'utf8');

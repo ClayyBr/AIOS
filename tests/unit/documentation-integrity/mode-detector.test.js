@@ -102,7 +102,7 @@ describe('Mode Detector', () => {
         JSON.stringify({
           name: '@aios/core',
           workspaces: ['packages/*'],
-        }),
+        })
       );
 
       const result = detectInstallationMode(tempDir);
@@ -120,7 +120,7 @@ describe('Mode Detector', () => {
       // Create package.json with different name (user project)
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'my-user-project' }),
+        JSON.stringify({ name: 'my-user-project' })
       );
 
       const result = detectInstallationMode(tempDir);
@@ -189,19 +189,13 @@ describe('Mode Detector', () => {
 
   describe('isAiosCoreRepository', () => {
     it('should return true for @aios/core package', () => {
-      fs.writeFileSync(
-        path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: '@aios/core' }),
-      );
+      fs.writeFileSync(path.join(tempDir, 'package.json'), JSON.stringify({ name: '@aios/core' }));
 
       expect(isAiosCoreRepository(tempDir)).toBe(true);
     });
 
     it('should return true for aios-core package', () => {
-      fs.writeFileSync(
-        path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'aios-core' }),
-      );
+      fs.writeFileSync(path.join(tempDir, 'package.json'), JSON.stringify({ name: 'aios-core' }));
 
       expect(isAiosCoreRepository(tempDir)).toBe(true);
     });
@@ -210,7 +204,7 @@ describe('Mode Detector', () => {
       // Generic monorepos should NOT be detected as aios-core
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'something', workspaces: ['packages/*'] }),
+        JSON.stringify({ name: 'something', workspaces: ['packages/*'] })
       );
 
       expect(isAiosCoreRepository(tempDir)).toBe(false);
@@ -220,7 +214,7 @@ describe('Mode Detector', () => {
       // Workspaces + .aios-core/infrastructure marker = aios-core repo
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'something', workspaces: ['packages/*'] }),
+        JSON.stringify({ name: 'something', workspaces: ['packages/*'] })
       );
       fs.mkdirSync(path.join(tempDir, '.aios-core', 'infrastructure'), { recursive: true });
 
@@ -228,10 +222,7 @@ describe('Mode Detector', () => {
     });
 
     it('should return false for regular package', () => {
-      fs.writeFileSync(
-        path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'my-app' }),
-      );
+      fs.writeFileSync(path.join(tempDir, 'package.json'), JSON.stringify({ name: 'my-app' }));
 
       expect(isAiosCoreRepository(tempDir)).toBe(false);
     });
@@ -251,19 +242,19 @@ describe('Mode Detector', () => {
     it('should map EXISTING_AIOS to BROWNFIELD by default (safer)', () => {
       // Without context, EXISTING_AIOS defaults to BROWNFIELD (won't skip project setup)
       expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOS)).toBe(
-        InstallationMode.BROWNFIELD,
+        InstallationMode.BROWNFIELD
       );
     });
 
     it('should map EXISTING_AIOS to FRAMEWORK_DEV with isAiosCoreRepo context', () => {
       expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOS, { isAiosCoreRepo: true })).toBe(
-        InstallationMode.FRAMEWORK_DEV,
+        InstallationMode.FRAMEWORK_DEV
       );
     });
 
     it('should map EXISTING_AIOS to BROWNFIELD with non-aios-core context', () => {
       expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOS, { isAiosCoreRepo: false })).toBe(
-        InstallationMode.BROWNFIELD,
+        InstallationMode.BROWNFIELD
       );
     });
 

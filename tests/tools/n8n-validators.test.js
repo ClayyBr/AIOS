@@ -48,7 +48,7 @@ describeIntegration('n8n Tool Validators', () => {
     });
 
     test('should have all required validator IDs', () => {
-      const validatorIds = n8nTool.executable_knowledge.validators.map(v => v.id);
+      const validatorIds = n8nTool.executable_knowledge.validators.map((v) => v.id);
       expect(validatorIds).toContain('validate-execute-workflow');
       expect(validatorIds).toContain('validate-create-workflow');
       expect(validatorIds).toContain('validate-create-credential');
@@ -148,7 +148,7 @@ describeIntegration('n8n Tool Validators', () => {
       const result = await validator.validate('create_workflow', {
         name: 'Test Workflow',
         connections: {
-          'Start': {
+          Start: {
             main: [[{ node: 'HTTP Request', type: 'main', index: 0 }]],
           },
         },
@@ -179,9 +179,7 @@ describeIntegration('n8n Tool Validators', () => {
     test('should fail with node missing type', async () => {
       const result = await validator.validate('create_workflow', {
         name: 'Test Workflow',
-        nodes: [
-          { name: 'Start' },
-        ],
+        nodes: [{ name: 'Start' }],
       });
 
       expect(result.valid).toBe(false);
@@ -191,9 +189,7 @@ describeIntegration('n8n Tool Validators', () => {
     test('should fail with node missing name', async () => {
       const result = await validator.validate('create_workflow', {
         name: 'Test Workflow',
-        nodes: [
-          { type: 'n8n-nodes-base.start' },
-        ],
+        nodes: [{ type: 'n8n-nodes-base.start' }],
       });
 
       expect(result.valid).toBe(false);
@@ -329,7 +325,9 @@ describeIntegration('n8n Tool Validators', () => {
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
       const maxDuration = Math.max(...durations);
 
-      console.log(`\nn8n Validator Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`);
+      console.log(
+        `\nn8n Validator Performance: avg=${avgDuration.toFixed(2)}ms, max=${maxDuration.toFixed(2)}ms`
+      );
 
       expect(avgDuration).toBeLessThan(50);
     });

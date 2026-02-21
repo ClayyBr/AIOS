@@ -10,7 +10,9 @@
  */
 
 const yaml = require('js-yaml');
-const { generateCoreConfig } = require('../../packages/installer/src/config/templates/core-config-template');
+const {
+  generateCoreConfig,
+} = require('../../packages/installer/src/config/templates/core-config-template');
 
 describe('core-config-template', () => {
   describe('ACT-12: language removed from core-config', () => {

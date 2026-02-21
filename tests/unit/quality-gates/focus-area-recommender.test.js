@@ -7,7 +7,9 @@
  * @story 3.5 - Human Review Orchestration
  */
 
-const { FocusAreaRecommender } = require('../../../.aios-core/core/quality-gates/focus-area-recommender');
+const {
+  FocusAreaRecommender,
+} = require('../../../.aios-core/core/quality-gates/focus-area-recommender');
 
 describe('FocusAreaRecommender', () => {
   let recommender;
@@ -131,7 +133,7 @@ describe('FocusAreaRecommender', () => {
       };
       const primary = recommender.determinePrimaryAreas(fileAnalysis, {});
 
-      expect(primary.some(p => p.area === 'architecture')).toBe(true);
+      expect(primary.some((p) => p.area === 'architecture')).toBe(true);
     });
 
     it('should limit to 3 primary areas', () => {
@@ -152,14 +154,16 @@ describe('FocusAreaRecommender', () => {
     it('should add code-quality area for high CodeRabbit issues', () => {
       const fileAnalysis = { categories: {} };
       const layer2Result = {
-        results: [{
-          check: 'coderabbit',
-          issues: { high: 5 },
-        }],
+        results: [
+          {
+            check: 'coderabbit',
+            issues: { high: 5 },
+          },
+        ],
       };
       const primary = recommender.determinePrimaryAreas(fileAnalysis, layer2Result);
 
-      expect(primary.some(p => p.area === 'code-quality')).toBe(true);
+      expect(primary.some((p) => p.area === 'code-quality')).toBe(true);
     });
   });
 
@@ -172,7 +176,7 @@ describe('FocusAreaRecommender', () => {
       };
       const secondary = recommender.determineSecondaryAreas(fileAnalysis, {});
 
-      expect(secondary.some(s => s.area === 'ux')).toBe(true);
+      expect(secondary.some((s) => s.area === 'ux')).toBe(true);
     });
 
     it('should limit to 2 secondary areas', () => {
@@ -194,22 +198,28 @@ describe('FocusAreaRecommender', () => {
     it('should return security questions for security category', () => {
       const questions = recommender.getReviewQuestions('security');
       expect(questions.length).toBeGreaterThan(0);
-      expect(questions.some(q => q.includes('authentication') || q.includes('sensitive'))).toBe(true);
+      expect(questions.some((q) => q.includes('authentication') || q.includes('sensitive'))).toBe(
+        true
+      );
     });
 
     it('should return architecture questions for architecture category', () => {
       const questions = recommender.getReviewQuestions('architecture');
-      expect(questions.some(q => q.includes('architectural') || q.includes('dependencies'))).toBe(true);
+      expect(questions.some((q) => q.includes('architectural') || q.includes('dependencies'))).toBe(
+        true
+      );
     });
 
     it('should return data-integrity questions', () => {
       const questions = recommender.getReviewQuestions('data-integrity');
-      expect(questions.some(q => q.includes('migration') || q.includes('validation'))).toBe(true);
+      expect(questions.some((q) => q.includes('migration') || q.includes('validation'))).toBe(true);
     });
 
     it('should return business-logic questions', () => {
       const questions = recommender.getReviewQuestions('business-logic');
-      expect(questions.some(q => q.includes('business') || q.includes('requirements'))).toBe(true);
+      expect(questions.some((q) => q.includes('business') || q.includes('requirements'))).toBe(
+        true
+      );
     });
 
     it('should return default questions for unknown category', () => {
@@ -246,9 +256,7 @@ describe('FocusAreaRecommender', () => {
   describe('generateSummary', () => {
     it('should generate summary with primary areas', () => {
       const recommendations = {
-        primary: [
-          { area: 'security', reason: '2 security files' },
-        ],
+        primary: [{ area: 'security', reason: '2 security files' }],
         secondary: [],
         highlightedAspects: ['Security-sensitive code changes'],
         skip: ['syntax', 'formatting'],

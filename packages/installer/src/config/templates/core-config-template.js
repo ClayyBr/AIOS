@@ -69,7 +69,7 @@ function generateCoreConfig(options = {}) {
     mcp: {
       enabled: mcpServers.length > 0,
       configLocation: '.claude/mcp.json',
-      servers: mcpServers.map(server => server.name || server.id),
+      servers: mcpServers.map((server) => server.name || server.id),
     },
 
     // QA Configuration
@@ -119,11 +119,7 @@ function generateCoreConfig(options = {}) {
     // Lazy Loading Configuration
     lazyLoading: {
       enabled: true,
-      heavySections: [
-        'pvMindContext',
-        'squads',
-        'registry',
-      ],
+      heavySections: ['pvMindContext', 'squads', 'registry'],
     },
 
     // Git Configuration

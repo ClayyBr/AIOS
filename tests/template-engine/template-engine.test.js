@@ -74,7 +74,7 @@ describe('Template Engine v2.0', () => {
       expect(Array.isArray(template.variables)).toBe(true);
       expect(template.variables.length).toBeGreaterThan(0);
 
-      const titleVar = template.variables.find(v => v.name === 'title');
+      const titleVar = template.variables.find((v) => v.name === 'title');
       expect(titleVar).toBeDefined();
       expect(titleVar.required).toBe(true);
     });
@@ -119,9 +119,7 @@ describe('Template Engine v2.0', () => {
     });
 
     test('should resolve auto values', async () => {
-      const variables = [
-        { name: 'now', type: 'string', auto: 'current_date' },
-      ];
+      const variables = [{ name: 'now', type: 'string', auto: 'current_date' }];
 
       const values = await elicitation.elicit(variables, {});
 
@@ -146,9 +144,7 @@ describe('Template Engine v2.0', () => {
 
       inquirer.prompt.mockResolvedValue({ title: 'Interactive Title' });
 
-      const variables = [
-        { name: 'title', type: 'string', required: true, prompt: 'Enter title:' },
-      ];
+      const variables = [{ name: 'title', type: 'string', required: true, prompt: 'Enter title:' }];
 
       const values = await interactiveElicitation.elicit(variables, {});
 
@@ -203,10 +199,10 @@ describe('Template Engine v2.0', () => {
         body: '{{#if showDetails}}Details: {{details}}{{else}}No details{{/if}}',
       };
 
-      expect(renderer.render(template, { showDetails: true, details: 'Some info' }))
-        .toBe('Details: Some info');
-      expect(renderer.render(template, { showDetails: false }))
-        .toBe('No details');
+      expect(renderer.render(template, { showDetails: true, details: 'Some info' })).toBe(
+        'Details: Some info'
+      );
+      expect(renderer.render(template, { showDetails: false })).toBe('No details');
     });
 
     test('should support each loops', () => {
@@ -303,16 +299,16 @@ describe('Template Engine v2.0', () => {
         title: 'Use Handlebars for Template Engine',
         status: 'Proposed',
         deciders: 'Dex, Pax',
-        context: 'We need a templating solution for generating documentation that supports variables, conditionals, and loops.',
-        decision: 'We will use Handlebars.js as our template engine because it provides a simple syntax, is well-maintained, and supports custom helpers.',
+        context:
+          'We need a templating solution for generating documentation that supports variables, conditionals, and loops.',
+        decision:
+          'We will use Handlebars.js as our template engine because it provides a simple syntax, is well-maintained, and supports custom helpers.',
         positiveConsequences: [
           'Simple and familiar syntax',
           'Good documentation',
           'Active community',
         ],
-        negativeConsequences: [
-          'Limited logic in templates',
-        ],
+        negativeConsequences: ['Limited logic in templates'],
       };
 
       const result = await engine.generate('adr', context);
@@ -334,11 +330,7 @@ describe('Template Engine v2.0', () => {
         status: 'Draft',
         owner: 'Pax',
         problem_statement: 'The current template system is inconsistent and lacks validation.',
-        goals: [
-          'Unified template format',
-          'Schema validation',
-          'Interactive variable elicitation',
-        ],
+        goals: ['Unified template format', 'Schema validation', 'Interactive variable elicitation'],
       };
 
       const result = await engine.generate('prd', context);
@@ -352,13 +344,13 @@ describe('Template Engine v2.0', () => {
 
   describe('TE-06: Error Handling', () => {
     test('should throw for unsupported template type', async () => {
-      await expect(engine.generate('unsupported', {}))
-        .rejects.toThrow('Unsupported template type');
+      await expect(engine.generate('unsupported', {})).rejects.toThrow('Unsupported template type');
     });
 
     test('should throw for missing required variables in non-interactive mode', async () => {
-      await expect(engine.generate('adr', { title: 'Test' }))
-        .rejects.toThrow('has no default and interactive mode is disabled');
+      await expect(engine.generate('adr', { title: 'Test' })).rejects.toThrow(
+        'has no default and interactive mode is disabled'
+      );
     });
 
     test('should handle template syntax errors gracefully', () => {
@@ -387,7 +379,7 @@ describe('Template Engine v2.0', () => {
       // 8 supported types: prd, prd-v2, adr, pmdr, dbdr, story, epic, task
       expect(templates.length).toBe(8);
 
-      const adrTemplate = templates.find(t => t.type === 'adr');
+      const adrTemplate = templates.find((t) => t.type === 'adr');
       expect(adrTemplate).toBeDefined();
       expect(adrTemplate.name).toBe('Architecture Decision Record');
     });
@@ -447,7 +439,10 @@ describe('Template Engine v2.0', () => {
       expect(result).toBe('012');
 
       // Test @first and @last data variables
-      const resultFlags = renderer.render({ body: '{{#times 3}}{{#if @first}}F{{/if}}{{@index}}{{#if @last}}L{{/if}}{{/times}}' }, {});
+      const resultFlags = renderer.render(
+        { body: '{{#times 3}}{{#if @first}}F{{/if}}{{@index}}{{#if @last}}L{{/if}}{{/times}}' },
+        {}
+      );
       expect(resultFlags).toBe('F012L');
     });
   });

@@ -158,7 +158,9 @@ describe('ManifestValidator', () => {
     describe('validateAll', () => {
       test('validates all manifests', async () => {
         // First generate manifests to ensure they exist
-        const { createManifestGenerator } = require('../../../.aios-core/core/manifest/manifest-generator');
+        const {
+          createManifestGenerator,
+        } = require('../../../.aios-core/core/manifest/manifest-generator');
         const generator = createManifestGenerator({ basePath });
         await generator.generateAll();
 
@@ -173,7 +175,9 @@ describe('ManifestValidator', () => {
 
       test('reports valid manifests correctly', async () => {
         // Ensure manifests are generated
-        const { createManifestGenerator } = require('../../../.aios-core/core/manifest/manifest-generator');
+        const {
+          createManifestGenerator,
+        } = require('../../../.aios-core/core/manifest/manifest-generator');
         const generator = createManifestGenerator({ basePath });
         await generator.generateAll();
 

@@ -4,7 +4,10 @@
  */
 
 const fs = require('fs');
-const { validateMCPs, runHealthCheck } = require('../../../../packages/installer/src/wizard/validation/validators/mcp-health-checker');
+const {
+  validateMCPs,
+  runHealthCheck,
+} = require('../../../../packages/installer/src/wizard/validation/validators/mcp-health-checker');
 
 // Mock dependencies
 jest.mock('fs');
@@ -18,12 +21,14 @@ describe('MCP Health Checker', () => {
     it('should validate MCPs with all installations successful', async () => {
       // Given
       fs.existsSync.mockReturnValue(true);
-      fs.readFileSync.mockReturnValue(JSON.stringify({
-        mcpServers: {
-          browser: { command: 'npx', args: ['-y', '@modelcontextprotocol/server-puppeteer'] },
-          context7: { command: 'npx', args: ['-y', '@upstash/context7-mcp'] },
-        },
-      }));
+      fs.readFileSync.mockReturnValue(
+        JSON.stringify({
+          mcpServers: {
+            browser: { command: 'npx', args: ['-y', '@modelcontextprotocol/server-puppeteer'] },
+            context7: { command: 'npx', args: ['-y', '@upstash/context7-mcp'] },
+          },
+        })
+      );
 
       const mcpContext = {
         installedMCPs: {
@@ -78,18 +83,20 @@ describe('MCP Health Checker', () => {
           expect.objectContaining({
             code: 'MCP_CONFIG_MISSING',
           }),
-        ]),
+        ])
       );
     });
 
     it('should skip health check for failed installations', async () => {
       // Given
       fs.existsSync.mockReturnValue(true);
-      fs.readFileSync.mockReturnValue(JSON.stringify({
-        mcpServers: {
-          browser: { command: 'npx', args: [] },
-        },
-      }));
+      fs.readFileSync.mockReturnValue(
+        JSON.stringify({
+          mcpServers: {
+            browser: { command: 'npx', args: [] },
+          },
+        })
+      );
 
       const mcpContext = {
         installedMCPs: {
@@ -101,7 +108,7 @@ describe('MCP Health Checker', () => {
       const result = await validateMCPs(mcpContext);
 
       // Then
-      const browserCheck = result.healthChecks.find(c => c.mcp === 'browser');
+      const browserCheck = result.healthChecks.find((c) => c.mcp === 'browser');
       expect(browserCheck.status).toBe('skipped');
       expect(browserCheck.message).toContain('Installation failed');
     });
@@ -109,12 +116,14 @@ describe('MCP Health Checker', () => {
     it('should aggregate health check results correctly', async () => {
       // Given
       fs.existsSync.mockReturnValue(true);
-      fs.readFileSync.mockReturnValue(JSON.stringify({
-        mcpServers: {
-          browser: { command: 'npx' },
-          exa: { command: 'npx', env: { EXA_API_KEY: 'test-key-123' } },
-        },
-      }));
+      fs.readFileSync.mockReturnValue(
+        JSON.stringify({
+          mcpServers: {
+            browser: { command: 'npx' },
+            exa: { command: 'npx', env: { EXA_API_KEY: 'test-key-123' } },
+          },
+        })
+      );
 
       const mcpContext = {
         installedMCPs: {
@@ -128,17 +137,19 @@ describe('MCP Health Checker', () => {
 
       // Then
       expect(result.healthChecks).toHaveLength(2);
-      expect(result.healthChecks.every(c => c.mcp && c.status)).toBe(true);
+      expect(result.healthChecks.every((c) => c.mcp && c.status)).toBe(true);
     });
 
     it('should aggregate health checks even when configuration is minimal', async () => {
       // Given
       fs.existsSync.mockReturnValue(true);
-      fs.readFileSync.mockReturnValue(JSON.stringify({
-        mcpServers: {
-          browser: { command: 'npx' },
-        },
-      }));
+      fs.readFileSync.mockReturnValue(
+        JSON.stringify({
+          mcpServers: {
+            browser: { command: 'npx' },
+          },
+        })
+      );
 
       const mcpContext = {
         installedMCPs: {
@@ -176,7 +187,7 @@ describe('MCP Health Checker', () => {
           expect.objectContaining({
             code: 'MCP_HEALTH_CHECK_ERROR',
           }),
-        ]),
+        ])
       );
     });
   });

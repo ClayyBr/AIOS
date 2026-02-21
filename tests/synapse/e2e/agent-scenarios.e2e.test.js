@@ -14,8 +14,12 @@ const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 const SYNAPSE_DIR = path.join(PROJECT_ROOT, '.synapse');
 const MANIFEST_PATH = path.join(SYNAPSE_DIR, 'manifest');
 
-const { SynapseEngine } = require(path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js'));
-const { parseManifest } = require(path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js'));
+const { SynapseEngine } = require(
+  path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js')
+);
+const { parseManifest } = require(
+  path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js')
+);
 
 // ---------------------------------------------------------------------------
 // Skip guard: .synapse/ must exist for E2E tests

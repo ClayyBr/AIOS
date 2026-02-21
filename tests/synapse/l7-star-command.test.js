@@ -56,12 +56,15 @@ describe('L7StarCommandProcessor', () => {
 
   describe('process()', () => {
     test('should detect single star-command and load rules', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*help] COMMAND:',
-        '0. Show available commands',
-        '1. Use bullet points',
-        '2. Max 5 items',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        [
+          '[*help] COMMAND:',
+          '0. Show available commands',
+          '1. Use bullet points',
+          '2. Max 5 items',
+        ].join('\n')
+      );
 
       const context = {
         prompt: '*help',
@@ -83,12 +86,15 @@ describe('L7StarCommandProcessor', () => {
     });
 
     test('should detect multiple star-commands in same prompt', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*dev] COMMAND:',
-        '0. Code over explanation',
-        '[*brief] COMMAND:',
-        '0. Use bullet points only',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        [
+          '[*dev] COMMAND:',
+          '0. Code over explanation',
+          '[*brief] COMMAND:',
+          '0. Use bullet points only',
+        ].join('\n')
+      );
 
       const context = {
         prompt: '*dev *brief implement the feature',
@@ -103,9 +109,7 @@ describe('L7StarCommandProcessor', () => {
       const result = processor.process(context);
 
       expect(result).not.toBeNull();
-      expect(result.metadata.commands).toEqual(
-        expect.arrayContaining(['dev', 'brief']),
-      );
+      expect(result.metadata.commands).toEqual(expect.arrayContaining(['dev', 'brief']));
       expect(result.rules.length).toBeGreaterThanOrEqual(2);
     });
 
@@ -155,10 +159,10 @@ describe('L7StarCommandProcessor', () => {
     });
 
     test('should return null when command not found in commands file', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*help] COMMAND:',
-        '0. Show commands',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        ['[*help] COMMAND:', '0. Show commands'].join('\n')
+      );
 
       const context = {
         prompt: '*unknown-command',
@@ -175,10 +179,10 @@ describe('L7StarCommandProcessor', () => {
     });
 
     test('should deduplicate repeated star-commands in prompt', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*help] COMMAND:',
-        '0. Show commands',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        ['[*help] COMMAND:', '0. Show commands'].join('\n')
+      );
 
       const context = {
         prompt: '*help and then *help again',
@@ -198,11 +202,10 @@ describe('L7StarCommandProcessor', () => {
     });
 
     test('should handle star-command with hyphens', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*run-tests] COMMAND:',
-        '0. Execute all tests',
-        '1. Show coverage',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        ['[*run-tests] COMMAND:', '0. Execute all tests', '1. Show coverage'].join('\n')
+      );
 
       const context = {
         prompt: '*run-tests for this feature',
@@ -239,10 +242,10 @@ describe('L7StarCommandProcessor', () => {
     });
 
     test('should handle star-command embedded in sentence', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*develop] COMMAND:',
-        '0. Start development',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        ['[*develop] COMMAND:', '0. Start development'].join('\n')
+      );
 
       const context = {
         prompt: 'please *develop story SYN-5 now',
@@ -261,10 +264,10 @@ describe('L7StarCommandProcessor', () => {
     });
 
     test('should be case-insensitive for command matching', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*Help] COMMAND:',
-        '0. Show help',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        ['[*Help] COMMAND:', '0. Show help'].join('\n')
+      );
 
       const context = {
         prompt: '*HELP me',
@@ -283,10 +286,10 @@ describe('L7StarCommandProcessor', () => {
     });
 
     test('should include inline content after command header', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*quick] COMMAND inline content here',
-        '0. Quick rule one',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        ['[*quick] COMMAND inline content here', '0. Quick rule one'].join('\n')
+      );
 
       const context = {
         prompt: '*quick',
@@ -302,17 +305,15 @@ describe('L7StarCommandProcessor', () => {
 
       expect(result).not.toBeNull();
       expect(result.rules).toEqual(
-        expect.arrayContaining([
-          expect.stringContaining('inline content here'),
-        ]),
+        expect.arrayContaining([expect.stringContaining('inline content here')])
       );
     });
 
     test('should work with _safeProcess wrapper', () => {
-      fs.writeFileSync(path.join(tempDir, 'commands'), [
-        '[*test] COMMAND:',
-        '0. Run tests',
-      ].join('\n'));
+      fs.writeFileSync(
+        path.join(tempDir, 'commands'),
+        ['[*test] COMMAND:', '0. Run tests'].join('\n')
+      );
 
       const context = {
         prompt: '*test',

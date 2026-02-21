@@ -9,7 +9,14 @@
  */
 
 const readline = require('readline');
-const { maskEmail, openBrowser, promptEmail, recoverLicense, RECOVERY_URL, RECOVERY_MESSAGE } = require('../packages/aios-pro-cli/src/recover');
+const {
+  maskEmail,
+  openBrowser,
+  promptEmail,
+  recoverLicense,
+  RECOVERY_URL,
+  RECOVERY_MESSAGE,
+} = require('../packages/aios-pro-cli/src/recover');
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -167,7 +174,7 @@ describe('recoverLicense', () => {
     // so the dynamic import will fail in test env → offline fallback
     await recoverLicense();
 
-    const allOutput = logSpy.mock.calls.map(c => c[0]).join('\n');
+    const allOutput = logSpy.mock.calls.map((c) => c[0]).join('\n');
 
     // AC1: shows recovery message
     expect(allOutput).toContain(RECOVERY_MESSAGE);
@@ -191,7 +198,7 @@ describe('recoverLicense', () => {
     // open package not available in test env → offline fallback
     await recoverLicense();
 
-    const allOutput = logSpy.mock.calls.map(c => c[0]).join('\n');
+    const allOutput = logSpy.mock.calls.map((c) => c[0]).join('\n');
     expect(allOutput).toContain('Could not open browser automatically');
     expect(allOutput).toContain(RECOVERY_URL);
   });

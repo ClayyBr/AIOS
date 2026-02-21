@@ -232,7 +232,7 @@ describe('AutonomousBuildLoop', () => {
       const loop = createLoop();
       // No plan provided and no plan files exist
       await expect(loop.run('story-1', { rootPath: tmpDir })).rejects.toThrow(
-        'No implementation plan found for story-1',
+        'No implementation plan found for story-1'
       );
     });
 
@@ -482,7 +482,7 @@ describe('AutonomousBuildLoop', () => {
 
       expect(executorFn).toHaveBeenCalledWith(
         expect.objectContaining({ id: 'subtask-1' }),
-        expect.objectContaining({ iteration: 1 }),
+        expect.objectContaining({ iteration: 1 })
       );
     });
 
@@ -533,7 +533,7 @@ describe('AutonomousBuildLoop', () => {
     test('returns null when no plan found (triggers error)', async () => {
       const loop = createLoop();
       await expect(loop.run('story-1', { rootPath: tmpDir })).rejects.toThrow(
-        'No implementation plan found',
+        'No implementation plan found'
       );
     });
   });

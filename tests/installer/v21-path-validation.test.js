@@ -87,7 +87,7 @@ function extractYamlFromMarkdown(content) {
 async function getFilesRecursive(dir, ext = '.md') {
   const files = [];
 
-  if (!await fs.pathExists(dir)) {
+  if (!(await fs.pathExists(dir))) {
     return files;
   }
 
@@ -194,7 +194,7 @@ describe('v2.1 Path Validation', () => {
         const taskDeps = agent.yaml.dependencies.tasks || [];
         for (const task of taskDeps) {
           const taskPath = resolveDependencyPath('tasks', task);
-          if (!await fs.pathExists(taskPath)) {
+          if (!(await fs.pathExists(taskPath))) {
             missingDeps.push({
               agent: agent.name,
               type: 'tasks',
@@ -207,14 +207,17 @@ describe('v2.1 Path Validation', () => {
 
       if (missingDeps.length > 0) {
         console.log('\n❌ Missing task dependencies:');
-        missingDeps.forEach(d => {
+        missingDeps.forEach((d) => {
           console.log(`   Agent: ${d.agent} → Task: ${d.dependency}`);
           console.log(`   Expected: ${d.expectedPath}`);
         });
       }
 
-      assert.strictEqual(missingDeps.length, 0,
-        `Found ${missingDeps.length} missing task dependencies`);
+      assert.strictEqual(
+        missingDeps.length,
+        0,
+        `Found ${missingDeps.length} missing task dependencies`
+      );
     });
 
     it('should have all agent checklist dependencies exist', async () => {
@@ -226,7 +229,7 @@ describe('v2.1 Path Validation', () => {
         const checklistDeps = agent.yaml.dependencies.checklists || [];
         for (const checklist of checklistDeps) {
           const checklistPath = resolveDependencyPath('checklists', checklist);
-          if (!await fs.pathExists(checklistPath)) {
+          if (!(await fs.pathExists(checklistPath))) {
             missingDeps.push({
               agent: agent.name,
               type: 'checklists',
@@ -239,14 +242,17 @@ describe('v2.1 Path Validation', () => {
 
       if (missingDeps.length > 0) {
         console.log('\n❌ Missing checklist dependencies:');
-        missingDeps.forEach(d => {
+        missingDeps.forEach((d) => {
           console.log(`   Agent: ${d.agent} → Checklist: ${d.dependency}`);
           console.log(`   Expected: ${d.expectedPath}`);
         });
       }
 
-      assert.strictEqual(missingDeps.length, 0,
-        `Found ${missingDeps.length} missing checklist dependencies`);
+      assert.strictEqual(
+        missingDeps.length,
+        0,
+        `Found ${missingDeps.length} missing checklist dependencies`
+      );
     });
 
     it('should have all agent template dependencies exist', async () => {
@@ -258,7 +264,7 @@ describe('v2.1 Path Validation', () => {
         const templateDeps = agent.yaml.dependencies.templates || [];
         for (const template of templateDeps) {
           const templatePath = resolveDependencyPath('templates', template);
-          if (!await fs.pathExists(templatePath)) {
+          if (!(await fs.pathExists(templatePath))) {
             missingDeps.push({
               agent: agent.name,
               type: 'templates',
@@ -271,14 +277,17 @@ describe('v2.1 Path Validation', () => {
 
       if (missingDeps.length > 0) {
         console.log('\n❌ Missing template dependencies:');
-        missingDeps.forEach(d => {
+        missingDeps.forEach((d) => {
           console.log(`   Agent: ${d.agent} → Template: ${d.dependency}`);
           console.log(`   Expected: ${d.expectedPath}`);
         });
       }
 
-      assert.strictEqual(missingDeps.length, 0,
-        `Found ${missingDeps.length} missing template dependencies`);
+      assert.strictEqual(
+        missingDeps.length,
+        0,
+        `Found ${missingDeps.length} missing template dependencies`
+      );
     });
   });
 
@@ -303,7 +312,7 @@ describe('v2.1 Path Validation', () => {
             }
 
             const depPath = resolveDependencyPath(type, dep);
-            if (!await fs.pathExists(depPath)) {
+            if (!(await fs.pathExists(depPath))) {
               missingDeps.push({
                 task: task.name,
                 type,
@@ -317,14 +326,17 @@ describe('v2.1 Path Validation', () => {
 
       if (missingDeps.length > 0) {
         console.log('\n❌ Missing task dependencies:');
-        missingDeps.forEach(d => {
+        missingDeps.forEach((d) => {
           console.log(`   Task: ${d.task} → ${d.type}: ${d.dependency}`);
           console.log(`   Expected: ${d.expectedPath}`);
         });
       }
 
-      assert.strictEqual(missingDeps.length, 0,
-        `Found ${missingDeps.length} missing task dependencies`);
+      assert.strictEqual(
+        missingDeps.length,
+        0,
+        `Found ${missingDeps.length} missing task dependencies`
+      );
     });
   });
 
@@ -344,7 +356,7 @@ describe('v2.1 Path Validation', () => {
           // Check agent references
           if (step.agent) {
             const agentPath = resolveDependencyPath('agents', `${step.agent}.md`);
-            if (!await fs.pathExists(agentPath)) {
+            if (!(await fs.pathExists(agentPath))) {
               invalidRefs.push({
                 workflow: workflow.name,
                 stepType: 'agent',
@@ -357,7 +369,7 @@ describe('v2.1 Path Validation', () => {
           // Check task references
           if (step.task) {
             const taskPath = resolveDependencyPath('tasks', `${step.task}.md`);
-            if (!await fs.pathExists(taskPath)) {
+            if (!(await fs.pathExists(taskPath))) {
               invalidRefs.push({
                 workflow: workflow.name,
                 stepType: 'task',
@@ -371,14 +383,17 @@ describe('v2.1 Path Validation', () => {
 
       if (invalidRefs.length > 0) {
         console.log('\n❌ Invalid workflow references:');
-        invalidRefs.forEach(r => {
+        invalidRefs.forEach((r) => {
           console.log(`   Workflow: ${r.workflow} → ${r.stepType}: ${r.reference}`);
           console.log(`   Expected: ${r.expectedPath}`);
         });
       }
 
-      assert.strictEqual(invalidRefs.length, 0,
-        `Found ${invalidRefs.length} invalid workflow references`);
+      assert.strictEqual(
+        invalidRefs.length,
+        0,
+        `Found ${invalidRefs.length} invalid workflow references`
+      );
     });
   });
 
@@ -405,7 +420,7 @@ describe('v2.1 Path Validation', () => {
 
       if (filesWithRoot.length > 0) {
         console.log('\n⚠️ Files with unreplaced {root} placeholders:');
-        filesWithRoot.forEach(f => {
+        filesWithRoot.forEach((f) => {
           console.log(`   ${f.file}: ${f.count} occurrence(s)`);
         });
       }

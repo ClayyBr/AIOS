@@ -171,9 +171,7 @@ class RegistryUpdater {
 
     const changes = [];
     for (const filePath of artifacts) {
-      const abs = path.isAbsolute(filePath)
-        ? filePath
-        : path.resolve(this._repoRoot, filePath);
+      const abs = path.isAbsolute(filePath) ? filePath : path.resolve(this._repoRoot, filePath);
 
       if (fs.existsSync(abs)) {
         changes.push({ action: 'change', filePath: abs });
@@ -268,7 +266,11 @@ class RegistryUpdater {
             }
             if (mutated) updated++;
 
-            this._logAudit({ action, path: path.relative(this._repoRoot, abs).replace(/\\/g, '/'), trigger: 'watcher' });
+            this._logAudit({
+              action,
+              path: path.relative(this._repoRoot, abs).replace(/\\/g, '/'),
+              trigger: 'watcher',
+            });
           } catch (err) {
             const relPath = path.relative(this._repoRoot, filePath).replace(/\\/g, '/');
             errors.push({ path: relPath, error: err.message });
@@ -600,13 +602,15 @@ class RegistryUpdater {
     if (!fs.existsSync(this._auditLogPath)) return [];
 
     const lines = fs.readFileSync(this._auditLogPath, 'utf8').trim().split('\n').filter(Boolean);
-    let entries = lines.map((line) => {
-      try {
-        return JSON.parse(line);
-      } catch {
-        return null;
-      }
-    }).filter(Boolean);
+    let entries = lines
+      .map((line) => {
+        try {
+          return JSON.parse(line);
+        } catch {
+          return null;
+        }
+      })
+      .filter(Boolean);
 
     if (filter.action) {
       entries = entries.filter((e) => e.action === filter.action);
@@ -664,17 +668,20 @@ if (require.main === module) {
       return { action, filePath: abs };
     });
 
-    updater.processChanges(changes).then((result) => {
-      console.log(`[IDS-Updater] Processed ${result.updated} updates.`);
-      if (result.errors.length > 0) {
-        console.error('[IDS-Updater] Errors:', result.errors);
+    updater
+      .processChanges(changes)
+      .then((result) => {
+        console.log(`[IDS-Updater] Processed ${result.updated} updates.`);
+        if (result.errors.length > 0) {
+          console.error('[IDS-Updater] Errors:', result.errors);
+          process.exit(1);
+        }
+        process.exit(0);
+      })
+      .catch((err) => {
+        console.error(`[IDS-Updater] Fatal error: ${err.message}`);
         process.exit(1);
-      }
-      process.exit(0);
-    }).catch((err) => {
-      console.error(`[IDS-Updater] Fatal error: ${err.message}`);
-      process.exit(1);
-    });
+      });
   } else if (args.includes('--log')) {
     const updater = new RegistryUpdater();
     const limitIdx = args.indexOf('--limit');

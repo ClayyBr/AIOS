@@ -180,10 +180,7 @@ describe('SquadPublisher', () => {
 
   describe('SquadPublisherError', () => {
     it('should create error with code and message', () => {
-      const error = new SquadPublisherError(
-        PublisherErrorCodes.AUTH_REQUIRED,
-        'Not authenticated',
-      );
+      const error = new SquadPublisherError(PublisherErrorCodes.AUTH_REQUIRED, 'Not authenticated');
 
       expect(error).toBeInstanceOf(Error);
       expect(error.code).toBe('AUTH_REQUIRED');
@@ -195,7 +192,7 @@ describe('SquadPublisher', () => {
       const error = new SquadPublisherError(
         PublisherErrorCodes.AUTH_REQUIRED,
         'Not authenticated',
-        'Run: gh auth login',
+        'Run: gh auth login'
       );
 
       expect(error.suggestion).toBe('Run: gh auth login');
@@ -205,7 +202,7 @@ describe('SquadPublisher', () => {
       const error = new SquadPublisherError(
         PublisherErrorCodes.AUTH_REQUIRED,
         'Not authenticated',
-        'Run: gh auth login',
+        'Run: gh auth login'
       );
 
       const str = error.toString();
@@ -247,9 +244,7 @@ describe('SquadPublisher', () => {
 
   describe('publish()', () => {
     it('should throw SQUAD_NOT_FOUND for non-existent path (Test 3.8)', async () => {
-      await expect(publisher.publish('/non/existent/path')).rejects.toThrow(
-        SquadPublisherError,
-      );
+      await expect(publisher.publish('/non/existent/path')).rejects.toThrow(SquadPublisherError);
       await expect(publisher.publish('/non/existent/path')).rejects.toMatchObject({
         code: 'SQUAD_NOT_FOUND',
       });
@@ -261,9 +256,7 @@ describe('SquadPublisher', () => {
       await fs.mkdir(invalidSquadPath, { recursive: true });
       // No squad.yaml - validation will fail
 
-      await expect(publisher.publish(invalidSquadPath)).rejects.toThrow(
-        SquadPublisherError,
-      );
+      await expect(publisher.publish(invalidSquadPath)).rejects.toThrow(SquadPublisherError);
       await expect(publisher.publish(invalidSquadPath)).rejects.toMatchObject({
         code: 'VALIDATION_FAILED',
       });
@@ -281,9 +274,7 @@ describe('SquadPublisher', () => {
         return '';
       });
 
-      await expect(publisher.publish(validSquadPath)).rejects.toThrow(
-        SquadPublisherError,
-      );
+      await expect(publisher.publish(validSquadPath)).rejects.toThrow(SquadPublisherError);
       await expect(publisher.publish(validSquadPath)).rejects.toMatchObject({
         code: 'AUTH_REQUIRED',
       });
@@ -464,7 +455,7 @@ describe('SquadPublisher', () => {
 
       expect(consoleLogSpy).toHaveBeenCalled();
       expect(consoleLogSpy.mock.calls.some((call) => call[0].includes('[SquadPublisher]'))).toBe(
-        true,
+        true
       );
     });
 
@@ -480,7 +471,7 @@ describe('SquadPublisher', () => {
       await quietPublisher.publish(validSquadPath);
 
       expect(
-        consoleLogSpy.mock.calls.filter((call) => call[0].includes('[SquadPublisher]')).length,
+        consoleLogSpy.mock.calls.filter((call) => call[0].includes('[SquadPublisher]')).length
       ).toBe(0);
     });
   });
@@ -496,7 +487,7 @@ describe('SquadPublisher', () => {
             official: [],
             community: [],
           },
-        }),
+        })
       );
 
       const manifest = {
@@ -529,7 +520,7 @@ describe('SquadPublisher', () => {
               },
             ],
           },
-        }),
+        })
       );
 
       const manifest = {
@@ -557,7 +548,7 @@ describe('SquadPublisher', () => {
             official: [],
             community: [{ name: 'z-squad', version: '1.0.0' }],
           },
-        }),
+        })
       );
 
       const manifest = {

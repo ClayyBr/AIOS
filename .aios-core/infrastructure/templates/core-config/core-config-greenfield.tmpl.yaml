@@ -9,9 +9,9 @@
 project:
   type: USER_PROJECT
   mode: greenfield
-  name: "{{PROJECT_NAME}}"
-  created: "{{GENERATED_DATE}}"
-  version: "0.1.0"
+  name: '{{PROJECT_NAME}}'
+  created: '{{GENERATED_DATE}}'
+  version: '0.1.0'
 
 # =============================================================================
 # DEV CONTEXT LOADING
@@ -35,16 +35,16 @@ deployment:
   branches:
     # These branch patterns will target staging (if staging-first workflow)
     staging_targets:
-      - "feature/*"
-      - "fix/*"
-      - "docs/*"
-      - "chore/*"
-      - "refactor/*"
-      - "test/*"
+      - 'feature/*'
+      - 'fix/*'
+      - 'docs/*'
+      - 'chore/*'
+      - 'refactor/*'
+      - 'test/*'
 
     # These branch patterns will target production directly (emergency fixes)
     production_targets:
-      - "hotfix/*"
+      - 'hotfix/*'
 
     # Branch names
     staging_branch: {{STAGING_BRANCH}}
@@ -56,20 +56,20 @@ deployment:
   # Environment configuration
   environments:
     staging:
-      name: "{{STAGING_ENV_NAME}}"
+      name: '{{STAGING_ENV_NAME}}'
       branch: {{STAGING_BRANCH}}
       auto_deploy: true
-      platform: "{{DEPLOYMENT_PLATFORM}}"
-      url: "${STAGING_URL}"
-      promotion_message: "After validation, create PR to {{PRODUCTION_BRANCH}} for production"
+      platform: '{{DEPLOYMENT_PLATFORM}}'
+      url: '${STAGING_URL}'
+      promotion_message: 'After validation, create PR to {{PRODUCTION_BRANCH}} for production'
 
     production:
-      name: "{{PRODUCTION_ENV_NAME}}"
+      name: '{{PRODUCTION_ENV_NAME}}'
       branch: {{PRODUCTION_BRANCH}}
       auto_deploy: true
-      platform: "{{DEPLOYMENT_PLATFORM}}"
-      url: "${PRODUCTION_URL}"
-      promotion_message: "This is the final production deployment"
+      platform: '{{DEPLOYMENT_PLATFORM}}'
+      url: '${PRODUCTION_URL}'
+      promotion_message: 'This is the final production deployment'
 
   # Quality gates for PRs
   quality_gates:
@@ -85,8 +85,8 @@ deployment:
     draft_by_default: false
     include_deployment_info: true
     labels:
-      staging: ["staging", "needs-review"]
-      production: ["production", "promotion"]
+      staging: ['staging', 'needs-review']
+      production: ['production', 'promotion']
 
 # =============================================================================
 # GITHUB INTEGRATION

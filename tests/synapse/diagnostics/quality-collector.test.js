@@ -47,7 +47,13 @@ function buildAllOkUap() {
   for (const r of UAP_RUBRIC) {
     loaders[r.name] = { duration: 10, status: 'ok' };
   }
-  return { agentId: 'dev', quality: 'full', totalDuration: 100, loaders, timestamp: new Date().toISOString() };
+  return {
+    agentId: 'dev',
+    quality: 'full',
+    totalDuration: 100,
+    loaders,
+    timestamp: new Date().toISOString(),
+  };
 }
 
 function buildAllOkHook(bracket = 'MODERATE') {
@@ -142,7 +148,10 @@ describe('collectQualityMetrics — UAP scoring', () => {
 
 describe('collectQualityMetrics — Hook scoring', () => {
   test('100 score when all expected layers ok for MODERATE', () => {
-    writeJson(path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'), buildAllOkHook('MODERATE'));
+    writeJson(
+      path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'),
+      buildAllOkHook('MODERATE')
+    );
 
     const result = collectQualityMetrics(tmpDir);
 
@@ -193,7 +202,10 @@ describe('collectQualityMetrics — Hook scoring', () => {
 
   test('not-expected layers have score 0 and maxScore 0', () => {
     // FRESH: workflow, task, squad, keyword are not expected
-    writeJson(path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'), buildAllOkHook('FRESH'));
+    writeJson(
+      path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'),
+      buildAllOkHook('FRESH')
+    );
 
     const result = collectQualityMetrics(tmpDir);
 
@@ -246,10 +258,14 @@ describe('collectQualityMetrics — Overall scoring', () => {
   test('grade F for score < 45', () => {
     // All loaders fail
     writeJson(path.join(tmpDir, '.synapse', 'metrics', 'uap-metrics.json'), {
-      totalDuration: 0, quality: 'fallback', loaders: {},
+      totalDuration: 0,
+      quality: 'fallback',
+      loaders: {},
     });
     writeJson(path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'), {
-      totalDuration: 0, bracket: 'MODERATE', perLayer: {},
+      totalDuration: 0,
+      bracket: 'MODERATE',
+      perLayer: {},
     });
 
     const result = collectQualityMetrics(tmpDir);
@@ -297,9 +313,12 @@ describe('Rubric exports', () => {
   });
 
   test('BRACKET_ACTIVE_LAYERS has all 4 brackets', () => {
-    expect(Object.keys(BRACKET_ACTIVE_LAYERS).sort()).toEqual(
-      ['CRITICAL', 'DEPLETED', 'FRESH', 'MODERATE'],
-    );
+    expect(Object.keys(BRACKET_ACTIVE_LAYERS).sort()).toEqual([
+      'CRITICAL',
+      'DEPLETED',
+      'FRESH',
+      'MODERATE',
+    ]);
   });
 
   test('MAX_STALENESS_MS is 30 minutes', () => {

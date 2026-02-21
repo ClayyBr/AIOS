@@ -125,9 +125,7 @@ describeIntegration('Complex Tool Validators - Integration Tests', () => {
       const result = await clickupValidator.validate('create_task', {
         name: 'Test Task',
         list_id: '123456789',
-        custom_fields: [
-          { id: 'field_123', value: 'test value' },
-        ],
+        custom_fields: [{ id: 'field_123', value: 'test value' }],
       });
 
       expect(result.valid).toBe(true);
@@ -514,7 +512,7 @@ describeIntegration('Complex Tool Validators - Integration Tests', () => {
         supabaseValidator.validate('execute_sql', {}),
       ]);
 
-      results.forEach(result => {
+      results.forEach((result) => {
         expect(result).toHaveProperty('valid');
         expect(result).toHaveProperty('errors');
         expect(typeof result.valid).toBe('boolean');
@@ -530,7 +528,7 @@ describeIntegration('Complex Tool Validators - Integration Tests', () => {
         supabaseValidator.validate('execute_sql', {}),
       ]);
 
-      results.forEach(result => {
+      results.forEach((result) => {
         expect(result.valid).toBe(false);
         expect(result.errors.length).toBeGreaterThan(0);
       });

@@ -11,9 +11,10 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const { collectOutputAnalysis, UAP_OUTPUT_EXPECTATIONS } = require(
-  '../../../.aios-core/core/synapse/diagnostics/collectors/output-analyzer',
-);
+const {
+  collectOutputAnalysis,
+  UAP_OUTPUT_EXPECTATIONS,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/output-analyzer');
 
 let tmpDir;
 
@@ -26,8 +27,12 @@ function writeJson(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
 }
 
-beforeEach(() => { tmpDir = createTmpDir(); });
-afterEach(() => { fs.rmSync(tmpDir, { recursive: true, force: true }); });
+beforeEach(() => {
+  tmpDir = createTmpDir();
+});
+afterEach(() => {
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+});
 
 describe('collectOutputAnalysis', () => {
   test('available=false when no metrics', () => {
@@ -41,7 +46,7 @@ describe('collectOutputAnalysis', () => {
     });
     const result = collectOutputAnalysis(tmpDir);
     expect(result.available).toBe(true);
-    const agent = result.uapAnalysis.find(a => a.name === 'agentConfig');
+    const agent = result.uapAnalysis.find((a) => a.name === 'agentConfig');
     expect(agent.quality).toBe('good');
   });
 
@@ -50,7 +55,7 @@ describe('collectOutputAnalysis', () => {
       loaders: { agentConfig: { duration: 10, status: 'error', error: 'fail' } },
     });
     const result = collectOutputAnalysis(tmpDir);
-    const agent = result.uapAnalysis.find(a => a.name === 'agentConfig');
+    const agent = result.uapAnalysis.find((a) => a.name === 'agentConfig');
     expect(agent.quality).toBe('bad');
   });
 
@@ -59,7 +64,7 @@ describe('collectOutputAnalysis', () => {
       loaders: { agentConfig: { duration: 100, status: 'timeout' } },
     });
     const result = collectOutputAnalysis(tmpDir);
-    const agent = result.uapAnalysis.find(a => a.name === 'agentConfig');
+    const agent = result.uapAnalysis.find((a) => a.name === 'agentConfig');
     expect(agent.quality).toBe('bad');
   });
 
@@ -68,7 +73,7 @@ describe('collectOutputAnalysis', () => {
       loaders: { agentConfig: { duration: 300, status: 'ok' } },
     });
     const result = collectOutputAnalysis(tmpDir);
-    const agent = result.uapAnalysis.find(a => a.name === 'agentConfig');
+    const agent = result.uapAnalysis.find((a) => a.name === 'agentConfig');
     expect(agent.quality).toBe('degraded');
   });
 
@@ -77,7 +82,7 @@ describe('collectOutputAnalysis', () => {
       perLayer: { constitution: { duration: 5, status: 'ok', rules: 3 } },
     });
     const result = collectOutputAnalysis(tmpDir);
-    const layer = result.hookAnalysis.find(a => a.name === 'constitution');
+    const layer = result.hookAnalysis.find((a) => a.name === 'constitution');
     expect(layer.quality).toBe('good');
     expect(layer.rules).toBe(3);
   });
@@ -87,7 +92,7 @@ describe('collectOutputAnalysis', () => {
       perLayer: { constitution: { duration: 5, status: 'ok', rules: 0 } },
     });
     const result = collectOutputAnalysis(tmpDir);
-    const layer = result.hookAnalysis.find(a => a.name === 'constitution');
+    const layer = result.hookAnalysis.find((a) => a.name === 'constitution');
     expect(layer.quality).toBe('empty');
   });
 

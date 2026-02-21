@@ -68,15 +68,15 @@ async function ensureDocker() {
   if (!docker.installed) {
     throw new Error(
       'Docker is not installed.\n' +
-      'Please install Docker Desktop from https://docker.com\n' +
-      'Or use your package manager: brew install --cask docker',
+        'Please install Docker Desktop from https://docker.com\n' +
+        'Or use your package manager: brew install --cask docker'
     );
   }
 
   if (!docker.running) {
     throw new Error(
       'Docker daemon is not running.\n' +
-      'Please start Docker Desktop or run: sudo systemctl start docker',
+        'Please start Docker Desktop or run: sudo systemctl start docker'
     );
   }
 
@@ -105,7 +105,7 @@ async function listMcps(options = {}) {
       const { stdout: containerOutput } = await execa(
         'docker',
         ['ps', '--filter', 'label=mcp.server', '--format', '{{.Names}}\t{{.Status}}\t{{.Image}}'],
-        { timeout: 15000 },
+        { timeout: 15000 }
       );
 
       spinner.stop();
@@ -117,10 +117,13 @@ async function listMcps(options = {}) {
       }
 
       if (options.json) {
-        const mcps = containerOutput.trim().split('\n').map(line => {
-          const [name, status, image] = line.split('\t');
-          return { name, status, image };
-        });
+        const mcps = containerOutput
+          .trim()
+          .split('\n')
+          .map((line) => {
+            const [name, status, image] = line.split('\t');
+            return { name, status, image };
+          });
         console.log(JSON.stringify(mcps, null, 2));
       } else {
         console.log(chalk.bold('\nActive MCP Servers:'));
@@ -136,7 +139,7 @@ async function listMcps(options = {}) {
     if (options.json) {
       // Parse and output as JSON
       const lines = stdout.trim().split('\n').filter(Boolean);
-      const mcps = lines.map(line => {
+      const mcps = lines.map((line) => {
         const parts = line.split(/\s+/);
         return {
           name: parts[0],
@@ -162,7 +165,11 @@ async function listMcps(options = {}) {
  */
 function parseMcpSource(nameOrUrl) {
   // Check if it's a URL
-  if (nameOrUrl.startsWith('http://') || nameOrUrl.startsWith('https://') || nameOrUrl.startsWith('git@')) {
+  if (
+    nameOrUrl.startsWith('http://') ||
+    nameOrUrl.startsWith('https://') ||
+    nameOrUrl.startsWith('git@')
+  ) {
     const urlMatch = nameOrUrl.match(/\/([^/]+?)(\.git)?$/);
     const name = urlMatch ? urlMatch[1] : path.basename(nameOrUrl, '.git');
     return {
@@ -209,11 +216,10 @@ async function addMcp(nameOrUrl, options = {}) {
     const spinner = ora(`Enabling MCP server: ${source.name}...`).start();
 
     try {
-      const { stdout, exitCode } = await execa(
-        'docker',
-        ['mcp', 'server', 'enable', source.name],
-        { timeout: 60000, reject: false },
-      );
+      const { stdout, exitCode } = await execa('docker', ['mcp', 'server', 'enable', source.name], {
+        timeout: 60000,
+        reject: false,
+      });
 
       if (exitCode === 0) {
         spinner.succeed(`MCP server enabled: ${source.name}`);
@@ -256,8 +262,23 @@ async function addMcp(nameOrUrl, options = {}) {
         if (hasCompose) {
           await execa('docker', ['compose', 'up', '-d'], { cwd: mcpDir, timeout: 300000 });
         } else {
-          await execa('docker', ['build', '-t', `mcp-${source.name}`, '.'], { cwd: mcpDir, timeout: 300000 });
-          await execa('docker', ['run', '-d', '--name', `mcp-${source.name}`, '--label', 'mcp.server=true', `mcp-${source.name}`], { timeout: 60000 });
+          await execa('docker', ['build', '-t', `mcp-${source.name}`, '.'], {
+            cwd: mcpDir,
+            timeout: 300000,
+          });
+          await execa(
+            'docker',
+            [
+              'run',
+              '-d',
+              '--name',
+              `mcp-${source.name}`,
+              '--label',
+              'mcp.server=true',
+              `mcp-${source.name}`,
+            ],
+            { timeout: 60000 }
+          );
         }
 
         buildSpinner.succeed('MCP container started');
@@ -274,7 +295,9 @@ async function addMcp(nameOrUrl, options = {}) {
           console.log(chalk.dim(`  cd ${mcpDir} && npm start`));
         } else {
           console.log(chalk.yellow('\nNote: No Dockerfile or package.json found.'));
-          console.log(chalk.dim('Please check the MCP documentation for installation instructions.'));
+          console.log(
+            chalk.dim('Please check the MCP documentation for installation instructions.')
+          );
         }
       }
 
@@ -313,11 +336,10 @@ async function removeMcp(name, options = {}) {
   const spinner = ora(`Disabling MCP server: ${name}...`).start();
 
   try {
-    const { exitCode } = await execa(
-      'docker',
-      ['mcp', 'server', 'disable', name],
-      { timeout: 30000, reject: false },
-    );
+    const { exitCode } = await execa('docker', ['mcp', 'server', 'disable', name], {
+      timeout: 30000,
+      reject: false,
+    });
 
     if (exitCode === 0) {
       spinner.succeed(`MCP server disabled: ${name}`);
@@ -337,7 +359,10 @@ async function removeMcp(name, options = {}) {
     await execa('docker', ['stop', containerName], { timeout: 30000, reject: false });
 
     // Remove container
-    const { exitCode } = await execa('docker', ['rm', containerName], { timeout: 30000, reject: false });
+    const { exitCode } = await execa('docker', ['rm', containerName], {
+      timeout: 30000,
+      reject: false,
+    });
 
     if (exitCode === 0) {
       spinner.succeed(`Container removed: ${containerName}`);

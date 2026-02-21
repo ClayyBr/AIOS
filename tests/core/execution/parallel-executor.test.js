@@ -48,8 +48,12 @@ describe('ParallelExecutor', () => {
 
   describe('execute', () => {
     it('should execute both providers in parallel', async () => {
-      const claudeExecutor = jest.fn().mockResolvedValue({ success: true, output: 'Claude result' });
-      const geminiExecutor = jest.fn().mockResolvedValue({ success: true, output: 'Gemini result' });
+      const claudeExecutor = jest
+        .fn()
+        .mockResolvedValue({ success: true, output: 'Claude result' });
+      const geminiExecutor = jest
+        .fn()
+        .mockResolvedValue({ success: true, output: 'Gemini result' });
 
       const result = await executor.execute(claudeExecutor, geminiExecutor);
 
@@ -69,7 +73,9 @@ describe('ParallelExecutor', () => {
 
     it('should handle Claude failure with Gemini fallback', async () => {
       const claudeExecutor = jest.fn().mockRejectedValue(new Error('Claude failed'));
-      const geminiExecutor = jest.fn().mockResolvedValue({ success: true, output: 'Gemini result' });
+      const geminiExecutor = jest
+        .fn()
+        .mockResolvedValue({ success: true, output: 'Gemini result' });
 
       const result = await executor.execute(claudeExecutor, geminiExecutor);
 
@@ -126,8 +132,12 @@ describe('ParallelExecutor', () => {
         consensusSimilarity: 0.5,
       });
 
-      const claudeExecutor = jest.fn().mockResolvedValue({ success: true, output: 'The quick brown fox' });
-      const geminiExecutor = jest.fn().mockResolvedValue({ success: true, output: 'The quick brown dog' });
+      const claudeExecutor = jest
+        .fn()
+        .mockResolvedValue({ success: true, output: 'The quick brown fox' });
+      const geminiExecutor = jest
+        .fn()
+        .mockResolvedValue({ success: true, output: 'The quick brown dog' });
 
       const result = await consensusExecutor.execute(claudeExecutor, geminiExecutor);
 
@@ -146,7 +156,8 @@ describe('ParallelExecutor', () => {
       });
       const geminiExecutor = jest.fn().mockResolvedValue({
         success: true,
-        output: 'This is a much longer response with more content and details including ```code blocks``` and - bullet points',
+        output:
+          'This is a much longer response with more content and details including ```code blocks``` and - bullet points',
       });
 
       const result = await bestOfExecutor.execute(claudeExecutor, geminiExecutor);
@@ -160,8 +171,12 @@ describe('ParallelExecutor', () => {
     it('should merge both outputs', async () => {
       const mergeExecutor = new ParallelExecutor({ mode: ParallelMode.MERGE });
 
-      const claudeExecutor = jest.fn().mockResolvedValue({ success: true, output: 'Claude output' });
-      const geminiExecutor = jest.fn().mockResolvedValue({ success: true, output: 'Gemini output' });
+      const claudeExecutor = jest
+        .fn()
+        .mockResolvedValue({ success: true, output: 'Claude output' });
+      const geminiExecutor = jest
+        .fn()
+        .mockResolvedValue({ success: true, output: 'Gemini output' });
 
       const result = await mergeExecutor.execute(claudeExecutor, geminiExecutor);
 
@@ -190,9 +205,11 @@ describe('ParallelExecutor', () => {
     it('should timeout slow executors', async () => {
       const timeoutExecutor = new ParallelExecutor({ timeout: 100 });
 
-      const slowExecutor = jest.fn().mockImplementation(
-        () => new Promise((resolve) => setTimeout(() => resolve({ success: true }), 500)),
-      );
+      const slowExecutor = jest
+        .fn()
+        .mockImplementation(
+          () => new Promise((resolve) => setTimeout(() => resolve({ success: true }), 500))
+        );
       const fastExecutor = jest.fn().mockResolvedValue({ success: true, output: 'fast' });
 
       const result = await timeoutExecutor.execute(slowExecutor, fastExecutor);

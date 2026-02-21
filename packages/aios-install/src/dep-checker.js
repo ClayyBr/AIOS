@@ -259,9 +259,7 @@ function formatDependencyStatus(check) {
   }
 
   if (!check.meetsMinVersion) {
-    return chalk.yellow(
-      `⚠ ${check.name}: v${check.version} (requires >= ${check.minVersion})`,
-    );
+    return chalk.yellow(`⚠ ${check.name}: v${check.version} (requires >= ${check.minVersion})`);
   }
 
   return chalk.green(`✓ ${check.name}: v${check.version}`);

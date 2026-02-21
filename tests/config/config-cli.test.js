@@ -288,7 +288,9 @@ describe('config CLI commands', () => {
         expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'local-config.yaml'))).toBe(true);
 
         // Backup created
-        expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'core-config.yaml.backup'))).toBe(true);
+        expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'core-config.yaml.backup'))).toBe(
+          true
+        );
       } finally {
         cleanupTempDir(tmpDir);
       }

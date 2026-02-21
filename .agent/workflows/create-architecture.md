@@ -8,12 +8,12 @@ description: Criar documento de Arquitetura seguindo os templates AIOS
 
 1. **Escolha o template adequado:**
 
-   | Cenário | Template |
-   |---------|----------|
-   | Projeto novo | `.claude/templates/architecture-tmpl.yaml` |
+   | Cenário           | Template                                              |
+   | ----------------- | ----------------------------------------------------- |
+   | Projeto novo      | `.claude/templates/architecture-tmpl.yaml`            |
    | Projeto existente | `.claude/templates/brownfield-architecture-tmpl.yaml` |
-   | Full-stack | `.claude/templates/fullstack-architecture-tmpl.yaml` |
-   | Front-end | `.claude/templates/front-end-architecture-tmpl.yaml` |
+   | Full-stack        | `.claude/templates/fullstack-architecture-tmpl.yaml`  |
+   | Front-end         | `.claude/templates/front-end-architecture-tmpl.yaml`  |
 
 2. **Leia o template escolhido:**
    Analise a estrutura completa do template antes de começar
@@ -37,6 +37,7 @@ description: Criar documento de Arquitetura seguindo os templates AIOS
    Em `docs/architecture/` seguindo o formato do template
 
 ## Templates Complementares
+
 - Spec front-end: `.claude/templates/front-end-spec-tmpl.yaml`
 - Database schema: `.claude/templates/database-schema-request-full.md`
 - Database schema (lite): `.claude/templates/database-schema-request-lite.md`

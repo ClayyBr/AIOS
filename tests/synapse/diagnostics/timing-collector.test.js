@@ -14,9 +14,11 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const { collectTimingMetrics, LOADER_TIER_MAP, MAX_STALENESS_MS } = require(
-  '../../../.aios-core/core/synapse/diagnostics/collectors/timing-collector',
-);
+const {
+  collectTimingMetrics,
+  LOADER_TIER_MAP,
+  MAX_STALENESS_MS,
+} = require('../../../.aios-core/core/synapse/diagnostics/collectors/timing-collector');
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -254,7 +256,10 @@ describe('collectTimingMetrics — Staleness (SYN-14)', () => {
 
   test('uap stale=true when timestamp > 5 min old', () => {
     const old = new Date(Date.now() - MAX_STALENESS_MS - 10000).toISOString();
-    writeJson(path.join(tmpDir, '.synapse', 'metrics', 'uap-metrics.json'), buildUapMetrics({ timestamp: old }));
+    writeJson(
+      path.join(tmpDir, '.synapse', 'metrics', 'uap-metrics.json'),
+      buildUapMetrics({ timestamp: old })
+    );
 
     const result = collectTimingMetrics(tmpDir);
 
@@ -272,7 +277,10 @@ describe('collectTimingMetrics — Staleness (SYN-14)', () => {
 
   test('hook stale=true when timestamp > 5 min old', () => {
     const old = new Date(Date.now() - MAX_STALENESS_MS - 10000).toISOString();
-    writeJson(path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'), buildHookMetrics({ timestamp: old }));
+    writeJson(
+      path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'),
+      buildHookMetrics({ timestamp: old })
+    );
 
     const result = collectTimingMetrics(tmpDir);
 
@@ -280,7 +288,10 @@ describe('collectTimingMetrics — Staleness (SYN-14)', () => {
   });
 
   test('hook includes hookBootMs field', () => {
-    writeJson(path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'), buildHookMetrics({ hookBootMs: 42.5 }));
+    writeJson(
+      path.join(tmpDir, '.synapse', 'metrics', 'hook-metrics.json'),
+      buildHookMetrics({ hookBootMs: 42.5 })
+    );
 
     const result = collectTimingMetrics(tmpDir);
 

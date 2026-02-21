@@ -22,9 +22,9 @@ const { createAddCommand } = require('./add');
 function createMcpCommand() {
   const mcp = new Command('mcp');
 
-  mcp
-    .description('Manage global MCP (Model Context Protocol) configuration')
-    .addHelpText('after', `
+  mcp.description('Manage global MCP (Model Context Protocol) configuration').addHelpText(
+    'after',
+    `
 Commands:
   setup             Create global ~/.aios/mcp/ structure
   link              Link project to global MCP config
@@ -60,7 +60,8 @@ Examples:
   $ aios mcp add myserver --type sse --url https://example.com/mcp
   $ aios mcp add myserver --remove
   $ aios mcp add --list-templates
-`);
+`
+  );
 
   // Add subcommands
   mcp.addCommand(createSetupCommand());

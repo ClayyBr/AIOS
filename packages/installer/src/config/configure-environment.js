@@ -7,7 +7,6 @@
  * @module configure-environment
  */
 
- 
 // Console statements are intentional for user feedback during installation
 
 const fs = require('fs-extra');
@@ -90,7 +89,7 @@ async function configureEnvironment(options = {}) {
         choices.push(
           { value: 'backup', label: 'Backup and overwrite' },
           { value: 'overwrite', label: 'Overwrite completely' },
-          { value: 'skip', label: 'Skip (keep existing)' },
+          { value: 'skip', label: 'Skip (keep existing)' }
         );
 
         envAction = await select({
@@ -139,7 +138,9 @@ async function configureEnvironment(options = {}) {
       results.envCreated = true;
 
       console.log('✅ Merged .env file');
-      console.log(`   📋 Preserved: ${mergeResult.stats.preserved}, Added: ${mergeResult.stats.added}`);
+      console.log(
+        `   📋 Preserved: ${mergeResult.stats.preserved}, Added: ${mergeResult.stats.added}`
+      );
       if (mergeResult.stats.conflicts > 0) {
         console.log(`   ⚠️  Suggestions: ${mergeResult.stats.conflicts} (see comments in file)`);
       }
@@ -324,21 +325,21 @@ async function updateGitignore(targetDir) {
   // Critical entries that must be in .gitignore
   const criticalEntries = {
     'Environment & Secrets': ['.env', '.env.local', '.env.*.local', '*.key', '*.pem'],
-    'Dependencies': ['node_modules/', 'node_modules'],
+    Dependencies: ['node_modules/', 'node_modules'],
     'Build & Logs': ['dist/', 'build/', '*.log', 'logs/'],
     'IDE & OS': ['.DS_Store', 'Thumbs.db', '.idea/', '*.swp'],
     'AIOS Local': ['.aios-core/local/', '.claude/settings.local.json', '.aios/install-log.txt'],
   };
 
-  const lines = gitignoreContent.split('\n').map(line => line.trim());
+  const lines = gitignoreContent.split('\n').map((line) => line.trim());
   const entriesToAdd = [];
 
   // Check each critical entry
   for (const [category, entries] of Object.entries(criticalEntries)) {
-    const missingEntries = entries.filter(entry => {
+    const missingEntries = entries.filter((entry) => {
       // Check if entry already exists (with or without leading /)
       const normalizedEntry = entry.replace(/^\//, '');
-      return !lines.some(line => {
+      return !lines.some((line) => {
         const normalizedLine = line.replace(/^\//, '');
         return normalizedLine === normalizedEntry || normalizedLine === entry;
       });

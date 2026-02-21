@@ -35,9 +35,7 @@ describeIntegration('npx Execution', () => {
       expect(packageJson.files).toContain('bin/');
       expect(packageJson.files).toContain('index.js');
       // Note: .aios-core/ should be included if it exists
-      const hasAiosCore = packageJson.files.some(f => 
-        f === '.aios-core/' || f === 'aios-core/',
-      );
+      const hasAiosCore = packageJson.files.some((f) => f === '.aios-core/' || f === 'aios-core/');
       expect(hasAiosCore).toBe(true);
     });
 
@@ -51,70 +49,86 @@ describeIntegration('npx Execution', () => {
   });
 
   describeIntegration('CLI Execution', () => {
-    it('should execute aios command with --version', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
-      const child = spawn('node', [cliPath, '--version']);
+    it(
+      'should execute aios command with --version',
+      (done) => {
+        const cliPath = path.join(__dirname, '../../bin/aios.js');
+        const child = spawn('node', [cliPath, '--version']);
 
-      let output = '';
-      child.stdout.on('data', (data) => {
-        output += data.toString();
-      });
+        let output = '';
+        child.stdout.on('data', (data) => {
+          output += data.toString();
+        });
 
-      child.on('close', (code) => {
-        expect(code).toBe(0);
-        expect(output).toMatch(/\d+\.\d+\.\d+/);
-        done();
-      });
-    }, timeout);
+        child.on('close', (code) => {
+          expect(code).toBe(0);
+          expect(output).toMatch(/\d+\.\d+\.\d+/);
+          done();
+        });
+      },
+      timeout
+    );
 
-    it('should execute aios command with --help', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
-      const child = spawn('node', [cliPath, '--help']);
+    it(
+      'should execute aios command with --help',
+      (done) => {
+        const cliPath = path.join(__dirname, '../../bin/aios.js');
+        const child = spawn('node', [cliPath, '--help']);
 
-      let output = '';
-      child.stdout.on('data', (data) => {
-        output += data.toString();
-      });
+        let output = '';
+        child.stdout.on('data', (data) => {
+          output += data.toString();
+        });
 
-      child.on('close', (code) => {
-        expect(code).toBe(0);
-        expect(output).toContain('USAGE');
-        expect(output).toContain('@synkra/aios-core');
-        done();
-      });
-    }, timeout);
+        child.on('close', (code) => {
+          expect(code).toBe(0);
+          expect(output).toContain('USAGE');
+          expect(output).toContain('@synkra/aios-core');
+          done();
+        });
+      },
+      timeout
+    );
 
-    it('should execute aios info command', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
-      const child = spawn('node', [cliPath, 'info']);
+    it(
+      'should execute aios info command',
+      (done) => {
+        const cliPath = path.join(__dirname, '../../bin/aios.js');
+        const child = spawn('node', [cliPath, 'info']);
 
-      let output = '';
-      child.stdout.on('data', (data) => {
-        output += data.toString();
-      });
+        let output = '';
+        child.stdout.on('data', (data) => {
+          output += data.toString();
+        });
 
-      child.on('close', (code) => {
-        expect(code).toBe(0);
-        expect(output).toContain('System Information');
-        done();
-      });
-    }, timeout);
+        child.on('close', (code) => {
+          expect(code).toBe(0);
+          expect(output).toContain('System Information');
+          done();
+        });
+      },
+      timeout
+    );
 
-    it('should fail with unknown command', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
-      const child = spawn('node', [cliPath, 'invalid-command']);
+    it(
+      'should fail with unknown command',
+      (done) => {
+        const cliPath = path.join(__dirname, '../../bin/aios.js');
+        const child = spawn('node', [cliPath, 'invalid-command']);
 
-      let stderr = '';
-      child.stderr.on('data', (data) => {
-        stderr += data.toString();
-      });
+        let stderr = '';
+        child.stderr.on('data', (data) => {
+          stderr += data.toString();
+        });
 
-      child.on('close', (code) => {
-        expect(code).toBe(1);
-        expect(stderr).toContain('Unknown command');
-        done();
-      });
-    }, timeout);
+        child.on('close', (code) => {
+          expect(code).toBe(1);
+          expect(stderr).toContain('Unknown command');
+          done();
+        });
+      },
+      timeout
+    );
   });
 
   describeIntegration('Index.js init Export', () => {
@@ -152,31 +166,35 @@ describeIntegration('npx Execution', () => {
   describeIntegration('Cross-Platform Compatibility', () => {
     it('should work on current platform', () => {
       const cliPath = path.join(__dirname, '../../bin/aios.js');
-      
+
       // Verify file exists
       expect(fs.existsSync(cliPath)).toBe(true);
-      
+
       // Verify it's executable (shebang present)
       const content = fs.readFileSync(cliPath, 'utf8');
       expect(content.startsWith('#!/usr/bin/env node')).toBe(true);
     });
 
-    it('should report current platform in info command', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
-      const child = spawn('node', [cliPath, 'info']);
+    it(
+      'should report current platform in info command',
+      (done) => {
+        const cliPath = path.join(__dirname, '../../bin/aios.js');
+        const child = spawn('node', [cliPath, 'info']);
 
-      let output = '';
-      child.stdout.on('data', (data) => {
-        output += data.toString();
-      });
+        let output = '';
+        child.stdout.on('data', (data) => {
+          output += data.toString();
+        });
 
-      child.on('close', (code) => {
-        expect(code).toBe(0);
-        expect(output).toContain('Platform:');
-        expect(output).toContain(process.platform);
-        done();
-      });
-    }, timeout);
+        child.on('close', (code) => {
+          expect(code).toBe(0);
+          expect(output).toContain('Platform:');
+          expect(output).toContain(process.platform);
+          done();
+        });
+      },
+      timeout
+    );
   });
 
   describeIntegration('Performance', () => {
@@ -205,4 +223,3 @@ describeIntegration('npx Execution', () => {
     }, 10000);
   });
 });
-

@@ -12,8 +12,13 @@ jest.mock('../../.aios-core/development/scripts/unified-activation-pipeline', ()
   })),
 }));
 
-const { ActivationRuntime, activateAgent } = require('../../.aios-core/development/scripts/activation-runtime');
-const { UnifiedActivationPipeline } = require('../../.aios-core/development/scripts/unified-activation-pipeline');
+const {
+  ActivationRuntime,
+  activateAgent,
+} = require('../../.aios-core/development/scripts/activation-runtime');
+const {
+  UnifiedActivationPipeline,
+} = require('../../.aios-core/development/scripts/unified-activation-pipeline');
 
 describe('ActivationRuntime', () => {
   beforeEach(() => {
@@ -48,7 +53,7 @@ describe('ActivationRuntime', () => {
     });
 
     await expect(runtime.activateGreeting('qa')).rejects.toThrow(
-      'ActivationRuntime.activateGreeting failed for "qa": pipeline exploded',
+      'ActivationRuntime.activateGreeting failed for "qa": pipeline exploded'
     );
   });
 

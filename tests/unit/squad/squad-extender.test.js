@@ -154,38 +154,48 @@ describe('SquadExtender', () => {
 
   describe('Input Validation', () => {
     it('should reject invalid component type', async () => {
-      await expect(extender.addComponent('extend-test-squad', {
-        type: 'invalid-type',
-        name: 'test-component',
-      })).rejects.toThrow(SquadExtenderError);
+      await expect(
+        extender.addComponent('extend-test-squad', {
+          type: 'invalid-type',
+          name: 'test-component',
+        })
+      ).rejects.toThrow(SquadExtenderError);
     });
 
     it('should reject invalid component name (uppercase)', async () => {
-      await expect(extender.addComponent('extend-test-squad', {
-        type: 'agent',
-        name: 'InvalidName',
-      })).rejects.toThrow(SquadExtenderError);
+      await expect(
+        extender.addComponent('extend-test-squad', {
+          type: 'agent',
+          name: 'InvalidName',
+        })
+      ).rejects.toThrow(SquadExtenderError);
     });
 
     it('should reject invalid component name (special chars)', async () => {
-      await expect(extender.addComponent('extend-test-squad', {
-        type: 'agent',
-        name: 'invalid_name!',
-      })).rejects.toThrow(SquadExtenderError);
+      await expect(
+        extender.addComponent('extend-test-squad', {
+          type: 'agent',
+          name: 'invalid_name!',
+        })
+      ).rejects.toThrow(SquadExtenderError);
     });
 
     it('should reject path traversal attempts', async () => {
-      await expect(extender.addComponent('extend-test-squad', {
-        type: 'agent',
-        name: '../malicious',
-      })).rejects.toThrow(SquadExtenderError);
+      await expect(
+        extender.addComponent('extend-test-squad', {
+          type: 'agent',
+          name: '../malicious',
+        })
+      ).rejects.toThrow(SquadExtenderError);
     });
 
     it('should reject backslash path traversal', async () => {
-      await expect(extender.addComponent('extend-test-squad', {
-        type: 'agent',
-        name: '..\\malicious',
-      })).rejects.toThrow(SquadExtenderError);
+      await expect(
+        extender.addComponent('extend-test-squad', {
+          type: 'agent',
+          name: '..\\malicious',
+        })
+      ).rejects.toThrow(SquadExtenderError);
     });
 
     it('should accept valid kebab-case names', async () => {
@@ -196,7 +206,10 @@ describe('SquadExtender', () => {
       // Create a minimal squad structure
       const squadPath = path.join(TEMP_PATH, 'test-squad');
       await fs.mkdir(path.join(squadPath, 'agents'), { recursive: true });
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), 'name: test-squad\nversion: 1.0.0\ncomponents: {}');
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        'name: test-squad\nversion: 1.0.0\ncomponents: {}'
+      );
 
       const result = await tempExtender.addComponent('test-squad', {
         type: 'agent',
@@ -213,7 +226,10 @@ describe('SquadExtender', () => {
 
       const squadPath = path.join(TEMP_PATH, 'test-squad-2');
       await fs.mkdir(path.join(squadPath, 'agents'), { recursive: true });
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), 'name: test-squad-2\nversion: 1.0.0\ncomponents: {}');
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        'name: test-squad-2\nversion: 1.0.0\ncomponents: {}'
+      );
 
       const result = await tempExtender.addComponent('test-squad-2', {
         type: 'agent',
@@ -243,11 +259,13 @@ describe('SquadExtender', () => {
 
   describe('addComponent() - Task with Agent', () => {
     it('should validate agent exists when adding task', async () => {
-      await expect(extender.addComponent('extend-test-squad', {
-        type: 'task',
-        name: 'new-task',
-        agentId: 'non-existent-agent',
-      })).rejects.toThrow(SquadExtenderError);
+      await expect(
+        extender.addComponent('extend-test-squad', {
+          type: 'task',
+          name: 'new-task',
+          agentId: 'non-existent-agent',
+        })
+      ).rejects.toThrow(SquadExtenderError);
     });
 
     it('should prepend agent ID to task filename', async () => {
@@ -258,7 +276,10 @@ describe('SquadExtender', () => {
       await fs.mkdir(path.join(squadPath, 'agents'), { recursive: true });
       await fs.mkdir(path.join(squadPath, 'tasks'), { recursive: true });
       await fs.writeFile(path.join(squadPath, 'agents', 'lead-agent.md'), '# lead-agent');
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), 'name: task-test-squad\nversion: 1.0.0\ncomponents: {}');
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        'name: task-test-squad\nversion: 1.0.0\ncomponents: {}'
+      );
 
       const result = await tempExtender.addComponent('task-test-squad', {
         type: 'task',
@@ -274,10 +295,12 @@ describe('SquadExtender', () => {
 
   describe('addComponent() - Error Cases', () => {
     it('should throw error for non-existent squad', async () => {
-      await expect(extender.addComponent('non-existent-squad', {
-        type: 'agent',
-        name: 'test-agent',
-      })).rejects.toThrow(SquadExtenderError);
+      await expect(
+        extender.addComponent('non-existent-squad', {
+          type: 'agent',
+          name: 'test-agent',
+        })
+      ).rejects.toThrow(SquadExtenderError);
     });
   });
 
@@ -288,12 +311,15 @@ describe('SquadExtender', () => {
       // Create squad structure
       const squadPath = path.join(TEMP_PATH, 'manifest-test-squad');
       await fs.mkdir(squadPath, { recursive: true });
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), `
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        `
 name: manifest-test-squad
 version: 1.0.0
 components:
   agents: []
-`);
+`
+      );
 
       const result = await tempExtender.updateManifest(squadPath, {
         type: 'agent',
@@ -313,13 +339,16 @@ components:
       // Create squad structure
       const squadPath = path.join(TEMP_PATH, 'duplicate-test-squad');
       await fs.mkdir(squadPath, { recursive: true });
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), `
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        `
 name: duplicate-test-squad
 version: 1.0.0
 components:
   agents:
     - existing-agent.md
-`);
+`
+      );
 
       await tempExtender.updateManifest(squadPath, {
         type: 'agent',
@@ -339,13 +368,18 @@ components:
       // Create squad with existing component
       const squadPath = path.join(TEMP_PATH, 'overwrite-test-squad');
       await fs.mkdir(path.join(squadPath, 'agents'), { recursive: true });
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), 'name: overwrite-test-squad\nversion: 1.0.0\ncomponents: {}');
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        'name: overwrite-test-squad\nversion: 1.0.0\ncomponents: {}'
+      );
       await fs.writeFile(path.join(squadPath, 'agents', 'existing-agent.md'), '# Existing');
 
-      await expect(tempExtender.addComponent('overwrite-test-squad', {
-        type: 'agent',
-        name: 'existing-agent',
-      })).rejects.toThrow(SquadExtenderError);
+      await expect(
+        tempExtender.addComponent('overwrite-test-squad', {
+          type: 'agent',
+          name: 'existing-agent',
+        })
+      ).rejects.toThrow(SquadExtenderError);
     });
 
     it('should allow overwrite with force flag', async () => {
@@ -354,19 +388,29 @@ components:
       // Create squad with existing component
       const squadPath = path.join(TEMP_PATH, 'force-test-squad');
       await fs.mkdir(path.join(squadPath, 'agents'), { recursive: true });
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), 'name: force-test-squad\nversion: 1.0.0\ncomponents: {}');
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        'name: force-test-squad\nversion: 1.0.0\ncomponents: {}'
+      );
       await fs.writeFile(path.join(squadPath, 'agents', 'existing-agent.md'), '# Existing');
 
-      const result = await tempExtender.addComponent('force-test-squad', {
-        type: 'agent',
-        name: 'existing-agent',
-        description: 'Overwritten agent',
-      }, { force: true });
+      const result = await tempExtender.addComponent(
+        'force-test-squad',
+        {
+          type: 'agent',
+          name: 'existing-agent',
+          description: 'Overwritten agent',
+        },
+        { force: true }
+      );
 
       expect(result.success).toBe(true);
 
       // Check content was overwritten
-      const content = await fs.readFile(path.join(squadPath, 'agents', 'existing-agent.md'), 'utf8');
+      const content = await fs.readFile(
+        path.join(squadPath, 'agents', 'existing-agent.md'),
+        'utf8'
+      );
       expect(content).toContain('Overwritten agent');
     });
 
@@ -376,18 +420,28 @@ components:
       // Create squad with existing component
       const squadPath = path.join(TEMP_PATH, 'backup-test-squad');
       await fs.mkdir(path.join(squadPath, 'agents'), { recursive: true });
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), 'name: backup-test-squad\nversion: 1.0.0\ncomponents: {}');
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        'name: backup-test-squad\nversion: 1.0.0\ncomponents: {}'
+      );
       await fs.writeFile(path.join(squadPath, 'agents', 'backup-agent.md'), '# Original');
 
-      await tempExtender.addComponent('backup-test-squad', {
-        type: 'agent',
-        name: 'backup-agent',
-        description: 'Updated',
-      }, { force: true });
+      await tempExtender.addComponent(
+        'backup-test-squad',
+        {
+          type: 'agent',
+          name: 'backup-agent',
+          description: 'Updated',
+        },
+        { force: true }
+      );
 
       // Check backup exists
       const backupPath = path.join(squadPath, 'agents', 'backup-agent.md.bak');
-      const backupExists = await fs.access(backupPath).then(() => true).catch(() => false);
+      const backupExists = await fs
+        .access(backupPath)
+        .then(() => true)
+        .catch(() => false);
       expect(backupExists).toBe(true);
     });
   });
@@ -399,7 +453,10 @@ components:
       // Create minimal squad
       const squadPath = path.join(TEMP_PATH, 'perf-test-squad');
       await fs.mkdir(path.join(squadPath, 'agents'), { recursive: true });
-      await fs.writeFile(path.join(squadPath, 'squad.yaml'), 'name: perf-test-squad\nversion: 1.0.0\ncomponents: {}');
+      await fs.writeFile(
+        path.join(squadPath, 'squad.yaml'),
+        'name: perf-test-squad\nversion: 1.0.0\ncomponents: {}'
+      );
 
       const start = Date.now();
       await tempExtender.addComponent('perf-test-squad', {

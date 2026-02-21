@@ -45,7 +45,7 @@ describeIntegration('Greeting Preference Integration', () => {
   beforeEach(async () => {
     manager = new GreetingPreferenceManager();
     builder = new GreetingBuilder();
-    
+
     // Backup original config
     if (fs.existsSync(CONFIG_PATH)) {
       originalConfig = fs.readFileSync(CONFIG_PATH, 'utf8');
@@ -72,7 +72,7 @@ describeIntegration('Greeting Preference Integration', () => {
     } else if (fs.existsSync(CONFIG_PATH)) {
       fs.unlinkSync(CONFIG_PATH);
     }
-    
+
     // Clean up backup
     if (fs.existsSync(BACKUP_PATH)) {
       fs.unlinkSync(BACKUP_PATH);
@@ -83,10 +83,10 @@ describeIntegration('Greeting Preference Integration', () => {
     test('minimal preference shows minimal greeting', async () => {
       // Set preference
       manager.setPreference('minimal');
-      
+
       // Build greeting
       const greeting = await builder.buildGreeting(mockAgent, {});
-      
+
       // Verify
       expect(greeting).toContain('dev Agent ready');
       expect(greeting).not.toContain('Dex the Builder');
@@ -95,7 +95,7 @@ describeIntegration('Greeting Preference Integration', () => {
     test('named preference shows named greeting', async () => {
       manager.setPreference('named');
       const greeting = await builder.buildGreeting(mockAgent, {});
-      
+
       expect(greeting).toContain('Dex (Builder) ready');
       expect(greeting).not.toContain('dev Agent ready');
     });
@@ -103,16 +103,16 @@ describeIntegration('Greeting Preference Integration', () => {
     test('archetypal preference shows archetypal greeting', async () => {
       manager.setPreference('archetypal');
       const greeting = await builder.buildGreeting(mockAgent, {});
-      
+
       expect(greeting).toContain('Dex the Builder ready to innovate!');
     });
 
     test('auto preference uses session detection', async () => {
       manager.setPreference('auto');
-      
+
       // New session (empty history)
       const greeting = await builder.buildGreeting(mockAgent, { conversationHistory: [] });
-      
+
       // Should use contextual logic (not fixed level)
       expect(greeting).toBeTruthy();
       // May contain session-aware content
@@ -135,11 +135,11 @@ describeIntegration('Greeting Preference Integration', () => {
 
     test('preference persists across GreetingBuilder instances', async () => {
       manager.setPreference('archetypal');
-      
+
       // Create new builder instance
       const newBuilder = new GreetingBuilder();
       const greeting = await newBuilder.buildGreeting(mockAgent, {});
-      
+
       expect(greeting).toContain('Dex the Builder ready to innovate!');
     });
   });
@@ -148,26 +148,25 @@ describeIntegration('Greeting Preference Integration', () => {
     test('default preference preserves Story 6.1.2.5 behavior', async () => {
       // Ensure preference is auto (default)
       manager.setPreference('auto');
-      
+
       const greeting = await builder.buildGreeting(mockAgent, { conversationHistory: [] });
-      
+
       // Should use contextual logic, not fixed level
       expect(greeting).toBeTruthy();
     });
 
     test('agents without greeting_levels fall back gracefully', async () => {
       manager.setPreference('minimal');
-      
+
       const agentWithoutLevels = {
         name: 'Test',
         id: 'test',
         icon: '🤖',
       };
-      
+
       const greeting = await builder.buildGreeting(agentWithoutLevels, {});
       expect(greeting).toBeTruthy();
       expect(greeting).toContain('*help');
     });
   });
 });
-

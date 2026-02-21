@@ -9,11 +9,32 @@
 const path = require('path');
 
 // Test modules
-const { searchKeyword, fuzzyMatchScore, levenshteinDistance } = require('../../.aios-core/cli/commands/workers/search-keyword');
-const { applyFilters, filterByCategory, filterByTags } = require('../../.aios-core/cli/commands/workers/search-filters');
-const { formatOutput, formatTable, formatJSON, formatYAML } = require('../../.aios-core/cli/utils/output-formatter-cli');
-const { calculateScores, sortByScore, calculateSearchAccuracy } = require('../../.aios-core/cli/utils/score-calculator');
-const { isSemanticAvailable, cosineSimilarity, buildSearchText } = require('../../.aios-core/cli/commands/workers/search-semantic');
+const {
+  searchKeyword,
+  fuzzyMatchScore,
+  levenshteinDistance,
+} = require('../../.aios-core/cli/commands/workers/search-keyword');
+const {
+  applyFilters,
+  filterByCategory,
+  filterByTags,
+} = require('../../.aios-core/cli/commands/workers/search-filters');
+const {
+  formatOutput,
+  formatTable,
+  formatJSON,
+  formatYAML,
+} = require('../../.aios-core/cli/utils/output-formatter-cli');
+const {
+  calculateScores,
+  sortByScore,
+  calculateSearchAccuracy,
+} = require('../../.aios-core/cli/utils/score-calculator');
+const {
+  isSemanticAvailable,
+  cosineSimilarity,
+  buildSearchText,
+} = require('../../.aios-core/cli/commands/workers/search-semantic');
 
 // Mock workers for testing
 const mockWorkers = [
@@ -101,13 +122,13 @@ describe('Filter Functions', () => {
   test('filterByCategory filters correctly', () => {
     const filtered = filterByCategory(mockWorkers, 'data');
     expect(filtered.length).toBe(2);
-    expect(filtered.every(w => w.category === 'data')).toBe(true);
+    expect(filtered.every((w) => w.category === 'data')).toBe(true);
   });
 
   test('filterByTags filters with AND logic', () => {
     const filtered = filterByTags(mockWorkers, ['json', 'csv']);
     expect(filtered.length).toBe(2);
-    expect(filtered.every(w => w.tags.includes('json') && w.tags.includes('csv'))).toBe(true);
+    expect(filtered.every((w) => w.tags.includes('json') && w.tags.includes('csv'))).toBe(true);
   });
 
   test('applyFilters combines category and tags', () => {
@@ -145,10 +166,7 @@ describe('Score Calculator', () => {
   });
 
   test('calculateSearchAccuracy returns correct metrics', () => {
-    const results = [
-      { id: 'json-validator' },
-      { id: 'other-worker' },
-    ];
+    const results = [{ id: 'json-validator' }, { id: 'other-worker' }];
     const accuracy = calculateSearchAccuracy(results, 'json-validator');
     expect(accuracy.found).toBe(true);
     expect(accuracy.isFirst).toBe(true);

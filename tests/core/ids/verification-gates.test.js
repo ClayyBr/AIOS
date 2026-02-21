@@ -5,28 +5,19 @@ const path = require('path');
 // Module paths
 const CIRCUIT_BREAKER_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/circuit-breaker.js',
+  '../../../.aios-core/core/ids/circuit-breaker.js'
 );
 const VERIFICATION_GATE_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/verification-gate.js',
+  '../../../.aios-core/core/ids/verification-gate.js'
 );
-const G1_PATH = path.resolve(
-  __dirname,
-  '../../../.aios-core/core/ids/gates/g1-epic-creation.js',
-);
-const G2_PATH = path.resolve(
-  __dirname,
-  '../../../.aios-core/core/ids/gates/g2-story-creation.js',
-);
+const G1_PATH = path.resolve(__dirname, '../../../.aios-core/core/ids/gates/g1-epic-creation.js');
+const G2_PATH = path.resolve(__dirname, '../../../.aios-core/core/ids/gates/g2-story-creation.js');
 const G3_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/gates/g3-story-validation.js',
+  '../../../.aios-core/core/ids/gates/g3-story-validation.js'
 );
-const G4_PATH = path.resolve(
-  __dirname,
-  '../../../.aios-core/core/ids/gates/g4-dev-context.js',
-);
+const G4_PATH = path.resolve(__dirname, '../../../.aios-core/core/ids/gates/g4-dev-context.js');
 
 const {
   CircuitBreaker,
@@ -38,11 +29,7 @@ const {
   DEFAULT_RESET_TIMEOUT_MS,
 } = require(CIRCUIT_BREAKER_PATH);
 
-const {
-  VerificationGate,
-  createGateResult,
-  DEFAULT_TIMEOUT_MS,
-} = require(VERIFICATION_GATE_PATH);
+const { VerificationGate, createGateResult, DEFAULT_TIMEOUT_MS } = require(VERIFICATION_GATE_PATH);
 
 const { G1EpicCreationGate } = require(G1_PATH);
 const { G2StoryCreationGate } = require(G2_PATH);
@@ -101,11 +88,13 @@ function createMockRegistryLoader() {
 class TestGate extends VerificationGate {
   constructor(config = {}, verifyImpl) {
     super({ gateId: 'TEST', agent: '@test', ...config });
-    this._verifyImpl = verifyImpl || (async () => ({
-      passed: true,
-      warnings: [],
-      opportunities: [],
-    }));
+    this._verifyImpl =
+      verifyImpl ||
+      (async () => ({
+        passed: true,
+        warnings: [],
+        opportunities: [],
+      }));
   }
 
   async _doVerify(context) {
@@ -279,14 +268,12 @@ describe('VerificationGate', () => {
   describe('constructor', () => {
     it('requires gateId', () => {
       expect(() => new TestGate({ gateId: undefined, agent: '@test' })).toThrow(
-        /gateId is required/,
+        /gateId is required/
       );
     });
 
     it('requires agent', () => {
-      expect(() => new TestGate({ gateId: 'T1', agent: undefined })).toThrow(
-        /agent is required/,
-      );
+      expect(() => new TestGate({ gateId: 'T1', agent: undefined })).toThrow(/agent is required/);
     });
 
     it('initializes with correct defaults', () => {
@@ -375,29 +362,33 @@ describe('VerificationGate', () => {
     it('returns warn-and-proceed on timeout', async () => {
       const gate = new TestGate(
         { timeoutMs: 50, logger },
-        () => new Promise((resolve) => setTimeout(() => resolve({
-          passed: true,
-          warnings: [],
-          opportunities: [],
-        }), 200)),
+        () =>
+          new Promise((resolve) =>
+            setTimeout(
+              () =>
+                resolve({
+                  passed: true,
+                  warnings: [],
+                  opportunities: [],
+                }),
+              200
+            )
+          )
       );
 
       const result = await gate.verify({});
       expect(result.result.passed).toBe(true);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('timed out')]),
+        expect.arrayContaining([expect.stringContaining('timed out')])
       );
     });
 
     it('returns normal result when within timeout', async () => {
-      const gate = new TestGate(
-        { timeoutMs: 500, logger },
-        async () => ({
-          passed: true,
-          warnings: ['fast result'],
-          opportunities: [],
-        }),
-      );
+      const gate = new TestGate({ timeoutMs: 500, logger }, async () => ({
+        passed: true,
+        warnings: ['fast result'],
+        opportunities: [],
+      }));
 
       const result = await gate.verify({});
       expect(result.result.warnings).toContain('fast result');
@@ -414,7 +405,7 @@ describe('VerificationGate', () => {
       expect(result.result.passed).toBe(true);
       expect(result.result.blocking).toBe(false);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('Database connection failed')]),
+        expect.arrayContaining([expect.stringContaining('Database connection failed')])
       );
     });
 
@@ -424,9 +415,7 @@ describe('VerificationGate', () => {
       });
 
       await gate.verify({});
-      expect(logger.warn).toHaveBeenCalledWith(
-        expect.stringContaining('Gate failed'),
-      );
+      expect(logger.warn).toHaveBeenCalledWith(expect.stringContaining('Gate failed'));
     });
 
     it('records failure in circuit breaker on error', async () => {
@@ -453,7 +442,9 @@ describe('VerificationGate', () => {
           logger,
           circuitBreakerOptions: { failureThreshold: 2, resetTimeoutMs: 60000 },
         },
-        async () => { throw new Error('fail'); },
+        async () => {
+          throw new Error('fail');
+        }
       );
 
       // Trip the circuit
@@ -467,7 +458,7 @@ describe('VerificationGate', () => {
       expect(verifyFn).not.toHaveBeenCalled();
       expect(result.result.passed).toBe(true);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('circuit breaker open')]),
+        expect.arrayContaining([expect.stringContaining('circuit breaker open')])
       );
     });
 
@@ -504,7 +495,7 @@ describe('VerificationGate', () => {
       // It should gracefully degrade (error -> warn-and-proceed)
       expect(result.result.passed).toBe(true);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('_doVerify() must be implemented')]),
+        expect.arrayContaining([expect.stringContaining('_doVerify() must be implemented')])
       );
     });
   });
@@ -565,9 +556,7 @@ describe('G1EpicCreationGate', () => {
 
   describe('constructor', () => {
     it('requires decisionEngine', () => {
-      expect(() => new G1EpicCreationGate({ logger })).toThrow(
-        /decisionEngine is required/,
-      );
+      expect(() => new G1EpicCreationGate({ logger })).toThrow(/decisionEngine is required/);
     });
 
     it('creates gate with correct config', () => {
@@ -584,7 +573,7 @@ describe('G1EpicCreationGate', () => {
       const result = await gate.verify({});
       expect(result.result.passed).toBe(true);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('No epic intent')]),
+        expect.arrayContaining([expect.stringContaining('No epic intent')])
       );
     });
 
@@ -593,7 +582,7 @@ describe('G1EpicCreationGate', () => {
       await gate.verify({ intent: 'user authentication system' });
       expect(decisionEngine.analyze).toHaveBeenCalledWith(
         'user authentication system',
-        expect.any(Object),
+        expect.any(Object)
       );
     });
 
@@ -605,7 +594,7 @@ describe('G1EpicCreationGate', () => {
       });
       expect(decisionEngine.analyze).toHaveBeenCalledWith(
         'Auth Epic: implement SSO login',
-        expect.any(Object),
+        expect.any(Object)
       );
     });
 
@@ -648,7 +637,7 @@ describe('G1EpicCreationGate', () => {
       const result = await gate.verify({ intent: 'something' });
 
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('2 related entities')]),
+        expect.arrayContaining([expect.stringContaining('2 related entities')])
       );
     });
 
@@ -675,10 +664,10 @@ describe('G1EpicCreationGate', () => {
         type: 'task',
         category: 'development',
       });
-      expect(decisionEngine.analyze).toHaveBeenCalledWith(
-        'test',
-        { type: 'task', category: 'development' },
-      );
+      expect(decisionEngine.analyze).toHaveBeenCalledWith('test', {
+        type: 'task',
+        category: 'development',
+      });
     });
 
     it('forwards analysis warnings', async () => {
@@ -712,9 +701,7 @@ describe('G2StoryCreationGate', () => {
 
   describe('constructor', () => {
     it('requires decisionEngine', () => {
-      expect(() => new G2StoryCreationGate({ logger })).toThrow(
-        /decisionEngine is required/,
-      );
+      expect(() => new G2StoryCreationGate({ logger })).toThrow(/decisionEngine is required/);
     });
 
     it('creates gate with correct config', () => {
@@ -731,7 +718,7 @@ describe('G2StoryCreationGate', () => {
       const result = await gate.verify({});
       expect(result.result.passed).toBe(true);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('No story intent')]),
+        expect.arrayContaining([expect.stringContaining('No story intent')])
       );
     });
 
@@ -740,14 +727,10 @@ describe('G2StoryCreationGate', () => {
       await gate.verify({ intent: 'create login form' });
 
       expect(decisionEngine.analyze).toHaveBeenCalledTimes(2);
-      expect(decisionEngine.analyze).toHaveBeenCalledWith(
-        'create login form',
-        { type: 'task' },
-      );
-      expect(decisionEngine.analyze).toHaveBeenCalledWith(
-        'create login form',
-        { type: 'template' },
-      );
+      expect(decisionEngine.analyze).toHaveBeenCalledWith('create login form', { type: 'task' });
+      expect(decisionEngine.analyze).toHaveBeenCalledWith('create login form', {
+        type: 'template',
+      });
     });
 
     it('enriches intent with acceptance criteria', async () => {
@@ -759,7 +742,7 @@ describe('G2StoryCreationGate', () => {
 
       expect(decisionEngine.analyze).toHaveBeenCalledWith(
         expect.stringContaining('user can login'),
-        expect.any(Object),
+        expect.any(Object)
       );
     });
 
@@ -768,7 +751,12 @@ describe('G2StoryCreationGate', () => {
         if (context.type === 'task') {
           return {
             recommendations: [
-              { entityPath: 'tasks/login.md', relevanceScore: 0.8, decision: 'ADAPT', rationale: 'match' },
+              {
+                entityPath: 'tasks/login.md',
+                relevanceScore: 0.8,
+                decision: 'ADAPT',
+                rationale: 'match',
+              },
             ],
             summary: { totalEntities: 100, matchesFound: 1 },
           };
@@ -781,7 +769,7 @@ describe('G2StoryCreationGate', () => {
 
       expect(result.result.opportunities.some((o) => o.type === 'task')).toBe(true);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('1 existing tasks')]),
+        expect.arrayContaining([expect.stringContaining('1 existing tasks')])
       );
     });
 
@@ -790,7 +778,12 @@ describe('G2StoryCreationGate', () => {
         if (context.type === 'template') {
           return {
             recommendations: [
-              { entityPath: 'templates/form.md', relevanceScore: 0.7, decision: 'ADAPT', rationale: 'form match' },
+              {
+                entityPath: 'templates/form.md',
+                relevanceScore: 0.7,
+                decision: 'ADAPT',
+                rationale: 'form match',
+              },
             ],
             summary: { totalEntities: 100, matchesFound: 1 },
           };
@@ -803,7 +796,7 @@ describe('G2StoryCreationGate', () => {
 
       expect(result.result.opportunities.some((o) => o.type === 'template')).toBe(true);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('1 existing templates')]),
+        expect.arrayContaining([expect.stringContaining('1 existing templates')])
       );
     });
 
@@ -812,14 +805,24 @@ describe('G2StoryCreationGate', () => {
         if (context.type === 'task') {
           return {
             recommendations: [
-              { entityPath: 'tasks/a.md', relevanceScore: 0.6, decision: 'ADAPT', rationale: 'low' },
+              {
+                entityPath: 'tasks/a.md',
+                relevanceScore: 0.6,
+                decision: 'ADAPT',
+                rationale: 'low',
+              },
             ],
             summary: { totalEntities: 100, matchesFound: 1 },
           };
         }
         return {
           recommendations: [
-            { entityPath: 'templates/b.md', relevanceScore: 0.9, decision: 'REUSE', rationale: 'high' },
+            {
+              entityPath: 'templates/b.md',
+              relevanceScore: 0.9,
+              decision: 'REUSE',
+              rationale: 'high',
+            },
           ],
           summary: { totalEntities: 100, matchesFound: 1 },
         };
@@ -829,7 +832,7 @@ describe('G2StoryCreationGate', () => {
       const result = await gate.verify({ intent: 'something' });
 
       expect(result.result.opportunities[0].relevance).toBeGreaterThanOrEqual(
-        result.result.opportunities[1].relevance,
+        result.result.opportunities[1].relevance
       );
     });
 
@@ -860,13 +863,13 @@ describe('G3StoryValidationGate', () => {
   describe('constructor', () => {
     it('requires decisionEngine', () => {
       expect(() => new G3StoryValidationGate({ registryLoader, logger })).toThrow(
-        /decisionEngine is required/,
+        /decisionEngine is required/
       );
     });
 
     it('requires registryLoader', () => {
       expect(() => new G3StoryValidationGate({ decisionEngine, logger })).toThrow(
-        /registryLoader is required/,
+        /registryLoader is required/
       );
     });
 
@@ -887,8 +890,8 @@ describe('G3StoryValidationGate', () => {
 
     it('validates referenced artifacts exist in registry', async () => {
       registryLoader.queryByPath
-        .mockReturnValueOnce([{ id: 'test', path: 'tasks/auth.md' }])  // found
-        .mockReturnValueOnce([]);  // not found
+        .mockReturnValueOnce([{ id: 'test', path: 'tasks/auth.md' }]) // found
+        .mockReturnValueOnce([]); // not found
 
       const gate = new G3StoryValidationGate({ decisionEngine, registryLoader, logger });
       const result = await gate.verify({
@@ -901,7 +904,7 @@ describe('G3StoryValidationGate', () => {
         expect.arrayContaining([
           expect.stringContaining('1 referenced artifacts not found'),
           expect.stringContaining('1 referenced artifacts verified'),
-        ]),
+        ])
       );
     });
 
@@ -934,8 +937,18 @@ describe('G3StoryValidationGate', () => {
       decisionEngine.analyze.mockReturnValue({
         intent: 'test',
         recommendations: [
-          { entityPath: 'tasks/similar.md', relevanceScore: 0.85, decision: 'REUSE', rationale: 'near duplicate' },
-          { entityPath: 'tasks/related.md', relevanceScore: 0.6, decision: 'ADAPT', rationale: 'related' },
+          {
+            entityPath: 'tasks/similar.md',
+            relevanceScore: 0.85,
+            decision: 'REUSE',
+            rationale: 'near duplicate',
+          },
+          {
+            entityPath: 'tasks/related.md',
+            relevanceScore: 0.6,
+            decision: 'ADAPT',
+            rationale: 'related',
+          },
         ],
         summary: { totalEntities: 100, matchesFound: 2 },
       });
@@ -944,7 +957,7 @@ describe('G3StoryValidationGate', () => {
       const result = await gate.verify({ intent: 'similar task' });
 
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('Potential duplication detected')]),
+        expect.arrayContaining([expect.stringContaining('Potential duplication detected')])
       );
       // Duplication (>=0.8) causes soft block
       expect(result.result.passed).toBe(false);
@@ -955,7 +968,12 @@ describe('G3StoryValidationGate', () => {
       decisionEngine.analyze.mockReturnValue({
         intent: 'test',
         recommendations: [
-          { entityPath: 'tasks/related.md', relevanceScore: 0.5, decision: 'ADAPT', rationale: 'low relevance' },
+          {
+            entityPath: 'tasks/related.md',
+            relevanceScore: 0.5,
+            decision: 'ADAPT',
+            rationale: 'low relevance',
+          },
         ],
         summary: { totalEntities: 100, matchesFound: 1 },
       });
@@ -1002,9 +1020,7 @@ describe('G4DevContextGate', () => {
 
   describe('constructor', () => {
     it('requires decisionEngine', () => {
-      expect(() => new G4DevContextGate({ logger })).toThrow(
-        /decisionEngine is required/,
-      );
+      expect(() => new G4DevContextGate({ logger })).toThrow(/decisionEngine is required/);
     });
 
     it('creates gate with correct config', () => {
@@ -1025,7 +1041,7 @@ describe('G4DevContextGate', () => {
       const result = await gate.verify({});
       expect(result.result.passed).toBe(true);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('No intent provided')]),
+        expect.arrayContaining([expect.stringContaining('No intent provided')])
       );
     });
 
@@ -1034,7 +1050,7 @@ describe('G4DevContextGate', () => {
       await gate.verify({ intent: 'implement circuit breaker' });
       expect(decisionEngine.analyze).toHaveBeenCalledWith(
         'implement circuit breaker',
-        expect.any(Object),
+        expect.any(Object)
       );
     });
 
@@ -1047,7 +1063,7 @@ describe('G4DevContextGate', () => {
 
       expect(decisionEngine.analyze).toHaveBeenCalledWith(
         expect.stringContaining('verification-gate'),
-        expect.any(Object),
+        expect.any(Object)
       );
     });
 
@@ -1055,7 +1071,12 @@ describe('G4DevContextGate', () => {
       decisionEngine.analyze.mockReturnValue({
         intent: 'test',
         recommendations: [
-          { entityPath: 'core/ids/registry-loader.js', relevanceScore: 0.7, decision: 'ADAPT', rationale: 'related IDS module' },
+          {
+            entityPath: 'core/ids/registry-loader.js',
+            relevanceScore: 0.7,
+            decision: 'ADAPT',
+            rationale: 'related IDS module',
+          },
         ],
         summary: { totalEntities: 100, matchesFound: 1 },
       });
@@ -1065,7 +1086,7 @@ describe('G4DevContextGate', () => {
 
       expect(result.result.opportunities).toHaveLength(1);
       expect(result.result.warnings).toEqual(
-        expect.arrayContaining([expect.stringContaining('1 relevant artifacts found')]),
+        expect.arrayContaining([expect.stringContaining('1 relevant artifacts found')])
       );
     });
 
@@ -1073,7 +1094,12 @@ describe('G4DevContextGate', () => {
       decisionEngine.analyze.mockReturnValue({
         intent: 'test',
         recommendations: [
-          { entityPath: 'exact-match.js', relevanceScore: 0.99, decision: 'REUSE', rationale: 'exact' },
+          {
+            entityPath: 'exact-match.js',
+            relevanceScore: 0.99,
+            decision: 'REUSE',
+            rationale: 'exact',
+          },
         ],
         summary: { totalEntities: 100, matchesFound: 1 },
       });
@@ -1150,7 +1176,7 @@ describe('Graceful Degradation (Integration)', () => {
       async () => {
         callCount++;
         throw new Error(`Failure #${callCount}`);
-      },
+      }
     );
 
     // All invocations should pass (graceful degradation)
@@ -1171,7 +1197,7 @@ describe('Graceful Degradation (Integration)', () => {
       async () => {
         doVerifyCalls++;
         throw new Error('Persistent failure');
-      },
+      }
     );
 
     // Trip the circuit: 2 failures
@@ -1188,11 +1214,18 @@ describe('Graceful Degradation (Integration)', () => {
   it('timeout does not block execution', async () => {
     const gate = new TestGate(
       { timeoutMs: 50, logger },
-      () => new Promise((resolve) => setTimeout(() => resolve({
-        passed: false,
-        warnings: ['should not appear'],
-        opportunities: [],
-      }), 500)),
+      () =>
+        new Promise((resolve) =>
+          setTimeout(
+            () =>
+              resolve({
+                passed: false,
+                warnings: ['should not appear'],
+                opportunities: [],
+              }),
+            500
+          )
+        )
     );
 
     const start = Date.now();

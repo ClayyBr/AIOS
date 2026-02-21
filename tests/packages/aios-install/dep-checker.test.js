@@ -215,7 +215,7 @@ describe('dep-checker', () => {
       // Then
       expect(result.passed).toBe(true);
       expect(result.missing).toHaveLength(0);
-      expect(result.required.every(d => d.installed)).toBe(true);
+      expect(result.required.every((d) => d.installed)).toBe(true);
     });
 
     it('should fail when Node.js is not installed', () => {
@@ -233,7 +233,7 @@ describe('dep-checker', () => {
 
       // Then
       expect(result.passed).toBe(false);
-      expect(result.missing.some(m => m.command === 'node')).toBe(true);
+      expect(result.missing.some((m) => m.command === 'node')).toBe(true);
     });
 
     it('should fail when Node.js version is below minimum', () => {
@@ -251,7 +251,9 @@ describe('dep-checker', () => {
 
       // Then
       expect(result.passed).toBe(false);
-      expect(result.missing.some(m => m.command === 'node' && m.reason.includes('below minimum'))).toBe(true);
+      expect(
+        result.missing.some((m) => m.command === 'node' && m.reason.includes('below minimum'))
+      ).toBe(true);
     });
 
     it('should warn but pass when optional dependencies are missing', () => {
@@ -301,7 +303,13 @@ describe('dep-checker', () => {
 
     it('should format dependency below minimum version with warning', () => {
       // Given
-      const check = { name: 'Node.js', installed: true, version: '16.0.0', meetsMinVersion: false, minVersion: '18.0.0' };
+      const check = {
+        name: 'Node.js',
+        installed: true,
+        version: '16.0.0',
+        meetsMinVersion: false,
+        minVersion: '18.0.0',
+      };
 
       // When
       const result = formatDependencyStatus(check);

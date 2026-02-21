@@ -23,4 +23,3 @@ This document clarifies the licensing boundary in Synkra AIOS.
 
 - `LICENSE` (root): MIT license for `aios-core`
 - `docs/legal/terms.md`: terms of use for this repository
-

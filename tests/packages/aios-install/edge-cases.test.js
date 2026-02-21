@@ -52,10 +52,7 @@ const {
   checkDockerRunning,
 } = require('../../../packages/aios-install/src/dep-checker');
 
-const {
-  checkDocker,
-  ensureDocker,
-} = require('../../../packages/aios-install/src/edmcp');
+const { checkDocker, ensureDocker } = require('../../../packages/aios-install/src/edmcp');
 
 describe('Edge Cases - Task 7.7', () => {
   beforeEach(() => {
@@ -210,7 +207,7 @@ describe('Edge Cases - Task 7.7', () => {
       // Then
       expect(result.passed).toBe(true); // Should still pass
       expect(result.hasWarnings).toBe(true);
-      expect(result.warnings.some(w => w.name === 'Docker')).toBe(true);
+      expect(result.warnings.some((w) => w.name === 'Docker')).toBe(true);
     });
   });
 
@@ -228,9 +225,7 @@ describe('Edge Cases - Task 7.7', () => {
       };
 
       // When/Then
-      await expect(
-        createUserConfigDirect('bob', mockLogger, false),
-      ).rejects.toThrow('EACCES');
+      await expect(createUserConfigDirect('bob', mockLogger, false)).rejects.toThrow('EACCES');
     });
 
     it('should handle EPERM error when writing config file', async () => {
@@ -248,9 +243,7 @@ describe('Edge Cases - Task 7.7', () => {
       };
 
       // When/Then
-      await expect(
-        createUserConfigDirect('bob', mockLogger, false),
-      ).rejects.toThrow('EPERM');
+      await expect(createUserConfigDirect('bob', mockLogger, false)).rejects.toThrow('EPERM');
     });
 
     it('should handle permission denied during npm install', async () => {
@@ -291,9 +284,7 @@ describe('Edge Cases - Task 7.7', () => {
       };
 
       // When/Then
-      await expect(
-        createUserConfigDirect('bob', mockLogger, false),
-      ).rejects.toThrow('EROFS');
+      await expect(createUserConfigDirect('bob', mockLogger, false)).rejects.toThrow('EROFS');
     });
 
     it('should handle read-only npm cache directory', async () => {
@@ -323,9 +314,7 @@ describe('Edge Cases - Task 7.7', () => {
       };
 
       // When/Then
-      await expect(
-        createUserConfigDirect('bob', mockLogger, false),
-      ).rejects.toThrow('ENOSPC');
+      await expect(createUserConfigDirect('bob', mockLogger, false)).rejects.toThrow('ENOSPC');
     });
 
     it('should not make filesystem changes in dry-run mode on read-only system', async () => {
@@ -387,9 +376,7 @@ describe('Edge Cases - Task 7.7', () => {
       };
 
       // When/Then
-      await expect(
-        createUserConfigDirect('bob', mockLogger, false),
-      ).rejects.toThrow('EBUSY');
+      await expect(createUserConfigDirect('bob', mockLogger, false)).rejects.toThrow('EBUSY');
     });
 
     it('should handle EEXIST when directory already exists during race condition', async () => {

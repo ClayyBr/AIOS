@@ -45,7 +45,9 @@ function createProgram() {
     .name('aios')
     .version(packageVersion)
     .description('AIOS-FullStack: AI-Orchestrated System for Full Stack Development')
-    .addHelpText('after', `
+    .addHelpText(
+      'after',
+      `
 Commands:
   workers           Manage and discover workers
   manifest          Manage manifest files (validate, regenerate)
@@ -95,7 +97,8 @@ Examples:
   $ aios pro validate
   $ aios install
   $ aios doctor
-`);
+`
+    );
 
   // Add workers command
   program.addCommand(createWorkersCommand());

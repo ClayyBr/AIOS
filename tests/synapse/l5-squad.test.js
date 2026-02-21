@@ -72,12 +72,15 @@ describe('L5SquadProcessor', () => {
 
   describe('process()', () => {
     test('should discover squad domains and return rules', () => {
-      createSquad(tempDir, 'copy-chief', [
-        'HEADLINES_STATE=active',
-        'HEADLINES_RECALL=headline,title',
-      ].join('\n'), {
-        'headlines': 'HEADLINES_RULE_1=Write compelling headlines\nHEADLINES_RULE_2=Use power words',
-      });
+      createSquad(
+        tempDir,
+        'copy-chief',
+        ['HEADLINES_STATE=active', 'HEADLINES_RECALL=headline,title'].join('\n'),
+        {
+          headlines:
+            'HEADLINES_RULE_1=Write compelling headlines\nHEADLINES_RULE_2=Use power words',
+        }
+      );
 
       const context = {
         prompt: '',
@@ -99,10 +102,8 @@ describe('L5SquadProcessor', () => {
     });
 
     test('should namespace domain keys with squad name uppercase', () => {
-      createSquad(tempDir, 'my-squad', [
-        'RULES_STATE=active',
-      ].join('\n'), {
-        'rules': 'Rule one\nRule two',
+      createSquad(tempDir, 'my-squad', ['RULES_STATE=active'].join('\n'), {
+        rules: 'Rule one\nRule two',
       });
 
       const context = {
@@ -116,7 +117,7 @@ describe('L5SquadProcessor', () => {
 
       expect(result).not.toBeNull();
       expect(result.metadata.domainsLoaded).toEqual(
-        expect.arrayContaining([expect.stringContaining('MY-SQUAD_')]),
+        expect.arrayContaining([expect.stringContaining('MY-SQUAD_')])
       );
     });
 
@@ -165,10 +166,10 @@ describe('L5SquadProcessor', () => {
 
     test('should discover multiple squads', () => {
       createSquad(tempDir, 'squad-alpha', 'ALPHA_STATE=active\n', {
-        'alpha': 'Alpha rule 1',
+        alpha: 'Alpha rule 1',
       });
       createSquad(tempDir, 'squad-beta', 'BETA_STATE=active\n', {
-        'beta': 'Beta rule 1',
+        beta: 'Beta rule 1',
       });
 
       const context = {
@@ -186,10 +187,10 @@ describe('L5SquadProcessor', () => {
 
     test('should prioritize active squad domains', () => {
       createSquad(tempDir, 'active-squad', 'ACTIVE_STATE=active\n', {
-        'active': 'Active squad rule',
+        active: 'Active squad rule',
       });
       createSquad(tempDir, 'passive-squad', 'PASSIVE_STATE=active\n', {
-        'passive': 'Passive squad rule',
+        passive: 'Passive squad rule',
       });
 
       const context = {
@@ -235,13 +236,19 @@ describe('L5SquadProcessor', () => {
       const manifest = {
         domains: {
           'OPT-OUT_EXTENDS': { file: 'none' },
-          'RULES': { file: 'rules' },
+          RULES: { file: 'rules' },
         },
       };
 
       const allRules = [];
       const domainsLoaded = [];
-      processor._loadSquadDomains('opt-out', manifest, path.join(tempDir, 'squads'), allRules, domainsLoaded);
+      processor._loadSquadDomains(
+        'opt-out',
+        manifest,
+        path.join(tempDir, 'squads'),
+        allRules,
+        domainsLoaded
+      );
 
       expect(allRules).toHaveLength(0);
       expect(domainsLoaded).toHaveLength(0);
@@ -260,7 +267,7 @@ describe('L5SquadProcessor', () => {
   describe('cache', () => {
     test('should create cache file after first scan', () => {
       createSquad(tempDir, 'cached-squad', 'DATA_STATE=active\n', {
-        'data': 'Cached rule',
+        data: 'Cached rule',
       });
 
       const context = {
@@ -282,7 +289,7 @@ describe('L5SquadProcessor', () => {
 
     test('should use cache when fresh (within TTL)', () => {
       createSquad(tempDir, 'ttl-squad', 'TTL_STATE=active\n', {
-        'ttl': 'TTL rule',
+        ttl: 'TTL rule',
       });
 
       const context = {
@@ -297,7 +304,7 @@ describe('L5SquadProcessor', () => {
 
       // Add a new squad after cache is written
       createSquad(tempDir, 'new-squad', 'NEW_STATE=active\n', {
-        'new': 'New rule',
+        new: 'New rule',
       });
 
       // Second call: should use cache (new squad NOT discovered)
@@ -309,7 +316,7 @@ describe('L5SquadProcessor', () => {
 
     test('should rescan when cache is stale', () => {
       createSquad(tempDir, 'stale-squad', 'STALE_STATE=active\n', {
-        'stale': 'Stale rule',
+        stale: 'Stale rule',
       });
 
       const context = {
@@ -339,7 +346,7 @@ describe('L5SquadProcessor', () => {
 
     test('should handle corrupt cache gracefully', () => {
       createSquad(tempDir, 'corrupt-squad', 'CORRUPT_STATE=active\n', {
-        'corrupt': 'Corrupt cache rule',
+        corrupt: 'Corrupt cache rule',
       });
 
       // Write corrupt cache

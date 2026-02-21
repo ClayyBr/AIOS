@@ -149,11 +149,14 @@ describeIntegration('Agent Activation Performance (Integration)', () => {
       const fullResult = await devLoader.load({ fullLoad: true, skipCache: true });
 
       // Only count successfully loaded files (exclude files with errors)
-      const successfulSummaryFiles = summaryResult.files.filter(f => !f.error);
-      const successfulFullFiles = fullResult.files.filter(f => !f.error);
+      const successfulSummaryFiles = summaryResult.files.filter((f) => !f.error);
+      const successfulFullFiles = fullResult.files.filter((f) => !f.error);
 
       // Calculate total lines only from successfully loaded files
-      const summaryLines = successfulSummaryFiles.reduce((sum, f) => sum + (f.summaryLines || 0), 0);
+      const summaryLines = successfulSummaryFiles.reduce(
+        (sum, f) => sum + (f.summaryLines || 0),
+        0
+      );
       const fullLines = successfulFullFiles.reduce((sum, f) => sum + (f.linesCount || 0), 0);
 
       // Only test reduction if we have data to compare

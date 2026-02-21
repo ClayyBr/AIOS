@@ -9,7 +9,10 @@ function getStagedFiles() {
   try {
     const output = execSync('git diff --cached --name-only', { encoding: 'utf8' }).trim();
     if (!output) return [];
-    return output.split('\n').map((line) => line.trim()).filter(Boolean);
+    return output
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean);
   } catch (_error) {
     return [];
   }

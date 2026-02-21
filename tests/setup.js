@@ -25,10 +25,7 @@ jest.setTimeout(process.env.CI ? 30000 : 10000);
 // };
 
 // Helper to conditionally skip integration tests
-global.describeIntegration = process.env.SKIP_INTEGRATION_TESTS === 'true'
-  ? describe.skip
-  : describe;
+global.describeIntegration =
+  process.env.SKIP_INTEGRATION_TESTS === 'true' ? describe.skip : describe;
 
-global.testIntegration = process.env.SKIP_INTEGRATION_TESTS === 'true'
-  ? test.skip
-  : test;
+global.testIntegration = process.env.SKIP_INTEGRATION_TESTS === 'true' ? test.skip : test;

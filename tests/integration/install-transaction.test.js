@@ -31,7 +31,11 @@ describe('InstallTransaction', () => {
 
     // Initialize transaction with temp dir
     // Use simple timestamp for testing (avoid Windows path issues)
-    const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/\./g, '-').replace('T', '_');
+    const timestamp = new Date()
+      .toISOString()
+      .replace(/:/g, '-')
+      .replace(/\./g, '-')
+      .replace('T', '_');
     transaction = new InstallTransaction({
       backupDir: path.join(tempDir, '.aios-backup', timestamp),
       logFile: path.join(tempDir, '.aios-install.log'),
@@ -158,7 +162,9 @@ describe('InstallTransaction', () => {
       const success = await transaction.rollback();
 
       expect(success).toBe(false);
-      expect(transaction.operations.some((op) => op.message.includes('Cannot rollback'))).toBe(true);
+      expect(transaction.operations.some((op) => op.message.includes('Cannot rollback'))).toBe(
+        true
+      );
     });
   });
 
@@ -319,7 +325,9 @@ describe('InstallTransaction', () => {
       const success = await transaction.rollback();
 
       expect(success).toBe(false);
-      expect(transaction.operations.some((op) => op.message.includes('Backup verification failed'))).toBe(true);
+      expect(
+        transaction.operations.some((op) => op.message.includes('Backup verification failed'))
+      ).toBe(true);
     });
 
     test('should verify backup integrity with hash comparison', async () => {

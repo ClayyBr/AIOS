@@ -329,10 +329,7 @@ describe('Story Update Hook - ClickUp Synchronization', () => {
 
     await syncStoryToClickUp(storyFile, changes);
 
-    expect(clickupHelpers.updateStoryStatus).toHaveBeenCalledWith(
-      'story-123',
-      'In Progress',
-    );
+    expect(clickupHelpers.updateStoryStatus).toHaveBeenCalledWith('story-123', 'In Progress');
   });
 
   test('should add changelog comment to ClickUp', async () => {
@@ -356,7 +353,7 @@ describe('Story Update Hook - ClickUp Synchronization', () => {
 
     expect(clickupHelpers.addTaskComment).toHaveBeenCalledWith(
       'story-456',
-      expect.stringContaining('Completed tasks:'),
+      expect.stringContaining('Completed tasks:')
     );
   });
 
@@ -382,7 +379,7 @@ describe('Story Update Hook - ClickUp Synchronization', () => {
 
     expect(clickupHelpers.updateTaskDescription).toHaveBeenCalledWith(
       'story-789',
-      expect.stringContaining('AC1: Updated'),
+      expect.stringContaining('AC1: Updated')
     );
   });
 
@@ -468,9 +465,7 @@ describe('Story Update Hook - Error Handling', () => {
   });
 
   test('should handle network failures during status update', async () => {
-    clickupHelpers.updateStoryStatus.mockRejectedValue(
-      new Error('Network error'),
-    );
+    clickupHelpers.updateStoryStatus.mockRejectedValue(new Error('Network error'));
 
     const storyFile = {
       metadata: {
@@ -491,9 +486,7 @@ describe('Story Update Hook - Error Handling', () => {
   });
 
   test('should handle invalid task_id in metadata', async () => {
-    clickupHelpers.updateStoryStatus.mockRejectedValue(
-      new Error('Task not found'),
-    );
+    clickupHelpers.updateStoryStatus.mockRejectedValue(new Error('Task not found'));
 
     const storyFile = {
       metadata: {
@@ -514,9 +507,7 @@ describe('Story Update Hook - Error Handling', () => {
   });
 
   test('should handle ClickUp API rate limit errors', async () => {
-    clickupHelpers.addTaskComment.mockRejectedValue(
-      new Error('Rate limit exceeded'),
-    );
+    clickupHelpers.addTaskComment.mockRejectedValue(new Error('Rate limit exceeded'));
 
     const storyFile = {
       metadata: { clickup_task_id: 'story-rate-limit' },
