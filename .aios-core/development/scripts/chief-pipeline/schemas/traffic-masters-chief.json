@@ -1,0 +1,95 @@
+{
+    "chief_name": "traffic-masters-chief",
+    "chief_icon": "📢",
+    "description": "Quality gate schema for Traffic Masters Chief — validates strategy, campaign, optimization, and report phases",
+    "version": "1.0.0",
+    "phases": {
+        "strategy": {
+            "description": "Tier 0 — Traffic Engine setup + BPM (Pittman/Mandalia)",
+            "specialist": "@molly-pittman / @depesh-mandalia",
+            "output_file": "00-strategy.md",
+            "required_fields": [
+                "platform",
+                "objective",
+                "budget_range",
+                "target_audience"
+            ],
+            "allowed_values": [
+                {
+                    "field": "platform",
+                    "values": [
+                        "Meta",
+                        "Facebook",
+                        "Instagram",
+                        "Google",
+                        "YouTube",
+                        "Multi-platform"
+                    ]
+                },
+                {
+                    "field": "objective",
+                    "values": [
+                        "Lead Generation",
+                        "E-commerce",
+                        "Awareness",
+                        "Traffic",
+                        "Conversions",
+                        "App Install",
+                        "Video Views",
+                        "Geração de Leads",
+                        "Vendas",
+                        "Reconhecimento",
+                        "Tráfego"
+                    ]
+                }
+            ],
+            "min_words": 200,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]"
+            ]
+        },
+        "campaign": {
+            "description": "Tier 1 — Platform-specific campaign setup",
+            "specialist": "auto-routed",
+            "output_file": "01-campaign.md",
+            "required_sections": [
+                "Campaign Structure",
+                "Targeting",
+                "Creative",
+                "Budget"
+            ],
+            "min_words": 400,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]"
+            ]
+        },
+        "optimization": {
+            "description": "Tier 2 — Scaling + creative optimization (Burns/Sobral)",
+            "specialist": "@ralph-burns / @pedro-sobral",
+            "output_file": "02-optimization.md",
+            "required_sections": [
+                "Metrics",
+                "Optimization",
+                "Scale"
+            ],
+            "min_words": 250
+        },
+        "report": {
+            "description": "Final performance report with KPIs",
+            "specialist": "traffic-masters-chief",
+            "output_file": "03-report.md",
+            "required_sections": [
+                "Summary",
+                "KPIs",
+                "Recommendations"
+            ],
+            "required_fields": [
+                "ROAS",
+                "CAC"
+            ],
+            "min_words": 300
+        }
+    }
+}

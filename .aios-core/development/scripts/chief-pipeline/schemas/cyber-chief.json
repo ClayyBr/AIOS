@@ -1,0 +1,99 @@
+{
+    "chief_name": "cyber-chief",
+    "chief_icon": "🛡️",
+    "description": "Quality gate schema for Cyber Chief pipeline — validates triage, assessment, remediation, and report phases",
+    "version": "1.0.0",
+    "phases": {
+        "triage": {
+            "description": "Rapid security problem assessment and specialist routing",
+            "specialist": "cyber-chief",
+            "output_file": "00-triage.md",
+            "required_fields": [
+                "urgency_level",
+                "problem_type",
+                "assets_at_risk",
+                "recommended_specialist"
+            ],
+            "allowed_values": [
+                {
+                    "field": "urgency_level",
+                    "values": [
+                        "CRITICAL",
+                        "HIGH",
+                        "MEDIUM",
+                        "LOW"
+                    ]
+                },
+                {
+                    "field": "problem_type",
+                    "values": [
+                        "pentest",
+                        "red-team",
+                        "appsec",
+                        "code-audit",
+                        "threat-hunt",
+                        "incident-response",
+                        "compliance",
+                        "security-program",
+                        "team-building",
+                        "recon"
+                    ]
+                }
+            ],
+            "min_words": 150,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]",
+                "(?i)\\[insert"
+            ]
+        },
+        "assessment": {
+            "description": "Specialist security assessment (pentest, audit, hunt, etc.)",
+            "specialist": "auto-routed",
+            "output_file": "01-assessment.md",
+            "required_sections": [
+                "Scope",
+                "Findings",
+                "Risk"
+            ],
+            "min_words": 400,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]",
+                "(?i)password[:\\s]*['\"]\\w+"
+            ]
+        },
+        "remediation": {
+            "description": "Remediation plan with prioritized actions",
+            "specialist": "auto-routed",
+            "output_file": "02-remediation.md",
+            "required_sections": [
+                "Priority",
+                "Action",
+                "Timeline"
+            ],
+            "required_fields": [
+                "risk_level",
+                "remediation_steps"
+            ],
+            "min_words": 300
+        },
+        "report": {
+            "description": "Final security report with executive summary",
+            "specialist": "cyber-chief",
+            "output_file": "03-report.md",
+            "required_sections": [
+                "Executive Summary",
+                "Findings",
+                "Recommendations"
+            ],
+            "min_words": 500,
+            "forbidden_patterns": [
+                "(?i)password[:\\s]*['\"]\\w+",
+                "(?i)api[_-]?key[:\\s]*['\"]\\w+",
+                "(?i)secret[:\\s]*['\"]\\w+",
+                "(?i)token[:\\s]*['\"]\\w+"
+            ]
+        }
+    }
+}

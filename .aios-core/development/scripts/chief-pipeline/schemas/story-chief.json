@@ -1,0 +1,54 @@
+{
+    "chief_name": "story-chief",
+    "chief_icon": "📖",
+    "description": "Quality gate schema for Story Chief pipeline — validates diagnosis, framework, creation, and delivery phases",
+    "version": "1.0.0",
+    "phases": {
+        "diagnosis": {
+            "description": "Tier 0 — Structure (Campbell) + Genre (Coyne) analysis",
+            "specialist": "@joseph-campbell / @shawn-coyne",
+            "output_file": "00-diagnosis.md",
+            "required_fields": [
+                "story_type",
+                "audience",
+                "recommended_framework",
+                "recommended_storyteller"
+            ],
+            "min_words": 200,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]"
+            ]
+        },
+        "framework": {
+            "description": "Tier 1 — Apply selected framework (StoryBrand, Sparkline, Story Circle, etc.)",
+            "specialist": "auto-routed",
+            "output_file": "01-framework.md",
+            "required_sections": [
+                "Framework",
+                "Structure",
+                "Beats"
+            ],
+            "min_words": 300
+        },
+        "creation": {
+            "description": "Tier 2 — Story creation by specialist",
+            "specialist": "auto-routed",
+            "output_file": "02-creation.md",
+            "required_sections": [
+                "Story"
+            ],
+            "min_words": 200
+        },
+        "delivery": {
+            "description": "Final story with quality validation",
+            "specialist": "story-chief",
+            "output_file": "03-delivery.md",
+            "required_sections": [
+                "Final Story",
+                "Quality Score"
+            ],
+            "min_words": 200
+        }
+    }
+}

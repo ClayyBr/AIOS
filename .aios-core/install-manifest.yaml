@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 4.2.13
-generated_at: "2026-02-21T02:28:47.395Z"
+generated_at: "2026-02-22T05:43:38.001Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1006
+file_count: 1021
 files:
   - path: cli/commands/config/index.js
     hash: sha256:14fab50f6fd07ddfa38902f10712a53ff76b997ed863916d7dc954b3c5a8d8da
@@ -1208,6 +1208,66 @@ files:
     hash: sha256:2e6b1e434f3f5e2e1d1f1aec994c3fb56efccf7baacb4f188e769b13dabe03de
     type: script
     size: 11536
+  - path: development/scripts/chief-pipeline/chief-quality-gate.py
+    hash: sha256:739faade30ac11c4e8246188efff65392720e94c34f00fdfff949ddbeaa35a25
+    type: script
+    size: 8975
+  - path: development/scripts/chief-pipeline/schemas/copy-chief.json
+    hash: sha256:280f4c01d87dbbf34bdc355af3364a71378b0d9ef988b9df605855790c0fc20f
+    type: script
+    size: 3693
+  - path: development/scripts/chief-pipeline/schemas/cyber-chief.json
+    hash: sha256:b5cf32d9ad788366d2ab9e162eeea495c4b59f3a831864dae4b4d4b0a344ea0d
+    type: script
+    size: 3358
+  - path: development/scripts/chief-pipeline/schemas/data-chief.json
+    hash: sha256:9fe1217f30474df543218fb6aeb35b383ef56c225c4eabd62669906c8ef5d235
+    type: script
+    size: 2153
+  - path: development/scripts/chief-pipeline/schemas/design-chief.json
+    hash: sha256:c3130b99393043fba5f3a3e37a0798f1ef39e9d21ee63d46567e18e402210b01
+    type: script
+    size: 2085
+  - path: development/scripts/chief-pipeline/schemas/legal-chief.json
+    hash: sha256:b5157399b95b44174ba7d1791e1a7a304e96d56e1eba2bc91388d253d1fcf0f0
+    type: script
+    size: 2997
+  - path: development/scripts/chief-pipeline/schemas/story-chief.json
+    hash: sha256:32f5ddd7f6733a8922fd7a60f054fd4fdc257c9bf12c9fc57a3a7c9af8824988
+    type: script
+    size: 1869
+  - path: development/scripts/chief-pipeline/schemas/traffic-masters-chief.json
+    hash: sha256:dc6d0db1054d681dd166350c7710d8c273df510b238c4a1f6db0443fd4b53ad0
+    type: script
+    size: 3198
+  - path: development/scripts/chief-pipeline/validators/copy_chief_validators.py
+    hash: sha256:e9740f809deb03452b2ffcf5d358a44145c5dbb42143130065de4e34ec4886b7
+    type: script
+    size: 4980
+  - path: development/scripts/chief-pipeline/validators/cyber_chief_validators.py
+    hash: sha256:b31323353365f1e44f27709390d5be86ddd4e06ace9cf398c244fa7d5c489aea
+    type: script
+    size: 6715
+  - path: development/scripts/chief-pipeline/validators/data_chief_validators.py
+    hash: sha256:861333122b7c7251dc2c33e84c16f7247c889fb29e5a09b44bc1426a80b81ccc
+    type: script
+    size: 5674
+  - path: development/scripts/chief-pipeline/validators/design_chief_validators.py
+    hash: sha256:9d5f29034c6aca9a02c05172a171df0e8f63a1009b84da086e3d4e1d9f580369
+    type: script
+    size: 5495
+  - path: development/scripts/chief-pipeline/validators/legal_chief_validators.py
+    hash: sha256:2b15741bc615483e771649542116b3be33777324f12c11c444e526a6be662e44
+    type: script
+    size: 5673
+  - path: development/scripts/chief-pipeline/validators/story_chief_validators.py
+    hash: sha256:fdd252be6f7ae46e3707691b3f306d44e834cb1ce27f4146423e51ea9f010e26
+    type: script
+    size: 7080
+  - path: development/scripts/chief-pipeline/validators/traffic_masters_chief_validators.py
+    hash: sha256:842d0d812d41d8c55560de75828e004d501c52d90677425462c7e7a28ad44491
+    type: script
+    size: 7617
   - path: development/scripts/code-quality-improver.js
     hash: sha256:684d03b9b456e61c46cdd5ac0f957520e1624be234d9b12c897ab866743d9fa9
     type: script
@@ -2287,11 +2347,11 @@ files:
   - path: development/templates/service-template/package.json.hbs
     hash: sha256:1441ed06cefcf144b35862b056161a2c0d939b2864d4975ebde1851cee39f2fe
     type: template
-    size: 1936
+    size: 1958
   - path: development/templates/service-template/README.md.hbs
     hash: sha256:be749174be431c1de1abc6eeb964b350ac74fc555ec845652a0fd67cfd1953e7
     type: template
-    size: 3318
+    size: 3387
   - path: development/templates/service-template/tsconfig.json
     hash: sha256:cb80644a3f118ac2f41564cbd4d9003bd3b59a65521c5045a134bf7243b7deeb
     type: template
@@ -3359,7 +3419,7 @@ files:
   - path: product/templates/adr.hbs
     hash: sha256:8a1981ccf5714d5a168b661083f4ebc4832bc6009ce9dcd2c4ed417e4c85b154
     type: template
-    size: 2304
+    size: 2427
   - path: product/templates/agent-template.yaml
     hash: sha256:4ad34c41d9e7546c208e4680faa8a30969d6505d59d17111b27d2963a8a22e73
     type: template
@@ -3411,7 +3471,7 @@ files:
   - path: product/templates/dbdr.hbs
     hash: sha256:ca2be330ef2accd4185262507a4c6e9b6e1cc5f6ca264f13dd960d98d416410a
     type: template
-    size: 4389
+    size: 4626
   - path: product/templates/design-story-tmpl.yaml
     hash: sha256:4733d02ac4118417b94cac22fe73bcfdeaaced4a70de80d56a07f61c59fc15c3
     type: template
@@ -3583,7 +3643,7 @@ files:
   - path: product/templates/pmdr.hbs
     hash: sha256:0c94b3729b9def7155ba200cde1a970a844160cd4627f59e5d780bf1750f83ea
     type: template
-    size: 3426
+    size: 3619
   - path: product/templates/prd-tmpl.yaml
     hash: sha256:4036b78d071c572ef4c754c316055e4295f612389630e9c8dfbcfe07a2bb5794
     type: template
@@ -3591,11 +3651,11 @@ files:
   - path: product/templates/prd-v2.0.hbs
     hash: sha256:b031ca0291bc95fb2608800c2d822e40123b3933086f18d4c42214e75842b151
     type: template
-    size: 4604
+    size: 4825
   - path: product/templates/prd.hbs
     hash: sha256:79f3c704a7ed0132ff219d93b2fe4ad290fceaa59d30805aff00ce36e044f483
     type: template
-    size: 3761
+    size: 3976
   - path: product/templates/project-brief-tmpl.yaml
     hash: sha256:265011d132225572288f1928429c21dad1fa4108ac323629a1cee5e6fd2c3b4e
     type: template
@@ -3643,7 +3703,7 @@ files:
   - path: product/templates/story.hbs
     hash: sha256:38f751a8db148dc58f1cc316414aee7634a6730ad3a54470f84eb7d47df729a0
     type: template
-    size: 5986
+    size: 6251
   - path: product/templates/task-execution-report.md
     hash: sha256:83ad06f4839cd6142009b0a7f0a1e5c3f59507c6aa53dc21165f3be39cf9f267
     type: template
@@ -3655,7 +3715,7 @@ files:
   - path: product/templates/task.hbs
     hash: sha256:141d4fc1eb1ce7b6f93ba300c9b4f871ef4f8f831d93df3d65fd4e37428d0261
     type: template
-    size: 2922
+    size: 3098
   - path: product/templates/tmpl-comment-on-examples.sql
     hash: sha256:254002c3fbc63cfcc5848b1d4b15822ce240bf5f57e6a1c8bb984e797edc2691
     type: template

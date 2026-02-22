@@ -76,20 +76,22 @@ aios-core/
 
 ### Ativação de Agentes
 
-Use `@agent-name` para ativar um agente:
+Use `@agent-name` para ativar um agente ou `/aios-{agent}` como workflow:
 
-| Agente              | Persona | Escopo Principal             |
-| ------------------- | ------- | ---------------------------- |
-| `@dev`              | Dex     | Implementação de código      |
-| `@qa`               | Quinn   | Testes e qualidade           |
-| `@architect`        | Aria    | Arquitetura e design técnico |
-| `@pm`               | Morgan  | Product Management           |
-| `@po`               | Pax     | Product Owner, stories/epics |
-| `@sm`               | River   | Scrum Master                 |
-| `@analyst`          | Alex    | Pesquisa e análise           |
-| `@data-engineer`    | Dara    | Database design              |
-| `@ux-design-expert` | Uma     | UX/UI design                 |
-| `@devops`           | Gage    | CI/CD, git push (EXCLUSIVO)  |
+| Agente              | Persona | Escopo Principal             | Workflow       |
+| ------------------- | ------- | ---------------------------- | -------------- |
+| `@dev`              | Dex     | Implementação de código      | `/aios-dev`    |
+| `@qa`               | Quinn   | Testes e qualidade           | `/aios-qa`     |
+| `@architect`        | Aria    | Arquitetura e design técnico | `/aios-architect` |
+| `@pm`               | Morgan  | Product Management           | `/aios-pm`     |
+| `@po`               | Pax     | Product Owner, stories/epics | `/aios-po`     |
+| `@sm`               | River   | Scrum Master                 | `/aios-sm`     |
+| `@analyst`          | Atlas   | Pesquisa e análise           | `/aios-analyst` |
+| `@data-engineer`    | Dara    | Database design              | `/aios-data-engineer` |
+| `@ux-design-expert` | Uma     | UX/UI design                 | `/aios-ux`     |
+| `@devops`           | Gage    | CI/CD, git push (EXCLUSIVO)  | `/aios-devops` |
+| `@aios-master`      | Orion   | Orquestração e framework     | —              |
+| `@squad-creator`    | Craft   | Criação de squads            | —              |
 
 ### Comandos de Agentes
 
@@ -115,8 +117,9 @@ Use prefixo `*` para comandos:
 
 Os arquivos detalhados de cada agente estão em:
 
-- `.antigravity/rules/agents/` — Agentes adaptados para Antigravity
-- `.claude/agents/` — Referência completa (24 agentes incluindo chiefs de squads)
+- `.antigravity/rules/agents/` — **Definições completas para Antigravity** (12 agentes core com persona, comandos, dependências)
+- `.aios-core/development/agents/` — Fonte original dos agentes (YAML completo)
+- `.claude/agents/` — Referência Claude Code (24 agentes incluindo chiefs de squads)
 
 ---
 
@@ -220,20 +223,18 @@ Os templates de documentos estão em `.claude/templates/` e devem ser usados com
 
 ## Skills AIOS
 
-Skills são habilidades avançadas disponíveis em `.claude/skills/`:
+Skills estão disponíveis como **workflows Antigravity** (ativados via `/nome-da-skill`) e como arquivos completos em `.claude/skills/`:
 
-| Skill                 | Arquivo                                        | Descrição                                    |
-| --------------------- | ---------------------------------------------- | -------------------------------------------- |
-| **Squad Creator**     | `.claude/skills/squad.md`                      | Criar e gerenciar squads de agentes IA       |
-| **Mind Clone**        | `.claude/skills/clone-mind.md`                 | Clonar conhecimento de especialistas humanos |
-| **Enhance Workflow**  | `.claude/skills/enhance-workflow.md`           | Melhorar workflows existentes                |
-| **MCP Builder**       | `.claude/skills/mcp-builder/`                  | Construir servidores MCP                     |
-| **Skill Creator**     | `.claude/skills/skill-creator/`                | Criar novas skills                           |
-| **Ralph**             | `.claude/skills/ralph.md`                      | Assistente Ralph                             |
-| **Course Generation** | `.claude/skills/course-generation-workflow.md` | Gerar cursos                                 |
-| **Architect First**   | `.claude/skills/architect-first/`              | Workflow de arquitetura primeiro             |
+| Skill                 | Workflow Antigravity             | Fonte Completa                                 |
+| --------------------- | -------------------------------- | ---------------------------------------------- |
+| **Squad Creator**     | `/squad`                         | `.claude/skills/squad.md`                      |
+| **Mind Clone**        | `/clone-mind`                    | `.claude/skills/clone-mind.md`                 |
+| **Enhance Workflow**  | `/enhance-workflow`              | `.claude/skills/enhance-workflow.md`           |
+| **MCP Builder**       | `/mcp-builder`                   | `.claude/skills/mcp-builder/`                  |
+| **Course Generation** | `/course-generation-workflow`    | `.claude/skills/course-generation-workflow.md` |
+| **Architect First**   | `/architect-first`               | `.claude/skills/architect-first/`              |
 
-> Ao usar uma skill, leia o arquivo completo antes de executar.
+> Workflows em `.agent/workflows/` contêm o fluxo resumido. Para detalhes completos, leia o arquivo fonte.
 
 ---
 
@@ -329,5 +330,6 @@ $env:AIOS_DEBUG = "true"
 
 ---
 
-_Synkra AIOS Antigravity Configuration v1.0_
+_Synkra AIOS Antigravity Configuration v2.0_
 _CLI First | Observability Second | UI Third_
+_Native Antigravity: 12 agents + 10 activation workflows + 6 skill workflows_

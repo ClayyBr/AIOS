@@ -1,0 +1,89 @@
+{
+    "chief_name": "legal-chief",
+    "chief_icon": "⚖️",
+    "description": "Quality gate schema for Legal Chief pipeline — validates diagnosis, analysis, document, and delivery phases",
+    "version": "1.0.0",
+    "phases": {
+        "diagnosis": {
+            "description": "Tier 0 — Legal area identification, urgency, risk exposure",
+            "specialist": "legal-chief",
+            "output_file": "00-diagnosis.md",
+            "required_fields": [
+                "legal_area",
+                "urgency",
+                "risk_exposure",
+                "recommended_specialist"
+            ],
+            "allowed_values": [
+                {
+                    "field": "urgency",
+                    "values": [
+                        "Crítica",
+                        "Alta",
+                        "Média",
+                        "Baixa",
+                        "Critical",
+                        "High",
+                        "Medium",
+                        "Low"
+                    ]
+                },
+                {
+                    "field": "risk_exposure",
+                    "values": [
+                        "Crítico",
+                        "Alto",
+                        "Médio",
+                        "Baixo",
+                        "Critical",
+                        "High",
+                        "Medium",
+                        "Low"
+                    ]
+                }
+            ],
+            "min_words": 150,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]"
+            ]
+        },
+        "analysis": {
+            "description": "Specialist legal analysis (contracts, tax, labor, corporate, LGPD)",
+            "specialist": "auto-routed",
+            "output_file": "01-analysis.md",
+            "required_sections": [
+                "Context",
+                "Analysis",
+                "Risk"
+            ],
+            "min_words": 400,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]",
+                "(?i)CPF[:\\s]*\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
+                "(?i)CNPJ[:\\s]*\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}"
+            ]
+        },
+        "document": {
+            "description": "Legal document or recommendation output",
+            "specialist": "auto-routed",
+            "output_file": "02-document.md",
+            "required_sections": [
+                "Recommendation"
+            ],
+            "min_words": 300
+        },
+        "delivery": {
+            "description": "Final delivery with disclaimer",
+            "specialist": "legal-chief",
+            "output_file": "03-delivery.md",
+            "required_sections": [
+                "Summary",
+                "Recommendations",
+                "Disclaimer"
+            ],
+            "min_words": 200
+        }
+    }
+}

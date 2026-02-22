@@ -1,0 +1,28 @@
+{
+    "version": "1.0",
+    "project": "aios-core",
+    "agents": {
+        "default": "dev",
+        "available": [
+            "dev",
+            "qa",
+            "architect",
+            "pm",
+            "po",
+            "analyst",
+            "sm",
+            "devops",
+            "data-engineer",
+            "ux-design-expert",
+            "aios-master",
+            "squad-creator"
+        ]
+    },
+    "workflows": {
+        "directory": ".agent/workflows"
+    },
+    "skills": {
+        "directory": ".agent/workflows",
+        "prefix": "skill-"
+    }
+}

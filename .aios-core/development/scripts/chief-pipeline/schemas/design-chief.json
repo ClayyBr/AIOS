@@ -1,0 +1,60 @@
+{
+    "chief_name": "design-chief",
+    "chief_icon": "🎨",
+    "description": "Quality gate schema for Design Chief pipeline — validates strategy, execution, system, and delivery phases",
+    "version": "1.0.0",
+    "phases": {
+        "strategy": {
+            "description": "Tier 0 — Brand strategy and DesignOps foundation (Neumeier/Malouf)",
+            "specialist": "@marty-neumeier / @dave-malouf",
+            "output_file": "00-strategy.md",
+            "required_fields": [
+                "brand_context",
+                "design_challenge",
+                "recommended_approach"
+            ],
+            "min_words": 200,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]",
+                "(?i)\\[insert"
+            ]
+        },
+        "execution": {
+            "description": "Tier 1-2 — Specialist execution (design, logo, photo, thumbnail, pricing)",
+            "specialist": "auto-routed",
+            "output_file": "01-execution.md",
+            "required_sections": [
+                "Concept",
+                "Specifications",
+                "Deliverables"
+            ],
+            "min_words": 300,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]"
+            ]
+        },
+        "system": {
+            "description": "Design system / tokens / component audit (Brad Frost)",
+            "specialist": "@brad-frost",
+            "output_file": "02-system.md",
+            "required_sections": [
+                "Tokens",
+                "Components"
+            ],
+            "min_words": 200
+        },
+        "delivery": {
+            "description": "Final delivery with visual assets and documentation",
+            "specialist": "design-chief",
+            "output_file": "03-delivery.md",
+            "required_sections": [
+                "Summary",
+                "Assets",
+                "Guidelines"
+            ],
+            "min_words": 200
+        }
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "chief_name": "data-chief",
+    "chief_icon": "📊",
+    "description": "Quality gate schema for Data Chief pipeline — validates fundamentação, operacionalização, comunicação, and delivery phases",
+    "version": "1.0.0",
+    "phases": {
+        "fundamentacao": {
+            "description": "Tier 0 — CLV, RFM, PMF, North Star (Fader/Ellis)",
+            "specialist": "@peter-fader / @sean-ellis",
+            "output_file": "00-fundamentacao.md",
+            "required_fields": [
+                "data_source",
+                "methodology",
+                "key_findings"
+            ],
+            "min_words": 250,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]",
+                "(?i)\\[insert"
+            ]
+        },
+        "operacionalizacao": {
+            "description": "Tier 1 — Health scores, churn, community, learning outcomes",
+            "specialist": "@nick-mehta / @david-spinks / @wes-kao",
+            "output_file": "01-operacionalizacao.md",
+            "required_sections": [
+                "Metrics",
+                "Implementation",
+                "Thresholds"
+            ],
+            "min_words": 300,
+            "forbidden_patterns": [
+                "(?i)placeholder",
+                "(?i)\\[TODO\\]"
+            ]
+        },
+        "comunicacao": {
+            "description": "Tier 2 — Attribution, dashboards, storytelling (Kaushik)",
+            "specialist": "@avinash-kaushik",
+            "output_file": "02-comunicacao.md",
+            "required_sections": [
+                "So What",
+                "Recommendation",
+                "Action"
+            ],
+            "min_words": 200
+        },
+        "delivery": {
+            "description": "Final delivery with actionable insights",
+            "specialist": "data-chief",
+            "output_file": "03-delivery.md",
+            "required_sections": [
+                "Summary",
+                "Key Metrics",
+                "Recommendations"
+            ],
+            "min_words": 300
+        }
+    }
+}

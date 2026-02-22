@@ -1,0 +1,110 @@
+{
+    "chief_name": "copy-chief",
+    "chief_icon": "📝",
+    "description": "Quality gate schema for Copy Chief pipeline — validates diagnosis, copy output, and audit phases",
+    "version": "1.0.0",
+    "phases": {
+        "diagnosis": {
+            "description": "Eugene Schwartz awareness + sophistication analysis",
+            "specialist": "@eugene-schwartz",
+            "output_file": "00-diagnosis.md",
+            "required_fields": [
+                "awareness_level",
+                "sophistication_level",
+                "recommended_copywriter",
+                "market_analysis"
+            ],
+            "allowed_values": [
+                {
+                    "field": "awareness_level",
+                    "values": [
+                        "Unaware",
+                        "Problem Aware",
+                        "Solution Aware",
+                        "Product Aware",
+                        "Most Aware"
+                    ]
+                },
+                {
+                    "field": "sophistication_level",
+                    "values": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "Level 1",
+                        "Level 2",
+                        "Level 3",
+                        "Level 4",
+                        "Level 5"
+                    ]
+                }
+            ],
+            "min_words": 200,
+            "forbidden_patterns": [
+                "(?i)lorem ipsum",
+                "(?i)\\[insert",
+                "(?i)\\[TODO\\]",
+                "(?i)placeholder"
+            ]
+        },
+        "copy_output": {
+            "description": "Sales copy created by selected copywriter",
+            "specialist": "auto-selected",
+            "output_file": "01-copy.md",
+            "required_sections": [
+                "Headline",
+                "Lead",
+                "Body",
+                "Call to Action"
+            ],
+            "min_words": 500,
+            "forbidden_patterns": [
+                "(?i)lorem ipsum",
+                "(?i)\\[insert",
+                "(?i)\\[TODO\\]",
+                "(?i)placeholder",
+                "(?i)your \\[product\\]",
+                "(?i)\\[name\\]"
+            ]
+        },
+        "audit": {
+            "description": "Claude Hopkins scientific audit + Sugarman 30 triggers",
+            "specialist": "@claude-hopkins",
+            "output_file": "02-audit.md",
+            "required_fields": [
+                "hopkins_score",
+                "trigger_coverage"
+            ],
+            "required_sections": [
+                "Hopkins Audit",
+                "Triggers"
+            ],
+            "score_thresholds": [
+                {
+                    "field": "hopkins_score",
+                    "min": 85,
+                    "description": "Minimum Hopkins scientific audit score"
+                },
+                {
+                    "field": "trigger_coverage",
+                    "min": 80,
+                    "description": "Minimum Sugarman 30 triggers coverage percentage"
+                }
+            ],
+            "min_words": 300
+        },
+        "final_review": {
+            "description": "Final quality check before delivery",
+            "specialist": "copy-chief",
+            "output_file": "03-final.md",
+            "required_sections": [
+                "Summary",
+                "Score",
+                "Recommendation"
+            ],
+            "min_words": 100
+        }
+    }
+}
