@@ -8,6 +8,7 @@ description: |
   Agente 3 (Estoque): Entradas, Saídas, Inventário.
   Agente 4 (Vendas): Revenue Management, Marketing, Campanhas.
   Agente 5 (IDS): Simulador Forense, Cascatas de Custo, Grafos Financeiros.
+  Agente 6 (Chef de Imagem): Geração de fotos de pratos via IA (Google AI Studio).
   Regime: Simples Nacional.
 author: Cleison
 license: MIT
@@ -25,6 +26,7 @@ components:
     - controlador-estoque.md
     - vendas.md
     - ids.md
+    - chef-imagem.md
   tasks:
     - gerir-operacao.md
     - criar-ficha-tecnica.md
@@ -48,6 +50,7 @@ components:
     - orcamento-mensal.md
     - vendas-criar-campanha.md
     - vendas-analisar-viabilidade.md
+    - gerar-foto-prato.md
   templates:
     - ficha-tecnica-template.md
     - ficha-cozinha-template.html

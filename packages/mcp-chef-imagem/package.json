@@ -1,0 +1,23 @@
+{
+  "name": "mcp-chef-imagem",
+  "version": "1.0.0",
+  "description": "MCP Server para geração de imagens de pratos via Google AI Studio (Gemini 3.1 Flash Image)",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@google/genai": "^1.0.0",
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "zod": "^3.24.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
