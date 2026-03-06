@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: atendente-whatsapp
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    region: oregon
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      # Meta WhatsApp — Obter em: https://developers.facebook.com
+      - key: META_VERIFY_TOKEN
+        sync: false
+      - key: META_ACCESS_TOKEN
+        sync: false
+      - key: META_PHONE_NUMBER_ID
+        sync: false
+      - key: META_APP_SECRET
+        sync: false
+      # Google AI Studio — Obter em: https://aistudio.google.com/app/apikey
+      - key: GEMINI_API_KEY
+        sync: false
+      # Google Sheets — Service Account JSON em base64
+      - key: GOOGLE_SHEETS_CREDENTIALS
+        sync: false
+      - key: SHEETS_CARDAPIO_ID
+        sync: false
+      - key: SHEETS_PEDIDOS_ID
+        sync: false
+      # Pagamento Pix
+      - key: PIX_KEY
+        sync: false
+      - key: PIX_RECEIVER_NAME
+        sync: false
+      # Configuração do Agente
+      - key: SESSION_TIMEOUT_MINUTES
+        value: "30"
+      - key: CARDAPIO_CACHE_MINUTES
+        value: "15"
+      - key: ESTIMATED_DELIVERY_MINUTES
+        value: "50"
