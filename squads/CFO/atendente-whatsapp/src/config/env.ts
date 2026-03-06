@@ -5,7 +5,7 @@ dotenv.config();
 
 const envSchema = z.object({
     // Meta WhatsApp
-    META_VERIFY_TOKEN: z.string().min(1, 'META_VERIFY_TOKEN is required'),
+    META_VERIFY_TOKEN: z.string().default(''),
     META_ACCESS_TOKEN: z.string().default(''),
     META_PHONE_NUMBER_ID: z.string().default(''),
     META_APP_SECRET: z.string().default(''),
@@ -36,9 +36,8 @@ function loadEnv(): Env {
     const result = envSchema.safeParse(process.env);
 
     if (!result.success) {
-        console.error('❌ Invalid environment variables:');
-        console.error(result.error.format());
-        process.exit(1);
+        const formatted = result.error.format();
+        throw new Error(`Invalid environment variables: ${JSON.stringify(formatted)}`);
     }
 
     return result.data;
