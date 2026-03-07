@@ -5,7 +5,14 @@ import { logger } from './utils/logger';
 const app = express();
 
 // Middlewares
-app.use(express.json({ limit: '5mb' }));
+app.use(express.json({
+    limit: '5mb',
+    // @ts-ignore
+    verify: (req: express.Request, _res: express.Response, buf: Buffer) => {
+        // @ts-ignore
+        req.rawBody = buf;
+    }
+}));
 app.use(express.urlencoded({ extended: true }));
 
 // Request logging middleware

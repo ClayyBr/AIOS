@@ -51,7 +51,8 @@ router.post('/webhook', (req: Request, res: Response) => {
     // Validate signature if app secret is configured
     if (env.META_APP_SECRET) {
         const signature = req.headers['x-hub-signature-256'] as string;
-        const rawBody = JSON.stringify(req.body);
+        // @ts-ignore - rawBody is attached by express.json.verify in app.ts
+        const rawBody = req.rawBody || JSON.stringify(req.body);
 
         if (!validateSignature(rawBody, signature, env.META_APP_SECRET)) {
             logger.warn('❌ Invalid webhook signature — ignoring event');
