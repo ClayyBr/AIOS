@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
+import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from '@google/genai';
 import { env } from '../config/env';
 import { CONSTANTS } from '../config/constants';
 import { logger } from '../utils/logger';
@@ -13,7 +13,7 @@ interface MessageHistoryEntry {
  * Handles prompt building, message generation, retry logic, and error handling.
  */
 class GeminiService {
-    private model;
+    private client: GoogleGenAI | null = null;
     private initialized: boolean;
 
     constructor() {
@@ -21,19 +21,47 @@ class GeminiService {
 
         if (!env.GEMINI_API_KEY) {
             logger.warn('⚠️ GEMINI_API_KEY not configured — GeminiService disabled');
-            this.model = null;
             return;
         }
 
-        const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
+        try {
+            this.client = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
+            this.initialized = true;
+            logger.info('🤖 GeminiService initialized with model: ' + CONSTANTS.GEMINI_MODEL);
+        } catch (error) {
+            logger.error({ error }, 'Failed to initialize GoogleGenAI client');
+        }
+    }
 
-        this.model = genAI.getGenerativeModel({
-            model: CONSTANTS.GEMINI_MODEL,
-            generationConfig: {
-                temperature: CONSTANTS.GEMINI_TEMPERATURE,
-                maxOutputTokens: 500,
-                topP: 0.95,
-            },
+    /**
+     * Generates a response from Gemini given a system prompt, message history, and new user message.
+     *
+     * @param systemPrompt - The system instruction (persona + cardápio)
+     * @param messageHistory - Previous conversation messages for context
+     * @param userMessage - The new message from the user
+     * @returns The generated response text
+     */
+    async generateResponse(
+        systemPrompt: string,
+        messageHistory: MessageHistoryEntry[],
+        userMessage: string,
+    ): Promise<string> {
+        if (!this.client || !this.initialized) {
+            logger.warn('GeminiService not initialized — returning fallback');
+            return FALLBACK_MESSAGE;
+        }
+
+        // Build chat history in the new format
+        const geminiHistory = messageHistory.map((entry) => ({
+            role: entry.role,
+            parts: [{ text: entry.content }],
+        }));
+
+        const config = {
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+            temperature: CONSTANTS.GEMINI_TEMPERATURE,
+            maxOutputTokens: 500,
+            topP: 0.95,
             safetySettings: [
                 {
                     category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -52,52 +80,25 @@ class GeminiService {
                     threshold: HarmBlockThreshold.BLOCK_NONE,
                 },
             ],
-        });
-
-        this.initialized = true;
-        logger.info('🤖 GeminiService initialized with model: ' + CONSTANTS.GEMINI_MODEL);
-    }
-
-    /**
-     * Generates a response from Gemini given a system prompt, message history, and new user message.
-     *
-     * @param systemPrompt - The system instruction (persona + cardápio)
-     * @param messageHistory - Previous conversation messages for context
-     * @param userMessage - The new message from the user
-     * @returns The generated response text
-     */
-    async generateResponse(
-        systemPrompt: string,
-        messageHistory: MessageHistoryEntry[],
-        userMessage: string,
-    ): Promise<string> {
-        if (!this.model || !this.initialized) {
-            logger.warn('GeminiService not initialized — returning fallback');
-            return FALLBACK_MESSAGE;
-        }
-
-        // Build chat history in Gemini format
-        const geminiHistory = messageHistory.map((entry) => ({
-            role: entry.role,
-            parts: [{ text: entry.content }],
-        }));
+        };
 
         let lastError: Error | null = null;
 
         for (let attempt = 1; attempt <= CONSTANTS.MAX_RETRIES; attempt++) {
             try {
-                const chat = this.model.startChat({
+                // Initialize a new chat session with history and config
+                const chat = this.client.chats.create({
+                    model: CONSTANTS.GEMINI_MODEL,
+                    config: config,
                     history: geminiHistory,
-                    systemInstruction: { role: 'system', parts: [{ text: systemPrompt }] },
                 });
 
                 const result = await Promise.race([
-                    chat.sendMessage(userMessage),
+                    chat.sendMessage({ message: userMessage }),
                     this.timeout(CONSTANTS.GEMINI_API_TIMEOUT_MS),
                 ]);
 
-                const response = result.response;
-                const text = response.text();
+                const text = result.text;
 
                 if (!text || text.trim().length === 0) {
                     logger.warn('Gemini returned empty response');
