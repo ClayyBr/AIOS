@@ -187,6 +187,14 @@ async function processMessage(
         sessionManager.setHandoff(from, true);
     }
 
+    if (tags.includes('ORDER_CONFIRMED')) {
+        const isPix = tags.includes('PIX_REQUESTED');
+        const newState = isPix ? 'AWAITING_PIX_PROOF' : 'CONFIRMED';
+
+        sessionManager.updateSession(from, { state: newState as any });
+        logger.info({ phone: from.slice(-4), isPix }, '✅ Order confirmed by Luna');
+    }
+
     // Add model response to history
     sessionManager.addMessage(from, 'model', cleanText);
 
