@@ -7,7 +7,6 @@ import { WebhookPayload } from '../types/whatsapp.types';
 import { geminiService } from '../services/gemini.service';
 import { sessionManager } from '../services/session.manager';
 import { whatsappSender } from '../services/whatsapp.sender';
-import { sheetsService } from '../services/sheets.service';
 import { buildSystemPrompt } from '../prompts/atendente.prompt';
 
 const router = Router();
@@ -159,15 +158,8 @@ async function processMessage(
     // Add user message to history
     sessionManager.addMessage(from, 'user', userMessage);
 
-    // Fetch restaurant cardápio and promoções (uses cache internally)
-    const restaurantData = await sheetsService.getRestaurantData();
-
-    // Build system prompt with dynamic data
-    const systemPrompt = buildSystemPrompt(
-        restaurantData.formattedMenu,
-        restaurantData.formattedPromos,
-        env.PIX_RECEIVER_NAME || 'nosso restaurante'
-    );
+    // Build system prompt pointing to Goomer Link
+    const systemPrompt = buildSystemPrompt(env.PIX_RECEIVER_NAME || 'nosso restaurante');
 
     // Get message history for context
     const messageHistory = sessionManager.getMessageHistory(from);
