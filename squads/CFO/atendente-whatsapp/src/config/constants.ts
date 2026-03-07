@@ -17,7 +17,7 @@ export const CONSTANTS = {
     META_API_BASE_URL: 'https://graph.facebook.com',
 
     // Gemini
-    GEMINI_MODEL: 'gemini-2.5-flash',
+    GEMINI_MODEL: 'gemini-2.0-flash-lite',
     GEMINI_TEMPERATURE: 0.3,
 
     // Order
