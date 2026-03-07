@@ -1,4 +1,3 @@
-import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from '@google/genai';
 import { env } from '../config/env';
 import { CONSTANTS } from '../config/constants';
 import { logger } from '../utils/logger';
@@ -8,12 +7,16 @@ interface MessageHistoryEntry {
     content: string;
 }
 
+// Local type aliases to avoid static importing ESM types in a CJS project
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type GoogleGenAIClient = any;
+
 /**
  * GeminiService — Interface with Gemini 1.5 Flash API.
  * Handles prompt building, message generation, retry logic, and error handling.
  */
 class GeminiService {
-    private client: GoogleGenAI | null = null;
+    private client: GoogleGenAIClient | null = null;
     private initialized: boolean;
 
     constructor() {
@@ -24,12 +27,23 @@ class GeminiService {
             return;
         }
 
+        // Initialize dynamically to avoid CommonJS / ESModules import clash with @google/genai
+        this.initializeClient();
+    }
+
+    private async initializeClient() {
         try {
+            // Check if client is already initialized in case of multiple calls
+            if (this.client) return;
+
+            // Dynamic import bypasses TS CJS/ESM strictness
+            const { GoogleGenAI } = await import('@google/genai');
             this.client = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
+
             this.initialized = true;
             logger.info('🤖 GeminiService initialized with model: ' + CONSTANTS.GEMINI_MODEL);
         } catch (error) {
-            logger.error({ error }, 'Failed to initialize GoogleGenAI client');
+            logger.error({ error }, 'Failed to dynamically import and initialize GoogleGenAI client');
         }
     }
 
@@ -64,20 +78,20 @@ class GeminiService {
             topP: 0.95,
             safetySettings: [
                 {
-                    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-                    threshold: HarmBlockThreshold.BLOCK_NONE,
+                    category: 'HARM_CATEGORY_HARASSMENT',
+                    threshold: 'BLOCK_NONE',
                 },
                 {
-                    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-                    threshold: HarmBlockThreshold.BLOCK_NONE,
+                    category: 'HARM_CATEGORY_HATE_SPEECH',
+                    threshold: 'BLOCK_NONE',
                 },
                 {
-                    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-                    threshold: HarmBlockThreshold.BLOCK_NONE,
+                    category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+                    threshold: 'BLOCK_NONE',
                 },
                 {
-                    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-                    threshold: HarmBlockThreshold.BLOCK_NONE,
+                    category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+                    threshold: 'BLOCK_NONE',
                 },
             ],
         };
