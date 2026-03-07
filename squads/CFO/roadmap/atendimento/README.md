@@ -18,6 +18,7 @@ Este diretório documenta as melhorias e evoluções planejadas para o Agente At
 | `04-pagamento-automatizado.md` | Verificação automática de Pix e integração com gateways | Média |
 | `05-analytics-e-metricas.md` | Dashboard de métricas do atendimento (tempo resposta, conversão) | Baixa |
 | `06-cardapio-no-codigo.md` | Migrar cardápio de Google Sheets para arquivo no código | Baixa |
+| `07-reconhecimento-de-audio.md` | Avaliação: Suporte multimídia para o Gemini transcrever voz | Baixa |
 
 ## 🗺️ Visão de Evolução
 

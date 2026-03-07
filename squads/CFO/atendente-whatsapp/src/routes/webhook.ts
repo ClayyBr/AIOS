@@ -132,7 +132,7 @@ async function processMessage(
     if (!text && messageType !== 'image') {
         // Audio, video, sticker, etc.
         const unsupportedMsg = messageType === 'audio'
-            ? 'Desculpe, no momento só consigo processar mensagens de texto 📝 Pode digitar o que precisa?'
+            ? 'Oi! Desculpe, mas eu não consigo ouvir áudios no momento 😕 Pode escrever pra mim em texto por favor?'
             : messageType === 'sticker'
                 ? '😊'
                 : 'Desculpe, não consigo processar esse tipo de mensagem. Pode me enviar como texto? 📝';
