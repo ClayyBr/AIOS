@@ -19,6 +19,9 @@
         "paths": {
             "@/*": [
                 "src/*"
+            ],
+            "@google/genai": [
+                "node_modules/@google/genai/dist/node/node.d.ts"
             ]
         },
         "moduleResolution": "node",
