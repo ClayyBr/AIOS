@@ -12,7 +12,7 @@ interface MessageHistoryEntry {
 type GoogleGenAIClient = any;
 
 /**
- * GeminiService — Interface with Gemini 1.5 Flash API.
+ * GeminiService — Interface with Gemini 2.0 Flash API.
  * Handles prompt building, message generation, retry logic, and error handling.
  */
 class GeminiService {
@@ -60,6 +60,11 @@ class GeminiService {
         messageHistory: MessageHistoryEntry[],
         userMessage: string,
     ): Promise<string> {
+        if (!this.initialized) {
+            // Guard against cold-start race conditions
+            await this.initializeClient();
+        }
+
         if (!this.client || !this.initialized) {
             logger.warn('GeminiService not initialized — returning fallback');
             return FALLBACK_MESSAGE;
