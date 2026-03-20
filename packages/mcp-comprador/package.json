@@ -1,0 +1,26 @@
+{
+  "name": "mcp-comprador",
+  "version": "1.0.0",
+  "description": "MCP Server para pesquisa de preços de ingredientes em supermercados atacadistas (Spani, Tenda, Atacadão, Assaí, Fort)",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "playwright": "^1.58.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0",
+    "zod": "^3.24.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -9,6 +9,7 @@ description: |
   Agente 4 (Vendas): Revenue Management, Marketing, Campanhas.
   Agente 5 (IDS): Simulador Forense, Cascatas de Custo, Grafos Financeiros.
   Agente 6 (Chef de Imagem): Geração de fotos de pratos via IA (Google AI Studio).
+  Agente 7 (Comprador): Pesquisa e cotação de preços em atacadistas (Spani, Tenda, Atacadão, Assaí, Fort).
   Regime: Simples Nacional.
 author: Cleison
 license: MIT
@@ -27,6 +28,7 @@ components:
     - vendas.md
     - ids.md
     - chef-imagem.md
+    - comprador.md
   tasks:
     - gerir-operacao.md
     - criar-ficha-tecnica.md
@@ -51,6 +53,7 @@ components:
     - vendas-criar-campanha.md
     - vendas-analisar-viabilidade.md
     - gerar-foto-prato.md
+    - buscar-precos-ingredientes.md
   templates:
     - ficha-tecnica-template.md
     - ficha-cozinha-template.html
