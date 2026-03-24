@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Executivo Estratégico - Sugestões Semanais</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e67e22;
+            --accent: #27ae60;
+            --bg: #f9f9f9;
+            --light: #ffffff;
+            --text: #333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 { color: var(--primary); margin: 0; font-size: 2.5em; }
+        .subtitle { color: var(--secondary); font-weight: bold; font-size: 1.1em; text-transform: uppercase; letter-spacing: 1px; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: var(--primary);
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        tr:hover { background-color: #f1f1f1; }
+        
+        .day-header {
+            background-color: #ecf0f1;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .category {
+            font-size: 0.8em;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .cat-main { background: #e8f4fd; color: #2980b9; }
+        .cat-econ { background: #e9f7ef; color: #27ae60; }
+        .cat-prem { background: #fdf2e9; color: #e67e22; }
+        .cat-light { background: #f4ecf7; color: #8e44ad; }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .badge-star { background: var(--secondary); color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="subtitle">Estratégia de Produto & CMV</div>
+            <h1>Matriz de Cardápio Executivo</h1>
+            <p>Sugestões Estratégicas por Dia da Semana (Segunda a Sábado)</p>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th width="150">Dia</th>
+                    <th>Pratos Sugeridos</th>
+                    <th>Perfil Estratégico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Segunda -->
+                <tr>
+                    <td class="day-header">Segunda-Feira</td>
+                    <td>
+                        • <b>Virado à Paulista</b> <span class="badge badge-star">TOP</span><br>
+                        • Bife à Cavalo com Fritas<br>
+                        • Frango Grelhado com Legumes<br>
+                        • Omelete Recheado Completo
+                    </td>
+                    <td>Início de ciclo. Foco em ingredientes de <b>baixo custo fixo</b> (ovos, grãos e banana).</td>
+                </tr>
+                <!-- Terça -->
+                <tr>
+                    <td class="day-header">Terça-Feira</td>
+                    <td>
+                        • <b>Strogonoff de Frango</b> <span class="badge badge-star">LUCRO</span><br>
+                        • Bife à Rolê com Purê<br>
+                        • Carne de Panela com Batata<br>
+                        • Panqueca de Carne com Arroz
+                    </td>
+                    <td>Foco em <b>CMV Baixo</b> e alta velocidade de saída. Pratos de fácil porcionamento.</td>
+                </tr>
+                <!-- Quarta -->
+                <tr>
+                    <td class="day-header">Quarta-Feira</td>
+                    <td>
+                        • <b>Feijoada Executiva</b> <span class="badge badge-star">TRADIÇÃO</span><br>
+                        • Peixe Frito (Iscas) com Arroz/Feijão<br>
+                        • Bife Acebolado Clássico<br>
+                        • Espaguete com Almôndegas
+                    </td>
+                    <td>Dia de <b>maior giro</b>. A feijoada atrai o público fiel; outras opções dão segurança para todos os gostos.</td>
+                </tr>
+                <!-- Quinta -->
+                <tr>
+                    <td class="day-header">Quinta-Feira</td>
+                    <td>
+                        • <b>Frango à Parmegiana</b> <span class="badge badge-star">POPULAR</span><br>
+                        • Nhoque (Gnocchi) ao Sugo<br>
+                        • Lagarto Assado com Purê<br>
+                        • Lasanha à Bolonhesa
+                    </td>
+                    <td>Foco em <b>Volume</b>. Opções de massas e assados que permitem pré-preparo em escala.</td>
+                </tr>
+                <!-- Sexta -->
+                <tr>
+                    <td class="day-header">Sexta-Feira</td>
+                    <td>
+                        • <b>Filé de Peixe Frito com Arroz e Feijão</b><br>
+                        • Filé de Frango à Milanesa<br>
+                        • Bife Acebolado com Fritas<br>
+                        • Linguiça Calabresa Acebolada
+                    </td>
+                    <td><b>Sexta do Peixe & Bife</b>. Opções rápidas e populares para fechar a semana comercial com agilidade.</td>
+                </tr>
+                <!-- Sábado -->
+                <tr>
+                    <td class="day-header">Sábado</td>
+                    <td>
+                        • <b>Feijoada Completa</b> <span class="badge badge-star">MAX</span><br>
+                        • Contra-Filé com Arroz e Fritas<br>
+                        • Costela com Mandioca Cozida<br>
+                        • Frango Assado (Galeto) com Farofa
+                    </td>
+                    <td><b>Evento Social</b>. Pratos mais fartos e tradicionais para o almoço prolongado de sábado.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p>Gerado pelo time de Agentes Gerenciais (CFO Squad) para análise estratégica dos sócios.</p>
+            <p>© 2026 - Gestão de Restaurante Inteligente</p>
+        </div>
+    </div>
+</body>
+</html>

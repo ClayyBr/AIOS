@@ -1,131 +1,33 @@
 metadata:
-  ultima_atualizacao: "2026-02-14"
+  ultima_atualizacao: "2026-03-23"
   tipo_ultimo_registro: "entrada"
-  valor_total_estoque: 820.00
+  valor_total_estoque: 114.65
 
 itens:
-  - id: "frango-peito"
-    nome: "Peito de Frango"
+  - id: "frango-sobrecoxa-sadia"
+    nome: "Frango Sadia CG/ Sobrecoxa"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 40.0
-    custo_medio_ponderado: 20.50
-    valor_em_estoque: 820.00
+    quantidade: 5.0
+    custo_medio_ponderado: 11.98
+    valor_em_estoque: 59.90
     par_stock: 5.0
     status: "ok"
-    validade_proxima: "2026-02-16" # Mantém a data MAIS CURTA
-    ultimo_fornecedor: "Atacadão"
-    ultimo_preco: 19.50
+    validade_proxima: "2026-06-21"
+    ultimo_fornecedor: "Nagumo"
+    ultimo_preco: 11.98
+    preco_referencia: 14.90
+
+  - id: "frango-peito"
+    nome: "Frango CG/Peito S/Osso"
+    categoria: "carnes"
+    unidade: "kg"
+    quantidade: 3.916
+    custo_medio_ponderado: 13.98
+    valor_em_estoque: 54.75
+    par_stock: 5.0
+    status: "comprar"
+    validade_proxima: "2026-06-22"
+    ultimo_fornecedor: "Nagumo"
+    ultimo_preco: 13.98
     preco_referencia: 22.90
-  
-  - id: "queijo-mussarela"
-    nome: "Queijo Mussarela (Peça)"
-    categoria: "laticinios"
-    unidade: "kg"
-    quantidade: 5.0
-    custo_medio_ponderado: 38.00
-    valor_em_estoque: 190.00
-    par_stock: 2.0
-    status: "ok"
-    validade_proxima: "2026-03-10"
-    ultimo_fornecedor: "Laticínios Bom Gosto"
-    ultimo_preco: 38.00
-    preco_referencia: 42.00
-
-  - id: "molho-tomate"
-    nome: "Molho de Tomate (Lata 2kg)"
-    categoria: "mercearia"
-    unidade: "kg"
-    quantidade: 10.0
-    custo_medio_ponderado: 8.50
-    valor_em_estoque: 85.00
-    par_stock: 4.0
-    status: "ok"
-    validade_proxima: "2026-12-01"
-    ultimo_fornecedor: "Atacadão"
-    ultimo_preco: 8.50
-    preco_referencia: 9.90
-
-  - id: "batata-inglesa"
-    nome: "Batata Inglesa"
-    categoria: "hortifruti"
-    unidade: "kg"
-    quantidade: 20.0
-    custo_medio_ponderado: 6.90
-    valor_em_estoque: 138.00
-    par_stock: 10.0
-    status: "ok"
-    validade_proxima: "2026-02-20"
-    ultimo_fornecedor: "CEASA"
-    ultimo_preco: 6.90
-    preco_referencia: 5.50
-
-  - id: "arroz-branco"
-    nome: "Arroz Branco Tipo 1"
-    categoria: "mercearia"
-    unidade: "kg"
-    quantidade: 30.0
-    custo_medio_ponderado: 5.20
-    valor_em_estoque: 156.00
-    par_stock: 10.0
-    status: "ok"
-    validade_proxima: "2026-06-15"
-    ultimo_fornecedor: "Atacadão"
-    ultimo_preco: 5.20
-    preco_referencia: 5.80
-
-  - id: "farinha-trigo"
-    nome: "Farinha de Trigo"
-    categoria: "mercearia"
-    unidade: "kg"
-    quantidade: 10.0
-    custo_medio_ponderado: 4.50
-    valor_em_estoque: 45.00
-    par_stock: 2.0
-    status: "ok"
-    validade_proxima: "2026-08-10"
-    ultimo_fornecedor: "Atacadão"
-    ultimo_preco: 4.50
-    preco_referencia: 5.00
-
-  - id: "farinha-rosca"
-    nome: "Farinha de Rosca"
-    categoria: "mercearia"
-    unidade: "kg"
-    quantidade: 5.0
-    custo_medio_ponderado: 6.00
-    valor_em_estoque: 30.00
-    par_stock: 2.0
-    status: "ok"
-    validade_proxima: "2026-05-20"
-    ultimo_fornecedor: "Padaria Central"
-    ultimo_preco: 6.00
-    preco_referencia: 7.50
-
-  - id: "ovos-vermelhos"
-    nome: "Ovos Vermelhos (Cartela 30un)"
-    categoria: "mercearia"
-    unidade: "un"
-    quantidade: 60.0
-    custo_medio_ponderado: 0.70
-    valor_em_estoque: 42.00
-    par_stock: 30.0
-    status: "ok"
-    validade_proxima: "2026-03-01"
-    ultimo_fornecedor: "Granja Sol"
-    ultimo_preco: 0.70
-    preco_referencia: 0.85
-
-  - id: "oleo-soja"
-    nome: "Óleo de Soja (900ml)"
-    categoria: "mercearia"
-    unidade: "L"
-    quantidade: 20.0
-    custo_medio_ponderado: 7.50
-    valor_em_estoque: 150.00
-    par_stock: 10.0
-    status: "ok"
-    validade_proxima: "2026-10-10"
-    ultimo_fornecedor: "Atacadão"
-    ultimo_preco: 7.50
-    preco_referencia: 8.90

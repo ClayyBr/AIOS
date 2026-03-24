@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Financeiro para Sócios — Gestão e Precificação de Restaurante</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --card: #22262f;
+            --border: #2e3340;
+            --text: #e4e6ed;
+            --muted: #8b90a0;
+            --accent: #6c9cff;
+            --accent2: #a78bfa;
+            --green: #34d399;
+            --yellow: #fbbf24;
+            --orange: #fb923c;
+            --red: #f87171;
+            --red-bg: rgba(248,113,113,0.08);
+            --green-bg: rgba(52,211,153,0.08);
+            --yellow-bg: rgba(251,191,36,0.08);
+            --blue-bg: rgba(108,156,255,0.08);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Inter',sans-serif; background:var(--bg); color:var(--text);
+            line-height:1.75; font-size:16px;
+        }
+        .container { max-width:900px; margin:0 auto; padding:20px 24px 80px; }
+
+        /* HERO */
+        .hero {
+            text-align:center; padding:60px 20px 50px;
+            background:linear-gradient(135deg,#1a1040 0%,#0f1117 50%,#0d1520 100%);
+            border-bottom:1px solid var(--border);
+            margin-bottom:40px;
+        }
+        .hero-icon { font-size:56px; margin-bottom:16px; }
+        .hero h1 { font-size:32px; font-weight:800; margin-bottom:12px;
+            background:linear-gradient(135deg,var(--accent),var(--accent2));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+        }
+        .hero .subtitle { font-size:17px; color:var(--muted); max-width:650px; margin:0 auto 20px; }
+        .hero .badge {
+            display:inline-block; padding:6px 16px; border-radius:20px; font-size:13px;
+            background:rgba(108,156,255,0.12); color:var(--accent); border:1px solid rgba(108,156,255,0.2);
+        }
+
+        /* NAVIGATION */
+        .toc { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:28px 32px; margin-bottom:48px; }
+        .toc h2 { font-size:18px; font-weight:700; margin-bottom:16px; color:var(--accent); }
+        .toc ol { padding-left:20px; }
+        .toc li { margin-bottom:8px; }
+        .toc a { color:var(--text); text-decoration:none; transition:color .2s; }
+        .toc a:hover { color:var(--accent); }
+
+        /* CHAPTERS */
+        .chapter { margin-bottom:56px; scroll-margin-top:24px; }
+        .chapter-header {
+            display:flex; align-items:center; gap:14px; margin-bottom:24px;
+            padding-bottom:14px; border-bottom:2px solid var(--border);
+        }
+        .chapter-num {
+            display:flex; align-items:center; justify-content:center;
+            width:40px; height:40px; border-radius:10px; font-weight:800; font-size:18px;
+            background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;
+            flex-shrink:0;
+        }
+        .chapter-header h2 { font-size:24px; font-weight:700; }
+
+        h3 { font-size:19px; font-weight:600; margin:28px 0 14px; color:var(--accent); }
+        h4 { font-size:16px; font-weight:600; margin:20px 0 10px; color:var(--accent2); }
+        p { margin-bottom:16px; color:var(--text); }
+
+        /* CARDS */
+        .card {
+            background:var(--card); border:1px solid var(--border); border-radius:12px;
+            padding:24px; margin-bottom:20px;
+        }
+        .card-title { font-weight:700; font-size:16px; margin-bottom:10px; }
+
+        /* ALERTS */
+        .alert {
+            border-radius:10px; padding:18px 22px; margin:20px 0; border-left:4px solid;
+        }
+        .alert-danger { background:var(--red-bg); border-color:var(--red); }
+        .alert-warning { background:var(--yellow-bg); border-color:var(--yellow); }
+        .alert-success { background:var(--green-bg); border-color:var(--green); }
+        .alert-info { background:var(--blue-bg); border-color:var(--accent); }
+        .alert-icon { font-size:20px; margin-right:8px; }
+        .alert strong { display:block; margin-bottom:6px; }
+
+        /* TABLES */
+        .table-wrap { overflow-x:auto; margin:16px 0 24px; border-radius:10px; border:1px solid var(--border); }
+        table { width:100%; border-collapse:collapse; font-size:14px; }
+        thead th {
+            background:var(--surface); color:var(--accent); font-weight:600;
+            padding:12px 16px; text-align:left; white-space:nowrap;
+        }
+        tbody td { padding:10px 16px; border-top:1px solid var(--border); }
+        tbody tr:hover { background:rgba(108,156,255,0.04); }
+
+        /* ANALOGY BOXES */
+        .analogy {
+            background:linear-gradient(135deg,rgba(167,139,250,0.08),rgba(108,156,255,0.08));
+            border:1px solid rgba(167,139,250,0.2); border-radius:12px;
+            padding:20px 24px; margin:20px 0;
+        }
+        .analogy-title { font-weight:700; color:var(--accent2); margin-bottom:8px; }
+
+        /* KEY NUMBERS */
+        .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin:20px 0; }
+        .metric {
+            background:var(--card); border:1px solid var(--border); border-radius:12px;
+            padding:20px; text-align:center;
+        }
+        .metric-value { font-size:28px; font-weight:800; margin-bottom:4px; }
+        .metric-label { font-size:13px; color:var(--muted); }
+
+        /* FORMULA */
+        .formula {
+            background:var(--surface); border:1px solid var(--border); border-radius:10px;
+            padding:18px 24px; margin:16px 0; font-family:'Courier New',monospace;
+            font-size:15px; text-align:center; color:var(--accent);
+        }
+
+        /* CONSEQUENCE FLOW */
+        .flow { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:16px 0; justify-content:center; }
+        .flow-step {
+            background:var(--card); border:1px solid var(--border); border-radius:8px;
+            padding:10px 16px; font-size:14px; font-weight:500; text-align:center;
+        }
+        .flow-arrow { color:var(--red); font-size:20px; font-weight:700; }
+
+        /* FOOTER */
+        .footer {
+            text-align:center; padding:40px 20px; margin-top:60px;
+            border-top:1px solid var(--border); color:var(--muted); font-size:13px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:640px){
+            .hero h1{font-size:24px;} .container{padding:16px;}
+            .metrics{grid-template-columns:1fr 1fr;} .flow{flex-direction:column;}
+        }
+
+        /* PRINT */
+        @media print {
+            body{background:#fff;color:#222;font-size:12px;}
+            .hero{background:#f5f5f5;border:1px solid #ddd;}
+            .hero h1{-webkit-text-fill-color:#333;background:none;}
+            .card,.alert,.analogy,.metric,.table-wrap{break-inside:avoid;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-icon">📊</div>
+    <h1>Guia Financeiro Essencial para Sócios</h1>
+    <p class="subtitle">Tudo que vocês precisam saber sobre gestão financeira, precificação do buffet e dos pratos executivos — e o que acontece quando isso é ignorado.</p>
+    <span class="badge">📅 Março 2026 · Relatório Didático · Pré-Abertura</span>
+</div>
+
+<div class="container">
+
+<!-- INTRO -->
+<div class="alert alert-danger">
+    <span class="alert-icon">⚠️</span>
+    <strong>Por que este relatório existe?</strong>
+    No Brasil, <b>mais de 60% dos restaurantes fecham antes de completar 5 anos</b>. A causa número 1 não é comida ruim — é <b>falta de controle financeiro</b>. Este guia foi criado para que todos os sócios entendam, de forma simples e clara, os fundamentos que vão determinar se o nosso restaurante sobrevive ou quebra.
+</div>
+
+<!-- TOC -->
+<div class="toc">
+    <h2>📑 O que você vai encontrar aqui</h2>
+    <ol>
+        <li><a href="#cap1">Por que restaurantes quebram? (E como evitar)</a></li>
+        <li><a href="#cap2">Para onde vai cada R$ 1,00 que entra no caixa</a></li>
+        <li><a href="#cap3">O que é CMV e por que ele decide tudo</a></li>
+        <li><a href="#cap4">Como definir o preço dos pratos executivos</a></li>
+        <li><a href="#cap5">Como definir o preço do buffet por quilo</a></li>
+        <li><a href="#cap6">Desperdício: o ladrão silencioso</a></li>
+        <li><a href="#cap7">Capital de giro: o oxigênio do negócio</a></li>
+        <li><a href="#cap8">O que acontece quando ignoramos tudo isso</a></li>
+        <li><a href="#cap9">Checklist de sobrevivência — resumo final</a></li>
+    </ol>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 1 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap1">
+    <div class="chapter-header">
+        <div class="chapter-num">1</div>
+        <h2>Por que restaurantes quebram?</h2>
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">🏠 Analogia: A casa sem alicerce</div>
+        <p>Imagine construir uma casa linda, com boa decoração e acabamento... mas sem alicerce. No primeiro temporal, ela desmorona. Um restaurante sem gestão financeira é exatamente isso: pode ter comida ótima, decoração bonita e atendimento nota 10, mas sem controle do dinheiro, vai desabar.</p>
+    </div>
+
+    <div class="metrics">
+        <div class="metric">
+            <div class="metric-value" style="color:var(--red)">60%+</div>
+            <div class="metric-label">dos restaurantes fecham<br>antes de 5 anos no Brasil</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value" style="color:var(--yellow)">35%</div>
+            <div class="metric-label">fecham já nos<br>primeiros 2 anos</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value" style="color:var(--green)">#1</div>
+            <div class="metric-label">causa de falência:<br>descontrole financeiro</div>
+        </div>
+    </div>
+
+    <h3>As 5 razões reais por trás do fracasso</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>#</th><th>Causa</th><th>O que significa na prática</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td><b>Precificação errada</b></td><td>Vender prato por R$ 25 que custa R$ 12 para produzir — parece lucro, mas quando soma aluguel, salários e impostos, dá prejuízo.</td></tr>
+                <tr><td>2</td><td><b>Não saber o custo real dos pratos</b></td><td>Achar que "por cima" sabe quanto custa uma porção. Sem ficha técnica, é chute — e chute errado fecha restaurante.</td></tr>
+                <tr><td>3</td><td><b>Misturar dinheiro pessoal com o do restaurante</b></td><td>Pagar conta pessoal com o caixa do restaurante. Parece inofensivo, mas torna impossível saber se o negócio dá lucro.</td></tr>
+                <tr><td>4</td><td><b>Sem capital de giro suficiente</b></td><td>Nos primeiros meses o restaurante gasta mais do que fatura. Sem reserva, acaba o dinheiro antes de o negócio decolar.</td></tr>
+                <tr><td>5</td><td><b>Desperdício descontrolado</b></td><td>Produzir comida demais, jogar fora ingredientes, não controlar estoque. É literalmente jogar dinheiro no lixo.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 2 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap2">
+    <div class="chapter-header">
+        <div class="chapter-num">2</div>
+        <h2>Para onde vai cada R$ 1,00 que entra no caixa</h2>
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">🍕 Analogia: A pizza do faturamento</div>
+        <p>Imagine que cada R$ 1,00 que um cliente paga é uma pizza inteira. Essa pizza já chega fatiada — cada fatia é comprometida com uma despesa. O <b>lucro é a última fatia</b>, e ela só existe se todas as outras fatias forem do tamanho certo.</p>
+    </div>
+
+    <p>Quando um cliente paga R$ 1,00 no nosso restaurante, esse dinheiro é dividido assim:</p>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Despesa</th><th>% de cada R$ 1,00</th><th>Em R$ 1,00</th><th>O que é</th></tr></thead>
+            <tbody>
+                <tr><td>🥩 Ingredientes (CMV)</td><td><b>28% a 35%</b></td><td>R$ 0,28 a R$ 0,35</td><td>Tudo que vai dentro do prato: carne, arroz, legumes, tempero</td></tr>
+                <tr><td>👨‍🍳 Salários e encargos</td><td><b>25% a 35%</b></td><td>R$ 0,25 a R$ 0,35</td><td>Cozinheiros, garçons, limpeza + impostos trabalhistas</td></tr>
+                <tr><td>🏠 Custos fixos</td><td><b>12% a 18%</b></td><td>R$ 0,12 a R$ 0,18</td><td>Aluguel, luz, água, gás, manutenção</td></tr>
+                <tr><td>🏛️ Impostos</td><td><b>4% a 19%</b></td><td>R$ 0,04 a R$ 0,19</td><td>Simples Nacional (depende do faturamento anual)</td></tr>
+                <tr><td>📋 Administrativo</td><td><b>3% a 5%</b></td><td>R$ 0,03 a R$ 0,05</td><td>Contador, sistema de gestão, material escritório</td></tr>
+                <tr><td>📱 Marketing</td><td><b>2% a 5%</b></td><td>R$ 0,02 a R$ 0,05</td><td>Instagram, Google, iFood, folders</td></tr>
+                <tr style="background:var(--green-bg)"><td>💰 <b>LUCRO</b></td><td><b>8% a 15%</b></td><td><b>R$ 0,08 a R$ 0,15</b></td><td><b>O que sobra para os sócios. É o objetivo de tudo.</b></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-warning">
+        <span class="alert-icon">💡</span>
+        <strong>A regra de ouro</strong>
+        A soma de todos esses percentuais <b>sempre tem que dar 100%</b>. Se der mais que 100%, significa que estamos gastando mais do que entra — ou seja, <b>prejuízo</b>. Se der menos, sobra mais lucro.
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">📖 Exemplo concreto</div>
+        <p>Se vendemos um prato executivo por <b>R$ 30,00</b>, o destino desse dinheiro será aproximadamente:</p>
+        <p>🥩 Ingredientes: R$ 9,60 · 👨‍🍳 Salários: R$ 8,40 · 🏠 Custos fixos: R$ 4,20 · 🏛️ Impostos: R$ 1,20 · 📋 Admin: R$ 1,20 · 📱 Marketing: R$ 0,90</p>
+        <p><b>💰 Lucro restante: R$ 4,50</b> (15% de R$ 30). Se qualquer fatia "inchar", o lucro encolhe ou vira prejuízo.</p>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 3 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap3">
+    <div class="chapter-header">
+        <div class="chapter-num">3</div>
+        <h2>O que é CMV e por que ele decide tudo</h2>
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">🧮 CMV em linguagem simples</div>
+        <p><b>CMV = Custo da Mercadoria Vendida.</b> É quanto você gastou em ingredientes para produzir o que foi vendido. Se no mês você faturou R$ 50.000 e gastou R$ 16.000 em ingredientes, seu CMV é 32%.</p>
+    </div>
+
+    <div class="formula">CMV (%) = (Gasto com ingredientes no mês ÷ Faturamento do mês) × 100</div>
+
+    <h3>Qual o CMV ideal?</h3>
+    <div class="metrics">
+        <div class="metric">
+            <div class="metric-value" style="color:var(--green)">28-32%</div>
+            <div class="metric-label">CMV saudável<br>✅ Meta ideal</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value" style="color:var(--yellow)">33-35%</div>
+            <div class="metric-label">CMV de atenção<br>⚠️ Precisa ajustar</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value" style="color:var(--red)">36%+</div>
+            <div class="metric-label">CMV perigoso<br>🚨 Risco de prejuízo</div>
+        </div>
+    </div>
+
+    <div class="alert alert-danger">
+        <span class="alert-icon">🚨</span>
+        <strong>A armadilha: "Mas o prato dá lucro!"</strong>
+        Muitos donos de restaurante olham só para o ingrediente: "Esse prato custa R$ 10 de ingredientes e eu vendo por R$ 30, lucro R$ 20!" <b>ERRADO.</b> Desses R$ 30, R$ 8,40 vão para salários, R$ 4,20 para aluguel/luz, R$ 1,20 para impostos... O lucro real não é R$ 20 — é R$ 4,50 (ou menos). Se o CMV estiver errado, esse lucro vira ZERO.
+    </div>
+
+    <h3>O que faz o CMV subir sem você perceber</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Causa</th><th>Exemplo</th><th>Impacto</th></tr></thead>
+            <tbody>
+                <tr><td>Porções maiores que o padrão</td><td>Cozinheiro coloca 200g de carne em vez de 150g</td><td>CMV sobe 1-3% ao mês</td></tr>
+                <tr><td>Desperdício na preparação</td><td>Descascar demais, queimar alimentos</td><td>Perda de 5-15% dos ingredientes</td></tr>
+                <tr><td>Preço do fornecedor subiu</td><td>Tomate subiu 40% por sazonalidade</td><td>CMV sobe sem reajustar o preço do prato</td></tr>
+                <tr><td>Comida jogada fora</td><td>Produzir 20kg e vender só 15kg</td><td>5kg = dinheiro no lixo</td></tr>
+                <tr><td>Roubo/desvio</td><td>Ingredientes que "somem" do estoque</td><td>Aumenta custo sem aumentar venda</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 4 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap4">
+    <div class="chapter-header">
+        <div class="chapter-num">4</div>
+        <h2>Como definir o preço dos pratos executivos</h2>
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">🎯 A ideia central</div>
+        <p>O preço de um prato <b>não pode ser "chutado"</b> nem baseado apenas no que a concorrência cobra. Ele precisa ser <b>calculado</b> a partir do custo dos ingredientes + todos os outros custos do restaurante + a margem de lucro que queremos.</p>
+    </div>
+
+    <h3>A fórmula (simplificada)</h3>
+    <div class="formula">Preço de Venda = Custo do Prato ÷ 0,32</div>
+
+    <p>De onde vem o <b>0,32</b>? É o espaço que sobra para o custo dos ingredientes depois de tirar todas as outras despesas. Se o CMV meta é 32%, o divisor é 0,32.</p>
+
+    <h3>Exemplo passo a passo</h3>
+    <div class="card">
+        <div class="card-title">🍗 Frango Grelhado Completo (arroz, feijão, salada)</div>
+        <p><b>Custo dos ingredientes (ficha técnica):</b> R$ 6,00</p>
+        <div class="formula">R$ 6,00 ÷ 0,32 = R$ 18,75</div>
+        <p><b>Preço sugerido:</b> R$ 21,90 (arredondado para cima para margem de segurança)</p>
+    </div>
+    <div class="card">
+        <div class="card-title">🥩 Filé Mignon ao Molho Madeira</div>
+        <p><b>Custo dos ingredientes:</b> R$ 26,65</p>
+        <div class="formula">R$ 26,65 ÷ 0,32 = R$ 83,28</div>
+        <p><b>Preço sugerido:</b> R$ 84,90 a R$ 89,90</p>
+    </div>
+
+    <h3>Cardápio executivo sugerido com preços calculados</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Prato</th><th>Custo</th><th>Preço Calculado</th><th>Preço Sugerido</th><th>CMV Real</th></tr></thead>
+            <tbody>
+                <tr><td>Frango grelhado completo</td><td>R$ 6,00</td><td>R$ 18,75</td><td>R$ 21,90</td><td style="color:var(--green)">27,4% ✅</td></tr>
+                <tr><td>Strogonoff de carne</td><td>R$ 12,40</td><td>R$ 38,75</td><td>R$ 39,90</td><td style="color:var(--green)">31,1% ✅</td></tr>
+                <tr><td>Peixe grelhado + legumes</td><td>R$ 14,20</td><td>R$ 44,37</td><td>R$ 44,90</td><td style="color:var(--green)">31,6% ✅</td></tr>
+                <tr><td>Bife acebolado completo</td><td>R$ 9,80</td><td>R$ 30,62</td><td>R$ 32,90</td><td style="color:var(--green)">29,8% ✅</td></tr>
+                <tr><td>Feijoada completa</td><td>R$ 8,90</td><td>R$ 27,81</td><td>R$ 29,90</td><td style="color:var(--green)">29,8% ✅</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <strong>Regra importante: preço calculado vs preço do mercado</strong>
+        Se o preço que a fórmula manda cobrar é <b>mais caro</b> que a concorrência cobra, temos 3 opções:<br>
+        1) Reduzir o custo da ficha (trocar ingrediente ou reduzir porção)<br>
+        2) Aceitar margem menor nesse prato e compensar em outros<br>
+        3) Não servir esse prato — se dá prejuízo, não vale ter no cardápio<br><br>
+        <b>NUNCA venda abaixo do custo só para "ter o prato no cardápio".</b>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 5 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap5">
+    <div class="chapter-header">
+        <div class="chapter-num">5</div>
+        <h2>Como definir o preço do buffet por quilo</h2>
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">⚖️ O grande desafio do buffet</div>
+        <p>No buffet, todos os pratos são vendidos pelo <b>mesmo preço por quilo</b>, mas cada um tem um custo diferente. O arroz custa R$ 2,60/kg para produzir, a carne assada custa R$ 52,40/kg. O preço por quilo precisa cobrir a <b>média ponderada</b> de tutti os custos — porque o cliente pode montar o prato como quiser.</p>
+    </div>
+
+    <h3>Passo 1: Calcular o custo médio do buffet</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Preparação</th><th>Custo/kg</th><th>% do Buffet</th><th>Custo Ponderado</th></tr></thead>
+            <tbody>
+                <tr><td>Arroz branco</td><td>R$ 2,60</td><td>25%</td><td>R$ 0,65</td></tr>
+                <tr><td>Feijão</td><td>R$ 4,68</td><td>12%</td><td>R$ 0,56</td></tr>
+                <tr><td>Frango grelhado</td><td>R$ 30,12</td><td>10%</td><td>R$ 3,01</td></tr>
+                <tr><td>Carne assada</td><td>R$ 52,40</td><td>7%</td><td>R$ 3,67</td></tr>
+                <tr><td>Strogonoff</td><td>R$ 35,80</td><td>8%</td><td>R$ 2,86</td></tr>
+                <tr><td>Salada mista</td><td>R$ 8,50</td><td>15%</td><td>R$ 1,28</td></tr>
+                <tr><td>Legumes refogados</td><td>R$ 9,80</td><td>8%</td><td>R$ 0,78</td></tr>
+                <tr><td>Macarrão</td><td>R$ 3,16</td><td>10%</td><td>R$ 0,32</td></tr>
+                <tr><td>Farofa</td><td>R$ 11,40</td><td>5%</td><td>R$ 0,57</td></tr>
+                <tr style="background:var(--blue-bg);font-weight:700"><td>TOTAL</td><td>—</td><td>100%</td><td>R$ 13,70</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Passo 2: Aplicar a fórmula</h3>
+    <div class="formula">R$ 13,70 ÷ 0,32 = R$ 42,81 → Preço mínimo: R$ 44,90/kg</div>
+
+    <h3>Passo 3: Margem de segurança (+8%)</h3>
+    <p>O cliente pode colocar mais carne e menos arroz no prato. Para nos proteger disso, adicionamos 8% de segurança:</p>
+    <div class="formula">R$ 42,81 × 1,08 = R$ 46,23 → <b>Preço sugerido: R$ 46,90 a R$ 49,90/kg</b></div>
+
+    <h3>O perigo do "prato pesado em carne"</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Cenário</th><th>O que acontece</th><th>Custo médio/kg</th><th>CMV</th><th>Situação</th></tr></thead>
+            <tbody>
+                <tr><td>😊 Ideal</td><td>Cliente serve mix equilibrado</td><td>R$ 13,70</td><td>29,2%</td><td style="color:var(--green)">✅ Saudável</td></tr>
+                <tr><td>😐 Moderado</td><td>Cliente serve +20% de carne</td><td>R$ 16,44</td><td>35,1%</td><td style="color:var(--yellow)">⚠️ Atenção</td></tr>
+                <tr><td>😟 Crítico</td><td>Cliente serve +40% de carne</td><td>R$ 19,18</td><td>40,9%</td><td style="color:var(--orange)">🚨 Perigo</td></tr>
+                <tr><td>😱 Catastrófico</td><td>60% do prato é carne</td><td>R$ 25,00+</td><td>53,3%</td><td style="color:var(--red)">❌ Prejuízo</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-info">
+        <span class="alert-icon">💡</span>
+        <strong>Estratégia de defesa no buffet</strong>
+        O layout do balcão importa MUITO. <b>Sempre coloque os itens caros (carnes) no FINAL</b> do balcão. O cliente chega lá com o prato já parcialmente cheio e se serve de menos carne. Além disso: use pegadores menores para proteínas nobres, corte a carne em pedaços menores e reponha pouco por vez.
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 6 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap6">
+    <div class="chapter-header">
+        <div class="chapter-num">6</div>
+        <h2>Desperdício: o ladrão silencioso</h2>
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">🗑️ Analogia: O balde furado</div>
+        <p>Imagine que nosso faturamento é a água de uma torneira enchendo um balde. O desperdício são <b>furos no balde</b>. Não adianta abrir mais a torneira (vender mais) se o balde está furado. Precisamos tampar os furos primeiro.</p>
+    </div>
+
+    <h3>Quanto cada % de desperdício custa por mês</h3>
+    <p>Exemplo: Buffet com faturamento de R$ 25.000/mês:</p>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>% de Sobra</th><th>Kg desperdiçados/mês</th><th>Custo perdido/mês</th><th>Perda no ano</th></tr></thead>
+            <tbody>
+                <tr><td style="color:var(--green)">3%</td><td>~22 kg</td><td>R$ 330</td><td>R$ 3.960</td></tr>
+                <tr><td style="color:var(--green)">5%</td><td>~37 kg</td><td>R$ 555</td><td>R$ 6.660</td></tr>
+                <tr><td style="color:var(--yellow)">7%</td><td>~52 kg</td><td>R$ 780</td><td>R$ 9.360</td></tr>
+                <tr><td style="color:var(--orange)">10%</td><td>~75 kg</td><td>R$ 1.125</td><td>R$ 13.500</td></tr>
+                <tr><td style="color:var(--red)">15%</td><td>~112 kg</td><td>R$ 1.688</td><td style="color:var(--red)"><b>R$ 20.256 🚨</b></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-success">
+        <span class="alert-icon">✅</span>
+        <strong>O impacto de controlar o desperdício</strong>
+        Reduzir a sobra de 10% para 5% = <b>economia de R$ 570/mês = R$ 6.840/ano.</b> Essa é uma economia que vai direto para o lucro, sem precisar vender mais.
+    </div>
+
+    <h3>Meta de sobras por categoria</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Categoria</th><th>Sobra aceitável</th><th>Dica</th></tr></thead>
+            <tbody>
+                <tr><td>Arroz / Massas</td><td>3-5%</td><td>Custo baixo, sobra tolerável</td></tr>
+                <tr><td>Feijão</td><td>3-5%</td><td>Produzir conservador — requentado perde qualidade</td></tr>
+                <tr><td>Saladas cruas</td><td>5-8%</td><td>Não reaproveitar — risco sanitário</td></tr>
+                <tr><td>Legumes cozidos</td><td>4-6%</td><td>Pode virar sopa ou purê no mesmo dia</td></tr>
+                <tr><td>Frango/carne econômica</td><td>2-4%</td><td>Controle rigoroso — custo médio</td></tr>
+                <tr><td style="color:var(--red)"><b>Proteína nobre (filé, camarão)</b></td><td style="color:var(--red)"><b>1-3%</b></td><td><b>Produzir sob demanda — custo alto!</b></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 7 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap7">
+    <div class="chapter-header">
+        <div class="chapter-num">7</div>
+        <h2>Capital de giro: o oxigênio do negócio</h2>
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">🫁 Analogia: O tanque de oxigênio</div>
+        <p>O capital de giro é como um tanque de oxigênio para um mergulhador. Nos primeiros meses, o restaurante <b>está debaixo d'água</b> — gasta mais do que fatura. O tanque precisa ter ar suficiente até ele chegar à superfície (ponto de equilíbrio). Se acabar o ar antes, o mergulhador morre — e o restaurante fecha.</p>
+    </div>
+
+    <h3>Os primeiros meses: a realidade que ninguém conta</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Fase</th><th>Período</th><th>Ocupação</th><th>O que acontece</th></tr></thead>
+            <tbody>
+                <tr><td>🎉 Inauguração</td><td>Semana 1-2</td><td>80-100%</td><td>Curiosidade. Parece que vai bombar.</td></tr>
+                <tr><td style="color:var(--red)">📉 Queda</td><td>Mês 1-2</td><td style="color:var(--red)"><b>40-50%</b></td><td><b>A queda pós-inauguração. É normal, mas assusta.</b></td></tr>
+                <tr><td>📊 Estabilização</td><td>Mês 3-6</td><td>55-65%</td><td>Clientes fiéis começam a aparecer</td></tr>
+                <tr><td style="color:var(--green)">📈 Maturidade</td><td>Mês 7-12</td><td>65-80%</td><td>O negócio começa a se pagar</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-danger">
+        <span class="alert-icon">🚨</span>
+        <strong>A regra de sobrevivência</strong>
+        O restaurante precisa ter reserva financeira para sobreviver com <b>40-50% de ocupação por pelo menos 3 meses</b>. Se as contas só fecham com 80% de ocupação, o negócio está subcapitalizado e corre risco altíssimo de quebrar.
+    </div>
+
+    <h3>Quanto precisamos de reserva</h3>
+    <div class="formula">Capital de Giro = Custos Fixos Mensais × 4 a 6 meses</div>
+    <p>Se nossos custos fixos mensais são R$ 30.000, precisamos de <b>R$ 120.000 a R$ 180.000</b> de reserva para sobreviver o período de maturação.</p>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 8 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap8">
+    <div class="chapter-header">
+        <div class="chapter-num">8</div>
+        <h2>O que acontece quando ignoramos tudo isso</h2>
+    </div>
+
+    <p>Cada erro financeiro não acontece isolado — ele cria um <b>efeito dominó</b> que pode destruir o negócio em poucos meses:</p>
+
+    <h3>Efeito dominó 1: Precificação errada</h3>
+    <div class="flow">
+        <div class="flow-step">Preço definido<br>"no olho"</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Preço não cobre<br>todos os custos</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Parece que vende<br>bem, mas dá prejuízo</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Dinheiro acaba<br>misteriosamente</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="border-color:var(--red);color:var(--red)"><b>Restaurante<br>fecha</b></div>
+    </div>
+
+    <h3>Efeito dominó 2: CMV descontrolado</h3>
+    <div class="flow">
+        <div class="flow-step">Sem ficha técnica<br>(sem saber custos)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Porções inconsistentes<br>desperdício invisível</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">CMV sobe para<br>40%+ sem perceber</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Lucro desaparece<br>mesmo vendendo bem</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="border-color:var(--red);color:var(--red)"><b>Dívidas e<br>falência</b></div>
+    </div>
+
+    <h3>Efeito dominó 3: Sem capital de giro</h3>
+    <div class="flow">
+        <div class="flow-step">Abre o restaurante<br>sem reserva</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Mês 2: ocupação<br>cai para 40%</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Não tem dinheiro<br>pra pagar fornecedor</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Compra fiado, pega<br>empréstimo caro</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="border-color:var(--red);color:var(--red)"><b>Espiral de<br>dívidas</b></div>
+    </div>
+
+    <h3>Consequências concretas e mensuráveis</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Erro</th><th>Consequência Imediata</th><th>Impacto em 6 meses</th><th>Impacto em 1 ano</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>CMV acima de 35%</td>
+                    <td>Lucro cai 40-60%</td>
+                    <td>Sem caixa para emergências</td>
+                    <td style="color:var(--red)">Fecha ou acumula dívidas</td>
+                </tr>
+                <tr>
+                    <td>Desperdício de 15%</td>
+                    <td>Perde R$ 1.688/mês</td>
+                    <td>R$ 10.128 jogados fora</td>
+                    <td style="color:var(--red)">R$ 20.256 desperdiçados</td>
+                </tr>
+                <tr>
+                    <td>Preço 15% abaixo do ideal</td>
+                    <td>Não cobre custos fixos</td>
+                    <td>Sócios fazem aportes extras</td>
+                    <td style="color:var(--red)">Esgota capital, fecha</td>
+                </tr>
+                <tr>
+                    <td>Sem controle de estoque</td>
+                    <td>Compra duplicada, vencimento</td>
+                    <td>R$ 3.000-5.000 desperdiçados</td>
+                    <td style="color:var(--red)">CMV inflado, prejuízo crônico</td>
+                </tr>
+                <tr>
+                    <td>Mistura dinheiro pessoal</td>
+                    <td>Não sabe se dá lucro</td>
+                    <td>Decisões no escuro</td>
+                    <td style="color:var(--red)">Impossível diagnosticar problemas</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- CAPÍTULO 9 -->
+<!-- ================================================================== -->
+<div class="chapter" id="cap9">
+    <div class="chapter-header">
+        <div class="chapter-num">9</div>
+        <h2>Checklist de sobrevivência — resumo final</h2>
+    </div>
+
+    <p>Se cada sócio entender e respeitar estes itens, as chances de sucesso sobem drasticamente:</p>
+
+    <div class="card" style="border-left:4px solid var(--green)">
+        <div class="card-title" style="color:var(--green)">💰 Precificação</div>
+        <p>✅ Todo prato tem ficha técnica com custo calculado<br>
+        ✅ Preço de venda foi calculado pela fórmula (custo ÷ 0,32), nunca "no olho"<br>
+        ✅ Preço do buffet inclui margem de segurança de 8%<br>
+        ✅ Revisamos os preços quando insumos sobem mais de 10%</p>
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--accent)">
+        <div class="card-title" style="color:var(--accent)">📊 Controle Financeiro</div>
+        <p>✅ CMV meta definido: 28-32% (monitorar todo mês)<br>
+        ✅ Conta bancária PJ separada da pessoal dos sócios<br>
+        ✅ NINGUÉM retira dinheiro do caixa sem registrar<br>
+        ✅ Relatório financeiro mensal (DRE) revisado por todos</p>
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--yellow)">
+        <div class="card-title" style="color:var(--yellow)">📦 Estoque e Desperdício</div>
+        <p>✅ Estoque controlado — sem comprar "por cima"<br>
+        ✅ Sobras pesadas e registradas todo dia (meta: 3-7%)<br>
+        ✅ Proteínas nobres produzidas sob demanda, nunca em excesso<br>
+        ✅ Layout do buffet com carnes no final do balcão</p>
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--accent2)">
+        <div class="card-title" style="color:var(--accent2)">🫁 Capital e Reserva</div>
+        <p>✅ Temos reserva para 4-6 meses de custos fixos<br>
+        ✅ Sabemos que os primeiros meses terão queda de movimento<br>
+        ✅ Nosso plano funciona mesmo com 40-50% de ocupação<br>
+        ✅ Ponto de equilíbrio calculado e conhecido por todos os sócios</p>
+    </div>
+
+    <div class="alert alert-success" style="margin-top:32px">
+        <span class="alert-icon">🏆</span>
+        <strong>A mensagem mais importante deste relatório</strong>
+        O restaurante que <b>controla o dinheiro com disciplina</b> e <b>precifica com método</b> está no grupo dos 40% que sobrevivem. Não é sobre ter a melhor comida da cidade — é sobre <b>saber transformar cada real de venda em sustentabilidade do negócio.</b> Todos os sócios precisam entender isso. O sucesso do restaurante depende de cada um de nós levar a gestão financeira tão a sério quanto a qualidade da comida.
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>📊 Relatório gerado pelo <b>Gerente Geral (Squad CFO)</b> · Março 2026</p>
+    <p>Fontes: Abrasel, Sebrae, ABERC, dados internos do planejamento financeiro</p>
+    <p style="margin-top:8px">Abra este arquivo no navegador para melhor visualização</p>
+</div>
+
+</div><!-- /container -->
+</body>
+</html>

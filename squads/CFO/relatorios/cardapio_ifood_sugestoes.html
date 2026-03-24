@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugestões do Dia iFood - Bom & Barato</title>
+    <style>
+        :root {
+            --ifood-red: #ea1d2c;
+            --ifood-bg: #f7f7f7;
+            --dark-text: #3e3e3e;
+            --light-text: #717171;
+            --white: #ffffff;
+            --green: #00a000;
+        }
+        body {
+            font-family: 'SulSans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--ifood-bg);
+            color: var(--dark-text);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--ifood-bg);
+        }
+        .header {
+            background-color: var(--ifood-red);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .promo-badge {
+            display: inline-block;
+            background-color: var(--green);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .day-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--ifood-red);
+        }
+        .day-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--dark-text);
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .item-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .item-info {
+            flex: 1;
+        }
+        .item-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+        }
+        .item-desc {
+            font-size: 14px;
+            color: var(--light-text);
+            margin: 0;
+            line-height: 1.4;
+        }
+        .price-tag {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--green);
+            margin-left: 15px;
+            white-space: nowrap;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: var(--light-text);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <span class="promo-badge">Promoções de iFood</span>
+        <h1>Cardápio "Bom e Barato"</h1>
+        <p>A melhor sugestão executiva de cada dia da semana direto para você!</p>
+    </div>
+
+    <!-- Segunda -->
+    <div class="day-card">
+        <h2 class="day-title">Segunda-Feira</h2>
+        <div class="item-details">
+            <div class="item-info">
+                <h3 class="item-name">Carne Moída à Primavera</h3>
+                <p class="item-desc">Acompanha cenoura sauté e purê de batata cremoso. A refeição perfeita para começar a semana.</p>
+            </div>
+            <div class="price-tag">Consulte</div>
+        </div>
+    </div>
+
+    <!-- Terça -->
+    <div class="day-card">
+        <h2 class="day-title">Terça-Feira</h2>
+        <div class="item-details">
+            <div class="item-info">
+                <h3 class="item-name">Strogonoff de Frango</h3>
+                <p class="item-desc">Clássico strogonoff cremoso servido com batata frita super crocante e um saudável mix de legumes.</p>
+            </div>
+            <div class="price-tag">Consulte</div>
+        </div>
+    </div>
+
+    <!-- Quarta -->
+    <div class="day-card">
+        <h2 class="day-title">Quarta-Feira</h2>
+        <div class="item-details">
+            <div class="item-info">
+                <h3 class="item-name">Bife à Rolê</h3>
+                <p class="item-desc">Tradicional bife à rolê recheado, acompanhado de purê de batata caseiro e berinjela frita.</p>
+            </div>
+            <div class="price-tag">Consulte</div>
+        </div>
+    </div>
+
+    <!-- Quinta -->
+    <div class="day-card">
+        <h2 class="day-title">Quinta-Feira</h2>
+        <div class="item-details">
+            <div class="item-info">
+                <h3 class="item-name">Filé de Sobrecoxa Grelhado</h3>
+                <p class="item-desc">Suculento filé de sobrecoxa grelhado servido com o delicioso macarrão penne ao alho e óleo, com bacon e brócolis.</p>
+            </div>
+            <div class="price-tag">Consulte</div>
+        </div>
+    </div>
+
+    <!-- Sexta -->
+    <div class="day-card">
+        <h2 class="day-title">Sexta-Feira</h2>
+        <div class="item-details">
+            <div class="item-info">
+                <h3 class="item-name">Lombo Grelhado com Tutu</h3>
+                <p class="item-desc">Lombo suíno grelhado no ponto, acompanhado de um rico tutu de feijão, couve refogada e vinagrete fresco.</p>
+            </div>
+            <div class="price-tag">Consulte</div>
+        </div>
+    </div>
+
+    <!-- Sábado -->
+    <div class="day-card">
+        <h2 class="day-title">Sábado</h2>
+        <div class="item-details">
+            <div class="item-info">
+                <h3 class="item-name">Feijoada Completa da Casa</h3>
+                <p class="item-desc">A nossa rainha do sábado! Acompanha arroz branco, feijão, farofa rica e couve refogada no alho.</p>
+            </div>
+            <div class="price-tag">Consulte</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        * Todos os dias temos entrega grátis pelo iFood para a região.
+        <br>Restaurante & Delivery Sabor Diário
+    </div>
+
+</div>
+
+</body>
+</html>

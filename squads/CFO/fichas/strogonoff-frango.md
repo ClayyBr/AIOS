@@ -14,17 +14,19 @@
 
 | Ingrediente | PB (g) | FC | PL (g) | FCc | Servido (g) | Custo/kg-L | Custo Porção | % Total |
 |---|---|---|---|---|---|---|---|---|
-| **Peito de Frango (filé s/ osso)** | 180 | 1,05 | 171 | 1,15 | 149 | R$ 22,90 | **R$ 4,12** | 45,1% |
-| Creme de Leite | 100ml | 1,00 | 100ml | 1,00 | — | R$ 14,00/L | R$ 1,40 | 15,3% |
-| Batata Palha (industrializada) | 30 | 1,00 | 30 | 1,00 | 30 | R$ 40,00 | R$ 1,20 | 13,1% |
-| Manteiga | 10 | 1,00 | 10 | 1,00 | — | R$ 55,00 | R$ 0,55 | 6,0% |
-| Arroz Branco | 80 | 1,00 | 80 | 0,40 | 200 | R$ 6,50 | R$ 0,52 | 5,7% |
-| Alho | 8 | 1,95 | 4 | 1,40 | 3 | R$ 45,00 | R$ 0,36 | 3,9% |
-| Ketchup | 30 | 1,00 | 30 | 1,00 | — | R$ 12,00 | R$ 0,36 | 3,9% |
-| Cebola | 40 | 1,67 | 24 | 1,60 | 15 | R$ 7,90 | R$ 0,32 | 3,5% |
-| Mostarda | 15 | 1,00 | 15 | 1,00 | — | R$ 18,00 | R$ 0,27 | 3,0% |
-| Sal/Pimenta | 3 | 1,00 | 3 | 1,00 | — | — | R$ 0,03 | 0,3% |
-| **TOTAL** | **496g** | — | — | — | **~400g** | — | **R$ 9,13** | **100%** |
+| **Peito de Frango (filé s/ osso)** | 140 | 1,05 | 133 | 1,15 | 116 | R$ 16,98 | **R$ 2,38** | 36,1% |
+| Creme de Leite | 80ml | 1,00 | 80ml | 1,00 | — | R$ 12,45/L | R$ 1,00 | 15,2% |
+| Batata Palha (industrializada) | 20 | 1,00 | 20 | 1,00 | 20 | R$ 40,00 | R$ 0,80 | 12,1% |
+| Arroz Branco | 60 | 1,00 | 60 | 0,40 | 150 | R$ 3,29 | R$ 0,20 | 3,0% |
+| Feijão Carioca | 35 | 1,05 | 33 | 0,50 | 66 | R$ 7,55 | R$ 0,26 | 4,0% |
+| Mix de Salada | 100 | 1,30 | 76 | 1,00 | 76 | R$ 12,00 | R$ 1,20 | 18,2% |
+| Molhos/Condimentos | 50 | 1,00 | 50 | 1,00 | 50 | R$ 15,00 | R$ 0,75 | 11,4% |
+| **TOTAL** | **485g** | — | — | — | **~478g** | — | **R$ 6,59** | **100%** |
+
+*Nota Creme de Leite: Caixa 200g por R$ 2,49 = R$ 12,45/kg*
+*Nota Ketchup: Pet 1028g por R$ 11,89 = R$ 11,57/kg*
+*Nota Mostarda: Frasco 1,01L por R$ 12,25 = R$ 12,13/L*
+*Nota Peito de Frango: Cotado no Atacadão pacote de 1kg a R$ 16,98*
 
 ---
 
@@ -32,22 +34,22 @@
 
 | Grupo | Custo (R$) | % do Total |
 |-------|-----------|-----------|
-| 🥩 Proteína (frango) | R$ 4,12 | 45,1% |
-| 🍚 Guarnição (arroz + batata palha) | R$ 1,72 | 18,8% |
-| 🥫 Molho (creme, ketchup, mostarda) | R$ 2,03 | 22,2% |
-| 🧄 Temperos e Gorduras (alho, cebola, manteiga, sal) | R$ 1,26 | 13,8% |
-| **Total** | **R$ 9,13** | **100%** |
+| 🥩 Proteína (frango) | R$ 3,06 | 44,0% |
+| 🍚 Guarnição (arroz + feijão + batata palha) | R$ 1,84 | 26,4% |
+| 🥫 Molho (creme, ketchup, mostarda) | R$ 1,78 | 25,5% |
+| 🧄 Temperos e Gorduras (alho, cebola, sal) | R$ 0,29 | 4,2% |
+| **Total** | **R$ 6,97** | **100%** |
 
 ---
 
-## Precificação Rápida
+## Precificação
 
-| CMV Meta | Preço Calculado | Preço Sugerido |
-|----------|----------------|----------------|
-| 28% | R$ 32,61 | R$ 33,90 |
-| 30% | R$ 30,43 | R$ 31,90 |
-| **32%** | **R$ 28,53** | **R$ 29,90 ← Recomendado** |
-| 35% | R$ 26,09 | R$ 26,90 |
+| Canal / Modalidade | CMV Meta | Preço Calculado | Preço Sugerido |
+|--------------------|----------|----------------|----------------|
+| **Salão / Balcão** | 32% | R$ 21,78 | **R$ 24,90** |
+| **iFood (Taxa 27%)**| — | R$ 34,10 | **R$ 35,90** |
+
+*(Cálculo iFood: Preço Salão ÷ 0,73. Para incluir embalagem de R$ 1,50, o preço sugerido vai a R$ 36,90).*
 
 ---
 
