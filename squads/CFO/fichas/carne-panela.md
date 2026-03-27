@@ -1,44 +1,44 @@
-# Ficha Técnica Gerencial — Carne de Panela ao Molho
+# Ficha Técnica Gerencial — Bife de Panela ao Molho Artesanal
 
 | Campo | Valor |
 |-------|-------|
-| **Prato** | Carne de Panela com Batata |
-| **Categoria** | Prato Executivo |
+| **Prato** | Bife de Panela ao Molho |
+| **Categoria** | Prato Executivo / Comercial |
 | **Rendimento** | 1 porção |
 | **Data de Criação** | 22/03/2026 |
-| **Última Atualização de Preços** | 22/03/2026 |
+| **Última Atualização de Preços** | 25/03/2026 |
 
 ---
 
-## Ingredientes e Custos
+## Ingredientes e Custos (Ajuste 450g)
 
 | Ingrediente | PB (g) | FC | PL (g) | FCc | Servido (g) | Custo/kg-L | Custo Porção | % Total |
 |---|---|---|---|---|---|---|---|---|
-| **Acém Bovino** | 160 | 1,22 | 131 | 1,18 | 111 | R$ 37,90 | **R$ 6,06** | 63,1% |
-| Arroz Branco | 65 | 1,00 | 65 | 0,40 | 163 | R$ 3,29 | R$ 0,21 | 2,2% |
-| Feijão Carioca | 40 | 1,05 | 38 | 0,50 | 76 | R$ 7,55 | R$ 0,30 | 3,1% |
-| Batata | 60 | 1,20 | 50 | 0,95 | 53 | R$ 4,39 | R$ 0,26 | 2,7% |
-| Óleo de Soja | 10ml | 1,00 | 10ml | 1,00 | — | R$ 8,10/L | R$ 0,08 | 0,8% |
-| Molho de Tomate | 30 | 1,00 | 30 | 1,00 | 30 | R$ 7,11 | R$ 0,21 | 2,2% |
-| Cebola/Alho | 25 | 1,70 | 15 | 1,50 | 10 | R$ 7,00 | R$ 0,18 | 1,8% |
-| Mix de Salada | 80 | 1,30 | 61 | 1,00 | 61 | R$ 6,00 | R$ 0,48 | 5,0% |
-| Farofa/Complementos | 10 | 1,00 | 10 | 1,00 | 10 | R$ 10,00 | R$ 0,10 | 1,0% |
-| **TOTAL** | **480g** | — | — | — | **~514g** | — | **R$ 7,88** | **100%** |
+| **Coxão Duro Bovino (Bifes)** | 160 | 1,22 | 131 | 1,18 | 111 | R$ 45,99 | **R$ 7,36** | 83,9% |
+| Arroz Branco | 60 | 1,00 | 60 | 0,40 | 150 | R$ 3,29 | R$ 0,20 | 2,3% |
+| Feijão Carioca | 40 | 1,05 | 38 | 0,50 | 76 | R$ 7,55 | R$ 0,30 | 3,4% |
+| Óleo de Soja | 10ml | 1,00 | 10ml | 1,00 | — | R$ 8,10/L | R$ 0,08 | 0,9% |
+| Molho de Tomate (Artesanal)| 40 | 1,00 | 40 | 1,00 | 40 | R$ 7,11 | R$ 0,28 | 3,2% |
+| Cebola/Alho (Molho e Tempero) | 15 | 1,70 | 9 | 1,50 | 6 | R$ 7,00 | R$ 0,10 | 1,1% |
+| Mix de Salada | 70 | 1,30 | 54 | 1,00 | 54 | R$ 6,00 | R$ 0,35 | 4,0% |
+| Farofa/Complementos | 10 | 1,00 | 10 | 1,00 | 10 | R$ 10,00 | R$ 0,10 | 1,1% |
+| **TOTAL** | **405g** | — | — | — | **~447g** | — | **R$ 8,77** | **100%** |
 
-*Nota sobre Óleo: Frasco 900ml por R$ 7,29 = R$ 8,10/L*
-*Nota sobre Molho: Sachê 1,7kg por R$ 12,09 = R$ 7,11/kg*
+*Nota: Batatas retiradas. Prato concentrado no bife de coxão duro e no molho encorpado.*
 
 ---
 
-## Precificação
+## Precificação Sugerida
 
-| Canal / Modalidade | CMV Meta | Preço Calculado | Preço Sugerido |
-|--------------------|----------|----------------|----------------|
-| **Salão / Balcão** | 32% | R$ 29,03 | **R$ 29,90** |
-| **iFood (Taxa 27%)**| — | R$ 40,95 | **R$ 41,90** |
+| Canal / Modalidade | CMV Meta | Preço Calculado | Preço Sugerido | CMV Estimado |
+|--------------------|----------|----------------|----------------|--------------|
+| **Salão / Balcão (Meta 26%)** | 26% | R$ 33,73 | **R$ 33,90** | 25,8% |
+| **Salão / Balcão (Meta 30%)** | 30% | R$ 29,23 | **R$ 29,90** | 29,3% |
+| **iFood (Para o preço R$ 29,90)**| — | R$ 42,45 | **R$ 42,90** | — |
+| **iFood (Para o preço R$ 33,90)**| — | R$ 47,93 | **R$ 47,90** | — |
 
-*(Cálculo iFood: Preço Salão ÷ 0,73. Para incluir embalagem de R$ 1,50, o preço sugerido vai a R$ 43,90).*
+*(Cálculo iFood: Preço Salão ÷ 0,73 + R$ 1,50 embalagem)*
 
 ## Observações
-- A carne representa quase 60% do custo do prato. Manter o porcionamento a rigor é essencial.
-- O rendimento final (servido) considera o ganho de peso do arroz e feijão cozidos.
+- O Coxão Duro em estoque possui um custo médio ponderado alto (R$ 45,99/kg). Com 111g servidas de bife, o custo apenas da carne vai a R$ 7,36.
+- Vendê-lo por menos de R$ 29,90 colocaria o CMV acima de 30%, o que começaria a estrangular a margem do restaurante.

@@ -1,7 +1,7 @@
 metadata:
-  ultima_atualizacao: "2026-03-23"
+  ultima_atualizacao: "2026-03-26"
   tipo_ultimo_registro: "entrada"
-  valor_total_estoque: 114.65
+  valor_total_estoque: 889.20
 
 itens:
   - id: "frango-sobrecoxa-sadia"
@@ -31,3 +31,405 @@ itens:
     ultimo_fornecedor: "Nagumo"
     ultimo_preco: 13.98
     preco_referencia: 22.90
+
+  - id: "pernil-suino-osso"
+    nome: "Pernil Suino S/Osso"
+    categoria: "carnes"
+    unidade: "kg"
+    quantidade: 3.290
+    custo_medio_ponderado: 18.90
+    valor_em_estoque: 62.18
+    par_stock: 5.0
+    status: "comprar"
+    validade_proxima: "2026-06-23"
+    ultimo_fornecedor: "Tauste"
+    ultimo_preco: 18.90
+    preco_referencia: 21.50
+
+  - id: "coxao-duro"
+    nome: "Coxão Duro"
+    categoria: "carnes"
+    unidade: "kg"
+    quantidade: 2.620
+    custo_medio_ponderado: 45.99
+    valor_em_estoque: 120.49
+    par_stock: 5.0
+    status: "comprar"
+    validade_proxima: "2026-06-23"
+    ultimo_fornecedor: "Boi Nobre"
+    ultimo_preco: 45.99
+    preco_referencia: 39.90
+
+  - id: "oleo-soja"
+    nome: "Óleo de Soja (900ml)"
+    categoria: "mercearia"
+    unidade: "L"
+    quantidade: 10.8
+    custo_medio_ponderado: 7.21
+    valor_em_estoque: 77.88
+    par_stock: 10.0
+    status: "ok"
+    validade_proxima: "2026-10-19"
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 7.21
+    preco_referencia: 8.90
+
+  - id: "arroz-branco"
+    nome: "Arroz Branco Tipo 1"
+    categoria: "mercearia"
+    unidade: "kg"
+    quantidade: 15.0
+    custo_medio_ponderado: 4.10
+    valor_em_estoque: 61.47
+    par_stock: 10.0
+    status: "ok"
+    validade_proxima: "2026-09-19"
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 4.10
+    preco_referencia: 5.80
+
+  - id: "feijao-carioca"
+    nome: "Feijão Carioca"
+    categoria: "mercearia"
+    unidade: "kg"
+    quantidade: 3.0
+    custo_medio_ponderado: 8.49
+    valor_em_estoque: 25.47
+    par_stock: 5.0
+    status: "comprar"
+    validade_proxima: "2026-12-19"
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 8.49
+    preco_referencia: 7.50
+
+  - id: "sal-refinado"
+    nome: "Sal Refinado"
+    categoria: "mercearia"
+    unidade: "kg"
+    quantidade: 1.0
+    custo_medio_ponderado: 4.29
+    valor_em_estoque: 4.29
+    par_stock: 2.0
+    status: "comprar"
+    validade_proxima: "2027-03-19"
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 4.29
+    preco_referencia: 3.50
+
+  - id: "tempero-brasileirinho"
+    nome: "Tempero Brasileirinho"
+    categoria: "temperos"
+    unidade: "un"
+    quantidade: 2.0
+    custo_medio_ponderado: 3.50
+    valor_em_estoque: 7.00
+    par_stock: 2.0
+    status: "ok"
+    ultimo_fornecedor: "Ponto do Tempero"
+
+  - id: "tempero-tempera-tudo"
+    nome: "Tempero Tempera Tudo"
+    categoria: "temperos"
+    unidade: "un"
+    quantidade: 2.0
+    custo_medio_ponderado: 3.50
+    valor_em_estoque: 7.00
+    par_stock: 2.0
+    status: "ok"
+    ultimo_fornecedor: "Ponto do Tempero"
+
+  - id: "tempero-edu-guedes"
+    nome: "Tempero Edu Guedes"
+    categoria: "temperos"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 3.50
+    valor_em_estoque: 3.50
+    par_stock: 1.0
+    status: "ok"
+    ultimo_fornecedor: "Ponto do Tempero"
+
+  - id: "tempero-paprica"
+    nome: "Páprica Comum"
+    categoria: "temperos"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 3.50
+    valor_em_estoque: 3.50
+    par_stock: 1.0
+    status: "ok"
+    ultimo_fornecedor: "Ponto do Tempero"
+
+  - id: "alho-roxo"
+    nome: "Alho Roxo"
+    categoria: "hortifru"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 18.25
+    valor_em_estoque: 18.25
+    par_stock: 1.0
+    status: "ok"
+    ultimo_fornecedor: "Ponto do Tempero"
+
+  - id: "cebola"
+    nome: "Cebola"
+    categoria: "hortifru"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 5.60
+    valor_em_estoque: 5.60
+    par_stock: 1.0
+    status: "ok"
+    ultimo_fornecedor: "Ponto do Tempero"
+
+  - id: "repolho"
+    nome: "Repolho"
+    categoria: "hortifru"
+    unidade: "un"
+    quantidade: 3.0
+    custo_medio_ponderado: 6.00
+    valor_em_estoque: 18.00
+    par_stock: 3.0
+    status: "ok"
+    ultimo_fornecedor: "Barraca do Mercadão"
+
+  - id: "beterraba"
+    nome: "Beterraba"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 3.0
+    custo_medio_ponderado: 6.00
+    valor_em_estoque: 18.00
+    par_stock: 3.0
+    status: "ok"
+    ultimo_fornecedor: "Barraca do Mercadão"
+
+  - id: "cenoura"
+    nome: "Cenoura"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 2.582
+    custo_medio_ponderado: 4.99
+    valor_em_estoque: 12.88
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-04-01"
+
+  - id: "tomate-salada"
+    nome: "Tomate Salada"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 2.324
+    custo_medio_ponderado: 5.99
+    valor_em_estoque: 13.92
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-04-01"
+
+  - id: "limao-tahiti"
+    nome: "Limão Tahiti"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 1.148
+    custo_medio_ponderado: 2.79
+    valor_em_estoque: 3.20
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-04-10"
+
+  - id: "leite-integral"
+    nome: "Leite Integral Lider 1L"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 2.0
+    custo_medio_ponderado: 4.50
+    valor_em_estoque: 9.00
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-07-25"
+
+  - id: "creme-leite-1kg"
+    nome: "Creme de Leite Italac 1,03kg"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 3.0
+    custo_medio_ponderado: 11.90
+    valor_em_estoque: 35.70
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-07-25"
+
+  - id: "vinagre-maca"
+    nome: "Vinagre Maçã Select 750ml"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 5.39
+    valor_em_estoque: 5.39
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-12-25"
+
+  - id: "mostarda-3kg"
+    nome: "Mostarda Campo Belo 3,05kg"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 16.90
+    valor_em_estoque: 16.90
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-12-25"
+
+  - id: "ketchup-3kg"
+    nome: "Ketchup Trad Cepera 3,5kg"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 26.90
+    valor_em_estoque: 26.90
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2027-03-25"
+
+  - id: "batata-palha"
+    nome: "Batata Palha Kari-Kari"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 2.0
+    custo_medio_ponderado: 11.90
+    valor_em_estoque: 23.80
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-06-25"
+
+  - id: "tempero-ami-1kg"
+    nome: "Tempero S/ Pimenta Ami 1kg"
+    categoria: "temperos"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 6.29
+    valor_em_estoque: 6.29
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-12-25"
+
+  - id: "alho-triturado"
+    nome: "Alho Triturado Select c/ Sal"
+    categoria: "temperos"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 15.99
+    valor_em_estoque: 15.99
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-12-25"
+
+  - id: "esponja"
+    nome: "Esponja Multiuso Scotch Brite"
+    categoria: "limpeza"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 6.49
+    valor_em_estoque: 6.49
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2028-01-01"
+
+  - id: "macarrao-ovos"
+    nome: "Macarrão Ovos Select Espaguete"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 3.0
+    custo_medio_ponderado: 2.59
+    valor_em_estoque: 7.77
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2027-03-25"
+
+  - id: "molho-tomate"
+    nome: "Molho Tomate Refog Pomarola"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 3.0
+    custo_medio_ponderado: 2.00
+    valor_em_estoque: 6.00
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-09-25"
+
+  - id: "salsa"
+    nome: "Salsa"
+    categoria: "hortifru"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 3.99
+    valor_em_estoque: 3.99
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-03-28"
+
+  - id: "cebolinha"
+    nome: "Cebolinha"
+    categoria: "hortifru"
+    unidade: "un"
+    quantidade: 2.0
+    custo_medio_ponderado: 4.29
+    valor_em_estoque: 8.58
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2026-03-28"
+
+  - id: "copo-descartavel-50ml"
+    nome: "Copo Descartável 50ml (100u)"
+    categoria: "suprimentos"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 2.90
+    valor_em_estoque: 2.90
+    ultimo_fornecedor: "Tenda"
+    validade_proxima: "2029-01-01"
+
+  - id: "agua-mineral-lindoya"
+    nome: "Água Mineral Lindoya S/ Gás"
+    categoria: "bebidas"
+    unidade: "un"
+    quantidade: 12.0
+    custo_medio_ponderado: 0.99
+    valor_em_estoque: 11.88
+    ultimo_fornecedor: "Tauste"
+    validade_proxima: "2026-09-25"
+
+  - id: "refrigerante-coca-cola"
+    nome: "Ref. Coca-Cola (Fardo)"
+    categoria: "bebidas"
+    unidade: "fd"
+    quantidade: 2.0
+    custo_medio_ponderado: 24.24
+    valor_em_estoque: 48.48
+    ultimo_fornecedor: "Tauste"
+    validade_proxima: "2026-07-25"
+
+  - id: "refrigerante-antarctica-guarana"
+    nome: "Ref. Guaraná Antarctica (CX)"
+    categoria: "bebidas"
+    unidade: "cx"
+    quantidade: 1.0
+    custo_medio_ponderado: 41.88
+    valor_em_estoque: 41.88
+    ultimo_fornecedor: "Tauste"
+    validade_proxima: "2026-07-25"
+
+  - id: "toucinho"
+    nome: "Toucinho"
+    categoria: "carnes"
+    unidade: "kg"
+    quantidade: 1.406
+    custo_medio_ponderado: 11.89
+    valor_em_estoque: 16.72
+    ultimo_fornecedor: "Tauste"
+    validade_proxima: "2026-04-10"
+
+  - id: "farinha-mandioca-kisabor"
+    nome: "Farinha Mandioca Kisabor Grossa"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 12.27
+    valor_em_estoque: 12.27
+    ultimo_fornecedor: "Tauste"
+    validade_proxima: "2026-12-25"
+
+  - id: "vinagre-maca-almaromi"
+    nome: "Vinagre Maçã Almaromi"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 4.99
+    valor_em_estoque: 4.99
+    ultimo_fornecedor: "Tauste"
+    validade_proxima: "2026-12-25"
