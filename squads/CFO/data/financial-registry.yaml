@@ -1,8 +1,20 @@
+# ⚠️ DEPRECATED — DADOS DE TESTE
+# Este arquivo contém dados ficticios de exemplo (fornecedores e preços falsos).
+# Nenhum agente do CFO consulta ou atualiza este arquivo.
+# Os dados reais estão em:
+#   - estoque/inventario/posicao-atual.yaml (inventário)
+#   - fichas/*.md (fichas técnicas com custos por porção)
+#   - estoque/entradas/*.md (registros de compras com preços reais)
+# Mantido apenas como referência da estrutura original.
+# Para excluir, consulte o dono do projeto.
+
 metadata:
-  version: "1.0.0"
+  version: "1.0.0-DEPRECATED-TEST-DATA"
   lastUpdated: "2026-02-16T12:00:00Z"
   entityCount: 15
   currency: "BRL"
+  status: "deprecated"
+
 
 entities:
   ingredients:

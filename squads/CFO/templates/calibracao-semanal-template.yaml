@@ -1,0 +1,171 @@
+# Template de Calibração Semanal — Inventário Físico Curva A
+# Preencher toda segunda-feira de manhã (antes de receber mercadorias)
+# Tempo estimado: 30-45 minutos
+# Referência: Abrasel, ABERC, NRA — Inventário Periódico Semanal
+
+metadata:
+  data: "{{YYYY-MM-DD}}"
+  tipo: "semanal"
+  curva: "A"
+  responsavel: "{{NOME}}"
+  hora_inicio: "{{HH:MM}}"
+  hora_fim: "{{HH:MM}}"
+  nota: "Contagem CEGA — não consultar posicao-atual.yaml antes de contar"
+
+# ═══════════════════════════════════════════════════
+# INSTRUÇÕES:
+# 1. Pese cada item SEM consultar o saldo do sistema
+# 2. Anote o peso real na coluna "saldo_real"
+# 3. O agente @controlador-estoque preencherá as demais colunas
+# ═══════════════════════════════════════════════════
+
+contagem:
+  # ─── PROTEÍNAS ───
+  - id: "frango-peito"
+    nome: "Peito de Frango S/O"
+    unidade: "kg"
+    saldo_sistema: null       # Preenchido pelo agente
+    saldo_real: null          # ← PREENCHER
+    desvio_kg: null           # Calculado: real - sistema
+    desvio_pct: null          # Calculado: desvio_kg / saldo_sistema × 100
+    causa_provavel: ""
+    acao: ""
+
+  - id: "frango-sobrecoxa-sadia"
+    nome: "Sobrecoxa de Frango"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "pernil-suino-osso"
+    nome: "Pernil Suíno S/O"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "coxao-duro"
+    nome: "Coxão Duro"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "acem-sem-osso"
+    nome: "Acém s/ Osso"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "toucinho"
+    nome: "Toucinho"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "linguica-calabresa-aurora"
+    nome: "Linguiça Calabresa"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "bacon-pedaco"
+    nome: "Bacon Pedaço"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "carne-seca-dianteiro"
+    nome: "Carne Seca"
+    unidade: "un"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "file-merluza-arg-cong"
+    nome: "Filé Merluza Congelado"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  # ─── MERCEARIA ESSENCIAL ───
+  - id: "arroz-branco"
+    nome: "Arroz Branco"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "feijao-carioca"
+    nome: "Feijão Carioca"
+    unidade: "kg"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+  - id: "oleo-soja"
+    nome: "Óleo de Soja"
+    unidade: "L"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    desvio_pct: null
+    causa_provavel: ""
+    acao: ""
+
+# ═══ WIP (PRODUTOS EM PROCESSO) ═══
+wip_contagem:
+  - id: "wip-{{id}}"
+    nome: "{{nome do WIP}}"
+    saldo_sistema: null
+    saldo_real: null
+    desvio_kg: null
+    status: ""  # disponivel / descartado / consumido
+
+resumo:
+  total_itens_contados: null
+  itens_dentro_margem: null      # desvio < 5%
+  itens_atencao: null            # desvio 5-10%
+  itens_criticos: null           # desvio > 10%
+  acuracia_geral: null           # meta: > 95%
+  valor_desvio_total: null       # R$ — impacto financeiro dos desvios
+  observacoes: ""

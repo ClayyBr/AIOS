@@ -1,7 +1,8 @@
 # Par Stock — Níveis Mínimos de Estoque
 # Baseado nos insumos das fichas técnicas existentes
 # Cobertura: 4 dias + 1 dia de segurança
-# v2.1 — Suporte a operação mista (buffet + executivo + delivery)
+# v3.0 — Modelo Híbrido: Baixa Teórica + Calibração Periódica
+# Ref: Abrasel, ABERC, NRA, Kasavana & Smith
 
 config:
   dias_cobertura_padrao: 4
@@ -17,6 +18,94 @@ config:
     - Itens marcados como 'estimado: true' precisam de calibração
     - consumo_por_operacao: breakdown do consumo diário por tipo de operação
     - Par Stock Total = soma dos consumos × (dias_cobertura + margem_seguranca)
+
+  # ═══════════════════════════════════════════════════
+  # CURVA ABC — Classificação e Frequência de Contagem
+  # Ref: Abrasel, NRA — "80/20: 20% dos itens = 80% do custo"
+  # ═══════════════════════════════════════════════════
+  curva_abc:
+    A:
+      criterio: ">5% do valor total em estoque OU todas as proteínas"
+      frequencia_contagem: "semanal"
+      dia_contagem: "segunda-feira"
+      hora_contagem: "08:00-09:00 (antes de receber entregas)"
+      metodo: "contagem cega (sem consultar sistema)"
+      tolerancia_desvio: 5%          # desvio > 5% = investigar
+      itens:
+        - frango-peito
+        - frango-sobrecoxa-sadia
+        - pernil-suino-osso
+        - coxao-duro
+        - acem-sem-osso
+        - toucinho
+        - linguica-calabresa-aurora
+        - bacon-pedaco
+        - carne-seca-dianteiro
+        - file-merluza-arg-cong
+        - arroz-branco
+        - feijao-carioca
+        - oleo-soja
+    B:
+      criterio: "1-5% do valor total OU hortifrúti perecíveis"
+      frequencia_contagem: "quinzenal"
+      dia_contagem: "segunda-feira (semanas pares)"
+      tolerancia_desvio: 8%
+      itens:
+        - cebola
+        - cenoura
+        - tomate-salada
+        - repolho
+        - beterraba
+        - chuchu
+        - limao-tahiti
+        - pimentao-verde
+        - pimentao-vermelho
+        - couve
+        - batata-palha
+        - farinha-mandioca-kisabor
+        - farinha-rosca
+        - macarrao-ovos
+        - feijao-preto
+    C:
+      criterio: "<1% do valor total OU não perecíveis"
+      frequencia_contagem: "mensal"
+      dia_contagem: "primeiro domingo do mês"
+      tolerancia_desvio: 10%
+      itens:
+        - sal-refinado
+        - acucar-refinado
+        - tempero-brasileirinho
+        - tempero-tempera-tudo
+        - tempero-edu-guedes
+        - tempero-paprica
+        - tempero-ami-1kg
+        - alho-triturado
+        - alho-roxo
+        - manjericao-watanabe-15g
+        - molho-tomate
+        - molho-tomate-quero-240g
+        - milho-verde-quero-170g
+        - ervilha-lata
+        - creme-leite-1kg
+        - leite-integral
+        - vinagre-maca
+        - vinagre-maca-almaromi
+        - mostarda-3kg
+        - ketchup-3kg
+        - agua-sanitaria-5l
+        - esponja
+        - copo-descartavel-50ml
+        # Bebidas e embalagens ficam em contagem visual (sem pesagem)
+
+  # ═══════════════════════════════════════════════════
+  # MARGENS DE TOLERÂNCIA (Ref: ABERC, Marcelo Politi)
+  # ═══════════════════════════════════════════════════
+  tolerancias:
+    excelente: 3%       # Desvio natural (evaporação, absorção)
+    aceitavel: 5%       # Monitorar tendência
+    atencao: 10%        # Investigar causa
+    critico: 15%        # Ação imediata
+    alarme: 15%         # Possível desvio/furto ou ficha errada
 
 itens:
   # ═══ PROTEÍNAS ═══

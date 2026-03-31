@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Delivery — Sexta-feira</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f3ed;
+            color: #1f2937;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .menu-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-banner {
+            background: linear-gradient(135deg, #c2410c 0%, #9a3412 100%);
+            box-shadow: 0 10px 15px -3px rgba(194, 65, 12, 0.3);
+        }
+
+        .accent-line {
+            height: 4px;
+            width: 50px;
+            background-color: #c2410c;
+            margin: 1rem 0;
+            border-radius: 2px;
+        }
+
+        .dish-image {
+            height: 240px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover .dish-image {
+            transform: scale(1.05);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-12">
+
+    <div class="max-w-5xl mx-auto">
+
+        <!-- Header -->
+        <header class="text-center mb-16">
+            <div class="flex flex-col items-center">
+                <span class="text-orange-700 font-bold tracking-[0.2em] uppercase text-sm mb-2">Restaurante Bendito és</span>
+                <h1 class="text-6xl md:text-7xl text-gray-900 mb-6">Cardápio do Dia</h1>
+                
+                <div class="flex justify-center items-center gap-6 mb-8 text-gray-500">
+                    <div class="h-[2px] w-16 bg-orange-200"></div>
+                    <span class="font-semibold tracking-[0.1em] text-lg uppercase">Sexta-feira</span>
+                    <div class="h-[2px] w-16 bg-orange-200"></div>
+                </div>
+
+                <!-- Pricing Banner (Centralized under headline) -->
+                <div class="pricing-banner text-white px-10 py-5 rounded-full flex flex-wrap justify-center gap-10 text-xl font-bold">
+                    <div class="flex items-center gap-2">
+                        <span class="opacity-80 text-sm uppercase tracking-wider">Tamanho P</span>
+                        <span>R$ 18,00</span>
+                    </div>
+                    <div class="h-6 w-[1px] bg-white/30 hidden md:block"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="opacity-80 text-sm uppercase tracking-wider">Tamanho M</span>
+                        <span>R$ 22,00</span>
+                    </div>
+                    <div class="h-6 w-[1px] bg-white/30 hidden md:block"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="opacity-80 text-sm uppercase tracking-wider">Tamanho G</span>
+                        <span>R$ 35,00</span>
+                    </div>
+                </div>
+                <p class="mt-4 text-gray-500 italic text-sm">Preço único para qualquer proteína escolhida.</p>
+            </div>
+        </header>
+
+        <!-- Grid de Pratos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+            <!-- Item 1: Strogonoff -->
+            <div class="menu-card group">
+                <div class="overflow-hidden">
+                    <img src="C:\Users\Cleison\.gemini\antigravity\brain\2baabf03-4c06-4b84-ac4a-437789b2bf30\strogonoff_frango_sexta_1774614141385.png" 
+                         alt="Strogonoff de Frango" class="dish-image">
+                </div>
+                <div class="p-8">
+                    <h2 class="text-3xl text-gray-900 font-bold mb-2">Strogonoff de Frango</h2>
+                    <div class="accent-line"></div>
+                    <p class="text-gray-500 text-xs uppercase font-bold tracking-widest mb-3 mt-6">Acompanhamentos:</p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Arroz branco, batata palha premium e salada fresca da estação.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 2: Peixe Empanado -->
+            <div class="menu-card group">
+                <div class="overflow-hidden">
+                    <img src="C:\Users\Cleison\.gemini\antigravity\brain\2baabf03-4c06-4b84-ac4a-437789b2bf30\peixe_empanado_sexta_1774614158254.png" 
+                         alt="Peixe Empanado" class="dish-image">
+                </div>
+                <div class="p-8">
+                    <h2 class="text-3xl text-gray-900 font-bold mb-2">Peixe Empanado</h2>
+                    <div class="accent-line"></div>
+                    <p class="text-gray-500 text-xs uppercase font-bold tracking-widest mb-3 mt-6">Acompanhamentos:</p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Arroz branco, feijão especial, purê de batata ou fritas e salada.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 3: Carne a Primavera -->
+            <div class="menu-card group">
+                <div class="overflow-hidden">
+                    <img src="C:\Users\Cleison\.gemini\antigravity\brain\2baabf03-4c06-4b84-ac4a-437789b2bf30\carne_primavera_sexta_1774614172032.png" 
+                         alt="Carne à Primavera" class="dish-image">
+                </div>
+                <div class="p-8">
+                    <h2 class="text-3xl text-gray-900 font-bold mb-2">Carne à Primavera</h2>
+                    <div class="accent-line"></div>
+                    <p class="text-gray-500 text-xs uppercase font-bold tracking-widest mb-3 mt-6">Acompanhamentos:</p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Legumes refogados, arroz branco, feijão e farofa crocante.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 4: Linguiça Calabresa -->
+            <div class="menu-card group">
+                <div class="overflow-hidden">
+                    <img src="C:\Users\Cleison\.gemini\antigravity\brain\2baabf03-4c06-4b84-ac4a-437789b2bf30\linguica_acebolada_sexta_1774614188276.png" 
+                         alt="Linguiça Calabresa Acebolada" class="dish-image">
+                </div>
+                <div class="p-8">
+                    <h2 class="text-3xl text-gray-900 font-bold mb-2">Linguiça Calabresa</h2>
+                    <div class="accent-line"></div>
+                    <p class="text-gray-500 text-xs uppercase font-bold tracking-widest mb-3 mt-6">Acompanhamentos:</p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Arroz branco, feijão carioca, cebola caramelizada e salada.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-20 text-center text-gray-400 text-sm">
+            <p>© 2026 Restaurante Bendito és — Delivery das 11h às 15h</p>
+            <p class="mt-2 text-orange-200 uppercase tracking-widest font-semibold">Peça pelo WhatsApp</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

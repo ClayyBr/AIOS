@@ -1,30 +1,45 @@
 # Análise de Custos e CMV: Marmitex Tamanhos P, M e G
 
-Com a nova precificação estabelecida pelos sócios, temos os preços fixos unificados: **P: R$ 18,00**, **M: R$ 22,00** e **G: R$ 35,00**, independentemente da proteína do dia (frango, suíno ou bovino). A regra de montagem estabelecida é **1 Proteína + 2 Guarnições**.
+Com a precificação estabelecida pelos sócios, temos os preços fixos unificados: **P: R$ 18,00**, **M: R$ 22,00** e **G: R$ 35,00**, independentemente da proteína do dia (frango, suíno ou bovino). A regra de montagem estabelecida é **1 Proteína + 2 Guarnições**.
+
+> ⚠️ **Versão corrigida em 31/03/2026** — Cálculos agora usam FC (Fator de Correção) e FCc (Fator de Cocção) da `tabela-fatores-correcao.yaml`. A versão anterior subestimava o CMV em ~8-10 pontos percentuais.
 
 ---
 
-## ⚖️ Padrão de Gramatura e Escala (Regra Gerencial)
+## ⚖️ Padrão de Gramatura e Escala (Calibrado 30/03/2026)
 
-A base para este cálculo assume a seguinte escala de volume total de comida servida:
-*   **Pequena (P):** **350g** (aprox. 75% a 80% do tamanho M). Foco em clientes com menos apetite ou orçamento reduzido.
-*   **Média (M):** **450g-500g** (100%). É a nossa "Linha Equilibrada", considerada o carro-chefe da casa.
-*   **Grande (G):** **600g-700g** (aprox. 133% a 150% do tamanho M). Marmitex tradicional farta, atende trabalhadores braçais ou pode ser dividida.
-
----
-
-## 📊 Tabela de Custos e CMV (Preço Único P/M/G)
-*Considerando a regra: 1 Proteína + 2 Guarnições*
-*Custo Base Padrão M (Equilibrado Misto - Média entre pratos comuns e bovinos): ~ R$ 6,00*
-
-| Tamanho | Peso Servido | Custo Estimado (Médio) | Preço de Venda Fixo | CMV Resultante (Média) | Lucro Bruto / Un. |
-|---------|--------------|------------------------|---------------------|------------------------|-------------------|
-| **P** (Pequena) | ~350g | R$ 4,60 | **R$ 18,00** | **25,5%** | R$ 13,40 |
-| **M** (Padrão) | ~480g | R$ 6,00 | **R$ 22,00** | **27,2%** | R$ 16,00 |
-| **G** (Grande) | ~650g | R$ 8,10 | **R$ 35,00** | **23,1%** | R$ 26,90 |
-
-> **Análise:** A unificação simplifica o cardápio. Os pratos à base de bovinos terão CMV individual maior (atingindo ~35% no tamanho M), mas as vendas de frango e suíno compensarão isso. O tamanho G, precificado a R$ 35,00, oferece uma rentabilidade absurda (CMV 23%), sendo um grande trunfo financeiro quando vendido.
+*   **Pequena (P):** **450-500g** servidas
+*   **Média (M):** **750-800g** servidas. Carro-chefe da casa.
+*   **Grande (G):** **1.140-1.200g** servidas. Serve facilmente 2 pessoas.
 
 ---
 
+## 📊 Tabela de Custos e CMV (Corrigida com FC/FCc)
+*Fonte: `relatorios/CMV_Real_Marmitex_30-03.md` (versão corrigida 31/03)*
 
+| Tamanho | Peso Servido | Custo Médio (R$) | Preço Venda | CMV Médio | Lucro Bruto | Status |
+|---------|-------------|------------------|-------------|-----------|-------------|--------|
+| **P** (Pequena) | ~470g | R$ 4,53 | **R$ 18,00** | **25,2%** ✅ | R$ 13,47 | Saudável |
+| **M** (Padrão) | ~770g | R$ 7,18 | **R$ 22,00** | **32,6%** ⚠️ | R$ 14,82 | No limite |
+| **G** (Grande) | ~1.160g | R$ 10,42 | **R$ 35,00** | **29,8%** ✅ | R$ 24,58 | Saudável |
+
+> **Análise (31/03 — Corrigida):** O CMV real ficou 8 a 10 pontos percentuais acima do cálculo anterior. A Marmitex M está no limite do benchmark Abrasel (28-35%), puxada pelo alto custo da Carne Moída. A estratégia de proteínas baratas (Suíno, Frango) continua viável, mas a Carne Moída M requer ajuste de gramatura.
+
+---
+
+## 🥩 CMV por Proteína (Referência rápida — Tamanho M)
+
+| Proteína | Custo Total M | CMV % | Status |
+|----------|:---:|:---:|---|
+| Bisteca Suína | R$ 6,46 | **29,4%** | ✅ Dentro da meta |
+| Frango ao Molho | R$ 6,72 | **30,5%** | ⚠️ Limite — monitorar |
+| Carne Moída (Acém) | R$ 8,36 | **38,0%** | 🚨 **Acima do teto** — reduzir gramatura |
+
+---
+
+## 🔄 Histórico de Revisão
+
+| Data | Versão | CMV M Médio | Motivo |
+|------|--------|-------------|--------|
+| 30/03/2026 | v1 (errada) | 23,4% | Cálculo sem FC/FCc |
+| 31/03/2026 | **v2 (corrigida)** | **32,6%** | Aplicação correta de FC/FCc |

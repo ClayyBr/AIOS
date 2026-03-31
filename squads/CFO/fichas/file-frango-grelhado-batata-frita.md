@@ -6,7 +6,7 @@
 | **Categoria** | Prato Executivo |
 | **Rendimento** | 1 porção |
 | **Data de Criação** | 14/02/2026 |
-| **Última Atualização de Preços** | 14/02/2026 (preços de referência) |
+| **Última Atualização de Preços** | 31/03/2026 (CMP posicao-atual.yaml) |
 
 ---
 
@@ -14,17 +14,20 @@
 
 | Ingrediente | PB (g) | FC | PL (g) | FCc | Servido (g) | Custo/kg-L | Custo Porção | % Total |
 |---|---|---|---|---|---|---|---|---|
-| **Peito de Frango (filé s/ osso)** | 200 | 1,05 | 190 | 1,22 | 156 | R$ 22,90 | **R$ 4,58** | 55,1% |
-| **Batata Inglesa** | 220 | 1,20 | 183 | 1,50 | 122 | R$ 6,90 | **R$ 1,52** | 18,3% |
-| Arroz Branco | 80 | 1,00 | 80 | 0,40 | 200 | R$ 6,50 | R$ 0,52 | 6,3% |
-| Óleo de Soja (fritura) | 50ml | 1,00 | 50ml | 1,00 | — | R$ 8,90/L | R$ 0,45 | 5,4% |
-| Tomate (salada) | 40 | 1,25 | 32 | 1,00 | 32 | R$ 8,90 | R$ 0,36 | 4,3% |
-| Alface Americana | 30 | 1,20 | 25 | 1,00 | 25 | R$ 8,90 | R$ 0,27 | 3,2% |
-| Limão (½ unidade) | 30 | 2,50 | 12 | 1,00 | 12 | R$ 7,90 | R$ 0,24 | 2,9% |
-| Alho | 5 | 1,95 | 3 | 1,40 | 2 | R$ 45,00 | R$ 0,23 | 2,8% |
-| Óleo (grelha) | 10ml | 1,00 | 10ml | 1,00 | — | R$ 8,90/L | R$ 0,09 | 1,1% |
-| Sal/Pimenta | 5 | 1,00 | 5 | 1,00 | — | — | R$ 0,05 | 0,6% |
-| **TOTAL** | **670g** | — | — | — | **~550g** | — | **R$ 8,31** | **100%** |
+| **Peito de Frango (filé s/ osso)** | 200 | 1,05 | 190 | 1,22 | 156 | R$ 16,02 | **R$ 3,20** | 48,8% |
+| **Batata Inglesa** | 220 | 1,20 | 183 | 1,50 | 122 | R$ 6,00 | **R$ 1,32** | 20,1% |
+| Arroz Branco | 80 | 1,00 | 80 | 0,40 | 200 | R$ 4,10 | R$ 0,33 | 5,0% |
+| Óleo de Soja (fritura) | 50ml | 1,00 | 50ml | 1,00 | — | R$ 7,21/L | R$ 0,36 | 5,5% |
+| Tomate (salada) | 40 | 1,25 | 32 | 1,00 | 32 | R$ 6,37 | R$ 0,25 | 3,8% |
+| Alface Americana | 30 | 1,20 | 25 | 1,00 | 25 | R$ 8,90 | R$ 0,27 | 4,1% |
+| Limão (½ unidade) | 30 | 2,50 | 12 | 1,00 | 12 | R$ 2,85 | R$ 0,09 | 1,4% |
+| Alho | 5 | 1,95 | 3 | 1,40 | 2 | R$ 15,99 | R$ 0,08 | 1,2% |
+| Óleo (grelha) | 10ml | 1,00 | 10ml | 1,00 | — | R$ 7,21/L | R$ 0,07 | 1,1% |
+| Sal/Pimenta | 5 | 1,00 | 5 | 1,00 | — | — | R$ 0,05 | 0,8% |
+| **TOTAL** | **670g** | — | — | — | **~550g** | — | **R$ 6,02** | **100%** |
+
+*Nota: Peito Frango CMP caiu para R$ 16,02/kg (inventário). Tomate CMP R$ 6,37/kg. Limão R$ 2,85/kg. Alho triturado R$ 15,99/kg.*
+*Custo Porção = PB × Custo/kg. Perdas de FC/FCc embutidas.*
 
 ---
 
@@ -32,11 +35,11 @@
 
 | Grupo | Custo (R$) | % do Total |
 |-------|-----------:|----------:|
-| 🥩 Proteína (frango grelhado) | R$ 4,58 | 55,1% |
-| 🍟 Guarnição (batata frita + arroz) | R$ 2,04 | 24,5% |
-| 🥗 Salada (alface + tomate) | R$ 0,63 | 7,6% |
-| 🧄 Temperos e Gorduras (alho, limão, sal, óleos) | R$ 1,06 | 12,8% |
-| **Total** | **R$ 8,31** | **100%** |
+| 🥩 Proteína (frango grelhado) | R$ 3,20 | 53,2% |
+| 🍟 Guarnição (batata frita + arroz) | R$ 1,65 | 27,4% |
+| 🥗 Salada (alface + tomate) | R$ 0,52 | 8,6% |
+| 🧄 Temperos e Gorduras (alho, limão, sal, óleos) | R$ 0,65 | 10,8% |
+| **Total** | **R$ 6,02** | **100%** |
 
 ---
 
@@ -44,10 +47,10 @@
 
 | CMV Meta | Preço Calculado | Preço Sugerido |
 |----------|----------------|----------------|
-| 28% | R$ 29,68 | R$ 29,90 |
-| **30%** | **R$ 27,70** | **R$ 27,90 ← Recomendado** |
-| 32% | R$ 25,97 | R$ 26,90 |
-| 35% | R$ 23,74 | R$ 24,90 |
+| 28% | R$ 21,50 | R$ 21,90 |
+| **30%** | **R$ 20,07** | **R$ 22,00 ← Marmitex M** |
+| 32% | R$ 18,81 | R$ 18,90 |
+| 35% | R$ 17,20 | R$ 18,00 ← Marmitex P |
 
 ---
 
@@ -68,11 +71,8 @@
 
 ## Observações
 
-- **Ingrediente de maior impacto:** Peito de frango (55,1% do custo) — proporção alta típica de pratos com proteína grelhada
-- **Custo competitivo:** R$ 8,31 por porção é um custo saudável para executivo, permitindo boa margem
-- **Batata frita caseira:** Custo já está otimizado com batata in natura (vs batata pré-frita congelada ~R$ 18,00/kg)
-- **Óleo de fritura:** Custo estimado de R$ 0,45/porção considerando absorção + reposição do óleo da fritadeira
-- **Limão FC 2,50:** 60% de perda — considerar limão já espremido para operações de alto volume
-- **CMV 30% recomendado:** Filé grelhado tem boa percepção de valor pelo cliente, justificando margem maior
-- ⚠️ **Alho FC 1,95:** Considerar alho descascado comprado pronto para reduzir desperdício
-- **Preços são de referência (fev/2026):** Atualizar com preços reais do fornecedor
+- **Custo caiu significativamente** de R$ 8,31 para R$ 6,02 devido à queda no CMP do peito de frango (R$ 22,90 → R$ 16,02) e do limão (R$ 7,90 → R$ 2,85).
+- **CMV na Marmitex M (R$ 22,00):** 6,02 / 22,00 = **27,4%** ✅ — excelente margem.
+- **CMV na Marmitex P (R$ 18,00):** 6,02 / 18,00 = **33,4%** ⚠️ — no limite.
+- Batata frita caseira mantém custo otimizado vs batata pré-frita congelada (~R$ 18,00/kg).
+- ⚠️ **Alho FC 1,95:** Considerar alho descascado comprado pronto para reduzir desperdício.

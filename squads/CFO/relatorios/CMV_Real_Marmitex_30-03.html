@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de CMV Real (Corrigido) — Marmitex P, M e G — 30/03/2026</title>
+    <style>
+        :root {
+            --primary: #1a237e; --primary-light: #3949ab;
+            --success: #2e7d32; --success-bg: #e8f5e9;
+            --warning: #f57f17; --warning-bg: #fff8e1;
+            --danger: #c62828; --danger-bg: #ffebee;
+            --gray-50: #fafafa; --gray-100: #f5f5f5; --gray-200: #eeeeee;
+            --gray-300: #e0e0e0; --gray-600: #757575; --gray-800: #424242; --gray-900: #212121;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif; max-width: 1000px; margin: 0 auto; padding: 30px 40px; color: var(--gray-900); background: #fff; line-height: 1.6; }
+        .report-header { border-bottom: 3px solid var(--primary); padding-bottom: 20px; margin-bottom: 30px; }
+        .report-header h1 { font-size: 1.8em; color: var(--primary); margin-bottom: 8px; }
+        .report-header .subtitle { font-size: 1.1em; color: var(--gray-600); }
+        .report-meta { display: flex; gap: 24px; margin-top: 12px; font-size: 0.9em; color: var(--gray-600); }
+        h2 { font-size: 1.3em; color: var(--primary); border-left: 4px solid var(--primary); padding-left: 12px; margin: 30px 0 16px 0; }
+        h3 { font-size: 1.1em; color: var(--gray-800); margin: 20px 0 10px 0; }
+        p { margin-bottom: 12px; color: var(--gray-800); }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0 24px 0; font-size: 0.92em; }
+        thead th { background-color: var(--primary); color: #fff; font-weight: 600; text-align: left; padding: 10px 14px; white-space: nowrap; }
+        tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray-200); }
+        tbody tr:nth-child(even) { background-color: var(--gray-50); }
+        tbody tr:hover { background-color: var(--gray-100); }
+        td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+        tr.total td { font-weight: 700; border-top: 2px solid var(--gray-300); background-color: var(--gray-100); }
+        .status-ok { color: var(--success); background: var(--success-bg); padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; }
+        .status-warn { color: var(--warning); background: var(--warning-bg); padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; }
+        .status-danger { color: var(--danger); background: var(--danger-bg); padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0 24px 0; }
+        .kpi-card { border: 1px solid var(--gray-200); border-radius: 8px; padding: 16px; text-align: center; }
+        .kpi-card .label { font-size: 0.85em; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-card .value { font-size: 1.8em; font-weight: 700; margin: 4px 0; }
+        .kpi-card .value.ok { color: var(--success); }
+        .kpi-card .value.warn { color: var(--warning); }
+        .kpi-card .value.danger { color: var(--danger); }
+        .kpi-card .benchmark { font-size: 0.8em; color: var(--gray-600); }
+        .alert { padding: 14px 18px; border-radius: 6px; margin: 12px 0; border-left: 4px solid; }
+        .alert-success { background: var(--success-bg); border-color: var(--success); }
+        .alert-warning { background: var(--warning-bg); border-color: var(--warning); }
+        .alert-danger { background: var(--danger-bg); border-color: var(--danger); }
+        .alert strong { display: block; margin-bottom: 4px; }
+        .formula { background: var(--gray-100); border: 1px solid var(--gray-300); border-radius: 4px; padding: 12px 16px; font-family: 'Consolas', monospace; font-size: 0.9em; margin: 8px 0 16px 0; }
+        .note { font-size: 0.88em; color: var(--gray-600); font-style: italic; margin: 4px 0 16px 0; }
+        .report-footer { margin-top: 40px; padding-top: 16px; border-top: 2px solid var(--gray-200); text-align: center; font-size: 0.8em; color: var(--gray-600); }
+        .report-footer .confidential { font-weight: 600; color: var(--danger); margin-bottom: 4px; }
+        .revision-banner { background: #fff3e0; border: 2px solid #ff9800; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+        .revision-banner strong { color: #e65100; }
+        @media print {
+            body { padding: 10px; font-size: 11pt; }
+            thead th { background-color: var(--primary) !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            tbody tr:nth-child(even) { background-color: var(--gray-50) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-header">
+        <h1>📊 Análise de CMV Real — Marmitex P, M e G (Corrigido)</h1>
+        <div class="subtitle">Pesagem Real × FC/FCc × CMP do Inventário</div>
+        <div class="report-meta">
+            <span>📅 30/03/2026 (Rev. 31/03)</span>
+            <span>📊 @arquiteto-lucro + @gerente-geral</span>
+            <span>🏢 Squad CFO</span>
+        </div>
+    </div>
+
+    <div class="revision-banner">
+        <strong>⚠️ REVISÃO CRÍTICA (31/03/2026):</strong> A versão anterior multiplicava o peso servido (cozido) pelo preço do kg cru, ignorando os Fatores de Correção (FC) e Cocção (FCc). Os CMV anteriores estavam sub-estimados em ~8 a 10 pontos percentuais. Esta versão aplica a fórmula correta: <code>Custo = PB × CMP/kg</code>, onde <code>PB = Servido × FCc × FC</code>.
+    </div>
+
+    <!-- KPIs RESUMO -->
+    <h2>Resumo Consolidado — CMV Corrigido por Tamanho</h2>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="label">Marmitex P (~470g)</div>
+            <div class="value ok">25,2%</div>
+            <div class="benchmark">Custo: R$ 4,53 → Venda: R$ 18,00</div>
+        </div>
+        <div class="kpi-card">
+            <div class="label">Marmitex M (~770g)</div>
+            <div class="value warn">32,6%</div>
+            <div class="benchmark">Custo: R$ 7,18 → Venda: R$ 22,00</div>
+        </div>
+        <div class="kpi-card">
+            <div class="label">Marmitex G (~1.160g)</div>
+            <div class="value ok">29,8%</div>
+            <div class="benchmark">Custo: R$ 10,42 → Venda: R$ 35,00</div>
+        </div>
+        <div class="kpi-card">
+            <div class="label">CMV Médio Ponderado</div>
+            <div class="value warn">~30,1%</div>
+            <div class="benchmark">Benchmark Abrasel: 28-35%</div>
+        </div>
+    </div>
+
+    <!-- COMPARATIVO -->
+    <h2>Comparativo: Versão Anterior vs. Corrigida</h2>
+    <table>
+        <thead><tr><th>Marmitex</th><th class="num">CMV Anterior</th><th class="num">CMV Corrigido</th><th class="num">Diferença</th><th>Impacto</th></tr></thead>
+        <tbody>
+            <tr><td><strong>P Média</strong></td><td class="num">17,1%</td><td class="num">25,2%</td><td class="num">+8,1 pp</td><td><span class="status-ok">✅ Saudável</span></td></tr>
+            <tr><td><strong>M Média</strong></td><td class="num">23,4%</td><td class="num">32,6%</td><td class="num">+9,2 pp</td><td><span class="status-warn">⚠️ Limite</span></td></tr>
+            <tr><td><strong>G Média</strong></td><td class="num">21,9%</td><td class="num">29,8%</td><td class="num">+7,9 pp</td><td><span class="status-ok">✅ Saudável</span></td></tr>
+            <tr><td><strong>M Carne Moída</strong></td><td class="num">28,1%</td><td class="num">38,0%</td><td class="num">+9,9 pp</td><td><span class="status-danger">🚨 Acima do teto</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- FÓRMULA -->
+    <h2>Metodologia Aplicada</h2>
+    <div class="formula">
+        PL (cru limpo) = Peso Servido × FCc<br>
+        PB (bruto comprado) = PL × FC<br>
+        Custo Porção = PB × CMP/kg<br><br>
+        FCc &lt; 1 = alimento GANHA peso (arroz, feijão)<br>
+        FCc &gt; 1 = alimento PERDE peso (carnes, batata frita)
+    </div>
+
+    <!-- PROTEÍNAS: CARNE MOÍDA -->
+    <h2>CMV por Proteína e Tamanho</h2>
+    <p class="note">Custos adicionais incluídos: Temperos/Molho/Gás R$ 0,80 + Embalagem (P: R$ 0,50 / M: R$ 0,60 / G: R$ 0,70)</p>
+
+    <h3>🥩 Carne Moída (Acém — R$ 36,98/kg | FC 1,00 | FCc 1,25)</h3>
+    <table>
+        <thead><tr><th>Tam.</th><th class="num">Base</th><th class="num">Prot. Servida</th><th class="num">PB Cru</th><th class="num">Custo Prot.</th><th class="num">Temp.+Emb.</th><th class="num">Total</th><th class="num">CMV %</th><th>Status</th></tr></thead>
+        <tbody>
+            <tr><td><strong>P</strong></td><td class="num">R$ 1,34</td><td class="num">50g</td><td class="num">63g</td><td class="num">R$ 2,33</td><td class="num">R$ 1,30</td><td class="num"><strong>R$ 4,97</strong></td><td class="num">27,6%</td><td><span class="status-ok">✅</span></td></tr>
+            <tr><td><strong>M</strong></td><td class="num">R$ 2,34</td><td class="num">100g</td><td class="num">125g</td><td class="num">R$ 4,62</td><td class="num">R$ 1,40</td><td class="num"><strong>R$ 8,36</strong></td><td class="num">38,0%</td><td><span class="status-danger">🚨</span></td></tr>
+            <tr><td><strong>G</strong></td><td class="num">R$ 3,76</td><td class="num">150g</td><td class="num">188g</td><td class="num">R$ 6,95</td><td class="num">R$ 1,50</td><td class="num"><strong>R$ 12,21</strong></td><td class="num">34,9%</td><td><span class="status-warn">⚠️</span></td></tr>
+        </tbody>
+    </table>
+
+    <h3>🐷 Bisteca Suína (Pernil S/O — R$ 18,90/kg | FC 1,15 | FCc 1,25)</h3>
+    <table>
+        <thead><tr><th>Tam.</th><th class="num">Base</th><th class="num">Prot. Servida</th><th class="num">PB Cru</th><th class="num">Custo Prot.</th><th class="num">Temp.+Emb.</th><th class="num">Total</th><th class="num">CMV %</th><th>Status</th></tr></thead>
+        <tbody>
+            <tr><td><strong>P</strong></td><td class="num">R$ 1,34</td><td class="num">50g</td><td class="num">72g</td><td class="num">R$ 1,36</td><td class="num">R$ 1,30</td><td class="num"><strong>R$ 4,00</strong></td><td class="num">22,2%</td><td><span class="status-ok">✅</span></td></tr>
+            <tr><td><strong>M</strong></td><td class="num">R$ 2,34</td><td class="num">100g</td><td class="num">144g</td><td class="num">R$ 2,72</td><td class="num">R$ 1,40</td><td class="num"><strong>R$ 6,46</strong></td><td class="num">29,4%</td><td><span class="status-ok">✅</span></td></tr>
+            <tr><td><strong>G</strong></td><td class="num">R$ 3,76</td><td class="num">160g</td><td class="num">230g</td><td class="num">R$ 4,35</td><td class="num">R$ 1,50</td><td class="num"><strong>R$ 9,61</strong></td><td class="num">27,5%</td><td><span class="status-ok">✅</span></td></tr>
+        </tbody>
+    </table>
+
+    <h3>🍗 Frango ao Molho (Peito S/O — R$ 16,02/kg | FC 1,05 | FCc 1,18)</h3>
+    <table>
+        <thead><tr><th>Tam.</th><th class="num">Base</th><th class="num">Prot. Servida</th><th class="num">PB Cru</th><th class="num">Custo Prot.</th><th class="num">Temp.+Emb.</th><th class="num">Total</th><th class="num">CMV %</th><th>Status</th></tr></thead>
+        <tbody>
+            <tr><td><strong>P</strong></td><td class="num">R$ 1,34</td><td class="num">100g</td><td class="num">124g</td><td class="num">R$ 1,99</td><td class="num">R$ 1,30</td><td class="num"><strong>R$ 4,63</strong></td><td class="num">25,7%</td><td><span class="status-ok">✅</span></td></tr>
+            <tr><td><strong>M</strong></td><td class="num">R$ 2,34</td><td class="num">150g</td><td class="num">186g</td><td class="num">R$ 2,98</td><td class="num">R$ 1,40</td><td class="num"><strong>R$ 6,72</strong></td><td class="num">30,5%</td><td><span class="status-warn">⚠️</span></td></tr>
+            <tr><td><strong>G</strong></td><td class="num">R$ 3,76</td><td class="num">210g</td><td class="num">260g</td><td class="num">R$ 4,17</td><td class="num">R$ 1,50</td><td class="num"><strong>R$ 9,43</strong></td><td class="num">26,9%</td><td><span class="status-ok">✅</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- ALERTAS -->
+    <h2>Alertas e Recomendações</h2>
+
+    <div class="alert alert-danger">
+        <strong>🚨 Marmitex M - Carne Moída: CMV 38,0% — ACIMA DO TETO</strong>
+        O Acém a R$ 36,98/kg + perda de 25% na cocção resulta em R$ 4,62 só de proteína. Recomendação: reduzir de 2 conchas (100g) para 1,5 concha (75g cozida), baixando o CMV para ~33%.
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>⚠️ Marmitex M - Frango ao Molho: CMV 30,5%</strong>
+        Dentro do benchmark, mas sem folga. Monitorar o preço do peito de frango (CMP atual: R$ 16,02, último preço: R$ 22,98).
+    </div>
+
+    <div class="alert alert-success">
+        <strong>✅ Bisteca Suína: melhor custo-benefício</strong>
+        CMV de 22-29% em todos os tamanhos. Priorizar no cardápio e como "sugestão do dia" para maximizar margem.
+    </div>
+
+    <div class="alert alert-success">
+        <strong>✅ Marmitex G: R$ 24,58 de lucro bruto</strong>
+        Mesmo com >1kg de comida, o CMV médio é 29,8%. Investir em marketing para vender mais G.
+    </div>
+
+    <div class="report-footer">
+        <div class="confidential">CONFIDENCIAL — USO INTERNO</div>
+        Squad CFO • Análise CMV corrigida com FC/FCc da tabela oficial • Rev. 31/03/2026
+    </div>
+</body>
+</html>

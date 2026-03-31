@@ -53,7 +53,7 @@ O Squad CFO é uma equipe de **5 agentes** hierarquizados:
     *   **Local:** `squads/CFO/fichas/`
 
 
-## Estrutura Atualizada (v2.0.0)
+## Estrutura Atualizada (v3.0.0)
 
 ```
 squads/CFO/
@@ -62,14 +62,23 @@ squads/CFO/
 │   ├── gerente-geral.md         
 │   ├── arquiteto-lucro.md       # Especialista Receitas/Preços
 │   ├── financeiro.md            # Controlador DRE/CMV
-│   ├── controlador-estoque.md   # Especialista Estoque
-│   ├── ids.md                   # [NOVO] Motor Forense (IDS)
+│   ├── controlador-estoque.md   # Especialista Estoque (v3.0 — Baixa Teórica)
+│   ├── ids.md                   # Motor Forense (IDS)
 │   └── vendas.md                
-├── tasks/                       # 13 tasks (1 mestra + 12 operacionais)
-├── templates/                   # 5 templates (incl. HTML cozinha)
+├── tasks/                       # 13+ tasks
+├── templates/                   # 8 templates (incl. produção, calibração, desvios)
 ├── checklists/                  # 3 checklists
-├── data/                        # 9 arquivos de conhecimento
+├── data/                        # Base de conhecimento
 ├── estoque/                     # Banco de dados do estoque
+│   ├── entradas/                #   Registros de compras (NFs)
+│   ├── saidas/                  #   Registros de vendas
+│   ├── producao/                #   [v3.0] Registro de produção diária (WIP)
+│   ├── inventario/
+│   │   ├── posicao-atual.yaml   #   Estado atual do inventário
+│   │   └── calibracoes/         #   [v3.0] Contagens físicas periódicas
+│   ├── desvios/                 #   [v3.0] Relatórios de GAP (real vs teórico)
+│   ├── alertas/                 #   Alertas de compra/validade
+│   └── par-stock.yaml           #   Par Stock + Curva ABC + Tolerâncias
 ├── fichas/                      # Fichas técnicas gerenciais (MD)
 ├── fichas-cozinha/              # Fichas operacionais (HTML)
 ├── insights/                    # Análises e otimizações
