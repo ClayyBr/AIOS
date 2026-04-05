@@ -1,22 +1,21 @@
 metadata:
-  ultima_atualizacao: "2026-03-30"
-  tipo_ultimo_registro: "vendas_diarias"
+  ultima_atualizacao: "2026-03-31"
+  tipo_ultimo_registro: "compras"
   notas_fiscais_processadas:
-    - "2026-03-27 Tauste (R$ 49,11) — pré-abertura 01:06"
-    - "2026-03-27 Nagumo (R$ 146,70) — pré-abertura 08:32"
-    - "2026-03-27 Vendas (Baixa 4 refeições)"
-    - "2026-03-27 Vendas Lote 2 (Baixa 11 refeições)"
-    - "2026-03-27 Nagumo Noite (R$ 149,71) — 21:50"
-    - "2026-03-27 Tauste Noite (R$ 79,61) — 22:28"
-    - "2026-03-28 Vendas (Baixa 3 refeições)"
-    - "2026-03-28 Vanildo (R$ 44,12) — 08:10 (Embalagens)"
+    - "2026-03-31 Compras Lote 1 e 2 (R$ 191,61)"
+    - "2026-03-31 Compras Lote 3 (R$ 41,55)"
+    - "2026-03-31 Compras Embalagens (R$ 13,60)"
+    - "2026-03-30 Vendas (Baixa 8 refeições)"
     - "2026-03-29 Tauste (R$ 16,67)"
     - "2026-03-29 Nagumo (R$ 13,99) — Gelo"
     - "2026-03-28 Hortifruti (R$ 7,00) — Couve"
     - "2026-03-28 Casa de Carnes Paraná (R$ 41,80) — Toucinho"
-    - "2026-03-29 Vendas (Baixa 2 refeições)"
-    - "2026-03-30 Vendas (Baixa 8 refeições)"
-  valor_total_estoque: 1388.26
+    - "2026-03-28 Vanildo (R$ 44,12) — 08:10 (Embalagens)"
+    - "2026-03-27 Tauste (R$ 49,11) — pré-abertura 01:06"
+    - "2026-03-27 Nagumo (R$ 146,70) — pré-abertura 08:32"
+    - "2026-03-27 Nagumo Noite (R$ 149,71) — 21:50"
+    - "2026-03-27 Tauste Noite (R$ 79,61) — 22:28"
+  valor_total_estoque: 1635.02
 
 itens:
   - id: "frango-sobrecoxa-sadia"
@@ -107,14 +106,14 @@ itens:
     nome: "Feijão Carioca"
     categoria: "mercearia"
     unidade: "kg"
-    quantidade: 1.730
-    custo_medio_ponderado: 8.49
-    valor_em_estoque: 14.69
+    quantidade: 3.730
+    custo_medio_ponderado: 8.44
+    valor_em_estoque: 31.47
     par_stock: 5.0
     status: "comprar"
     validade_proxima: "2026-12-19"
-    ultimo_fornecedor: "Tenda"
-    ultimo_preco: 8.49
+    ultimo_fornecedor: "Nagumo"
+    ultimo_preco: 8.39
     preco_referencia: 7.50
 
   - id: "sal-refinado"
@@ -190,12 +189,12 @@ itens:
     nome: "Cebola"
     categoria: "hortifru"
     unidade: "kg"  # CORRIGIDO: era 'un', padronizado para kg (fichas e par-stock usam kg)
-    quantidade: 1.695
-    custo_medio_ponderado: 5.33
-    valor_em_estoque: 9.04
+    quantidade: 2.550
+    custo_medio_ponderado: 5.20
+    valor_em_estoque: 13.27
     par_stock: 2.0  # CORRIGIDO: par-stock.yaml define 2.0kg mínimo
-    status: "comprar"  # CORRIGIDO: 1.695kg < par_stock 2.0kg
-    ultimo_fornecedor: "Tauste"
+    status: "ok"
+    ultimo_fornecedor: "Hortifruti"
     ultimo_preco: 4.95
 
   - id: "repolho"
@@ -235,11 +234,11 @@ itens:
     nome: "Tomate Salada"
     categoria: "hortifru"
     unidade: "kg"
-    quantidade: 3.778
-    custo_medio_ponderado: 6.37
-    valor_em_estoque: 24.07
-    ultimo_fornecedor: "Nagumo"
-    ultimo_preco: 6.98
+    quantidade: 4.158
+    custo_medio_ponderado: 6.61
+    valor_em_estoque: 27.47
+    ultimo_fornecedor: "Hortifruti"
+    ultimo_preco: 8.95
     validade_proxima: "2026-04-01"
 
   - id: "limao-tahiti"
@@ -433,11 +432,11 @@ itens:
     nome: "Linguiça Aurora Calabresa Defumada"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 0.858
-    custo_medio_ponderado: 26.19
-    valor_em_estoque: 22.47
+    quantidade: 1.448
+    custo_medio_ponderado: 27.73
+    valor_em_estoque: 40.16
     ultimo_fornecedor: "Nagumo"
-    ultimo_preco: 23.98
+    ultimo_preco: 29.98
     validade_proxima: "2026-04-20"
 
   - id: "manjericao-watanabe-15g"
@@ -506,10 +505,11 @@ itens:
     nome: "Ref. Coca-Cola (Fardo)"
     categoria: "bebidas"
     unidade: "fd"
-    quantidade: 1.500
+    quantidade: 2.500
     custo_medio_ponderado: 24.24
-    valor_em_estoque: 36.36
-    ultimo_fornecedor: "Tauste"
+    valor_em_estoque: 60.60
+    ultimo_fornecedor: "Hortifruti"
+    ultimo_preco: 24.24
     validade_proxima: "2026-07-25"
 
   - id: "refrigerante-antarctica-guarana"
@@ -686,9 +686,9 @@ itens:
     nome: "Kit FM50 Fibraform Marmitex"
     categoria: "embalagens"
     unidade: "pct"
-    quantidade: 1.0
+    quantidade: 2.0
     custo_medio_ponderado: 6.50
-    valor_em_estoque: 6.50
+    valor_em_estoque: 13.00
     ultimo_fornecedor: "Vanildo"
     ultimo_preco: 6.50
 
@@ -761,6 +761,96 @@ itens:
     valor_em_estoque: 7.00
     ultimo_fornecedor: "Hortifruti"
     ultimo_preco: 3.50
+
+  - id: "frango-peito-osso"
+    nome: "Frango Resf/Peito c/ Osso"
+    categoria: "carnes"
+    unidade: "kg"
+    quantidade: 1.694
+    custo_medio_ponderado: 21.98
+    valor_em_estoque: 37.23
+    ultimo_fornecedor: "Nagumo"
+    ultimo_preco: 21.98
+
+  - id: "costela-gaucha"
+    nome: "Carne 2A. Costela Gaucha"
+    categoria: "carnes"
+    unidade: "kg"
+    quantidade: 2.232
+    custo_medio_ponderado: 29.98
+    valor_em_estoque: 66.92
+    ultimo_fornecedor: "Nagumo"
+    ultimo_preco: 29.98
+
+  - id: "batata-lavada"
+    nome: "Legume Batata Lavada"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 1.416
+    custo_medio_ponderado: 4.98
+    valor_em_estoque: 7.05
+    ultimo_fornecedor: "Nagumo"
+    ultimo_preco: 4.98
+
+  - id: "margarina-qualy-250g"
+    nome: "Marg. Qualy 250g C/Sal"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 5.59
+    valor_em_estoque: 5.59
+    ultimo_fornecedor: "Nagumo"
+    ultimo_preco: 5.59
+
+  - id: "batata-baroa"
+    nome: "Batata Baroa"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 0.905
+    custo_medio_ponderado: 6.45
+    valor_em_estoque: 5.84
+    ultimo_fornecedor: "Hortifruti"
+    ultimo_preco: 6.45
+
+  - id: "pepino-japones"
+    nome: "Pepino Japones"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 0.380
+    custo_medio_ponderado: 6.95
+    valor_em_estoque: 2.64
+    ultimo_fornecedor: "Hortifruti"
+    ultimo_preco: 6.95
+
+  - id: "bisteca-lombo"
+    nome: "Bisteca do Lombo"
+    categoria: "carnes"
+    unidade: "kg"
+    quantidade: 1.034
+    custo_medio_ponderado: 16.99
+    valor_em_estoque: 17.57
+    ultimo_fornecedor: "Casa de Carnes"
+    ultimo_preco: 16.99
+
+  - id: "batata-bem-brasil"
+    nome: "Bat Bem Brasil +Bat"
+    categoria: "mercearia"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 23.98
+    valor_em_estoque: 23.98
+    ultimo_fornecedor: "Supermercado"
+    ultimo_preco: 23.98
+
+  - id: "kit-marmitex-fm75"
+    nome: "Kit FM75 Fibraform Marmitex"
+    categoria: "embalagens"
+    unidade: "pct"
+    quantidade: 1.0
+    custo_medio_ponderado: 7.10
+    valor_em_estoque: 7.10
+    ultimo_fornecedor: "Vanildo"
+    ultimo_preco: 7.10
 
 # ═══════════════════════════════════════════════════════════════
 # PRODUTOS EM PROCESSO (WIP) — Comida Pronta / Sobras
