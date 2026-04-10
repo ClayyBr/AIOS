@@ -19,7 +19,7 @@ A semana operou ativamente durante 5 dias (segunda a quinta, pulando a sexta, co
 | 02/04 | Quinta-feira | 8 | R$ 228,14 |
 | 03/04 | Sexta-feira | 0 | R$ 0,00 |
 | 04/04 | Sábado | 5 | R$ 188,46 |
-| **TOTAL** | **SEMANA 2** | **42 Vendas** | **R$ 1.342,47** |
+| **TOTAL** | **SEMANA 2** | **42 Vendas** | **R$ 1.332,47** |
 
 ---
 
@@ -44,12 +44,12 @@ Os custos atrelados à operação (CMV de Compras diretas para reposição) engl
 Abaixo está o cruzamento do Faturamento Bruto vs Custo de Entradas, proporcionando uma visão inicial da lucratividade desta margem operacional (Lucro Bruto e CMV Real). 
 
 **A. MÉTRICAS PRINCIPAIS DA OPERAÇÃO:**
-* **Receita Bruta Total:** **R$ 1.342,47**
+* **Receita Bruta Total:** **R$ 1.332,47**
 * **Custo Total de Compras (Reposição/Estoque):** **R$ 653,96**
-* **Lucro Bruto Operacional:** **R$ 688,51**
-* **CMV Geral Aparente (Custo / Receita):** **48,7%** 
+* **Lucro Bruto Operacional:** **R$ 678,51**
+* **CMV Geral Aparente (Custo / Receita):** **49,1%** 
 
-> **Nota sobre o CMV:** O índice de 48,7% (embora superior aos ~35% tido como teto ideal no mercado de alimentação enxuta) reflete a realidade operacional do restaurante, operando em um modelo Just-in-Time com estoque temporário de giro rápido. Toda emissão de compra atesta a falta real daquele ingrediente (tanto no seco quanto congelado). Portanto, as compras listadas não formam longos estoques residuais para a próxima semana; elas representam a **reposição exata** do que foi exaurido. Esse cenário atesta que o **CMV Real Efetivo da semana foi cravado em 48,7%**, exigindo otimização direta no custo das receitas e controle de volume (comida a peso) nos próximos dias.
+> **Nota sobre o CMV:** O índice de 49,1% (embora superior aos ~35% tido como teto ideal no mercado de alimentação enxuta) reflete a realidade operacional do restaurante, operando em um modelo Just-in-Time com estoque temporário de giro rápido. Toda emissão de compra atesta a falta real daquele ingrediente (tanto no seco quanto congelado). Portanto, as compras listadas não formam longos estoques residuais para a próxima semana; elas representam a **reposição exata** do que foi exaurido. Esse cenário atesta que o **CMV Real Efetivo da semana foi cravado em 49,1%**, exigindo otimização direta no custo das receitas e controle de volume (comida a peso) nos próximos dias.
 
 **B. DESTAQUES POSITIVOS DA SEMANA:**
 - **Pico de Faturamento:** Quarta-feira (01/04) consolidou o maior giro da semana, batendo **R$ 339,30** puxado pelo sucesso de saídas rápidas (Feijoada e Bife de Panela).
@@ -62,7 +62,7 @@ Abaixo está o cruzamento do Faturamento Bruto vs Custo de Entradas, proporciona
 
 ## 🕵️‍♂️ 4. Diagnóstico do Cost of Goods Sold (Por que o CMV está em 48,7%?)
 
-Baseado no modelo operacional de vendas (Marmitex, Delivery e Self-Service), o indicador de **48,7%** aponta que quase metade do faturamento é consumido unicamente pelos ingredientes, achatando a margem livre para cobrir o restante da operação a níveis insustentáveis no médio prazo. 
+Baseado no modelo operacional de vendas (Marmitex, Delivery e Self-Service), o indicador de **49,1%** aponta que quase metade do faturamento é consumido unicamente pelos ingredientes, achatando a margem livre para cobrir o restante da operação a níveis insustentáveis no médio prazo. 
 
 Existem 5 hipóteses gerenciais catalogadas que justificam esse alto impacto:
 
@@ -81,7 +81,7 @@ Apesar das hipóteses abordadas acima como fatores inerentes de risco de qualque
 **As sobras nas panelas são rigorosamente equilibradas.** 
 Ao fim do dia, arroz, feijão e carnes restam nas gavetas em escalas proporcionais, frustrando a hipótese de que há clientes ou porcionadores devorando unicamente o lucro líquido da mistura. A fundação de seu CMV técnico por prato é de fato lucrativa.
 
-Isso revela que o índice de **48,7% é um quadro de falta de escala.** Como as vendas repousaram num nicho médio de 10 a 15 saídas orgânicas/dia perante panelas cozidas para atender até 40 pessoas, o estoque "morto" da cozinha não obteve rota de escoação. A comida vendida bancou inteiramente a comida "perdida" diariamente.
+Isso revela que o índice de **49,1%** é um quadro de falta de escala. Como as vendas repousaram num nicho médio de 10 a 15 saídas orgânicas/dia perante panelas cozidas para atender até 40 pessoas, o estoque "morto" da cozinha não obteve rota de escoação. A comida vendida bancou inteiramente a comida "perdida" diariamente.
 
 **Diretriz Suprema para a Semana 3:** 
 Engatar agressivamente a prospecção da boca do funil via WhatsApp, Campanhas no Meta Ads e captações no iFood. Como o Custo Variante dos pratos já foi engolido na conta de hoje, cada novo cliente trazido para a base via patrocínio resultará num faturamento que vai descer maciçamente e diluir a taxa nominal do CMV (devolvendo-o as margens perfeitas de ~35%). O produto está sólido e mensurado, agora precisamos somente **vender em massa.**

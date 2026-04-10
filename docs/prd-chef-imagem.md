@@ -66,7 +66,7 @@ Validação manual: YAML frontmatter válido, MCP Server compila e responde, ima
 
 ### Additional Technical Assumptions
 
-- API utilizada: Google AI Studio — modelo `gemini-2.0-flash-exp` ou equivalente com capacidade de geração de imagens
+- API utilizada: Google AI Studio — modelo `gemini-3.1-flash-image-preview` ou equivalente com capacidade de geração de imagens
 - Autenticação: API Key simples (variável de ambiente `GOOGLE_AI_STUDIO_API_KEY`)
 - Formato de saída da API: imagem em base64 (PNG), convertida e salva localmente
 - Transporte MCP: stdio (padrão para integração local)
