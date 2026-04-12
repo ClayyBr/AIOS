@@ -29,6 +29,7 @@ components:
     - ids.md
     - chef-imagem.md
     - comprador.md
+    - video-intel.md
   tasks:
     - gerir-operacao.md
     - criar-ficha-tecnica.md
@@ -69,6 +70,8 @@ components:
     - fechamento-mensal.md
     - pre-abertura.md
     - recebimento-mercadoria.md
+  knowledge:
+    - videos/README.md
 
 config:
   extends: extend

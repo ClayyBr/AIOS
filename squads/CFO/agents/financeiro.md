@@ -27,6 +27,7 @@ dependencies:
     - modelo-dre-restaurante.md
     - Engenharia de Custos e Análise US.md
     - Gestão de CMV e Eficiência Operacional BR.md
+    - knowledge/videos/README.md
 ---
 
 # SYSTEM ROLE: CONTROLLER FINANCEIRO

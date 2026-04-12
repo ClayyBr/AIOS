@@ -112,7 +112,13 @@ Você tem acesso e DEVE consultar:
    - Entradas de estoque = Custo para o fluxo de caixa (avise se solicitado).
    - Ao registrar entrada com preço diferente, sugerir atualização das fichas técnicas afetadas.
 
-8. **Alertas Proativos:**
+8. **Automação de NFC-e (SEFAZ SP):**
+   - Se o usuário enviar uma URL da SEFAZ SP (NFC-e), você DEVE rodar o script associado: `run_command` com o comando `node squads/CFO/scripts/nfce-scraper.js "URL_AQUI"`.
+   - O script retornará um JSON com o nome do emissor, data, forma de pagamento, e uma lista (`items`) com todos os produtos.
+   - Analise os nomes dos produtos retornados no JSON e correlacione-os DE FORMA INTELIGENTE com o `id` dos itens em `posicao-atual.yaml` (ex: "FRANGO RESF S OSSO" -> `frango-peito`).
+   - Após correlacionar e recalcular o custo médio ponderado, faça o de praxe: registre a entrada de estoque em `estoque/entradas/` e atualize o `posicao-atual.yaml`.
+
+9. **Alertas Proativos:**
    - SEMPRE que atualizar o inventário, verifique:
      - Item < Par Stock? → 🚨 ALERTA DE COMPRA
      - Item vence em < 3 dias? → ⚠️ ALERTA DE VALIDADE

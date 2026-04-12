@@ -1,187 +1,236 @@
-# 📊 Análise Estratégica: Vale a Pena a Promoção de Cupom no iFood?
+# 📊 Análise Revisada — Promoção Cupom iFood (Cenário Ajustado)
 
 **Data:** 10/04/2026  
-**Solicitante:** Dono  
-**Análise Multi-Agente:** 👔 Gerente Geral + 📊 Financeiro + 💰 Arquiteto do Lucro + 🎯 Vendas  
-**Status:** ⚠️ APROVADA COM RESSALVAS — Requer ajustes antes de ativar
+**Análise Multi-Agente:** 💰 Arquiteto do Lucro + 📊 Financeiro + 🎯 Vendas + 👔 Gerente Geral
 
 ---
 
-## 🔍 O Que Está em Jogo (Resumo da Promoção)
+## 📋 Parâmetros do Novo Cenário
 
-| Parâmetro | Configuração Proposta |
-|-----------|----------------------|
-| **Público-alvo** | Todos os clientes |
-| **Classificação** | **Novos clientes** (nunca pediram na loja) |
-| **Desconto** | R$ 12,00 por pedido |
+| Parâmetro | Valor |
+|-----------|-------|
+| **Cupons/dia** | 3 (teste controlado) |
+| **Dias/semana** | 6 (Seg–Sáb) |
+| **Total cupons/semana** | **18 cupons/semana** |
+| **Desconto do cupom** | R$ 12,00 |
 | **Pedido mínimo** | R$ 25,00 |
-| **Cupons/semana** | 60 (somente almoço, 09h–16h30) |
-| **Distribuição** | Seg a Sáb: 10/dia · Dom: 0 |
-| **Investimento máximo/semana** | R$ 720,00 |
-| **Estimativa iFood de retorno** | R$ 1,08 por real investido |
-
-> **IMPORTANTE:** O iFood promete retorno de R$ 1,08 por R$ 1,00 investido. Isso parece bom, mas precisamos decompor essa matemática com os NOSSOS números reais de custo.
-
----
-
-## 💰 ANÁLISE DO ARQUITETO DO LUCRO: CMV por Prato no iFood
-
-### Tabela de CMV por Prato — Canal iFood (SEM cupom)
-
-| Prato | Custo Porção | Embalagem | Custo Total | Preço iFood | Repasse iFood (73%) | Margem Bruta | CMV Efetivo |
-|-------|-------------|-----------|-------------|-------------|---------------------|-------------|-------------|
-| **Frango Frito** | R$ 4,18 | R$ 1,50 | R$ 5,68 | R$ 28,90 | R$ 21,10 | **R$ 15,42** | 26,9% ✅ |
-| **Pernil Acebolado** | R$ 5,52 | R$ 1,50 | R$ 7,02 | R$ 29,90 | R$ 21,83 | **R$ 14,81** | 32,2% ✅ |
-| **Strogonoff** | R$ 6,59 | R$ 1,50 | R$ 8,09 | R$ 33,90 | R$ 24,75 | **R$ 16,66** | 32,7% ✅ |
-| **Parmegiana** | R$ 9,44 | R$ 1,50 | R$ 10,94 | R$ 34,90 | R$ 25,48 | **R$ 14,54** | 42,9% ⚠️ |
-| **Bife de Panela** | R$ 9,08 | R$ 1,50 | R$ 10,58 | R$ 42,90 | R$ 31,32 | **R$ 20,74** | 33,8% ✅ |
-
-### 🚨 Tabela de CMV por Prato — Canal iFood COM CUPOM de R$ 12,00
-
-O cupom de R$ 12 é descontado do repasse, não do preço listado.
-
-| Prato | Custo Total | Preço iFood | Repasse Normal (73%) | **Repasse COM Cupom** | **Margem Bruta** | **CMV Efetivo** | Status |
-|-------|-------------|-------------|---------------------|----------------------|-----------------|----------------|--------|
-| **Frango Frito** | R$ 5,68 | R$ 28,90 | R$ 21,10 | **R$ 9,10** | **R$ 3,42** | 62,4% | 🚨 PREJUÍZO IMINENTE |
-| **Pernil Acebolado** | R$ 7,02 | R$ 29,90 | R$ 21,83 | **R$ 9,83** | **R$ 2,81** | 71,4% | 🚨 QUASE ZERO |
-| **Strogonoff** | R$ 8,09 | R$ 33,90 | R$ 24,75 | **R$ 12,75** | **R$ 4,66** | 63,5% | 🚨 MARGEM MÍNIMA |
-| **Parmegiana** | R$ 10,94 | R$ 34,90 | R$ 25,48 | **R$ 13,48** | **R$ 2,54** | 81,2% | ☠️ PREJUÍZO |
-| **Bife de Panela** | R$ 10,58 | R$ 42,90 | R$ 31,32 | **R$ 19,32** | **R$ 8,74** | 54,8% | ⚠️ APERTADO |
-
-> **ATENÇÃO:** Com o cupom de R$ 12, NENHUM prato opera com CMV saudável (< 35%). Os pratos mais baratos (Frango Frito, Pernil) chegam perto do prejuízo líquido quando somamos custos indiretos (gás, mão de obra, etc.).
+| **Taxa iFood** | 27% (repasse para a loja = 73%) |
+| **Preço Marmitex P** | R$ 24,90 |
+| **Preço Marmitex M** | R$ 32,40 |
+| **Preço Marmitex G** | R$ 43,90 |
+| **Embalagem (marmita)** | R$ 1,50 |
+| **Estratégia Raspadinha** | ❌ Não aplicada |
 
 ---
 
-## 📊 ANÁLISE DO FINANCEIRO: Simulação de Cenários
+## 💰 ANÁLISE DO ARQUITETO DO LUCRO
 
-### Cenário A — Sem Promoção (Status Quo)
+### ⚠️ Ponto Crítico Descoberto: Marmitex P Não Qualifica para o Cupom
+
+> **O pedido mínimo para usar o cupom é R$ 25,00.  
+> A Marmitex P custa R$ 24,90 no iFood → NÃO atinge o mínimo.**  
+> **Conclusão: A Marmitex P está automaticamente excluída da promoção.**
+
+---
+
+### Tabela de Margem por Tamanho — COM Cupom de R$ 12
+
+**Metodologia:**
+- Repasse líquido = Preço × 73%
+- Repasse com cupom = Repasse líquido − R$ 12,00
+- Margem = Repasse com cupom − Custo prato − Embalagem R$ 1,50
+
+#### Marmitex M — R$ 32,40 (iFood)
+
+| Prato | Custo Porção | Embalagem | Custo Total | Repasse (73%) | Repasse c/ Cupom | **Margem** | **CMV Real** |
+|-------|-------------|-----------|-------------|---------------|------------------|-----------|-------------|
+| **Frango Frito** | R$ 4,18 | R$ 1,50 | R$ 5,68 | R$ 23,65 | R$ 11,65 | **R$ 5,97** | 48,8% ⚠️ |
+| **Pernil Acebolado** | R$ 5,52 | R$ 1,50 | R$ 7,02 | R$ 23,65 | R$ 11,65 | **R$ 4,63** | 60,3% 🚨 |
+| **Filé Grelhado c/ Frita** | R$ 6,02 | R$ 1,50 | R$ 7,52 | R$ 23,65 | R$ 11,65 | **R$ 4,13** | 64,5% 🚨 |
+| **Strogonoff de Frango** | R$ 6,59 | R$ 1,50 | R$ 8,09 | R$ 23,65 | R$ 11,65 | **R$ 3,56** | 69,4% 🚨 |
+| **Bife de Panela** | R$ 9,08 | R$ 1,50 | R$ 10,58 | R$ 23,65 | R$ 11,65 | **R$ 1,07** | 90,8% ☠️ |
+| **Parmegiana** | R$ 9,44 | R$ 1,50 | R$ 10,94 | R$ 23,65 | R$ 11,65 | **−R$ 3,29** | **PREJUÍZO** ☠️ |
+
+#### Marmitex G — R$ 43,90 (iFood)
+
+| Prato | Custo Porção* | Embalagem | Custo Total | Repasse (73%) | Repasse c/ Cupom | **Margem** | **CMV Real** |
+|-------|-------------|-----------|-------------|---------------|------------------|-----------|-------------|
+| **Frango Frito** | R$ 5,43 | R$ 1,50 | R$ 6,93 | R$ 32,05 | R$ 20,05 | **R$ 13,12** | 34,6% ✅ |
+| **Pernil Acebolado** | R$ 7,18 | R$ 1,50 | R$ 8,68 | R$ 32,05 | R$ 20,05 | **R$ 11,37** | 43,3% ⚠️ |
+| **Filé Grelhado c/ Frita** | R$ 7,83 | R$ 1,50 | R$ 9,33 | R$ 32,05 | R$ 20,05 | **R$ 10,72** | 46,5% ⚠️ |
+| **Strogonoff de Frango** | R$ 8,57 | R$ 1,50 | R$ 10,07 | R$ 32,05 | R$ 20,05 | **R$ 9,98** | 50,2% ⚠️ |
+| **Bife de Panela** | R$ 11,80 | R$ 1,50 | R$ 13,30 | R$ 32,05 | R$ 20,05 | **R$ 6,75** | 66,3% 🚨 |
+| **Parmegiana** | R$ 12,27 | R$ 1,50 | R$ 13,77 | R$ 32,05 | R$ 20,05 | **R$ 6,28** | 68,7% 🚨 |
+
+*Custo G estimado em 130% do custo M (porção ~30% maior).*
+
+---
+
+## 📊 ANÁLISE DO FINANCEIRO: O Que os Números Revelam
+
+### 🔴 Diagnóstico da Marmitex M com Cupom
+
+O cupom de R$ 12 representa **50,7% do repasse** de uma Marmitex M.
+
+```
+Repasse M = R$ 32,40 × 73% = R$ 23,65
+Cupom = R$ 12,00 → representa 50,7% do repasse
+Sobra = R$ 11,65 para pagar prato + embalagem + gás + mão de obra
+```
+
+Mesmo no melhor prato (Frango Frito @ R$ 5,97 de margem bruta):
+- Sem cobrir gás (~R$ 0,80/prato)
+- Sem cobrir mão de obra proporcional (~R$ 2,00/prato estimativa mínima)
+- **Margem real: ~R$ 3,17** — 73 centavos por real investido em cupom
+
+### 🟡 Diagnóstico da Marmitex G com Cupom
+
+```
+Repasse G = R$ 43,90 × 73% = R$ 32,05
+Cupom = R$ 12,00 → representa 37,4% do repasse
+Sobra = R$ 20,05 para pagar prato + embalagem + gás + mão de obra
+```
+
+No Frango Frito G (melhor caso):
+- Margem bruta após embalagem: R$ 13,12
+- Menos gás+MO estimados (~R$ 2,80): **~R$ 10,32 de margem real** ✅
+- CMV de 34,6% → único prato que passa no benchmark com cupom
+
+---
+
+## 📊 SIMULAÇÃO SEMANAL REAL (3 cupons/dia × 6 dias = 18 cupons)
+
+### Premissa conservadora: 60% de conversão (~11 pedidos/semana)
+
+| Cenário | Pedidos/semana | Receita Bruta | Repasse (73%) | Cupons Absorvidos | Rep. Líquido | Custo Pratos | Embalagens | **Margem Bruta** |
+|---------|---------------|--------------|---------------|-------------------|-------------|-------------|-----------|----------------|
+| **Todos Marm M (Frango Frito)** | 11 | R$ 356,40 | R$ 260,17 | R$ 132,00 | R$ 128,17 | R$ 45,98 | R$ 16,50 | **R$ 65,69** |
+| **Todos Marm G (Frango Frito)** | 11 | R$ 482,90 | R$ 352,52 | R$ 132,00 | R$ 220,52 | R$ 59,73 | R$ 16,50 | **R$ 144,29** |
+| **Mix: 70% M + 30% G (Frango)** | 11 | R$ 390,90 | R$ 285,36 | R$ 132,00 | R$ 153,36 | R$ 66,23 | R$ 16,50 | **R$ 70,63** |
+
+### Custo real da promoção (custo de oportunidade)
 
 | Métrica | Valor |
 |---------|-------|
-| Vendas iFood/semana (média atual) | ~1 pedido/semana |
-| Faturamento semanal iFood | ~R$ 31,00 (líquido) |
-| Faturamento total médio semanal | ~R$ 233,00/dia × 5 dias = **R$ 1.165,00** |
-| CMV geral | ~49% (acima do teto) |
+| Cupons distribuídos/semana | 18 |
+| Pedidos esperados (60% conversão) | ~11 |
+| Desconto total absorvido/semana | **R$ 132,00** |
+| Margem bruta no melhor caso (G) | **R$ 144,29** |
+| Margem bruta no cenário mix | **R$ 70,63** |
+| Se vendesse tudo sem cupom (M) | ~R$ 197,69 |
 
-### Cenário B — Com Promoção (60 cupons/semana, configuração original)
-
-**Premissa otimista (50% conversão = 30 pedidos/semana):**
-
-| Métrica | Cálculo | Valor |
-|---------|---------|-------|
-| Ticket médio iFood com cupom | ~R$ 30,00 (preço listado) | — |
-| Repasse iFood por pedido (73%) | R$ 30,00 × 0,73 | R$ 21,90 |
-| Menos cupom | R$ 21,90 - R$ 12,00 | **R$ 9,90** |
-| Menos custo do prato | R$ 9,90 - R$ 7,00 (média) | **R$ 2,90** |
-| Menos embalagem | R$ 2,90 - R$ 1,50 | **R$ 1,40** |
-| **Lucro bruto por pedido com cupom** | | **R$ 1,40** 😬 |
-| Lucro bruto semanal (30 pedidos) | 30 × R$ 1,40 | **R$ 42,00** |
-| Investimento real em cupons (30 × R$ 12) | | **R$ 360,00** |
-
-> **ATENÇÃO:** O "investimento" de R$ 720/semana não é dinheiro que sai do bolso — é desconto na receita. Mas o efeito líquido é que você trabalha a R$ 1,40 de margem bruta por pedido, sem considerar gás, mão de obra e desgaste operacional.
+> Você "gasta" R$ 132,00 em descontos por semana para ganhar R$ 65–144.
+> A questão não é só a margem — é se os novos clientes captados vão voltar.
 
 ---
 
-## 🎯 ANÁLISE DO AGENTE DE VENDAS: Perspectiva Estratégica
+## 🎯 ANÁLISE DO AGENTE DE VENDAS: Viabilidade Estratégica
 
-### ✅ Argumentos A FAVOR
+### A Matemática do Cliente (Lifetime Value)
 
-1. **Aquisição de Clientes (CAC):** O restaurante tem ~1 venda iFood por semana. A promoção pode gerar 30-60 novos clientes na base. Valor de lifetime se eles voltarem.
+| Hipótese | Valor |
+|----------|-------|
+| Taxa de retenção iFood (benchmark) | 15–25% |
+| De 11 novos clientes/semana → retêm | 2–3 clientes |
+| Se esses 2-3 compram 2×/mês (Marm M, sem cupom) | 5–6 pedidos extras/mês |
+| Margem por pedido sem cupom (Strogonoff M) | R$ 16,66 |
+| **Receita adicional mensal gerada** | **R$ 83–100** |
+| Custo de aquisição (cupons/mês, 4 semanas) | R$ 528/mês |
+| **Payback em novos clientes retidos** | 5+ meses 😬 |
 
-2. **Visibilidade no App:** O badge "Cupom" no iFood aumenta significativamente a exposição da loja nos rankings do app (visibilidade orgânica gratuita).
+### O Que Realmente Importa: Efeito de Escala no CMV
 
-3. **Escala Resolve CMV:** O relatório da Semana 2 identificou que o CMV de 49% é causado por falta de escala, não por ineficiência. Mais pedidos diluem custos fixos da cozinha.
+O relatório da Semana 2 identificou: **o CMV de 49% é problema de escala, não de eficiência.**
 
-4. **Desintermediação Futura (Raspadinha):** Cada pedido iFood é uma chance de incluir na sacola um voucher físico de migração para WhatsApp: *"Peça pelo WhatsApp e ganhe Batata Frita no próximo pedido!"*
-   - Custo da batata frita como brinde: ~R$ 1,20
-   - Economia ao migrar do iFood: +27% de margem
-   - ROI da migração: altíssimo
+Se 18 cupons gerarem ~11 pedidos extras/semana:
+- **Faturamento semanal atual:** ~R$ 233/dia × 5 dias = R$ 1.165
+- **Com promoção (receita bruta iFood):** +R$ 357–483
+- **Novo faturamento semanal:** ~R$ 1.521–1.648
+- **Aumento de volume:** **+30–41%** com custo fixo praticamente igual
 
-### ❌ Argumentos CONTRA
-
-1. **Margem por pedido de R$ 1,40:** Qualquer porcionamento um pouco maior já gera prejuízo.
-
-2. **Capacidade operacional:** A cozinha opera com média de 6-8 vendas/dia. Absorver +10 pedidos iFood/dia exige: motoboy, embalagens extras, tempo de produção.
-
-3. **Efeito "Cupom Hunter":** Taxa de retenção média no iFood é de 15-20%.
-
-4. **Risco de Operação Negativa:** Se a maioria dos pedidos for de Parmegiana (CMV 81% com cupom), gera prejuízo real.
-
----
-
-## 👔 CONSOLIDAÇÃO DO GERENTE GERAL
-
-### Tabela de Viabilidade Final
-
-| Indicador | Cenário A (Sem Promoção) | Cenário B (Com Promoção) | Diferença |
-|-----------|--------------------------|--------------------------|-----------|
-| Vendas iFood/semana | ~1 | 30-60 (estimado) | +2.900–5.900% |
-| Receita líquida iFood/semana | ~R$ 21,00 | R$ 297–594 (repasse s/ cupom) | — |
-| Custo real dos cupons | R$ 0 | R$ 360–720 (incorporado ao repasse) | — |
-| Lucro bruto iFood/semana | ~R$ 14,00 | R$ 42–84 | +R$ 28–70 |
-| Margem por pedido | ~R$ 14,00 | **R$ 1,40** | -90% |
-| Novos clientes na base | 0 | 30-60 | Ativo estratégico |
-| Capacidade para migrar WhatsApp | 0 | 30-60 contatos | 💡 Oportunidade |
+**Isso SIM resolve o CMV.** Cada prato a mais vendido cobre custos fixos que já estão pagos.
 
 ---
 
-## 🏆 VEREDITO FINAL — RECOMENDAÇÃO CONSOLIDADA
+## 👔 VEREDITO DO GERENTE GERAL
 
-### ⚠️ A promoção VALE A PENA, mas COM AJUSTES CIRÚRGICOS:
-
-**Não ative a promoção como está configurada.** Faça as 4 alterações abaixo antes.
-
-### 1. 🔧 Reduzir o valor do cupom: R$ 12 → R$ 8
-- R$ 12 de desconto come toda a margem
-- R$ 8 mantém apelo para o cliente e preserva ~R$ 5,00 de margem por pedido
-- Investimento semanal cai de R$ 720 para R$ 480 (máximo)
-
-### 2. 🔧 Reduzir quantidade de cupons: 60 → 30/semana
-- 5 cupons/dia em vez de 10
-- Mantém efeito de visibilidade no app sem sobrecarregar a cozinha
-- Investimento real máximo: R$ 240/semana (30 × R$ 8)
-
-### 3. 🔧 Ajustar preços do cardápio iFood ANTES de ativar
-- Todos os pratos precisam de margem de segurança de +R$ 3 a R$ 5 para absorver o cupom
-- Aumentar preços iFood em R$ 3-5 antes de ativar a promoção
-- Exemplo: Strogonoff de R$ 33,90 → R$ 37,90 no iFood
-
-### 4. 🔧 Implementar a Estratégia "Raspadinha" (Desintermediação)
-- Em CADA sacola de iFood, colocar um voucher: "📱 Peça pelo nosso WhatsApp e ganhe Batata Frita GRÁTIS!"
-- Custo do brinde: R$ 1,20/porção
-- Economia ao migrar 1 cliente: R$ 6-8 em taxa iFood no próximo pedido
-- ROI da migração: 500-700%
-
-### 📐 Simulação com os Ajustes Recomendados
-
-| Métrica | Valor Ajustado |
-|---------|---------------|
-| Cupons/semana | 30 |
-| Desconto por cupom | R$ 8,00 |
-| Preço médio iFood (ajustado +R$ 4) | R$ 35,00 |
-| Repasse iFood (73%) | R$ 25,55 |
-| Menos cupom | R$ 17,55 |
-| Menos custo prato (média) | R$ 10,55 |
-| Menos embalagem | **R$ 9,05** |
-| **Lucro bruto por pedido** | **R$ 9,05** ✅ |
-| Lucro bruto semanal (30 pedidos) | **R$ 271,50** |
-| Se 20% migrarem para WhatsApp (6 clientes) | +R$ 120/semana em vendas com margem total |
+### ✅ SIM — Fazer o teste com 3 cupons/dia, COM as condições abaixo:
 
 ---
 
-## 📋 CHECKLIST DE AÇÃO (Ordem de Execução)
+### Condição 1: Proibir Marmitex M com pratos de proteína bovina
 
-- [ ] **1.** Ajustar preços de TODOS os pratos no cardápio iFood (+R$ 3 a R$ 5)
-- [ ] **2.** Excluir Parmegiana da promoção ou aumentar preço iFood para R$ 42,90
-- [ ] **3.** Reduzir cupom para R$ 8 e quantidade para 30/semana (5/dia)
-- [ ] **4.** Preparar voucher de Raspadinha para incluir nas sacolas
-- [ ] **5.** Garantir estoque de embalagens para +5 pedidos/dia
-- [ ] **6.** Definir cardápio iFood do dia (evitar pratos caros nos dias de cupom)
-- [ ] **7.** Ativar a promoção após ajustes
-- [ ] **8.** Monitorar diariamente: quantos cupons foram usados, quais pratos foram pedidos
-- [ ] **9.** Após 1 semana, analisar CMV real e decidir se mantém
+Nos dias com cupom ativo, o cardápio iFood para Marm M deve ser **somente frango e pernil**.
+
+| Prato | Marm M c/ Cupom | Decisão |
+|-------|----------------|---------|
+| Frango Frito | R$ 5,97 | ✅ Aceitar |
+| Pernil Acebolado | R$ 4,63 | ✅ Aceitar com cautela |
+| Filé Grelhado | R$ 4,13 | ⚠️ Só se for prato do dia |
+| Strogonoff | R$ 3,56 | ⚠️ Só se for prato do dia |
+| Bife de Panela | R$ 1,07 | 🚨 Evitar |
+| Parmegiana | **PREJUÍZO** | ❌ Proibido com cupom |
+
+### Condição 2: Favorecer a Marmitex G na comunicação
+
+A Marmitex G com cupom tem a melhor matemática:
+- **Frango Frito G: margem bruta de R$ 13,12 ✅**
+- Custo de aquisição de cliente muito menor proporcionalmente
+
+**Ação:** Na bio do iFood e nos títulos dos pratos, destacar a Marmitex G como opção de valor.
+
+### Condição 3: Fazer o teste por 2 semanas e medir
+
+| Métrica para monitorar | Meta |
+|------------------------|------|
+| Quantos cupons foram usados | Mín. 10/semana (56% conversão) |
+| Qual tamanho foi mais pedido | Preferência por G = ótimo |
+| Quais pratos foram pedidos | Evitar bovinos com cupom |
+| Taxa de retorno (2ª semana) | Algum cliente repetiu? |
+| CMV semanal geral | Está caindo com o volume? |
 
 ---
 
-*Análise gerada pelo time de agentes CFO — Gerente Geral, Financeiro, Arquiteto do Lucro e Vendas.*  
-*Restaurante Bendito É · Abril/2026*
+## 📐 SIMULAÇÃO FINANCEIRA FINAL — Cenário RECOMENDADO
+
+**Base: 3 cupons/dia × 6 dias = 18 cupons → 11 pedidos (60% conversão)**  
+**Mix estimado: 70% Marm M (frango) + 30% Marm G**
+
+| Linha | Cálculo | Valor |
+|-------|---------|-------|
+| Pedidos M (8 × R$ 32,40) | | R$ 259,20 |
+| Pedidos G (3 × R$ 43,90) | | R$ 131,70 |
+| **Receita Bruta Total** | | **R$ 390,90** |
+| **Repasse iFood (73%)** | R$ 390,90 × 0,73 | **R$ 285,36** |
+| **Menos cupons usados** (11 × R$ 12) | | **−R$ 132,00** |
+| **Repasse líquido real** | | **R$ 153,36** |
+| Custo dos pratos (8 × R$ 5,68 + 3 × R$ 6,93) | | −R$ 66,23 |
+| Embalagens (11 × R$ 1,50) | | −R$ 16,50 |
+| **Margem Bruta Operacional** | | **R$ 70,63** |
+| Frete/motoboy estimado (5 pedidos × R$ 5) | | −R$ 25,00 |
+| **Margem Líquida Estimada** | | **~R$ 45,63/semana** |
+
+---
+
+## 📋 PLANO DE AÇÃO — PRÓXIMAS 2 SEMANAS
+
+| Prioridade | Ação |
+|-----------|------|
+| 🔴 Antes de ativar | Remover Parmegiana e Bife de Panela do cardápio de promoção |
+| 🔴 Antes de ativar | Confirmar que Marm P (R$ 24,90) não aparece como opção de cupom |
+| 🟡 Semana 1 | Ativar 3 cupons/dia → Público: Novos Clientes · Horário: Almoço 09h–16h30 |
+| 🟡 Semana 1 | Monitorar diariamente: qual tamanho e prato estão sendo pedidos |
+| 🟢 Semana 2 | Analisar: algum cliente fez segundo pedido sem cupom? |
+| 🟢 Semana 3 | Decisão: manter 3/dia, aumentar para 5/dia, ou pausar |
+
+---
+
+## 🏁 RESUMO EXECUTIVO
+
+1. **A promoção com 3 cupons/dia é segura para testar** — custo máximo de R$ 132/semana em descontos absorvidos.
+2. **Só é viável com Marm G ou Marm M de frango/pernil** — nunca bovinos com cupom.
+3. **O objetivo real não é lucrar nos pedidos com cupom — é atrair clientes que vão voltar sem cupom** e aumentar o volume para diluir o CMV atual de 49%.
+
+---
+
+*Análise revisada pelo time CFO — Restaurante Bendito É · Abril/2026*
