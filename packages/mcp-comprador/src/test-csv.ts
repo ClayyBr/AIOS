@@ -20,7 +20,7 @@ import * as path from "node:path";
 
 process.env.COMPRADOR_CEP = "12060360";
 
-const INGREDIENTES = ["frango sasami", "linguiça toscana", "acém"];
+const INGREDIENTES = ["óleo de soja", "macarrão tipo espaguete", "creme de leite", "ketchup", "mostarda", "extrato de tomate", "molho de tomate", "arroz", "feijão"];
 const scrapers: ScraperModule[] = [spaniScraper, tendaScraper, atacadaoScraper];
 
 // ============================================================================
@@ -226,7 +226,7 @@ async function main() {
         const outputDir = path.resolve("../../squads/CFO/relatorios/cotacoes");
         fs.mkdirSync(outputDir, { recursive: true });
 
-        const fileName = `cotacao-${getTimestamp()}.csv`;
+        const fileName = `Cotação-Mercearia.csv`;
         const csvPath = path.join(outputDir, fileName);
         const csvContent = gerarCSV(limpos, dataColeta);
         fs.writeFileSync(csvPath, csvContent, "utf-8");
