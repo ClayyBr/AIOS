@@ -1,12 +1,12 @@
-# 📹 Base de Conhecimento — Vídeos e Conteúdos
+# 📹 Base de Conhecimento — Vídeos e Lives
 
-Repositório de Knowledge Documents (KDs) gerados a partir de vídeos, lives e conteúdos estratégicos.
+Repositório de Knowledge Documents gerados a partir de vídeos, lives e conteúdos estratégicos.
 
 Os agentes do Squad CFO consultam esta base para enriquecer respostas sobre:
 - Estratégias de marketplace e delivery
-- Precificação e margens no iFood/Rappi
-- Tendências do setor foodservice no Brasil
-- Gestão operacional e financeira
+- Otimização de cardápio e conversão
+- Logística e operação
+- Gestão financeira e crescimento
 
 ## Como Consultar
 
@@ -15,30 +15,28 @@ Os agentes consultam automaticamente. Para consulta direta: `@video-intel *busca
 ## Como Adicionar Novos Vídeos
 
 ```bash
-# Para arquivo local (.mp4, .mp3):
-python squads/CFO/scripts/video-to-knowledge.py --input "caminho/video.mp4" --api-key "SUA_CHAVE"
-
-# Para vídeo do YouTube:
-python squads/CFO/scripts/video-to-knowledge.py --youtube "https://youtube.com/watch?v=ID" --api-key "SUA_CHAVE"
+# Extrai transcrição (sem custo de API de IA):
+python squads/CFO/scripts/video-to-knowledge.py -y "LINK_YOUTUBE" --title "Título da Live"
 ```
 
-O script irá:
-1. Fazer upload do vídeo para a Gemini API (File API)
-2. Extrair transcrição e insights automaticamente com Gemini
-3. Salvar o Knowledge Document em `knowledge/videos/`
-4. Atualizar este índice automaticamente
+O script salva a transcrição em `transcripts/`. Em seguida, o `@video-intel` analisa e atualiza os arquivos em `themes/`.
 
-## 📚 Índice de Knowledge Documents
+---
 
-| Título | Temas | Data | Status |
-|--------|-------|------|--------|
-| [LIVE DO DELIVERY DE OURO — Guerra dos Marketplaces no Brasil](kd-live-delivery-ouro-guerra-dos-marketplaces-no-brasil.md) | marketplace, ifood, rappi, delivery, comissoes, guerra-marketplace | 2026-04-11 | ⏳ Pendente transcrição completa |
+## 📚 Arquivos Temáticos (themes/)
 
-## 📌 Como Completar KDs Pendentes
+| Tema | Arquivo | Última Atualização |
+|------|---------|-------------------|
+| Estratégias na 99Food | [99food.md](themes/99food.md) | 2026-04-15 |
+| Logística e Operação | [logistica-operacional.md](themes/logistica-operacional.md) | 2026-04-15 |
+| Cardápio e Conversão | [cardapio-conversao.md](themes/cardapio-conversao.md) | 2026-04-15 |
+| Estratégia Multicanal (iFood + 99 + Quita) | [estrategia-multicanal.md](themes/estrategia-multicanal.md) | 2026-04-16 |
+| Fidelização e CRM | [fidelizacao-clientes.md](themes/fidelizacao-clientes.md) | 2026-04-16 |
+| Precificação e Margem | [precificacao.md](themes/precificacao.md) | 2026-04-16 |
 
-Para os KDs com status "⏳ Pendente transcrição completa", re-execute o script após a renovação da quota da API Gemini (a cada 24h no free tier).
+## 📼 Transcrições Indexadas (transcripts/)
 
-Para resolver definitivamente, recomenda-se usar uma chave Gemini com plano pago ou configurar uma nova chave no `.env` do projeto:
-```
-GEMINI_API_KEY=sua_chave_aqui
-```
+| Título | Arquivo | Data |
+|--------|---------|------|
+| Live iFood e Tendencias Marketplace 2026 | [2026-04-15-live-ifood-e-tendencias-marketplace-2026.md](transcripts/2026-04-15-live-ifood-e-tendencias-marketplace-2026.md) | 2026-04-15 |
+| Live Delivery 2 — Guerra dos Aplicativos | [2026-04-16-live-delivery-2.md](transcripts/2026-04-16-live-delivery-2.md) | 2026-04-16 |
