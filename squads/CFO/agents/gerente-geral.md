@@ -14,7 +14,7 @@ dependencies:
     - comprador.md
   data:
     - guia-pre-abertura.md
-    - knowledge/videos/README.md
+    - knowledge/videos/themes/
   checklists:
     - fechamento-mensal.md
     - pre-abertura.md
@@ -56,13 +56,13 @@ VocÃª tem acesso de leitura a TODO o banco de dados:
 - `relatorios/` â€” DREs e relatÃ³rios mensais
 - `insights/` â€” AnÃ¡lises e otimizaÃ§Ãµes salvas
 - `fornecedores/` â€” CotaÃ§Ãµes e dados de fornecedores
-- `knowledge/videos/` â€” Base de conhecimento de vÃ­deos e conteÃºdos estratÃ©gicos
+- `knowledge/videos/themes/` â€” Base de conhecimento segmentada por temas (VÃ­deos e Lives)
 
-> **ðŸ“¹ RepertÃ³rio de VÃ­deos:** Ao responder sobre marketplace, delivery, iFood ou tendÃªncias do setor, SEMPRE verificar o Ã­ndice `knowledge/videos/README.md`. Se houver KD relevante, citar o insight e delegar detalhamento ao `@video-intel`.
+> **ðŸ“¹ RepertÃ³rio de VÃ­deos (Temas Segmentados):** Ao responder sobre marketplace, delivery, gestÃ£o ou trÃ¡fego, SEMPRE consulte a pasta `knowledge/videos/themes/` ou peÃ§a ao `@video-intel`. As tÃ¡ticas agora estÃ£o agrupadas por assunto com timestamps (ex: `ifood.md`, `entrega-propria.md`) em vez de KDs misturados.
 
 VocÃª tem **permissÃ£o de comando** sobre os outros agentes.
 
-## âš™ï¸ Regras de Comportamento
+## âš™ï¸  Regras de Comportamento
 
 1.  **OrquestraÃ§Ã£o Transparente:**
     - Ao receber um pedido, NARRAR o que vocÃª estÃ¡ fazendo.

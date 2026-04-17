@@ -1,0 +1,489 @@
+[
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260420826969000123650010000026651745414959%7C3%7C1",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "CASA DE CARNES M.G.V. LTDA",
+        "cnpj": "20826969000123",
+        "data_emissao": "14/04/2026 09:27:27"
+      },
+      "items": [
+        {
+          "nome": "BISTECA SUINA KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t21,55",
+          "quantidade": 1.078,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 21.55
+        },
+        {
+          "nome": "FRANGO A PASSARINHO KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t12,83",
+          "quantidade": 0.988,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 12.83
+        },
+        {
+          "nome": "ACEM KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t21,99",
+          "quantidade": 0.564,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 21.99
+        }
+      ],
+      "totais": {
+        "valor_total": 56.37
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260420826969000123650010000026701097604365%7C3%7C1",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "CASA DE CARNES M.G.V. LTDA",
+        "cnpj": "20826969000123",
+        "data_emissao": "15/04/2026 09:19:00"
+      },
+      "items": [
+        {
+          "nome": "TOUCINHO (TORRESMO) KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t9,50",
+          "quantidade": 0.5,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 9.5
+        },
+        {
+          "nome": "TOUCINHO (TORRESMO) KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t14,55",
+          "quantidade": 0.766,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 14.55
+        }
+      ],
+      "totais": {
+        "valor_total": 24.05
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260410938144000147651060000534491762592857%7C3%7C1",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "ESTOK BRASIL COMERCIO DE ALIM LTDA",
+        "cnpj": "10938144000147",
+        "data_emissao": "15/04/2026 08:29:09"
+      },
+      "items": [
+        {
+          "nome": "BACON AMERICA PALETA DEF.TABLETE kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t13,12",
+          "quantidade": 0.263,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 13.12
+        },
+        {
+          "nome": "DA TERRINHA/FARINHA MAND.GROSSA 1kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,79",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 7.79
+        },
+        {
+          "nome": "FEIJAO PRETO CAMIL 1kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,98",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 6.98
+        }
+      ],
+      "totais": {
+        "valor_total": 27.89
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650380000239459391577964%7C2%7C1%7C15%7C19.95%7C737677584b7a5444436e5067364c72347a5850357a386b394d4c6f3d%7C1%7C0FAA1E1699731EAF4DABE1290B2E027F96B129E2",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "15/04/2026 00:00:00"
+      },
+      "items": [
+        {
+          "nome": "CR LEITE NESTLE LEVE\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,99",
+          "quantidade": 1,
+          "unidade": "TP",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "CR LEITE NESTLE LEVE\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,99",
+          "quantidade": 1,
+          "unidade": "TP",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "CR LEITE NESTLE LEVE\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,99",
+          "quantidade": 1,
+          "unidade": "TP",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "CR LEITE NESTLE LEVE\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,99",
+          "quantidade": 1,
+          "unidade": "TP",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "CR LEITE NESTLE LEVE\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,99",
+          "quantidade": 1,
+          "unidade": "TP",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        }
+      ],
+      "totais": {
+        "valor_total": 19.95
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260401157555001771652080000294141287525340|2|1|1|F6FB9A807D4050752F2448ECA0802986FA80F6B8",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TENDA ATACADO LTDA (TAUBATE)",
+        "cnpj": "01157555001771",
+        "data_emissao": "15/04/2026 21:55:23"
+      },
+      "items": [
+        {
+          "nome": "REFRI ANTARCTICA GUARANA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t9,27",
+          "quantidade": 3,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 9.27
+        },
+        {
+          "nome": "REFRI ANTARCTICA GUARANA DIET\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,09",
+          "quantidade": 1,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 3.09
+        },
+        {
+          "nome": "REFRI COCA COLA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t16,76",
+          "quantidade": 4,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 16.76
+        },
+        {
+          "nome": "REFRI COCA COLA ZERO 310ml\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t4,09",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 4.09
+        },
+        {
+          "nome": "AGUA MINERAL S GAS SELECT\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,15",
+          "quantidade": 3,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 3.15
+        },
+        {
+          "nome": "AGUA MINERAL C GAS SELECT\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,70",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 2.7
+        },
+        {
+          "nome": "LA ACO BOMBRIL ECO 6UN 45g\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,69",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 2.69
+        }
+      ],
+      "totais": {
+        "valor_total": 41.75
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260410938144000147651130000157931115834054|3|1",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "ESTOK BRASIL COMERCIO DE ALIM LTDA",
+        "cnpj": "10938144000147",
+        "data_emissao": "15/04/2026 21:43:23"
+      },
+      "items": [
+        {
+          "nome": "J.WATANABE/ALFACE CRESPA CADA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,98",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 2.98
+        },
+        {
+          "nome": "NAGUMO/TOMATE GRAPE 180G.CUMB.\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,98",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 2.98
+        },
+        {
+          "nome": "FEIJAO CARIOCA TARUMA 1kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t8,19",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 8.19
+        },
+        {
+          "nome": "FRUTA LIMAO THAITI kg.\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,94",
+          "quantidade": 0.779,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 1.94
+        },
+        {
+          "nome": "LEGUME TOMATE SALADA kg.\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t5,43",
+          "quantidade": 0.68,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 5.43
+        },
+        {
+          "nome": "LEGUME CEBOLA NACIONAL kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,10",
+          "quantidade": 0.779,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 3.1
+        },
+        {
+          "nome": "ARROZ FANTASTICO G.NOBRES 2kg.TP1\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t9,65",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 9.65
+        },
+        {
+          "nome": "CARNE SUINA/PERNIL S/OSSO kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t18,56",
+          "quantidade": 0.982,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 18.56
+        },
+        {
+          "nome": "J.WATANABE/REPOLHO ROXO kg.\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,15",
+          "quantidade": 0.716,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 7.15
+        },
+        {
+          "nome": "GRANEL/ALHO kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,92",
+          "quantidade": 0.172,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 2.92
+        }
+      ],
+      "totais": {
+        "valor_total": 62.9
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650440000388219558738060|2|1|13|87.08|53795137345a6d392b4b323533544241582f5274616f6b745655733d|1|BB74B5DDF3A97BDD8790A85A73A2BACE3DACA5E5",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "13/04/2026 00:00:00"
+      },
+      "items": [
+        {
+          "nome": "LEITE LETTI INT A2\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t9,95",
+          "quantidade": 1,
+          "unidade": "GF",
+          "valor_unitario": null,
+          "valor_total": 9.95
+        },
+        {
+          "nome": "IOG SERRAMAR CEN MEL\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,95",
+          "quantidade": 1,
+          "unidade": "CP",
+          "valor_unitario": null,
+          "valor_total": 1.95
+        },
+        {
+          "nome": "PAO MINEIRO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,98",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 7.98
+        },
+        {
+          "nome": "MINI BOLO PANCO BAUN\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,38",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 2.38
+        },
+        {
+          "nome": "PRES SEARA S/C GRA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t10,38",
+          "quantidade": 0.372,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 10.38
+        },
+        {
+          "nome": "QJO MUSSAREL GRANEL\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t18,26",
+          "quantidade": 0.366,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 18.26
+        },
+        {
+          "nome": "REF ANTARCTICA GUA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,99",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 7.99
+        },
+        {
+          "nome": "KETCH QUERO TRADIC\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,89",
+          "quantidade": 1,
+          "unidade": "FR",
+          "valor_unitario": null,
+          "valor_total": 7.89
+        },
+        {
+          "nome": "CAFE 3 COR TRAD VAC\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t14,45",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 14.45
+        },
+        {
+          "nome": "AGUA SANIT CANDURA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t5,85",
+          "quantidade": 1,
+          "unidade": "FR",
+          "valor_unitario": null,
+          "valor_total": 5.85
+        }
+      ],
+      "totais": {
+        "valor_total": 87.08
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650320000226131139435265|2|1|1|A469B400005DDDB2E5BF79074F5FFD37E2BC0685",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "15/04/2026 20:53:24"
+      },
+      "items": [
+        {
+          "nome": "FILE FGO CONG EMB\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t9,39",
+          "quantidade": 0.676,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 9.39
+        },
+        {
+          "nome": "FILE FGO CONG EMB\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t20,95",
+          "quantidade": 1.508,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 20.95
+        },
+        {
+          "nome": "P PEITO S/OSSO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t54,52",
+          "quantidade": 1.478,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 54.52
+        },
+        {
+          "nome": "LEITE LV LIDER INTEG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t4,98",
+          "quantidade": 1,
+          "unidade": "TP",
+          "valor_unitario": null,
+          "valor_total": 4.98
+        }
+      ],
+      "totais": {
+        "valor_total": 89.84
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260476430438012692650190000303071019315267|2|1|1|3B4C5CF2F3586A34F1CC0924BE5412987663FC56",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "IRMAOS MUFFATO E CIA LTDA",
+        "cnpj": "76430438012692",
+        "data_emissao": "16/04/2026 13:05:58"
+      },
+      "items": [
+        {
+          "nome": "BATATA LUDI MIX 2KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t19,89",
+          "quantidade": 1,
+          "unidade": "Un",
+          "valor_unitario": null,
+          "valor_total": 19.89
+        },
+        {
+          "nome": "PEITO ADORO KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t20,29",
+          "quantidade": 1.4,
+          "unidade": "Kg",
+          "valor_unitario": null,
+          "valor_total": 20.29
+        },
+        {
+          "nome": "BIFE COXAO MOLE KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t29,59",
+          "quantidade": 0.658,
+          "unidade": "Kg",
+          "valor_unitario": null,
+          "valor_total": 29.59
+        },
+        {
+          "nome": "REF COCA COLA 350ML\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t11,97",
+          "quantidade": 3,
+          "unidade": "Un",
+          "valor_unitario": null,
+          "valor_total": 11.97
+        },
+        {
+          "nome": "REF ANTARCTICA 350ML\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t9,57",
+          "quantidade": 3,
+          "unidade": "Un",
+          "valor_unitario": null,
+          "valor_total": 9.57
+        }
+      ],
+      "totais": {
+        "valor_total": 91.31
+      }
+    }
+  }
+]

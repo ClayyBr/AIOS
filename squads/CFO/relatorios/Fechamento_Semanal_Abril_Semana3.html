@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fechamento Financeiro Semanal Oficial (Semana 3)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: rgba(30, 41, 59, 0.7);
+            --surface-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .metadata-card {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .metadata-item {
+            text-align: center;
+        }
+
+        .metadata-label {
+            display: block;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .metadata-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        section {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+        
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.6s; }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--surface-border);
+            padding-bottom: 1rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 2px solid var(--surface-border);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .row-total {
+            background-color: rgba(59, 130, 246, 0.1);
+            font-weight: 700;
+        }
+        
+        .row-total td {
+            border-top: 2px solid var(--accent-primary);
+        }
+
+        .highlight-positive { color: var(--success); font-weight: 600; }
+        .highlight-warning { color: var(--warning); font-weight: 600;}
+        .highlight-expense { color: var(--danger); font-weight: 600; }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: scale(1.05);
+        }
+
+        .metric-title {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .alert {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .alert strong {
+            color: var(--accent-primary);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+        
+        li { margin-bottom: 0.5rem; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .metadata-card { flex-direction: column; gap: 1rem; }
+            section { padding: 1.5rem; }
+            h1 { font-size: 2rem; }
+            th, td { padding: 0.75rem; font-size: 0.85rem;}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>📉 Fechamento Financeiro Oficial</h1>
+            <div class="subtitle">Visão Analítica Semanal da Operação</div>
+        </header>
+
+        <div class="metadata-card">
+            <div class="metadata-item">
+                <span class="metadata-label">Período de Referência</span>
+                <span class="metadata-value">06/04/2026 a 11/04/2026 (Semana 3)</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Responsável</span>
+                <span class="metadata-value">CFO / Gerência Financeira</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Status</span>
+                <span class="metadata-value" style="color: var(--success);">✔ Consolidado</span>
+            </div>
+        </div>
+
+        <section>
+            <h2>💰 1. Resumo de Receita Gerada (Faturamento)</h2>
+            <p>Nesta semana, a operação funcionou entre terça (07/04) e sábado (11/04). As vendas compreendem todos os canais (Presencial, Delivery Próprio e iFood).</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Dia da Semana</th>
+                            <th>Vendas Registradas</th>
+                            <th style="text-align: right;">Faturamento Bruto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>06/04</td><td style="color: var(--text-secondary);">Segunda-feira (Inativo)</td><td>0</td><td style="text-align: right; color: var(--text-secondary);">R$ 0,00</td></tr>
+                        <tr><td>07/04</td><td>Terça-feira</td><td>7</td><td style="text-align: right;">R$ 211,91</td></tr>
+                        <tr><td>08/04</td><td>Quarta-feira</td><td>6</td><td style="text-align: right;">R$ 248,33</td></tr>
+                        <tr><td>09/04</td><td>Quinta-feira</td><td>8</td><td style="text-align: right;">R$ 238,07</td></tr>
+                        <tr><td>10/04</td><td>Sexta-feira</td><td>2</td><td style="text-align: right;" class="highlight-warning">R$ 86,70</td></tr>
+                        <tr><td>11/04</td><td>Sábado</td><td>10</td><td style="text-align: right;" class="highlight-positive">R$ 420,73</td></tr>
+                        <tr class="row-total">
+                            <td colspan="2">TOTAL - SEMANA 3</td>
+                            <td>33 Vendas</td>
+                            <td style="text-align: right; font-size: 1.1rem;" class="highlight-positive">R$ 1.205,74</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>🛒 2. Histórico de Compras e Custo de Mercadoria</h2>
+            <p>Custo (CMV) correspondente a todas as reposições da semana, englobando atacadistas, hortifruti e varejistas locais mapeados via NFC-e.</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Dia da Semana</th>
+                            <th>Lotes / Fornecedores</th>
+                            <th style="text-align: right;">Valor Gasto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>06/04</td><td>Segunda-feira</td><td style="color: var(--text-secondary);">Sem registros oficiais</td><td style="text-align: right; color: var(--text-secondary);">R$ 0,00</td></tr>
+                        <tr><td>07/04</td><td>Terça-feira</td><td>Shibata, Estok, Boi Nobre</td><td style="text-align: right;" class="highlight-expense">R$ 233,25</td></tr>
+                        <tr><td>08/04</td><td>Quarta-feira</td><td style="color: var(--text-secondary);">-</td><td style="text-align: right; color: var(--text-secondary);">R$ 0,00</td></tr>
+                        <tr><td>09/04</td><td>Quinta-feira</td><td>Tenda, Ponto das Embalagens</td><td style="text-align: right;" class="highlight-expense">R$ 170,94</td></tr>
+                        <tr><td>10/04</td><td>Sexta-feira</td><td>Tauste, Tenda</td><td style="text-align: right;" class="highlight-expense">R$ 152,14</td></tr>
+                        <tr><td>11/04</td><td>Sábado</td><td>Estok, Semar</td><td style="text-align: right;" class="highlight-expense">R$ 75,73</td></tr>
+                        <tr class="row-total">
+                            <td colspan="3">TOTAL - SEMANA 3</td>
+                            <td style="text-align: right; font-size: 1.1rem;" class="highlight-expense">- R$ 632,06</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>📊 3. Resumo Executivo e Comparativo com Semana Passada</h2>
+            <p>Cruzamento de Faturamento Bruto vs Custo de Entradas estritamente operacional da semana contra a Semana 2.</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card" style="border-top: 3px solid var(--accent-primary);">
+                    <div class="metric-title">Receita Bruta Total</div>
+                    <div class="metric-value highlight-positive">R$ 1.205,74</div>
+                </div>
+                <div class="metric-card" style="border-top: 3px solid #ef4444;">
+                    <div class="metric-title">Custo de Entradas</div>
+                    <div class="metric-value highlight-expense">R$ 632,06</div>
+                </div>
+                <div class="metric-card" style="border-top: 3px solid var(--success);">
+                    <div class="metric-title">Lucro Bruto</div>
+                    <div class="metric-value highlight-positive">R$ 573,68</div>
+                </div>
+                <div class="metric-card" style="border-top: 3px solid var(--warning);">
+                    <div class="metric-title">CMV Total Aparente</div>
+                    <div class="metric-value" style="color: var(--warning);">52,42%</div>
+                </div>
+            </div>
+
+            <div class="table-container" style="margin-top: 2rem; margin-bottom: 2rem;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrica</th>
+                            <th>Semana 2 (30/03 a 04/04)</th>
+                            <th>Semana Atual (06 a 11/04)</th>
+                            <th style="color: #fff;">Variação</th>
+                            <th>Análise do Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Vendas Totais</strong></td>
+                            <td>42 pedidos</td>
+                            <td><strong>33 pedidos</strong></td>
+                            <td class="highlight-expense">📉 -21,4%</td>
+                            <td>Queda no volume de transações; compensado apenas parcialmente no sábado.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Faturamento Bruto</strong></td>
+                            <td>R$ 1.332,47</td>
+                            <td><strong>R$ 1.205,74</strong></td>
+                            <td class="highlight-expense">📉 -9,5%</td>
+                            <td>Faturamento menor, porém Ticket Médio aumentou de R$ 31,72 para R$ 36,53.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Custos (Compras)</strong></td>
+                            <td>R$ 653,96</td>
+                            <td><strong>R$ 632,06</strong></td>
+                            <td style="color: var(--success);">📉 -3,3%</td>
+                            <td>Leve retração nominal nos gastos. Caiu, mas em proporção menor do que a queda na receita.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lucro Bruto</strong></td>
+                            <td>R$ 678,51</td>
+                            <td><strong>R$ 573,68</strong></td>
+                            <td class="highlight-expense">🔴 -15,4%</td>
+                            <td>Corrosão do lucro puxada principalmente pelo baixo movimento em volume na sexta-feira.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CMV Geral</strong></td>
+                            <td>49,08%</td>
+                            <td><strong>52,42%</strong></td>
+                            <td class="highlight-expense">🔴 Piora 3,3%</td>
+                            <td>O CMV piorou, demonstrando avanço de custos sobre preços fáceis. O número ideal para re-escalar é ~35%.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💡 Destaques e Observações Analíticas Limpas</h3>
+            <div class="metrics-grid" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+                <div class="metric-card" style="text-align: left; padding: 1.5rem; border-left: 6px solid var(--warning);">
+                    <strong style="color: var(--text-primary); font-size: 1.15rem; display: block; margin-bottom: 0.4rem;">1. CMV Pressionado (52,4%) e Redução do Lucro Base</strong>
+                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">O Lucro bruto retraiu em 15%. A métrica isolada aponta que consumimos efetivamente ~52,4% dos ganhos na feitura da semana. Reposições picadas contínuas não alcançam descontos comerciais de atacado e continuam minando a base livre do dinheiro que sobraria.</p>
+                </div>
+                
+                <div class="metric-card" style="text-align: left; padding: 1.5rem; border-left: 6px solid var(--success);">
+                    <strong style="color: var(--text-primary); font-size: 1.15rem; display: block; margin-bottom: 0.4rem;">2. A "Muleta" do Fim de Semana</strong>
+                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">Durante a semana as médias caíram (Sexta fez minguados R$ 86,70), contudo, o Sábado (11/04) gerou o recorde absoluto de <strong>R$ 420,73</strong>. O Delivery salvou a semana, fechando fendas. Criar um dia útil "Estrela" e aplicar promoções como ocorreu organicamente com a feijoada é o antídoto lógico.</p>
+                </div>
+                
+                <div class="metric-card" style="text-align: left; padding: 1.5rem; border-left: 6px solid var(--danger);">
+                    <strong style="color: var(--text-primary); font-size: 1.15rem; display: block; margin-bottom: 0.4rem;">3. Taxas Secundárias Logísticas</strong>
+                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">Despesas extras com mobilidade paralela sob falhas do sistema motoboy somaram quase R$ 25 gastos que comem diretamente a fatia dos R$ 573 reais que sobrariam limpos na balança.</p>
+                </div>
+            </div>
+            
+            <div class="metric-card" style="border-top: 3px solid var(--accent-secondary); margin-top: 2rem;">
+                <div class="metric-title" style="font-size: 1.1rem; color: var(--text-primary); font-weight: 700;">Conclusão e Diagnóstico Reajustado</div>
+                <div class="metric-value" style="font-size: 1.05rem; font-weight: 400; margin-top: 0.5rem; color: var(--text-secondary);">Com os números consolidados em regime de caixa da semana, o lucro despencou, revelando que a principal artéria rompida é a falta de escala. Os insumos básicos pesam de forma esmagadora quando escoam sobre apenas "33 Vendas", exigindo atração brutal de novos clientes para que essas pequenas contas representem cada vez menos no faturamento global.</div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

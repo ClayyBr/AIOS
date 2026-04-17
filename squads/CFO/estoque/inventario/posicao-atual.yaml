@@ -1,7 +1,17 @@
 metadata:
-  ultima_atualizacao: "2026-04-11"
+  ultima_atualizacao: "2026-04-16"
   tipo_ultimo_registro: "compras"
   notas_fiscais_processadas:
+    - "2026-04-15 Tenda (R$ 67,99) — Imagem"
+    - "2026-04-16 Irmaos Muffato (R$ 91,31)"
+    - "2026-04-15 Tauste (R$ 89,84)"
+    - "2026-04-15 Estok (R$ 62,90)"
+    - "2026-04-15 Tenda (R$ 41,75)"
+    - "2026-04-15 Tauste (R$ 19,95)"
+    - "2026-04-15 Estok (R$ 27,89)"
+    - "2026-04-15 Casa de Carnes (R$ 24,05)"
+    - "2026-04-14 Casa de Carnes (R$ 56,37)"
+    - "2026-04-12 Tauste (R$ 100,44)"
     - "2026-04-11 Semar (R$ 23,60)"
     - "2026-04-10 Tenda (R$ 67,08)"
     - "2026-04-10 Tauste (R$ 85,06)"
@@ -18,7 +28,7 @@ metadata:
     - "2026-03-27 Nagumo (R$ 146,70) — pré-abertura 08:32"
     - "2026-03-27 Nagumo Noite (R$ 149,71) — 21:50"
     - "2026-03-27 Tauste Noite (R$ 79,61) — 22:28"
-  valor_total_estoque: 1862.89
+  valor_total_estoque: 2445.38
 
 itens:
   - id: "frango-sobrecoxa-sadia"
@@ -39,23 +49,23 @@ itens:
     nome: "Frango CG/Peito S/Osso"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 5.674
-    custo_medio_ponderado: 15.47
-    valor_em_estoque: 87.79
+    quantidade: 11.816
+    custo_medio_ponderado: 20.68
+    valor_em_estoque: 244.36
     par_stock: 5.0
     status: "ok"
     validade_proxima: "2026-06-22"
     ultimo_fornecedor: "Tauste"
-    ultimo_preco: 13.88
+    ultimo_preco: 36.89
     preco_referencia: 22.90
 
   - id: "pernil-suino-osso"
     nome: "Pernil Suino S/Osso"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 3.290
+    quantidade: 4.272
     custo_medio_ponderado: 18.90
-    valor_em_estoque: 62.18
+    valor_em_estoque: 80.74
     par_stock: 5.0
     status: "comprar"
     validade_proxima: "2026-06-23"
@@ -67,56 +77,56 @@ itens:
     nome: "Coxão Duro"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 2.520
-    custo_medio_ponderado: 45.99
-    valor_em_estoque: 115.89
+    quantidade: 3.178
+    custo_medio_ponderado: 45.78
+    valor_em_estoque: 145.48
     par_stock: 5.0
     status: "comprar"
     validade_proxima: "2026-06-23"
     ultimo_fornecedor: "Boi Nobre"
-    ultimo_preco: 45.99
+    ultimo_preco: 44.97
     preco_referencia: 39.90
 
   - id: "oleo-soja"
     nome: "Óleo de Soja (900ml)"
     categoria: "mercearia"
     unidade: "L"
-    quantidade: 5.4
-    custo_medio_ponderado: 7.36
-    valor_em_estoque: 39.74
+    quantidade: 6.3
+    custo_medio_ponderado: 7.39
+    valor_em_estoque: 46.53
     par_stock: 10.0
     status: "ok"
     validade_proxima: "2026-10-19"
-    ultimo_fornecedor: "Estok"
-    ultimo_preco: 8.10
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 7.54
     preco_referencia: 8.90
 
   - id: "arroz-branco"
     nome: "Arroz Branco Tipo 1"
     categoria: "mercearia"
     unidade: "kg"
-    quantidade: 10.780
-    custo_medio_ponderado: 3.75
-    valor_em_estoque: 40.48
+    quantidade: 12.780
+    custo_medio_ponderado: 3.92
+    valor_em_estoque: 50.13
     par_stock: 10.0
     status: "ok"
     validade_proxima: "2026-09-19"
     ultimo_fornecedor: "Tauste"
-    ultimo_preco: 3.35
+    ultimo_preco: 4.83
     preco_referencia: 5.80
 
   - id: "feijao-carioca"
     nome: "Feijão Carioca"
     categoria: "mercearia"
     unidade: "kg"
-    quantidade: 4.730
+    quantidade: 5.730
     custo_medio_ponderado: 8.20
-    valor_em_estoque: 38.77
+    valor_em_estoque: 46.96
     par_stock: 5.0
     status: "comprar"
     validade_proxima: "2026-12-19"
     ultimo_fornecedor: "Tenda"
-    ultimo_preco: 7.30
+    ultimo_preco: 8.19
     preco_referencia: 7.50
 
   - id: "sal-refinado"
@@ -181,24 +191,25 @@ itens:
     nome: "Alho Roxo"
     categoria: "hortifru"
     unidade: "un"
-    quantidade: 1.0
-    custo_medio_ponderado: 18.25
-    valor_em_estoque: 18.25
+    quantidade: 1.172
+    custo_medio_ponderado: 18.06
+    valor_em_estoque: 21.17
     par_stock: 1.0
     status: "ok"
     ultimo_fornecedor: "Ponto do Tempero"
 
+    ultimo_preco: 16.98
   - id: "cebola"
     nome: "Cebola"
     categoria: "hortifru"
     unidade: "kg"  # CORRIGIDO: era 'un', padronizado para kg (fichas e par-stock usam kg)
-    quantidade: 2.897
-    custo_medio_ponderado: 5.05
-    valor_em_estoque: 14.63
+    quantidade: 4.252
+    custo_medio_ponderado: 4.71
+    valor_em_estoque: 20.03
     par_stock: 2.0  # CORRIGIDO: par-stock.yaml define 2.0kg mínimo
     status: "ok"
-    ultimo_fornecedor: "Estok"
-    ultimo_preco: 3.98
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 3.99
 
   - id: "repolho"
     nome: "Repolho"
@@ -238,34 +249,35 @@ itens:
     nome: "Tomate Salada"
     categoria: "hortifru"
     unidade: "kg"
-    quantidade: 5.715
-    custo_medio_ponderado: 7.36
-    valor_em_estoque: 42.08
+    quantidade: 6.395
+    custo_medio_ponderado: 7.43
+    valor_em_estoque: 47.51
     ultimo_fornecedor: "Semar"
-    ultimo_preco: 11.98
+    ultimo_preco: 7.99
     validade_proxima: "2026-04-01"
 
   - id: "limao-tahiti"
     nome: "Limão Tahiti"
     categoria: "hortifru"
     unidade: "kg"
-    quantidade: 2.891
-    custo_medio_ponderado: 2.75
-    valor_em_estoque: 7.96
+    quantidade: 3.670
+    custo_medio_ponderado: 2.70
+    valor_em_estoque: 9.90
     ultimo_fornecedor: "Tenda"
-    ultimo_preco: 2.58
+    ultimo_preco: 2.49
     validade_proxima: "2026-04-10"
 
   - id: "leite-integral"
     nome: "Leite Integral Lider 1L"
     categoria: "mercearia"
     unidade: "un"
-    quantidade: 1.0
-    custo_medio_ponderado: 4.50
-    valor_em_estoque: 4.50
+    quantidade: 2.000
+    custo_medio_ponderado: 4.74
+    valor_em_estoque: 9.48
     ultimo_fornecedor: "Tenda"
     validade_proxima: "2026-07-25"
 
+    ultimo_preco: 4.98
   - id: "creme-leite-1kg"
     nome: "Creme de Leite Italac 1,03kg"
     categoria: "mercearia"
@@ -301,19 +313,20 @@ itens:
     nome: "Ketchup Trad Cepera 3,5kg"
     categoria: "mercearia"
     unidade: "un"
-    quantidade: 1.0
-    custo_medio_ponderado: 26.90
-    valor_em_estoque: 26.90
+    quantidade: 2.000
+    custo_medio_ponderado: 17.39
+    valor_em_estoque: 34.79
     ultimo_fornecedor: "Tenda"
     validade_proxima: "2027-03-25"
 
+    ultimo_preco: 7.89
   - id: "batata-palha"
     nome: "Batata Palha Kari-Kari"
     categoria: "mercearia"
     unidade: "kg"
-    quantidade: 0.430
+    quantidade: 0.830
     custo_medio_ponderado: 29.75
-    valor_em_estoque: 12.79
+    valor_em_estoque: 24.69
     ultimo_fornecedor: "Tenda"
     validade_proxima: "2026-06-25"
 
@@ -351,9 +364,9 @@ itens:
     nome: "Macarrão Ovos Select Espaguete"
     categoria: "mercearia"
     unidade: "un"
-    quantidade: 1.350
-    custo_medio_ponderado: 3.93
-    valor_em_estoque: 5.30
+    quantidade: 2.350
+    custo_medio_ponderado: 3.57
+    valor_em_estoque: 8.40
     ultimo_fornecedor: "Tenda"
     ultimo_preco: 3.10
     validade_proxima: "2027-03-25"
@@ -427,22 +440,22 @@ itens:
     nome: "Carne 2ª Acém s/ Osso"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 3.116
-    custo_medio_ponderado: 36.98
-    valor_em_estoque: 115.23
+    quantidade: 3.680
+    custo_medio_ponderado: 37.29
+    valor_em_estoque: 137.22
     ultimo_fornecedor: "Nagumo"
-    ultimo_preco: 36.98
+    ultimo_preco: 38.99
     validade_proxima: "2026-04-03"
 
   - id: "linguica-calabresa-aurora"
     nome: "Linguiça Aurora Calabresa Defumada"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 1.448
-    custo_medio_ponderado: 27.73
-    valor_em_estoque: 40.16
-    ultimo_fornecedor: "Nagumo"
-    ultimo_preco: 29.98
+    quantidade: 1.764
+    custo_medio_ponderado: 27.77
+    valor_em_estoque: 48.98
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 27.90
     validade_proxima: "2026-04-20"
 
   - id: "manjericao-watanabe-15g"
@@ -501,54 +514,57 @@ itens:
     nome: "Água Mineral Lindoya S/ Gás"
     categoria: "bebidas"
     unidade: "un"
-    quantidade: 11.0
-    custo_medio_ponderado: 0.99
-    valor_em_estoque: 10.89
+    quantidade: 14.000
+    custo_medio_ponderado: 1.00
+    valor_em_estoque: 14.04
     ultimo_fornecedor: "Tauste"
     validade_proxima: "2026-09-25"
 
+    ultimo_preco: 1.05
   - id: "refrigerante-coca-cola"
     nome: "Ref. Coca-Cola (Fardo)"
     categoria: "bebidas"
     unidade: "fd"
-    quantidade: 2.500
-    custo_medio_ponderado: 24.24
-    valor_em_estoque: 60.60
+    quantidade: 9.500
+    custo_medio_ponderado: 9.40
+    valor_em_estoque: 89.33
     ultimo_fornecedor: "Hortifruti"
-    ultimo_preco: 24.24
+    ultimo_preco: 3.99
     validade_proxima: "2026-07-25"
 
   - id: "refrigerante-antarctica-guarana"
     nome: "Ref. Guaraná Antarctica (CX)"
     categoria: "bebidas"
     unidade: "cx"
-    quantidade: 0.668
-    custo_medio_ponderado: 41.88
-    valor_em_estoque: 27.98
+    quantidade: 6.668
+    custo_medio_ponderado: 7.02
+    valor_em_estoque: 46.82
     ultimo_fornecedor: "Tauste"
     validade_proxima: "2026-07-25"
 
+    ultimo_preco: 3.14
   - id: "toucinho"
     nome: "Toucinho"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 3.231
-    custo_medio_ponderado: 18.11
-    valor_em_estoque: 58.52
+    quantidade: 4.497
+    custo_medio_ponderado: 18.36
+    valor_em_estoque: 82.57
     ultimo_fornecedor: "Casa de Carnes Paraná"
-    ultimo_preco: 22.99
+    ultimo_preco: 19.00
     validade_proxima: "2026-04-10"
 
   - id: "farinha-mandioca-kisabor"
     nome: "Farinha Mandioca Kisabor Grossa"
     categoria: "mercearia"
     unidade: "kg"
-    quantidade: 0.480
-    custo_medio_ponderado: 24.54
-    valor_em_estoque: 11.78
+    quantidade: 1.480
+    custo_medio_ponderado: 13.22
+    valor_em_estoque: 19.57
     ultimo_fornecedor: "Tauste"
     validade_proxima: "2026-12-25"
 
+    ultimo_preco: 7.79
   - id: "vinagre-maca-almaromi"
     nome: "Vinagre Maçã Almaromi"
     categoria: "mercearia"
@@ -563,21 +579,22 @@ itens:
     nome: "Água Sanitária Suprema 5L"
     categoria: "limpeza"
     unidade: "un"
-    quantidade: 1.0
-    custo_medio_ponderado: 9.98
-    valor_em_estoque: 9.98
+    quantidade: 2.000
+    custo_medio_ponderado: 7.92
+    valor_em_estoque: 15.83
     ultimo_fornecedor: "Nagumo"
-    ultimo_preco: 9.98
+    ultimo_preco: 5.85
 
   - id: "bacon-pedaco"
     nome: "Bacon Pedaço (Frimesa/Sadia)"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 0.340
-    custo_medio_ponderado: 35.83
-    valor_em_estoque: 12.18
+    quantidade: 0.603
+    custo_medio_ponderado: 41.96
+    valor_em_estoque: 25.30
     ultimo_fornecedor: "Nagumo/Tauste"
 
+    ultimo_preco: 49.89
   - id: "carne-seca-dianteiro"
     nome: "Carne Seca Friboi 400g Dianteiro"
     categoria: "carnes"
@@ -592,11 +609,11 @@ itens:
     nome: "Feijão Preto Fantastico 1kg Prem."
     categoria: "mercearia"
     unidade: "kg"
-    quantidade: 0.450
-    custo_medio_ponderado: 6.90
-    valor_em_estoque: 3.10
+    quantidade: 1.450
+    custo_medio_ponderado: 6.95
+    valor_em_estoque: 10.08
     ultimo_fornecedor: "Nagumo"
-    ultimo_preco: 6.90
+    ultimo_preco: 6.98
 
   - id: "acucar-refinado"
     nome: "Açúcar Ref. Caravelas 1kg"
@@ -612,11 +629,11 @@ itens:
     nome: "Pimentão Verde"
     categoria: "hortifru"
     unidade: "kg"
-    quantidade: 0.198
-    custo_medio_ponderado: 12.29
-    valor_em_estoque: 2.43
-    ultimo_fornecedor: "Estok"
-    ultimo_preco: 12.94
+    quantidade: 0.274
+    custo_medio_ponderado: 12.45
+    valor_em_estoque: 3.41
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 12.90
 
   - id: "pimentao-vermelho"
     nome: "Pimentão Vermelho"
@@ -762,21 +779,41 @@ itens:
     nome: "Couve"
     categoria: "hortifru"
     unidade: "un"
-    quantidade: 4.0
-    custo_medio_ponderado: 4.24
-    valor_em_estoque: 16.96
-    ultimo_fornecedor: "Estok"
-    ultimo_preco: 4.98
+    quantidade: 6.0
+    custo_medio_ponderado: 4.16
+    valor_em_estoque: 24.94
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 3.99
+
+  - id: "laranja-pera"
+    nome: "Laranja Pera"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 0.804
+    custo_medio_ponderado: 4.99
+    valor_em_estoque: 4.01
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 4.99
+
+  - id: "abobrinha-italiana"
+    nome: "Abobrinha Italiana"
+    categoria: "hortifru"
+    unidade: "kg"
+    quantidade: 0.332
+    custo_medio_ponderado: 6.99
+    valor_em_estoque: 2.32
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 6.99
 
   - id: "frango-peito-osso"
     nome: "Frango Resf/Peito c/ Osso"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 2.388
-    custo_medio_ponderado: 20.24
-    valor_em_estoque: 48.33
+    quantidade: 3.788
+    custo_medio_ponderado: 18.12
+    valor_em_estoque: 68.62
     ultimo_fornecedor: "Estok"
-    ultimo_preco: 15.98
+    ultimo_preco: 14.49
 
   - id: "costela-gaucha"
     nome: "Carne 2A. Costela Gaucha"
@@ -792,11 +829,11 @@ itens:
     nome: "Legume Batata Lavada"
     categoria: "hortifru"
     unidade: "kg"
-    quantidade: 1.416
-    custo_medio_ponderado: 4.98
-    valor_em_estoque: 7.05
-    ultimo_fornecedor: "Nagumo"
-    ultimo_preco: 4.98
+    quantidade: 4.081
+    custo_medio_ponderado: 7.65
+    valor_em_estoque: 31.23
+    ultimo_fornecedor: "Tauste"
+    ultimo_preco: 9.95
 
   - id: "margarina-qualy-250g"
     nome: "Marg. Qualy 250g C/Sal"
@@ -822,31 +859,31 @@ itens:
     nome: "Pepino Japones"
     categoria: "hortifru"
     unidade: "kg"
-    quantidade: 0.380
-    custo_medio_ponderado: 6.95
-    valor_em_estoque: 2.64
-    ultimo_fornecedor: "Hortifruti"
-    ultimo_preco: 6.95
+    quantidade: 0.616
+    custo_medio_ponderado: 7.35
+    valor_em_estoque: 4.53
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 7.99
 
   - id: "bisteca-lombo"
     nome: "Bisteca do Lombo"
     categoria: "carnes"
     unidade: "kg"
-    quantidade: 1.034
-    custo_medio_ponderado: 16.99
-    valor_em_estoque: 17.57
+    quantidade: 2.112
+    custo_medio_ponderado: 18.52
+    valor_em_estoque: 39.12
     ultimo_fornecedor: "Casa de Carnes"
-    ultimo_preco: 16.99
+    ultimo_preco: 19.99
 
   - id: "batata-bem-brasil"
     nome: "Bat Bem Brasil +Bat"
     categoria: "mercearia"
     unidade: "un"
-    quantidade: 1.0
-    custo_medio_ponderado: 23.98
-    valor_em_estoque: 23.98
-    ultimo_fornecedor: "Supermercado"
-    ultimo_preco: 23.98
+    quantidade: 2.0
+    custo_medio_ponderado: 20.94
+    valor_em_estoque: 41.88
+    ultimo_fornecedor: "Tenda"
+    ultimo_preco: 17.90
 
   - id: "kit-marmitex-fm75"
     nome: "Kit FM75 Fibraform Marmitex"
@@ -907,6 +944,26 @@ itens:
     valor_em_estoque: 27.24
     ultimo_fornecedor: "Semar"
     ultimo_preco: 4.54
+
+  - id: "brocolis-ninja"
+    nome: "Brócolis Ninja"
+    categoria: "hortifru"
+    unidade: "un"
+    quantidade: 1.0
+    custo_medio_ponderado: 6.95
+    valor_em_estoque: 6.95
+    ultimo_fornecedor: "Tauste"
+    ultimo_preco: 6.95
+
+  - id: "linguica-sadia-churras"
+    nome: "Linguiça Sadia Churrasco"
+    categoria: "carnes"
+    unidade: "pc"
+    quantidade: 1.0
+    custo_medio_ponderado: 17.49
+    valor_em_estoque: 17.49
+    ultimo_fornecedor: "Tauste"
+    ultimo_preco: 17.49
 
 # ═══════════════════════════════════════════════════════════════
 # PRODUTOS EM PROCESSO (WIP) — Comida Pronta / Sobras

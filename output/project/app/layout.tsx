@@ -16,6 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
   title: 'CrossFit Academy - Maximize Your Potential',
   description:
     'Join the premier CrossFit Academy and achieve your fitness goals. High-intensity training, expert coaches, and a supportive community.',
@@ -43,11 +44,15 @@ export const metadata: Metadata = {
     images: ['https://yourcrossfitacademy.com/twitter-image.jpg'],
   },
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
