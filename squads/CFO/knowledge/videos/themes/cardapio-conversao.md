@@ -1,9 +1,10 @@
 ---
 theme: "cardapio-conversao"
 description: "Estratégias de design de cardápio para maximizar conversão nas plataformas de delivery"
-date_last_updated: "2026-04-15"
+date_last_updated: "2026-04-17"
 sources:
   - "Live iFood e Tendencias Marketplace 2026 (https://youtu.be/WEPLSs-0nUI)"
+  - "Trabalha muito, mas não vê dinheiro, não ter vida (https://youtu.be/_MMDw426caI)"
 ---
 
 # 📚 Tema: Cardápio e Conversão no Delivery
@@ -42,4 +43,9 @@ Ativar campanhas pagas sem um cardápio otimizado e sem operação robusta é jo
 Um nicho com baixa demanda online (ex.: churros, espetinhos) tem um teto natural de faturamento que nenhuma estratégia consegue superar. Já nicho de refeição (marmitex, executivos) tem demanda diária recorrente muito superior.
 - **Ação Prática:** Ao avaliar um novo produto no cardápio, pesquisar o volume de busca no iFood e 99Food antes de investir tempo/capital na ficha técnica.
 > 🔗 Fonte: [Live iFood e Tendencias Marketplace 2026](https://youtu.be/WEPLSs-0nUI?t=1807s) | Processado em: `2026-04-15`
+---
+### 5. Engenharia de Cardápio: O Motor da Escala
+O que permite a uma loja sair de 30 para 500 pedidos/dia não é o nome bonito, mas a **Engenharia de Cardápio**. Isso significa estruturar pratos que compartilham a mesma base de produção e insumos (insumos multiuso), permitindo que a cozinha produza em larga escala com estrutura enxuta.
+- **Ação Prática:** Revise sua ficha técnica. Se cada item do cardápio exige um processo de preparo isolado ou insumos exclusivos, você nunca terá escala. Padronize a base para ganhar velocidade no "tiro" (lote de produção).
+> 🔗 Fonte: [Trabalha muito, não vê dinheiro](https://youtu.be/_MMDw426caI?t=2061s) | Processado em: `2026-04-17`
 ---

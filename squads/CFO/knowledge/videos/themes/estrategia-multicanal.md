@@ -1,10 +1,11 @@
 ---
 theme: "estrategia-multicanal"
 description: "Estratégias de presença em múltiplas plataformas (iFood, 99Food, Quita) e gestão de canais de venda"
-date_last_updated: "2026-04-16"
+date_last_updated: "2026-04-17"
 sources:
   - "Live iFood e Tendencias Marketplace 2026 (https://youtu.be/WEPLSs-0nUI)"
   - "Live Delivery 2 — Guerra dos Aplicativos (https://youtu.be/iSvjMBoVYoE)"
+  - "Sair de 10 para 100 pedidos (https://youtu.be/HROseNFMDqw)"
 ---
 
 # 📚 Tema: Estratégia Multicanal — Plataformas de Delivery
@@ -50,3 +51,9 @@ A Quita (Meituan) é 30x maior que o iFood em receita global e tem tecnologia de
 - **Ação Prática:** Monitore a chegada da Quita na sua região. Quando chegar, a estratégia de entrada deve ser registrar imediatamente — assim como feito com 99Food.
 > 🔗 Fonte: [Live Guerra dos Aplicativos](https://youtu.be/iSvjMBoVYoE?t=3258s) | Processado em: `2026-04-16`
 ---
+### 6. Branding e Influenciadores: Saia da Guerra de Preços
+Para que o cliente pare de olhar apenas o preço (R$ 24,99 vs R$ 19,90), é necessário construir **Brand Equity** (valor de marca). A estratégia validada é usar um Instagram unificado com influenciadores nacionais e regionais consumindo o produto. Isso gera um "senso de comunidade" e desejo que justifica margens maiores.
+- **Ação Prática:** Antes de rodar tráfego pago, "recheie" seu perfil com depoimentos e vídeos de influenciadores (nacionais para autoridade, regionais para proximidade). O cliente deve sentir que "todo mundo está comendo isso".
+> 🔗 Fonte: [Sair de 10 para 100 pedidos](https://youtu.be/HROseNFMDqw?t=516s) | Processado em: `2026-04-17`
+---
+

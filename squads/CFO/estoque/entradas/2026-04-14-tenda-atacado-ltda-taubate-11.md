@@ -1,0 +1,34 @@
+# Registro de Entrada (Compra) — 14/04/2026 09:09:35
+
+**Fornecedor:** TENDA ATACADO LTDA (TAUBATE)
+**CNPJ:** 01157555001771
+**Data de Emissão:** 14/04/2026 09:09:35
+**Valor Total:** R$ 83,28
+
+## Itens Comprados
+
+| Item NFC-e | Descrição no Sistema | Qtd | Un | Valor Unit. (R$) | Total (R$) |
+|------------|----------------------|-----|----|------------------|------------|
+| CHEIRO VERDE UN | PENDENTE: CHEIRO VERDE UN | 1,000 | UN | 0,00 | 3,49 |
+| APP1 LIMAO TAHITI KG | PENDENTE: APP1 LIMAO TAHITI KG | 1,178 | kg | 0,00 | 2,93 |
+| CENOURA kg | PENDENTE: CENOURA kg | 0,340 | kg | 0,00 | 2,17 |
+| LING CALABRESA AURORA GRN KG | PENDENTE: LING CALABRESA AURORA GRN KG | 0,444 | kg | 0,00 | 12,83 |
+| MANJERICAO UN | PENDENTE: MANJERICAO UN | 1,000 | UN | 0,00 | 2,99 |
+| OLEO SOJA LIZA 900ml | PENDENTE: OLEO SOJA LIZA 900ml | 1,000 | FR | 0,00 | 7,40 |
+| FEIJAO CARIOCA TARUMA 1kg | PENDENTE: FEIJAO CARIOCA TARUMA 1kg | 1,000 | UN | 0,00 | 8,49 |
+| ALFACE CRESPA UN | PENDENTE: ALFACE CRESPA UN | 1,000 | UN | 0,00 | 3,99 |
+| MOLHO TOM TRAD REFOG SELECT SCH 300g | PENDENTE: MOLHO TOM TRAD REFOG SELECT SCH 300g | 2,000 | UN | 0,00 | 3,50 |
+| AGUA MINERAL S GAS SELECT | PENDENTE: AGUA MINERAL S GAS SELECT | 4,000 | UN | 0,00 | 4,20 |
+| REFRI ANTARCTICA GUARANA | PENDENTE: REFRI ANTARCTICA GUARANA | 4,000 | LA | 0,00 | 12,36 |
+| REFRI COCA COLA | PENDENTE: REFRI COCA COLA | 2,000 | LA | 0,00 | 8,38 |
+| ALHO RESF DESC KAMAR PCT 200g | PENDENTE: ALHO RESF DESC KAMAR PCT 200g | 1,000 | UN | 0,00 | 6,99 |
+| APP1 CEBOLA kg | PENDENTE: APP1 CEBOLA kg | 0,584 | kg | 0,00 | 2,33 |
+| BATATA LAVADA EXTRA kg | PENDENTE: BATATA LAVADA EXTRA kg | 0,460 | kg | 0,00 | 2,11 |
+| **TOTAL** | | | | | **83,28** |
+
+## Impactos no Estoque
+
+- **[PENDENTE]** Revisar descrições e impacto.
+
+---
+*Processado via script em 19/04/2026*

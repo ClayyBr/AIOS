@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Viabilidade: Pool de Motoboys Próprio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0070f3;
+            --primary-glow: rgba(0, 112, 243, 0.3);
+            --secondary: #7928ca;
+            --bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ededed;
+            --text-muted: #888;
+            --success: #00ffbd;
+            --warning: #f5a623;
+            --danger: #ff0055;
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            background-image: 
+                radial-gradient(circle at 2% 10%, rgba(121, 40, 202, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 98% 90%, rgba(0, 112, 243, 0.15) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #0070f3, #7928ca);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.05em;
+        }
+
+        .meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            background: rgba(0, 255, 189, 0.1);
+            color: var(--success);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 189, 0.2);
+        }
+
+        section {
+            margin-bottom: 4rem;
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 112, 243, 0.4);
+            transform: translateY(-4px);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            text-align: left;
+            padding: 1rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--card-border);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .highlight {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .math-box {
+            background: #000;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            border-left: 4px solid var(--secondary);
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            color: #88ff88;
+        }
+
+        .insight-box {
+            background: rgba(0, 112, 243, 0.1);
+            border: 1px solid rgba(0, 112, 243, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-main);
+        }
+
+        .kpi-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .kpi-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: block;
+            color: #fff;
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .summary-table {
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0, 112, 243, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .card { padding: 1.5rem; }
+            .meta { flex-direction: column; align-items: center; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Relatório de Viabilidade: Pool de Motoboys Próprio</h1>
+        <div class="meta">
+            <span><strong>Gerado por:</strong> Gerente Geral — CFO Squad</span>
+            <span><strong>Data:</strong> 19 de Abril de 2026</span>
+            <span class="status-badge">Análise Estratégica Ativa</span>
+        </div>
+    </header>
+
+    <section id="kpis" style="animation-delay: 0.2s;">
+        <div class="kpi-container">
+            <div class="kpi-card">
+                <span class="kpi-value">R$ 4.160</span>
+                <span class="kpi-label">Margem Mensal (50 ped/dia)</span>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-value">43%</span>
+                <span class="kpi-label">Spread Retido p/ Restaurante</span>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-value">+R$ 1.950</span>
+                <span class="kpi-label">Vantagem vs. Motoboy Fixo</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="part1" style="animation-delay: 0.4s;">
+        <div class="card">
+            <h2>Benchmark de Mercado</h2>
+            <p>Análise comparativa das taxas cobradas pelos principais marketplaces (iFood/DoorDash) em 2025.</p>
+            
+            <h3>Estrutura de Frete iFood (Vale do Paraíba)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Distância</th>
+                        <th>Frete Cliente</th>
+                        <th>Repasse Motoboy</th>
+                        <th>Spread Plataforma</th>
+                        <th>Spread %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Até 2km</td><td>R$ 5,00 - 7,00</td><td>R$ 2,50 - 3,50</td><td class="highlight">R$ 2,50</td><td>~42%</td></tr>
+                    <tr><td>2-3km</td><td>R$ 7,00 - 10,00</td><td>R$ 4,00 - 5,50</td><td class="highlight">R$ 3,50</td><td>~39%</td></tr>
+                    <tr><td>3-4km</td><td>R$ 10,00 - 13,00</td><td>R$ 5,50 - 7,00</td><td class="highlight">R$ 4,50</td><td>~38%</td></tr>
+                    <tr><td>4-5km</td><td>R$ 13,00 - 16,00</td><td>R$ 7,00 - 9,00</td><td class="highlight">R$ 5,50</td><td>~37%</td></tr>
+                </tbody>
+            </table>
+
+            <div class="insight-box">
+                "Referência: Em uma entrega de 3km, o iFood cobra R$ 9,00 e repassa R$ 5,50. O spread retido é de R$ 3,50 por entrega."
+            </div>
+        </div>
+    </section>
+
+    <section id="part2" style="animation-delay: 0.6s;">
+        <div class="card">
+            <h2>Proposta Canal Próprio</h2>
+            <p>Estratégia de precificação para manter competitividade e maximizar a lucratividade operacional.</p>
+            
+            <h3>Tabela de Pagamento (Acordada no Recrutamento)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Configuração</th>
+                        <th>Pago Motoboy</th>
+                        <th>Receita Média</th>
+                        <th>Margem Bruta Frete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1 Pedido (Simples)</td><td>R$ 5,00</td><td>R$ 7,00</td><td class="highlight">R$ 2,00 (28%)</td></tr>
+                    <tr><td>2 Pedidos (Duplo)</td><td>R$ 8,00</td><td>R$ 14,00</td><td class="highlight">R$ 6,00 (43%)</td></tr>
+                    <tr><td>3 Pedidos (Triplo)</td><td>R$ 10,00</td><td>R$ 21,00</td><td class="highlight">R$ 11,00 (52%)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Ganho por Hora (O Argumento de Venda)</h3>
+            <div class="math-box">
+Sem Batching:  ~22min / saída → R$ 5,00 → ~R$ 13,50/h
+Batching Duplo: ~32min / saída → R$ 8,00 → ~R$ 15,20/h (Foco Principal)
+Batching Triplo: ~42min / saída → R$ 10,00 → ~R$ 14,00/h
+            </div>
+        </div>
+    </section>
+
+    <section id="part4" style="animation-delay: 0.8s;">
+        <div class="card">
+            <h2>Cenários de Viabilidade</h2>
+            <div class="grid">
+                <div class="kpi-card">
+                    <span class="kpi-label">Cenário A</span>
+                    <span class="kpi-value">25 Ped/Dia</span>
+                    <p>Margem Frete: R$ 2.015/mês</p>
+                    <p style="font-size: 0.8rem; color: var(--success);">+R$ 910 vs Fixo</p>
+                </div>
+                <div class="kpi-card" style="border: 2px solid var(--primary);">
+                    <span class="kpi-label">Cenário B (Alvo)</span>
+                    <span class="kpi-value">50 Ped/Dia</span>
+                    <p>Margem Frete: R$ 4.160/mês</p>
+                    <p style="font-size: 0.8rem; color: var(--success);">+R$ 1.950 vs Fixo</p>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-label">Cenário C</span>
+                    <span class="kpi-value">100 Ped/Dia</span>
+                    <p>Margem Frete: R$ 8.450/mês</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Volume de Escala</p>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                "Conclusão: Cobrar R$ 5,00 de frete no canal próprio é suficiente para cobrir o custo do pool via batching, sendo significativamente mais barato que o iFood para o cliente."
+            </div>
+        </div>
+    </section>
+
+    <section id="summary" style="animation-delay: 1s;">
+        <div class="card summary-table">
+            <h2>Síntese Executiva</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Custo (50 ped/dia)</th>
+                        <th>Margem Frete</th>
+                        <th>Risco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>100% iFood</td><td>R$ 0 (comissão 27%)</td><td>R$ 0</td><td>Dependência Total</td></tr>
+                    <tr><td>Motoboy Fixo</td><td>R$ 7.540/mês</td><td>R$ 2.210/mês</td><td>Custo fixo alto</td></tr>
+                    <tr><td><strong>Pool Proposto</strong></td><td class="highlight">R$ 5.590/mês</td><td class="highlight">R$ 4.160/mês</td><td style="color: var(--warning);">Disponibilidade</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <p>Desenvolvido pelo CFO Squad — Synkra AIOS</p>
+        <p>CLI First | Observability Second | UI Third</p>
+    </footer>
+</div>
+
+</body>
+</html>

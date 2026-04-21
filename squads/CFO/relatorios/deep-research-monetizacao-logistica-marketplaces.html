@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Research: Monetização Logística em Marketplaces</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg: #0a0c10;
+      --bg-card: #111318;
+      --bg-card2: #181c24;
+      --border: #1e2530;
+      --accent: #f97316;
+      --accent2: #3b82f6;
+      --accent3: #10b981;
+      --accent-warn: #f59e0b;
+      --accent-danger: #ef4444;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-faint: #475569;
+      --grad1: linear-gradient(135deg, #f97316, #ef4444);
+      --grad2: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --grad3: linear-gradient(135deg, #10b981, #06b6d4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f141e 0%, #151b2a 50%, #0f141e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 40px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%);
+      top: -200px; right: -200px;
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      bottom: -150px; left: 50px;
+      border-radius: 50%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.3);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.15;
+      max-width: 700px;
+      background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative; z-index: 1;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 20px;
+      position: relative; z-index: 1;
+    }
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .hero-meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .hero-meta-value {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+
+    /* Executive Summary */
+    .exec-summary {
+      background: linear-gradient(135deg, rgba(249,115,22,0.06), rgba(239,68,68,0.04));
+      border: 1px solid rgba(249,115,22,0.2);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+    }
+    .exec-summary h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .exec-summary p {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.75;
+    }
+    .exec-summary .conclusion {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: rgba(249,115,22,0.08);
+      border-radius: 8px;
+      font-size: 13.5px;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    /* Part Header */
+    .part-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 48px 0 24px;
+    }
+    .part-number {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    .part-number.orange { background: rgba(249,115,22,0.15); color: var(--accent); border: 1px solid rgba(249,115,22,0.25); }
+    .part-number.blue { background: rgba(59,130,246,0.15); color: var(--accent2); border: 1px solid rgba(59,130,246,0.25); }
+    .part-number.green { background: rgba(16,185,129,0.15); color: var(--accent3); border: 1px solid rgba(16,185,129,0.25); }
+    .part-number.amber { background: rgba(245,158,11,0.15); color: var(--accent-warn); border: 1px solid rgba(245,158,11,0.25); }
+    .part-number.red { background: rgba(239,68,68,0.15); color: var(--accent-danger); border: 1px solid rgba(239,68,68,0.25); }
+    .part-number.purple { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.25); }
+
+    .part-title { font-size: 22px; font-weight: 700; color: var(--text); }
+    .part-subtitle { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
+
+    /* Section */
+    .section { margin-bottom: 32px; }
+    .section h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); margin: 16px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    thead { background: var(--bg-card2); }
+    thead th {
+      padding: 11px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+    tbody td { padding: 10px 14px; color: var(--text-muted); }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+    .td-highlight { color: var(--accent) !important; font-weight: 600 !important; }
+    .td-green { color: var(--accent3) !important; font-weight: 600 !important; }
+    .td-red { color: var(--accent-danger) !important; font-weight: 600 !important; }
+    .td-amber { color: var(--accent-warn) !important; font-weight: 600 !important; }
+
+    /* Code blocks */
+    .code-block {
+      background: #0d1017;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #a3e635;
+      line-height: 1.9;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .code-block .comment { color: #475569; }
+    .code-block .highlight { color: var(--accent); }
+    .code-block .green { color: var(--accent3); }
+    .code-block .amber { color: var(--accent-warn); }
+
+    /* Insight boxes */
+    .insight-box {
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 16px 0;
+      font-size: 13.5px;
+    }
+    .insight-box.critical {
+      background: rgba(239,68,68,0.07);
+      border: 1px solid rgba(239,68,68,0.2);
+      color: #fca5a5;
+    }
+    .insight-box.critical .label { color: var(--accent-danger); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .insight-box.info {
+      background: rgba(59,130,246,0.06);
+      border: 1px solid rgba(59,130,246,0.2);
+      color: #93c5fd;
+    }
+    .insight-box.info .label { color: var(--accent2); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .insight-box.tip {
+      background: rgba(16,185,129,0.07);
+      border: 1px solid rgba(16,185,129,0.2);
+      color: #6ee7b7;
+    }
+    .insight-box.tip .label { color: var(--accent3); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .insight-box.amber {
+      background: rgba(245,158,11,0.07);
+      border: 1px solid rgba(245,158,11,0.2);
+      color: #fcd34d;
+    }
+    .insight-box.amber .label { color: var(--accent-warn); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+
+    /* Principle cards */
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .principle-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .principle-card:hover { border-color: rgba(249,115,22,0.3); }
+    .principle-card .num {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .principle-card h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .principle-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+    .principle-card .impact {
+      margin-top: 12px;
+      padding: 6px 10px;
+      background: rgba(16,185,129,0.08);
+      border-radius: 6px;
+      font-size: 11.5px;
+      color: var(--accent3);
+      font-weight: 600;
+    }
+
+    /* Phase cards */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 16px 0;
+    }
+    @media (max-width: 768px) { .phase-grid { grid-template-columns: 1fr; } }
+    .phase-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .phase-card .phase-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .phase1 .phase-tag { color: var(--accent2); }
+    .phase2 .phase-tag { color: var(--accent-warn); }
+    .phase3 .phase-tag { color: var(--accent3); }
+    .phase1 { border-top: 2px solid var(--accent2); }
+    .phase2 { border-top: 2px solid var(--accent-warn); }
+    .phase3 { border-top: 2px solid var(--accent3); }
+    .phase-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+    .phase-card ul { list-style: none; }
+    .phase-card ul li {
+      padding: 5px 0;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 8px;
+    }
+    .phase-card ul li:last-child { border-bottom: none; }
+    .phase-card ul li::before { content: '→'; color: var(--text-faint); flex-shrink: 0; }
+    .phase-card .metric-box {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Alert risks */
+    .risk-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .risk-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      align-items: start;
+      gap: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .risk-sev { font-size: 18px; }
+    .risk-title { font-size: 13.5px; font-weight: 600; color: var(--text); }
+    .risk-sev-text { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+    .risk-sev-text.critical { background: rgba(239,68,68,0.15); color: var(--accent-danger); }
+    .risk-sev-text.attention { background: rgba(245,158,11,0.15); color: var(--accent-warn); }
+    .risk-mitigation { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+    .risk-mit-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); }
+
+    /* Tool grid */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .tool-card .tool-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .tool-card .tool-cost { font-size: 11px; color: var(--accent3); font-weight: 600; margin-top: 2px; }
+    .tool-card .tool-desc { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+    .tool-card .tool-equiv { font-size: 11px; margin-top: 8px; color: var(--text-faint); }
+    .tool-card .tool-equiv span { color: var(--accent2); }
+
+    /* Formula box */
+    .formula-box {
+      background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(139,92,246,0.05));
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #93c5fd;
+      line-height: 2;
+    }
+    .formula-box .formula-title { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+
+    /* Elasticity bar */
+    .elasticity-item {
+      display: grid;
+      grid-template-columns: 120px 1fr 160px;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .elasticity-item:last-child { border: none; }
+    .elast-bar { height: 8px; border-radius: 999px; background: var(--border); position: relative; }
+    .elast-fill { position: absolute; left: 0; top: 0; height: 100%; border-radius: 999px; }
+    .elast-note { font-size: 12px; color: var(--text-muted); }
+
+    /* Summary table final */
+    .summary-principles {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    .summary-principles .sp-header {
+      background: var(--bg-card2);
+      padding: 16px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      display: grid;
+      grid-template-columns: 2fr 2fr 1fr;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .summary-principles .sp-row {
+      padding: 14px 20px;
+      display: grid;
+      grid-template-columns: 2fr 2fr 1fr;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      align-items: start;
+    }
+    .summary-principles .sp-row:last-child { border: none; }
+    .summary-principles .sp-row:hover { background: rgba(255,255,255,0.02); }
+    .sp-principle { font-weight: 600; color: var(--text); }
+    .sp-action { color: var(--text-muted); }
+    .sp-impact { color: var(--accent3); font-weight: 600; font-size: 12px; }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+    .footer .logo { font-weight: 700; color: var(--text-muted); }
+    .footer .logo span { color: var(--accent); }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+    p { color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+    strong { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🔬 Deep Research</div>
+  <h1>Engenharia Reversa da Monetização Logística em Marketplaces</h1>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Para</span>
+      <span class="hero-meta-value">Gerente Geral &amp; Proprietário</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Escopo</span>
+      <span class="hero-meta-value">iFood (BR) × DoorDash / UberEats (EUA)</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Aplicação</span>
+      <span class="hero-meta-value">Frota própria de restaurante</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Data</span>
+      <span class="hero-meta-value">18/04/2026</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="exec-summary">
+    <h2>📋 Sumário Executivo</h2>
+    <p>Os grandes marketplaces de delivery não são apenas plataformas de tecnologia — são <strong>máquinas de arbitragem logística</strong>. A cada pedido entregue, eles capturam um spread entre o frete cobrado do cliente e o repasse ao entregador, enquanto otimizam custo via algoritmos de agrupamento (batching), gamificação de oferta de trabalho e precificação dinâmica.</p>
+    <div class="conclusion">
+      💡 <strong>Conclusão Antecipada:</strong> Um restaurante que domina sua logística não precisa de escala de marketplace. Precisa de <em>inteligência de alocação</em>. A diferença entre gastar R$ 18 por entrega e R$ 9 está nos mesmos princípios matemáticos que o DoorDash usa para valer US$ 50 bilhões.
+    </div>
+  </div>
+
+  <!-- ======================== PARTE 1 ======================== -->
+  <div class="part-header">
+    <div class="part-number orange">P1</div>
+    <div>
+      <div class="part-title">A Caixa-Preta dos Marketplaces</div>
+      <div class="part-subtitle">Como eles lucram na logística — o "spread" de frete revelado</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>1.1 — Anatomia de uma Entrega: O Spread de Frete</h3>
+    <p>A estrutura financeira de uma entrega em marketplace funciona em camadas. O cliente paga uma coisa; o entregador recebe outra. O que está no meio é a engenharia de monetização da plataforma.</p>
+
+    <h4 style="font-size:13px;font-weight:600;color:var(--accent);margin:16px 0 8px;">iFood — Plano Entrega (Logística da Plataforma)</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Componente</th><th>Quem Paga</th><th>Quem Recebe</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td>Taxa de Entrega (Frete)</td><td>Cliente</td><td>iFood</td><td>Valor dinâmico: distância + demanda</td></tr>
+          <tr><td>Taxa de Serviço (R$ 0,99–R$ 1,99)</td><td>Cliente</td><td class="td-highlight">iFood exclusivamente</td><td>Não repassa ao restaurante nem ao motoboy</td></tr>
+          <tr><td>Comissão sobre vendas (23–27%)</td><td>Restaurante</td><td>iFood</td><td>Cobre logística + tecnologia + marketing</td></tr>
+          <tr><td>Repasse ao Motoboy</td><td>iFood</td><td>Entregador</td><td>Base fixa + R$/km + adicional de agrupamento</td></tr>
+          <tr><td>Gorjeta</td><td>Cliente</td><td class="td-green">Entregador (100%)</td><td>iFood não retém nada das gorjetas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 style="font-size:13px;font-weight:600;color:var(--accent);margin:20px 0 8px;">DoorDash (EUA) — Decomposição de um Pedido de US$ 50</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Componente</th><th>Valor Estimado</th><th>Destinatário</th></tr></thead>
+        <tbody>
+          <tr><td>Subtotal do restaurante (após comissão 25%)</td><td>US$ 37,50</td><td>Restaurante</td></tr>
+          <tr><td>Comissão DoorDash (25%)</td><td>US$ 12,50</td><td>DoorDash</td></tr>
+          <tr><td>Taxa de entrega (cliente)</td><td>US$ 3,99–US$ 7,99</td><td>DoorDash</td></tr>
+          <tr><td>Taxa de serviço (~13%)</td><td>US$ 6,50</td><td>DoorDash</td></tr>
+          <tr><td>Base pay do Dasher</td><td class="td-amber">US$ 3,00–US$ 5,00</td><td>Entregador</td></tr>
+          <tr><td>Gorjeta (méd. 15%)</td><td>US$ 7,50</td><td>Entregador</td></tr>
+          <tr><td style="font-weight:700;color:#e2e8f0;">Receita Bruta DoorDash / pedido</td><td class="td-highlight">~US$ 14–22</td><td>—</td></tr>
+          <tr><td style="font-weight:700;color:#e2e8f0;">Custo DoorDash com motorista (sem gorjeta)</td><td class="td-red">US$ 3–5</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight-box critical">
+      <div class="label">🔴 Insight Crítico</div>
+      O cliente paga uma "taxa de entrega" de até US$ 7,99 que vai 100% para o DoorDash, mas o driver recebe apenas US$ 3–5 de base pay. O restante <strong>(US$ 3–5 de spread puro)</strong> vai para o caixa da plataforma como "lucro logístico". A gorjeta, paga separadamente, é o mecanismo que mantém os motoristas engajados sem que a plataforma precise aumentar o base pay.
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>1.2 — A Matemática da Arbitragem por Quilômetro</h3>
+
+    <div class="formula-box">
+      <div class="formula-title">Fórmula de Arbitragem por KM</div>
+Spread por KM = (Frete Cobrado do Cliente ÷ KM) - (Repasse ao Motoboy ÷ KM)
+
+EXEMPLO — iFood (entrega de 3km):
+  Frete cobrado ao cliente:  R$ 9,00  →  R$ 3,00 / km
+  Repasse ao motoboy:        R$ 5,50  →  R$ 1,83 / km
+  Spread retido pela plataforma:       R$ 1,17 / km
+
+EXEMPLO — DoorDash (entrega equivalente ~3km):
+  Delivery fee cobrada:   US$ 5,99
+  Base pay ao driver:     US$ 3,50
+  Spread retido:          US$ 2,49
+    </div>
+
+    <div class="insight-box tip">
+      <div class="label">💡 Implicação para o Restaurante</div>
+      Se o restaurante cobra R$ 9,00 de frete do cliente e paga R$ 5,50 ao motoboy, ele retém <strong>R$ 3,50 de spread</strong> — significativamente mais do que a plataforma por não carregar overhead tecnológico de bilhões. O desafio é replicar a <em>eficiência de alocação</em> que garante que cada saída do motoboy seja economicamente viável.
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ======================== PARTE 2 ======================== -->
+  <div class="part-header">
+    <div class="part-number blue">P2</div>
+    <div>
+      <div class="part-title">Engenharia de Agrupamento (Batching)</div>
+      <div class="part-subtitle">A máquina de redução de custo por entrega dos marketplaces</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>2.1 — Como o Algoritmo de Batching Funciona</h3>
+    <p>O batching é o principal alavancador de rentabilidade logística dos marketplaces. A lógica central: <strong>um motoboy fazendo 2 entregas na mesma rota custa quase o mesmo que 1</strong>, mas a plataforma cobra frete de 2 clientes diferentes.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Variável Avaliada</th><th>Lógica do Algoritmo</th><th>Impacto no Agrupamento</th></tr></thead>
+        <tbody>
+          <tr><td>Proximidade geográfica</td><td>Calcula desvio de rota para 2º destino</td><td>Desvio &lt; 15% → agrupa automaticamente</td></tr>
+          <tr><td>Tempo de preparo sincronizado</td><td>Ambos prontos na janela de ~4 min</td><td>Evita espera excessiva do entregador</td></tr>
+          <tr><td>Disponibilidade do entregador</td><td>Capacidade da bag e tipo de veículo</td><td>Moto: max 3 pedidos; carro: max 5</td></tr>
+          <tr><td>Perfil de demanda local</td><td>Clusters de pedidos por horário e bairro</td><td>Em pico, agrupa mais agressivamente</td></tr>
+          <tr><td>Temperatura/urgência</td><td>Pedidos frios agrupam com mais flexibilidade</td><td>Ex: açaí + sushi = possível; pizza + sushi = improvável</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:20px;">Economia Gerada por Batching — Modelo de 2 Pedidos</h3>
+    <div class="code-block"><span class="comment">// SEM batching (2 entregadores separados):</span>
+  Custo motoboy 1:                 <span class="highlight">R$ 8,00</span>
+  Custo motoboy 2:                 <span class="highlight">R$ 8,00</span>
+  Total:                           R$ 16,00
+  Frete cobrado dos 2 clientes:    R$ 18,00 (R$ 9 cada)
+  <span class="amber">Margem da plataforma: R$ 2,00</span>
+
+<span class="comment">// COM batching (1 entregador, 2 pedidos agrupados):</span>
+  Custo motoboy (base + adicional): <span class="highlight">R$ 11,00</span>
+  Frete cobrado dos 2 clientes:     R$ 18,00 (R$ 9 cada)
+  <span class="green">Margem da plataforma: R$ 7,00</span>
+
+<span class="green">→ GANHO DE MARGEM POR BATCHING: +R$ 5,00 por operação</span>
+<span class="green">→ INCREMENTO DE MARGEM LOGÍSTICA: +250%</span></div>
+  </div>
+
+  <div class="section">
+    <h3>2.2 — Playbook para Forçar o Batching a Seu Favor</h3>
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="num">TÁTICA 01</div>
+        <h4>Sinalizar "Pedido Pronto" em Lote</h4>
+        <p>Finalizar vários pedidos simultaneamente no sistema aumenta a probabilidade de o algoritmo agrupar a coleta com 1 único motoboy.</p>
+        <div class="impact">↑ Agrupamento orgânico sem custo extra</div>
+      </div>
+      <div class="principle-card">
+        <div class="num">TÁTICA 02</div>
+        <h4>Tempo de Preparo Consistente</h4>
+        <p>O algoritmo testa a sincronização entre pedidos. Inconsistências de tempo bloqueiam o agrupamento pois um pedido fica pronto muito antes do outro.</p>
+        <div class="impact">↑ Previsibilidade = mais batching aprovado</div>
+      </div>
+      <div class="principle-card">
+        <div class="num">TÁTICA 03</div>
+        <h4>Segregação de Raios (iFood)</h4>
+        <p>Raio 0–2km para Logística Parceira iFood; raio 3–4km para motoboy próprio (Flex). Mantém entregadores da plataforma em ciclo constante próximo à loja.</p>
+        <div class="impact">↑ Densidade logística ao redor da loja</div>
+      </div>
+      <div class="principle-card">
+        <div class="num">TÁTICA 04</div>
+        <h4>Não "Expulsar" Motoboys da Plataforma</h4>
+        <p>Manter motoboys iFood em raios curtos garante que o algoritmo tenha com quem agrupar pedidos. Entregas longas dispersam essa "nuvem" de disponibilidade.</p>
+        <div class="impact">↑ Ranking de prioridade no algoritmo</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ======================== PARTE 3 ======================== -->
+  <div class="part-header">
+    <div class="part-number green">P3</div>
+    <div>
+      <div class="part-title">Gamificação e Recompensas</div>
+      <div class="part-subtitle">Como os marketplaces controlam custo de entregador via game design</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>3.1 — Mecanismos de Gamificação dos Marketplaces</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mecanismo</th><th>Como Funciona</th><th>Efeito Econômico (Plataforma)</th></tr></thead>
+        <tbody>
+          <tr><td>Missões</td><td>"Complete 15 entregas até domingo e ganhe R$ 40 bônus"</td><td>Dilui bônus em 15 entregas → custo incremental = R$ 2,67/entrega</td></tr>
+          <tr><td>Peak Pay</td><td>Bônus temporário de US$ 2–5/entrega em pico</td><td>Zero custo fora do pico; concentra oferta sem custo fixo</td></tr>
+          <tr><td>Score/Avaliação</td><td>Score alto = prioridade na fila de pedidos</td><td>Incentiva qualidade sem custo adicional; punição automática</td></tr>
+          <tr><td>Zonas Quentes</td><td>Mapa mostra onde haverá mais pedidos</td><td>Manipula posicionamento do entregador; reduz tempo de despacho</td></tr>
+          <tr><td>Desafios de Sequência</td><td>"Complete 3 entregas em 2h e ganhe bônus"</td><td>Induz aceitar pedidos subótimos para não "quebrar" a sequência</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:24px;">3.2 — Modelo de Incentivo para Frota Própria</h3>
+    <div class="code-block"><span class="comment">// SISTEMA DE METAS SEMANAIS (1-3 motoboys)</span>
+
+Meta Base:   40 entregas/semana  → Diária normal
+Faixa Prata: 55 entregas/semana  → + <span class="amber">R$ 30 bônus</span>
+Faixa Ouro:  70 entregas/semana  → + <span class="green">R$ 70 bônus</span>
+
+<span class="comment">// ANÁLISE DE ROI DO INCENTIVO (Faixa Ouro):</span>
+  Entregas extras sobre a base:     30
+  Custo incremental do bônus:       R$ 70 ÷ 30 = <span class="highlight">R$ 2,33/entrega extra</span>
+  Receita de frete por entrega:     R$ 9,00
+  Margem líquida por entrega extra: <span class="green">R$ 6,67</span>
+
+<span class="green">→ ROI do incentivo: +286% por entrega adicional gerada</span></div>
+  </div>
+
+  <hr>
+
+  <!-- ======================== PARTE 4 ======================== -->
+  <div class="part-header">
+    <div class="part-number amber">P4</div>
+    <div>
+      <div class="part-title">Precificação Dinâmica</div>
+      <div class="part-subtitle">Transformar clima, pico e distância em receita extra de frete</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>4.1 — Variáveis que os Marketplaces Monitoram</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Fator</th><th>Como o Marketplace Usa</th><th>Variação do Frete</th></tr></thead>
+        <tbody>
+          <tr><td>Clima (chuva/tempestade)</td><td>Demanda explode; entregadores reduzem</td><td class="td-highlight">+40–120% no frete</td></tr>
+          <tr><td>Horário de pico</td><td>12h–13h30 e 19h–21h (jantar)</td><td class="td-amber">+20–50%</td></tr>
+          <tr><td>Baixa oferta de entregadores</td><td>Menos Dashers ativos na área = surge maior</td><td class="td-amber">+30–80%</td></tr>
+          <tr><td>Distância aumentada</td><td>Taxa de entrega linear por km adicional</td><td>R$ 1,00–R$ 2,00/km extra</td></tr>
+          <tr><td>Feriados e finais de semana</td><td>Alta demanda + baixa oferta de trabalho</td><td class="td-amber">+20–40%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:24px;">4.2 — Matriz de Frete Dinâmico para Restaurante Próprio</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Condição</th><th>Frete Padrão</th><th>Ajuste</th><th>Frete Final</th><th>Justificativa para o Cliente</th></tr></thead>
+        <tbody>
+          <tr><td>Dia normal, horário comercial</td><td>R$ 6,00</td><td>—</td><td>R$ 6,00</td><td>Padrão de mercado</td></tr>
+          <tr><td>Horário de pico (12h–13h, 19h–20h)</td><td>R$ 6,00</td><td>+R$ 2,00</td><td class="td-amber">R$ 8,00</td><td>"Alta demanda — entrega garantida"</td></tr>
+          <tr><td>Chuva intensa / tempestade</td><td>R$ 6,00</td><td>+R$ 3–5</td><td class="td-highlight">R$ 9–11</td><td>"Taxa de clima — motoboy em risco; entrega garantida"</td></tr>
+          <tr><td>Feriado / fim de semana especial</td><td>R$ 6,00</td><td>+R$ 2–3</td><td class="td-amber">R$ 8–9</td><td>"Taxa de feriado — operamos quando outros fecham"</td></tr>
+          <tr><td>Raio estendido (&gt;4km)</td><td>R$ 6,00</td><td>+R$ 1,50/km extra</td><td>Variável</td><td>"Entrega em área estendida"</td></tr>
+          <tr><td>Pedido pequeno (&lt;R$ 30)</td><td>R$ 6,00</td><td>+R$ 2,00</td><td class="td-amber">R$ 8,00</td><td>"Taxa de conveniência para pedido pequeno"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight-box amber">
+      <div class="label">⚠️ Regra de Elasticidade</div>
+      O cliente aceita pagar mais pelo frete quando: (1) a justificativa é transparente, (2) a alternativa — sair na chuva — é pior, (3) o frete ainda é competitivo vs. o marketplace que também sobe no surge. A resistência ao frete maior é <strong>menor do que os restaurantes acreditam</strong>, especialmente em clima adverso.
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ======================== PARTE 5 ======================== -->
+  <div class="part-header">
+    <div class="part-number red">P5</div>
+    <div>
+      <div class="part-title">Logística Própria como Unidade de Negócio</div>
+      <div class="part-subtitle">Da frota como custo para a frota como mini plataforma geradora de receita</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>5.1 — O Motoboy Como Ativo, Não Como Custo</h3>
+    <div class="code-block"><span class="comment">// MODELO: 1 motoboy, 2 turnos/dia (11h–13h30 e 18h–20h30)</span>
+
+Entregas médias / dia:       7 entregas
+Frete médio cobrado:         R$ 9,00
+Receita bruta de frete/dia:  <span class="green">R$ 63,00</span>
+
+Custo diário do motoboy:
+  Diária (MEI/PJ):           R$ 90,00
+  Combustível:               R$ 22,00
+  Total:                     R$ 112,00
+
+<span class="amber">Cobertura do custo pelo frete: 56% (R$ 63 / R$ 112)</span>
+<span class="green">Custo real do motoboy para o restaurante: R$ 49,00 / dia</span>
+<span class="comment">→ O frete do cliente financia 56% do custo do motoboy</span></div>
+
+    <h3 style="margin-top:24px;">5.2 — O Modelo "Nunca Volta Vazio"</h3>
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="num">ESTRATÉGIA 01</div>
+        <h4>Batching Manual (Janelas de Despacho)</h4>
+        <p>Criar 3–4 "rodadas" de entrega por turno em vez de despacho individual. Aguardar no máximo 8 minutos para acumular 2 pedidos antes de despachar.</p>
+        <div class="impact">+42% de throughput sem contratar novo motoboy</div>
+      </div>
+      <div class="principle-card">
+        <div class="num">ESTRATÉGIA 02</div>
+        <h4>Aceitar Entregas para Parceiros Vizinhos</h4>
+        <p>Farmácias, padarias e pequenos comércios próximos pagam R$ 10–15 por entrega avulsa. O motoboy passa pela rota natural e coleta sem desvio significativo.</p>
+        <div class="impact">+R$ 400–600/mês de receita nova</div>
+      </div>
+      <div class="principle-card">
+        <div class="num">ESTRATÉGIA 03</div>
+        <h4>Coleta de Retorno ("Reverse Logistics")</h4>
+        <p>Na entrega, o motoboy recolhe embalagens retornáveis ou recolhe insumos de fornecedor próximo. Elimina viagem autônoma de compra futura.</p>
+        <div class="impact">Custo do retorno = zero para o restaurante</div>
+      </div>
+      <div class="principle-card">
+        <div class="num">ESTRATÉGIA 04</div>
+        <h4>Regra do "Mesmo Setor"</h4>
+        <p>Dividir a área de entrega em 4 setores (N, S, L, O). Dois pedidos no mesmo setor → despacho conjunto sempre. Pedidos em setores opostos → despacho separado.</p>
+        <div class="impact">-25% de km total rodado por turno</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px;">5.3 — VRP Simplificado: Roteamento por Nível de Tecnologia</h3>
+    <div class="code-block"><span class="comment">// BENEFÍCIO DO BATCHING MANUAL (2 pedidos no mesmo setor):</span>
+
+Entrega individual:          25 min round-trip
+Entrega agrupada (2 pedidos): 35 min round-trip
+
+Tempo economizado:           <span class="green">15 min</span> (sem viagem de retorno extra)
+Entregas/hora sem batching:  2,4
+Entregas/hora com batching:  <span class="green">3,4  →  +42% de capacidade</span></div>
+  </div>
+
+  <hr>
+
+  <!-- ======================== PARTE 6 ======================== -->
+  <div class="part-header">
+    <div class="part-number purple">P6</div>
+    <div>
+      <div class="part-title">Matriz de Ferramentas e Tecnologias</div>
+      <div class="part-subtitle">SaaS acessíveis que replicam inteligência de marketplace para PMEs</div>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-card">
+      <div class="tool-name">Saipos Delivery</div>
+      <div class="tool-cost">R$ 0–150/mês</div>
+      <div class="tool-desc">Módulo de roteirização nativo para restaurantes brasileiros. Integrado ao PDV com despacho automático.</div>
+      <div class="tool-equiv">🔄 Equivale a: <span>Engine de batching do iFood</span></div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">RoutEasy</div>
+      <div class="tool-cost">R$ 200–500/mês</div>
+      <div class="tool-desc">VRP completo + rastreamento em tempo real + dashboard de performance da frota. Solução brasileira robusta.</div>
+      <div class="tool-equiv">🔄 Equivale a: <span>Logística completa do iFood</span></div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Vuupt</div>
+      <div class="tool-cost">R$ ~200/mês</div>
+      <div class="tool-desc">GPS em tempo real, prova digital de entrega, dashboard de performance. Foco em last-mile brasileiro.</div>
+      <div class="tool-equiv">🔄 Equivale a: <span>"Onde está meu pedido" do app</span></div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Shipday</div>
+      <div class="tool-cost">USD 19–49/mês</div>
+      <div class="tool-desc">Mais acessível. App do motorista intuitivo. Despacho automático. Ótimo para restaurante com 1–3 motoboys.</div>
+      <div class="tool-equiv">🔄 Equivale a: <span>Back-end de despacho da plataforma</span></div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Google Maps (Free)</div>
+      <div class="tool-cost">R$ 0</div>
+      <div class="tool-desc">Inserir múltiplos destinos como "paradas". O Maps otimiza a sequência automaticamente. Reduz 15–25% dos km rodados.</div>
+      <div class="tool-equiv">🔄 Equivale a: <span>Roteamento básico sequencial</span></div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Goomer / Cardápio Web</div>
+      <div class="tool-cost">R$ 99–150/mês</div>
+      <div class="tool-desc">Canal de pedidos próprio sem comissão de marketplace. Integra com pagamento PIX/cartão direto.</div>
+      <div class="tool-equiv">🔄 Equivale a: <span>Frontend do marketplace + gateway</span></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ======================== PARTE 7 ======================== -->
+  <div class="part-header">
+    <div class="part-number orange">P7</div>
+    <div>
+      <div class="part-title">Plano de Maximização de Lucro</div>
+      <div class="part-subtitle">Do frete como custo necessário para o frete como fonte de receita — 3 fases</div>
+    </div>
+  </div>
+
+  <div class="phase-grid">
+    <div class="phase-card phase1">
+      <div class="phase-tag">🔵 Fase 1 — Semanas 1–2</div>
+      <h4>Fundação: Medir para Gerenciar</h4>
+      <ul>
+        <li>Calcular CPE real: custo motoboy ÷ entregas/mês</li>
+        <li>Mapear Frete Médio Cobrado por entrega</li>
+        <li>Calcular Margem Logística atual</li>
+        <li>Identificar 5 endereços mais frequentes (oportunidade de batching)</li>
+      </ul>
+      <div class="metric-box">
+Exemplo de Baseline:
+  Custo motoboy/mês:  R$ 3.000
+  Entregas/mês:       180
+  CPE:                R$ 16,67
+  Frete médio:        R$ 7,00
+  Margem logística:   -R$ 9,67 (PREJUÍZO)
+      </div>
+    </div>
+
+    <div class="phase-card phase2">
+      <div class="phase-tag">🟡 Fase 2 — Semanas 3–8</div>
+      <h4>Otimização: Aumentar Eficiência</h4>
+      <ul>
+        <li>Implementar janelas de despacho (3–4 rodadas/turno)</li>
+        <li>Regra do batching: nunca despachar 1 pedido só se há 2 prontos</li>
+        <li>Ajustar frete para cobrir 60–80% do CPE</li>
+        <li>Implementar frete dinâmico (3 categorias)</li>
+        <li>Testar rota de retorno carregado</li>
+      </ul>
+      <div class="metric-box">
+Nova métrica esperada:
+  Entregas/mês:       230 (+28%)
+  CPE:                R$ 13,04
+  Frete ajustado:     R$ 10,50
+  Margem logística:   -R$ 2,54 (quase breakeven)
+      </div>
+    </div>
+
+    <div class="phase-card phase3">
+      <div class="phase-tag">🟢 Fase 3 — Mês 3+</div>
+      <h4>Monetização: Frete Como Lucro</h4>
+      <ul>
+        <li>Implementar software de roteirização (−15–25% CPE)</li>
+        <li>Expandir raio com frete premium</li>
+        <li>Aceitar 1–2 entregas/dia para parceiros (R$ 12–15 cada)</li>
+        <li>Criar programa "Entrega Garantida" (+R$ 2 por SLA)</li>
+        <li>Rastreamento ao cliente via WhatsApp automático</li>
+      </ul>
+      <div class="metric-box">
+Projeção Fase 3:
+  Entregas próprias:     260/mês
+  Entregas parcerias:    40/mês (R$ 480)
+  CPE:                   R$ 10,50
+  Frete médio:           R$ 11,00
+  Margem logística:      +R$ 130/mês
+  Receita parcerias:     +R$ 480/mês
+  ─────────────────────────────────
+  SWING TOTAL:           +R$ 2.350/mês
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ======================== PARTE 8 ======================== -->
+  <div class="part-header">
+    <div class="part-number blue">P8</div>
+    <div>
+      <div class="part-title">Elasticidade de Preço do Frete</div>
+      <div class="part-subtitle">Até onde o cliente aceita pagar — e os fatores que aumentam essa tolerância</div>
+    </div>
+  </div>
+
+  <div class="section" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;">
+    <div class="elasticity-item">
+      <div style="font-weight:700;color:var(--accent3);">R$ 0 (grátis)</div>
+      <div><div class="elast-bar"><div class="elast-fill" style="width:100%;background:var(--accent3);"></div></div></div>
+      <div class="elast-note">Elástico — Conversão máxima; insustentável sem escala</div>
+    </div>
+    <div class="elasticity-item">
+      <div style="font-weight:700;color:var(--accent3);">R$ 5–7</div>
+      <div><div class="elast-bar"><div class="elast-fill" style="width:80%;background:var(--accent3);"></div></div></div>
+      <div class="elast-note">✅ Zona de conforto — percebido como "justo"</div>
+    </div>
+    <div class="elasticity-item">
+      <div style="font-weight:700;color:var(--accent-warn);">R$ 8–10</div>
+      <div><div class="elast-bar"><div class="elast-fill" style="width:60%;background:var(--accent-warn);"></div></div></div>
+      <div class="elast-note">✅ Aceitável se comunicado — igual ao marketplace</div>
+    </div>
+    <div class="elasticity-item">
+      <div style="font-weight:700;color:var(--accent-warn);">R$ 11–14</div>
+      <div><div class="elast-bar"><div class="elast-fill" style="width:40%;background:var(--accent-warn);"></div></div></div>
+      <div class="elast-note">⚠️ Precisa de justificativa clara (clima, distância, garantia)</div>
+    </div>
+    <div class="elasticity-item">
+      <div style="font-weight:700;color:var(--accent-danger);">R$ 15+</div>
+      <div><div class="elast-bar"><div class="elast-fill" style="width:20%;background:var(--accent-danger);"></div></div></div>
+      <div class="elast-note">🔴 Perda de conversão significativa — usar só em casos extremos</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ======================== SÍNTESE FINAL ======================== -->
+  <div class="part-header">
+    <div class="part-number green">🎯</div>
+    <div>
+      <div class="part-title">Síntese: Os 7 Princípios Transpostos</div>
+      <div class="part-subtitle">Do marketplace para a frota própria — tabela de impacto consolidada</div>
+    </div>
+  </div>
+
+  <div class="summary-principles">
+    <div class="sp-header">
+      <div>Princípio do Marketplace</div>
+      <div>Versão para Restaurante Próprio</div>
+      <div>Impacto Estimado</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-principle">1. Agrupamento (Batching)</div>
+      <div class="sp-action">Janelas de despacho + regra do lote mínimo 2 pedidos</div>
+      <div class="sp-impact">+28–42% throughput</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-principle">2. Spread de Frete</div>
+      <div class="sp-action">Precificar frete para cobrir 80–110% do CPE</div>
+      <div class="sp-impact">De prejuízo a lucro logístico</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-principle">3. Precificação Dinâmica</div>
+      <div class="sp-action">3 perfis de frete: Normal / Pico / Clima</div>
+      <div class="sp-impact">+R$ 200–500/mês</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-principle">4. Gamificação de Entregadores</div>
+      <div class="sp-action">Sistema de metas semanais com bônus por faixa</div>
+      <div class="sp-impact">+15–20% de produtividade</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-principle">5. Segregação de Raios</div>
+      <div class="sp-action">Raio curto = plataforma; raio longo = frota própria</div>
+      <div class="sp-impact">Elimina custo logístico de entregas longas</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-principle">6. Logística como Negócio</div>
+      <div class="sp-action">Aceitar entregas para 2–3 parceiros vizinhos</div>
+      <div class="sp-impact">+R$ 400–600/mês receita nova</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-principle">7. Concentração de Demanda</div>
+      <div class="sp-action">Concentrar pedidos em turnos definidos; não operar disperso</div>
+      <div class="sp-impact">-20% custo fixo do motoboy</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ALERTAS E RISCOS -->
+  <div class="part-header">
+    <div class="part-number red">⚠️</div>
+    <div>
+      <div class="part-title">Alertas e Riscos</div>
+    </div>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-item">
+      <div class="risk-sev">💸</div>
+      <div>
+        <div class="risk-title">Frete alto faz cliente voltar para o marketplace</div>
+        <div class="risk-mitigation"><span class="risk-mit-label">Mitigação:</span> Manter frete ≤ frete do marketplace no mesmo raio. Monitorar semanalmente</div>
+      </div>
+      <div class="risk-sev-text critical">🔴 Crítico</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-sev">⏱️</div>
+      <div>
+        <div class="risk-title">Batching atrasa entrega e derruba avaliação do restaurante</div>
+        <div class="risk-mitigation"><span class="risk-mit-label">Mitigação:</span> SLA máximo de espera por lote: 8–10 minutos. Comunicar ao cliente o horário previsto</div>
+      </div>
+      <div class="risk-sev-text attention">🟡 Atenção</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-sev">💰</div>
+      <div>
+        <div class="risk-title">Motoboy com custo fixo alto e baixa eficiência (poucas entregas/dia)</div>
+        <div class="risk-mitigation"><span class="risk-mit-label">Mitigação:</span> Definir mínimo de entregas/dia. Calcular CPE semanalmente e ajustar se necessário</div>
+      </div>
+      <div class="risk-sev-text critical">🔴 Crítico</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-sev">⚖️</div>
+      <div>
+        <div class="risk-title">Precariedade legal na contratação de motoboy</div>
+        <div class="risk-mitigation"><span class="risk-mit-label">Mitigação:</span> Formalizar como MEI prestador de serviços; evitar vínculo empregatício tácito</div>
+      </div>
+      <div class="risk-sev-text attention">🟡 Atenção</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-sev">📦</div>
+      <div>
+        <div class="risk-title">Entregas para parceiros comprometem pontualidade dos pedidos próprios</div>
+        <div class="risk-mitigation"><span class="risk-mit-label">Mitigação:</span> Entregas de parcerias somente após pedidos do restaurante despachados. Prioridade sempre interna</div>
+      </div>
+      <div class="risk-sev-text attention">🟡 Atenção</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="logo">Synkra AIOS <span>CFO Squad</span> — Gerente Geral</div>
+  <div>Deep Research · Monetização Logística · 2026-04-18</div>
+  <div>Próxima revisão: após 90 dias de implementação</div>
+</div>
+
+</body>
+</html>

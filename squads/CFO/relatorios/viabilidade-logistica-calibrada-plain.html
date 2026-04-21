@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Relatório Logístico Calibrado — Dados Reais iFood</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      color: #000;
+      background: #fff;
+      padding: 2cm 2.5cm;
+      line-height: 1.5;
+    }
+    h1 { font-size: 18pt; margin-bottom: 4px; }
+    h2 { font-size: 13pt; margin: 28px 0 8px; border-bottom: 2px solid #000; padding-bottom: 4px; }
+    h3 { font-size: 11pt; margin: 16px 0 6px; }
+    p  { margin-bottom: 8px; }
+
+    .meta { font-size: 9pt; color: #444; margin-bottom: 24px; }
+    .meta span { margin-right: 24px; }
+
+    /* KPIs inline */
+    .kpi-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0 20px; }
+    .kpi { border: 1px solid #000; padding: 8px 12px; flex: 1; min-width: 140px; }
+    .kpi-label { font-size: 8pt; text-transform: uppercase; letter-spacing: .04em; color: #555; }
+    .kpi-value { font-size: 16pt; font-weight: bold; }
+    .kpi-note  { font-size: 8pt; color: #555; }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 10pt; }
+    th {
+      background: #eee;
+      border: 1px solid #999;
+      padding: 6px 8px;
+      text-align: left;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    td { border: 1px solid #bbb; padding: 6px 8px; }
+    tr:nth-child(even) td { background: #f9f9f9; }
+
+    /* Highlight rows */
+    .row-highlight td { background: #f0f7ff !important; font-weight: bold; }
+    .row-strong td { background: #e8f5e9 !important; }
+
+    /* Pre / monospace blocks */
+    pre {
+      background: #f4f4f4;
+      border-left: 4px solid #555;
+      padding: 10px 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 9.5pt;
+      white-space: pre-wrap;
+      margin: 10px 0 16px;
+    }
+
+    /* Note boxes */
+    .note {
+      border-left: 4px solid #555;
+      background: #f4f4f4;
+      padding: 8px 12px;
+      margin: 10px 0 16px;
+      font-size: 10pt;
+    }
+    .note-ok  { border-color: #2e7d32; background: #f1f8f1; }
+    .note-warn{ border-color: #f57f17; background: #fffde7; }
+    .note-info{ border-color: #1565c0; background: #e8f0fe; }
+
+    /* Two-column batch compare */
+    .two-col { display: flex; gap: 16px; margin: 10px 0 16px; }
+    .col { flex: 1; border: 1px solid #999; padding: 10px 12px; }
+    .col h4 { font-size: 10pt; margin-bottom: 8px; }
+    .col-line { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 3px 0; font-size: 10pt; }
+    .col-line.total { font-weight: bold; border-bottom: none; border-top: 2px solid #999; margin-top: 4px; padding-top: 6px; }
+
+    /* Scenario grid */
+    .scenario-grid { display: flex; gap: 12px; margin: 10px 0 16px; }
+    .scenario { flex: 1; border: 1px solid #999; padding: 10px 12px; }
+    .scenario.alvo { border: 2px solid #000; }
+    .scenario-title { font-size: 9pt; text-transform: uppercase; letter-spacing: .04em; color: #555; }
+    .scenario-number { font-size: 22pt; font-weight: bold; line-height: 1; margin: 4px 0; }
+    .scenario-sub { font-size: 8.5pt; color: #666; margin-bottom: 8px; }
+    .s-line { display: flex; justify-content: space-between; font-size: 9.5pt; padding: 2px 0; border-bottom: 1px solid #eee; }
+    .s-line:last-child { border-bottom: none; }
+
+    /* Page break hint */
+    .page-break { page-break-before: always; }
+
+    footer { margin-top: 32px; padding-top: 12px; border-top: 1px solid #999; font-size: 8.5pt; color: #666; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <h1>Relatório Logístico Calibrado — Dados Reais iFood</h1>
+  <div class="meta">
+    <span>Gerado por: CFO Squad — Gerente Geral</span>
+    <span>Data: 19 de Abril de 2026</span>
+    <span>Base: Tabela real Entrega Parceira iFood</span>
+  </div>
+
+  <!-- TOP KPIs -->
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-label">Frete Médio Real (iFood)</div>
+      <div class="kpi-value">R$ 7,38</div>
+      <div class="kpi-note">Média ponderada da sua tabela</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">iFood retém por entrega</div>
+      <div class="kpi-value">39%</div>
+      <div class="kpi-note">≈ R$ 2,88 seu — sem ver nada</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Você pode reter (pool)</div>
+      <div class="kpi-value">46%</div>
+      <div class="kpi-note">Com 60% de batching duplo</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Margem mensal (50 ped/dia)</div>
+      <div class="kpi-value">R$ 4.160</div>
+      <div class="kpi-note">vs. R$ 0 atual (iFood leva tudo)</div>
+    </div>
+  </div>
+
+  <!-- PARTE 1 -->
+  <h2>Parte 1 — Sua Tabela Real de Frete + Engenharia Reversa</h2>
+
+  <div class="note note-info">
+    <strong>O que é Entrega Parceira:</strong> o iFood envia seus próprios motoboys e cobra o frete do cliente. Você não vê essa receita. No canal próprio, você cobra esse frete e paga o pool — ficando com o spread que hoje vai para o iFood.
+  </div>
+
+  <p>
+    Regra de estimativa aplicada: iFood retém 39% do frete e repassa 61% ao motoboy.
+    Referência auditada: entrega de 3km = R$ 9,00 cobrado, R$ 5,50 repasse = 61%.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Raio</th>
+        <th>Tempo iFood</th>
+        <th>Taxa ao Cliente</th>
+        <th>Est. Motoboy (61%)</th>
+        <th>Margem iFood (39%)</th>
+        <th>Zona</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>0,5 km</td><td>26 min</td><td><b>R$ 4,99</b></td><td>R$ 3,04</td><td>R$ 1,95</td><td>A</td></tr>
+      <tr><td>1,0 km</td><td>30 min</td><td><b>R$ 4,99</b></td><td>R$ 3,04</td><td>R$ 1,95</td><td>A</td></tr>
+      <tr><td>1,5 km</td><td>32 min</td><td><b>R$ 6,99</b></td><td>R$ 4,26</td><td>R$ 2,73</td><td>B</td></tr>
+      <tr><td>2,0 km</td><td>33 min</td><td><b>R$ 6,99</b></td><td>R$ 4,26</td><td>R$ 2,73</td><td>B</td></tr>
+      <tr><td>2,5 km</td><td>34 min</td><td><b>R$ 7,99</b></td><td>R$ 4,87</td><td>R$ 3,12</td><td>B</td></tr>
+      <tr><td>3,0 km</td><td>36 min</td><td><b>R$ 7,99</b></td><td>R$ 4,87</td><td>R$ 3,12</td><td>B</td></tr>
+      <tr><td>3,5 km</td><td>37 min</td><td><b>R$ 8,99</b></td><td>R$ 5,48</td><td>R$ 3,51</td><td>C</td></tr>
+      <tr><td>4,0 km</td><td>38 min</td><td><b>R$ 8,99</b></td><td>R$ 5,48</td><td>R$ 3,51</td><td>C</td></tr>
+      <tr><td>4,5 km</td><td>39 min</td><td><b>R$ 10,99</b></td><td>R$ 6,70</td><td>R$ 4,29</td><td>C</td></tr>
+      <tr class="row-highlight"><td>5,0 km</td><td>40 min</td><td><b>R$ 10,99</b></td><td>R$ 6,70</td><td>R$ 4,29</td><td>C</td></tr>
+    </tbody>
+  </table>
+
+  <pre>ANÁLISE DO TEMPO (o que os dados revelam):
+0,5km → 26min | 5,0km → 40min | diferença = 14min em 4,5km de distância
+Conclusão: o tempo é dominado pelo preparo (~22–24 min).
+O motoboy em si gasta apenas ~4 min em 0,5km → ~16 min em 5km.
+
+Tempo real de trânsito estimado (sem preparo):
+  Zona A (0–1 km):  4–8 min ida   →  8–16 min ida+volta
+  Zona B (1–3 km):  8–14 min ida  → 16–28 min ida+volta
+  Zona C (3–5 km): 14–20 min ida  → 28–40 min ida+volta</pre>
+
+  <!-- PARTE 2 -->
+  <h2>Parte 2 — As 3 Zonas de Entrega (Simplificadas)</h2>
+  <p>Em vez de 10 faixas, o pool opera com 3 zonas fixas acordadas no recrutamento.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Zona</th>
+        <th>Raio</th>
+        <th>Frete iFood</th>
+        <th>Frete Canal Próprio</th>
+        <th>Pago ao Motoboy</th>
+        <th>Margem Restaurante</th>
+        <th>Margem %</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Zona A</b></td><td>0–1 km</td><td>R$ 4,99</td><td><b>R$ 4,50</b></td><td><b>R$ 2,80</b></td><td><b>R$ 1,70</b></td><td>38%</td></tr>
+      <tr><td><b>Zona B</b></td><td>1–3 km</td><td>R$ 6,99–7,99</td><td><b>R$ 7,00</b></td><td><b>R$ 4,50</b></td><td><b>R$ 2,50</b></td><td>36%</td></tr>
+      <tr><td><b>Zona C</b></td><td>3–5 km</td><td>R$ 8,99–10,99</td><td><b>R$ 9,50</b></td><td><b>R$ 6,00</b></td><td><b>R$ 3,50</b></td><td>37%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-ok">
+    <strong>Regra de ouro:</strong> o frete do canal próprio é sempre igual ou abaixo do iFood.
+    Argumento para o cliente: "mais barato e paga no PIX sem taxa de serviço."
+  </div>
+
+  <!-- PARTE 3 -->
+  <h2>Parte 3 — Tabela de Pagamento do Pool (Combinada no Recrutamento)</h2>
+  <p>Acordada uma única vez. Durante a operação: sem negociação, sem explicação — apenas o número final.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Configuração da Saída</th>
+        <th>Pago ao Motoboy</th>
+        <th>Receita Restaurante</th>
+        <th>Margem por Saída</th>
+        <th>Margem por Pedido</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1 pedido — Zona A</td><td><b>R$ 2,80</b></td><td>R$ 4,50</td><td>R$ 1,70</td><td>R$ 1,70 (38%)</td></tr>
+      <tr><td>1 pedido — Zona B</td><td><b>R$ 4,50</b></td><td>R$ 7,00</td><td>R$ 2,50</td><td>R$ 2,50 (36%)</td></tr>
+      <tr><td>1 pedido — Zona C</td><td><b>R$ 6,00</b></td><td>R$ 9,50</td><td>R$ 3,50</td><td>R$ 3,50 (37%)</td></tr>
+      <tr class="row-strong"><td><b>2 pedidos — duplo (qualquer zona)</b></td><td><b>Zona + R$ 3,00</b></td><td>Frete × 2</td><td>+R$ 4–6 acima do simples</td><td>43–50%</td></tr>
+      <tr class="row-strong"><td><b>3 pedidos — triplo (qualquer zona)</b></td><td><b>Zona + R$ 5,00</b></td><td>Frete × 3</td><td>+R$ 9–14 acima do simples</td><td>52–57%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>Regra do bônus de batching:</strong> para cada pedido adicional na saída, o motoboy recebe R$ 2,50 a mais.
+    Exemplo Zona B duplo: R$ 4,50 + R$ 3,00 = R$ 7,50.
+    Você não explica a fórmula — você diz: "2 pedidos = R$ 7,50. 3 pedidos = R$ 9,50."
+  </div>
+
+  <!-- PARTE 4 -->
+  <h2 class="page-break">Parte 4 — A Economia do Batching (Seus Números Reais)</h2>
+  <p>Comparativo: 2 pedidos Zona B saindo <em>separados</em> vs. <em>agrupados</em>.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <h4>SEM Batching — 2 Saídas Separadas</h4>
+      <div class="col-line"><span>Frete cliente A (Zona B)</span><span>R$ 7,00</span></div>
+      <div class="col-line"><span>Pago motoboy — saída 1</span><span>– R$ 4,50</span></div>
+      <div class="col-line"><span>Margem saída 1</span><span>R$ 2,50</span></div>
+      <div class="col-line"><span>Frete cliente B (Zona B)</span><span>R$ 7,00</span></div>
+      <div class="col-line"><span>Pago motoboy — saída 2</span><span>– R$ 4,50</span></div>
+      <div class="col-line"><span>Margem saída 2</span><span>R$ 2,50</span></div>
+      <div class="col-line total"><span>MARGEM TOTAL (2 pedidos)</span><span>R$ 5,00</span></div>
+      <div class="col-line"><span>Tempo motoboy</span><span>~44 min</span></div>
+      <div class="col-line"><span>Motoboy ganha / hora</span><span>R$ 12,27/h</span></div>
+    </div>
+    <div class="col">
+      <h4>COM Batching — 1 Saída Dupla</h4>
+      <div class="col-line"><span>Frete cliente A (Zona B)</span><span>R$ 7,00</span></div>
+      <div class="col-line"><span>Frete cliente B (Zona B)</span><span>R$ 7,00</span></div>
+      <div class="col-line"><span>Total coletado</span><span><b>R$ 14,00</b></span></div>
+      <div class="col-line"><span>Pago motoboy — saída dupla</span><span>– R$ 7,50</span></div>
+      <div class="col-line total"><span>MARGEM TOTAL (2 pedidos)</span><span><b>R$ 6,50</b></span></div>
+      <div class="col-line"><span>Diferença vs. separado</span><span><b>+R$ 1,50 extra</b></span></div>
+      <div class="col-line"><span>Tempo motoboy</span><span>~30 min</span></div>
+      <div class="col-line"><span>Motoboy ganha / hora</span><span><b>R$ 15,00/h (+R$ 2,73)</b></span></div>
+    </div>
+  </div>
+
+  <div class="note note-ok">
+    Com batching duplo, o restaurante captura <strong>R$ 1,50 a mais</strong> por par de pedidos.
+    O motoboy ganha <strong>R$ 2,73/h a mais</strong>. Nenhum dos dois perde.
+  </div>
+
+  <pre>GANHO DO MOTOBOY POR HORA — COMPARATIVO COMPLETO:
+──────────────────────────────────────────────────────────────
+Saída simples Zona B:
+  Tempo: ~22 min  |  Recebe: R$ 4,50  |  = R$ 12,27/h
+
+Saída dupla Zona B (2 pedidos):
+  Tempo: ~30 min  |  Recebe: R$ 7,50  |  = R$ 15,00/h  ← PONTO ÓTIMO
+
+Saída tripla Zona B (3 pedidos):
+  Tempo: ~40 min  |  Recebe: R$ 9,50  |  = R$ 14,25/h
+
+→ Argumento no recrutamento:
+  "Com o nosso volume, você vai sempre sair com 2 pedidos.
+   Isso dá ~R$ 15/h — mais que em loja com pouco movimento."</pre>
+
+  <!-- PARTE 5 -->
+  <h2>Parte 5 — Cenários de Viabilidade</h2>
+  <p>
+    Premissas: frete médio = R$ 7,38 (sua tabela real). Distribuição: 20% Zona A, 55% Zona B, 25% Zona C.
+    Batching: 30% simples + 60% duplo + 10% triplo. 26 dias/mês.
+  </p>
+
+  <div class="scenario-grid">
+    <div class="scenario">
+      <div class="scenario-title">Cenário A</div>
+      <div class="scenario-number">25</div>
+      <div class="scenario-sub">pedidos / dia — Fase Inicial</div>
+      <div class="s-line"><span>Frete arrecadado/dia</span><span>R$ 184,50</span></div>
+      <div class="s-line"><span>Pago ao pool/dia</span><span>R$ 105,00</span></div>
+      <div class="s-line"><span><b>Margem frete/dia</b></span><span><b>R$ 79,50</b></span></div>
+      <div class="s-line"><span><b>Margem frete/mês</b></span><span><b>R$ 2.067</b></span></div>
+      <div class="s-line"><span>Pool necessário</span><span>3–4 cadastrados</span></div>
+      <div class="s-line"><span>vs. Motoboy fixo</span><span>+R$ 832/mês</span></div>
+    </div>
+    <div class="scenario alvo">
+      <div class="scenario-title">Cenário B — ALVO ★</div>
+      <div class="scenario-number">50</div>
+      <div class="scenario-sub">pedidos / dia — Operação Plena</div>
+      <div class="s-line"><span>Frete arrecadado/dia</span><span>R$ 369,00</span></div>
+      <div class="s-line"><span>Pago ao pool/dia</span><span>R$ 209,00</span></div>
+      <div class="s-line"><span><b>Margem frete/dia</b></span><span><b>R$ 160,00</b></span></div>
+      <div class="s-line"><span><b>Margem frete/mês</b></span><span><b>R$ 4.160</b></span></div>
+      <div class="s-line"><span>Pool necessário</span><span>5–6 cadastrados</span></div>
+      <div class="s-line"><span>vs. Motoboy fixo</span><span>+R$ 1.950/mês</span></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-title">Cenário C</div>
+      <div class="scenario-number">100</div>
+      <div class="scenario-sub">pedidos / dia — Escala</div>
+      <div class="s-line"><span>Frete arrecadado/dia</span><span>R$ 738,00</span></div>
+      <div class="s-line"><span>Pago ao pool/dia</span><span>R$ 418,00</span></div>
+      <div class="s-line"><span><b>Margem frete/dia</b></span><span><b>R$ 320,00</b></span></div>
+      <div class="s-line"><span><b>Margem frete/mês</b></span><span><b>R$ 8.320</b></span></div>
+      <div class="s-line"><span>Pool necessário</span><span>8–10 cadastrados</span></div>
+      <div class="s-line"><span>vs. Motoboy fixo</span><span>+R$ 288/mês</span></div>
+    </div>
+  </div>
+
+  <!-- PARTE 6 -->
+  <h2>Parte 6 — Você vs. iFood: Quem Retém Mais do Frete?</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Configuração</th>
+        <th>Frete Cliente</th>
+        <th>Motoboy Recebe</th>
+        <th>Plataforma / Restaurante Fica</th>
+        <th>Spread %</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>iFood — Entrega Parceira (hoje)</td>
+        <td>R$ 7,38 (média)</td>
+        <td>R$ 4,50 (61%)</td>
+        <td><b>R$ 2,88 — iFood fica</b></td>
+        <td>39%</td>
+      </tr>
+      <tr>
+        <td>Canal Próprio — Saída Simples</td>
+        <td>R$ 7,20 (média)</td>
+        <td>R$ 4,25 (59%)</td>
+        <td><b>R$ 2,95 — você fica</b></td>
+        <td>41%</td>
+      </tr>
+      <tr class="row-strong">
+        <td><b>Canal Próprio — Batching Duplo (60% dos casos)</b></td>
+        <td>R$ 14,40 / saída</td>
+        <td>R$ 7,50 (52%)</td>
+        <td><b>R$ 6,90 / saída — você fica</b></td>
+        <td><b>48%</b></td>
+      </tr>
+      <tr class="row-strong">
+        <td><b>Canal Próprio — Batching Triplo (10%)</b></td>
+        <td>R$ 21,60 / saída</td>
+        <td>R$ 9,50 (44%)</td>
+        <td><b>R$ 12,10 / saída — você fica</b></td>
+        <td><b>56%</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note note-ok">
+    Com batching duplo você captura <strong>48% do frete</strong> — muito acima dos 39% que o iFood captura hoje.
+    Em 50 pedidos/dia, isso equivale a <strong>R$ 4.160/mês</strong> de receita de frete que hoje fica com a plataforma.
+  </div>
+
+  <!-- PARTE 7 -->
+  <h2>Parte 7 — Script de Recrutamento do Pool</h2>
+
+  <pre>SCRIPT (WhatsApp ou presencial):
+────────────────────────────────────────────────────────
+"Aqui no restaurante funciona assim:
+
+  Saiu com 1 pedido:   você recebe R$ 4,50 (até 3km)
+  Saiu com 2 pedidos:  você recebe R$ 7,50
+  Saiu com 3 pedidos:  você recebe R$ 9,50
+
+  A maioria das saídas é com 2 pedidos juntos.
+  Dá em torno de R$ 15/hora trabalhado.
+  Não tem espera: chegou, pegou, foi.
+  Paga todo dia no encerramento do turno.
+
+  Formalização como MEI obrigatória.
+  Interessa?"
+────────────────────────────────────────────────────────
+IMPORTANTE: não mencione "km excedente", "zona" ou qualquer
+cálculo. O motoboy decide pelo número que vai receber e
+pela frequência de saída — não pela fórmula por trás.</pre>
+
+  <!-- SÍNTESE -->
+  <h2>Síntese Executiva — Os 5 Números que Definem o Modelo</h2>
+
+  <table>
+    <thead>
+      <tr><th>Indicador</th><th>Valor</th><th>Observação</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Frete médio ponderado (dados reais iFood)</td><td><b>R$ 7,38</b></td><td>Calculado da tabela real</td></tr>
+      <tr><td>Pagamento médio pool / pedido simples</td><td><b>R$ 4,25</b></td><td>Média: 20% Zona A, 55% B, 25% C</td></tr>
+      <tr><td>Pagamento médio pool / pedido com batching</td><td><b>R$ 3,75</b></td><td>R$ 7,50 ÷ 2 pedidos por saída</td></tr>
+      <tr><td>Margem por pedido (mix 60% batching)</td><td><b>R$ 3,40</b></td><td>46% do frete arrecadado</td></tr>
+      <tr class="row-strong"><td>Margem total / mês (50 ped/dia, 26 dias)</td><td><b>R$ 4.420</b></td><td>vs. R$ 2.210 com motoboy fixo</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-info">
+    <strong>Próximos Passos:</strong>
+    (1) Simplificar para 2 zonas operacionais: 0–3km (Zona B) e 3–5km (Zona C), descartando Zona A para operação inicial.
+    (2) Recrutar pool inicial de 4 motoboys e operar 1 semana no modelo padrão.
+    (3) Na semana 3, migrar para a tabela pool quando o volume já for visível para os motoboys.
+    (4) Formalizar todos via MEI antes da primeira operação recorrente.
+  </div>
+
+  <footer>
+    Relatório Logístico Calibrado — CFO Squad | Synkra AIOS | Abril 2026
+    Base: Tabela real de frete iFood + Engenharia Reversa aplicada
+  </footer>
+
+</body>
+</html>

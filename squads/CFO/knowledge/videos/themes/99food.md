@@ -1,9 +1,11 @@
 ---
 theme: "99food"
 description: "Estratégias e insights extraídos de lives sobre a plataforma 99Food"
-date_last_updated: "2026-04-15"
+date_last_updated: "2026-04-17"
 sources:
   - "Live iFood e Tendencias Marketplace 2026 (https://youtu.be/WEPLSs-0nUI)"
+  - "Trabalha muito, mas não vê dinheiro, não ter vida (https://youtu.be/_MMDw426caI)"
+  - "Segredo para vender muito no iFood (https://www.youtube.com/watch?v=3GhYz8Yc9oM)"
 ---
 
 # 📚 Tema: Estratégias na Plataforma 99Food
@@ -54,4 +56,20 @@ Um concorrente citado na live tem cardápio bagunçado, operação em caos, mas 
 Quando a operação é consistente e o pedido sai rápido, os motoboys aprendem que ali é um ponto confiável. Eles chegam antes da loja até abrir e ficam esperando. **A fila de motoboys na porta = prova social do algoritmo valorizar sua loja.**
 - **Ação Prática:** Ofereça café, água, boa recepção ao motoboy. A relação com o entregador impacta diretamente na rapidez da coleta e na sua reputação na plataforma.
 > 🔗 Fonte: [Live iFood e Tendencias Marketplace 2026](https://youtu.be/WEPLSs-0nUI?t=3005s) | Processado em: `2026-04-15`
+---
+### 7. Aproveite as Promoções Subsidiadas (Até 50%)
+A 99Food é agressiva em subsídios. Existem campanhas (ex: "Hamburger Day" ou promoções de 40%) onde a plataforma banca até 50% do desconto. Isso permite que o restaurante mantenha uma margem alta enquanto oferece um preço imbatível pro cliente final.
+- **Ação Prática:** Monitore diariamente a aba de promoções. Se houver subsídio >20%, ative imediatamente. É a forma mais barata de ganhar volume e "viciar" o algoritmo na sua loja.
+> 🔗 Fonte: [Trabalha muito, não vê dinheiro](https://youtu.be/_MMDw426caI?t=3605s) | Processado em: `2026-04-17`
+---
+
+### 8. O Algoritmo Tenta Te "Quebrar" Para Te Conhecer
+O computador da 99Food trabalha com números: ele envia demanda crescente (10, 20, 50 pedidos) até você "enroscar" (atrasar ou dar gargalo). Quando ele encontra seu limite, ele estabiliza o envio naquele volume. Se você quer subir de nível (ex: de 100 para 200 pedidos), sua cozinha precisa estar pronta para produzir o novo volume SEM ATRASOS na primeira tentativa de transbordo.
+- **Ação Prática:** Garanta que sua linha de produção aguenta 2x o volume atual antes de pedir/ativar campanhas de alto giro. O algoritmo premia previsibilidade matemática.
+> 🔗 Fonte: [Trabalha muito, não vê dinheiro](https://youtu.be/_MMDw426caI?t=2182s) | Processado em: `2026-04-17`
+---
+### 9. Ativação Manual de Anúncios Gratuitos
+Diferente de outras plataformas, na 99Food, mesmo quando você ganha créditos ou períodos de anúncio gratuito (por boa performance ou novos cadastros), o benefício **não entra automaticamente**. É necessário realizar a ativação manual.
+- **Ação Prática:** Verifique periodicamente a aba "Pontuação de Qualidade" no portal. Se houver selos de performance ou dias de destaque gratuito ativos, clique em ativar. Muitos restaurantes perdem visibilidade gratuita por falta deste check manual.
+> 🔗 Fonte: [Segredo para vender muito no iFood](https://youtu.be/3GhYz8Yc9oM?t=4528s) | Processado em: `2026-04-18`
 ---
