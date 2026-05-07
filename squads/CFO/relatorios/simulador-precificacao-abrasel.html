@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Precificação Abrasel</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: #e2e8f0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #cbd5e1;
+        }
+
+        .form-group .hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-prefix, .input-suffix {
+            position: absolute;
+            color: var(--text-muted);
+            padding: 0 0.75rem;
+        }
+
+        .input-suffix {
+            right: 0;
+        }
+
+        input {
+            width: 100%;
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        input.with-prefix { padding-left: 2.5rem; }
+        input.with-suffix { padding-right: 2.5rem; }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .results {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #0f172a;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--border);
+        }
+
+        .result-item.cmv { border-left-color: var(--warning); }
+        .result-item.cmo { border-left-color: #3b82f6; }
+        .result-item.rent { border-left-color: #8b5cf6; }
+        .result-item.taxes { border-left-color: #ec4899; }
+        .result-item.marketing { border-left-color: #f97316; }
+        .result-item.profit { 
+            border-left-color: var(--success);
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+
+        .result-item.profit.loss {
+            border-left-color: var(--danger);
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .result-label {
+            font-weight: 500;
+        }
+
+        .result-values {
+            text-align: right;
+        }
+
+        .result-money {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .result-percent {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            margin-left: 0.5rem;
+            font-weight: bold;
+        }
+
+        .badge.ok { background-color: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .badge.warn { background-color: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .badge.danger { background-color: rgba(239, 68, 68, 0.2); color: var(--danger); }
+
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background-color: var(--bg-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            margin-top: 1.5rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .progress-segment {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            transition: width 0.3s ease;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn:hover { background-color: var(--primary-hover); }
+
+        .scenario-box {
+            background-color: rgba(37, 99, 235, 0.1);
+            border: 1px dashed var(--primary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Simulador Estratégico de Precificação</h1>
+        <p>Baseado nos indicadores da Abrasel (CMV, CMO, Aluguel, etc.)</p>
+    </div>
+
+    <div class="grid">
+        <!-- Coluna de Inputs -->
+        <div class="card">
+            <h2>1. Dados do Prato & Custos</h2>
+            
+            <div class="form-group">
+                <label>Preço de Venda do Prato</label>
+                <div class="input-wrapper">
+                    <span class="input-prefix">R$</span>
+                    <input type="number" id="precoVenda" value="30.00" step="0.50" class="with-prefix" oninput="calculate()">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Custo dos Ingredientes (R$)</label>
+                <span class="hint">O valor real pago pelos insumos do prato</span>
+                <div class="input-wrapper">
+                    <span class="input-prefix">R$</span>
+                    <input type="number" id="custoInsumos" value="10.50" step="0.10" class="with-prefix" oninput="calculate()">
+                </div>
+            </div>
+
+            <h2 style="margin-top: 2rem;">2. Variáveis de Operação (%)</h2>
+            <span class="hint" style="margin-bottom: 1rem;">Ajuste os percentuais conforme a realidade do seu restaurante. Os valores padrão são as médias Abrasel.</span>
+
+            <div class="form-group">
+                <label>Mão de Obra (CMO) - Abrasel: 25% a 30%</label>
+                <div class="input-wrapper">
+                    <input type="number" id="pctCmo" value="25" step="0.5" class="with-suffix" oninput="calculate()">
+                    <span class="input-suffix">%</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Aluguel / Ocupação - Abrasel: 5% a 10%</label>
+                <div class="input-wrapper">
+                    <input type="number" id="pctAluguel" value="8" step="0.5" class="with-suffix" oninput="calculate()">
+                    <span class="input-suffix">%</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Impostos (Simples) e Taxas (Cartão/iFood)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="pctTaxas" value="12" step="0.5" class="with-suffix" oninput="calculate()">
+                    <span class="input-suffix">%</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Marketing & Outras Despesas Fixas</label>
+                <div class="input-wrapper">
+                    <input type="number" id="pctMarketing" value="10" step="0.5" class="with-suffix" oninput="calculate()">
+                    <span class="input-suffix">%</span>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 2rem;">3. Projeção de Volume</h2>
+            
+            <div class="form-group">
+                <label>Total Estimado de Pedidos no Mês</label>
+                <span class="hint">Quantidade de vezes que este prato/ticket é vendido por mês</span>
+                <div class="input-wrapper">
+                    <input type="number" id="totalPedidos" value="1000" step="10" class="with-suffix" style="padding-right: 1rem;" oninput="calculate()">
+                </div>
+            </div>
+            
+            <button class="btn" onclick="resetToAbrasel()">Restaurar Médias Abrasel</button>
+        </div>
+
+        <!-- Coluna de Resultados -->
+        <div class="card">
+            <h2>4. Destrinchamento do Preço</h2>
+            
+            <div class="results">
+                <div class="result-item cmv">
+                    <div>
+                        <div class="result-label">Ingredientes (CMV)</div>
+                        <div style="font-size:0.8rem; color:#94a3b8;">Meta Abrasel: 25-35%</div>
+                    </div>
+                    <div class="result-values">
+                        <div class="result-money" id="resCmvMoney">R$ 0,00</div>
+                        <div class="result-percent">
+                            <span id="resCmvPct">0%</span>
+                            <span id="badgeCmv" class="badge"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-item cmo">
+                    <div class="result-label">Mão de Obra (CMO)</div>
+                    <div class="result-values">
+                        <div class="result-money" id="resCmoMoney">R$ 0,00</div>
+                        <div class="result-percent" id="resCmoPct">0%</div>
+                    </div>
+                </div>
+
+                <div class="result-item rent">
+                    <div class="result-label">Aluguel / Ocupação</div>
+                    <div class="result-values">
+                        <div class="result-money" id="resRentMoney">R$ 0,00</div>
+                        <div class="result-percent" id="resRentPct">0%</div>
+                    </div>
+                </div>
+
+                <div class="result-item taxes">
+                    <div class="result-label">Impostos & Taxas</div>
+                    <div class="result-values">
+                        <div class="result-money" id="resTaxesMoney">R$ 0,00</div>
+                        <div class="result-percent" id="resTaxesPct">0%</div>
+                    </div>
+                </div>
+
+                <div class="result-item marketing">
+                    <div class="result-label">Mkt & Outros</div>
+                    <div class="result-values">
+                        <div class="result-money" id="resMktMoney">R$ 0,00</div>
+                        <div class="result-percent" id="resMktPct">0%</div>
+                    </div>
+                </div>
+
+                <div class="result-item profit" id="profitCard">
+                    <div>
+                        <div class="result-label">Lucro Líquido</div>
+                        <div style="font-size:0.8rem; color:#94a3b8;">Meta Abrasel: 10-20%</div>
+                    </div>
+                    <div class="result-values">
+                        <div class="result-money" id="resProfitMoney">R$ 0,00</div>
+                        <div class="result-percent">
+                            <span id="resProfitPct">0%</span>
+                            <span id="badgeProfit" class="badge"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Composição Visual -->
+            <h2 style="margin-top: 2rem; border-bottom:none;">Composição do Prato</h2>
+            <div class="progress-bar" id="progressBar">
+                <!-- Generated by JS -->
+            </div>
+            
+            <div class="scenario-box">
+                <h3 style="margin-top:0; color:#60a5fa; font-size:1.1rem;">📅 Projeção Mensal do Prato</h3>
+                <p style="font-size:0.9rem; margin-bottom:0.5rem;">Baseado na estimativa de <strong style="color:white;" id="lblTotalPedidos">0</strong> pedidos/mês:</p>
+                <ul style="font-size:0.9rem; margin-top:0; padding-left:1.5rem;">
+                    <li>Faturamento Bruto: <span id="simFaturamento" style="color:white; font-weight:bold;">R$ 0,00</span></li>
+                    <li>Custo em Insumos (CMV): <span id="simCmvTotal" style="color:var(--warning); font-weight:bold;">R$ 0,00</span></li>
+                    <li>Despesas Operacionais (CMO+Aluguel+Taxas+Mkt): <span id="simDespesasTotal" style="color:#ef4444; font-weight:bold;">R$ 0,00</span></li>
+                    <li>Lucro Líquido Mensal: <span id="simLucroTotal" style="color:var(--success); font-weight:bold;">R$ 0,00</span></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function formatMoney(value) {
+        return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function calculate() {
+        const precoVenda = parseFloat(document.getElementById('precoVenda').value) || 0;
+        const custoInsumos = parseFloat(document.getElementById('custoInsumos').value) || 0;
+        const pctCmo = parseFloat(document.getElementById('pctCmo').value) || 0;
+        const pctAluguel = parseFloat(document.getElementById('pctAluguel').value) || 0;
+        const pctTaxas = parseFloat(document.getElementById('pctTaxas').value) || 0;
+        const pctMarketing = parseFloat(document.getElementById('pctMarketing').value) || 0;
+
+        if (precoVenda <= 0) return;
+
+        // Cálculos
+        const pctCmv = (custoInsumos / precoVenda) * 100;
+        
+        const valCmo = precoVenda * (pctCmo / 100);
+        const valAluguel = precoVenda * (pctAluguel / 100);
+        const valTaxas = precoVenda * (pctTaxas / 100);
+        const valMarketing = precoVenda * (pctMarketing / 100);
+
+        const valCustoTotal = custoInsumos + valCmo + valAluguel + valTaxas + valMarketing;
+        const valLucro = precoVenda - valCustoTotal;
+        const pctLucro = (valLucro / precoVenda) * 100;
+
+        // Atualizar UI
+        document.getElementById('resCmvMoney').innerText = formatMoney(custoInsumos);
+        document.getElementById('resCmvPct').innerText = pctCmv.toFixed(1) + '%';
+        
+        const badgeCmv = document.getElementById('badgeCmv');
+        if (pctCmv <= 30) { badgeCmv.innerText = 'Excelente'; badgeCmv.className = 'badge ok'; }
+        else if (pctCmv <= 35) { badgeCmv.innerText = 'No Limite'; badgeCmv.className = 'badge warn'; }
+        else { badgeCmv.innerText = 'Perigo'; badgeCmv.className = 'badge danger'; }
+
+        document.getElementById('resCmoMoney').innerText = formatMoney(valCmo);
+        document.getElementById('resCmoPct').innerText = pctCmo.toFixed(1) + '%';
+
+        document.getElementById('resRentMoney').innerText = formatMoney(valAluguel);
+        document.getElementById('resRentPct').innerText = pctAluguel.toFixed(1) + '%';
+
+        document.getElementById('resTaxesMoney').innerText = formatMoney(valTaxas);
+        document.getElementById('resTaxesPct').innerText = pctTaxas.toFixed(1) + '%';
+
+        document.getElementById('resMktMoney').innerText = formatMoney(valMarketing);
+        document.getElementById('resMktPct').innerText = pctMarketing.toFixed(1) + '%';
+
+        document.getElementById('resProfitMoney').innerText = formatMoney(valLucro);
+        document.getElementById('resProfitPct').innerText = pctLucro.toFixed(1) + '%';
+
+        const profitCard = document.getElementById('profitCard');
+        const badgeProfit = document.getElementById('badgeProfit');
+        if (pctLucro >= 15) { 
+            badgeProfit.innerText = 'Excelente'; badgeProfit.className = 'badge ok'; 
+            profitCard.className = 'result-item profit';
+        } else if (pctLucro >= 10) { 
+            badgeProfit.innerText = 'Saudável'; badgeProfit.className = 'badge ok'; 
+            profitCard.className = 'result-item profit';
+        } else if (pctLucro > 0) { 
+            badgeProfit.innerText = 'Apertado'; badgeProfit.className = 'badge warn'; 
+            profitCard.className = 'result-item profit';
+        } else { 
+            badgeProfit.innerText = 'Prejuízo'; badgeProfit.className = 'badge danger'; 
+            profitCard.className = 'result-item profit loss';
+        }
+
+        // Barra de progresso visual
+        const pBar = document.getElementById('progressBar');
+        pBar.innerHTML = '';
+        
+        const segments = [
+            { pct: pctCmv, color: '#f59e0b', title: 'CMV' },
+            { pct: pctCmo, color: '#3b82f6', title: 'CMO' },
+            { pct: pctAluguel, color: '#8b5cf6', title: 'Aluguel' },
+            { pct: pctTaxas, color: '#ec4899', title: 'Taxas' },
+            { pct: pctMarketing, color: '#f97316', title: 'Mkt' },
+            { pct: Math.max(0, pctLucro), color: '#10b981', title: 'Lucro' }
+        ];
+
+        segments.forEach(seg => {
+            if (seg.pct > 0) {
+                const div = document.createElement('div');
+                div.className = 'progress-segment';
+                div.style.width = seg.pct + '%';
+                div.style.backgroundColor = seg.color;
+                if(seg.pct > 5) div.innerText = seg.title;
+                div.title = `${seg.title}: ${seg.pct.toFixed(1)}%`;
+                pBar.appendChild(div);
+            }
+        });
+
+        // Simulador de Projeção Mensal
+        const totalPedidos = parseInt(document.getElementById('totalPedidos').value) || 0;
+        document.getElementById('lblTotalPedidos').innerText = totalPedidos;
+        
+        const faturamentoBruto = precoVenda * totalPedidos;
+        const cmvTotal = custoInsumos * totalPedidos;
+        const lucroTotal = valLucro * totalPedidos;
+        const despesasTotal = faturamentoBruto - cmvTotal - lucroTotal;
+
+        document.getElementById('simFaturamento').innerText = formatMoney(faturamentoBruto);
+        document.getElementById('simCmvTotal').innerText = formatMoney(cmvTotal);
+        document.getElementById('simDespesasTotal').innerText = formatMoney(despesasTotal);
+        document.getElementById('simLucroTotal').innerText = formatMoney(lucroTotal);
+    }
+
+    function resetToAbrasel() {
+        document.getElementById('pctCmo').value = 25;
+        document.getElementById('pctAluguel').value = 8;
+        document.getElementById('pctTaxas').value = 12;
+        document.getElementById('pctMarketing').value = 10;
+        calculate();
+    }
+
+    // Inicializar
+    calculate();
+</script>
+
+</body>
+</html>

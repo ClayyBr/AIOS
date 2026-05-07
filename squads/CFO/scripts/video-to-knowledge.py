@@ -56,6 +56,8 @@ def extract_video_id(url: str) -> str | None:
             return parse_qs(parsed.query).get('v', [None])[0]
         if parsed.path.startswith(('/embed/', '/v/')):
             return parsed.path.split('/')[2]
+        if parsed.path.startswith('/shorts/'):
+            return parsed.path.split('/shorts/')[1].split('?')[0]
     return None
 
 

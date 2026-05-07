@@ -1,0 +1,547 @@
+[
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260401157555001771651090000961621685410741|2|1|1|3A6E2305971B25B252854C598183C065ACCA4BDB",
+    "data": {
+      "emissor": {
+        "nome": "TENDA ATACADO LTDA (TAUBATE)",
+        "cnpj": "01157555001771",
+        "data_emissao": "25/04/2026 09:29:01"
+      },
+      "items": [
+        {
+          "nome": "CHUCHU KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,60",
+          "quantidade": 0.402,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.6
+        },
+        {
+          "nome": "BETERRABA KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,96",
+          "quantidade": 0.424,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.96
+        },
+        {
+          "nome": "LIMAO TAHITI KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,57",
+          "quantidade": 0.562,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.57
+        },
+        {
+          "nome": "ALHO GRANEL kg CAL 6\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,36",
+          "quantidade": 0.076,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.36
+        },
+        {
+          "nome": "TOMATE SALADA kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t8,81",
+          "quantidade": 0.84,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 8.81
+        },
+        {
+          "nome": "PIMENTAO VERDE KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,27",
+          "quantidade": 0.112,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.27
+        },
+        {
+          "nome": "CEBOLA kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,41",
+          "quantidade": 0.482,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.41
+        },
+        {
+          "nome": "COUVE PICADO HIGIENIZADO PCT 200G\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t5,29",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 5.29
+        },
+        {
+          "nome": "BATATA PALITO CONG UAI 2Kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t19,90",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 19.9
+        },
+        {
+          "nome": "AGUA MINERAL C GAS SELECT\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,70",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 2.7
+        },
+        {
+          "nome": "FEIJAO PRETO TARUMA 1kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t5,79",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 5.79
+        },
+        {
+          "nome": "FARINHA MAND GROSSA KICALDO 1kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,45",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 6.45
+        },
+        {
+          "nome": "LARANJA PERA KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t4,70",
+          "quantidade": 0.942,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 4.7
+        },
+        {
+          "nome": "AGUA MINERAL S GAS PETROPOLIS 510ml\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,96",
+          "quantidade": 4,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 3.96
+        },
+        {
+          "nome": "REFRI COCA COLA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t8,38",
+          "quantidade": 2,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 8.38
+        },
+        {
+          "nome": "ARROZ TIPO 1 EMPORIO SAO JOAO 2Kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t10,99",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 10.99
+        },
+        {
+          "nome": "ALHO TRITURADO SABORALLI S SAL PT 400g\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,05",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 6.05
+        }
+      ],
+      "totais": {
+        "valor_total": 94.19
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650460000369201246007317|2|1|1|FAEBCAE8A185166B25F803E7269D2350E971703D",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "22/04/2026 01:13:02"
+      },
+      "items": [
+        {
+          "nome": "FILE FGO CONFINA CG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t16,98",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 16.98
+        },
+        {
+          "nome": "PAIO SEARA EMB\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,64",
+          "quantidade": 0.246,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 6.64
+        },
+        {
+          "nome": "FEIJAO PTO TARUMA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t5,29",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 5.29
+        },
+        {
+          "nome": "FOSFORO FIAT LUX EXT\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,90",
+          "quantidade": 1,
+          "unidade": "CX",
+          "valor_unitario": null,
+          "valor_total": 3.9
+        },
+        {
+          "nome": "FOSFORO FIAT LUX EXT\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,90",
+          "quantidade": 1,
+          "unidade": "CX",
+          "valor_unitario": null,
+          "valor_total": 3.9
+        },
+        {
+          "nome": "REF COCA COLA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,99",
+          "quantidade": 1,
+          "unidade": "LT",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "OL SOJA COAMO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,19",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 7.19
+        },
+        {
+          "nome": "BACON M SADIA EMB\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t11,19",
+          "quantidade": 0.288,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 11.19
+        },
+        {
+          "nome": "BACON M SADIA EMB\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t8,16",
+          "quantidade": 0.21,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 8.16
+        },
+        {
+          "nome": "ARROZ SOLITO PREM T1\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t10,79",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 10.79
+        },
+        {
+          "nome": "REF COCA COLA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,99",
+          "quantidade": 1,
+          "unidade": "LT",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "FEIJAO CAR FANTAST\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,99",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 7.99
+        },
+        {
+          "nome": "MAC ADRIA ESPAGH  8\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,39",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 3.39
+        },
+        {
+          "nome": "BERINJELA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,17",
+          "quantidade": 0.635,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 3.17
+        },
+        {
+          "nome": "FAR MA DEUSA BCA GRO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t5,65",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 5.65
+        }
+      ],
+      "totais": {
+        "valor_total": 102.22
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260401157555001771652040000208261338792869|2|1|1|7E7D070934D64E0A33496EFFB5B2FFCCBED1B5E9",
+    "data": {
+      "emissor": {
+        "nome": "TENDA ATACADO LTDA (TAUBATE)",
+        "cnpj": "01157555001771",
+        "data_emissao": "22/04/2026 08:43:33"
+      },
+      "items": [
+        {
+          "nome": "APP1 LARANJA PERA KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,42",
+          "quantidade": 0.856,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 3.42
+        },
+        {
+          "nome": "ABOBRINHA ITALIANA KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,63",
+          "quantidade": 0.376,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.63
+        },
+        {
+          "nome": "COUVE PICADO HIGIENIZADO PCT 200G\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t11,90",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 11.9
+        },
+        {
+          "nome": "TOMATE SALADA kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,91",
+          "quantidade": 0.89,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 7.91
+        },
+        {
+          "nome": "CEBOLA kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,97",
+          "quantidade": 0.47,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.97
+        },
+        {
+          "nome": "CHARQUE BOV DIANTEIRO VILHETO 500G\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t28,50",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 28.5
+        },
+        {
+          "nome": "RABO SUINO SALGADO kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t14,42",
+          "quantidade": 0.536,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 14.42
+        },
+        {
+          "nome": "ALHO GRANEL kg CAL 6\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,85",
+          "quantidade": 0.098,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.85
+        },
+        {
+          "nome": "LING CALABRESA RETA PERDIGAO PCT KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t14,06",
+          "quantidade": 0.504,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 14.06
+        },
+        {
+          "nome": "PIMENTAO VERDE KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,19",
+          "quantidade": 0.092,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.19
+        },
+        {
+          "nome": "LIMAO TAHITI KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,96",
+          "quantidade": 0.742,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.96
+        },
+        {
+          "nome": "DETERG LIQ YPE CLEAR 500ml\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,35",
+          "quantidade": 1,
+          "unidade": "FR",
+          "valor_unitario": null,
+          "valor_total": 2.35
+        },
+        {
+          "nome": "APP1 TOMATE GRAPE BDJ 500G\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t5,89",
+          "quantidade": 1,
+          "unidade": "BD",
+          "valor_unitario": null,
+          "valor_total": 5.89
+        },
+        {
+          "nome": "APP1 BATATA PALITO CONG UAI 2Kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t18,90",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 18.9
+        }
+      ],
+      "totais": {
+        "valor_total": 116.02
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260420826969000123650010000027371873122951|3|1",
+    "data": {
+      "emissor": {
+        "nome": "CASA DE CARNES M.G.V. LTDA",
+        "cnpj": "20826969000123",
+        "data_emissao": "22/04/2026 09:07:34"
+      },
+      "items": [
+        {
+          "nome": "JOELHO KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,48",
+          "quantidade": 0.374,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 7.48
+        },
+        {
+          "nome": "TOUCINHO (TORRESMO) KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t18,50",
+          "quantidade": 0.974,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 18.5
+        },
+        {
+          "nome": "PE DE PORCO KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,00",
+          "quantidade": 0.5,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 6
+        }
+      ],
+      "totais": {
+        "valor_total": 31.98
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650150000285731423203100|2|1|1|B4C522F1E9E73299E016B7F4D8E69E169EE23599",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "24/04/2026 08:26:14"
+      },
+      "items": [
+        {
+          "nome": "OVO G BCO PRETI\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t9,79",
+          "quantidade": 1,
+          "unidade": "BJ",
+          "valor_unitario": null,
+          "valor_total": 9.79
+        },
+        {
+          "nome": "FILE MERL ARG CONG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t14,61",
+          "quantidade": 0.458,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 14.61
+        },
+        {
+          "nome": "TOMATE ITALIANO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,19",
+          "quantidade": 0.62,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 6.19
+        },
+        {
+          "nome": "LING TOSC SADIA CG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t20,90",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 20.9
+        },
+        {
+          "nome": "BATATA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t14,45",
+          "quantidade": 2.135,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 14.45
+        },
+        {
+          "nome": "ALHO GRANEL\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,50",
+          "quantidade": 0.13,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 3.5
+        },
+        {
+          "nome": "FAR TR GLOBO PLAST\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,29",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 3.29
+        },
+        {
+          "nome": "PEPINO COMUM\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,24",
+          "quantidade": 0.225,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 2.24
+        },
+        {
+          "nome": "FILE MERL ARG CONG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t16,26",
+          "quantidade": 0.51,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 16.26
+        },
+        {
+          "nome": "CENOURA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,54",
+          "quantidade": 0.655,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 6.54
+        },
+        {
+          "nome": "BATATA DOCE ROSADA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,45",
+          "quantidade": 0.67,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 2.45
+        }
+      ],
+      "totais": {
+        "valor_total": 100.22
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650450000396761482587140|2|1|1|FCC77C22BABFA07E31487E449E204E8717F0D6B4",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "16/04/2026 23:34:07"
+      },
+      "items": [
+        {
+          "nome": "OL SOJA VILA VELHA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,59",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 6.59
+        },
+        {
+          "nome": "FILE MERL ARG CONG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t22,58",
+          "quantidade": 0.708,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 22.58
+        },
+        {
+          "nome": "CHUCHU\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,26",
+          "quantidade": 0.515,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 1.26
+        },
+        {
+          "nome": "FILE FGO CONG EMB\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t8,50",
+          "quantidade": 0.612,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 8.5
+        },
+        {
+          "nome": "OL SOJA VILA VELHA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,59",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 6.59
+        }
+      ],
+      "totais": {
+        "valor_total": 45.52
+      }
+    }
+  }
+]

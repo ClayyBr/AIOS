@@ -367,5 +367,958 @@
         "valor_total": 111.8
       }
     }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260401157555001771652050000334921909778355%7C2%7C1%7C1%7CAC42ADF10C2930477776CF97AB833810680692CB",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TENDA ATACADO LTDA (TAUBATE)",
+        "cnpj": "01157555001771",
+        "data_emissao": "27/04/2026 09:06:44"
+      },
+      "items": [
+        {
+          "nome": "BATATA PALHA KARI-KARI CROCANTE 400g",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 12.5
+        },
+        {
+          "nome": "ARROZ TIPO 1 EMPORIO SAO JOAO 2Kg",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 10.99
+        },
+        {
+          "nome": "MAC OVOS D BENTA ESPAGUETINHO 500g",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 3.59
+        },
+        {
+          "nome": "CR DE LEITE PIRACANJUBA TP 1,03kg",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 13.9
+        },
+        {
+          "nome": "LEITE INTEGRAL ITALAC CT 1L",
+          "quantidade": 1,
+          "unidade": "LT",
+          "valor_unitario": null,
+          "valor_total": 5.89
+        },
+        {
+          "nome": "ALFACE CRESPA UN",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "APP1 OLEO SOJA VITALIV 900ml",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 6.79
+        },
+        {
+          "nome": "REFRI ANTARCTICA GUARANA",
+          "quantidade": 2,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 6.18
+        },
+        {
+          "nome": "REFRI COCA COLA",
+          "quantidade": 2,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 8.38
+        },
+        {
+          "nome": "MOLHO TOM TRAD REFOG SELECT SCH 300g",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 3.5
+        },
+        {
+          "nome": "DETERG LIQ YPE CLEAR 500ml",
+          "quantidade": 1,
+          "unidade": "FR",
+          "valor_unitario": null,
+          "valor_total": 2.35
+        },
+        {
+          "nome": "CENOURA kg",
+          "quantidade": 0.716,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 7.08
+        },
+        {
+          "nome": "CEBOLA kg",
+          "quantidade": 0.396,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.98
+        },
+        {
+          "nome": "MANJERICAO UN",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 2.65
+        },
+        {
+          "nome": "BATATA LAVADA EXTRA kg",
+          "quantidade": 0.718,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 4.3
+        }
+      ],
+      "totais": {
+        "valor_total": 93.87
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650400000407821225874682%7C2%7C1%7C1%7CC18B75A9EFC0E20B1E8D6655C4E687856AA8150E",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "28/04/2026 00:34:55"
+      },
+      "items": [
+        {
+          "nome": "FILE FGO CONFINA CG",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 13.89
+        },
+        {
+          "nome": "BAT SADIA CG",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 8.9
+        },
+        {
+          "nome": "MOL KISABOR MOST MEL",
+          "quantidade": 1,
+          "unidade": "FR",
+          "valor_unitario": null,
+          "valor_total": 5.79
+        },
+        {
+          "nome": "MOL KISABOR ROSE",
+          "quantidade": 1,
+          "unidade": "FR",
+          "valor_unitario": null,
+          "valor_total": 5.79
+        },
+        {
+          "nome": "TEMP SAZON CARNES",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 4.79
+        }
+      ],
+      "totais": {
+        "valor_total": 39.16
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260410938144000147651090000228601951679979%7C3%7C1",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "ESTOK BRASIL COMERCIO DE ALIM LTDA",
+        "cnpj": "10938144000147",
+        "data_emissao": "28/04/2026 09:55:52"
+      },
+      "items": [
+        {
+          "nome": "CARNE SUINA/PERNIL S/OSSO kg",
+          "quantidade": 1.172,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 23.42
+        },
+        {
+          "nome": "CARNE 2A. ACEM S/OSSO kg",
+          "quantidade": 0.506,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 19.22
+        },
+        {
+          "nome": "OLEO SOJA VILA VELHA 900ML.PET",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 6.79
+        },
+        {
+          "nome": "J.WATANABE/REPOLHO VERDE kg.",
+          "quantidade": 0.933,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 6.51
+        },
+        {
+          "nome": "LEGUME CEBOLA NACIONAL kg",
+          "quantidade": 0.38,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 1.89
+        },
+        {
+          "nome": "LEGUME TOMATE SALADA kg.",
+          "quantidade": 0.44,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 3.07
+        },
+        {
+          "nome": "LING AURORA CALABRESA DEF.kg",
+          "quantidade": 0.372,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 8.66
+        }
+      ],
+      "totais": {
+        "valor_total": 69.56
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260401157555001771652050000336921632812365%7C2%7C1%7C1%7C8E28F46ED067BC8B7E2B49BB9E7BA1D2E8226E49",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TENDA ATACADO LTDA (TAUBATE)",
+        "cnpj": "01157555001771",
+        "data_emissao": "29/04/2026 09:12:01"
+      },
+      "items": [
+        {
+          "nome": "APP1 TOUCINHO SUINO RESF GRN KG",
+          "quantidade": 1.03,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 15.35
+        },
+        {
+          "nome": "TOMATE SALADA kg",
+          "quantidade": 0.65,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 6.82
+        },
+        {
+          "nome": "ALHO GRANEL kg CAL 6",
+          "quantidade": 0.146,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.61
+        },
+        {
+          "nome": "BETERRABA KG",
+          "quantidade": 0.562,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 3.93
+        },
+        {
+          "nome": "CEBOLA kg",
+          "quantidade": 0.52,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.59
+        },
+        {
+          "nome": "LIMAO TAHITI KG",
+          "quantidade": 1.118,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.07
+        },
+        {
+          "nome": "PIMENTAO VERDE KG",
+          "quantidade": 0.142,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.83
+        },
+        {
+          "nome": "SACO PLASTICO FREEZER EMBAFREEZER 2L",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 5.49
+        },
+        {
+          "nome": "CHUCHU KG",
+          "quantidade": 0.562,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.24
+        },
+        {
+          "nome": "FEIJAO CARIOCA TARUMA 1kg",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 8.89
+        },
+        {
+          "nome": "ABORBORA CABOTIA kg",
+          "quantidade": 0.444,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.33
+        },
+        {
+          "nome": "MANDIOQUINHA kg",
+          "quantidade": 0.385,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 6.7
+        },
+        {
+          "nome": "SAL REFINADO CISNE 1kg",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "APP1 MAC SEMOLA GALO ESPAGUETINHO 9 500g",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 3.19
+        },
+        {
+          "nome": "ARROZ TIPO 1 EMPORIO SAO JOAO 2Kg",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 10.99
+        },
+        {
+          "nome": "APP1 BATATA CONG BATATARIA 2Kg",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 21.9
+        },
+        {
+          "nome": "ORELHA SUINA SALGADA VOG Kg",
+          "quantidade": 0.542,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 7.75
+        },
+        {
+          "nome": "BACON MANTA SADIA GRN KG",
+          "quantidade": 0.248,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 8.41
+        },
+        {
+          "nome": "LING CALABRESA SADIA 400g",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 10.93
+        },
+        {
+          "nome": "GUARD PAPEL ABSOLUTO FS 22,5X20cm 50un",
+          "quantidade": 2,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 3.78
+        },
+        {
+          "nome": "OLEO SOJA VITALIV 900ml",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 7.19
+        },
+        {
+          "nome": "AGUA MINERAL C GAS SELECT",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 2.7
+        },
+        {
+          "nome": "REFRI COCA COLA",
+          "quantidade": 3,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 12.57
+        },
+        {
+          "nome": "REFRI ANTARCTICA GUARANA",
+          "quantidade": 1,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 3.09
+        },
+        {
+          "nome": "CHEIRO VERDE UN",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 3.49
+        }
+      ],
+      "totais": {
+        "valor_total": 147.51
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650390000389831191722586%7C2%7C1%7C1%7CB077D5BB3C8BF268DB1F1651767A4BE326512E74",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "27/04/2026 00:31:24"
+      },
+      "items": [
+        {
+          "nome": "BATATA BAROA",
+          "quantidade": 0.71,
+          "unidade": "KG",
+          "valor_unitario": null,
+          "valor_total": 4.65
+        },
+        {
+          "nome": "FILE FGO CONFINA CG",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 13.89
+        },
+        {
+          "nome": "CAFE PILAO ALMOFADA",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 15.35
+        }
+      ],
+      "totais": {
+        "valor_total": 33.89
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260401157555001771651090000970781917225718%7C2%7C1%7C1%7C50A03C51CB070B74685A7DF043D19DAD4D178917",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TENDA ATACADO LTDA (TAUBATE)",
+        "cnpj": "01157555001771",
+        "data_emissao": "30/04/2026 08:46:08"
+      },
+      "items": [
+        {
+          "nome": "PEPINO CAIPIRA KG",
+          "quantidade": 0.342,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.38
+        },
+        {
+          "nome": "LIMAO TAHITI KG",
+          "quantidade": 0.604,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.41
+        },
+        {
+          "nome": "CENOURA kg",
+          "quantidade": 0.41,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 4.05
+        },
+        {
+          "nome": "BATATA LAVADA EXTRA kg",
+          "quantidade": 0.372,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.23
+        },
+        {
+          "nome": "DETERG LIQ YPE CLEAR 500ml",
+          "quantidade": 1,
+          "unidade": "FR",
+          "valor_unitario": null,
+          "valor_total": 2.79
+        },
+        {
+          "nome": "KETCHUP TRAD EKMA 950ml",
+          "quantidade": 1,
+          "unidade": "FR",
+          "valor_unitario": null,
+          "valor_total": 7.69
+        },
+        {
+          "nome": "BATATA LAVADA EXTRA kg",
+          "quantidade": 1.328,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 7.95
+        }
+      ],
+      "totais": {
+        "valor_total": 29.5
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260420826969000123650010000027991952866808%7C3%7C1",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "CASA DE CARNES M.G.V. LTDA",
+        "cnpj": "20826969000123",
+        "data_emissao": "27/04/2026 09:21:36"
+      },
+      "items": [
+        {
+          "nome": "ACEM KILO",
+          "quantidade": 0.614,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 23.94
+        },
+        {
+          "nome": "BISTECA SUINA KILO",
+          "quantidade": 0.986,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 16.75
+        }
+      ],
+      "totais": {
+        "valor_total": 40.69
+      }
+    }
+  },
+  {
+    "url": "photo_receipt_ponto_embalagens_2804",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "PONTO DAS EMBALAGENS",
+        "cnpj": "35806275000100",
+        "data_emissao": "28/04/2026 10:09:20"
+      },
+      "items": [
+        {
+          "nome": "SALADINHA D645 C10 UNIDADES - TAMPA SEP",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": 3.4,
+          "valor_total": 3.4
+        },
+        {
+          "nome": "SACOLA RECUPERADA 40X50CM BRANCA",
+          "quantidade": 0.5,
+          "unidade": "kg",
+          "valor_unitario": 21,
+          "valor_total": 10.5
+        }
+      ],
+      "totais": {
+        "valor_total": 13.9
+      }
+    }
+  },
+  {
+    "url": "photo_receipt_boi_nobre_3004",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "CASA DE CARNES M.G.V. LTDA",
+        "cnpj": "20826969000123",
+        "data_emissao": "30/04/2026 09:02:33"
+      },
+      "items": [
+        {
+          "nome": "ACEM KILO",
+          "quantidade": 0.544,
+          "unidade": "KG",
+          "valor_unitario": 38.99,
+          "valor_total": 21.21
+        },
+        {
+          "nome": "BISTECA SUINA KILO",
+          "quantidade": 0.46,
+          "unidade": "KG",
+          "valor_unitario": 16.99,
+          "valor_total": 7.82
+        },
+        {
+          "nome": "CALABRESA KILO",
+          "quantidade": 0.274,
+          "unidade": "KG",
+          "valor_unitario": 38.99,
+          "valor_total": 10.68
+        }
+      ],
+      "totais": {
+        "valor_total": 39.71
+      }
+    }
+  },
+  {
+    "url": "photo_receipt_ponto_embalagens_3004",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "PONTO DAS EMBALAGENS",
+        "cnpj": "35806275000100",
+        "data_emissao": "30/04/2026 09:06:49"
+      },
+      "items": [
+        {
+          "nome": "MARMITEX FRACIONADA M - 10UN",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": 6.2,
+          "valor_total": 6.2
+        },
+        {
+          "nome": "GELADINHO TRADICIONAL G 06X24",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": 3,
+          "valor_total": 3
+        }
+      ],
+      "totais": {
+        "valor_total": 9.2
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35260465897910001802650360000289781791453117%7C2%7C1%7C1%7CDDB564F4007C651AB9956F368D6DFA6DF602264B",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TAUSTE SUPERMERCADOS LTDA",
+        "cnpj": "65897910001802",
+        "data_emissao": "29/04/2026 08:31:09"
+      },
+      "items": [
+        {
+          "nome": "FILE FGO CONFINA CG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t13,89",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 13.89
+        },
+        {
+          "nome": "LING TOSC SADIA CG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t20,90",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 20.9
+        },
+        {
+          "nome": "FILE FGO CONFINA CG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t13,89",
+          "quantidade": 1,
+          "unidade": "PC",
+          "valor_unitario": null,
+          "valor_total": 13.89
+        }
+      ],
+      "totais": {
+        "valor_total": 48.68
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260501157555001771652050000341361984826020%7C2%7C1%7C1%7CF54EB6569532147DD621A5423B1EC406CA0B91EC",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "TENDA ATACADO LTDA (TAUBATE)",
+        "cnpj": "01157555001771",
+        "data_emissao": "02/05/2026 08:25:55"
+      },
+      "items": [
+        {
+          "nome": "LING PERNIL CONG FRIMESA 1KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t24,90",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 24.9
+        },
+        {
+          "nome": "CEBOLA kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,12",
+          "quantidade": 0.4,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.12
+        },
+        {
+          "nome": "BATATA LAVADA EXTRA kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t8,79",
+          "quantidade": 1.258,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 8.79
+        },
+        {
+          "nome": "TOMATE SALADA kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t12,60",
+          "quantidade": 1.274,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 12.6
+        },
+        {
+          "nome": "FEIJAO CARIOCA TARUMA 1kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t8,89",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 8.89
+        },
+        {
+          "nome": "FEIJAO PRETO TARUMA 1kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t5,79",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 5.79
+        },
+        {
+          "nome": "PIMENTAO VERDE KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,26",
+          "quantidade": 0.098,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.26
+        },
+        {
+          "nome": "LARANJA PERA KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,09",
+          "quantidade": 1.22,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 6.09
+        },
+        {
+          "nome": "MAC OVOS ADRIA ESPAGUETINHO 9 500g\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,49",
+          "quantidade": 1,
+          "unidade": "PT",
+          "valor_unitario": null,
+          "valor_total": 3.49
+        },
+        {
+          "nome": "ARROZ TIPO 1 EMPORIO SAO JOAO 2Kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t10,99",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 10.99
+        },
+        {
+          "nome": "BETERRABA KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,71",
+          "quantidade": 0.388,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.71
+        },
+        {
+          "nome": "CHARQUE BOV TRASEIRO KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t21,52",
+          "quantidade": 0.392,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 21.52
+        },
+        {
+          "nome": "BACON MANTA SADIA GRN KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t10,37",
+          "quantidade": 0.306,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 10.37
+        },
+        {
+          "nome": "LIMAO TAHITI KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,21",
+          "quantidade": 0.554,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 2.21
+        },
+        {
+          "nome": "PE SUINO SALGADO kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,98",
+          "quantidade": 0.502,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 7.98
+        },
+        {
+          "nome": "RABO SUINO SALGADO kg\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,47",
+          "quantidade": 0.326,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 7.47
+        },
+        {
+          "nome": "LING CALABRESA RETA PERDIGAO PCT KG\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t14,06",
+          "quantidade": 0.504,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 14.06
+        },
+        {
+          "nome": "ALHO GRANEL kg CAL 6\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t1,47",
+          "quantidade": 0.082,
+          "unidade": "kg",
+          "valor_unitario": null,
+          "valor_total": 1.47
+        },
+        {
+          "nome": "OLEO SOJA VITALIV 900ml\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t14,38",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 14.38
+        },
+        {
+          "nome": "REFRI COCA COLA ZERO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t4,39",
+          "quantidade": 1,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 4.39
+        },
+        {
+          "nome": "REFRI COCA COLA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t16,76",
+          "quantidade": 4,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 16.76
+        },
+        {
+          "nome": "REFRI ANTARCTICA GUARANA\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t6,18",
+          "quantidade": 2,
+          "unidade": "LA",
+          "valor_unitario": null,
+          "valor_total": 6.18
+        },
+        {
+          "nome": "AGUA MINERAL C GAS SELECT\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t2,70",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 2.7
+        },
+        {
+          "nome": "TOMATE GRAPE BDJ 180G\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t3,99",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 3.99
+        },
+        {
+          "nome": "COUVE MANTEIGA UN\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t7,98",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": null,
+          "valor_total": 7.98
+        }
+      ],
+      "totais": {
+        "valor_total": 209.09
+      }
+    }
+  },
+  {
+    "url": "https://www.nfce.fazenda.sp.gov.br/qrcode?p=35260520826969000123650010000030761132597551%7C3%7C1",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "CASA DE CARNES M.G.V. LTDA",
+        "cnpj": "20826969000123",
+        "data_emissao": "02/05/2026 08:39:12"
+      },
+      "items": [
+        {
+          "nome": "TOUCINHO (TORRESMO) KILO\n\t\t\t\t\t\t\t\t\tVl. Total\n\t\t\t\t\t\t\t\t\t20,21",
+          "quantidade": 1.064,
+          "unidade": "KGA",
+          "valor_unitario": null,
+          "valor_total": 20.21
+        }
+      ],
+      "totais": {
+        "valor_total": 20.21
+      }
+    }
+  },
+  {
+    "url": "photo_receipt_ponto_embalagens_0205",
+    "status": "success",
+    "data": {
+      "emissor": {
+        "nome": "PONTO DAS EMBALAGENS",
+        "cnpj": "35806275000100",
+        "data_emissao": "02/05/2026 08:43:21"
+      },
+      "items": [
+        {
+          "nome": "SALADINHA D645 C10 UNIDADES - TAMPA SEP",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": 3.4,
+          "valor_total": 3.4
+        },
+        {
+          "nome": "GARFO/ FACA REFEICAO - 50 UNID PEROLA",
+          "quantidade": 2,
+          "unidade": "UN",
+          "valor_unitario": 10,
+          "valor_total": 20
+        },
+        {
+          "nome": "MARMITEX FRACIONADA P - 10UN",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": 5.5,
+          "valor_total": 5.5
+        },
+        {
+          "nome": "FITA ADESIVA 18X40 - SULAMERICANA",
+          "quantidade": 1,
+          "unidade": "UN",
+          "valor_unitario": 3.4,
+          "valor_total": 3.4
+        }
+      ],
+      "totais": {
+        "valor_total": 32.3,
+        "forma_pagamento": "Pagamento Instantâneo (PIX)"
+      }
+    }
   }
 ]

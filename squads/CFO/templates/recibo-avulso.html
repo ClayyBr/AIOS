@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo de Pagamento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #000;
+            background: #fff;
+            padding: 20px;
+        }
+        .page {
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           VIA ORIGINAL
+        ============================================ */
+        .via {
+            border: 1px solid #000;
+            padding: 20px 24px;
+            margin-bottom: 8px;
+        }
+
+        .via-label {
+            text-align: right;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .doc-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .doc-number {
+            text-align: center;
+            font-size: 11px;
+            margin-bottom: 18px;
+        }
+
+        /* Emitente */
+        .emitente {
+            border: 1px solid #000;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+        }
+        .emitente-title {
+            font-weight: bold;
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px;
+        }
+        .emitente-nome {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        .emitente-detalhe {
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* Declaração */
+        .declaracao {
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 14px;
+        }
+        .declaracao strong {
+            text-decoration: underline;
+        }
+
+        /* Tabela de itens */
+        .tabela-itens {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 14px;
+            font-size: 11px;
+        }
+        .tabela-itens th {
+            background: #000;
+            color: #fff;
+            padding: 5px 8px;
+            text-align: left;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 10px;
+        }
+        .tabela-itens th.right,
+        .tabela-itens td.right {
+            text-align: right;
+        }
+        .tabela-itens td {
+            padding: 5px 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        .tabela-itens tr:last-child td {
+            border-bottom: none;
+        }
+        .total-row td {
+            font-weight: bold;
+            border-top: 2px solid #000 !important;
+            border-bottom: none !important;
+            font-size: 12px;
+        }
+
+        /* Pagamento */
+        .pagamento {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+            font-size: 11px;
+        }
+        .pagamento-box {
+            flex: 1;
+            border: 1px solid #000;
+            padding: 8px 10px;
+        }
+        .pagamento-box .pg-label {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 10px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px;
+            margin-bottom: 5px;
+        }
+        .pagamento-box .pg-valor {
+            font-size: 12px;
+        }
+
+        /* Extenso */
+        .extenso {
+            font-size: 11px;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        /* Assinaturas */
+        .assinaturas {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+        .assinatura-campo {
+            flex: 1;
+            text-align: center;
+        }
+        .assinatura-linha {
+            border-bottom: 1px solid #000;
+            margin-bottom: 4px;
+            height: 30px;
+        }
+        .assinatura-legenda {
+            font-size: 10px;
+        }
+
+        /* Rodapé da via */
+        .obs {
+            font-size: 10px;
+            border-top: 1px dashed #000;
+            padding-top: 6px;
+            color: #333;
+        }
+
+        /* Divisória de corte */
+        .corte {
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin: 6px 0;
+            letter-spacing: 3px;
+        }
+
+        /* Impressão */
+        @media print {
+            body { padding: 10px; }
+            .no-print { display: none; }
+        }
+
+        /* Botão */
+        .no-print {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .no-print button {
+            font-size: 13px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            border: 1px solid #000;
+            background: #fff;
+            font-weight: bold;
+        }
+        .no-print button:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- ==================== VIA ORIGINAL ==================== -->
+    <div class="via">
+        <div class="via-label">1ª VIA — EMITENTE</div>
+
+        <div class="doc-title">Recibo de Pagamento</div>
+        <div class="doc-number">N.º 001/2026 — Emitido em: 30/04/2026</div>
+
+        <div class="emitente">
+            <div class="emitente-title">Dados do Emitente (Recebedor)</div>
+            <div class="emitente-nome">Restaurante Bendito És</div>
+            <div class="emitente-detalhe">
+                Razão Social: 65.799.095 Kathlyn Nayra Pereira Ferreira Braga<br>
+                CNPJ: 65.799.095/0001-09<br>
+                Endereço: Av. Dr. Mario Banhara, 121 – Residencial Novo Horizonte – Taubaté / SP
+            </div>
+        </div>
+
+        <div class="declaracao">
+            Declaro ter recebido de <strong>___________________________________________________</strong>
+            o valor de <strong>R$ 22,00 (vinte e dois reais)</strong>, referente ao(s) produto(s)/serviço(s) discriminado(s) abaixo:
+        </div>
+
+        <table class="tabela-itens">
+            <thead>
+                <tr>
+                    <th style="width: 40px;">#</th>
+                    <th>Descrição do Item</th>
+                    <th class="right" style="width: 60px;">Qtd.</th>
+                    <th class="right" style="width: 90px;">Vl. Unit.</th>
+                    <th class="right" style="width: 90px;">Vl. Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>Marmitex Tamanho Médio</td>
+                    <td class="right">1</td>
+                    <td class="right">R$ 22,00</td>
+                    <td class="right">R$ 22,00</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="4" class="right"><strong>TOTAL</strong></td>
+                    <td class="right"><strong>R$ 22,00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pagamento">
+            <div class="pagamento-box">
+                <div class="pg-label">Valor Pago</div>
+                <div class="pg-valor">R$ 50,00 — Dinheiro (espécie)</div>
+            </div>
+            <div class="pagamento-box">
+                <div class="pg-label">Troco Devolvido via Pix</div>
+                <div class="pg-valor">R$ 28,00<br>
+                Chave Pix: ___________________________
+                </div>
+            </div>
+            <div class="pagamento-box">
+                <div class="pg-label">Valor Líquido Recebido</div>
+                <div class="pg-valor"><strong>R$ 22,00</strong></div>
+            </div>
+        </div>
+
+        <div class="extenso">
+            Por extenso: <strong>vinte e dois reais</strong>.
+        </div>
+
+        <div class="assinaturas">
+            <div class="assinatura-campo">
+                <div class="assinatura-linha"></div>
+                <div class="assinatura-legenda">
+                    Assinatura e Carimbo do Emitente<br>
+                    CNPJ: 65.799.095/0001-09
+                </div>
+            </div>
+            <div class="assinatura-campo">
+                <div class="assinatura-linha"></div>
+                <div class="assinatura-legenda">
+                    Assinatura do Pagador<br>
+                    CPF/CNPJ: _______________________
+                </div>
+            </div>
+        </div>
+
+        <div class="obs">
+            OBS: Este recibo é válido como comprovante de pagamento para fins de prestação de contas.
+            O troco de R$ 28,00 foi devolvido ao pagador via transferência Pix no mesmo dia, para a chave informada no campo acima.
+        </div>
+    </div>
+
+    <!-- Linha de corte -->
+    <div class="corte">- - - - - - - - - - - - RECORTE - - - - - - - - - - - -</div>
+
+    <!-- ==================== VIA DO CLIENTE ==================== -->
+    <div class="via">
+        <div class="via-label">2ª VIA — PAGADOR / RH DA EMPRESA</div>
+
+        <div class="doc-title">Recibo de Pagamento</div>
+        <div class="doc-number">N.º 001/2026 — Emitido em: 30/04/2026</div>
+
+        <div class="emitente">
+            <div class="emitente-title">Dados do Emitente (Recebedor)</div>
+            <div class="emitente-nome">Restaurante Bendito És</div>
+            <div class="emitente-detalhe">
+                Razão Social: 65.799.095 Kathlyn Nayra Pereira Ferreira Braga<br>
+                CNPJ: 65.799.095/0001-09<br>
+                Endereço: Av. Dr. Mario Banhara, 121 – Residencial Novo Horizonte – Taubaté / SP
+            </div>
+        </div>
+
+        <div class="declaracao">
+            Declaro ter recebido de <strong>___________________________________________________</strong>
+            o valor de <strong>R$ 22,00 (vinte e dois reais)</strong>, referente ao(s) produto(s)/serviço(s) discriminado(s) abaixo:
+        </div>
+
+        <table class="tabela-itens">
+            <thead>
+                <tr>
+                    <th style="width: 40px;">#</th>
+                    <th>Descrição do Item</th>
+                    <th class="right" style="width: 60px;">Qtd.</th>
+                    <th class="right" style="width: 90px;">Vl. Unit.</th>
+                    <th class="right" style="width: 90px;">Vl. Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>Marmitex Tamanho Médio</td>
+                    <td class="right">1</td>
+                    <td class="right">R$ 22,00</td>
+                    <td class="right">R$ 22,00</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="4" class="right"><strong>TOTAL</strong></td>
+                    <td class="right"><strong>R$ 22,00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pagamento">
+            <div class="pagamento-box">
+                <div class="pg-label">Valor Pago</div>
+                <div class="pg-valor">R$ 50,00 — Dinheiro (espécie)</div>
+            </div>
+            <div class="pagamento-box">
+                <div class="pg-label">Troco Devolvido via Pix</div>
+                <div class="pg-valor">R$ 28,00<br>
+                Chave Pix: ___________________________
+                </div>
+            </div>
+            <div class="pagamento-box">
+                <div class="pg-label">Valor Líquido Recebido</div>
+                <div class="pg-valor"><strong>R$ 22,00</strong></div>
+            </div>
+        </div>
+
+        <div class="extenso">
+            Por extenso: <strong>vinte e dois reais</strong>.
+        </div>
+
+        <div class="assinaturas">
+            <div class="assinatura-campo">
+                <div class="assinatura-linha"></div>
+                <div class="assinatura-legenda">
+                    Assinatura e Carimbo do Emitente<br>
+                    CNPJ: 65.799.095/0001-09
+                </div>
+            </div>
+            <div class="assinatura-campo">
+                <div class="assinatura-linha"></div>
+                <div class="assinatura-legenda">
+                    Assinatura do Pagador<br>
+                    CPF/CNPJ: _______________________
+                </div>
+            </div>
+        </div>
+
+        <div class="obs">
+            OBS: Este recibo é válido como comprovante de pagamento para fins de prestação de contas.
+            O troco de R$ 28,00 foi devolvido ao pagador via transferência Pix no mesmo dia, para a chave informada no campo acima.
+        </div>
+    </div>
+
+    <div class="no-print">
+        <button onclick="window.print()">Imprimir / Salvar como PDF</button>
+    </div>
+
+</div>
+</body>
+</html>

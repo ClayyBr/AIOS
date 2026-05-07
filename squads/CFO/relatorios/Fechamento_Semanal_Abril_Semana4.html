@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fechamento Financeiro Semanal (13 a 18/04)</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --card-bg: #fff;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .positive {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .negative {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .card .value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .analysis-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-top: 30px;
+        }
+
+        .analysis-box h3 {
+            color: #2980b9;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📉 Fechamento Financeiro Semanal (Semana 4)</h1>
+            <div class="meta-info">
+                <span><strong>Período:</strong> 13/04 a 18/04/2026</span>
+                <span><strong>Responsável:</strong> Gerente Geral CFO</span>
+            </div>
+        </header>
+
+        <p>Este documento apresenta o fechamento detalhado da operação financeira durante a semana de 13 a 18 de Abril. Constam aqui todos os registros oficiais de receitas (faturamento presencial, delivery próprio e iFood) e despesas de estoque e insumos. Adicionalmente, inserimos uma análise comparativa com a semana anterior.</p>
+
+        <div class="summary-cards">
+            <div class="card">
+                <h3>Vendas Totais</h3>
+                <div class="value">54</div>
+                <div class="positive">📈 +63,6%</div>
+            </div>
+            <div class="card">
+                <h3>Faturamento Bruto</h3>
+                <div class="value">R$ 1.943,05</div>
+                <div class="positive">📈 +61,1%</div>
+            </div>
+            <div class="card">
+                <h3>Lucro Bruto</h3>
+                <div class="value">R$ 799,93</div>
+                <div class="positive">📈 +39,4%</div>
+            </div>
+            <div class="card">
+                <h3>CMV Aparente</h3>
+                <div class="value" style="color: var(--accent);">58,83%</div>
+                <div class="negative">🔴 Piorou 6,4%</div>
+            </div>
+        </div>
+
+        <h2>💰 1. Resumo de Receita Gerada</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Dia da Semana</th>
+                    <th class="text-center">Vendas Reg.</th>
+                    <th class="text-right">Faturamento (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>13/04</td><td>Segunda-feira</td><td class="text-center">9</td><td class="text-right">R$ 292,68</td></tr>
+                <tr><td>14/04</td><td>Terça-feira</td><td class="text-center">6</td><td class="text-right">R$ 209,06</td></tr>
+                <tr><td>15/04</td><td>Quarta-feira</td><td class="text-center">14</td><td class="text-right">R$ 410,86</td></tr>
+                <tr><td>16/04</td><td>Quinta-feira</td><td class="text-center">12</td><td class="text-right">R$ 512,30</td></tr>
+                <tr><td>17/04</td><td>Sexta-feira</td><td class="text-center">8</td><td class="text-right">R$ 244,83</td></tr>
+                <tr><td>18/04</td><td>Sábado</td><td class="text-center">5</td><td class="text-right">R$ 273,32</td></tr>
+            </tbody>
+            <tfoot>
+                <tr style="background-color: #f8f9fa; font-weight: bold;">
+                    <td colspan="2">TOTAL SEMANA</td>
+                    <td class="text-center highlight">54 Vendas</td>
+                    <td class="text-right highlight">R$ 1.943,05</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <h2>🛒 2. Custos e Entradas (CMV)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Dia da Semana</th>
+                    <th class="text-right">Valor Gasto (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>13/04</td><td>Segunda-feira</td><td class="text-right">R$ 95,28</td></tr>
+                <tr><td>14/04</td><td>Terça-feira</td><td class="text-right">R$ 299,63</td></tr>
+                <tr><td>15/04</td><td>Quarta-feira</td><td class="text-right">R$ 334,37</td></tr>
+                <tr><td>16/04</td><td>Quinta-feira</td><td class="text-right">R$ 150,83</td></tr>
+                <tr><td>17/04</td><td>Sexta-feira</td><td class="text-right">R$ 174,15</td></tr>
+                <tr><td>18/04</td><td>Sábado</td><td class="text-right">R$ 88,86</td></tr>
+            </tbody>
+            <tfoot>
+                <tr style="background-color: #f8f9fa; font-weight: bold;">
+                    <td colspan="2">TOTAL SEMANA</td>
+                    <td class="text-right negative">R$ 1.143,12</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <h2>📊 3. Resumo Executivo e Comparativo</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Métrica</th>
+                    <th>Semana 3</th>
+                    <th>Semana 4</th>
+                    <th>Variação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Vendas Totais</strong></td>
+                    <td>33 pedidos</td>
+                    <td><strong>54 pedidos</strong></td>
+                    <td class="positive">📈 +63,6%</td>
+                </tr>
+                <tr>
+                    <td><strong>Faturamento</strong></td>
+                    <td>R$ 1.205,74</td>
+                    <td><strong>R$ 1.943,05</strong></td>
+                    <td class="positive">📈 +61,1%</td>
+                </tr>
+                <tr>
+                    <td><strong>Compras (Créditos)</strong></td>
+                    <td>R$ 632,06</td>
+                    <td><strong>R$ 1.143,12</strong></td>
+                    <td class="negative">📈 +80,8%</td>
+                </tr>
+                <tr>
+                    <td><strong>Lucro Bruto</strong></td>
+                    <td>R$ 573,68</td>
+                    <td><strong>R$ 799,93</strong></td>
+                    <td class="positive">📈 +39,4%</td>
+                </tr>
+                <tr>
+                    <td><strong>CMV Aparente</strong></td>
+                    <td>52,42%</td>
+                    <td><strong>58,83%</strong></td>
+                    <td class="negative">🔴 +6,4%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="analysis-box">
+            <h3>Destaques e Diagnóstico Executivo</h3>
+            <ol>
+                <li><strong>Volume Surpreendente, CMV Pressionante:</strong> Tivemos um forte avanço de vendas (crescemos faturamento em mais de 60%). No entanto, o lucro acompanhou a uma taxa menor (~39%), indicando que nossa escala não está ganhando eficiência em suprimentos; pelo contrário, o CMV médio pulou para quase 59%.</li>
+                <li><strong>Destaques da Semana (Quarta e Quinta):</strong> Com 14 e 12 pedidos e receitas beirando a marca de R$ 500/dia, os dias de meio de semana sustentaram o faturamento.</li>
+                <li><strong>Reposições Constantes:</strong> Gastos elevados na terça (R$ 299) e quarta-feira (R$ 334) impactaram fortemente o caixa semanal, demonstrando alta dependência de compras emergenciais com fornecedores locais.</li>
+            </ol>
+            <p><strong>Conclusão:</strong> A base de clientes aumentou significativamente essa semana, gerando um recorde de faturamento (quase R$ 2k), o que é muito positivo. Mas com o CMV beirando 60%, estamos entregando comida excelente operando quase empatado em margem líquida final. Para as próximas semanas, a palavra de ordem é centralizar compras e controlar rupturas no estoque para forçar esse CMV em direção aos 40% reais.</p>
+        </div>
+    </div>
+</body>
+</html>

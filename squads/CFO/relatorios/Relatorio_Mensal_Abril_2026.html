@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Mensal Abril 2026 - Mobile Friendly</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --text: #333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6; 
+            padding: 10px;
+        }
+
+        .container { 
+            max-width: 100%; 
+            width: 1000px; 
+            margin: auto; 
+            background: var(--white); 
+            padding: 15px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        h1 { font-size: 1.5rem; color: var(--secondary); margin-bottom: 5px; }
+        h2 { font-size: 1.2rem; color: var(--primary); margin: 25px 0 15px; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid var(--primary); padding-left: 10px; }
+        h3 { font-size: 1.1rem; color: var(--secondary); margin-bottom: 10px; }
+
+        p { margin-bottom: 15px; font-size: 0.95rem; }
+
+        /* Responsive Table Wrapper */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            min-width: 600px; /* Force scroll on small mobile */
+        }
+
+        th, td { 
+            padding: 12px 8px; 
+            border-bottom: 1px solid #eee; 
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        th { background-color: var(--primary); color: white; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
+        
+        tr:last-child td { border-bottom: none; }
+        .total-row { background-color: #f8f9fa; font-weight: bold; }
+
+        /* Status Badges */
+        .badge {
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-warning { background: #fff3cd; color: #856404; }
+        .badge-danger { background: #f8d7da; color: #721c24; }
+
+        /* Alert Boxes */
+        .card {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 5px solid transparent;
+        }
+        .card-danger { background: #fdf2f2; border-left-color: var(--primary); }
+        .card-info { background: #eef2ff; border-left-color: #3498db; }
+        .card-warning { background: #fff9eb; border-left-color: var(--warning); }
+        .card-success { background: #f0fff4; border-left-color: var(--success); }
+
+        .highlight-red { color: var(--primary); font-weight: bold; }
+        .highlight-green { color: var(--success); font-weight: bold; }
+
+        .botton-line {
+            text-align: center;
+            padding: 20px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .botton-line .price { font-size: 1.8rem; font-weight: bold; display: block; margin-top: 10px; color: #ff7675; }
+
+        footer {
+            text-align: right;
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #777;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.3rem; }
+            .container { padding: 12px; }
+            .botton-line .price { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>👔 RELATÓRIO MENSAL REVISADO</h1>
+        <p><strong>Abril 2026</strong> | Fechamento Exato</p>
+    </header>
+
+    <h2>📊 1. PANORAMA FINANCEIRO</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Período</th>
+                    <th>Vendas</th>
+                    <th>Faturamento</th>
+                    <th>CMV (Custo)</th>
+                    <th>Lucro Bruto</th>
+                    <th>CMV %</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Semana 2</td>
+                    <td>42</td>
+                    <td>R$ 1.332,47</td>
+                    <td>R$ 653,96</td>
+                    <td class="highlight-green">R$ 678,51</td>
+                    <td>49,1%</td>
+                </tr>
+                <tr>
+                    <td>Semana 3</td>
+                    <td>33</td>
+                    <td>R$ 1.205,74</td>
+                    <td>R$ 632,06</td>
+                    <td class="highlight-green">R$ 573,68</td>
+                    <td>52,4%</td>
+                </tr>
+                <tr>
+                    <td>Semana 4</td>
+                    <td>54</td>
+                    <td>R$ 1.943,05</td>
+                    <td>R$ 1.143,12</td>
+                    <td class="highlight-green">R$ 799,93</td>
+                    <td>58,8%</td>
+                </tr>
+                <tr>
+                    <td>Reta Final</td>
+                    <td>~35</td>
+                    <td>R$ 1.143,19</td>
+                    <td>R$ 1.476,60</td>
+                    <td class="highlight-red">R$ -333,41</td>
+                    <td class="highlight-red">129,1% 🚨</td>
+                </tr>
+                <tr class="total-row">
+                    <td>TOTAL MÊS</td>
+                    <td>~164</td>
+                    <td>R$ 5.624,45</td>
+                    <td>R$ 3.905,74</td>
+                    <td>R$ 1.718,71</td>
+                    <td class="highlight-red">69,4% 🚨</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card card-info">
+        <h3>💡 Dicionário do Gerente</h3>
+        <p><strong>Lucro Bruto:</strong> É o que sobra após pagar os ingredientes. Ele deve pagar o aluguel, luz e seu lucro. Se for negativo, você está pagando para o cliente comer.</p>
+    </div>
+
+    <h2>🏢 2. CUSTOS FIXOS PAGOS</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Despesa</th>
+                    <th>Status</th>
+                    <th>Valor</th>
+                    <th>Observação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Aluguel</strong></td>
+                    <td><span class="badge badge-success">Pago</span></td>
+                    <td>R$ 2.000,00</td>
+                    <td>Quitação Abril</td>
+                </tr>
+                <tr>
+                    <td><strong>Água</strong></td>
+                    <td><span class="badge badge-success">Pago</span></td>
+                    <td>R$ 151,11</td>
+                    <td>Ref. Sabesp</td>
+                </tr>
+                <tr>
+                    <td><strong>Luz</strong></td>
+                    <td><span class="badge badge-warning">Pendente</span></td>
+                    <td>-</td>
+                    <td>Venceu 04/05</td>
+                </tr>
+                <tr>
+                    <td><strong>Internet</strong></td>
+                    <td><span class="badge badge-warning">Pendente</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="botton-line">
+        <h3>SALDO LÍQUIDO FINAL (Abril)</h3>
+        <span class="price">R$ -432,40 (Prejuízo)</span>
+        <p>⚠️ Valor não considera as contas pendentes de Luz e Internet.</p>
+    </div>
+
+    <h2>🕵️‍♂️ 3. DIAGNÓSTICO TÉCNICO</h2>
+    <div class="card card-danger">
+        <p><strong>Crise no CMV:</strong> Gastamos 70% de tudo que entrou com comida. Na última semana, o custo superou a venda (129%).</p>
+    </div>
+    
+    <div class="card card-warning">
+        <p><strong>O Fator Volume:</strong> O CMV alto é causado também pelas vendas baixas. A cozinha produz muito e vende pouco, gerando desperdício e custo fixo de produção alto.</p>
+    </div>
+
+    <h2>🎯 4. PLANO DE GUERRA (MAIO)</h2>
+    <div class="card card-success">
+        <p><strong>1. PROIBIDO VAREJO:</strong> Compras apenas em atacado semanal.</p>
+    </div>
+    <div class="card card-success">
+        <p><strong>2. BALANÇA É LEI:</strong> Porcionamento rígido em cada marmita.</p>
+    </div>
+    <div class="card card-success">
+        <p><strong>3. FOCO EM VENDAS:</strong> Marketing agressivo para bater 40 marmitas/dia.</p>
+    </div>
+
+    <footer>
+        Relatório Gerado pelo Gerente Geral AIOS
+    </footer>
+</div>
+
+</body>
+</html>

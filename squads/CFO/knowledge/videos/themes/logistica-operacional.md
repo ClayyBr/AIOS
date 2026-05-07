@@ -86,3 +86,14 @@ A verdadeira escala no marketplace não vem de "macetes" no portal do parceiro, 
 - **Ação Prática:** Foque em otimizar o layout da cozinha e o fluxo de montagem. Se sua operação "trava" ao atingir 50 pedidos/hora, o algoritmo vai te boicotar. Se você escoa 50 com facilidade, ele vai te testar com 100.
 > 🔗 Fonte: [Segredo para vender muito no iFood](https://youtu.be/3GhYz8Yc9oM?t=4661s) | Processado em: `2026-04-18`
 ---
+
+### 12. Modelo Real de Pagamento: R$ 90 Fixo + Almoço para 15 Entregas em 4 Rotas
+Um restaurante de canal próprio revela seu modelo real: motoboy recebe **R$ 90 + almoço** por turno de ~2h20 (11h10 às 13h30), fazendo em média **15 entregas em 4 rotas agrupadas**. O batching natural (casar endereços próximos por proximidade) é o que viabiliza o modelo. **80% dos pedidos estão no raio de 2km** — isso maximiza o ciclo e reduz o tempo morto entre entregas.
+
+- **Dado crítico de mercado:** o benchmark local citado é R$ 100–120 para quase 5 horas de trabalho noturno. Esse restaurante paga R$ 90 + almoço por apenas 2h20 — tornando-se o melhor pagador *por hora* da cidade sem elevar o custo absoluto.
+- **Estrutura de rotas:** 15 entregas ÷ 4 rotas = média de 3,75 pedidos/saída. Isso é batching de alta eficiência e exatamente o ponto ótimo da nossa tabela de pool (entre duplo e triplo).
+- **Aplicação para nós:** Calibrar o pool para o motoboy receba R$ 90–100 por sessão de 3,5h (11h–14h30), sendo competitivo com esse benchmark — e claramente superior ao mercado noturno. O argumento de recrutamento já está validado por operação real.
+- **Raio 80/20:** 80% dos pedidos em até 2km é uma meta operacional concreta. Concentrar o marketing de aquisição em clientes dentro desse raio reduz custo de entrega e aumenta o batching natural.
+
+> 🔗 Fonte: [Short — Quanto pago meus motoboys?](https://youtu.be/2GDncbKiIb4?t=0s) | Processado em: `2026-04-21`
+---
